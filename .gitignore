@@ -751,3 +751,4 @@ $RECYCLE.BIN/
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,visualstudio,visualstudiocode,csharp,rider,jetbrains
+src/Smart.FA.Catalog.Web/appsettings.Local.json
