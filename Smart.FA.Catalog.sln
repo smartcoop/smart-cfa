@@ -1,0 +1,86 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{98D46582-2F64-45BD-A516-E259EE3A78DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8A4DEB10-3A8D-4F50-9E5F-A5550B42BBBA}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		Api.Dockerfile = Api.Dockerfile
+		DB.Dockerfile = DB.Dockerfile
+		docker-compose.dcproj = docker-compose.dcproj
+		docker-compose.dcproj.user = docker-compose.dcproj.user
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{D485BE00-A082-47D7-827D-0FD646807006}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reverse-Proxy", "Reverse-Proxy", "{4962514A-455F-4866-ACD4-51A26609E064}"
+	ProjectSection(SolutionItems) = preProject
+		src\Reverse-Proxy\nginx.conf = src\Reverse-Proxy\nginx.conf
+		src\Reverse-Proxy\Nginx.Dockerfile = src\Reverse-Proxy\Nginx.Dockerfile
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "src\Smart.FA.Catalog.Infrastructure\Infrastructure.csproj", "{28001A1F-34D6-4876-9778-EBF2DDCD106A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\Smart.FA.Catalog.Application\Application.csproj", "{AAA1F5B8-F23E-4545-9668-C2655C88B943}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "src\Smart.FA.Catalog.Core\Core.csproj", "{E5C326FC-DA72-47F3-8EA1-18103CDE8D4E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "src\Smart.FA.Catalog.Web\Api.csproj", "{ADB7CE09-C689-4CB9-9F4D-C964B1752E82}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.IntegrationTests", "Smart.FA.Catalog.IntegrationTests\Smart.FA.Catalog.IntegrationTests.csproj", "{BBE101FD-3BFE-40C6-8ABA-5D5C268541EF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.UnitTests", "Smart.FA.Catalog.UnitTests\Smart.FA.Catalog.UnitTests.csproj", "{B8F4E02A-C635-4729-8E94-117F4886BE65}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28001A1F-34D6-4876-9778-EBF2DDCD106A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28001A1F-34D6-4876-9778-EBF2DDCD106A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28001A1F-34D6-4876-9778-EBF2DDCD106A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28001A1F-34D6-4876-9778-EBF2DDCD106A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAA1F5B8-F23E-4545-9668-C2655C88B943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAA1F5B8-F23E-4545-9668-C2655C88B943}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAA1F5B8-F23E-4545-9668-C2655C88B943}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAA1F5B8-F23E-4545-9668-C2655C88B943}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5C326FC-DA72-47F3-8EA1-18103CDE8D4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5C326FC-DA72-47F3-8EA1-18103CDE8D4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5C326FC-DA72-47F3-8EA1-18103CDE8D4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5C326FC-DA72-47F3-8EA1-18103CDE8D4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADB7CE09-C689-4CB9-9F4D-C964B1752E82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADB7CE09-C689-4CB9-9F4D-C964B1752E82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADB7CE09-C689-4CB9-9F4D-C964B1752E82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADB7CE09-C689-4CB9-9F4D-C964B1752E82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBE101FD-3BFE-40C6-8ABA-5D5C268541EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBE101FD-3BFE-40C6-8ABA-5D5C268541EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBE101FD-3BFE-40C6-8ABA-5D5C268541EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBE101FD-3BFE-40C6-8ABA-5D5C268541EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8F4E02A-C635-4729-8E94-117F4886BE65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8F4E02A-C635-4729-8E94-117F4886BE65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8F4E02A-C635-4729-8E94-117F4886BE65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8F4E02A-C635-4729-8E94-117F4886BE65}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4962514A-455F-4866-ACD4-51A26609E064} = {98D46582-2F64-45BD-A516-E259EE3A78DA}
+		{28001A1F-34D6-4876-9778-EBF2DDCD106A} = {98D46582-2F64-45BD-A516-E259EE3A78DA}
+		{AAA1F5B8-F23E-4545-9668-C2655C88B943} = {98D46582-2F64-45BD-A516-E259EE3A78DA}
+		{E5C326FC-DA72-47F3-8EA1-18103CDE8D4E} = {98D46582-2F64-45BD-A516-E259EE3A78DA}
+		{ADB7CE09-C689-4CB9-9F4D-C964B1752E82} = {98D46582-2F64-45BD-A516-E259EE3A78DA}
+		{BBE101FD-3BFE-40C6-8ABA-5D5C268541EF} = {D485BE00-A082-47D7-827D-0FD646807006}
+		{B8F4E02A-C635-4729-8E94-117F4886BE65} = {D485BE00-A082-47D7-827D-0FD646807006}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D2F2190D-B4DE-48B8-B87C-7AA80A91538E}
+	EndGlobalSection
+EndGlobal
