@@ -15,8 +15,10 @@ public class Context : DbContext
         this.contextOptions = contextOptions;
     }
     public DbSet<Trainer> Trainer { get; set; }
-    public DbSet<Training> Training { get; set; }
-
+    public DbSet<Training> Trainings { get; set; }
+    public DbSet<TrainingIdentity> TrainingIdentities { get; set; }
+    public DbSet<TrainingTarget> TrainingTargets { get; set; }
+    public DbSet<TrainerEnrollment> TrainerEnrollments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -34,12 +36,6 @@ public class Context : DbContext
     {
         RemoveEnumerationsFromTracker();
         return await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
-    }
-
-    public void Seed()
-    {
-        Trainer.Add(new Trainer("Victor"));
-        Trainer.Add(new Trainer("Maxime"));
     }
 
     private void RemoveEnumerationsFromTracker()
