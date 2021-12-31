@@ -10,7 +10,11 @@ internal class TrainingConfiguration : EntityConfigurationBase<Training>
     {
         base.Configure(builder);
 
-        builder.HasKey(builder => builder.Id);
-        builder.Property(builder => builder.Name);
+        builder.HasMany(training => training.Details).WithOne().HasForeignKey(detail => detail.TrainingId);
+        builder.HasMany(training => training.Identities).WithOne().HasForeignKey(identity => identity.TrainingId);
+        builder.HasMany(training => training.Targets).WithOne().HasForeignKey(target => target.TrainingId);
+        builder.HasMany(training => training.TrainerEnrollments).WithOne()
+            .HasForeignKey(enrollment => enrollment.TrainingId);
+
     }
 }

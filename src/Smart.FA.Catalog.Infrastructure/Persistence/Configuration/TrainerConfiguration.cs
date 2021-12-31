@@ -10,7 +10,10 @@ public class TrainerConfiguration : EntityConfigurationBase<Trainer>
     {
         base.Configure(builder);
 
-        builder.HasKey(builder => builder.Id);
-        builder.Property(builder => builder.Name).HasMaxLength(128);
+        builder.Property(trainer => trainer.Id).ValueGeneratedOnAdd();
+        builder.HasKey(trainer => trainer.Id);
+        builder.Property(trainer => trainer.FirstName).HasMaxLength(128);
+        builder.Property(trainer => trainer.LastName).HasMaxLength(128);
+        builder.Property(trainer => trainer.Description).HasMaxLength(1500);
     }
 }
