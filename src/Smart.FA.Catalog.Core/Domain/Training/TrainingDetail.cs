@@ -21,7 +21,7 @@ public class TrainingDetail
         get => _title;
         set
         {
-            if (value.Length > 150) throw new Exception();
+            if (value.Length > 150) throw new Exception($"{nameof(Title)} has a maximum value of 150 characters");
             _title = value;
         }
     }
@@ -31,7 +31,7 @@ public class TrainingDetail
         get => _goal;
         set
         {
-            if (value.Length > 1500) throw new Exception();
+            if (value.Length > 1500) throw new Exception($"{nameof(Goal)} has a maximum value of 1500 characters");
             _goal = value;
         }
     }
@@ -41,7 +41,7 @@ public class TrainingDetail
         get => _methodology;
         set
         {
-            if (value.Length > 1500) throw new Exception();
+            if (value.Length > 1500) throw new Exception($"{nameof(Methodology)} has a maximum value of 1500 characters");
             _methodology = value;
         }
     }
@@ -50,7 +50,7 @@ public class TrainingDetail
         get => _language;
         set
         {
-            if (value.Length > 1500) throw new Exception();
+            if (value.Length > 2) throw new Exception($"{nameof(Language)} has a maximum value of 2 characters");
             _language = value;
         }
     }

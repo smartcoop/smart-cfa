@@ -35,7 +35,6 @@ public class Training : Entity, IAggregateRoot
     {
         if (types == null || !types.Any()) throw new Exception();
         if (targetAudiences == null || !targetAudiences.Distinct().Any()) throw new Exception();
-
         if (trainer == null) throw new Exception();
 
         SwitchTrainingTypes(types);
@@ -79,7 +78,7 @@ public class Training : Entity, IAggregateRoot
 
     public void AddDetails(string title, string goal, string methodology, string language)
     {
-        if (_details.Where(detail => detail.Language == language) != null) throw new Exception();
+        if (_details.FirstOrDefault(detail => detail.Language == language) != null) throw new Exception();
         _details.Add(new TrainingDetail(this, title, goal, methodology, language));
     }
 
@@ -89,4 +88,5 @@ public class Training : Entity, IAggregateRoot
         if (trainingDetail == null) throw new Exception();
         trainingDetail.UpdateDescription(title, goal, methodology);
     }
+
 }
