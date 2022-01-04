@@ -1,0 +1,102 @@
+﻿@page
+@using Core.Domain
+@using Core.SeedWork
+@inject IStringLocalizer<CreateModel> Localizer
+@model Api.Pages.Admin.Trainings.Create.CreateModel
+@{
+    Layout = "_AdminLayout";
+    ViewData["ToolBarTitle"] = "Add a new training";
+    ViewData["Title"] = "Add a training";
+}
+
+@section HeaderToolbar
+{
+    <div class="c-navbar c-navbar--bordered-bottom">
+        <div class="c-toolbar">
+            <div class="c-toolbar__left">
+                <div class="c-toolbar__item">
+                    @if (Request.Query.ContainsKey("fromlist"))
+                    {
+                        <a class="c-button c-button--icon c-button--borderless" href="/admin/trainings/list">
+                            <div class="c-button__content">
+                                <smart-icon icon="ArrowLeft"></smart-icon>
+                                <div class="u-sr-accessible">Back</div>
+                            </div>
+                        </a>
+                    }
+                </div>
+                <div class="c-toolbar__item">
+                    <h2 class="c-toolbar__title">@ViewData["ToolBarTitle"]</h2>
+                </div>
+            </div>
+            <div class="c-toolbar__right">
+                <div class="c-toolbar__item">
+                    <smart-button label="Save as draft" button-style="Secondary"></smart-button>
+                </div>
+                <div class="c-toolbar__item">
+                    <smart-button id="submitBtn" label="Request validation" button-style="Primary" leading-icon="Save" button-type="Submit"></smart-button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<smart-container size="Medium">
+    <form method="post" id="form">
+        <div asp-validation-summary="All"></div>
+        <div class="o-form-group-layout o-form-group-layout--standard">
+            <smart-form-group-input-text label="Titre de la formation / module" asp-for="CreateTrainingViewModel.Title"></smart-form-group-input-text>
+
+            <smart-formgroup></smart-formgroup>
+
+            <smart-formgroup label="La formation">
+                @foreach (var trainingType in Enumeration.GetAll<TrainingType>())
+                {
+                    <smart-checkbox label="@Localizer[trainingType.Name]" asp-for="CreateTrainingViewModel.TrainingTypeIds" value="@trainingType.Id"></smart-checkbox>
+                }
+                <smart-checkbox label="Autre"></smart-checkbox>
+                <div class="u-spacer-left-xl">
+                    <smart-form-group-input-text label="Precisez"></smart-form-group-input-text>
+                </div>
+            </smart-formgroup>
+
+            <smart-formgroup label="Public cible">
+                @foreach (var targetAudience in Enumeration.GetAll<TrainingTargetAudience>())
+                {
+                    <smart-checkbox label="@Localizer[targetAudience.Name]" asp-for="CreateTrainingViewModel.TargetAudienceIds" value="@targetAudience.Id"></smart-checkbox>
+                }
+                <smart-checkbox label="Autre"></smart-checkbox>
+                <div class="u-spacer-left-xl">
+                    <smart-form-group-input-text label="Precisez"></smart-form-group-input-text>
+                </div>
+            </smart-formgroup>
+
+            <smart-formgroup label="S'agit-il d'un cours ?">
+                @foreach (var slotNumberType in Enumeration.GetAll<TrainingSlotNumberType>())
+                {
+                    <smart-radio asp-for="CreateTrainingViewModel.SlotNumberTypeId" value="@slotNumberType.Id" label="@Localizer[slotNumberType.Name]"></smart-radio>
+                }
+            </smart-formgroup>
+
+            @* <smart-form-group-input-text label="Lieu de la formation" asp-for="EditTrainingViewModel.Address"></smart-form-group-input-text> *@
+
+            <smart-form-group-textarea rows="5" asp-for="CreateTrainingViewModel.Goal" label="@Localizer[nameof(Model.CreateTrainingViewModel.Goal)]"></smart-form-group-textarea>
+            <smart-form-group-textarea rows="5" asp-for="CreateTrainingViewModel.Methodology" label="@Localizer[nameof(Model.CreateTrainingViewModel.Methodology)]"></smart-form-group-textarea>
+
+            <div class="u-spacer"></div>
+        </div>
+    </form>
+</smart-container>
+
+<div class="u-spacer"></div>
+
+@section Scripts
+{
+    <script>
+        window.addEventListener("load",
+            function(event) {
+                var btn = document.getElementById("submitBtn");
+                document.getElementById("submitBtn").onclick = e => document.getElementById("form").submit();
+            });
+    </script>
+}
