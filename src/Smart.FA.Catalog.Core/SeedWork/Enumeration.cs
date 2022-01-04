@@ -16,7 +16,9 @@ public abstract class Enumeration : IComparable
 
     #region Constructor
 
-    protected Enumeration() { }
+    protected Enumeration()
+    {
+    }
 
     protected Enumeration(int id, string name)
     {
@@ -61,6 +63,9 @@ public abstract class Enumeration : IComparable
         return matchingItem;
     }
 
+    public static List<T> FromValues<T>(IEnumerable<int> values) where T : Enumeration
+        => values.Select(FromValue<T>).ToList();
+
     public static T FromDisplayName<T>(string displayName) where T : Enumeration
     {
         var matchingItem = Parse<T, string>(displayName, "display name", item => item.Name == displayName);
@@ -70,7 +75,8 @@ public abstract class Enumeration : IComparable
     public static T FromDisplayNameInvariant<T>(string displayName) where T : Enumeration
     {
         if (IsNullOrWhiteSpace(displayName)) return null;
-        var matchingItem = GetAll<T>().FirstOrDefault(item => string.Equals(item.Name, displayName, StringComparison.InvariantCultureIgnoreCase));
+        var matchingItem = GetAll<T>().FirstOrDefault(item =>
+            string.Equals(item.Name, displayName, StringComparison.InvariantCultureIgnoreCase));
         return matchingItem;
     }
 
@@ -84,7 +90,7 @@ public abstract class Enumeration : IComparable
         return matchingItem;
     }
 
-    public int CompareTo(object obj) => Id.CompareTo(((Enumeration)obj).Id);
+    public int CompareTo(object obj) => Id.CompareTo(((Enumeration) obj).Id);
 
     #endregion
 
@@ -95,7 +101,7 @@ public abstract class Enumeration : IComparable
         if (ReferenceEquals(a, b))
             return true;
 
-        if ((object)a == null || (object)b == null)
+        if ((object) a == null || (object) b == null)
             return false;
 
         return a.Equals(b);
