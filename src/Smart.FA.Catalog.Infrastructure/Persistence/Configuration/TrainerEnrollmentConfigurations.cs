@@ -8,10 +8,20 @@ public class TrainerEnrollmentConfigurations: IEntityTypeConfiguration<TrainerEn
 {
     public void Configure(EntityTypeBuilder<TrainerEnrollment> builder)
     {
-        builder.HasKey(enrollment => new {enrollment.TrainingId, enrollment.TrainerId});
+        builder.HasKey(enrollment => new {enrollment.TrainingId, enrollment.TrainerId}).IsClustered();
 
-        builder.Ignore(enrollment => enrollment.Trainer);
-        builder.Ignore(enrollment => enrollment.Training);
+        builder
+            .HasOne(enrollment => enrollment.Training)
+            .WithMany(training => training.TrainerEnrollments)
+            .HasForeignKey(enrollment => enrollment.TrainingId)
+            .OnDelete(DeleteBehavior.Cascade);
+        builder
+            .HasOne(enrollment => enrollment.Trainer)
+            .WithMany(enrollment => enrollment.Enrollments)
+            .HasForeignKey(enrollment => enrollment.TrainerId)
+            .OnDelete(DeleteBehavior.Cascade);
+        builder.Navigation(enrollment => enrollment.Training);
+        builder.Navigation(enrollment => enrollment.Trainer);
 
         builder.ToTable("TrainerEnrollment");
     }

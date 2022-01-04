@@ -16,5 +16,6 @@ public class TrainingDetailConfigurations: IEntityTypeConfiguration<TrainingDeta
         builder.HasOne(detail => detail.Training).WithMany(training => training.Details)
             .HasForeignKey(detail => detail.TrainingId);
 
+        builder.ToTable("TrainingDetails");
     }
 }
