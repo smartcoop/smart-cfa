@@ -33,7 +33,6 @@ public class TestSetup : IntegrationTestBase, IDisposable
         using (var context = GivenTrainingContext(beginTransaction: false))
         {
             context.Database.Migrate();
-            context.Seed();
             context.SaveChanges();
         }
     }
