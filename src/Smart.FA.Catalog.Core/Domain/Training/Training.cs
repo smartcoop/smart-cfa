@@ -11,7 +11,6 @@ public class Training : Entity, IAggregateRoot
     private readonly List<TrainingIdentity> _Identities = new();
     private readonly List<TrainingTarget> _targets = new();
     private readonly List<TrainingDetail> _details = new();
-    private TrainingStatus _status = TrainingStatus.Draft;
 
     #endregion
 
@@ -20,11 +19,12 @@ public class Training : Entity, IAggregateRoot
     public virtual IReadOnlyCollection<TrainerEnrollment> TrainerEnrollments => _trainerEnrollments;
     public virtual IReadOnlyCollection<TrainingIdentity> Identities => _Identities;
     public virtual IReadOnlyCollection<TrainingTarget> Targets => _targets;
-
-    public virtual TrainingStatus Status => _status;
-
-    public virtual TrainingSlotNumberType SlotNumberType { get; private set; }
     public virtual IReadOnlyCollection<TrainingDetail> Details => _details;
+
+    public  int StatusId { get; private set; } = TrainingStatus.Draft.Id;
+
+    public int SlotNumberTypeId { get; private set; } = TrainingSlotNumberType.Group.Id;
+
 
     #endregion
 
@@ -39,6 +39,7 @@ public class Training : Entity, IAggregateRoot
 
         SwitchTrainingTypes(types);
         SwitchTargetAudience(targetAudiences);
+        SwitchSlotNumberType(slotNumberType);
         EnrollTrainer(trainer);
     }
 
@@ -62,7 +63,7 @@ public class Training : Entity, IAggregateRoot
     }
 
     public void SwitchSlotNumberType(TrainingSlotNumberType slotNumberType)
-        =>        SlotNumberType = slotNumberType;
+        =>        SlotNumberTypeId = slotNumberType.Id;
 
     public void EnrollTrainer(Trainer trainer)
     {
@@ -73,7 +74,8 @@ public class Training : Entity, IAggregateRoot
 
     public void Validate(IMailService mailService)
     {
-        _status = _status.Validate(_Identities.Select(identity => identity.TrainingType));
+        TrainingStatus status = Enumeration.FromValue<TrainingStatus>(StatusId);
+        StatusId = status.Validate(_Identities.Select(identity => identity.TrainingType)).Id;
     }
 
     public void AddDetails(string title, string goal, string methodology, string language)

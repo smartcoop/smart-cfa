@@ -10,6 +10,7 @@ public class Trainer : Entity, IAggregateRoot
     private string _description;
     private string _firstName;
     private string _lastName;
+    private string _defaultLanguage;
 
     #endregion
 
@@ -45,14 +46,25 @@ public class Trainer : Entity, IAggregateRoot
         }
     }
 
-    public IReadOnlyCollection<TrainerEnrollment> Enrollments => _enrollments;
+    public string DefaultLanguage
+    {
+        get => _defaultLanguage;
+        set
+        {
+            if (value.Length > 2) throw new Exception($"{nameof(DefaultLanguage)} has a maximum value of 2 characters");
+            _description = value;
+        }
+    }
+
+    public virtual IReadOnlyCollection<TrainerEnrollment> Enrollments => _enrollments;
 
     #endregion
 
     #region Constructors
 
-    public Trainer(string firstName, string lastName, string description)
+    public Trainer(string firstName, string lastName, string description, string defaultLanguage)
     {
+        _defaultLanguage = defaultLanguage;
         FirstName = firstName;
         LastName = lastName;
         Description = description;

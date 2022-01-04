@@ -5,11 +5,11 @@ public class TrainerEnrollment
 
     #region Properties
 
-    public int TrainingId { get; }
-    public int TrainerId { get; }
+    public int TrainingId { get; private set; }
+    public int TrainerId { get; private set; }
 
-    public virtual Training Training { get; set; }
-    public virtual Trainer Trainer { get; set; }
+    public virtual Training Training { get; init; }
+    public virtual Trainer Trainer { get; init; }
 
     #endregion
 
@@ -24,6 +24,8 @@ public class TrainerEnrollment
     {
         Training = training;
         Trainer = trainer;
+        TrainingId = training.Id;
+        TrainerId = trainer.Id;
     }
 
     #endregion
