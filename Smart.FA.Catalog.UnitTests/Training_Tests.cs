@@ -26,7 +26,7 @@ public class TrainingTests
     [Fact]
     public void HasInitiallyOneTrainer()
     {
-        var trainer = _trainerFactory.Create();
+        var trainer = _trainerFactory.CreateClean();
         var training = _trainingFactory.Create(trainer);
 
         training.TrainerEnrollments.Should().ContainSingle();
@@ -37,10 +37,10 @@ public class TrainingTests
     [Fact]
     public void CanAddTrainer()
     {
-        var trainerAlpha = _trainerFactory.Create();
+        var trainerAlpha = _trainerFactory.CreateClean();
         var training = _trainingFactory.Create(trainerAlpha);
 
-        var trainerBeta = _trainerFactory.Create();
+        var trainerBeta = _trainerFactory.CreateClean();
         training.EnrollTrainer(trainerBeta);
 
         training.TrainerEnrollments.Should().HaveCount(2);
@@ -50,7 +50,7 @@ public class TrainingTests
     [Fact]
     public void CanAddValidDetails()
     {
-        var trainer = _trainerFactory.Create();
+        var trainer = _trainerFactory.CreateClean();
         var training = _trainingFactory.Create(trainer);
 
         var action = () => training.AddDetails(_fixture.Create<string>(), _fixture.Create<string>(),
@@ -66,7 +66,7 @@ public class TrainingTests
     [InlineData("Title", "Goal", "Methodology", "FRE")]
     public void CantAddInvalidDetails(string title, string goal, string methodology, string language)
     {
-        var trainer = _trainerFactory.Create();
+        var trainer = _trainerFactory.CreateClean();
         var training = _trainingFactory.Create(trainer);
 
         var action = () => training.AddDetails(title, goal, methodology, language);
@@ -78,7 +78,7 @@ public class TrainingTests
     [Fact]
     public void CantAddTwiceSameLanguageDescription()
     {
-        var trainer = _trainerFactory.Create();
+        var trainer = _trainerFactory.CreateClean();
         var training = _trainingFactory.Create(trainer);
         var language = _fixture.Create<string>().Substring(0, 2);
 
@@ -96,7 +96,7 @@ public class TrainingTests
     [Fact]
     public void CanUpdateLanguageDescription()
     {
-        var trainer = _trainerFactory.Create();
+        var trainer = _trainerFactory.CreateClean();
         var training = _trainingFactory.Create(trainer);
         var language = _fixture.Create<string>().Substring(0, 2);
         var newTitle = _fixture.Create<string>();
@@ -117,42 +117,42 @@ public class TrainingTests
     [Fact]
     public void StartsInDraft()
     {
-        var trainer = _trainerFactory.Create();
+        var trainer = _trainerFactory.CreateClean();
 
         var training = _trainingFactory.Create(trainer);
 
-        training.Status.Should().Be(TrainingStatus.Draft);
+        training.StatusId.Should().Be(TrainingStatus.Draft.Id);
     }
 
 
     [Fact]
     public void StatusCanBeAutoValidated()
     {
-        var trainer = _trainerFactory.Create();
+        var trainer = _trainerFactory.CreateClean();
         var training = new Training(trainer, new List<TrainingType> {TrainingType.LanguageCourse},
             TrainingSlotNumberType.Group, new List<TrainingTargetAudience> {TrainingTargetAudience.Employee});
 
         training.Validate(_mailService.Object);
 
-        training.Status.Should().Be(TrainingStatus.Validated);
+        training.StatusId.Should().Be(TrainingStatus.Validated.Id);
     }
 
     [Fact]
     public void StatusMustBeManuallyValidated()
     {
-        var trainer = _trainerFactory.Create();
-        var training = new Training(trainer, new List<TrainingType> {TrainingType.Other},
+        var trainer = _trainerFactory.CreateClean();
+        var training = new Training(trainer, new List<TrainingType> {TrainingType.Professional},
             TrainingSlotNumberType.Group, new List<TrainingTargetAudience> {TrainingTargetAudience.Employee});
 
         training.Validate(_mailService.Object);
 
-        training.Status.Should().Be(TrainingStatus.WaitingForValidation);
+        training.StatusId.Should().Be(TrainingStatus.WaitingForValidation.Id);
     }
 
     [Fact]
     public void HasAlwaysAType()
     {
-        var trainer = _trainerFactory.Create();
+        var trainer = _trainerFactory.CreateClean();
 
         var training = _trainingFactory.Create(trainer);
 
@@ -163,7 +163,7 @@ public class TrainingTests
     [Fact]
     public void HasAlwaysATargetAudience()
     {
-        var trainer = _trainerFactory.Create();
+        var trainer = _trainerFactory.CreateClean();
 
         var training = _trainingFactory.Create(trainer);
 
@@ -174,12 +174,12 @@ public class TrainingTests
     [Fact]
     public void CanBeSwitchedFromSingleToGroupSlotNumber()
     {
-        var trainer = _trainerFactory.Create();
-        var training = new Training(trainer, new List<TrainingType> {TrainingType.Other},
+        var trainer = _trainerFactory.CreateClean();
+        var training = new Training(trainer, new List<TrainingType> {TrainingType.Professional},
             TrainingSlotNumberType.Single, new List<TrainingTargetAudience> {TrainingTargetAudience.Employee});
 
         training.SwitchSlotNumberType(TrainingSlotNumberType.Group);
 
-        training.SlotNumberType.Should().Be(TrainingSlotNumberType.Group);
+        training.SlotNumberTypeId.Should().Be(TrainingSlotNumberType.Group.Id);
     }
 }
