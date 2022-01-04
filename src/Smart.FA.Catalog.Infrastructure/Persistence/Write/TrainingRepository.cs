@@ -18,11 +18,12 @@ public class TrainingRepository : ITrainingRepository
         return _context.TrainerEnrollments
             .Where(enrollment => enrollment.TrainerId == trainerId)
             .Include(enrollment => enrollment.Training)
-            .Select(enrollment => enrollment.Training);
+            .Select(enrollment => enrollment.Training).ToList();
     }
 
     public async Task<Training> GetTrainingAsync(int trainingId)
     {
         return await _context.Trainings.FindAsync(trainingId);
     }
+
 }

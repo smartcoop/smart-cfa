@@ -20,5 +20,5 @@ public class TrainerRepository: ITrainerRepository
             .Select(enrollment => enrollment.Trainer);
     }
 
-    public async Task<Trainer> FindByIdAsync(int trainerId) => await _context.Trainers.FindAsync(trainerId);
+    public async Task<Trainer> FindByIdAsync(int trainerId) => await _context.Trainers.FirstOrDefaultAsync(trainer => trainer.Id == trainerId) ?? throw new InvalidOperationException();
 }
