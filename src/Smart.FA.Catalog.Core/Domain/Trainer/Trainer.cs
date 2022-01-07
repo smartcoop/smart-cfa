@@ -7,67 +7,28 @@ public class Trainer : Entity, IAggregateRoot
     #region Private fields
 
     private readonly List<TrainerEnrollment> _enrollments = new();
-    private string _description;
-    private string _firstName;
-    private string _lastName;
-    private string _defaultLanguage;
 
     #endregion
 
     #region Properties
 
-    public string FirstName
-    {
-        get => _firstName;
-        set
-        {
-            if (value.Length > 150) throw new Exception($"{nameof(FirstName)} has a maximum value of 150 characters");
-            _firstName = value;
-        }
-    }
+    public virtual Name Name { get; private set; }
 
-    public string LastName
-    {
-        get => _lastName;
-        set
-        {
-            if (value.Length > 150) throw new Exception($"{nameof(LastName)} has a maximum value of 150 characters");
-            _lastName = value;
-        }
-    }
+    public string Description { get; private set; }
 
-    public string Description
-    {
-        get => _description;
-        set
-        {
-            if (value.Length > 150) throw new Exception($"{nameof(Description)} has a maximum value of 150 characters");
-            _description = value;
-        }
-    }
+    public Language DefaultLanguage { get; private set; }
 
-    public string DefaultLanguage
-    {
-        get => _defaultLanguage;
-        set
-        {
-            if (value.Length > 2) throw new Exception($"{nameof(DefaultLanguage)} has a maximum value of 2 characters");
-            _description = value;
-        }
-    }
-
-    public virtual IReadOnlyCollection<TrainerEnrollment> Enrollments => _enrollments;
+    public virtual IReadOnlyCollection<TrainerEnrollment> Enrollments { get; private set; }
 
     #endregion
 
     #region Constructors
 
-    public Trainer(string firstName, string lastName, string description, string defaultLanguage)
+    public Trainer(Name name, string description, Language defaultLanguage)
     {
-        _defaultLanguage = defaultLanguage;
-        FirstName = firstName;
-        LastName = lastName;
-        Description = description;
+        ChangeDefaultLanguage(defaultLanguage);
+        Rename(name);
+        UpdateDescription(description);
     }
 
     protected Trainer()
@@ -80,20 +41,30 @@ public class Trainer : Entity, IAggregateRoot
 
     public void UpdateDescription(string description)
     {
+        Guard.AgainstNull(description, nameof(description));
+        Guard.Requires(() => description.Length <= 2000
+            , "Description is too long");
         Description = description;
     }
 
     public void EnrollIn(Training training)
     {
-        if (_enrollments.Select(enrollment => enrollment.Training).Contains(training)) throw new Exception();
+        Guard.Requires(() => _enrollments.Select(enrollment => enrollment.Training).Contains(training),
+            "The trainer has never enrolled in that training");
         _enrollments.Add(new TrainerEnrollment(training, this));
     }
 
     public void DisenrollFrom(Training training)
     {
-        var trainingNumberRemoved =_enrollments.RemoveAll(enrollment => enrollment.Training == training);
-        if (trainingNumberRemoved == 0) throw new Exception("The trainer has never enrolled in that training");
+        var trainingNumberRemoved = _enrollments.RemoveAll(enrollment => enrollment.Training == training);
+        Guard.Ensures(() => trainingNumberRemoved != 0, "The trainer has never enrolled in that training");
     }
+
+    public List<Training> GetTrainings()
+        => Enrollments.Any() ? Enrollments.Select(enrollment => enrollment.Training).ToList() : new List<Training>();
+
+    public void Rename(Name name) => Name = name;
+    public void ChangeDefaultLanguage(Language language) => DefaultLanguage = language;
 
     #endregion
 }
