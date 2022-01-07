@@ -1,10 +1,12 @@
 using Core.Domain;
+using Core.Domain.Dto;
+using Core.Domain.Interfaces;
 using Dapper;
 using Microsoft.Data.SqlClient;
 
 namespace Infrastructure.Persistence.Read;
 
-public class TrainerQueries
+public class TrainerQueries : ITrainerQueries
 {
     private readonly string _connectionString;
 
@@ -12,11 +14,12 @@ public class TrainerQueries
     {
         _connectionString = connectionString;
     }
-    public async Task< IEnumerable<Trainer>> GetTrainingsByTrainerId(int trainerId)
-    {
-        var sql = @"SELECT FirstName, LastName, Description, DefaultLanguage FROM ";
-        await using var db = new SqlConnection(_connectionString);
-        return await db.QueryAsync< Trainer >( sql, new { trainerId } );
 
+    public async Task<IEnumerable<TrainerDto>> GetTrainersAsync(List<int> trainingIds, CancellationToken cancellationToken)
+    {
+        var sql = @"SELECT T.* FROM dbo.Trainer T WHERE T.Id IN @TrainingIds";
+        await using var db = new SqlConnection(_connectionString);
+
+        return await db.QueryAsync<TrainerDto>(sql, new {TrainingIds = trainingIds});
     }
 }
