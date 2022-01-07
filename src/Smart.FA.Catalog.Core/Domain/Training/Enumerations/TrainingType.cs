@@ -1,7 +1,6 @@
-using System.ComponentModel.DataAnnotations;
 using Core.SeedWork;
 
-namespace Core.Domain;
+namespace Core.Domain.Enumerations;
 
 public class TrainingType : Enumeration
 {
