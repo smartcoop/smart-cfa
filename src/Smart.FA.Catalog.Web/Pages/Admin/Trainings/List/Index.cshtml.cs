@@ -1,6 +1,7 @@
 using Api.Options;
 using Application.UseCases.Queries;
 using Core.Domain;
+using Core.Domain.Enumerations;
 using Core.SeedWork;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -31,11 +32,10 @@ public class ListModel : AdminPage
         // {
         //     return RedirectToCurrentPageOne();
         // }
-
-        var response = await Mediator.Send(new GetTrainingsFromTrainerRequest {TrainerId = 1});
+        var response = await Mediator.Send(new GetTrainingsFromTrainerRequest {TrainerId = 1, Language = Language.Create("FR").Value});
         Trainings = response.Trainings.Select(training => new TrainingListingViewModel
         {
-            Status = Enumeration.FromValue<TrainingStatus>(training.StatusId), Tags = new List<string>(), Title = training.Details.FirstOrDefault()?.Title
+            Status = Enumeration.FromValue<TrainingStatus>(training.StatusId), Tags = new List<string>(), Title = training.Title, Id = training.TrainingId
         }).ToList();
 
         // If CurrentPage returns no result, redirect to the index 1.

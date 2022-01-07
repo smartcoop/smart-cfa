@@ -1,10 +1,12 @@
 using Core.Domain;
+using Core.Domain.Enumerations;
 using Smart.Design.Razor.TagHelpers.Pill;
 
 namespace Api.Pages.Admin.Trainings.List;
 
 public record TrainingListingViewModel
 {
+    public int Id { get; set; }
     public string? Title { get; set; }
 
     public List<string>? Tags { get; set; }
