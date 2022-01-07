@@ -24,8 +24,8 @@ public class DeleteTrainingCommand: IRequestHandler<DeleteTrainingRequest, Delet
 
         try
         {
-            var training = await _context.Trainings.FindAsync(request.TrainingId);
-            _unitOfWork.RegisterDeleted(training);
+            var training = await _context.Trainings.FindAsync(new object?[] { request.TrainingId, cancellationToken }, cancellationToken: cancellationToken);
+            _unitOfWork.RegisterDeleted(training!);
             _unitOfWork.Commit();
             resp.SetSuccess();
         }
