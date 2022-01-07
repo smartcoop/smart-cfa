@@ -1,4 +1,5 @@
 using Core.Domain;
+using Core.Domain.Enumerations;
 using Core.SeedWork;
 using Infrastructure.Persistence.Configuration.EntityConfigurations;
 

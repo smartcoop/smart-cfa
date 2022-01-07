@@ -1,3 +1,5 @@
+using Core.Domain.Enumerations;
+
 namespace Core.Domain;
 
 public class TrainingIdentity
