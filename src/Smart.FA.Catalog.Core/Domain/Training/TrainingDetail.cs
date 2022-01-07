@@ -1,8 +1,9 @@
+using Core.SeedWork;
+
 namespace Core.Domain;
 
 public class TrainingDetail
 {
-
     #region Private fields
 
     private string _title;
@@ -14,14 +15,19 @@ public class TrainingDetail
 
     #region Properties
 
-    public int TrainingId { get;  }
+    public int TrainingId { get; }
     public virtual Training Training { get; }
+
     public string Title
     {
         get => _title;
         set
         {
-            if (value.Length > 150) throw new Exception($"{nameof(Title)} has a maximum value of 150 characters");
+            Guard.Requires(() =>
+            {
+                if (value != null) return value.Length < 150;
+                return false;
+            }, $"{nameof(Title)} has a maximum value of 150 characters");
             _title = value;
         }
     }
@@ -31,7 +37,11 @@ public class TrainingDetail
         get => _goal;
         set
         {
-            if (value.Length > 1500) throw new Exception($"{nameof(Goal)} has a maximum value of 1500 characters");
+            Guard.Requires(() =>
+            {
+                if (value != null) return value.Length < 1500;
+                return false;
+            }, $"{nameof(Goal)} has a maximum value of 1500 characters");
             _goal = value;
         }
     }
@@ -41,16 +51,25 @@ public class TrainingDetail
         get => _methodology;
         set
         {
-            if (value.Length > 1500) throw new Exception($"{nameof(Methodology)} has a maximum value of 1500 characters");
+            Guard.Requires(() =>
+            {
+                if (value != null) return value.Length < 1500;
+                return false;
+            }, $"{nameof(Methodology)} has a maximum value of 1500 characters");
             _methodology = value;
         }
     }
+
     public string Language
     {
         get => _language;
         set
         {
-            if (value.Length > 2) throw new Exception($"{nameof(Language)} has a maximum value of 2 characters");
+            Guard.Requires(() =>
+            {
+                if (value != null) return value.Length < 1500;
+                return false;
+            }, $"{nameof(Language)} has a maximum value of 2 characters");
             _language = value;
         }
     }
@@ -69,7 +88,6 @@ public class TrainingDetail
 
     protected TrainingDetail()
     {
-
     }
 
     #endregion
