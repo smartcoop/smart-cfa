@@ -4,6 +4,7 @@ using Core.Domain.Dto;
 using Core.Domain.Enumerations;
 using Core.Domain.Interfaces;
 using Core.SeedWork;
+using Core.Services;
 using Infrastructure.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -17,14 +18,16 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
     private readonly ITrainingRepository _trainingRepository;
     private readonly ITrainerRepository _trainerRepository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IMailService _mailService;
 
     public UpdateTrainingCommandHandler(ILogger<UpdateTrainingCommandHandler> logger,
-        ITrainingRepository trainingRepository, ITrainerRepository trainerRepository, IUnitOfWork unitOfWork)
+        ITrainingRepository trainingRepository, ITrainerRepository trainerRepository, IUnitOfWork unitOfWork, IMailService mailService)
     {
         _logger = logger;
         _trainingRepository = trainingRepository;
         _trainerRepository = trainerRepository;
         _unitOfWork = unitOfWork;
+        _mailService = mailService;
     }
 
     public async Task<UpdateTrainingResponse> Handle(UpdateTrainingRequest request, CancellationToken cancellationToken)
@@ -41,7 +44,7 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
             training.SwitchSlotNumberType(request.SlotNumberTypes);
             var trainers = await _trainerRepository.GetListAsync(request.TrainerIds, cancellationToken);
             training.EnrollTrainers(trainers);
-
+            training.Validate(_mailService);
             _unitOfWork.RegisterDirty(training);
             _unitOfWork.Commit();
 
