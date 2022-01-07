@@ -1,4 +1,4 @@
-namespace Application.UseCases.Dto;
+namespace Core.Domain.Dto;
 
 public class TrainingDetailDto
 {
