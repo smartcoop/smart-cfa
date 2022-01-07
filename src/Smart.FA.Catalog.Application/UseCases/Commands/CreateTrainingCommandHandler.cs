@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.UseCases.Commands;
 
-public class CreateTrainingCommandHandler: IRequestHandler<CreateTrainingRequest, CreateTrainingResponse>
+public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingRequest, CreateTrainingResponse>
 {
     private readonly ILogger<CreateTrainingCommandHandler> _logger;
     private readonly IUnitOfWork _unitOfWork;
@@ -26,14 +26,16 @@ public class CreateTrainingCommandHandler: IRequestHandler<CreateTrainingRequest
         _trainerRepository = trainerRepository;
         _mailService = mailService;
     }
+
     public async Task<CreateTrainingResponse> Handle(CreateTrainingRequest request, CancellationToken cancellationToken)
     {
         CreateTrainingResponse resp = new();
         try
         {
-            var trainer = await _trainerRepository.FindByIdAsync(request.TrainerId);
-            var training = new Training(trainer, request.Types, request.SlotNumberType, request.TargetAudiences);
-            training.AddDetails(request.Detail.Title, request.Detail.Goal, request.Detail.Methodology, request.Detail.Language);
+            var trainer = await _trainerRepository.FindAsync(request.TrainerId, cancellationToken);
+            var training = new Training(trainer, request.Types, request.SlotNumberTypes, request.TargetAudiences);
+            training.AddDetails(request.Detail.Title, request.Detail.Goal, request.Detail.Methodology,
+                Language.Create(request.Detail.Language).Value);
             training.Validate(_mailService);
 
             _unitOfWork.RegisterNew(training);
@@ -47,19 +49,21 @@ public class CreateTrainingCommandHandler: IRequestHandler<CreateTrainingRequest
             _logger.LogError(e.StackTrace);
             throw;
         }
+
         return resp;
     }
 }
-public class CreateTrainingRequest: IRequest<CreateTrainingResponse>
+
+public class CreateTrainingRequest : IRequest<CreateTrainingResponse>
 {
     public int TrainerId { get; set; }
-    public TrainingDetailDto Detail { get; set; }
-    public List<TrainingTargetAudience> TargetAudiences { get; set; }
-    public List<TrainingType> Types { get; set; }
-    public TrainingSlotNumberType SlotNumberType { get; set; }
+    public TrainingDetailDto? Detail { get; set; }
+    public List<TrainingTargetAudience>? TargetAudiences { get; set; }
+    public List<TrainingType>? Types { get; set; }
+    public List<TrainingSlotNumberType>? SlotNumberTypes { get; set; }
 }
 
-public class CreateTrainingResponse: ResponseBase
+public class CreateTrainingResponse : ResponseBase
 {
-    public Training Training { get; set; }
+    public Training? Training { get; set; }
 }
