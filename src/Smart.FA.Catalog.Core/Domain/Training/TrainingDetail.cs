@@ -26,7 +26,7 @@ public class TrainingDetail
             Guard.Requires(() =>
             {
                 if (value != null) return value.Length < 150;
-                return false;
+                return true;
             }, $"{nameof(Title)} has a maximum value of 150 characters");
             _title = value;
         }
@@ -40,7 +40,7 @@ public class TrainingDetail
             Guard.Requires(() =>
             {
                 if (value != null) return value.Length < 1500;
-                return false;
+                return true;
             }, $"{nameof(Goal)} has a maximum value of 1500 characters");
             _goal = value;
         }
@@ -54,7 +54,7 @@ public class TrainingDetail
             Guard.Requires(() =>
             {
                 if (value != null) return value.Length < 1500;
-                return false;
+                return true;
             }, $"{nameof(Methodology)} has a maximum value of 1500 characters");
             _methodology = value;
         }
@@ -68,7 +68,7 @@ public class TrainingDetail
             Guard.Requires(() =>
             {
                 if (value != null) return value.Length < 1500;
-                return false;
+                return true;
             }, $"{nameof(Language)} has a maximum value of 2 characters");
             _language = value;
         }
