@@ -10,7 +10,7 @@ public class TrainingFactory
         Fixture fixture = new();
 
        var training = new Training(trainer, new List<TrainingType> {TrainingType.SchoolCourse, TrainingType.Professional},
-            TrainingSlotNumberType.Single,
+            new List<TrainingSlotNumberType>{TrainingSlotNumberType.Single},
             new List<TrainingTargetAudience> {TrainingTargetAudience.Employee, TrainingTargetAudience.Student});
        return training;
     }
@@ -20,6 +20,4 @@ public class TrainingFactory
         TrainerFactory trainerFactory = new();
         return Create(trainerFactory.CreateClean());
     }
-
-
 }
