@@ -2,6 +2,7 @@ namespace Core.Domain.Interfaces;
 
 public interface ITrainerRepository
 {
-    IEnumerable<Trainer> GetTrainersByTrainingId(int trainingId);
-    Task<Trainer> FindByIdAsync(int trainerId);
+    Task<IEnumerable<Trainer>> GetListAsync(int trainingId, CancellationToken cancellationToken);
+    Task<IEnumerable<Trainer>> GetListAsync(IEnumerable<int> trainingIds, CancellationToken cancellationToken);
+    Task<Trainer> FindAsync(int trainerId, CancellationToken cancellationToken);
 }
