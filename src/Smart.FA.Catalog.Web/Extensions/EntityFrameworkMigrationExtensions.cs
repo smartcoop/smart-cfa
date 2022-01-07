@@ -1,3 +1,4 @@
+using Core.Domain;
 using Infrastructure.Persistence;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,7 @@ namespace Api.Extensions;
 
 public static class EntityFrameworkMigrationExtensions
 {
+    //TODO: Find a better place to apply migrations to decouple Infra logic entirely
     /// <summary>
     /// Apply Migrations in the Infrastructure when the data server is up and running.
     /// </summary>
@@ -20,8 +22,9 @@ public static class EntityFrameworkMigrationExtensions
                 using var connection = new SqlConnection(builder.Configuration.GetConnectionString("Training"));
                 using (var scope = services.CreateScope())
                 {
-                    var db = scope.ServiceProvider.GetRequiredService<Context>();
-                    db.Database.Migrate();
+                    var context = scope.ServiceProvider.GetRequiredService<Context>();
+                    context.Database.Migrate();
+                    Seed(context);
                 }
                 break;
             }
@@ -31,5 +34,12 @@ public static class EntityFrameworkMigrationExtensions
             }
             Thread.Sleep(20000);
         }
+    }
+
+    public static void Seed(Context context)
+    {
+        var trainer = new Trainer(Name.Create("Victor", "vD").Value, "Hello I am Victor van Duynen", Language.Create("FR").Value);
+        context.Trainers.Add(trainer);
+        context.SaveChanges();
     }
 }
