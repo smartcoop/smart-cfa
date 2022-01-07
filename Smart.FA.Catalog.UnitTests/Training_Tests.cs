@@ -55,7 +55,7 @@ public class TrainingTests
 
         var action = () => training.AddDetails(_fixture.Create<string>(), _fixture.Create<string>(),
             _fixture.Create<string>(),
-            _fixture.Create<string>().Substring(0, 2));
+            Language.Create(_fixture.Create<string>().Substring(0, 2)).Value);
 
         action.Should().NotThrow<Exception>();
         training.Details.Should().ContainSingle();
@@ -69,7 +69,7 @@ public class TrainingTests
         var trainer = _trainerFactory.CreateClean();
         var training = _trainingFactory.Create(trainer);
 
-        var action = () => training.AddDetails(title, goal, methodology, language);
+        var action = () => training.AddDetails(title, goal, methodology,  Language.Create(language).Value);
 
         action.Should().Throw<Exception>();
         training.Details.Should().BeEmpty();
@@ -84,9 +84,9 @@ public class TrainingTests
 
 
         training.AddDetails(_fixture.Create<string>(), _fixture.Create<string>(),
-            _fixture.Create<string>(),language);
+            _fixture.Create<string>(), Language.Create(language).Value);
         var action = () => training.AddDetails(_fixture.Create<string>(), _fixture.Create<string>(),
-            _fixture.Create<string>(), language);
+            _fixture.Create<string>(),  Language.Create(language).Value);
 
         action.Should().Throw<Exception>();
         training.Details.Should().ContainSingle();
@@ -102,9 +102,9 @@ public class TrainingTests
         var newTitle = _fixture.Create<string>();
 
         training.AddDetails(_fixture.Create<string>(), _fixture.Create<string>(),
-            _fixture.Create<string>(),language);
+            _fixture.Create<string>(), Language.Create(language).Value);
         var action = () => training.UpdateDetails(newTitle, _fixture.Create<string>(),
-            _fixture.Create<string>(),language);
+            _fixture.Create<string>(), Language.Create(language).Value);
 
 
         action.Should().NotThrow<Exception>();
@@ -130,7 +130,7 @@ public class TrainingTests
     {
         var trainer = _trainerFactory.CreateClean();
         var training = new Training(trainer, new List<TrainingType> {TrainingType.LanguageCourse},
-            TrainingSlotNumberType.Group, new List<TrainingTargetAudience> {TrainingTargetAudience.Employee});
+            new List<TrainingSlotNumberType>{TrainingSlotNumberType.Group}, new List<TrainingTargetAudience> {TrainingTargetAudience.Employee});
 
         training.Validate(_mailService.Object);
 
@@ -142,7 +142,7 @@ public class TrainingTests
     {
         var trainer = _trainerFactory.CreateClean();
         var training = new Training(trainer, new List<TrainingType> {TrainingType.Professional},
-            TrainingSlotNumberType.Group, new List<TrainingTargetAudience> {TrainingTargetAudience.Employee});
+            new List<TrainingSlotNumberType>{TrainingSlotNumberType.Group}, new List<TrainingTargetAudience> {TrainingTargetAudience.Employee});
 
         training.Validate(_mailService.Object);
 
@@ -176,10 +176,11 @@ public class TrainingTests
     {
         var trainer = _trainerFactory.CreateClean();
         var training = new Training(trainer, new List<TrainingType> {TrainingType.Professional},
-            TrainingSlotNumberType.Single, new List<TrainingTargetAudience> {TrainingTargetAudience.Employee});
+            new List<TrainingSlotNumberType>{TrainingSlotNumberType.Single}, new List<TrainingTargetAudience> {TrainingTargetAudience.Employee});
 
-        training.SwitchSlotNumberType(TrainingSlotNumberType.Group);
+        training.SwitchSlotNumberType(new List<TrainingSlotNumberType>{TrainingSlotNumberType.Group});
 
-        training.SlotNumberTypeId.Should().Be(TrainingSlotNumberType.Group.Id);
+        training.Slots.Should().ContainSingle();
+        training.Slots.Select(slot => slot.TrainingSlotNumberSlotType).First().Should().BeSameAs(TrainingSlotNumberType.Group);
     }
 }
