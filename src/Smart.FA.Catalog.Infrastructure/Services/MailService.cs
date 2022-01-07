@@ -9,9 +9,9 @@ public class MailService : IMailService
 {
     private readonly string _sender;
     private readonly string _server;
-    private readonly ILogger _logger;
+    private readonly ILogger<MailService> _logger;
 
-    public MailService(IOptions<MailOptions> mailOptions, ILogger logger)
+    public MailService(IOptions<MailOptions> mailOptions, ILogger<MailService> logger)
     {
         _sender = mailOptions.Value.Sender;
         _server = mailOptions.Value.Server;
