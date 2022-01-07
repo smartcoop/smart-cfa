@@ -38,9 +38,9 @@ public static class EditTrainingViewModelMapping
                     Title = model.Title
                 },
             TrainingId = trainingId,
-            Types = Enumeration.FromValues<TrainingType>(model.TrainingTypeIds),
-            TargetAudiences = Enumeration.FromValues<TrainingTargetAudience>(model.TargetAudienceIds),
-            SlotNumberTypes = Enumeration.FromValues<TrainingSlotNumberType>(model.SlotNumberTypeIds),
+            Types = Enumeration.FromValues<TrainingType>(model.TrainingTypeIds ?? new()),
+            TargetAudiences = Enumeration.FromValues<TrainingTargetAudience>(model.TargetAudienceIds ?? new()),
+            SlotNumberTypes = Enumeration.FromValues<TrainingSlotNumberType>(model.SlotNumberTypeIds ?? new()),
             TrainerIds = new List<int>{trainerId}
         };
 
