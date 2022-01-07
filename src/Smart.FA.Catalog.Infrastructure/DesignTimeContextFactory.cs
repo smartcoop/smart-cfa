@@ -11,10 +11,10 @@ public class DesignTimeContextFactory : IDesignTimeDbContextFactory<Context>
         var basePath = Directory.GetCurrentDirectory();
         var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
         Console.WriteLine($"\nDesignTimeContextFactory.Create(string[]):\n\tBase Path: {basePath}\n\tEnvironmentVariable: {environmentName}");
-        return Create(basePath, environmentName);
+        return Create(basePath, environmentName, true);
     }
 
-    private static Context Create(string basePath, string environmentName)
+    private static Context Create(string basePath, string environmentName, bool useConsoleLogger)
     {
         const string appSettingsFileName = "appsettings";
         var builder = new ConfigurationBuilder()
@@ -26,7 +26,6 @@ public class DesignTimeContextFactory : IDesignTimeDbContextFactory<Context>
 
         var config = builder.Build();
         var connectionString = config.GetConnectionString("Training");
-
         if (string.IsNullOrWhiteSpace(connectionString))
             throw new InvalidOperationException(
                 "Could not find a connection string named 'Training'.");
@@ -37,6 +36,6 @@ public class DesignTimeContextFactory : IDesignTimeDbContextFactory<Context>
         optionsBuilder.UseSqlServer(connectionString);
         Console.WriteLine($"\nDesignTimeContextFactory.Create(string):\n\tConnection string: {connectionString}\n");
         var options = optionsBuilder.Options;
-        return new Context(options);
+        return new Context(connectionString, useConsoleLogger);
     }
 }
