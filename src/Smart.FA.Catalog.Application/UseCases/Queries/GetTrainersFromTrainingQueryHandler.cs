@@ -22,7 +22,7 @@ public class GetTrainersFromTrainingQueryHandler : IRequestHandler<GetTrainersFr
         GetTrainersFromTrainingResponse response = new();
         try
         {
-            var training = await _context.Trainings.FirstOrDefaultAsync(training => training.Id == request.TrainingId);
+            var training = await _context.Trainings.FindAsync(new object?[] { request.TrainingId }, cancellationToken: cancellationToken);
             response.Trainers = training?.TrainerEnrollments.Select(ttt => ttt.Trainer).ToList();
             response.SetSuccess();
         }
