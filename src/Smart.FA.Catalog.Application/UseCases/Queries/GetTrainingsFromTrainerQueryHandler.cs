@@ -1,5 +1,6 @@
 using Application.SeedWork;
 using Core.Domain;
+using Core.Domain.Dto;
 using Core.Domain.Interfaces;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -11,23 +12,23 @@ public class
         GetTrainingsFromTrainerResponse>
 {
     private readonly ILogger<GetTrainingsFromTrainerQueryHandler> _logger;
-    private readonly ITrainingRepository _trainingRepository;
+    private readonly ITrainingQueries _trainingQueries;
 
     public GetTrainingsFromTrainerQueryHandler(ILogger<GetTrainingsFromTrainerQueryHandler> logger,
-        ITrainingRepository trainingRepository)
+        ITrainingQueries trainingQueries )
     {
         _logger = logger;
-        _trainingRepository = trainingRepository;
+        _trainingQueries = trainingQueries;
     }
 
-    public Task<GetTrainingsFromTrainerResponse> Handle(GetTrainingsFromTrainerRequest request,
+    public async Task<GetTrainingsFromTrainerResponse> Handle(GetTrainingsFromTrainerRequest request,
         CancellationToken cancellationToken)
     {
         GetTrainingsFromTrainerResponse resp = new();
 
         try
         {
-            resp.Trainings = _trainingRepository.GetTrainingByTrainerId(request.TrainerId);
+            resp.Trainings = await _trainingQueries.GetListAsync(request.TrainerId, request.Language.Value, cancellationToken);
             resp.SetSuccess();
         }
         catch (Exception e)
@@ -36,16 +37,17 @@ public class
             throw;
         }
 
-        return Task.FromResult(resp);
+        return resp;
     }
 }
 
 public class GetTrainingsFromTrainerRequest : IRequest<GetTrainingsFromTrainerResponse>
 {
     public int TrainerId { get; set; }
+    public Language Language { get; set; }
 }
 
 public class GetTrainingsFromTrainerResponse : ResponseBase
 {
-    public IEnumerable<Training> Trainings { get; set; }
+    public IEnumerable<TrainingDto>? Trainings { get; set; }
 }
