@@ -1,5 +1,6 @@
 ﻿@page
 @using Core.Domain
+@using Core.Domain.Enumerations
 @using Core.SeedWork
 @inject IStringLocalizer<CreateModel> Localizer
 @model Api.Pages.Admin.Trainings.Create.CreateModel
@@ -74,11 +75,11 @@
             <smart-formgroup label="S'agit-il d'un cours ?">
                 @foreach (var slotNumberType in Enumeration.GetAll<TrainingSlotNumberType>())
                 {
-                    <smart-radio asp-for="CreateTrainingViewModel.SlotNumberTypeId" value="@slotNumberType.Id" label="@Localizer[slotNumberType.Name]"></smart-radio>
+                    <smart-radio asp-for="CreateTrainingViewModel.SlotNumberTypeIds" value="@slotNumberType.Id" label="@Localizer[slotNumberType.Name]"></smart-radio>
                 }
             </smart-formgroup>
 
-            @* <smart-form-group-input-text label="Lieu de la formation" asp-for="EditTrainingViewModel.Address"></smart-form-group-input-text> *@
+            @* <smart-form-group-input-text label="Lieu de la formation" asp-for="CreateTrainingViewModel.Address"></smart-form-group-input-text> *@
 
             <smart-form-group-textarea rows="5" asp-for="CreateTrainingViewModel.Goal" label="@Localizer[nameof(Model.CreateTrainingViewModel.Goal)]"></smart-form-group-textarea>
             <smart-form-group-textarea rows="5" asp-for="CreateTrainingViewModel.Methodology" label="@Localizer[nameof(Model.CreateTrainingViewModel.Methodology)]"></smart-form-group-textarea>
