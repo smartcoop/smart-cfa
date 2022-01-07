@@ -2,7 +2,7 @@ using Core.Domain;
 using Core.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Persistence.Repository;
+namespace Infrastructure.Persistence.Write;
 
 public class TrainingRepository : ITrainingRepository
 {
@@ -13,17 +13,18 @@ public class TrainingRepository : ITrainingRepository
         _context = context;
     }
 
-    public IEnumerable<Training> GetTrainingByTrainerId(int trainerId)
-    {
-        return _context.TrainerEnrollments
-            .Where(enrollment => enrollment.TrainerId == trainerId)
-            .Include(enrollment => enrollment.Training)
-            .Select(enrollment => enrollment.Training).ToList();
-    }
+    public async Task<IEnumerable<Training>> GetTrainingsByTrainerIdAsync(int trainerId, CancellationToken cancellationToken)
+        => await _context.Trainings.Include(training => training.TrainerEnrollments).Where(training =>
+            training.TrainerEnrollments.Select(enrollment => enrollment.TrainerId).Contains(trainerId)).ToListAsync(cancellationToken);
 
-    public async Task<Training> GetTrainingAsync(int trainingId)
-    {
-        return await _context.Trainings.FindAsync(trainingId);
-    }
+    public async Task<Training?> GetFullTraGetTrainingAsync(int trainingId, CancellationToken cancellationToken)
+        => await _context.Trainings.Include(training => training.TrainerEnrollments)
+            .Include(training => training.Details)
+            .Include(training => training.Identities)
+            .Include(training => training.Slots)
+            .Include(training => training.Targets)
+            .FirstOrDefaultAsync(training => training.Id == trainingId, cancellationToken);
 
+    public async Task<Training> FindTrainingIdAsync(int trainingId, CancellationToken cancellationToken)
+        => await _context.Trainings.FindAsync(new object?[] { trainingId, cancellationToken }, cancellationToken: cancellationToken) ?? throw new Exception();
 }
