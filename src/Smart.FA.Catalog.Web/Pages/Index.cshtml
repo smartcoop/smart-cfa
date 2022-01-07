@@ -1,2 +1,9 @@
 ﻿@page
-<smart-accordion></smart-accordion>
+@model Api.Pages.IndexModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Index";
+    ViewData["ToolBarTitle"] = "Add a new training";
+}
+
+<smart-input-time></smart-input-time>

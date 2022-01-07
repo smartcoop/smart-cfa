@@ -1,7 +1,11 @@
+using Api.Pages.Admin;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Smart.CFA.Pages.Pages;
+namespace Api.Pages;
 
+[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+[IgnoreAntiforgeryToken]
 public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
@@ -11,8 +15,9 @@ public class IndexModel : PageModel
         _logger = logger;
     }
 
-    public void OnGet()
+    public async Task OnGet()
     {
-
+        ViewData[nameof(SideMenuItem)] = SideMenuItem.MyTrainings;
+        RedirectToPage("Admin/Trainings/List/Index");
     }
 }
