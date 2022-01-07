@@ -1,6 +1,7 @@
 using Application.SeedWork;
-using Application.UseCases.Dto;
 using Core.Domain;
+using Core.Domain.Dto;
+using Core.Domain.Enumerations;
 using Core.Domain.Interfaces;
 using Core.SeedWork;
 using Infrastructure.Persistence;

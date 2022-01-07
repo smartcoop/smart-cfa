@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoFixture;
 using Core.Domain;
+using Core.Domain.Enumerations;
 using Core.Services;
 using FluentAssertions;
 using Moq;

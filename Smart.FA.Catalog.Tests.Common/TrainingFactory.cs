@@ -1,5 +1,6 @@
 using AutoFixture;
 using Core.Domain;
+using Core.Domain.Enumerations;
 
 namespace Smart.FA.Catalog.Tests.Common;
 
