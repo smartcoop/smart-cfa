@@ -2,7 +2,6 @@ using Application.SeedWork;
 using Core.Domain;
 using Infrastructure.Persistence;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Application.UseCases.Queries;
@@ -29,7 +28,7 @@ public class GetTrainingFromIdQueryHandler: IRequestHandler<GetTrainingFromIdReq
         }
         catch (Exception e)
         {
-            _logger.LogError(e.StackTrace);
+             _logger.LogError("{Exception}", e.ToString());
             throw;
         }
 

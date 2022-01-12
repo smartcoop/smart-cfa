@@ -28,7 +28,7 @@ public class GetTrainersFromTrainingQueryHandler : IRequestHandler<GetTrainersFr
         }
         catch (Exception e)
         {
-            _logger.LogError(e.StackTrace);
+             _logger.LogError("{Exception}", e.ToString());
             throw;
         }
 

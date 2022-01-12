@@ -33,7 +33,7 @@ public class
         }
         catch (Exception e)
         {
-            _logger.LogError(e.StackTrace);
+             _logger.LogError("{Exception}", e.ToString());
             throw;
         }
 
