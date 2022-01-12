@@ -31,3 +31,17 @@ public record TrainingListingViewModel
         return string.Empty;
     }
 }
+
+public static class StatusExtension
+{
+    public static string DisplayStatus(this TrainingStatus trainingStatus)
+    {
+        if (Equals(trainingStatus, TrainingStatus.Draft))
+            return "Draft";
+
+        if (Equals(trainingStatus, TrainingStatus.WaitingForValidation))
+            return "En attente de validation";
+
+        return Equals(trainingStatus, TrainingStatus.Validated) ? "Validé" : string.Empty;
+    }
+}
