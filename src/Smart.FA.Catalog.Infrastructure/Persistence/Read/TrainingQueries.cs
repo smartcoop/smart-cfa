@@ -20,7 +20,8 @@ public class TrainingQueries: ITrainingQueries
 	                    T.Id 'TrainingId',
 	                    T.StatusId,
 	                    TD.Title,
-	                    TD.Goal
+	                    TD.Goal,
+                        TD.Language
                     FROM dbo.Training T
                     INNER JOIN dbo.TrainingDetails TD ON T.Id = TD.TrainingId
                     WHERE TD.TrainingId = @TrainingId AND TD.Language = @Language";
