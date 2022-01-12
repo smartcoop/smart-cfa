@@ -34,9 +34,7 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingReques
         try
         {
             var trainer = await _trainerRepository.FindAsync(request.TrainerId, cancellationToken);
-            var training = new Training(trainer, trainer.DefaultLanguage, request.Types, request.SlotNumberTypes, request.TargetAudiences);
-            training.UpdateDetails(request.Detail.Title, request.Detail.Goal, request.Detail.Methodology,
-                Language.Create(request.Detail.Language).Value);
+            var training = new Training(trainer, request.Detail, request.Types, request.SlotNumberTypes, request.TargetAudiences);
             training.Validate(_mailService);
 
             _unitOfWork.RegisterNew(training);
@@ -47,7 +45,7 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingReques
         }
         catch (Exception e)
         {
-            _logger.LogError(e.ToString());
+            _logger.LogError("{Exception}", e.ToString());
             throw;
         }
 
@@ -58,10 +56,10 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingReques
 public class CreateTrainingRequest : IRequest<CreateTrainingResponse>
 {
     public int TrainerId { get; set; }
-    public TrainingDetailDto? Detail { get; set; }
-    public List<TrainingTargetAudience>? TargetAudiences { get; set; }
-    public List<TrainingType>? Types { get; set; }
-    public List<TrainingSlotNumberType>? SlotNumberTypes { get; set; }
+    public TrainingDetailDto Detail { get; set; }
+    public List<TrainingTargetAudience> TargetAudiences { get; set; }
+    public List<TrainingType> Types { get; set; }
+    public List<TrainingSlotNumberType> SlotNumberTypes { get; set; }
 }
 
 public class CreateTrainingResponse : ResponseBase
