@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Smart.FA.Catalog.IntegrationTests.TrainingContext;
 
-[CollectionDefinition("Integration test collection")]
+[Collection("Integration test collection")]
 public class TrainingTests: IntegrationTestBase
 {
     private readonly TrainerFactory _trainerFactory = new();

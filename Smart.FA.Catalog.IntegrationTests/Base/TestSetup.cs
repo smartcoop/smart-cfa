@@ -10,8 +10,6 @@ namespace Smart.FA.Catalog.IntegrationTests.Base;
 
 public class TestSetup : IntegrationTestBase, IDisposable
 {
-    private const string databaseName = "Training";
-
     public TestSetup()
     {
         DestroyDatabase();
@@ -25,10 +23,10 @@ public class TestSetup : IntegrationTestBase, IDisposable
 
     private static void CreateDatabase()
     {
-        ExecuteSqlCommand(Master, $@"
-                CREATE DATABASE [{databaseName}]
-                ON (NAME = '{databaseName}',
-                FILENAME = '{Filename}')");
+        ExecuteSqlCommand(ConnectionSetup.Master, $@"
+                CREATE DATABASE [{ConnectionSetup.DatabaseName}]
+                ON (NAME = '{ConnectionSetup.DatabaseName}',
+                FILENAME = '{ConnectionSetup.Filename}')");
 
         using (var context = GivenTrainingContext(beginTransaction: false))
         {
@@ -39,16 +37,16 @@ public class TestSetup : IntegrationTestBase, IDisposable
 
     private static void DestroyDatabase()
     {
-        var fileNames = ExecuteSqlQuery(Master, $@"
+        var fileNames = ExecuteSqlQuery(ConnectionSetup.Master, $@"
                 SELECT [physical_name] FROM [sys].[master_files]
-                WHERE [database_id] = DB_ID('{databaseName}')",
+                WHERE [database_id] = DB_ID('{ConnectionSetup.DatabaseName}')",
             row => (string)row["physical_name"]);
 
         if (fileNames.Any())
         {
-            ExecuteSqlCommand(Master, $@"
-                    ALTER DATABASE [{databaseName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-                    EXEC sp_detach_db '{databaseName}'");
+            ExecuteSqlCommand(ConnectionSetup.Master, $@"
+                    ALTER DATABASE [{ConnectionSetup.DatabaseName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+                    EXEC sp_detach_db '{ConnectionSetup.DatabaseName}'");
 
             fileNames.ForEach(File.Delete);
         }
@@ -92,17 +90,4 @@ public class TestSetup : IntegrationTestBase, IDisposable
             }
         }
     }
-
-    private static SqlConnectionStringBuilder Master =>
-        new SqlConnectionStringBuilder
-        {
-            DataSource = @"(LocalDB)\MSSQLLocalDB",
-            InitialCatalog = "master",
-            IntegratedSecurity = true
-        };
-
-    private static string Filename => Path.Combine(
-        Path.GetDirectoryName(
-            typeof(TestSetup).GetTypeInfo().Assembly.Location),
-        $"{databaseName}.mdf");
 }
