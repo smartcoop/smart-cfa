@@ -18,7 +18,7 @@ public class Trainer : Entity, IAggregateRoot
 
     public Language DefaultLanguage { get; private set; }
 
-    public virtual IReadOnlyCollection<TrainerEnrollment> Enrollments { get; private set; }
+    public virtual IReadOnlyCollection<TrainerEnrollment> Enrollments => _enrollments;
 
     #endregion
 
@@ -49,8 +49,8 @@ public class Trainer : Entity, IAggregateRoot
 
     public void EnrollIn(Training training)
     {
-        Guard.Requires(() => _enrollments.Select(enrollment => enrollment.Training).Contains(training),
-            "The trainer has never enrolled in that training");
+        Guard.Requires(() =>! _enrollments.Select(enrollment => enrollment.Training).Contains(training),
+            "The trainer is already enrolled in that training");
         _enrollments.Add(new TrainerEnrollment(training, this));
     }
 
