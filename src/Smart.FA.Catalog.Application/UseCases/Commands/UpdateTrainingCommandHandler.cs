@@ -36,13 +36,13 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
 
         try
         {
-            var training = await _trainingRepository.GetFullTraGetTrainingAsync(request.TrainingId, cancellationToken);
+            var training = await _trainingRepository.GetFullAsync(request.TrainingId, cancellationToken);
             training.UpdateDetails(request.Detail.Title, request.Detail.Goal, request.Detail.Methodology,
                 Language.Create(request.Detail.Language).Value);
             training.SwitchTrainingTypes(request.Types);
             training.SwitchTargetAudience(request.TargetAudiences);
             training.SwitchSlotNumberType(request.SlotNumberTypes);
-            var trainers = await _trainerRepository.GetListAsync(request.TrainerIds, cancellationToken);
+            var trainers = await _trainerRepository.GetListAsync(request.TrainingId, cancellationToken);
             training.EnrollTrainers(trainers);
             training.Validate(_mailService);
             _unitOfWork.RegisterDirty(training);
@@ -53,7 +53,7 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
         }
         catch (Exception e)
         {
-            _logger.LogError(e.StackTrace);
+             _logger.LogError("{Exception}", e.ToString());
             throw;
         }
 
