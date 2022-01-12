@@ -24,6 +24,6 @@ public class TrainingType : Enumeration
 
 public static class TrainingTypeExtensions
 {
-    public static bool IsTrainingAutoValidated(this IEnumerable<TrainingType> trainingTypes)
-        => trainingTypes.Contains(TrainingType.LanguageCourse);
+    public static bool IsTrainingAutoValidated(this IEnumerable<TrainingIdentity> trainingTypes)
+        => trainingTypes.Select(identity => identity.TrainingType).Contains(TrainingType.LanguageCourse);
 }

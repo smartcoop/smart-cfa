@@ -21,6 +21,6 @@ public class TrainingStatus : Enumeration
 
 public static class TrainingStatusExtensions
 {
-    public static TrainingStatus Validate(this TrainingStatus status, IEnumerable<TrainingType> trainingTypes)
-     => trainingTypes.IsTrainingAutoValidated() ? TrainingStatus.Validated : TrainingStatus.WaitingForValidation;
+    public static TrainingStatus Validate(this TrainingStatus status, IEnumerable<TrainingIdentity> identities)
+        => identities.IsTrainingAutoValidated() ? TrainingStatus.Validated : TrainingStatus.WaitingForValidation;
 }
