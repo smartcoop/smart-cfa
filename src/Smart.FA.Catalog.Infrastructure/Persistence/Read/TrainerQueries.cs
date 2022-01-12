@@ -15,7 +15,7 @@ public class TrainerQueries : ITrainerQueries
         _connectionString = connectionString;
     }
 
-    public async Task<IEnumerable<TrainerDto>> GetTrainersAsync(List<int> trainingIds, CancellationToken cancellationToken)
+    public async Task<IEnumerable<TrainerDto>> GetListAsync(List<int> trainingIds, CancellationToken cancellationToken)
     {
         var sql = @"SELECT T.* FROM dbo.Trainer T WHERE T.Id IN @TrainingIds";
         await using var db = new SqlConnection(_connectionString);
