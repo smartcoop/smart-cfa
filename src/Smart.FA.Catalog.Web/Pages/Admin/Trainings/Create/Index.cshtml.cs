@@ -31,9 +31,10 @@ public class CreateModel : AdminPage
             return RedirectToPage();
         }
 
+        var trainer = new TrainerDto(1, Name.Create("firstName", "lastName").Value, "", Language.Create("FR").Value );
         var response =
             await Mediator.Send(
-                CreateTrainingViewModel.MapToRequest(new TrainerDto {Id = 1, DefaultLanguage = Language.Create("FR").Value}));
+                CreateTrainingViewModel.MapToRequest(trainer));
 
         return RedirectToPage("/Admin/Trainings/List/Index");
     }
