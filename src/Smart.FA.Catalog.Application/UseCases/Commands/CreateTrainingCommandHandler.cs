@@ -34,8 +34,8 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingReques
         try
         {
             var trainer = await _trainerRepository.FindAsync(request.TrainerId, cancellationToken);
-            var training = new Training(trainer, request.Types, request.SlotNumberTypes, request.TargetAudiences);
-            training.AddDetails(request.Detail.Title, request.Detail.Goal, request.Detail.Methodology,
+            var training = new Training(trainer, trainer.DefaultLanguage, request.Types, request.SlotNumberTypes, request.TargetAudiences);
+            training.UpdateDetails(request.Detail.Title, request.Detail.Goal, request.Detail.Methodology,
                 Language.Create(request.Detail.Language).Value);
             training.Validate(_mailService);
 
@@ -47,7 +47,7 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingReques
         }
         catch (Exception e)
         {
-            _logger.LogError(e.StackTrace);
+            _logger.LogError(e.ToString());
             throw;
         }
 

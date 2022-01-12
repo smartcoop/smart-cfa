@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoFixture;
 using Core.Domain;
+using Core.Domain.Dto;
 using Core.Domain.Enumerations;
+using Core.Exceptions;
 using Core.Services;
 using FluentAssertions;
 using Moq;
@@ -59,7 +61,7 @@ public class TrainingTests
             Language.Create(_fixture.Create<string>().Substring(0, 2)).Value);
 
         action.Should().NotThrow<Exception>();
-        training.Details.Should().ContainSingle();
+        training.Details.Should().HaveCount(2);
     }
 
 
@@ -73,7 +75,7 @@ public class TrainingTests
         var action = () => training.AddDetails(title, goal, methodology,  Language.Create(language).Value);
 
         action.Should().Throw<Exception>();
-        training.Details.Should().BeEmpty();
+        training.Details.Should().HaveCount(1);
     }
 
     [Fact]
@@ -81,16 +83,16 @@ public class TrainingTests
     {
         var trainer = _trainerFactory.CreateClean();
         var training = _trainingFactory.Create(trainer);
-        var language = _fixture.Create<string>().Substring(0, 2);
+        var language = Language.Create(_fixture.Create<string>().Substring(0, 2)).Value;
 
 
         training.AddDetails(_fixture.Create<string>(), _fixture.Create<string>(),
-            _fixture.Create<string>(), Language.Create(language).Value);
+            _fixture.Create<string>(), language);
         var action = () => training.AddDetails(_fixture.Create<string>(), _fixture.Create<string>(),
-            _fixture.Create<string>(),  Language.Create(language).Value);
+            _fixture.Create<string>(), language);
 
         action.Should().Throw<Exception>();
-        training.Details.Should().ContainSingle();
+        training.Details.Should().HaveCount(2);
     }
 
 
@@ -99,19 +101,19 @@ public class TrainingTests
     {
         var trainer = _trainerFactory.CreateClean();
         var training = _trainingFactory.Create(trainer);
-        var language = _fixture.Create<string>().Substring(0, 2);
+        var language =  Language.Create(_fixture.Create<string>().Substring(0, 2)).Value;
         var newTitle = _fixture.Create<string>();
 
         training.AddDetails(_fixture.Create<string>(), _fixture.Create<string>(),
-            _fixture.Create<string>(), Language.Create(language).Value);
+            _fixture.Create<string>(), language);
         var action = () => training.UpdateDetails(newTitle, _fixture.Create<string>(),
-            _fixture.Create<string>(), Language.Create(language).Value);
+            _fixture.Create<string>(),language);
 
 
         action.Should().NotThrow<Exception>();
-        training.Details.Should().ContainSingle();
-        training.Details.FirstOrDefault().Should().NotBeNull();
-        training.Details.FirstOrDefault()!.Title.Should().Be(newTitle);
+        training.Details.Should().HaveCount(2);
+        training.Details.FirstOrDefault(detail => detail.Language == language).Should().NotBeNull();
+        training.Details.FirstOrDefault(detail => detail.Language == language)!.Title.Should().Be(newTitle);
     }
 
 
@@ -130,11 +132,13 @@ public class TrainingTests
     public void StatusCanBeAutoValidated()
     {
         var trainer = _trainerFactory.CreateClean();
-        var training = new Training(trainer, new List<TrainingType> {TrainingType.LanguageCourse},
+        var training = new Training(trainer, new TrainingDetailDto(_fixture.Create<string>(),null,"FR", null),new List<TrainingType> {TrainingType.LanguageCourse},
             new List<TrainingSlotNumberType>{TrainingSlotNumberType.Group}, new List<TrainingTargetAudience> {TrainingTargetAudience.Employee});
+        training.UpdateDetails("Hello", "My Goal", "A methodology", Language.Create("FR").Value);
 
-        training.Validate(_mailService.Object);
+        var errors = training.Validate(_mailService.Object);
 
+        errors.Should().BeEmpty();
         training.StatusId.Should().Be(TrainingStatus.Validated.Id);
     }
 
@@ -142,11 +146,14 @@ public class TrainingTests
     public void StatusMustBeManuallyValidated()
     {
         var trainer = _trainerFactory.CreateClean();
-        var training = new Training(trainer, new List<TrainingType> {TrainingType.Professional},
+        var training = new Training(trainer, new TrainingDetailDto(_fixture.Create<string>(),null,"FR", null),new List<TrainingType> {TrainingType.Professional},
             new List<TrainingSlotNumberType>{TrainingSlotNumberType.Group}, new List<TrainingTargetAudience> {TrainingTargetAudience.Employee});
+        training.UpdateDetails("Hello", "My Goal", "A methodology", Language.Create("FR").Value);
 
-        training.Validate(_mailService.Object);
 
+        var errors = training.Validate(_mailService.Object);
+
+        errors.Should().BeEmpty();
         training.StatusId.Should().Be(TrainingStatus.WaitingForValidation.Id);
     }
 
@@ -176,12 +183,22 @@ public class TrainingTests
     public void CanBeSwitchedFromSingleToGroupSlotNumber()
     {
         var trainer = _trainerFactory.CreateClean();
-        var training = new Training(trainer, new List<TrainingType> {TrainingType.Professional},
+        var training = new Training(trainer, new TrainingDetailDto(_fixture.Create<string>(),null,"FR", null) , new List<TrainingType> {TrainingType.Professional},
             new List<TrainingSlotNumberType>{TrainingSlotNumberType.Single}, new List<TrainingTargetAudience> {TrainingTargetAudience.Employee});
 
         training.SwitchSlotNumberType(new List<TrainingSlotNumberType>{TrainingSlotNumberType.Group});
 
         training.Slots.Should().ContainSingle();
         training.Slots.Select(slot => slot.TrainingSlotNumberSlotType).First().Should().BeSameAs(TrainingSlotNumberType.Group);
+    }
+
+    [Fact]
+    public void CannotBeSwitchedToNullValue()
+    {
+        var training = _trainingFactory.CreateClean();
+
+        var action = () => training.SwitchTargetAudience(null!);
+
+        action.Should().Throw<GuardClauseException>();
     }
 }

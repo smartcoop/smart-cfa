@@ -1,3 +1,5 @@
+using System.Linq.Expressions;
+using Core.Domain.Dto;
 using Core.Domain.Enumerations;
 using Core.SeedWork;
 using Core.Services;
@@ -9,7 +11,7 @@ public class Training : Entity, IAggregateRoot
     #region Private fields
 
     private readonly List<TrainerEnrollment> _trainerEnrollments = new();
-    private readonly List<TrainingIdentity> _Identities = new();
+    private readonly List<TrainingIdentity> _identities = new();
     private readonly List<TrainingTarget> _targets = new();
     private readonly List<TrainingDetail> _details = new();
     private readonly List<TrainingSlot> _slots = new();
@@ -19,7 +21,7 @@ public class Training : Entity, IAggregateRoot
     #region Properties
 
     public virtual IReadOnlyCollection<TrainerEnrollment> TrainerEnrollments => _trainerEnrollments;
-    public virtual IReadOnlyCollection<TrainingIdentity> Identities => _Identities;
+    public virtual IReadOnlyCollection<TrainingIdentity> Identities => _identities;
     public virtual IReadOnlyCollection<TrainingTarget> Targets => _targets;
     public virtual IReadOnlyCollection<TrainingDetail> Details => _details;
     public virtual IReadOnlyCollection<TrainingSlot> Slots => _slots;
@@ -31,10 +33,11 @@ public class Training : Entity, IAggregateRoot
 
     #region Constructors
 
-    public Training(Trainer trainer, IEnumerable<TrainingType> types,
+    public Training(Trainer trainer, TrainingDetailDto trainingDetail, IEnumerable<TrainingType> types,
         IEnumerable<TrainingSlotNumberType> slotNumberTypes,
         IEnumerable<TrainingTargetAudience> targetAudiences)
     {
+        AddDetails(trainingDetail.Title,trainingDetail.Goal,trainingDetail.Methodology, Language.Create(trainingDetail.Language).Value);
         SwitchTrainingTypes(types);
         SwitchTargetAudience(targetAudiences);
         SwitchSlotNumberType(slotNumberTypes);
@@ -50,33 +53,33 @@ public class Training : Entity, IAggregateRoot
 
     #region Public methods
 
-    public void SwitchTrainingTypes(IEnumerable<TrainingType> trainingTypes)
+    public void SwitchTrainingTypes(IEnumerable<TrainingType>? trainingTypes)
     {
         Guard.Requires(() => trainingTypes != null, "training types should not be null");
-        _Identities.Clear();
-        _Identities.AddRange(trainingTypes.Distinct().Select(trainingType => new TrainingIdentity(this, trainingType)));
+        _identities.Clear();
+        _identities.AddRange(trainingTypes!.Distinct().Select(trainingType => new TrainingIdentity(this, trainingType)));
     }
 
-    public void SwitchTargetAudience(IEnumerable<TrainingTargetAudience> trainingTargetAudiences)
+    public void SwitchTargetAudience(IEnumerable<TrainingTargetAudience>? trainingTargetAudiences)
     {
         Guard.Requires(() => trainingTargetAudiences != null, "training audiences should not be null");
         _targets.Clear();
-        _targets.AddRange(trainingTargetAudiences.Distinct()
+        _targets.AddRange(trainingTargetAudiences!.Distinct()
             .Select(trainingAudience => new TrainingTarget(this, trainingAudience)));
     }
 
-    public void SwitchSlotNumberType(IEnumerable<TrainingSlotNumberType> slotNumberTypes)
+    public void SwitchSlotNumberType(IEnumerable<TrainingSlotNumberType>? slotNumberTypes)
     {
         Guard.Requires(() => slotNumberTypes != null, "slot number types should not be null");
         _slots.Clear();
-        _slots.AddRange(slotNumberTypes.Distinct()
+        _slots.AddRange(slotNumberTypes!.Distinct()
             .Select(slotNumberType => new TrainingSlot(this, slotNumberType)));
     }
 
-    public void EnrollTrainer(Trainer trainer)
+    public void EnrollTrainer(Trainer? trainer)
     {
         Guard.Requires(() => trainer != null, "There should be at least one trainer enrolled (owner)");
-        TrainerEnrollment trainerEnrollment = new(this, trainer);
+        TrainerEnrollment trainerEnrollment = new(this, trainer!);
         if (_trainerEnrollments.Contains(trainerEnrollment)) throw new Exception();
         _trainerEnrollments.Add(trainerEnrollment);
     }
@@ -93,32 +96,29 @@ public class Training : Entity, IAggregateRoot
     public void DisenrollAll()
         => _trainerEnrollments.RemoveAll(enrollment => enrollment.TrainerId != TrainerCreatorId);
 
-    public bool Validate(IMailService mailService)
+    public List<string> Validate(IMailService mailService)
     {
-        if (MissingFields().Any())
-        {
-            StatusId = TrainingStatus.Draft.Id;
-            return false;
-        }
+        var missingFieldsErrors =  ListMissingFields();
 
-        var status = Enumeration.FromValue<TrainingStatus>(StatusId);
-        StatusId = status.Validate(_Identities.Select(identity => identity.TrainingType)).Id;
+        StatusId = missingFieldsErrors.Any()
+            ? TrainingStatus.Draft.Id
+            : ValidateStatus.Compile()(this).Id;
 
-        return true;
+        return missingFieldsErrors;
     }
 
-    public void AddDetails(string title, string goal, string methodology, Language language)
+    public void AddDetails(string? title, string? goal, string? methodology, Language language)
     {
-        Guard.Requires(() => _details.FirstOrDefault(detail => detail.Language == language.Value) == null,
+        Guard.Requires(() => _details.FirstOrDefault(detail => detail.Language.Value == language.Value) == null,
             "A description for that language already exists");
-        _details.Add(new TrainingDetail(this, title, goal, methodology, language.Value));
+        _details.Add(new TrainingDetail(this, title, goal, methodology, language));
     }
 
     public void UpdateDetails(string title, string goal, string methodology, Language language)
     {
-        Guard.Requires(() => _details.FirstOrDefault(detail => detail.Language == language.Value) != null,
+        Guard.Requires(() => _details.FirstOrDefault(detail => detail.Language.Value == language.Value) != null,
             "No descriptions for that language exist");
-       var detailToModify = _details.First(detail => detail.Language == language.Value);
+       var detailToModify = _details.First(detail => detail.Language.Value == language.Value);
        detailToModify.Goal = goal;
        detailToModify.Title = title;
        detailToModify.Methodology = methodology;
@@ -127,12 +127,21 @@ public class Training : Entity, IAggregateRoot
 
     #region Private methods
 
-    private IEnumerable<string> MissingFields()
+    private static readonly Expression<Func<Training, TrainingStatus>> ValidateStatus =
+        training => Enumeration.FromValue<TrainingStatus>(training.StatusId)
+            .Validate(training.Identities);
+
+    private List<string> ListMissingFields()
     {
         List<string> errors = new();
         if (!Identities.Any()) errors.Add("Missing Identities");
         if (!Targets.Any()) errors.Add("Missing Targets");
         if (!TrainerEnrollments.Any()) errors.Add("Missing Trainer enrollments");
+        if(!Details.Any()) errors.Add("Missing Training Details");
+        foreach (var detail in Details)
+        {
+            errors.AddRange(detail.Validate());
+        }
         return errors;
     }
 
