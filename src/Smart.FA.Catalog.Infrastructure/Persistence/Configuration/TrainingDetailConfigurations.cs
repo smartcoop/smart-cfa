@@ -15,10 +15,10 @@ public class TrainingDetailConfigurations : IEntityTypeConfiguration<TrainingDet
         builder.Property(detail => detail.Goal).HasMaxLength(1500).IsRequired(false);
         builder.Property(detail => detail.Methodology).HasMaxLength(1500).IsRequired(false);
         builder.Property(trainer => trainer.Language).HasConversion(language => language.Value,
-            language => Language.Create(language).Value);
+            language => Language.Create(language).Value).HasColumnName("Language").HasColumnType("NCHAR(2)");
         builder.HasOne(detail => detail.Training).WithMany(training => training.Details)
             .HasForeignKey(detail => detail.TrainingId);
 
-        builder.ToTable("TrainingDetails");
+        builder.ToTable("TrainingDetail");
     }
 }
