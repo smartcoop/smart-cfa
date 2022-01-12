@@ -1,8 +1,11 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture;
+using Core.Domain.Dto;
 using FluentAssertions;
+using Infrastructure.Persistence.Read;
 using Infrastructure.Persistence.Write;
 using Microsoft.EntityFrameworkCore;
 using Smart.FA.Catalog.IntegrationTests.Base;
@@ -11,12 +14,13 @@ using Xunit;
 
 namespace Smart.FA.Catalog.IntegrationTests.Repositories;
 
-[CollectionDefinition("Integration test collection")]
+[Collection("Integration test collection")]
 public class TrainerRepositoryTests : IntegrationTestBase
 {
     private readonly TrainerFactory _trainerFactory = new();
     private readonly TrainingFactory _trainingFactory = new();
     private readonly Fixture _fixture = new();
+    private readonly TrainerQueries _trainerQueries = new TrainerQueries(ConnectionSetup.Training.ConnectionString);
 
     public TrainerRepositoryTests()
     {
@@ -52,5 +56,25 @@ public class TrainerRepositoryTests : IntegrationTestBase
 
         foundTrainer.Should().NotBeNull();
         foundTrainer.Should().BeEquivalentTo(trainer);
+    }
+
+    [Fact]
+    public async Task GetListOfTrainersFromTrainingId()
+    {
+        var trainerToAdd = _trainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
+        var trainingToAdd = _trainingFactory.Create(trainerToAdd);
+        await using (var context = GivenTrainingContext(false))
+        {
+            context.Trainers.Attach(trainerToAdd);
+            await context.SaveChangesAsync();
+
+            context.Trainings.Attach(trainingToAdd);
+           await context.SaveChangesAsync();
+        }
+
+        var trainers = await _trainerQueries.GetListAsync(new List<int> {trainingToAdd.Id}, CancellationToken.None);
+
+        trainers.Should().NotBeEmpty();
+        trainers.Should().Contain(trainer => trainer.Id == trainerToAdd.Id);
     }
 }
