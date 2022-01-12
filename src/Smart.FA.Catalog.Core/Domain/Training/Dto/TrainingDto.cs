@@ -4,5 +4,5 @@ public record TrainingDto
     (int TrainingId,
     int StatusId,
     string Title,
-    string Goal,
+    string? Goal,
     string Language);
