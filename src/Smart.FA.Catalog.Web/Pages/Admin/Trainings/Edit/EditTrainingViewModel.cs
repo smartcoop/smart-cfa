@@ -31,12 +31,12 @@ public static class EditTrainingViewModelMapping
         {
             Detail =
                 new TrainingDetailDto
-                {
-                    Goal = model.Goal,
-                    Language = language,
-                    Methodology = model.Methodology,
-                    Title = model.Title
-                },
+                (
+                    model.Title,
+                    model.Goal,
+                    language,
+                     model.Methodology
+                ),
             TrainingId = trainingId,
             Types = Enumeration.FromValues<TrainingType>(model.TrainingTypeIds ?? new()),
             TargetAudiences = Enumeration.FromValues<TrainingTargetAudience>(model.TargetAudienceIds ?? new()),
@@ -47,7 +47,7 @@ public static class EditTrainingViewModelMapping
 
     public static EditTrainingViewModel MapGetToResponse(this GetTrainingFromIdResponse model, string language)
     {
-        var detail = model.Training.Details.FirstOrDefault(detail => detail.Language == language);
+        var detail = model.Training.Details.FirstOrDefault(detail => detail.Language == Language.Create(language).Value);
         EditTrainingViewModel response = new()
         {
             Goal = detail.Goal,
@@ -63,7 +63,7 @@ public static class EditTrainingViewModelMapping
 
     public static EditTrainingViewModel MapUpdateToResponse(this UpdateTrainingResponse model, string language)
     {
-        var detail = model.Training.Details.FirstOrDefault(detail => detail.Language == language);
+        var detail = model.Training.Details.FirstOrDefault(detail => detail.Language == Language.Create(language).Value);
         EditTrainingViewModel response = new()
         {
             Goal = detail.Goal,

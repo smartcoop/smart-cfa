@@ -28,16 +28,16 @@ public static class EditTrainingViewModelMapping
     public static CreateTrainingRequest MapToRequest(this CreateTrainingViewModel model, TrainerDto trainer)
         => new()
         {
-            Detail =
-                new TrainingDetailDto
-                {
-                    Goal = model.Goal,
-                    Language = trainer.DefaultLanguage.Value,
-                    Methodology = model.Methodology,
-                    Title = model.Title
-                },
+            Detail = new
+                TrainingDetailDto
+                (
+                    model.Title,
+                    model.Goal,
+                    trainer.DefaultLanguage.Value,
+                    model.Methodology
+                ),
             TrainerId = trainer.Id,
-            Types = Enumeration.FromValues<TrainingType>(model.TrainingTypeIds ?? new ()),
+            Types = Enumeration.FromValues<TrainingType>(model.TrainingTypeIds ?? new()),
             TargetAudiences = Enumeration.FromValues<TrainingTargetAudience>(model.TargetAudienceIds ?? new()),
             SlotNumberTypes = Enumeration.FromValues<TrainingSlotNumberType>(model.SlotNumberTypeIds ?? new())
         };
