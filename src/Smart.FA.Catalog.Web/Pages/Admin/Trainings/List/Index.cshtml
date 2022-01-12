@@ -7,23 +7,23 @@
 }
 
 @section HeaderToolbar {
-<div class="c-navbar c-navbar--bordered-bottom">
-    <div class="c-toolbar">
-        <div class="c-toolbar__left">
-            <div class="c-toolbar__item">
-                <h2 class="c-toolbar__title">@ViewData["ToolBarTitle"]</h2>
+    <div class="c-navbar c-navbar--bordered-bottom">
+        <div class="c-toolbar">
+            <div class="c-toolbar__left">
+                <div class="c-toolbar__item">
+                    <h2 class="c-toolbar__title">@ViewData["ToolBarTitle"]</h2>
+                </div>
             </div>
-        </div>
 
-        <smart-button-toolbar>
-            <div class="c-toolbar__right">
-                <a href="/admin/trainings/create?fromlist=">
-                    <smart-button label="Add new training" leading-icon="Add"></smart-button>
-                </a>
-            </div>
-        </smart-button-toolbar>
+            <smart-button-toolbar>
+                <div class="c-toolbar__right">
+                    <a href="/admin/trainings/create?fromlist=">
+                        <smart-button label="Add new training" leading-icon="Add"></smart-button>
+                    </a>
+                </div>
+            </smart-button-toolbar>
+        </div>
     </div>
-</div>
 }
 
 <div class="o-card-grid small-up-1">
@@ -39,9 +39,11 @@
                                     <smart-button leading-icon="EditAlt" button-style="Borderless"></smart-button>
                                 </a>
                             </div>
-                            <div class="c-toolbar__item">
-                                <smart-button  leading-icon="Delete" button-style="Borderless"></smart-button>
-                            </div>
+                            <form method="post" asp-page-handler="Delete" asp-route-id="@training.Id">
+                                <button>
+                                    <smart-icon icon="Delete"/>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </smart-card-actions>

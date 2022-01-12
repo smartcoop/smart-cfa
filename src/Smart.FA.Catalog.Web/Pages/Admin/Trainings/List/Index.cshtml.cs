@@ -1,4 +1,5 @@
 using Api.Options;
+using Application.UseCases.Commands;
 using Application.UseCases.Queries;
 using Core.Domain;
 using Core.Domain.Enumerations;
@@ -41,6 +42,12 @@ public class ListModel : AdminPage
         // If CurrentPage returns no result, redirect to the index 1.
         // return Trainings?.Count == 0 ? RedirectToCurrentPageOne() : Page();
         return Page();
+    }
+
+    public async Task<IActionResult> OnPostDeleteAsync(int id)
+    {
+        var response = await Mediator.Send(new DeleteTrainingRequest {TrainingId = id});
+        return RedirectToPage(new {CurrentPage = 1});
     }
 
     private IActionResult RedirectToCurrentPageOne()
