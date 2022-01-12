@@ -10,7 +10,7 @@ public class Language: ValueObject
         Value = value;
     }
 
-    public static Result<Language> Create(string language)
+    public static Result<Language> Create(string? language)
     {
         if (string.IsNullOrWhiteSpace(language))
             return Result.Failure<Language>("Language should not be empty");
@@ -20,8 +20,8 @@ public class Language: ValueObject
 
         if (language.Length != 2)
             return Result.Failure<Language>("language should be exactly two characters long");
-        return Result.Success(new Language(language));
 
+        return Result.Success(new Language(language));
     }
 
     protected override IEnumerable<object> GetEqualityComponents()
