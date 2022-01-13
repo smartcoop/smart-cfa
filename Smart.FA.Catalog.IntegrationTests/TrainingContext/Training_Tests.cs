@@ -15,13 +15,11 @@ public class TrainingTests: IntegrationTestBase
 
     [Theory]
     [InlineData("Victor", "vD")]
-    public async Task CanCreateTraining(string firstName, string lastName)
+    public async Task CanCreate(string firstName, string lastName)
     {
         using var context = GivenTrainingContext(false);
         var trainer = _trainerFactory.Create(firstName, lastName);
         context.Trainers.Attach(trainer);
-        await context.SaveChangesAsync();
-
         var training = _trainingFactory.Create(trainer);
         context.Trainings.Attach(training);
         await context.SaveChangesAsync();

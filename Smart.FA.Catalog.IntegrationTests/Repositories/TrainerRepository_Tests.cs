@@ -3,11 +3,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture;
-using Core.Domain.Dto;
 using FluentAssertions;
 using Infrastructure.Persistence.Read;
 using Infrastructure.Persistence.Write;
-using Microsoft.EntityFrameworkCore;
 using Smart.FA.Catalog.IntegrationTests.Base;
 using Smart.FA.Catalog.Tests.Common;
 using Xunit;
@@ -20,14 +18,10 @@ public class TrainerRepositoryTests : IntegrationTestBase
     private readonly TrainerFactory _trainerFactory = new();
     private readonly TrainingFactory _trainingFactory = new();
     private readonly Fixture _fixture = new();
-    private readonly TrainerQueries _trainerQueries = new TrainerQueries(ConnectionSetup.Training.ConnectionString);
-
-    public TrainerRepositoryTests()
-    {
-    }
+    private readonly TrainerQueries _trainerQueries = new(ConnectionSetup.Training.ConnectionString);
 
     [Fact]
-    public async Task CanGetListFromTrainingId()
+    public async Task GetListFromTrainingId()
     {
         await using var context = GivenTrainingContext();
         var trainerRepository = new TrainerRepository(context);
@@ -44,7 +38,25 @@ public class TrainerRepositoryTests : IntegrationTestBase
     }
 
     [Fact]
-    public async Task GetGetFromId()
+    public async Task GetReadOnlyListFromTrainingId()
+    {
+        await using var context = GivenTrainingContext(false);
+        var trainerToAdd = _trainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
+        context.Trainers.Attach(trainerToAdd);
+        var trainingToAdd = _trainingFactory.Create(trainerToAdd);
+        context.Trainings.Attach(trainingToAdd);
+        await context.SaveChangesAsync();
+
+        var trainers = (await _trainerQueries
+                .GetListAsync(new List<int> {trainingToAdd.Id}, CancellationToken.None))
+            .ToList();
+
+        trainers.Should().NotBeEmpty();
+        trainers.Should().Contain(trainer => trainer.Id == trainerToAdd.Id);
+    }
+
+    [Fact]
+    public async Task GetFromId()
     {
         await using var context = GivenTrainingContext();
         var trainerRepository = new TrainerRepository(context);
@@ -56,25 +68,5 @@ public class TrainerRepositoryTests : IntegrationTestBase
 
         foundTrainer.Should().NotBeNull();
         foundTrainer.Should().BeEquivalentTo(trainer);
-    }
-
-    [Fact]
-    public async Task GetListOfTrainersFromTrainingId()
-    {
-        var trainerToAdd = _trainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
-        var trainingToAdd = _trainingFactory.Create(trainerToAdd);
-        await using (var context = GivenTrainingContext(false))
-        {
-            context.Trainers.Attach(trainerToAdd);
-            await context.SaveChangesAsync();
-
-            context.Trainings.Attach(trainingToAdd);
-           await context.SaveChangesAsync();
-        }
-
-        var trainers = await _trainerQueries.GetListAsync(new List<int> {trainingToAdd.Id}, CancellationToken.None);
-
-        trainers.Should().NotBeEmpty();
-        trainers.Should().Contain(trainer => trainer.Id == trainerToAdd.Id);
     }
 }
