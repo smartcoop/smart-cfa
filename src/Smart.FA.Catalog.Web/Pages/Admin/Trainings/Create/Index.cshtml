@@ -1,5 +1,4 @@
 ﻿@page
-@using Core.Domain
 @using Core.Domain.Enumerations
 @using Core.SeedWork
 @inject IStringLocalizer<CreateModel> Localizer
@@ -10,40 +9,54 @@
     ViewData["Title"] = "Add a training";
 }
 
-@section HeaderToolbar
-{
-    <div class="c-navbar c-navbar--bordered-bottom">
-        <div class="c-toolbar">
-            <div class="c-toolbar__left">
-                <div class="c-toolbar__item">
-                    @if (Request.Query.ContainsKey("fromlist"))
-                    {
-                        <a class="c-button c-button--icon c-button--borderless" href="/admin/trainings/list">
-                            <div class="c-button__content">
-                                <smart-icon icon="ArrowLeft"></smart-icon>
-                                <div class="u-sr-accessible">Back</div>
-                            </div>
-                        </a>
-                    }
-                </div>
-                <div class="c-toolbar__item">
-                    <h2 class="c-toolbar__title">@ViewData["ToolBarTitle"]</h2>
-                </div>
-            </div>
-            <div class="c-toolbar__right">
-                <div class="c-toolbar__item">
-                    <smart-button label="Save as draft" button-style="Secondary"></smart-button>
-                </div>
-                <div class="c-toolbar__item">
-                    <smart-button id="submitBtn" label="Request validation" button-style="Primary" leading-icon="Save" button-type="Submit"></smart-button>
-                </div>
-            </div>
-        </div>
-    </div>
-}
-
 <smart-container size="Medium">
     <form method="post" id="form">
+
+        @section HeaderToolbar
+        {
+            <div class="c-navbar c-navbar--bordered-bottom">
+                <div class="c-toolbar">
+                    <div class="c-toolbar__left">
+                        <div class="c-toolbar__item">
+                            @if (Request.Query.ContainsKey("fromlist"))
+                            {
+                                <a class="c-button c-button--icon c-button--borderless" href="/admin/trainings/list/index">
+                                    <div class="c-button__content">
+                                        <smart-icon icon="ArrowLeft"></smart-icon>
+                                        <div class="u-sr-accessible">Back</div>
+                                    </div>
+                                </a>
+                            }
+                        </div>
+                        <div class="c-toolbar__item">
+                            <h2 class="c-toolbar__title">@ViewData["ToolBarTitle"]</h2>
+                        </div>
+
+                    </div>
+                    <div class="c-toolbar__right">
+                        <div class="c-toolbar__item">
+                            <button type="submit" name="ValidateModel" id="validationBtn" asp-page-handler="ValidateModel" form="form">Request Validation</button>
+                        </div>
+                        <div class="c-toolbar__item">
+                            <button type="submit" name="ValidateModel" id="validationBtn" asp-page-handler="Save" form="form">Save</button>
+                            @* <smart-button id="submitBtn" label="Save" button-style="Primary" leading-icon="Save" button-type="Submit" </smart-button> *@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (Model.ValidationErrors.Any())
+        {
+            <div class="c-alert c-alert--error">
+                <ul>
+                    @foreach (var error in Model.ValidationErrors)
+                    {
+                        <li>@error</li>
+                    }
+                </ul>
+            </div>
+        }
         <div asp-validation-summary="All"></div>
         <div class="o-form-group-layout o-form-group-layout--standard">
             <smart-form-group-input-text label="Titre de la formation / module" asp-for="CreateTrainingViewModel.Title"></smart-form-group-input-text>
@@ -78,9 +91,6 @@
                     <smart-radio asp-for="CreateTrainingViewModel.SlotNumberTypeIds" value="@slotNumberType.Id" label="@Localizer[slotNumberType.Name]"></smart-radio>
                 }
             </smart-formgroup>
-
-            @* <smart-form-group-input-text label="Lieu de la formation" asp-for="CreateTrainingViewModel.Address"></smart-form-group-input-text> *@
-
             <smart-form-group-textarea rows="5" asp-for="CreateTrainingViewModel.Goal" label="@Localizer[nameof(Model.CreateTrainingViewModel.Goal)]"></smart-form-group-textarea>
             <smart-form-group-textarea rows="5" asp-for="CreateTrainingViewModel.Methodology" label="@Localizer[nameof(Model.CreateTrainingViewModel.Methodology)]"></smart-form-group-textarea>
 
@@ -90,14 +100,3 @@
 </smart-container>
 
 <div class="u-spacer"></div>
-
-@section Scripts
-{
-    <script>
-        window.addEventListener("load",
-            function(event) {
-                var btn = document.getElementById("submitBtn");
-                document.getElementById("submitBtn").onclick = e => document.getElementById("form").submit();
-            });
-    </script>
-}
