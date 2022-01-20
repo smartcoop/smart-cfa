@@ -21,6 +21,13 @@ public class TrainerConfiguration : EntityConfigurationBase<Trainer>
                 p.Property(pp => pp.FirstName).HasColumnName("FirstName").HasMaxLength(200).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
                 p.Property(pp => pp.LastName).HasColumnName("LastName").HasMaxLength(200).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
             });
+
+        builder.OwnsOne(p => p.Identity, p =>
+        {
+            p.Property(pp => pp.ApplicationTypeId).HasColumnName("ApplicationType").HasMaxLength(200).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+            p.Property(pp => pp.UserId).HasColumnName("UserId").HasMaxLength(200).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+        });
+
         builder.Property(trainer => trainer.DefaultLanguage).HasConversion(language => language.Value,
             language => Language.Create(language).Value);
         builder.Property(trainer => trainer.Description).HasMaxLength(1500);
