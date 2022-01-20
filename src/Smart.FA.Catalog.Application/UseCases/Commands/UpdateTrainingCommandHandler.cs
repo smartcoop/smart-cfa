@@ -44,7 +44,7 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
             training.SwitchSlotNumberType(request.SlotNumberTypes);
             var trainers = await _trainerRepository.GetListAsync(request.TrainingId, cancellationToken);
             training.EnrollTrainers(trainers);
-            training.Validate(_mailService);
+            training.Validate(true, _mailService);
             _unitOfWork.RegisterDirty(training);
             _unitOfWork.Commit();
 
