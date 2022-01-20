@@ -20,15 +20,24 @@ public static class ServiceCollectionExtensions
         bool useConsoleLogger, IConfigurationSection mailOptionSection)
     {
         services.AddContext(trainingConnectionString, useConsoleLogger)
+            .AddEventDispatcher()
             .AddRepositories()
             .AddServices(userAccountConnectionString, mailOptionSection)
             .AddQueries(trainingConnectionString);
     }
 
+    private static IServiceCollection AddEventDispatcher(this IServiceCollection services)
+    {
+        services.AddScoped<IBus, Bus>();
+        services.AddScoped<MessageBus>();
+        services.AddScoped<EventDispatcher>();
+        return services;
+    }
+
     private static IServiceCollection AddContext(this IServiceCollection services, string connectionString,
         bool useConsoleLogger)
     {
-        services.AddScoped(_ => new Context(connectionString, useConsoleLogger));
+        services.AddScoped(provider => new Context(connectionString, useConsoleLogger, provider.GetRequiredService<EventDispatcher>()));
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         return services;
     }

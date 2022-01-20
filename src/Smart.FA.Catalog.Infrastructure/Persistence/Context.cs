@@ -2,7 +2,6 @@ using System.Reflection;
 using Core.Domain;
 using Core.SeedWork;
 using Infrastructure.Extensions;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -12,14 +11,14 @@ public class Context : DbContext
 {
     private readonly string _connectionString;
     private readonly bool _useConsoleLogger;
+    private readonly EventDispatcher _eventDispatcher;
 
-
-    public Context(string connectionString, bool useConsoleLogger)
+    public Context(string connectionString, bool useConsoleLogger, EventDispatcher eventDispatcher)
     {
         _connectionString = connectionString;
         _useConsoleLogger = useConsoleLogger;
+        _eventDispatcher = eventDispatcher;
     }
-
 
     public DbSet<Trainer> Trainers { get; set; }
     public DbSet<Training> Trainings { get; set; }
@@ -52,6 +51,7 @@ public class Context : DbContext
     {
         AddDateTimeToEntities();
         RemoveEnumerationsFromTracker();
+        DispatchEventFromEntities();
         return base.SaveChanges();
     }
 
@@ -60,13 +60,14 @@ public class Context : DbContext
     {
         AddDateTimeToEntities();
         RemoveEnumerationsFromTracker();
+        DispatchEventFromEntities();
         return await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
     }
 
     private void RemoveEnumerationsFromTracker()
     {
-        ChangeTracker.Entries()
-            .Where(ee => ee.Entity is Enumeration)
+        ChangeTracker
+            .Entries<Enumeration>()
             .ToList()
             .ForEach(ee => ee.State = EntityState.Detached);
     }
@@ -75,8 +76,8 @@ public class Context : DbContext
     {
         var entries = ChangeTracker
             .Entries<Entity>()
-            .Where(e =>  e.State == EntityState.Added
-                         || e.State == EntityState.Modified);
+            .Where(entry =>  entry.State == EntityState.Added
+                         || entry.State == EntityState.Modified);
 
         foreach (var entityEntry in entries)
         {
@@ -89,4 +90,16 @@ public class Context : DbContext
         }
     }
 
+    private void DispatchEventFromEntities()
+    {
+        var entries = ChangeTracker
+            .Entries<Entity>()
+            .Select(entry => entry.Entity)
+            .Where(entity => entity.DomainEvents.Any());
+        foreach (var entity in entries)
+        {
+            _eventDispatcher.Dispatch(entity.DomainEvents);
+            entity.ClearDomainEvents();
+        }
+    }
 }

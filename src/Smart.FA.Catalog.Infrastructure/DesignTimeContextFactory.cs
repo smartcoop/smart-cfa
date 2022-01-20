@@ -1,3 +1,4 @@
+using Core.SeedWork;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -36,6 +37,6 @@ public class DesignTimeContextFactory : IDesignTimeDbContextFactory<Context>
         optionsBuilder.UseSqlServer(connectionString);
         Console.WriteLine($"\nDesignTimeContextFactory.Create(string):\n\tConnection string: {connectionString}\n");
         var options = optionsBuilder.Options;
-        return new Context(connectionString, useConsoleLogger);
+        return new Context(connectionString, useConsoleLogger, null);
     }
 }
