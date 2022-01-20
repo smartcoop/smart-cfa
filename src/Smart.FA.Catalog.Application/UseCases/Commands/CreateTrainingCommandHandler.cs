@@ -15,17 +15,14 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingReques
     private readonly ILogger<CreateTrainingCommandHandler> _logger;
     private readonly IUnitOfWork _unitOfWork;
     private readonly ITrainerRepository _trainerRepository;
-    private readonly IMailService _mailService;
 
     public CreateTrainingCommandHandler(ILogger<CreateTrainingCommandHandler> logger
         , IUnitOfWork unitOfWork
-        , ITrainerRepository trainerRepository
-        , IMailService mailService)
+        , ITrainerRepository trainerRepository)
     {
         _logger = logger;
         _unitOfWork = unitOfWork;
         _trainerRepository = trainerRepository;
-        _mailService = mailService;
     }
 
     public async Task<CreateTrainingResponse> Handle(CreateTrainingRequest request, CancellationToken cancellationToken)
@@ -35,7 +32,7 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingReques
         {
             var trainer = await _trainerRepository.FindAsync(request.TrainerId, cancellationToken);
             var training = new Training(trainer, request.Detail, request.Types, request.SlotNumberTypes, request.TargetAudiences);
-            var errors = training.Validate(true, _mailService);
+            var errors = training.Validate();
 
             _unitOfWork.RegisterNew(training);
             _unitOfWork.Commit();

@@ -34,7 +34,7 @@ public class
             var trainer = await _trainerRepository.FindAsync(request.TrainerId, cancellationToken);
             var training = new Training(trainer, request.Detail, request.Types, request.SlotNumberTypes,
                 request.TargetAudiences);
-            var errors = training.Validate(false, null);
+            var errors = training.Validate();
 
             resp.ValidationErrors = errors;
             resp.SetSuccess();

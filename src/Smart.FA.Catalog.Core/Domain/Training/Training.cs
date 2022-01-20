@@ -98,13 +98,16 @@ public class Training : Entity, IAggregateRoot
     public void DisenrollAll()
         => _trainerEnrollments.RemoveAll(enrollment => enrollment.TrainerId != TrainerCreatorId);
 
-    public List<string> Validate(bool withMail, IMailService mailService)
+    public List<string> Validate()
     {
         var missingFieldsErrors = ListMissingFields();
 
         StatusId = missingFieldsErrors.Any()
             ? TrainingStatus.Draft.Id
             : ValidateStatus.Compile()(this).Id;
+
+        var trainingDetail = Details.FirstOrDefault(training => training.Language == Language.Create("EN").Value) ?? Details.First();
+        AddDomainEvent(new ValidateTrainingEvent(trainingDetail.Title!, Id, TrainerEnrollments.Select(enrollment => enrollment.TrainerId)));
 
         return missingFieldsErrors;
     }
