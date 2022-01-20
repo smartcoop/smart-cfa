@@ -35,12 +35,13 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingReques
         {
             var trainer = await _trainerRepository.FindAsync(request.TrainerId, cancellationToken);
             var training = new Training(trainer, request.Detail, request.Types, request.SlotNumberTypes, request.TargetAudiences);
-            training.Validate(_mailService);
+            var errors = training.Validate(true, _mailService);
 
             _unitOfWork.RegisterNew(training);
             _unitOfWork.Commit();
 
             resp.Training = training;
+            resp.ValidationErrors = errors;
             resp.SetSuccess();
         }
         catch (Exception e)
@@ -65,4 +66,5 @@ public class CreateTrainingRequest : IRequest<CreateTrainingResponse>
 public class CreateTrainingResponse : ResponseBase
 {
     public Training? Training { get; set; }
+    public List<string> ValidationErrors { get; set; }
 }
