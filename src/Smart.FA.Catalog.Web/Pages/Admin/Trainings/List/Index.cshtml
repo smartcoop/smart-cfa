@@ -1,5 +1,4 @@
 ﻿@page
-
 @using Smart.Design.Razor.TagHelpers.Pill
 @using Core.SeedWork
 @using Core.Domain.Enumerations
@@ -44,7 +43,7 @@
                                 </a>
                             </div>
                             <form method="post" asp-page-handler="Delete" asp-route-id="@training.TrainingId">
-                                <button>
+                                <button class="c-button c-button--borderless">
                                     <smart-icon icon="Delete"/>
                                 </button>
                             </form>
@@ -75,7 +74,7 @@
         }
     </div>
 
-    <div> @Model.Trainings.Count/@Model.Trainings.TotalCount Trainings - Page @Model.CurrentPage</div>
+    <div> @Model.Trainings.Count/@Model.Trainings.TotalCount Trainings - Page @Model.CurrentPage/@Model.Trainings.TotalPages</div>
     <div class="c-toolbar__right">
         @if (Model.Trainings.HasNextPage)
         {

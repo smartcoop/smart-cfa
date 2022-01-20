@@ -7,6 +7,7 @@ namespace Api.Pages.Admin.Trainings.List;
 public record TrainingListingViewModel
 {
     public int Id { get; set; }
+
     public string? Title { get; set; }
 
     public List<string>? Tags { get; set; }
@@ -14,22 +15,6 @@ public record TrainingListingViewModel
     public TrainingStatus? Status { get; set; }
 
     public PillStatus PillStatus { get; set; }
-
-    public string StatusDisplayName => Display();
-
-    private string Display()
-    {
-        if (Equals(Status, TrainingStatus.Draft))
-            return "Draft";
-
-        if (Equals(Status, TrainingStatus.WaitingForValidation))
-            return "En attente de validation";
-
-        if (Equals(Status, TrainingStatus.Validated))
-            return "Validé";
-
-        return string.Empty;
-    }
 }
 
 public static class StatusExtension
@@ -37,7 +22,7 @@ public static class StatusExtension
     public static string DisplayStatus(this TrainingStatus trainingStatus)
     {
         if (Equals(trainingStatus, TrainingStatus.Draft))
-            return "Draft";
+            return "Brouillon";
 
         if (Equals(trainingStatus, TrainingStatus.WaitingForValidation))
             return "En attente de validation";
