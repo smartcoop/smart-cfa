@@ -1,5 +1,6 @@
 using System.Net.Mail;
 using Core.Services;
+using Infrastructure.Services.Options;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -32,7 +33,7 @@ public class MailService : IMailService
         }
         catch (Exception e)
         {
-            _logger.LogError(e.ToString());
+             _logger.LogError("{Exception}", e.ToString());
             throw;
         }
         return Task.CompletedTask;
