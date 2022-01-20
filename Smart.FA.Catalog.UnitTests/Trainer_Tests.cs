@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using AutoFixture;
 using Core.Domain;
+using Core.Domain.Enumerations;
 using FluentAssertions;
 using Smart.FA.Catalog.Tests.Common;
 using Xunit;
@@ -27,7 +28,7 @@ public class TrainerTests
     [InlineData("Victor", "van Duynen", "Hello my name is Victor van Duynen", "EN")]
     public void CanCreateWithValidDescription(string firstName, string lastName, string description, string language)
     {
-        var action = () => new Trainer(Name.Create(firstName, lastName).Value, description, Language.Create(language).Value);
+        var action = () => new Trainer(Name.Create(firstName, lastName).Value, TrainerIdentity.Create(_fixture.Create<string>(), ApplicationType.Account).Value, description, Language.Create(language).Value);
 
         action.Should().NotThrow<Exception>();
     }
@@ -36,7 +37,7 @@ public class TrainerTests
     [InlineData("Victor", "van Duynen", "Hello my name is Victor van Duynen", "EN")]
     public void CanUpdateWithValidDescription(string firstName, string lastName, string description, string language)
     {
-       var trainer = new Trainer(Name.Create(firstName, lastName).Value, description, Language.Create(language).Value);
+       var trainer = new Trainer(Name.Create(firstName, lastName).Value, TrainerIdentity.Create(_fixture.Create<string>(), ApplicationType.Account).Value, description, Language.Create(language).Value);
        string updatedDescription = description + "!";
 
        var action = () => trainer.UpdateDescription(updatedDescription);
@@ -48,7 +49,7 @@ public class TrainerTests
     [Fact]
     public void CantCreateWithInvalidDescription()
     {
-        var action = () => new Trainer(Name.Create(_fixture.Create<string>(), _fixture.Create<string>()).Value,string.Concat(Enumerable.Repeat('a', 2001)),  Language.Create(_fixture.Create<string>().Substring(0,2)).Value);
+        var action = () => new Trainer(Name.Create(_fixture.Create<string>(), _fixture.Create<string>()).Value, TrainerIdentity.Create(_fixture.Create<string>(), ApplicationType.Account).Value,string.Concat(Enumerable.Repeat('a', 2001)),  Language.Create(_fixture.Create<string>().Substring(0,2)).Value);
 
         action.Should().Throw<Exception>();
     }
@@ -57,7 +58,7 @@ public class TrainerTests
     public void CantUpdateWithInvalidDescription()
     {
         string description = "Hello my name is Victor van Duynen";
-        var trainer = new Trainer(Name.Create("Victor", "van Duynen").Value,description, Language.Create("EN").Value );
+        var trainer = new Trainer(Name.Create("Victor", "van Duynen").Value, TrainerIdentity.Create(_fixture.Create<string>(), ApplicationType.Account).Value, description, Language.Create("EN").Value );
 
         var action = () => trainer.UpdateDescription(string.Concat(Enumerable.Repeat('a', 2000)));
 
