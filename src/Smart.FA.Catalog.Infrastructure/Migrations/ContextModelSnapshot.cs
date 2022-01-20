@@ -291,6 +291,33 @@ namespace Infrastructure.Migrations
                                 .HasForeignKey("TrainerId");
                         });
 
+                    b.OwnsOne("Core.Domain.TrainerIdentity", "Identity", b1 =>
+                        {
+                            b1.Property<int>("TrainerId")
+                                .HasColumnType("int");
+
+                            b1.Property<int>("ApplicationTypeId")
+                                .HasMaxLength(200)
+                                .HasColumnType("int")
+                                .HasColumnName("ApplicationType");
+
+                            b1.Property<string>("UserId")
+                                .IsRequired()
+                                .HasMaxLength(200)
+                                .HasColumnType("nvarchar(200)")
+                                .HasColumnName("UserId");
+
+                            b1.HasKey("TrainerId");
+
+                            b1.ToTable("Trainer");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TrainerId");
+                        });
+
+                    b.Navigation("Identity")
+                        .IsRequired();
+
                     b.Navigation("Name")
                         .IsRequired();
                 });
