@@ -27,7 +27,7 @@ public class EditModel : AdminPage
         TrainingId = id;
         var response =
             await Mediator.Send(new GetTrainingFromIdRequest {TrainingId = TrainingId}, CancellationToken.None);
-        EditTrainingViewModel = response.MapGetToResponse(user.Trainer.DefaultLanguage.Value);
+        EditTrainingViewModel = response.MapGetToResponse(user.Trainer.DefaultLanguage);
         await InitAsync();
     }
 
