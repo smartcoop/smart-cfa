@@ -1,4 +1,5 @@
 using Application.UseCases.Commands;
+using Application.UseCases.Queries;
 using Core.Domain;
 using Core.Domain.Dto;
 using Core.Domain.Enumerations;
@@ -25,7 +26,7 @@ public class CreateTrainingViewModel
 
 public static class EditTrainingViewModelMapping
 {
-    public static CreateTrainingRequest MapToRequest(this CreateTrainingViewModel model, TrainerDto trainer)
+    public static CreateTrainingRequest MapToRequest(this CreateTrainingViewModel model, int trainerId, Language language)
         => new()
         {
             Detail = new
@@ -33,10 +34,27 @@ public static class EditTrainingViewModelMapping
                 (
                     model.Title,
                     model.Goal,
-                    trainer.DefaultLanguage.Value,
+                    language.Value,
                     model.Methodology
                 ),
-            TrainerId = trainer.Id,
+            TrainerId = trainerId,
+            Types = Enumeration.FromValues<TrainingType>(model.TrainingTypeIds ?? new()),
+            TargetAudiences = Enumeration.FromValues<TrainingTargetAudience>(model.TargetAudienceIds ?? new()),
+            SlotNumberTypes = Enumeration.FromValues<TrainingSlotNumberType>(model.SlotNumberTypeIds ?? new())
+        };
+
+    public static GetTrainingValidationErrorsRequest MapDraftToRequest(this CreateTrainingViewModel model, int trainerId, Language language)
+        => new()
+        {
+            Detail = new
+                TrainingDetailDto
+                (
+                    model.Title,
+                    model.Goal,
+                    language.Value,
+                    model.Methodology
+                ),
+            TrainerId = trainerId,
             Types = Enumeration.FromValues<TrainingType>(model.TrainingTypeIds ?? new()),
             TargetAudiences = Enumeration.FromValues<TrainingTargetAudience>(model.TargetAudienceIds ?? new()),
             SlotNumberTypes = Enumeration.FromValues<TrainingSlotNumberType>(model.SlotNumberTypeIds ?? new())
