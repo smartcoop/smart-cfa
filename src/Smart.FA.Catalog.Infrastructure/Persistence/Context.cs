@@ -74,18 +74,17 @@ public class Context : DbContext
     private void AddDateTimeToEntities()
     {
         var entries = ChangeTracker
-            .Entries()
-            .Where(e => e.Entity is Entity && (
-                e.State == EntityState.Added
-                || e.State == EntityState.Modified));
+            .Entries<Entity>()
+            .Where(e =>  e.State == EntityState.Added
+                         || e.State == EntityState.Modified);
 
         foreach (var entityEntry in entries)
         {
-            ((Entity)entityEntry.Entity).LastModifiedAt = DateTime.UtcNow;
+            entityEntry.Entity.LastModifiedAt = DateTime.UtcNow;
 
             if (entityEntry.State == EntityState.Added)
             {
-                ((Entity)entityEntry.Entity).CreatedAt = DateTime.UtcNow;
+                entityEntry.Entity.CreatedAt = DateTime.UtcNow;
             }
         }
     }
