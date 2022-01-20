@@ -1,3 +1,4 @@
+using Api.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -19,3 +20,4 @@ public abstract class AdminPage : PageModel
 
     protected abstract SideMenuItem GetSideMenuItem();
 }
+
