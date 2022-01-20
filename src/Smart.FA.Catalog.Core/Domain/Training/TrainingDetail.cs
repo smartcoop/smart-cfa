@@ -77,14 +77,14 @@ public class TrainingDetail
     {
         Title = title;
         Goal = goal;
-        Methodology = Methodology;
+        Methodology = methodology;
     }
 
     #endregion
 
     #region Validation
 
-    public List<string> Validate()
+    public IEnumerable<string> Validate()
     {
         List<string> errors = new();
         if (string.IsNullOrEmpty(Title)) errors.Add($"Missing {nameof(Title)} Details for language {Language}");
@@ -102,9 +102,6 @@ public class TrainingDetail
             Guard.Requires(() =>
                     string.IsNullOrEmpty(fieldValue) || fieldValue.Length < 1500,
                 $"{nameof(fieldName)} has a maximum value of 1500 characters");
-
-    private static readonly Expression<Func<bool>> Test = () => true;
-
 
     #endregion
 }

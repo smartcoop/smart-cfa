@@ -37,7 +37,8 @@ public class Training : Entity, IAggregateRoot
         IEnumerable<TrainingSlotNumberType> slotNumberTypes,
         IEnumerable<TrainingTargetAudience> targetAudiences)
     {
-        AddDetails(trainingDetail.Title,trainingDetail.Goal,trainingDetail.Methodology, Language.Create(trainingDetail.Language).Value);
+        AddDetails(trainingDetail.Title, trainingDetail.Goal, trainingDetail.Methodology,
+            Language.Create(trainingDetail.Language).Value);
         SwitchTrainingTypes(types);
         SwitchTargetAudience(targetAudiences);
         SwitchSlotNumberType(slotNumberTypes);
@@ -57,7 +58,8 @@ public class Training : Entity, IAggregateRoot
     {
         Guard.Requires(() => trainingTypes != null, "training types should not be null");
         _identities.Clear();
-        _identities.AddRange(trainingTypes!.Distinct().Select(trainingType => new TrainingIdentity(this, trainingType)));
+        _identities.AddRange(trainingTypes!.Distinct()
+            .Select(trainingType => new TrainingIdentity(this, trainingType)));
     }
 
     public void SwitchTargetAudience(IEnumerable<TrainingTargetAudience>? trainingTargetAudiences)
@@ -96,9 +98,9 @@ public class Training : Entity, IAggregateRoot
     public void DisenrollAll()
         => _trainerEnrollments.RemoveAll(enrollment => enrollment.TrainerId != TrainerCreatorId);
 
-    public List<string> Validate(IMailService mailService)
+    public List<string> Validate(bool withMail, IMailService mailService)
     {
-        var missingFieldsErrors =  ListMissingFields();
+        var missingFieldsErrors = ListMissingFields();
 
         StatusId = missingFieldsErrors.Any()
             ? TrainingStatus.Draft.Id
@@ -116,13 +118,12 @@ public class Training : Entity, IAggregateRoot
 
     public void UpdateDetails(string title, string goal, string methodology, Language language)
     {
-        Guard.Requires(() => _details.FirstOrDefault(detail => detail.Language.Value == language.Value) != null,
+        var detailToModify = _details.FirstOrDefault(detail => detail.Language.Value == language.Value);
+        Guard.Requires(() => detailToModify != null,
             "No descriptions for that language exist");
-       var detailToModify = _details.First(detail => detail.Language.Value == language.Value);
-       detailToModify.Goal = goal;
-       detailToModify.Title = title;
-       detailToModify.Methodology = methodology;
+        detailToModify!.UpdateDescription(title, goal, methodology);
     }
+
     #endregion
 
     #region Private methods
@@ -137,11 +138,12 @@ public class Training : Entity, IAggregateRoot
         if (!Identities.Any()) errors.Add("Missing Identities");
         if (!Targets.Any()) errors.Add("Missing Targets");
         if (!TrainerEnrollments.Any()) errors.Add("Missing Trainer enrollments");
-        if(!Details.Any()) errors.Add("Missing Training Details");
+        if (!Details.Any()) errors.Add("Missing Training Details");
         foreach (var detail in Details)
         {
             errors.AddRange(detail.Validate());
         }
+
         return errors;
     }
 

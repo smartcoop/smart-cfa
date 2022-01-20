@@ -4,8 +4,6 @@ namespace Core.Domain.Enumerations;
 
 public class TrainingType : Enumeration
 {
-
-
     public static readonly TrainingType LanguageCourse = new(1, nameof(LanguageCourse));
     public static readonly TrainingType Professional = new(2, nameof(Professional));
     public static readonly TrainingType SchoolCourse = new(3, nameof(SchoolCourse));

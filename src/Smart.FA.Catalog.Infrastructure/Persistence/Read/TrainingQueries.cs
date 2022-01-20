@@ -1,10 +1,8 @@
-using Core.Domain;
 using Core.Domain.Dto;
 using Core.Domain.Interfaces;
 using Core.SeedWork;
 using Dapper;
 using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence.Read;
 
@@ -26,7 +24,7 @@ public class TrainingQueries : ITrainingQueries
 	                    TD.Goal,
                         TD.Language
                     FROM dbo.Training T
-                    INNER JOIN dbo.TrainingDetails TD ON T.Id = TD.TrainingId
+                    INNER JOIN dbo.TrainingDetail TD ON T.Id = TD.TrainingId
                     WHERE TD.TrainingId = @TrainingId AND TD.Language = @Language";
 
         await using var db = new SqlConnection(_connectionString);
@@ -44,13 +42,12 @@ public class TrainingQueries : ITrainingQueries
                         TD.Language
                     FROM dbo.Training T
                     INNER JOIN dbo.TrainerEnrollment TE ON T.Id = TE.TrainingId
-                    INNER JOIN dbo.TrainingDetails TD ON T.Id = TD.TrainingId
+                    INNER JOIN dbo.TrainingDetail TD ON T.Id = TD.TrainingId
                     WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language ";
 
         await using var db = new SqlConnection(_connectionString);
         return await db.QueryAsync<TrainingDto>(sql, new {trainerId, language});
     }
-
 
     public async Task<PagedList<TrainingDto>> GetPagedListAsync(int trainerId, string language, PageItem pageItem, CancellationToken cancellationToken)
     {
@@ -62,7 +59,7 @@ public class TrainingQueries : ITrainingQueries
                         TD.Language
                     FROM dbo.Training T
                     INNER JOIN dbo.TrainerEnrollment TE ON T.Id = TE.TrainingId
-                    INNER JOIN dbo.TrainingDetails TD ON T.Id = TD.TrainingId
+                    INNER JOIN dbo.TrainingDetail TD ON T.Id = TD.TrainingId
                     WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language
                     ORDER BY T.Id
                     OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
@@ -71,7 +68,7 @@ public class TrainingQueries : ITrainingQueries
 	                    COUNT(*)
                     FROM dbo.Training T
                     INNER JOIN dbo.TrainerEnrollment TE ON T.Id = TE.TrainingId
-                    INNER JOIN dbo.TrainingDetails TD ON T.Id = TD.TrainingId
+                    INNER JOIN dbo.TrainingDetail TD ON T.Id = TD.TrainingId
                     WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language";
 
         await using var db = new SqlConnection(_connectionString);
@@ -79,5 +76,4 @@ public class TrainingQueries : ITrainingQueries
         var list = await db.QueryAsync<TrainingDto>(sql, new {trainerId, language, pageItem.Offset,  pageItem.PageSize });
         return new PagedList<TrainingDto>(list, pageItem, count);
     }
-
 }
