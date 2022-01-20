@@ -61,9 +61,9 @@ public static class EditTrainingViewModelMapping
         return response;
     }
 
-    public static EditTrainingViewModel MapUpdateToResponse(this UpdateTrainingResponse model, string language)
+    public static EditTrainingViewModel MapUpdateToResponse(this UpdateTrainingResponse model, Language language)
     {
-        var detail = model.Training.Details.FirstOrDefault(detail => detail.Language == Language.Create(language).Value);
+        var detail = model.Training.Details.FirstOrDefault(detail => detail.Language == language);
         EditTrainingViewModel response = new()
         {
             Goal = detail.Goal,

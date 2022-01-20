@@ -42,7 +42,7 @@ public class EditModel : AdminPage
         var response =
             await Mediator.Send(
                 EditTrainingViewModel.MapToUpdateRequest(user.Trainer.DefaultLanguage.Value, id, user.Trainer.Id));
-        EditTrainingViewModel = response.MapUpdateToResponse("FR");
+        EditTrainingViewModel = response.MapUpdateToResponse(user.Trainer.DefaultLanguage);
 
         return RedirectToPage("/Admin/Trainings/List/Index");
     }
