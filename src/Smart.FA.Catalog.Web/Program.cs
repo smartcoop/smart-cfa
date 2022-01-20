@@ -7,21 +7,36 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json");
 
-
-builder.Services.AddApplication();
-builder.Services.AddSmartDesign();
-builder.Services.AddRazorPages()
-                .AddViewLocalization(options => options.ResourcesPath = "Resources");
-
-
+builder.Services
+    .AddHttpContextAccessor();
+builder.Services
+    .AddApplication();
+builder.Services
+    .AddApi(builder.Configuration
+        .GetSection("AdminOptions"));
+builder.Services
+    .AddSmartDesign();
+builder.Services
+    .AddRazorPages()
+    .AddViewLocalization(options => options.ResourcesPath = "Resources");
 #if DEBUG
-builder.Services.AddInfrastructure(builder.Configuration.GetConnectionString("Training"), true, builder.Configuration.GetSection("MailOptions"));
+builder.Services
+    .AddInfrastructure(builder.Configuration.GetConnectionString("Training"),
+        builder.Configuration.GetConnectionString("Account"),
+        true,
+        builder.Configuration.GetSection("MailOptions"));
 #else
-builder.Services.AddInfrastructure(builder.Configuration.GetConnectionString("Training"), false, builder.Configuration.GetSection("MailOptions"));
+builder.Services
+    .AddInfrastructure(builder.Configuration.GetConnectionString("Training"),
+                    false,
+        builder.Configuration.GetSection("MailOptions"));
 #endif
 
 var app = builder.Build();
 
+app.UseForwardedHeaders();
+
+app.UseProxyHeaders();
 
 if (app.Environment.IsProduction())
 {
