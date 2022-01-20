@@ -15,7 +15,7 @@ public class TrainingRepository : ITrainingRepository
         _context = context;
     }
 
-    public async Task<IReadOnlyList<Training>> GetListAsync(int trainerId,  Specification<Training> specification, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<Training>> GetListAsync(int trainerId, Specification<Training> specification, CancellationToken cancellationToken)
         => await _context
             .Trainings
             .Include(training => training.TrainerEnrollments)
@@ -36,5 +36,5 @@ public class TrainingRepository : ITrainingRepository
             .FirstOrDefaultAsync(training => training.Id == trainingId, cancellationToken);
 
     public async Task<Training> FindAsync(int trainingId, CancellationToken cancellationToken)
-        => await _context.Trainings.FindAsync(new object?[] { trainingId, cancellationToken }, cancellationToken: cancellationToken) ?? throw new Exception();
+        => await _context.Trainings.SingleAsync( training => training.Id == trainingId, cancellationToken);
 }
