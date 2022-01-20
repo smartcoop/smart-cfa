@@ -1,7 +1,13 @@
+using System;
+using System.Threading;
 using Core.Domain;
+using Core.Domain.Enumerations;
 using Infrastructure.Persistence;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Api.Extensions;
 
@@ -24,21 +30,24 @@ public static class EntityFrameworkMigrationExtensions
                 {
                     var context = scope.ServiceProvider.GetRequiredService<Context>();
                     context.Database.Migrate();
-                    Seed(context);
                 }
+
                 break;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
+
             Thread.Sleep(20000);
         }
     }
 
     public static void Seed(Context context)
     {
-        var trainer = new Trainer(Name.Create("Victor", "vD").Value, "Hello I am Victor van Duynen", Language.Create("FR").Value);
+        var trainer = new Trainer(Name.Create("Victor", "vD").Value,
+            TrainerIdentity.Create("1", ApplicationType.Default).Value, "Hello I am Victor van Duynen",
+            Language.Create("FR").Value);
         context.Trainers.Add(trainer);
         context.SaveChanges();
     }
