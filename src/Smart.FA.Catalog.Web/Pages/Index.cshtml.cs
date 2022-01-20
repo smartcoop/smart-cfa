@@ -1,3 +1,4 @@
+using Api.Extensions;
 using Api.Pages.Admin;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -9,15 +10,18 @@ namespace Api.Pages;
 public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
-
+    public CustomIdentity? Identity { get; set; }
     public IndexModel(ILogger<IndexModel> logger)
     {
         _logger = logger;
     }
 
-    public async Task OnGet()
+    public IActionResult OnGet()
     {
         ViewData[nameof(SideMenuItem)] = SideMenuItem.MyTrainings;
-        RedirectToPage("Admin/Trainings/List/Index");
+        Identity = HttpContext.User.Identity as CustomIdentity;
+        // if (!User.Identity!.IsAuthenticated)
+        //     return RedirectToPage("Admin/Account/Index");
+        return Page();
     }
 }

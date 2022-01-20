@@ -1,9 +1,14 @@
 ﻿@page
 @model Api.Pages.IndexModel
 @{
-    Layout = "_Layout";
+    Layout = "_AdminLayout";
     ViewData["Title"] = "Index";
     ViewData["ToolBarTitle"] = "Add a new training";
 }
 
-<smart-input-time></smart-input-time>
+
+<smart-card>
+    <smart-card-body>
+        <smart-card-title text="Hi @Model.Identity.ToString()"></smart-card-title>
+    </smart-card-body>
+</smart-card>
