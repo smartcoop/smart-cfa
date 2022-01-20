@@ -76,4 +76,21 @@ public static class EditTrainingViewModelMapping
 
         return response;
     }
+
+    public static GetTrainingValidationErrorsRequest MapDraftToRequest(this EditTrainingViewModel model, int trainerId, Language language)
+        => new()
+        {
+            Detail = new
+                TrainingDetailDto
+                (
+                    model.Title,
+                    model.Goal,
+                    language.Value,
+                    model.Methodology
+                ),
+            TrainerId = trainerId,
+            Types = Enumeration.FromValues<TrainingType>(model.TrainingTypeIds ?? new()),
+            TargetAudiences = Enumeration.FromValues<TrainingTargetAudience>(model.TargetAudienceIds ?? new()),
+            SlotNumberTypes = Enumeration.FromValues<TrainingSlotNumberType>(model.SlotNumberTypeIds ?? new())
+        };
 }
