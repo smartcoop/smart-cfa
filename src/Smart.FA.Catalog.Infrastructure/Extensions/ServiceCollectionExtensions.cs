@@ -1,3 +1,4 @@
+using System.Data;
 using Core.Domain.Enumerations;
 using Core.Domain.Interfaces;
 using Core.SeedWork;
@@ -9,6 +10,7 @@ using Infrastructure.Persistence.Write;
 using Infrastructure.Services;
 using Infrastructure.Services.Options;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,7 +18,8 @@ namespace Infrastructure.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static void AddInfrastructure(this IServiceCollection services, string trainingConnectionString, string userAccountConnectionString,
+    public static void AddInfrastructure(this IServiceCollection services, string trainingConnectionString,
+        string userAccountConnectionString,
         bool useConsoleLogger, IConfigurationSection mailOptionSection)
     {
         services.AddContext(trainingConnectionString, useConsoleLogger)
@@ -37,7 +40,8 @@ public static class ServiceCollectionExtensions
     private static IServiceCollection AddContext(this IServiceCollection services, string connectionString,
         bool useConsoleLogger)
     {
-        services.AddScoped(provider => new Context(connectionString, useConsoleLogger, provider.GetRequiredService<EventDispatcher>()));
+        services.AddScoped(provider =>
+            new Context(connectionString, useConsoleLogger, provider.GetRequiredService<EventDispatcher>()));
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         return services;
     }

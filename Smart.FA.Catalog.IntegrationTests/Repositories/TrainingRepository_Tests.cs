@@ -8,6 +8,7 @@ using Core.Domain.Enumerations;
 using Core.SeedWork;
 using FluentAssertions;
 using Infrastructure.Persistence.Read;
+using Microsoft.Data.SqlClient;
 using Smart.FA.Catalog.IntegrationTests.Base;
 using Smart.FA.Catalog.Tests.Common;
 using Xunit;

@@ -6,6 +6,7 @@ using AutoFixture;
 using FluentAssertions;
 using Infrastructure.Persistence.Read;
 using Infrastructure.Persistence.Write;
+using Microsoft.Data.SqlClient;
 using Smart.FA.Catalog.IntegrationTests.Base;
 using Smart.FA.Catalog.Tests.Common;
 using Xunit;
