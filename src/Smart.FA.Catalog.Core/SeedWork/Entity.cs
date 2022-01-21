@@ -6,7 +6,7 @@ public abstract class Entity
 {
     #region Fields
 
-    private List<DomainEvent> _domainEvents;
+    private List<DomainEvent> _domainEvents = new();
 
     #endregion
 
@@ -16,7 +16,7 @@ public abstract class Entity
     public virtual bool IsTransient => Id == default;
     public DateTime CreatedAt { get; set; }
     public DateTime LastModifiedAt { get; set; }
-    public IReadOnlyCollection<DomainEvent> DomainEvents => _domainEvents?.AsReadOnly();
+    public IReadOnlyCollection<DomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
     #endregion
 
@@ -24,13 +24,12 @@ public abstract class Entity
 
     public void AddDomainEvent(DomainEvent @event)
     {
-        _domainEvents ??= new List<DomainEvent>();
         _domainEvents.Add(@event);
     }
 
     public void ClearDomainEvents()
     {
-        _domainEvents?.Clear();
+        _domainEvents.Clear();
     }
 
     #endregion
