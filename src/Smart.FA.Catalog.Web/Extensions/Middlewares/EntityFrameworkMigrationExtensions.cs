@@ -1,15 +1,10 @@
-using System;
-using System.Threading;
 using Core.Domain;
 using Core.Domain.Enumerations;
 using Infrastructure.Persistence;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace Api.Extensions;
+namespace Api.Extensions.Middlewares;
 
 public static class EntityFrameworkMigrationExtensions
 {

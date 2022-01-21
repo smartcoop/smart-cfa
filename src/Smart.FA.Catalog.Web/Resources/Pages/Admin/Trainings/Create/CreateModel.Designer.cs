@@ -8,10 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Api.Resources.Admin.Trainings.Create {
-    using System;
-    
-    
+namespace Api.Resources.Pages.Admin.Trainings.Create {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

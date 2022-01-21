@@ -1,4 +1,5 @@
 using Api.Extensions;
+using Api.Identity;
 using Core.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

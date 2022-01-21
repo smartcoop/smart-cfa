@@ -1,4 +1,5 @@
 using Api.Extensions;
+using Api.Identity;
 using Application.UseCases.Queries;
 using Core.Domain;
 using MediatR;

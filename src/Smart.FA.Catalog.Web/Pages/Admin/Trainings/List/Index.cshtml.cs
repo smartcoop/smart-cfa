@@ -1,4 +1,5 @@
 using Api.Extensions;
+using Api.Identity;
 using Api.Options;
 using Application.UseCases.Commands;
 using Application.UseCases.Queries;

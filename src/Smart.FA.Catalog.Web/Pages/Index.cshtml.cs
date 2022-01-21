@@ -1,4 +1,5 @@
 using Api.Extensions;
+using Api.Identity;
 using Api.Pages.Admin;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

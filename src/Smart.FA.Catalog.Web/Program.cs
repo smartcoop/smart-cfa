@@ -1,4 +1,5 @@
 using Api.Extensions;
+using Api.Extensions.Middlewares;
 using Application.Extensions;
 using Infrastructure.Extensions;
 using Smart.Design.Razor.Extensions;

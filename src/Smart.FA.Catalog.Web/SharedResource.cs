@@ -1,4 +1,4 @@
-namespace Localization;
+namespace Api;
 
 public class SharedResource
 {
