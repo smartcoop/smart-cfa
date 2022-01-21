@@ -4,6 +4,7 @@ using Core.Domain.Enumerations;
 using Core.SeedWork;
 using Core.Services;
 using Infrastructure.Persistence;
+using Infrastructure.Services;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -13,14 +14,14 @@ namespace Application.UseCases.Queries;
 public class GetTrainerFromUserAppQueryHandler : IRequestHandler<GetTrainerFromUserAppRequest, GetTrainerFromUserAppResponse>
 {
     private readonly ILogger<GetTrainerFromUserAppQueryHandler> _logger;
-    private readonly IUserStrategy _userStrategy;
+    private readonly UserStrategyResolver _userStrategyResolver;
     private readonly Context _context;
 
     public GetTrainerFromUserAppQueryHandler(ILogger<GetTrainerFromUserAppQueryHandler> logger,
-        IUserStrategy userStrategy, Context context)
+        UserStrategyResolver userStrategyResolver, Context context)
     {
         _logger = logger;
-        _userStrategy = userStrategy;
+        _userStrategyResolver = userStrategyResolver;
         _context = context;
     }
 
@@ -29,7 +30,8 @@ public class GetTrainerFromUserAppQueryHandler : IRequestHandler<GetTrainerFromU
         GetTrainerFromUserAppResponse resp = new();
         try
         {
-            var user = await _userStrategy.GetAsync(request.userId);
+            var userStrategy =  _userStrategyResolver.Resolve(request.ApplicationType);
+            var user = await userStrategy.GetAsync(request.userId);
             var linkedTrainer =
                 await _context.Trainers.FirstOrDefaultAsync(trainer => trainer.Identity.UserId == request.userId, cancellationToken);
             if (linkedTrainer == null)

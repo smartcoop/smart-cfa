@@ -50,24 +50,8 @@ public static class ServiceCollectionExtensions
         IConfigurationSection mailOptionSection)
     {
         services.Configure<MailOptions>(mailOptionSection);
-        services.AddScoped<IUserStrategy>(provider =>
-        {
-            var context = provider.GetRequiredService<IHttpContextAccessor>();
-            var appName = context.HttpContext?.Request.Headers["application_name"];
-
-            if (string.Equals(appName, ApplicationType.Account.Name))
-                return new AccountUserStrategy(userAccountConnectionString);
-            return new AccountUserStrategy(userAccountConnectionString);
-        });
+        services.AddScoped(_ => new UserStrategyResolver(userAccountConnectionString));
         services.AddScoped<IMailService, MailService>();
-
-        return services;
-    }
-
-    private static IServiceCollection AddQueries(this IServiceCollection services, string connectionString)
-    {
-        services.AddScoped<ITrainerQueries>(_ => new TrainerQueries(connectionString));
-        services.AddScoped<ITrainingQueries>(_ => new TrainingQueries(connectionString));
 
         return services;
     }
@@ -76,6 +60,16 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<ITrainingRepository, TrainingRepository>();
         services.AddScoped<ITrainerRepository, TrainerRepository>();
+
+        return services;
+    }
+
+    private static IServiceCollection AddQueries(this IServiceCollection services, string connectionString)
+    {
+        //Note: Dapper handles disposing of connections, so using statement are not necessary for the IDbConnection
+        services.AddTransient<IDbConnection>(_ => new SqlConnection(connectionString));
+        services.AddScoped<ITrainerQueries, TrainerQueries>();
+        services.AddScoped<ITrainingQueries, TrainingQueries>();
 
         return services;
     }
