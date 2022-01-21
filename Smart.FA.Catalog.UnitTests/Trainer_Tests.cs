@@ -15,7 +15,6 @@ public class TrainerTests
     private readonly TrainingFactory _trainingFactory = new();
     private readonly Fixture _fixture = new();
 
-
     [Fact]
     public void HasInitiallyNoTraining()
     {

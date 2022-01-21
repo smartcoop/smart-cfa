@@ -136,7 +136,7 @@ public class TrainingTests
             new List<TrainingSlotNumberType>{TrainingSlotNumberType.Group}, new List<TrainingTargetAudience> {TrainingTargetAudience.Employee});
         training.UpdateDetails("Hello", "My Goal", "A methodology", Language.Create("FR").Value);
 
-        var errors = training.Validate(false, _mailService.Object);
+        var errors = training.Validate();
 
         errors.Should().BeEmpty();
         training.StatusId.Should().Be(TrainingStatus.Validated.Id);
@@ -151,7 +151,7 @@ public class TrainingTests
         training.UpdateDetails("Hello", "My Goal", "A methodology", Language.Create("FR").Value);
 
 
-        var errors = training.Validate(false, _mailService.Object);
+        var errors = training.Validate();
 
         errors.Should().BeEmpty();
         training.StatusId.Should().Be(TrainingStatus.WaitingForValidation.Id);
