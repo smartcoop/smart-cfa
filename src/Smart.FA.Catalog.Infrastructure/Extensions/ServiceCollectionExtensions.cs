@@ -67,9 +67,8 @@ public static class ServiceCollectionExtensions
     private static IServiceCollection AddQueries(this IServiceCollection services, string connectionString)
     {
         //Note: Dapper handles disposing of connections, so using statement are not necessary for the IDbConnection
-        services.AddTransient<IDbConnection>(_ => new SqlConnection(connectionString));
-        services.AddScoped<ITrainerQueries, TrainerQueries>();
-        services.AddScoped<ITrainingQueries, TrainingQueries>();
+        services.AddScoped<ITrainerQueries>(_ => new TrainerQueries(connectionString));
+        services.AddScoped<ITrainingQueries>(_ => new TrainingQueries(connectionString));
 
         return services;
     }
