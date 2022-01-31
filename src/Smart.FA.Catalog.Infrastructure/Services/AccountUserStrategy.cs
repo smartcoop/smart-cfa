@@ -17,6 +17,7 @@ public class AccountUserStrategy : IUserStrategy
 
     public async Task<UserDto> GetAsync(string userId)
     {
+        return new UserDto(userId, "Victor", "vD", ApplicationType.Account.Name);
         if (!int.TryParse(userId, out int id)) throw new Exception();
         var sql = @$"SELECT CAST([Id] AS NVARCHAR(10)) 'UserId'
                       ,[FirstName]
