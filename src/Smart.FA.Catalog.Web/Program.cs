@@ -29,6 +29,7 @@ builder.Services
 #else
 builder.Services
     .AddInfrastructure(builder.Configuration.GetConnectionString("Training"),
+    builder.Configuration.GetConnectionString("Account"),
                     false,
         builder.Configuration.GetSection("MailOptions"));
 #endif
