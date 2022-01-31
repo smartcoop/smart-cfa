@@ -12,7 +12,6 @@ services:
 
   api:
     depends_on:
-      - reverse_proxy
       - datasource
     build:
       context: .
