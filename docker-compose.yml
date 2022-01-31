@@ -1,15 +1,6 @@
 version: "3.9"
 
 services:
-
-  reverse_proxy:
-    build:
-      context: ./src/Reverse-Proxy
-      dockerfile: Nginx.Dockerfile
-    ports:
-      - "4000:4000"
-    restart: always
-
   datasource:
     build:
       context: .
