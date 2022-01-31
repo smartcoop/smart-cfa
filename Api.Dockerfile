@@ -5,7 +5,7 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-ENV ASPNETCORE_ENVIRONMENT Local
+ENV ASPNETCORE_ENVIRONMENT Development
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["src/Smart.FA.Catalog.Web/Api.csproj", "src/Smart.FA.Catalog.Web/"]
