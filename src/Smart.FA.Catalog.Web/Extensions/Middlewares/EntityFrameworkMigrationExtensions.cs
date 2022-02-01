@@ -24,6 +24,7 @@ public static class EntityFrameworkMigrationExtensions
                 using (var scope = services.CreateScope())
                 {
                     var context = scope.ServiceProvider.GetRequiredService<Context>();
+                    Console.WriteLine($"trying to connect to {connection.DataSource}...");
                     context.Database.Migrate();
                 }
 
