@@ -17,7 +17,7 @@ public class DesignTimeContextFactory : IDesignTimeDbContextFactory<Context>
 
     private static Context Create(string basePath, string environmentName, bool useConsoleLogger)
     {
-        const string appSettingsFileName = "appsettings";
+        const string appSettingsFileName = "appsettings.Infrastructure";
         var builder = new ConfigurationBuilder()
                      .SetBasePath(basePath)
                      .AddJsonFile($"{appSettingsFileName}.json", false)
