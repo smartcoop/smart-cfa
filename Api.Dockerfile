@@ -9,6 +9,8 @@ WORKDIR /src
 COPY ["src/Smart.FA.Catalog.Web/Api.csproj", "src/Smart.FA.Catalog.Web/"]
 COPY ["src/Smart.FA.Catalog.Application/Application.csproj", "src/Smart.FA.Catalog.Application/"]
 COPY ["src/Smart.FA.Catalog.Core/Core.csproj", "src/Smart.FA.Catalog.Core/"]
+COPY ["src/Smart.FA.Catalog.Infrastructure/Infrastructure.csproj", "src/Smart.FA.Catalog.Infrastructure/"]
+
 RUN dotnet restore "src/Smart.FA.Catalog.Web/Api.csproj"
 COPY . .
 WORKDIR "/src/src/Smart.FA.Catalog.Web"
