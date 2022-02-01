@@ -16,6 +16,6 @@ public class UserStrategyResolver
         //Right now there is only the account strategy so next line is useless
         // if (applicationType == ApplicationType.Account) return new AccountUserStrategy(_accountConnectionString);
 
-        return new AccountUserStrategy(_accountConnectionString);
+        return new FakeAccountUserStrategy();
     }
 }
