@@ -1,10 +1,6 @@
 #! /usr/bin/env bash
 echo "run docker."
 
-docker rm -f "cfa-datasource" || true
-docker rm -f "cfa-api" || true
-
-
 docker run -d \
   --name cfa-datasource \
   --restart=always \

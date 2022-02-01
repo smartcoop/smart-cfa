@@ -34,12 +34,11 @@
   <ItemGroup>
     <None Remove="appsettings.json" />
   </ItemGroup>
-
   <ItemGroup>
-    <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
-      <HintPath>..\..\..\..\Program Files\dotnet\shared\Microsoft.AspNetCore.App\6.0.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNetCore.Http.Features" />
+    <Content Include="appsettings.Infrastructure.Development.json">
+      <DependentUpon>appsettings.Infrastructure.json</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

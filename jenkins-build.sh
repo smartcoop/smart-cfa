@@ -1,4 +1,15 @@
 #! /usr/bin/env bash
+
+echo "Clean images."
+
+docker rm -f "cfa-datasource" || true
+docker rm -f "cfa-api" || true
+
+docker image rm "cfa-api" || true
+docker image rm "cfa-datasource" || true
+
+docker image prune -f
+
 echo "build docker."
 
 docker build  \
