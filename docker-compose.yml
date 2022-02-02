@@ -9,7 +9,9 @@ services:
     - "1433:1433"
     hostname: cfa-datasource
     restart: always
-
+    networks:
+      cfa:
+        ipv4_address: 172.22.1.3
   api:
     depends_on:
       - datasource
@@ -20,3 +22,13 @@ services:
       - "8080:80"
     hostname: cfa-api
     restart: always
+    networks:
+      cfa:
+        ipv4_address: 172.22.1.2
+networks:
+  cfa:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.22.1.0/24
+          gateway: 172.22.1.1
