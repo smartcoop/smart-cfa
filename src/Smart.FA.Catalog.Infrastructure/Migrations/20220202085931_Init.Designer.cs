@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220107131426_Init")]
+    [Migration("20220202085931_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -207,7 +207,8 @@ namespace Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Language")
-                        .HasColumnType("NCHAR(2)");
+                        .HasColumnType("NCHAR(2)")
+                        .HasColumnName("Language");
 
                     b.Property<string>("Goal")
                         .HasMaxLength(1500)
@@ -218,13 +219,12 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(1500)");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
                     b.HasKey("TrainingId", "Language");
 
-                    b.ToTable("TrainingDetails", (string)null);
+                    b.ToTable("TrainingDetail", (string)null);
                 });
 
             modelBuilder.Entity("Core.Domain.TrainingIdentity", b =>
@@ -292,6 +292,33 @@ namespace Infrastructure.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("TrainerId");
                         });
+
+                    b.OwnsOne("Core.Domain.TrainerIdentity", "Identity", b1 =>
+                        {
+                            b1.Property<int>("TrainerId")
+                                .HasColumnType("int");
+
+                            b1.Property<int>("ApplicationTypeId")
+                                .HasMaxLength(200)
+                                .HasColumnType("int")
+                                .HasColumnName("ApplicationType");
+
+                            b1.Property<string>("UserId")
+                                .IsRequired()
+                                .HasMaxLength(200)
+                                .HasColumnType("nvarchar(200)")
+                                .HasColumnName("UserId");
+
+                            b1.HasKey("TrainerId");
+
+                            b1.ToTable("Trainer");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TrainerId");
+                        });
+
+                    b.Navigation("Identity")
+                        .IsRequired();
 
                     b.Navigation("Name")
                         .IsRequired();

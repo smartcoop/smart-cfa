@@ -19,6 +19,8 @@ namespace Infrastructure.Migrations
                     LastName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
                     DefaultLanguage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    ApplicationType = table.Column<int>(type: "int", maxLength: 200, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -104,20 +106,20 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TrainingDetails",
+                name: "TrainingDetail",
                 columns: table => new
                 {
                     TrainingId = table.Column<int>(type: "int", nullable: false),
                     Language = table.Column<string>(type: "NCHAR(2)", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     Goal = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: true),
                     Methodology = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TrainingDetails", x => new { x.TrainingId, x.Language });
+                    table.PrimaryKey("PK_TrainingDetail", x => new { x.TrainingId, x.Language });
                     table.ForeignKey(
-                        name: "FK_TrainingDetails_Training_TrainingId",
+                        name: "FK_TrainingDetail_Training_TrainingId",
                         column: x => x.TrainingId,
                         principalTable: "Training",
                         principalColumn: "Id",
@@ -239,7 +241,7 @@ namespace Infrastructure.Migrations
                 name: "TrainerEnrollment");
 
             migrationBuilder.DropTable(
-                name: "TrainingDetails");
+                name: "TrainingDetail");
 
             migrationBuilder.DropTable(
                 name: "TrainingIdentity");
