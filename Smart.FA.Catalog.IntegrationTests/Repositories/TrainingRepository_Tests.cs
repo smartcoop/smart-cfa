@@ -19,15 +19,14 @@ namespace Smart.FA.Catalog.IntegrationTests.Repositories;
 public class TrainingRepositoryTests : IntegrationTestBase
 {
     private readonly TrainerFactory _trainerFactory = new();
-    private readonly TrainingFactory _trainingFactory = new();
     private readonly Fixture _fixture = new();
     private readonly TrainingQueries _trainingQueries = new(ConnectionSetup.Training.ConnectionString);
 
     [Fact]
     public async Task GetPaginatedReadOnlyListFromTrainerId()
     {
-        int pageSize = 1;
-        int currentPage = 1;
+        var pageSize = 1;
+        var currentPage = 1;
         await using var context = GivenTrainingContext(false);
         var trainerToAdd = _trainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
         context.Trainers.Attach(trainerToAdd);
