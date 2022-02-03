@@ -8,8 +8,8 @@ public class TrainingSlot
 
     public int TrainingId { get; private set; }
     public int TrainingSlotTypeId { get; private set; }
-    public virtual TrainingSlotNumberType TrainingSlotNumberSlotType { get; }
-    public virtual Training Training { get; }
+    public virtual TrainingSlotNumberType TrainingSlotNumberSlotType { get; } = null!;
+    public virtual Training Training { get; } = null!;
 
     #endregion
 

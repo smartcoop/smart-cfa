@@ -8,20 +8,21 @@ namespace Api.Pages.Admin.Trainings.Create;
 
 public class CreateModel : AdminPage
 {
-    [BindProperty] public CreateTrainingViewModel CreateTrainingViewModel { get; set; }
+    [BindProperty] public CreateTrainingViewModel CreateTrainingViewModel { get; set; } = new();
     public List<string> ValidationErrors { get; set; } = new();
+
     public CreateModel(IMediator mediator) : base(mediator)
     {
     }
 
-    private async Task InitAsync()
+    private void Init()
     {
         SetSideMenuItem();
     }
 
-    public async Task OnGet()
+    public void OnGet()
     {
-        await InitAsync();
+        Init();
     }
 
     public async Task<IActionResult> OnPostSaveAsync()
@@ -29,12 +30,12 @@ public class CreateModel : AdminPage
         var user = (HttpContext.User.Identity as CustomIdentity)!;
         var response =
             await Mediator.Send(
-                CreateTrainingViewModel.MapToRequest(user.Trainer.Id, user.Trainer.DefaultLanguage));
+                CreateTrainingViewModel!.MapToRequest(user.Trainer.Id, user.Trainer.DefaultLanguage));
 
         return RedirectToPage("/Admin/Trainings/List/Index");
     }
 
-    public async Task<IActionResult>  OnPostValidateModelAsync()
+    public async Task<IActionResult> OnPostValidateModelAsync()
     {
         var user = (HttpContext.User.Identity as CustomIdentity)!;
         var response =

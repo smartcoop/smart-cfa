@@ -26,6 +26,6 @@ public class ConnectionSetup
 
     public static string Filename => Path.Combine(
         Path.GetDirectoryName(
-            typeof(TestSetup).GetTypeInfo().Assembly.Location),
+            typeof(TestSetup).GetTypeInfo().Assembly.Location)!,
         $"{DatabaseName}.mdf");
 }

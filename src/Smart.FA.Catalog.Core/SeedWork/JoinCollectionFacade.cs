@@ -38,7 +38,7 @@ public class JoinCollectionFacade<T, TJoin> : ICollection<T>
 
     public bool Remove(T item)
         => _collection.Remove(
-            _collection.FirstOrDefault(e => Equals(_selector(e), item)));
+            _collection.First(e => Equals(_selector(e), item)));
 
     public int Count
         => _collection.Count;

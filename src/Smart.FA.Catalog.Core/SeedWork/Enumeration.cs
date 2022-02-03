@@ -8,7 +8,7 @@ public abstract class Enumeration : IComparable
 {
     #region Properties
 
-    public string Name { get; }
+    public string Name { get; } = null!;
 
     public int Id { get; }
 
@@ -32,9 +32,9 @@ public abstract class Enumeration : IComparable
 
     public override string ToString() => Name;
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
-        if (!(obj is Enumeration otherValue))
+        if (obj is not Enumeration otherValue)
             return false;
 
         var typeMatches = GetType() == obj.GetType();
@@ -72,9 +72,9 @@ public abstract class Enumeration : IComparable
         return matchingItem;
     }
 
-    public static T FromDisplayNameInvariant<T>(string displayName) where T : Enumeration
+    public static T? FromDisplayNameInvariant<T>(string displayName) where T : Enumeration
     {
-        if (IsNullOrWhiteSpace(displayName)) return null;
+        if (IsNullOrWhiteSpace(displayName)) return default;
         var matchingItem = GetAll<T>().FirstOrDefault(item =>
             string.Equals(item.Name, displayName, StringComparison.InvariantCultureIgnoreCase));
         return matchingItem;
@@ -84,25 +84,24 @@ public abstract class Enumeration : IComparable
     {
         var matchingItem = GetAll<T>().FirstOrDefault(predicate);
 
-        if (matchingItem == null)
+        if (matchingItem is null)
             throw new InvalidOperationException($"'{value}' is not a valid {description} in {typeof(T)}");
 
         return matchingItem;
     }
 
-    public int CompareTo(object obj) => Id.CompareTo(((Enumeration) obj).Id);
+    public int CompareTo(object? obj) => obj is null ? default : Id.CompareTo(((Enumeration) obj).Id);
 
     #endregion
 
     #region Operators
 
-    public static bool operator ==(Enumeration a, Enumeration b)
+    public static bool operator ==(Enumeration? a, Enumeration? b)
     {
         if (ReferenceEquals(a, b))
             return true;
 
-        if ((object) a == null || (object) b == null)
-            return false;
+        if (a is null || b is null) return false;
 
         return a.Equals(b);
     }

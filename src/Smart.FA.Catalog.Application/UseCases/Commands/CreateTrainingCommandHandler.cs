@@ -4,7 +4,6 @@ using Core.Domain.Dto;
 using Core.Domain.Enumerations;
 using Core.Domain.Interfaces;
 using Core.SeedWork;
-using Core.Services;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -32,13 +31,10 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingReques
         {
             var trainer = await _trainerRepository.FindAsync(request.TrainerId, cancellationToken);
             var training = new Training(trainer, request.Detail, request.Types, request.SlotNumberTypes, request.TargetAudiences);
-            var errors = training.Validate();
 
             _unitOfWork.RegisterNew(training);
             _unitOfWork.Commit();
 
-            resp.Training = training;
-            resp.ValidationErrors = errors;
             resp.SetSuccess();
         }
         catch (Exception e)
@@ -53,15 +49,13 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingReques
 
 public class CreateTrainingRequest : IRequest<CreateTrainingResponse>
 {
-    public int TrainerId { get; set; }
-    public TrainingDetailDto Detail { get; set; }
-    public List<TrainingTargetAudience> TargetAudiences { get; set; }
-    public List<TrainingType> Types { get; set; }
-    public List<TrainingSlotNumberType> SlotNumberTypes { get; set; }
+    public int TrainerId { get; init; }
+    public TrainingDetailDto Detail { get; init; } = null!;
+    public List<TrainingTargetAudience> TargetAudiences { get; init; } = null!;
+    public List<TrainingType> Types { get; init; } = null!;
+    public List<TrainingSlotNumberType> SlotNumberTypes { get; init; } = null!;
 }
 
 public class CreateTrainingResponse : ResponseBase
 {
-    public Training? Training { get; set; }
-    public List<string> ValidationErrors { get; set; }
 }

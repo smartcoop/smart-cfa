@@ -7,7 +7,7 @@ namespace Infrastructure.Persistence.Database;
 public class UnitOfWork : IUnitOfWork
 {
     private readonly Context _context;
-    private IDbContextTransaction _transaction;
+    private IDbContextTransaction? _transaction;
 
     public UnitOfWork(Context context)
     {
@@ -106,14 +106,13 @@ public class UnitOfWork : IUnitOfWork
 
     public void CommitTransaction()
     {
-        _transaction.Commit();
+        _transaction?.Commit();
         _transaction = null;
     }
 
     public void RollbackTransaction()
     {
-        if (_transaction != null)
-            _transaction.Rollback();
+        _transaction?.Rollback();
 
         _transaction = null;
     }

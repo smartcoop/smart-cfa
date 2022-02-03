@@ -37,7 +37,8 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
         try
         {
             var training = await _trainingRepository.GetFullAsync(request.TrainingId, cancellationToken);
-            training.UpdateDetails(request.Detail.Title, request.Detail.Goal, request.Detail.Methodology,
+            if (training is null) throw new Exception("No trainings cannot be found with that id");
+            training.UpdateDetails(request.Detail.Title!, request.Detail.Goal!, request.Detail.Methodology!,
                 Language.Create(request.Detail.Language).Value);
             training.SwitchTrainingTypes(request.Types);
             training.SwitchTargetAudience(request.TargetAudiences);
@@ -63,15 +64,15 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
 
 public class UpdateTrainingRequest : IRequest<UpdateTrainingResponse>
 {
-    public int TrainingId { get; set; }
-    public TrainingDetailDto? Detail { get; set; }
-    public List<TrainingTargetAudience>? TargetAudiences { get; set; }
-    public List<TrainingType>? Types { get; set; }
-    public List<TrainingSlotNumberType>? SlotNumberTypes { get; set; }
-    public List<int> TrainerIds { get; set; }
+    public int TrainingId { get; init; }
+    public TrainingDetailDto Detail { get; init; } = null!;
+    public List<TrainingTargetAudience>? TargetAudiences { get; init; }
+    public List<TrainingType> Types { get; init; } = null!;
+    public List<TrainingSlotNumberType> SlotNumberTypes { get; init; } = null!;
+    public List<int> TrainerIds { get; init; } = null!;
 }
 
 public class UpdateTrainingResponse : ResponseBase
 {
-    public Training Training { get; set; }
+    public Training Training { get; set; } = null!;
 }

@@ -8,8 +8,8 @@ public class TrainingTarget
 
     public int TrainingId { get; }
     public int TrainingTargetAudienceId { get; }
-    public virtual Training Training { get; }
-    public virtual TrainingTargetAudience TrainingTargetAudience { get; }
+    public virtual Training Training { get; } = null!;
+    public virtual TrainingTargetAudience TrainingTargetAudience { get; } = null!;
 
     #endregion
 

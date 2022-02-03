@@ -30,11 +30,11 @@ public class GetTrainerFromUserAppQueryHandler : IRequestHandler<GetTrainerFromU
         GetTrainerFromUserAppResponse resp = new();
         try
         {
-            var userStrategy =  _userStrategyResolver.Resolve(request.ApplicationType);
-            var user = await userStrategy.GetAsync(request.userId);
+            var userStrategy =  _userStrategyResolver.Resolve(request.ApplicationType!);
+            var user = await userStrategy.GetAsync(request.UserId!);
             var linkedTrainer =
-                await _context.Trainers.FirstOrDefaultAsync(trainer => trainer.Identity.UserId == request.userId, cancellationToken);
-            if (linkedTrainer == null)
+                await _context.Trainers.FirstOrDefaultAsync(trainer => trainer.Identity.UserId == request.UserId, cancellationToken);
+            if (linkedTrainer is null)
             {
                 linkedTrainer = new Trainer(Name.Create(user.FirstName, user.LastName).Value,
                     TrainerIdentity.Create(user.UserId, Enumeration.FromDisplayName<ApplicationType>(user.ApplicationType)).Value, string.Empty,
@@ -57,11 +57,11 @@ public class GetTrainerFromUserAppQueryHandler : IRequestHandler<GetTrainerFromU
 
 public class GetTrainerFromUserAppRequest : IRequest<GetTrainerFromUserAppResponse>
 {
-    public string userId { get; set; }
-    public ApplicationType ApplicationType { get; set; }
+    public string UserId { get; init; } = null!;
+    public ApplicationType ApplicationType { get; init; } = null!;
 }
 
 public class GetTrainerFromUserAppResponse : ResponseBase
 {
-    public Trainer Trainer { get; set; }
+    public Trainer? Trainer { get; set; }
 }

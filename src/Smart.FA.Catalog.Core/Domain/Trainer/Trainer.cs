@@ -12,13 +12,13 @@ public class Trainer : Entity, IAggregateRoot
 
     #region Properties
 
-    public virtual Name Name { get; private set; }
+    public virtual Name Name { get; private set; } = null!;
 
-    public string Description { get; private set; }
+    public string Description { get; private set; } = null!;
 
-    public Language DefaultLanguage { get; private set; }
+    public Language DefaultLanguage { get; private set; } = null!;
 
-    public TrainerIdentity Identity { get; }
+    public TrainerIdentity Identity { get; } = null!;
     public virtual IReadOnlyCollection<TrainerEnrollment> Enrollments => _enrollments;
 
     #endregion

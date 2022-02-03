@@ -8,8 +8,8 @@ public class TrainingIdentity
 
     public int TrainingId { get; set; }
     public int TrainingTypeId { get; set; }
-    public virtual TrainingType TrainingType { get; }
-    public virtual Training Training { get; }
+    public virtual TrainingType TrainingType { get; } = null!;
+    public virtual Training Training { get; } = null!;
 
     #endregion
 

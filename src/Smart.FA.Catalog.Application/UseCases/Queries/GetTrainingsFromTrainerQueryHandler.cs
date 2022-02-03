@@ -43,8 +43,8 @@ public class
 
 public class GetTrainingsFromTrainerRequest : IRequest<GetTrainingsFromTrainerResponse>
 {
-    public int TrainerId { get; set; }
-    public Language Language { get; set; }
+    public int TrainerId { get; init; }
+    public Language Language { get; init; } = null!;
 }
 
 public class GetTrainingsFromTrainerResponse : ResponseBase

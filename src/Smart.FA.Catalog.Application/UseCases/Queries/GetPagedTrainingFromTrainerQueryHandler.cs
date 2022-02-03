@@ -46,9 +46,9 @@ public class GetPagedTrainingsFromTrainerQueryHandler : IRequestHandler<GetPaged
 
 public class GetPagedTrainingsFromTrainerRequest : IRequest<GetPagedTrainingsFromTrainerResponse>
 {
-    public int TrainerId { get; set; }
-    public Language Language { get; set; }
-    public PageItem PageItem { get; set; }
+    public int TrainerId { get; init; }
+    public Language Language { get; init; } = null!;
+    public PageItem PageItem { get; init; } = null!;
 }
 
 public class GetPagedTrainingsFromTrainerResponse : ResponseBase

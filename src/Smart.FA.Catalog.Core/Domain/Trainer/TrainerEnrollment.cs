@@ -8,8 +8,8 @@ public class TrainerEnrollment
     public int TrainingId { get; private set; }
     public int TrainerId { get; private set; }
 
-    public virtual Training Training { get; init; }
-    public virtual Trainer Trainer { get; init; }
+    public virtual Training Training { get; } = null!;
+    public virtual Trainer Trainer { get; } = null!;
 
     #endregion
 

@@ -9,19 +9,19 @@ namespace Api.Pages.Admin.Trainings.Edit;
 
 public class EditTrainingViewModel
 {
-    public string? Title { get; set; }
+    public string? Title { get; init; }
 
-    public List<int>? SlotNumberTypeIds { get; set; }
+    public List<int>? SlotNumberTypeIds { get; init; }
 
-    public List<int>? TrainingTypeIds { get; set; }
+    public List<int>? TrainingTypeIds { get; init; }
 
-    public List<int>? TargetAudienceIds { get; set; }
+    public List<int>? TargetAudienceIds { get; init; }
 
-    public string? Goal { get; set; }
+    public string? Goal { get; init; }
 
-    public string? Methodology { get; set; }
+    public string? Methodology { get; init; }
 
-    public string? Address { get; set; }
+    // public string? Address { get; set; }
 }
 
 public static class EditTrainingViewModelMapping
@@ -47,12 +47,12 @@ public static class EditTrainingViewModelMapping
 
     public static EditTrainingViewModel MapGetToResponse(this GetTrainingFromIdResponse model, Language language)
     {
-        var detail = model.Training.Details.FirstOrDefault(detail => detail.Language == language);
+        var detail = model.Training!.Details.FirstOrDefault(detail => detail.Language == language);
         EditTrainingViewModel response = new()
         {
-            Goal = detail.Goal,
-            Title = detail.Title,
-            Methodology = detail.Methodology,
+            Goal = detail?.Goal,
+            Title = detail?.Title,
+            Methodology = detail?.Methodology,
             TargetAudienceIds = model.Training.Targets.Select(target => target.TrainingTargetAudienceId).ToList(),
             TrainingTypeIds = model.Training.Identities.Select(identity => identity.TrainingTypeId).ToList(),
             SlotNumberTypeIds = model.Training.Slots.Select(slot => slot.TrainingSlotTypeId).ToList()
@@ -66,9 +66,9 @@ public static class EditTrainingViewModelMapping
         var detail = model.Training.Details.FirstOrDefault(detail => detail.Language == language);
         EditTrainingViewModel response = new()
         {
-            Goal = detail.Goal,
-            Title = detail.Title,
-            Methodology = detail.Methodology,
+            Goal = detail?.Goal,
+            Title = detail?.Title,
+            Methodology = detail?.Methodology,
             TargetAudienceIds = model.Training.Targets.Select(target => target.TrainingTargetAudienceId).ToList(),
             TrainingTypeIds = model.Training.Identities.Select(identity => identity.TrainingTypeId).ToList(),
             SlotNumberTypeIds = model.Training.Slots.Select(slot => slot.TrainingSlotTypeId).ToList()

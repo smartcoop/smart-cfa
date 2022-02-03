@@ -14,13 +14,12 @@ namespace Smart.FA.Catalog.IntegrationTests.TrainingContext;
 public class TrainerTests : IntegrationTestBase
 {
     private readonly TrainerFactory _trainerFactory = new();
-    private readonly TrainingFactory _trainingFactory = new();
 
     [Theory]
     [InlineData("Victor", "vD")]
     public async Task CanCreateTrainer(string firstName, string lastName)
     {
-        using var context = GivenTrainingContext();
+        await using var context = GivenTrainingContext();
         var trainer = _trainerFactory.Create(firstName, lastName);
 
         context.Trainers.Attach(trainer);
@@ -28,8 +27,8 @@ public class TrainerTests : IntegrationTestBase
         var foundTrainer = await context.Trainers.FindAsync(trainer.Id);
 
         foundTrainer.Should().NotBeNull();
-        foundTrainer.Should().BeSameAs(trainer);
-        foundTrainer.Name.FirstName.Should().NotBeEmpty();
+        foundTrainer!.Should().BeSameAs(trainer);
+        foundTrainer!.Name.FirstName.Should().NotBeEmpty();
         foundTrainer.Name.LastName.Should().NotBeEmpty();
         foundTrainer.DefaultLanguage.Value.Should().NotBeEmpty();
     }
@@ -38,7 +37,7 @@ public class TrainerTests : IntegrationTestBase
     [InlineData("Victor", "vD")]
     public async Task CanChangeTrainerName(string firstName, string lastName)
     {
-        using var context = GivenTrainingContext();
+        await using var context = GivenTrainingContext();
         var trainer = _trainerFactory.Create(firstName, lastName);
         context.Trainers.Attach(trainer);
         await context.SaveChangesAsync();
@@ -47,7 +46,7 @@ public class TrainerTests : IntegrationTestBase
         trainer.Rename(newName.Value);
         var foundTrainer = await context.Trainers.FindAsync(trainer.Id);
 
-        foundTrainer.Name.Should().BeSameAs(newName.Value);
+        foundTrainer!.Name.Should().BeSameAs(newName.Value);
     }
 
 

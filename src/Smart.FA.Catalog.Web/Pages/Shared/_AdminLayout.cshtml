@@ -139,7 +139,7 @@
                     <ul class="c-side-menu">
                         @foreach (var sideMenuItem in Enumeration.GetAll<SideMenuItem>())
                         {
-                            <li class="c-side-menu__item @(ViewData[nameof(SideMenuItem)] == sideMenuItem ? "c-side-menu__item--active" : "")">
+                            <li class="c-side-menu__item @((SideMenuItem)ViewData[nameof(SideMenuItem)]! == sideMenuItem ? "c-side-menu__item--active" : "")">
                                 <a class="c-side-menu__link" href="@sideMenuItem.Href">@sideMenuItem.Name</a>
                             </li>
                         }

@@ -7,7 +7,7 @@ public class TrainingDetail
 {
     #region Private fields
 
-    private string _title;
+    private string _title = null!;
     private string? _goal;
     private string? _methodology;
 
@@ -16,9 +16,9 @@ public class TrainingDetail
     #region Properties
 
     public int TrainingId { get; }
-    public virtual Training Training { get; }
+    public virtual Training Training { get; } = null!;
 
-    public string? Title
+    public string Title
     {
         get => _title;
         set
@@ -49,7 +49,7 @@ public class TrainingDetail
         }
     }
 
-    public virtual Language Language { get; }
+    public Language Language { get; } = null!;
 
     #endregion
 

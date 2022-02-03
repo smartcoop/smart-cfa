@@ -7,8 +7,8 @@ namespace Core.Domain;
 
 public class TrainerIdentity : ValueObject
 {
-    public string UserId { get; }
-    public int ApplicationTypeId { get; set; }
+    public string UserId { get; } = null!;
+    public int ApplicationTypeId { get; }
 
     protected TrainerIdentity()
     {

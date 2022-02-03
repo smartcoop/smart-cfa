@@ -6,8 +6,8 @@ namespace Core.Domain;
 
 public class Name: ValueObject
 {
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+    public string FirstName { get; } = null!;
+    public string LastName { get; }= null!;
 
     private Name(string firstName, string lastName):this()
     {

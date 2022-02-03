@@ -11,22 +11,22 @@ public class Context : DbContext
 {
     private readonly string _connectionString;
     private readonly bool _useConsoleLogger;
-    private readonly EventDispatcher _eventDispatcher;
+    private readonly EventDispatcher? _eventDispatcher;
 
-    public Context(string connectionString, bool useConsoleLogger, EventDispatcher eventDispatcher)
+    public Context(string connectionString, bool useConsoleLogger, EventDispatcher? eventDispatcher)
     {
         _connectionString = connectionString;
         _useConsoleLogger = useConsoleLogger;
         _eventDispatcher = eventDispatcher;
     }
 
-    public DbSet<Trainer> Trainers { get; set; }
-    public DbSet<Training> Trainings { get; set; }
-    public DbSet<TrainerEnrollment> TrainerEnrollments { get; set; }
+    public DbSet<Trainer> Trainers { get; set; } = null!;
+    public DbSet<Training> Trainings { get; set; } = null!;
+    public DbSet<TrainerEnrollment> TrainerEnrollments { get; set; } = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        ILoggerFactory? loggerFactory = LoggerFactory.Create(builder =>
+        var loggerFactory = LoggerFactory.Create(builder =>
         {
             builder.AddFilter((category, level) =>
                     category == DbLoggerCategory.Database.Command.Name && level == LogLevel.Information)
@@ -76,8 +76,7 @@ public class Context : DbContext
     {
         var entries = ChangeTracker
             .Entries<Entity>()
-            .Where(entry =>  entry.State == EntityState.Added
-                         || entry.State == EntityState.Modified);
+            .Where(entry =>  entry.State is EntityState.Added or EntityState.Modified);
 
         foreach (var entityEntry in entries)
         {
@@ -98,7 +97,7 @@ public class Context : DbContext
             .Where(entity => entity.DomainEvents.Any());
         foreach (var entity in entries)
         {
-            _eventDispatcher.Dispatch(entity.DomainEvents);
+            _eventDispatcher!.Dispatch(entity.DomainEvents);
             entity.ClearDomainEvents();
         }
     }

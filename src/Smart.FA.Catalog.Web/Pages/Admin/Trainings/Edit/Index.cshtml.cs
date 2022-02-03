@@ -1,7 +1,5 @@
-using Api.Extensions;
 using Api.Identity;
 using Application.UseCases.Queries;
-using Core.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,15 +7,15 @@ namespace Api.Pages.Admin.Trainings.Edit;
 
 public class EditModel : AdminPage
 {
-    public int TrainingId { get; private set; }
-    public List<string> ValidationErrors { get; set; } = new();
-    [BindProperty] public EditTrainingViewModel EditTrainingViewModel { get; set; } = new();
+    private int TrainingId { get; set; }
+    public List<string> ValidationErrors { get; private set; } = new();
+    [BindProperty] public EditTrainingViewModel EditTrainingViewModel { get; set; } = null!;
 
     public EditModel(IMediator mediator) : base(mediator)
     {
     }
 
-    private async Task InitAsync()
+    private void Init()
     {
         SetSideMenuItem();
     }
@@ -29,7 +27,7 @@ public class EditModel : AdminPage
         var response =
             await Mediator.Send(new GetTrainingFromIdRequest {TrainingId = TrainingId}, CancellationToken.None);
         EditTrainingViewModel = response.MapGetToResponse(user.Trainer.DefaultLanguage);
-        await InitAsync();
+        Init();
     }
 
     public async Task<IActionResult> OnPostUpdateAsync(int id)
@@ -57,7 +55,6 @@ public class EditModel : AdminPage
         ValidationErrors = response.ValidationErrors;
         return Page();
     }
-
 
     protected override SideMenuItem GetSideMenuItem()
     {

@@ -51,14 +51,14 @@ public class
 
 public class GetTrainingValidationErrorsRequest : IRequest<GetTrainingValidationErrorsResponse>
 {
-    public int TrainerId { get; set; }
-    public TrainingDetailDto Detail { get; set; }
-    public List<TrainingTargetAudience> TargetAudiences { get; set; }
-    public List<TrainingType> Types { get; set; }
-    public List<TrainingSlotNumberType> SlotNumberTypes { get; set; }
+    public int TrainerId { get; init; }
+    public TrainingDetailDto Detail { get; init; } = null!;
+    public List<TrainingTargetAudience> TargetAudiences { get; init; } = null!;
+    public List<TrainingType> Types { get; init; } = null!;
+    public List<TrainingSlotNumberType> SlotNumberTypes { get; init; } = null!;
 }
 
 public class GetTrainingValidationErrorsResponse : ResponseBase
 {
-    public List<string> ValidationErrors { get; set; }
+    public List<string> ValidationErrors { get; set; } = null!;
 }

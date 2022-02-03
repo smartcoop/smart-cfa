@@ -22,8 +22,8 @@ public class GetTrainingFromIdQueryHandler: IRequestHandler<GetTrainingFromIdReq
 
         try
         {
-            var training = await _context.Trainings.FindAsync(request.TrainingId);
-            resp.Training = training;
+            var training = await _context.Trainings.FindAsync(new object?[] { request.TrainingId }, cancellationToken: cancellationToken);
+            resp.Training = training!;
             resp.SetSuccess();
         }
         catch (Exception e)
@@ -44,5 +44,5 @@ public class GetTrainingFromIdRequest: IRequest<GetTrainingFromIdResponse>
 
 public class GetTrainingFromIdResponse : ResponseBase
 {
-    public Training Training { get; set; }
+    public Training? Training { get; set; }
 }

@@ -7,12 +7,12 @@ using Microsoft.Extensions.Configuration;
 namespace Infrastructure;
 public class DesignTimeContextFactory : IDesignTimeDbContextFactory<Context>
 {
-    public Context CreateDbContext(string[] args)
+    public Context CreateDbContext(string[]? args)
     {
         var basePath = Directory.GetCurrentDirectory();
         var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
         Console.WriteLine($"\nDesignTimeContextFactory.Create(string[]):\n\tBase Path: {basePath}\n\tEnvironmentVariable: {environmentName}");
-        return Create(basePath, environmentName, true);
+        return Create(basePath, environmentName!, true);
     }
 
     private static Context Create(string basePath, string environmentName, bool useConsoleLogger)

@@ -17,9 +17,9 @@ public static class Guard
         Debug.Assert(predicate(), message);
     }
 
-    public static void AgainstNull(object argumentValue, string argumentName)
+    public static void AgainstNull(object? argumentValue, string argumentName)
     {
-        if (argumentValue == null)
+        if (argumentValue is null)
             throw new ArgumentNullException(argumentName);
     }
 }

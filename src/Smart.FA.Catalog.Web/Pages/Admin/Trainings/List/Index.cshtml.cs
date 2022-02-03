@@ -15,7 +15,7 @@ namespace Api.Pages.Admin.Trainings.List;
 public class ListModel : AdminPage
 {
     private readonly AdminOptions _adminOptions;
-    public PagedList<TrainingDto>? Trainings { get; set; }
+    public PagedList<TrainingDto>? Trainings { get; set; } = null!;
 
     [BindProperty(SupportsGet = true)] public int CurrentPage { get; set; } = 1;
 
