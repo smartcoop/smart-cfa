@@ -2,7 +2,6 @@ using System.Linq.Expressions;
 using Core.Domain.Dto;
 using Core.Domain.Enumerations;
 using Core.SeedWork;
-using Core.Services;
 
 namespace Core.Domain;
 
@@ -80,7 +79,7 @@ public class Training : Entity, IAggregateRoot
 
     public void EnrollTrainer(Trainer? trainer)
     {
-        Guard.Requires(() => trainer != null, "There should be at least one trainer enrolled (owner)");
+        Guard.Requires(() => trainer is not null, "There should be at least one trainer enrolled (owner)");
         TrainerEnrollment trainerEnrollment = new(this, trainer!);
         if (_trainerEnrollments.Contains(trainerEnrollment)) throw new Exception();
         _trainerEnrollments.Add(trainerEnrollment);
@@ -88,14 +87,14 @@ public class Training : Entity, IAggregateRoot
 
     public void EnrollTrainers(IEnumerable<Trainer> trainers)
     {
-        DisenrollAll();
+        DisEnrollAll();
         foreach (var trainer in trainers)
         {
             EnrollTrainer(trainer);
         }
     }
 
-    public void DisenrollAll()
+    public void DisEnrollAll()
         => _trainerEnrollments.RemoveAll(enrollment => enrollment.TrainerId != TrainerCreatorId);
 
     public List<string> Validate()
@@ -114,9 +113,10 @@ public class Training : Entity, IAggregateRoot
 
     public void AddDetails(string? title, string? goal, string? methodology, Language language)
     {
+        Guard.AgainstNull(title, nameof(title));
         Guard.Requires(() => _details.FirstOrDefault(detail => detail.Language.Value == language.Value) == null,
             "A description for that language already exists");
-        _details.Add(new TrainingDetail(this, title, goal, methodology, language));
+        _details.Add(new TrainingDetail(this, title!, goal, methodology, language));
     }
 
     public void UpdateDetails(string title, string goal, string methodology, Language language)

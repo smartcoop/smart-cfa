@@ -2,5 +2,5 @@ namespace Core.Services;
 
 public interface IMailService
 {
-    public Task SendAsync(string body, string recipents, string? subject, CancellationToken cancellationToken);
+    public Task SendAsync(string body, string receipents, string? subject, CancellationToken cancellationToken);
 }

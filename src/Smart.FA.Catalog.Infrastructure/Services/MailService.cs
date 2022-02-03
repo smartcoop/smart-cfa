@@ -14,14 +14,14 @@ public class MailService : IMailService
 
     public MailService(IOptions<MailOptions> mailOptions, ILogger<MailService> logger)
     {
-        _sender = mailOptions.Value.Sender;
-        _server = mailOptions.Value.Server;
+        _sender = mailOptions.Value.Sender ?? null!;
+        _server = mailOptions.Value.Server ?? null!;
         _logger = logger;
     }
 
-    public Task SendAsync(string body, string recipents, string? subject, CancellationToken cancellationToken)
+    public Task SendAsync(string body, string receipents, string? subject, CancellationToken cancellationToken)
     {
-        MailMessage message = new(_sender, recipents);
+        MailMessage message = new(_sender, receipents);
         message.Body = body;
         message.Subject = subject;
 

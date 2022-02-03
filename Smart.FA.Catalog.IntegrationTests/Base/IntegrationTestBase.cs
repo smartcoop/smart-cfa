@@ -5,11 +5,11 @@ namespace Smart.FA.Catalog.IntegrationTests.Base;
 
 public class IntegrationTestBase
 {
-    private static readonly DesignTimeContextFactory contextFactory = new();
+    private static readonly DesignTimeContextFactory ContextFactory = new();
 
     protected static Context GivenTrainingContext(bool beginTransaction = true)
     {
-        var context = contextFactory.CreateDbContext(null);
+        var context = ContextFactory.CreateDbContext(null);
         if (beginTransaction)
             context.Database.BeginTransaction();
         return context;

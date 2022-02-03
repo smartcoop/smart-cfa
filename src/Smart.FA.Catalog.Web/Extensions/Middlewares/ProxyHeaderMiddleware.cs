@@ -19,13 +19,13 @@ public class ProxyHeaderMiddleware
     public async Task InvokeAsync(HttpContext context, IMediator mediator )
     {
 
-        var userId = string.IsNullOrEmpty(context.Request.Headers["user_id"].ToString())  ? "1" : context.Request.Headers["user_id"].ToString();
+        var userId = (string.IsNullOrEmpty(context.Request.Headers["user_id"].ToString())  ? "1" : context.Request.Headers["user_id"].ToString())!;
         var appName =  string.IsNullOrEmpty(context.Request.Headers["app_name"].ToString()) ? ApplicationType.Default.Name : context.Request.Headers["app_name"].ToString();
         var applicationType = Enumeration.FromDisplayName<ApplicationType>(appName);
 
-        var resp = await mediator.Send(new GetTrainerFromUserAppRequest {userId = userId, ApplicationType = applicationType});
+        var resp = await mediator.Send(new GetTrainerFromUserAppRequest {UserId = userId, ApplicationType = applicationType});
 
-        context.User = new GenericPrincipal(new CustomIdentity(resp.Trainer), null );
+        context.User = new GenericPrincipal(new CustomIdentity(resp.Trainer!), null );
         await _next(context);
     }
 }
