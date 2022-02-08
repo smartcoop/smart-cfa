@@ -1,4 +1,4 @@
-namespace Api.Options;
+namespace Web.Options;
 
 public class AdminOptions
 {

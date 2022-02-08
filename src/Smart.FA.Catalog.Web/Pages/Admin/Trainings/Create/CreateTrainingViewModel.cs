@@ -5,7 +5,7 @@ using Core.Domain.Dto;
 using Core.Domain.Enumerations;
 using Core.SeedWork;
 
-namespace Api.Pages.Admin.Trainings.Create;
+namespace Web.Pages.Admin.Trainings.Create;
 
 public class CreateTrainingViewModel
 {

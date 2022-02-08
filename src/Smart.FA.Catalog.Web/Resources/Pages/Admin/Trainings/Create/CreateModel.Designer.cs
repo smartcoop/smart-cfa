@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Api.Resources.Pages.Admin.Trainings.Create {
+namespace Web.Resources.Pages.Admin.Trainings.Create {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -36,7 +36,7 @@ namespace Api.Resources.Pages.Admin.Trainings.Create {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Api.Resources.Pages.Admin.Trainings.Create.CreateModel", typeof(CreateModel).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Web.Resources.Pages.Admin.Trainings.Create.CreateModel", typeof(CreateModel).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

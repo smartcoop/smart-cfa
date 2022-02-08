@@ -17,7 +17,7 @@ services:
       - datasource
     build:
       context: .
-      dockerfile: Api.Dockerfile
+      dockerfile: Web.Dockerfile
     ports:
       - "8080:80"
     hostname: cfa-api

@@ -1,4 +1,4 @@
-namespace Api;
+namespace Web;
 
 public class SharedResource
 {

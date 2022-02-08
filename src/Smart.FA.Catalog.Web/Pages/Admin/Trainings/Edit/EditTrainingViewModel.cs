@@ -5,7 +5,7 @@ using Core.Domain.Dto;
 using Core.Domain.Enumerations;
 using Core.SeedWork;
 
-namespace Api.Pages.Admin.Trainings.Edit;
+namespace Web.Pages.Admin.Trainings.Edit;
 
 public class EditTrainingViewModel
 {

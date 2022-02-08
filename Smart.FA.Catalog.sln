@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\Smart.FA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "src\Smart.FA.Catalog.Core\Core.csproj", "{E5C326FC-DA72-47F3-8EA1-18103CDE8D4E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "src\Smart.FA.Catalog.Web\Api.csproj", "{ADB7CE09-C689-4CB9-9F4D-C964B1752E82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "src\Smart.FA.Catalog.Web\Web.csproj", "{ADB7CE09-C689-4CB9-9F4D-C964B1752E82}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.IntegrationTests", "Smart.FA.Catalog.IntegrationTests\Smart.FA.Catalog.IntegrationTests.csproj", "{BBE101FD-3BFE-40C6-8ABA-5D5C268541EF}"
 EndProject
