@@ -10,11 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.dockerignore = .dockerignore
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
-		Api.Dockerfile = Api.Dockerfile
 		DB.Dockerfile = DB.Dockerfile
 		docker-compose.dcproj = docker-compose.dcproj
 		docker-compose.dcproj.user = docker-compose.dcproj.user
 		docker-compose.yml = docker-compose.yml
+		Web.Dockerfile = Web.Dockerfile
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{D485BE00-A082-47D7-827D-0FD646807006}"
