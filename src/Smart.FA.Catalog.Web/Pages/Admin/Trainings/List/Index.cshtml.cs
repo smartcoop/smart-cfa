@@ -1,16 +1,14 @@
-using Api.Extensions;
-using Api.Identity;
-using Api.Options;
 using Application.UseCases.Commands;
 using Application.UseCases.Queries;
-using Core.Domain;
 using Core.Domain.Dto;
 using Core.SeedWork;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Web.Identity;
+using Web.Options;
 
-namespace Api.Pages.Admin.Trainings.List;
+namespace Web.Pages.Admin.Trainings.List;
 
 public class ListModel : AdminPage
 {

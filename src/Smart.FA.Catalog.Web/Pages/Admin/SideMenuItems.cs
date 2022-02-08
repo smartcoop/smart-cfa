@@ -1,6 +1,6 @@
 using Core.SeedWork;
 
-namespace Api.Pages.Admin;
+namespace Web.Pages.Admin;
 
 public class SideMenuItem : Enumeration
 {

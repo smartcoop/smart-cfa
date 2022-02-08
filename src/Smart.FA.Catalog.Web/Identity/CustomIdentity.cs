@@ -1,7 +1,7 @@
 using System.Security.Principal;
 using Core.Domain;
 
-namespace Api.Identity;
+namespace Web.Identity;
 
 public class CustomIdentity : IIdentity
 {

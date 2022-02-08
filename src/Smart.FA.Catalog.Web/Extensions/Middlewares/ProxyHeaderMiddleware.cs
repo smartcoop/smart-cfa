@@ -1,11 +1,11 @@
 using System.Security.Principal;
-using Api.Identity;
 using Application.UseCases.Queries;
 using Core.Domain.Enumerations;
 using Core.SeedWork;
 using MediatR;
+using Web.Identity;
 
-namespace Api.Extensions.Middlewares;
+namespace Web.Extensions.Middlewares;
 
 public class ProxyHeaderMiddleware
 {

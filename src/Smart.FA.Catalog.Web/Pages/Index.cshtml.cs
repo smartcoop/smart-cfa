@@ -1,10 +1,9 @@
-using Api.Extensions;
-using Api.Identity;
-using Api.Pages.Admin;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Web.Identity;
+using Web.Pages.Admin;
 
-namespace Api.Pages;
+namespace Web.Pages;
 
 [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 [IgnoreAntiforgeryToken]

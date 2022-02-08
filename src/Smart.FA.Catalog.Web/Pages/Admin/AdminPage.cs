@@ -1,8 +1,7 @@
-using Api.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Api.Pages.Admin;
+namespace Web.Pages.Admin;
 
 public abstract class AdminPage : PageModel
 {

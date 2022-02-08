@@ -4,7 +4,7 @@ using Infrastructure.Persistence;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
-namespace Api.Extensions.Middlewares;
+namespace Web.Extensions.Middlewares;
 
 public static class EntityFrameworkMigrationExtensions
 {

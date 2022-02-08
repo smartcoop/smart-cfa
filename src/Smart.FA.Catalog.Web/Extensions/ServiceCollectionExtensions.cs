@@ -1,8 +1,6 @@
-using Api.Options;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+using Web.Options;
 
-namespace Api.Extensions;
+namespace Web.Extensions;
 
 public static class ServiceCollectionExtensions
 {

@@ -1,8 +1,8 @@
-using Api.Extensions;
-using Api.Extensions.Middlewares;
 using Application.Extensions;
 using Infrastructure.Extensions;
 using Smart.Design.Razor.Extensions;
+using Web.Extensions;
+using Web.Extensions.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())

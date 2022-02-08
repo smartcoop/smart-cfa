@@ -1,9 +1,9 @@
-using Api.Identity;
 using Application.UseCases.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Web.Identity;
 
-namespace Api.Pages.Admin.Trainings.Edit;
+namespace Web.Pages.Admin.Trainings.Edit;
 
 public class EditModel : AdminPage
 {

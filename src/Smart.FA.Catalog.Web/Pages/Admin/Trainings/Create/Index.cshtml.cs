@@ -1,10 +1,9 @@
-using Api.Extensions;
-using Api.Identity;
 using Core.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Web.Identity;
 
-namespace Api.Pages.Admin.Trainings.Create;
+namespace Web.Pages.Admin.Trainings.Create;
 
 public class CreateModel : AdminPage
 {
@@ -25,12 +24,12 @@ public class CreateModel : AdminPage
         Init();
     }
 
-    public async Task<IActionResult> OnPostSaveAsync()
+    public async Task<IActionResult> OnPostSaveAsync(CreateTrainingViewModel model)
     {
         var user = (HttpContext.User.Identity as CustomIdentity)!;
+        var request = CreateTrainingViewModel!.MapToRequest(user.Trainer.Id, user.Trainer.DefaultLanguage);
         var response =
-            await Mediator.Send(
-                CreateTrainingViewModel!.MapToRequest(user.Trainer.Id, user.Trainer.DefaultLanguage));
+            await Mediator.Send(request);
 
         return RedirectToPage("/Admin/Trainings/List/Index");
     }
