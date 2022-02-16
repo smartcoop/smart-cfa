@@ -14,7 +14,8 @@ public class Trainer : Entity, IAggregateRoot
 
     public virtual Name Name { get; private set; } = null!;
 
-    public string Description { get; private set; } = null!;
+    public string Biography { get; private set; } = null!;
+    public string Title { get; set; } = null!;
 
     public Language DefaultLanguage { get; private set; } = null!;
 
@@ -25,12 +26,13 @@ public class Trainer : Entity, IAggregateRoot
 
     #region Constructors
 
-    public Trainer(Name name, TrainerIdentity identity, string description, Language defaultLanguage)
+    public Trainer(Name name, TrainerIdentity identity, string title, string description, Language defaultLanguage)
     {
         Identity = identity;
         ChangeDefaultLanguage(defaultLanguage);
         Rename(name);
-        UpdateDescription(description);
+        UpdateBiography(description);
+        UpdateTitle(title);
     }
 
     protected Trainer()
@@ -41,12 +43,20 @@ public class Trainer : Entity, IAggregateRoot
 
     #region Methods
 
-    public void UpdateDescription(string description)
+    public void UpdateBiography(string newBiography)
     {
-        Guard.AgainstNull(description, nameof(description));
-        Guard.Requires(() => description.Length <= 2000
-            , "Description is too long");
-        Description = description;
+        Guard.AgainstNull(newBiography, nameof(newBiography));
+        Guard.Requires(() => newBiography.Length <= 1500
+            , "Biography is too long");
+        Biography = newBiography;
+    }
+
+    public void UpdateTitle(string newTitle)
+    {
+        Guard.AgainstNull(newTitle, nameof(newTitle));
+        Guard.Requires(() => newTitle.Length <= 150
+            , "Title is too long");
+        Title = newTitle;
     }
 
     public void EnrollIn(Training training)

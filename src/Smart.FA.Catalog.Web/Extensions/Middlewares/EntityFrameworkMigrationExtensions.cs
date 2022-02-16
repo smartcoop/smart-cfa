@@ -42,7 +42,7 @@ public static class EntityFrameworkMigrationExtensions
     public static void Seed(Context context)
     {
         var trainer = new Trainer(Name.Create("Victor", "vD").Value,
-            TrainerIdentity.Create("1", ApplicationType.Default).Value, "Hello I am Victor van Duynen",
+            TrainerIdentity.Create("1", ApplicationType.Default).Value,"Developer", "Hello I am Victor van Duynen",
             Language.Create("FR").Value);
         context.Trainers.Add(trainer);
         context.SaveChanges();
