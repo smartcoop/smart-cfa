@@ -22,7 +22,7 @@ public class TrainerQueries : ITrainerQueries
                        Id,
                        FirstName,
                        LastName,
-                       Description,
+                       Biography,
                        DefaultLanguage
                     FROM dbo.Trainer T
                     INNER JOIN dbo.TrainerEnrollment TE ON T.Id = TE.TrainerId

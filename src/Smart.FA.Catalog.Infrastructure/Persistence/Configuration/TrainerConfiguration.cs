@@ -30,7 +30,8 @@ public class TrainerConfiguration : EntityConfigurationBase<Trainer>
 
         builder.Property(trainer => trainer.DefaultLanguage).HasConversion(language => language.Value,
             language => Language.Create(language).Value);
-        builder.Property(trainer => trainer.Description).HasMaxLength(1500);
+        builder.Property(trainer => trainer.Biography).HasMaxLength(1500);
+        builder.Property(trainer => trainer.Title).HasMaxLength(150);
 
         builder.ToTable("Trainer");
     }

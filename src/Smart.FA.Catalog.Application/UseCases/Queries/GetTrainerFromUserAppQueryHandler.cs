@@ -37,7 +37,7 @@ public class GetTrainerFromUserAppQueryHandler : IRequestHandler<GetTrainerFromU
             if (linkedTrainer is null)
             {
                 linkedTrainer = new Trainer(Name.Create(user.FirstName, user.LastName).Value,
-                    TrainerIdentity.Create(user.UserId, Enumeration.FromDisplayName<ApplicationType>(user.ApplicationType)).Value, string.Empty,
+                    TrainerIdentity.Create(user.UserId, Enumeration.FromDisplayName<ApplicationType>(user.ApplicationType)).Value,string.Empty, string.Empty,
                     Language.Create("EN").Value);
                 await _context.Trainers.AddAsync(linkedTrainer, cancellationToken);
                 await _context.SaveChangesAsync(cancellationToken);
