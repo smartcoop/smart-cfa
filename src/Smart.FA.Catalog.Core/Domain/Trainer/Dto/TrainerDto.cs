@@ -4,5 +4,6 @@ public record TrainerDto(
     int Id,
     string FirstName,
     string LastName,
-    string? Description,
+    string Biography,
+    string Title,
     string DefaultLanguage);
