@@ -3,6 +3,7 @@ using Infrastructure.Extensions;
 using Smart.Design.Razor.Extensions;
 using Web.Extensions;
 using Web.Extensions.Middlewares;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
@@ -19,7 +20,13 @@ builder.Services
     .AddSmartDesign();
 builder.Services
     .AddRazorPages()
+    .AddFluentValidation(cfg =>
+    {
+        cfg.RegisterValidatorsFromAssemblyContaining<Program>();
+        cfg.DisableDataAnnotationsValidation = true;
+    })
     .AddViewLocalization(options => options.ResourcesPath = "Resources");
+
 #if DEBUG
 builder.Services
     .AddInfrastructure(builder.Configuration.GetConnectionString("Training"),

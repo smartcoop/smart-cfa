@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Security.Principal;
 using Application.UseCases.Queries;
 using Core.Domain.Enumerations;
@@ -25,6 +26,7 @@ public class ProxyHeaderMiddleware
 
         var resp = await mediator.Send(new GetTrainerFromUserAppRequest {UserId = userId, ApplicationType = applicationType});
 
+        CultureInfo.CurrentUICulture = new CultureInfo(resp.Trainer!.DefaultLanguage.Value);
         context.User = new GenericPrincipal(new CustomIdentity(resp.Trainer!), null );
         await _next(context);
     }

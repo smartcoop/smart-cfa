@@ -22,6 +22,7 @@ public class CreateTrainingViewModel
     public string? Methodology { get; set; }
 
     public string? Address { get; set; }
+    public bool IsDraft { get; set; }
 }
 
 public static class EditTrainingViewModelMapping
@@ -40,23 +41,7 @@ public static class EditTrainingViewModelMapping
             TrainerId = trainerId,
             Types = Enumeration.FromValues<TrainingType>(model.TrainingTypeIds ?? new()),
             TargetAudiences = Enumeration.FromValues<TrainingTargetAudience>(model.TargetAudienceIds ?? new()),
-            SlotNumberTypes = Enumeration.FromValues<TrainingSlotNumberType>(model.SlotNumberTypeIds ?? new())
-        };
-
-    public static GetTrainingValidationErrorsRequest MapDraftToRequest(this CreateTrainingViewModel model, int trainerId, Language language)
-        => new()
-        {
-            Detail = new
-                TrainingDetailDto
-                (
-                    model.Title,
-                    model.Goal,
-                    language.Value,
-                    model.Methodology
-                ),
-            TrainerId = trainerId,
-            Types = Enumeration.FromValues<TrainingType>(model.TrainingTypeIds ?? new()),
-            TargetAudiences = Enumeration.FromValues<TrainingTargetAudience>(model.TargetAudienceIds ?? new()),
-            SlotNumberTypes = Enumeration.FromValues<TrainingSlotNumberType>(model.SlotNumberTypeIds ?? new())
+            SlotNumberTypes = Enumeration.FromValues<TrainingSlotNumberType>(model.SlotNumberTypeIds ?? new()),
+            IsDraft = model.IsDraft
         };
 }

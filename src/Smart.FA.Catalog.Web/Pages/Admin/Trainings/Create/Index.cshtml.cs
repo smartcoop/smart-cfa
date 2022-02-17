@@ -1,4 +1,3 @@
-using Core.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Web.Identity;
@@ -7,11 +6,13 @@ namespace Web.Pages.Admin.Trainings.Create;
 
 public class CreateModel : AdminPage
 {
+    private readonly ILogger<CreateModel> _logger;
     [BindProperty] public CreateTrainingViewModel CreateTrainingViewModel { get; set; } = new();
     public List<string> ValidationErrors { get; set; } = new();
 
-    public CreateModel(IMediator mediator) : base(mediator)
+    public CreateModel(IMediator mediator, ILogger<CreateModel> logger) : base(mediator)
     {
+        _logger = logger;
     }
 
     private void Init()
@@ -24,24 +25,16 @@ public class CreateModel : AdminPage
         Init();
     }
 
-    public async Task<IActionResult> OnPostSaveAsync(CreateTrainingViewModel model)
+    public async Task<IActionResult> OnPostSaveAsync()
     {
         var user = (HttpContext.User.Identity as CustomIdentity)!;
-        var request = CreateTrainingViewModel!.MapToRequest(user.Trainer.Id, user.Trainer.DefaultLanguage);
-        var response =
-            await Mediator.Send(request);
-
+        if (!ModelState.IsValid)
+        {
+            return Page();
+        }
+        var request = CreateTrainingViewModel.MapToRequest(user.Trainer.Id, user.Trainer.DefaultLanguage);
+        var response = await Mediator.Send(request);
         return RedirectToPage("/Admin/Trainings/List/Index");
-    }
-
-    public async Task<IActionResult> OnPostValidateModelAsync()
-    {
-        var user = (HttpContext.User.Identity as CustomIdentity)!;
-        var response =
-            await Mediator.Send(
-                CreateTrainingViewModel.MapDraftToRequest(user.Trainer.Id, Language.Create("FR").Value));
-        ValidationErrors = response.ValidationErrors;
-        return Page();
     }
 
     protected override SideMenuItem GetSideMenuItem()
