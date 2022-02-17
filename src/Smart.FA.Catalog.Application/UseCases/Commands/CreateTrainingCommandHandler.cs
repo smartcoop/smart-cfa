@@ -4,6 +4,7 @@ using Core.Domain.Dto;
 using Core.Domain.Enumerations;
 using Core.Domain.Interfaces;
 using Core.SeedWork;
+using CSharpFunctionalExtensions;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -31,7 +32,11 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingReques
         {
             var trainer = await _trainerRepository.FindAsync(request.TrainerId, cancellationToken);
             var training = new Training(trainer, request.Detail, request.Types, request.SlotNumberTypes, request.TargetAudiences);
-
+            if (request.IsDraft is false)
+            {
+                var result = training.Validate();
+                await result.OnFailure(errors => throw new Exception(string.Join(Environment.NewLine, errors)));
+            }
             _unitOfWork.RegisterNew(training);
             _unitOfWork.Commit();
 
@@ -50,6 +55,7 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingReques
 public class CreateTrainingRequest : IRequest<CreateTrainingResponse>
 {
     public int TrainerId { get; init; }
+    public bool IsDraft { get; set; }
     public TrainingDetailDto Detail { get; init; } = null!;
     public List<TrainingTargetAudience> TargetAudiences { get; init; } = null!;
     public List<TrainingType> Types { get; init; } = null!;

@@ -12,53 +12,32 @@
 }
 
 <smart-container size="Medium">
-    <form method="post" id="form">
-
-        @section HeaderToolbar
-        {
-            <div class="c-navbar c-navbar--bordered-bottom">
-                <div class="c-toolbar">
-                    <div class="c-toolbar__left">
-                        <div class="c-toolbar__item">
-                            @if (Request.Query.ContainsKey("fromlist"))
-                            {
-                                <a class="c-button c-button--icon c-button--borderless" href="/admin/trainings/list/index">
-                                    <div class="c-button__content">
-                                        <smart-icon icon="ArrowLeft"></smart-icon>
-                                        <div class="u-sr-accessible">Back</div>
-                                    </div>
-                                </a>
-                            }
-                        </div>
-                        <div class="c-toolbar__item">
-                            <h2 class="c-toolbar__title">@ViewData["ToolBarTitle"]</h2>
-                        </div>
-
+    @section HeaderToolbar
+    {
+        <div class="c-navbar c-navbar--bordered-bottom">
+            <div class="c-toolbar">
+                <div class="c-toolbar__left">
+                    <div class="c-toolbar__item">
+                        @if (Request.Query.ContainsKey("fromlist"))
+                        {
+                            <a class="c-button c-button--icon c-button--borderless" href="/admin/trainings/list/index">
+                                <div class="c-button__content">
+                                    <smart-icon icon="ArrowLeft"></smart-icon>
+                                    <div class="u-sr-accessible">Back</div>
+                                </div>
+                            </a>
+                        }
                     </div>
-                    <div class="c-toolbar__right">
-                        <div class="c-toolbar__item">
-                            <button type="submit" name="ValidateModel" id="validationBtn" asp-page-handler="ValidateModel" form="form">Request Validation</button>
-                        </div>
-                        <div class="c-toolbar__item">
-                            <button type="submit" name="ValidateModel" id="validationBtn" asp-page-handler="Save" form="form">Save</button>
-                            @* <smart-button id="submitBtn" label="Save" button-style="Primary" leading-icon="Save" button-type="Submit" </smart-button> *@
-                        </div>
+                    <div class="c-toolbar__item">
+                        <h2 class="c-toolbar__title">@ViewData["ToolBarTitle"]</h2>
                     </div>
+
                 </div>
-            </div>
-        }
 
-        @if (Model.ValidationErrors.Any())
-        {
-            <div class="c-alert c-alert--error">
-                <ul>
-                    @foreach (var error in Model.ValidationErrors)
-                    {
-                        <li>@error</li>
-                    }
-                </ul>
             </div>
-        }
+        </div>
+    }
+    <form method="post" id="form">
         <div asp-validation-summary="All"></div>
         <div class="o-form-group-layout o-form-group-layout--standard">
             <smart-form-group-input-text label="Titre de la formation / module" asp-for="CreateTrainingViewModel.Title"></smart-form-group-input-text>
@@ -95,10 +74,19 @@
             </smart-formgroup>
             <smart-form-group-textarea rows="5" asp-for="CreateTrainingViewModel.Goal" label="@Localizer[nameof(Model.CreateTrainingViewModel.Goal)]"></smart-form-group-textarea>
             <smart-form-group-textarea rows="5" asp-for="CreateTrainingViewModel.Methodology" label="@Localizer[nameof(Model.CreateTrainingViewModel.Methodology)]"></smart-form-group-textarea>
-
+            <input type="hidden" id="isDraft" value="false" asp-for="CreateTrainingViewModel.IsDraft"/>
             <div class="u-spacer"></div>
+        </div>
+        <div class="c-toolbar__right">
+            <div class="c-toolbar__item">
+                <smart-button id="Save" label="Save" button-style="Secondary" leading-icon="Save" button-type="Submit" asp-page-handler="Save"> </smart-button>
+            </div>
+            <div class="c-toolbar__item">
+                <smart-button id="Publish" label="Publish" button-style="Primary" leading-icon="Send" button-type="Submit" asp-page-handler="Save"> </smart-button>
+            </div>
         </div>
     </form>
 </smart-container>
 
 <div class="u-spacer"></div>
+

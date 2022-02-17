@@ -20,6 +20,7 @@ public class Trainer : Entity, IAggregateRoot
     public Language DefaultLanguage { get; private set; } = null!;
 
     public TrainerIdentity Identity { get; } = null!;
+
     public virtual IReadOnlyCollection<TrainerEnrollment> Enrollments => _enrollments;
 
     #endregion

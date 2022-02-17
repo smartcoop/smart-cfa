@@ -45,7 +45,10 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
             training.SwitchSlotNumberType(request.SlotNumberTypes);
             var trainers = await _trainerRepository.GetListAsync(request.TrainingId, cancellationToken);
             training.EnrollTrainers(trainers);
-            training.Validate();
+            if (request.IsDraft is not true)
+            {
+                training.Validate();
+            }
             _unitOfWork.RegisterDirty(training);
             _unitOfWork.Commit();
 
@@ -70,6 +73,7 @@ public class UpdateTrainingRequest : IRequest<UpdateTrainingResponse>
     public List<TrainingType> Types { get; init; } = null!;
     public List<TrainingSlotNumberType> SlotNumberTypes { get; init; } = null!;
     public List<int> TrainerIds { get; init; } = null!;
+    public bool IsDraft { get; set; }
 }
 
 public class UpdateTrainingResponse : ResponseBase

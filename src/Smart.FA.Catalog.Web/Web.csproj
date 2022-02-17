@@ -11,8 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="10.3.6" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
-    <PackageReference Include="Smart.Design.Razor" Version="1.0.8" />
+    <PackageReference Include="Smart.Design.Razor" Version="1.0.12" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +28,9 @@
     </Content>
     <Content Update="appsettings.Local.json">
       <DependentUpon>appsettings.json</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\js\lib.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   
@@ -47,6 +52,22 @@
     <EmbeddedResource Include="wwwroot\favicon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Validators\CreateTrainingViewModelValidator.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CreateTrainingViewModelValidator.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Validators\CreateTrainingViewModelValidator.fr.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CreateTrainingViewModelValidator.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Pages\Admin\Trainings\Edit\EditModel.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CreateModel.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Pages\Admin\Trainings\Update\UpdateModel.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CreateModel.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -54,6 +75,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Index.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Validators\CreateTrainingViewModelValidator.fr.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CreateTrainingViewModelValidator.fr.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
