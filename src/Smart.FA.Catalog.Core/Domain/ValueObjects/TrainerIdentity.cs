@@ -1,4 +1,5 @@
 using Core.Domain.Enumerations;
+using Core.Exceptions;
 using Core.SeedWork;
 using CSharpFunctionalExtensions;
 using ValueObject = CSharpFunctionalExtensions.ValueObject;
@@ -10,22 +11,20 @@ public class TrainerIdentity : ValueObject
     public string UserId { get; } = null!;
     public int ApplicationTypeId { get; }
 
-    protected TrainerIdentity()
-    {
-
-    }
     private TrainerIdentity(string userId, ApplicationType applicationType):base()
     {
         UserId = userId;
         ApplicationTypeId = applicationType.Id;
     }
 
-    public static Result<TrainerIdentity> Create(string userId, ApplicationType applicationType)
+    protected TrainerIdentity() { }
+
+    public static Result<TrainerIdentity, Error> Create(string userId, ApplicationType applicationType)
     {
         if (string.IsNullOrWhiteSpace(userId))
-            return Result.Failure<TrainerIdentity>("User id should not be empty");
+            return Errors.General.ValueIsRequired();
 
-        return Result.Success(new TrainerIdentity(userId, applicationType));
+        return new TrainerIdentity(userId, applicationType);
     }
 
     protected override IEnumerable<object> GetEqualityComponents()
