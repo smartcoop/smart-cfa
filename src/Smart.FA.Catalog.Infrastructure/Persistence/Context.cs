@@ -37,8 +37,10 @@ public class Context : DbContext
             .UseSqlServer(_connectionString)
             .UseLazyLoadingProxies();
         if (_useConsoleLogger)
+        {
             optionsBuilder.UseLoggerFactory(loggerFactory)
                 .EnableSensitiveDataLogging();
+        }
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

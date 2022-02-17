@@ -5,9 +5,9 @@ using Core.Domain.Dto;
 using Core.Domain.Enumerations;
 using Core.SeedWork;
 
-namespace Web.Pages.Admin.Trainings.Edit;
+namespace Web.Pages.Admin.Trainings.Update;
 
-public class EditTrainingViewModel
+public class UpdateTrainingViewModel
 {
     public string? Title { get; init; }
 
@@ -21,12 +21,13 @@ public class EditTrainingViewModel
 
     public string? Methodology { get; init; }
 
-    // public string? Address { get; set; }
+    public bool IsDraft { get; set; }
+
 }
 
 public static class EditTrainingViewModelMapping
 {
-    public static UpdateTrainingRequest MapToUpdateRequest(this EditTrainingViewModel model, string language, int trainingId, int trainerId)
+    public static UpdateTrainingRequest MapToUpdateRequest(this UpdateTrainingViewModel model, string language, int trainingId, int trainerId)
         => new()
         {
             Detail =
@@ -41,14 +42,14 @@ public static class EditTrainingViewModelMapping
             Types = Enumeration.FromValues<TrainingType>(model.TrainingTypeIds ?? new()),
             TargetAudiences = Enumeration.FromValues<TrainingTargetAudience>(model.TargetAudienceIds ?? new()),
             SlotNumberTypes = Enumeration.FromValues<TrainingSlotNumberType>(model.SlotNumberTypeIds ?? new()),
-            TrainerIds = new List<int>{trainerId}
+            TrainerIds = new List<int>{trainerId},
         };
 
 
-    public static EditTrainingViewModel MapGetToResponse(this GetTrainingFromIdResponse model, Language language)
+    public static UpdateTrainingViewModel MapGetToResponse(this GetTrainingFromIdResponse model, Language language)
     {
         var detail = model.Training!.Details.FirstOrDefault(detail => detail.Language == language);
-        EditTrainingViewModel response = new()
+        UpdateTrainingViewModel response = new()
         {
             Goal = detail?.Goal,
             Title = detail?.Title,
@@ -61,10 +62,10 @@ public static class EditTrainingViewModelMapping
         return response;
     }
 
-    public static EditTrainingViewModel MapUpdateToResponse(this UpdateTrainingResponse model, Language language)
+    public static UpdateTrainingViewModel MapUpdateToResponse(this UpdateTrainingResponse model, Language language)
     {
         var detail = model.Training.Details.FirstOrDefault(detail => detail.Language == language);
-        EditTrainingViewModel response = new()
+        UpdateTrainingViewModel response = new()
         {
             Goal = detail?.Goal,
             Title = detail?.Title,
@@ -77,7 +78,7 @@ public static class EditTrainingViewModelMapping
         return response;
     }
 
-    public static GetTrainingValidationErrorsRequest MapDraftToRequest(this EditTrainingViewModel model, int trainerId, Language language)
+    public static GetTrainingValidationErrorsRequest MapDraftToRequest(this UpdateTrainingViewModel model, int trainerId, Language language)
         => new()
         {
             Detail = new

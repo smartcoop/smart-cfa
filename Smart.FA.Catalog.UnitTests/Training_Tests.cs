@@ -136,9 +136,9 @@ public class TrainingTests
             new List<TrainingSlotNumberType>{TrainingSlotNumberType.Group}, new List<TrainingTargetAudience> {TrainingTargetAudience.Employee});
         training.UpdateDetails("Hello", "My Goal", "A methodology", Language.Create("FR").Value);
 
-        var errors = training.Validate();
+        var result = training.Validate();
 
-        errors.Should().BeEmpty();
+        result.IsSuccess.Should().BeTrue();
         training.StatusId.Should().Be(TrainingStatus.Validated.Id);
     }
 
@@ -150,10 +150,9 @@ public class TrainingTests
             new List<TrainingSlotNumberType>{TrainingSlotNumberType.Group}, new List<TrainingTargetAudience> {TrainingTargetAudience.Employee});
         training.UpdateDetails("Hello", "My Goal", "A methodology", Language.Create("FR").Value);
 
+        var result = training.Validate();
 
-        var errors = training.Validate();
-
-        errors.Should().BeEmpty();
+        result.IsSuccess.Should().BeTrue();
         training.StatusId.Should().Be(TrainingStatus.WaitingForValidation.Id);
     }
 

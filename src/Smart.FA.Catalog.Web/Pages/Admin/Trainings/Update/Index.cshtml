@@ -1,11 +1,9 @@
 ﻿@page "{id:int}"
-@using Core.Domain
 @using Core.Domain.Enumerations
 @using Core.SeedWork
 @using Microsoft.Extensions.Localization
-@using Web.Pages.Admin.Trainings.Edit
-@inject IStringLocalizer<EditModel> _localizer
-@model Web.Pages.Admin.Trainings.Edit.EditModel
+@inject IStringLocalizer<UpdateModel> _localizer
+@model Web.Pages.Admin.Trainings.Update.UpdateModel
 @{
     Layout = "_AdminLayout";
     ViewData["ToolBarTitle"] = "Edit Training";
@@ -34,15 +32,6 @@
                             <h2 class="c-toolbar__title">@ViewData["ToolBarTitle"]</h2>
                         </div>
                     </div>
-                    <div class="c-toolbar__right">
-                        <div class="c-toolbar__item">
-                            <button type="submit" name="ValidateModel" id="validationBtn" asp-page-handler="ValidateModel" form="form">Request Validation</button>
-                        </div>
-                        <div class="c-toolbar__item">
-                            <button type="submit" name="ValidateModel" id="validationBtn" asp-page-handler="Update" form="form">Save</button>
-                            @* <smart-button id="submitBtn" label="Save" button-style="Primary" leading-icon="Save" button-type="Submit" </smart-button> *@
-                        </div>
-                    </div>
                 </div>
             </div>
         }
@@ -60,14 +49,14 @@
         }
         <div asp-validation-summary="All"></div>
         <div class="o-form-group-layout o-form-group-layout--standard">
-            <smart-form-group-input-text label="Titre de la formation / module" asp-for="EditTrainingViewModel.Title"></smart-form-group-input-text>
+            <smart-form-group-input-text label="Titre de la formation / module" asp-for="UpdateTrainingViewModel.Title"></smart-form-group-input-text>
 
             <smart-formgroup></smart-formgroup>
 
             <smart-formgroup label="La formation">
                 @foreach (var trainingType in Enumeration.GetAll<TrainingType>())
                 {
-                    <smart-checkbox label="@_localizer[trainingType.Name]" asp-for="EditTrainingViewModel.TrainingTypeIds" value="@trainingType.Id" checked="Model.EditTrainingViewModel.TrainingTypeIds?.Contains(trainingType.Id) ?? false"></smart-checkbox>
+                    <smart-checkbox label="@_localizer[trainingType.Name]" asp-for="UpdateTrainingViewModel.TrainingTypeIds" value="@trainingType.Id" checked="Model.UpdateTrainingViewModel.TrainingTypeIds?.Contains(trainingType.Id) ?? false"></smart-checkbox>
                 }
                 <smart-checkbox label="Autre"></smart-checkbox>
                 <div class="u-spacer-left-xl">
@@ -78,7 +67,7 @@
             <smart-formgroup label="Public cible">
                 @foreach (var targetAudience in Enumeration.GetAll<TrainingTargetAudience>())
                 {
-                    <smart-checkbox label="@_localizer[targetAudience.Name]" asp-for="EditTrainingViewModel.TargetAudienceIds" value="@targetAudience.Id" checked="Model.EditTrainingViewModel.TargetAudienceIds?.Contains(targetAudience.Id) ?? false"></smart-checkbox>
+                    <smart-checkbox label="@_localizer[targetAudience.Name]" asp-for="UpdateTrainingViewModel.TargetAudienceIds" value="@targetAudience.Id" checked="Model.UpdateTrainingViewModel.TargetAudienceIds?.Contains(targetAudience.Id) ?? false"></smart-checkbox>
                 }
                 <smart-checkbox label="Autre"></smart-checkbox>
                 <div class="u-spacer-left-xl">
@@ -89,14 +78,23 @@
             <smart-formgroup label="S'agit-il d'un cours ?">
                 @foreach (var slotNumberType in Enumeration.GetAll<TrainingSlotNumberType>())
                 {
-                    <smart-checkbox asp-for="EditTrainingViewModel.SlotNumberTypeIds" value="@slotNumberType.Id" label="@_localizer[slotNumberType.Name]" checked="Model.EditTrainingViewModel.SlotNumberTypeIds?.Contains(slotNumberType.Id) ?? false"></smart-checkbox>
+                    <smart-checkbox asp-for="UpdateTrainingViewModel.SlotNumberTypeIds" value="@slotNumberType.Id" label="@_localizer[slotNumberType.Name]" checked="Model.UpdateTrainingViewModel.SlotNumberTypeIds?.Contains(slotNumberType.Id) ?? false"></smart-checkbox>
                 }
             </smart-formgroup>
 
-            <smart-form-group-textarea rows="5" asp-for="EditTrainingViewModel.Goal" label="@_localizer[nameof(Model.EditTrainingViewModel.Goal)]"></smart-form-group-textarea>
-            <smart-form-group-textarea rows="5" asp-for="EditTrainingViewModel.Methodology" label="@_localizer[nameof(Model.EditTrainingViewModel.Methodology)]"></smart-form-group-textarea>
+            <smart-form-group-textarea rows="5" asp-for="UpdateTrainingViewModel.Goal" label="@_localizer[nameof(Model.UpdateTrainingViewModel.Goal)]"></smart-form-group-textarea>
+            <smart-form-group-textarea rows="5" asp-for="UpdateTrainingViewModel.Methodology" label="@_localizer[nameof(Model.UpdateTrainingViewModel.Methodology)]"></smart-form-group-textarea>
+            <input type="hidden" id="isDraft" value="false" asp-for="UpdateTrainingViewModel.IsDraft"/>
 
             <div class="u-spacer"></div>
+        </div>
+        <div class="c-toolbar__right">
+            <div class="c-toolbar__item">
+                <smart-button id="Save" label="Save" button-style="Secondary" leading-icon="Save" button-type="Submit" asp-page-handler="Update"> </smart-button>
+            </div>
+            <div class="c-toolbar__item">
+                <smart-button id="Publish" label="Publish" button-style="Primary" leading-icon="Send" button-type="Submit" asp-page-handler="Update"> </smart-button>
+            </div>
         </div>
     </form>
 </smart-container>

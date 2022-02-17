@@ -1,7 +1,10 @@
-using System.Linq.Expressions;
 using Core.Domain.Dto;
 using Core.Domain.Enumerations;
+using Core.Domain.Validators;
+using Core.Exceptions;
 using Core.SeedWork;
+using CSharpFunctionalExtensions;
+using Entity = Core.SeedWork.Entity;
 
 namespace Core.Domain;
 
@@ -97,18 +100,21 @@ public class Training : Entity, IAggregateRoot
     public void DisEnrollAll()
         => _trainerEnrollments.RemoveAll(enrollment => enrollment.TrainerId != TrainerCreatorId);
 
-    public List<string> Validate()
+    public Result<Training, IEnumerable<Error>> Validate()
     {
-        var missingFieldsErrors = ListMissingFields();
+        var validator = new TrainingValidator();
+        var validationResult =  validator.Validate(this);
 
-        StatusId = missingFieldsErrors.Any()
-            ? TrainingStatus.Draft.Id
-            : ValidateStatus.Compile()(this).Id;
+        if (validationResult.IsValid is false)
+        {
+          var errors = validationResult.Errors.Select( validationError => Errors.Training.ValidationError(validationError.ErrorMessage));
+          return Result.Failure<Training, IEnumerable<Error>>(errors);
+        }
 
         var trainingDetail = Details.FirstOrDefault(training => training.Language == Language.Create("EN").Value) ?? Details.First();
         AddDomainEvent(new ValidateTrainingEvent(trainingDetail.Title!, Id, TrainerEnrollments.Select(enrollment => enrollment.TrainerId)));
 
-        return missingFieldsErrors;
+        return Result.Success<Training, IEnumerable<Error>>(this);
     }
 
     public void AddDetails(string? title, string? goal, string? methodology, Language language)
@@ -125,29 +131,6 @@ public class Training : Entity, IAggregateRoot
         Guard.Requires(() => detailToModify != null,
             "No descriptions for that language exist");
         detailToModify!.UpdateDescription(title, goal, methodology);
-    }
-
-    #endregion
-
-    #region Private methods
-
-    private static readonly Expression<Func<Training, TrainingStatus>> ValidateStatus =
-        training => Enumeration.FromValue<TrainingStatus>(training.StatusId)
-            .Validate(training.Identities);
-
-    private List<string> ListMissingFields()
-    {
-        List<string> errors = new();
-        if (!Identities.Any()) errors.Add("Missing Identities");
-        if (!Targets.Any()) errors.Add("Missing Targets");
-        if (!TrainerEnrollments.Any()) errors.Add("Missing Trainer enrollments");
-        if (!Details.Any()) errors.Add("Missing Training Details");
-        foreach (var detail in Details)
-        {
-            errors.AddRange(detail.Validate());
-        }
-
-        return errors;
     }
 
     #endregion

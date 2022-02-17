@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using Core.Exceptions;
 using Core.SeedWork;
 
 namespace Core.Domain;
@@ -83,16 +84,6 @@ public class TrainingDetail
     #endregion
 
     #region Validation
-
-    public IEnumerable<string> Validate()
-    {
-        List<string> errors = new();
-        if (string.IsNullOrEmpty(Title)) errors.Add($"Missing {nameof(Title)} Details for language {Language}");
-        if (string.IsNullOrEmpty(Goal)) errors.Add($"Missing {nameof(Goal)} Details for language {Language}");
-        if (string.IsNullOrEmpty(Methodology))
-            errors.Add($"Missing {nameof(Methodology)} Details for language {Language}");
-        return errors;
-    }
 
     private void ValidateMaxLength(string? field, string? name, int maxValue) =>
         LengthMaxValidation.Compile()(field, name, maxValue);
