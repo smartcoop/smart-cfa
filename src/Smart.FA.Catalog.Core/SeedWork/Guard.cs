@@ -8,7 +8,7 @@ public static class Guard
     public static void Requires(Func<bool> predicate, string message)
     {
         if (predicate()) return;
-        throw new GuardClauseException(message);
+        throw new GuardClauseException(Errors.General.GuardClauseBlockage(message));
     }
 
     [Conditional("DEBUG")]

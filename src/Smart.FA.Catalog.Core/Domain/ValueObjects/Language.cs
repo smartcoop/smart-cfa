@@ -1,3 +1,4 @@
+using Core.Exceptions;
 using CSharpFunctionalExtensions;
 
 namespace Core.Domain;
@@ -10,18 +11,18 @@ public class Language: ValueObject
         Value = value;
     }
 
-    public static Result<Language> Create(string? language)
+    public static Result<Language, Error> Create(string? language)
     {
         if (string.IsNullOrWhiteSpace(language))
-            return Result.Failure<Language>("Language should not be empty");
+            return Errors.General.ValueIsRequired();
 
         language = language.Trim();
         language = language.ToUpperInvariant();
 
         if (language.Length != 2)
-            return Result.Failure<Language>("language should be exactly two characters long");
+             return Errors.Language.InvalidLength();
 
-        return Result.Success(new Language(language));
+        return new Language(language);
     }
 
     protected override IEnumerable<object> GetEqualityComponents()

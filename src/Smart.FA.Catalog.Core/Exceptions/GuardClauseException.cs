@@ -1,8 +1,10 @@
+using Core.SeedWork;
+
 namespace Core.Exceptions;
 
-public class GuardClauseException: CommonAggregateException
+public class GuardClauseException: DomainException
 {
-    public GuardClauseException(string message) : base(CommonExceptionCode.GuardClauseException, message)
+    public GuardClauseException(Error error) : base(error.Code, error.Message)
     {
     }
 }
