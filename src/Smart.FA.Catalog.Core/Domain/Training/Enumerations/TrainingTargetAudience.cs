@@ -8,7 +8,7 @@ public class TrainingTargetAudience: Enumeration
     public static readonly TrainingTargetAudience Student = new(2, nameof(Student));
     public static readonly TrainingTargetAudience Unemployed = new(3, nameof(Unemployed));
 
-    private TrainingTargetAudience(int id, string name) : base(id, name)
+    protected TrainingTargetAudience(int id, string name) : base(id, name)
     {
     }
 }
