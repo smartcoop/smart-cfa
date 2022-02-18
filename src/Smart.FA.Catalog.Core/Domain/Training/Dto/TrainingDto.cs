@@ -2,7 +2,7 @@ namespace Core.Domain.Dto;
 
 public record TrainingDto
     (int TrainingId,
-    int StatusId,
+    short StatusId,
     string Title,
     string? Goal,
     string Language);

@@ -33,6 +33,9 @@
 
   <ItemGroup>
     <None Remove="appsettings.json" />
+    <None Update="appsettings.Infrastructure.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="appsettings.Infrastructure.Development.json">

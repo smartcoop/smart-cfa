@@ -9,7 +9,7 @@ public class ValidStatusSpecification : Specification<Training>
     int[] validStatus = {TrainingStatus.Validated.Id, TrainingStatus.WaitingForValidation.Id};
 
     public override Expression<Func<Training, bool>> ToExpression() =>
-        training => validStatus.Contains(training.StatusId);
+        training => validStatus.Contains(training.Status.Id);
 }
 
 
