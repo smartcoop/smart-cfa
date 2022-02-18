@@ -16,11 +16,8 @@ public class TrainingValidator: AbstractValidator<Training>
             .NotEmpty().WithMessage(Errors.General.MissingField("trainer").Message);
         RuleFor(request => request.TrainerEnrollments)
             .NotEmpty().WithMessage(Errors.General.MissingField("trainer").Message);
-        When(request => request.StatusId == TrainingStatus.Draft.Id, () => RuleFor(request => request.Details)
+        RuleFor(request => request.Details)
             .NotEmpty().WithMessage(Errors.General.MissingField("description").Message)
-            .ForEach(detail => detail.SetValidator(new TrainingDetailValidation(true))))
-            .Otherwise(() => RuleFor(request => request.Details)
-                .NotEmpty().WithMessage(Errors.General.MissingField("description").Message)
-                .ForEach(detail => detail.SetValidator(new TrainingDetailValidation(false))));
+            .ForEach(detail => detail.SetValidator(new TrainingDetailValidation()));
     }
 }

@@ -29,7 +29,7 @@ public class Training : Entity, IAggregateRoot
     public virtual IReadOnlyCollection<TrainingSlot> Slots => _slots;
 
     public int TrainerCreatorId { get; }
-    public int StatusId { get; private set; } = TrainingStatus.Draft.Id;
+    public TrainingStatus Status { get; private set; } = TrainingStatus.Draft;
 
     #endregion
 
@@ -39,7 +39,7 @@ public class Training : Entity, IAggregateRoot
         IEnumerable<TrainingSlotNumberType> slotNumberTypes,
         IEnumerable<TrainingTargetAudience> targetAudiences)
     {
-        AddDetails(trainingDetail.Title, trainingDetail.Goal, trainingDetail.Methodology,
+        AddDetails(trainingDetail.Title!, trainingDetail.Goal!, trainingDetail.Methodology!,
             Language.Create(trainingDetail.Language).Value);
         SwitchTrainingTypes(types);
         SwitchTargetAudience(targetAudiences);
@@ -111,13 +111,15 @@ public class Training : Entity, IAggregateRoot
           return Result.Failure<Training, IEnumerable<Error>>(errors);
         }
 
+        Status = Status.Validate(_identities);
+
         var trainingDetail = Details.FirstOrDefault(training => training.Language == Language.Create("EN").Value) ?? Details.First();
         AddDomainEvent(new ValidateTrainingEvent(trainingDetail.Title!, Id, TrainerEnrollments.Select(enrollment => enrollment.TrainerId)));
 
         return Result.Success<Training, IEnumerable<Error>>(this);
     }
 
-    public void AddDetails(string? title, string? goal, string? methodology, Language language)
+    public void AddDetails(string title, string goal, string methodology, Language language)
     {
         Guard.AgainstNull(title, nameof(title));
         Guard.Requires(() => _details.FirstOrDefault(detail => detail.Language.Value == language.Value) == null,

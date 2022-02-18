@@ -124,7 +124,7 @@ public class TrainingTests
 
         var training = _trainingFactory.Create(trainer);
 
-        training.StatusId.Should().Be(TrainingStatus.Draft.Id);
+        training.Status.Should().Be(TrainingStatus.Draft);
     }
 
 
@@ -139,7 +139,7 @@ public class TrainingTests
         var result = training.Validate();
 
         result.IsSuccess.Should().BeTrue();
-        training.StatusId.Should().Be(TrainingStatus.Validated.Id);
+        training.Status.Should().Be(TrainingStatus.Validated);
     }
 
     [Fact]
@@ -153,7 +153,7 @@ public class TrainingTests
         var result = training.Validate();
 
         result.IsSuccess.Should().BeTrue();
-        training.StatusId.Should().Be(TrainingStatus.WaitingForValidation.Id);
+        training.Status.Should().Be(TrainingStatus.WaitingForValidation);
     }
 
     [Fact]

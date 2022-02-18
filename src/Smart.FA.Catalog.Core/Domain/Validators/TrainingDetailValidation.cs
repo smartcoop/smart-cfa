@@ -5,15 +5,15 @@ namespace Core.Domain.Validators;
 
 public class TrainingDetailValidation: AbstractValidator<TrainingDetail>
 {
-    public TrainingDetailValidation(bool isDraft)
+    public TrainingDetailValidation()
     {
         RuleFor(request => request.Title)
             .NotEmpty().WithMessage(Errors.General.MissingField("title").Message);
-        When(_ => isDraft, () => RuleFor(request => request.Language)
-            .NotEmpty().WithMessage(Errors.General.MissingField("language").Message));
-        When(_ => isDraft,() => RuleFor(request => request.Goal)
-            .NotEmpty().WithMessage(Errors.General.MissingField("goal").Message));
-        When(_ => isDraft,() => RuleFor(request => request.Methodology)
-            .NotEmpty().WithMessage(Errors.General.MissingField("methodology").Message));
+        RuleFor(request => request.Language)
+            .NotEmpty().WithMessage(Errors.General.MissingField("language").Message);
+        RuleFor(request => request.Goal)
+            .NotEmpty().WithMessage(Errors.General.MissingField("goal").Message);
+        RuleFor(request => request.Methodology)
+            .NotEmpty().WithMessage(Errors.General.MissingField("methodology").Message);
     }
 }
