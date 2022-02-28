@@ -8,9 +8,10 @@ public class TrainingIdentityConfigurations: IEntityTypeConfiguration<TrainingId
 {
     public void Configure(EntityTypeBuilder<TrainingIdentity> builder)
     {
-        builder.HasKey(enrollment => new {enrollment.TrainingId, enrollment.TrainingTypeId});
-        builder.HasOne(enrollment => enrollment.Training).WithMany(training => training.Identities)
-            .HasForeignKey(enrollment => enrollment.TrainingId);
+        builder.HasKey(identity => new {identity.TrainingId, identity.TrainingTypeId});
+        builder.HasOne(identity => identity.Training)
+            .WithMany(training => training.Identities)
+            .HasForeignKey(identity => identity.TrainingId);
 
         builder.ToTable("TrainingIdentity");
     }

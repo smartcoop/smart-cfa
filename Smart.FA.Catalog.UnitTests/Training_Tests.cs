@@ -32,8 +32,8 @@ public class TrainingTests
         var trainer = _trainerFactory.CreateClean();
         var training = _trainingFactory.Create(trainer);
 
-        training.TrainerEnrollments.Should().ContainSingle();
-        training.TrainerEnrollments.Select(enrollment => enrollment.Trainer).FirstOrDefault().Should()
+        training.TrainerAssignments.Should().ContainSingle();
+        training.TrainerAssignments.Select(assignment => assignment.Trainer).FirstOrDefault().Should()
             .BeSameAs(trainer);
     }
 
@@ -44,9 +44,9 @@ public class TrainingTests
         var training = _trainingFactory.Create(trainerAlpha);
 
         var trainerBeta = _trainerFactory.CreateClean();
-        training.EnrollTrainer(trainerBeta);
+        training.AssignTrainer(trainerBeta);
 
-        training.TrainerEnrollments.Should().HaveCount(2);
+        training.TrainerAssignments.Should().HaveCount(2);
     }
 
 

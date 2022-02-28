@@ -5,11 +5,11 @@ public static partial class Errors
     public static class Training
     {
         public static Error NotFound(int id) => new("training.not.found", $"Training with id {id} was not found");
-        public static Error TooManyEnrollments() =>
-            new("trainer.too.many.enrollments", "Training cannot have more than 2 enrollments");
+        public static Error TooManyAssignments() =>
+            new("trainer.too.many.assignments", "Training cannot have more than 2 assignments");
 
-        public static Error AlreadyEnrolled(string trainingName) =>
-            new("trainer.already.enrolled", $"Trainer is already enrolled into training '{trainingName}'");
+        public static Error AlreadyAssigned(string trainingName) =>
+            new("trainer.already.assigned", $"Trainer is already assigned to the training '{trainingName}'");
 
         public static Error InvalidState(string name) => new("invalid.state", $"Invalid state: '{name}'");
 

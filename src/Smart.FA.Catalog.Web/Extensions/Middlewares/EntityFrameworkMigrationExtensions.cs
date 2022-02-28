@@ -23,9 +23,10 @@ public static class EntityFrameworkMigrationExtensions
                 using var connection = new SqlConnection(builder.Configuration.GetConnectionString("Catalog"));
                 using (var scope = services.CreateScope())
                 {
-                    var context = scope.ServiceProvider.GetRequiredService<CatalogContext>();
+                    var catalogContext = scope.ServiceProvider.GetRequiredService<CatalogContext>();
                     Console.WriteLine($"trying to connect to {connection.DataSource}...");
-                    context.Database.Migrate();
+                    Seed(catalogContext);
+                    catalogContext.Database.Migrate();
                 }
 
                 break;

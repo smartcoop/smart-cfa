@@ -23,7 +23,7 @@ public class GetTrainersFromTrainingQueryHandler : IRequestHandler<GetTrainersFr
         try
         {
             var training = await _catalogContext.Trainings.FindAsync(new object?[] { request.TrainingId }, cancellationToken: cancellationToken);
-            response.Trainers = training?.TrainerEnrollments.Select(ttt => ttt.Trainer).ToList();
+            response.Trainers = training?.TrainerAssignments.Select(ttt => ttt.Trainer).ToList();
             response.SetSuccess();
         }
         catch (Exception e)

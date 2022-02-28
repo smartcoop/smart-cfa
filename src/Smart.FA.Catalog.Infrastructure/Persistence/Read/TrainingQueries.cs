@@ -41,7 +41,7 @@ public class TrainingQueries : ITrainingQueries
 	                    TD.Goal,
                         TD.Language
                     FROM dbo.Training T
-                    INNER JOIN dbo.TrainerEnrollment TE ON T.Id = TE.TrainingId
+                    INNER JOIN dbo.TrainerAssignment TE ON T.Id = TE.TrainingId
                     INNER JOIN dbo.TrainingDetail TD ON T.Id = TD.TrainingId
                     WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language ";
         await using var connection = new SqlConnection(_connectionString);
@@ -58,7 +58,7 @@ public class TrainingQueries : ITrainingQueries
 	                    TD.Goal,
                         TD.Language
                     FROM dbo.Training T
-                    INNER JOIN dbo.TrainerEnrollment TE ON T.Id = TE.TrainingId
+                    INNER JOIN dbo.TrainerAssignment TE ON T.Id = TE.TrainingId
                     INNER JOIN dbo.TrainingDetail TD ON T.Id = TD.TrainingId
                     WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language
                     ORDER BY T.Id
@@ -67,7 +67,7 @@ public class TrainingQueries : ITrainingQueries
         var countsql = @"SELECT
 	                    COUNT(*)
                     FROM dbo.Training T
-                    INNER JOIN dbo.TrainerEnrollment TE ON T.Id = TE.TrainingId
+                    INNER JOIN dbo.TrainerAssignment TE ON T.Id = TE.TrainingId
                     INNER JOIN dbo.TrainingDetail TD ON T.Id = TD.TrainingId
                     WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language";
 

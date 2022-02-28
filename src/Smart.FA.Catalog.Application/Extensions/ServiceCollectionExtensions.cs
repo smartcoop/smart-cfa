@@ -1,3 +1,4 @@
+using System.Reflection;
 using Application.SeedWork;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,6 +9,6 @@ public static class ServiceCollectionExtensions
 {
     public static void AddApplication(this IServiceCollection services)
     {
-        services.AddMediatR(typeof(ResponseBase).Assembly);
+        services.AddMediatR(Assembly.GetExecutingAssembly());
     }
 }

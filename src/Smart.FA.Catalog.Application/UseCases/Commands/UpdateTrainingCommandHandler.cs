@@ -48,7 +48,7 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
             training.SwitchTargetAudience(request.TargetAudiences);
             training.SwitchSlotNumberType(request.SlotNumberTypes);
             var trainers = await _trainerRepository.GetListAsync(request.TrainingId, cancellationToken);
-            training.EnrollTrainers(trainers);
+            training.AssignTrainers(trainers);
 
             if (request.IsDraft is not true)
             {

@@ -9,7 +9,8 @@ public class TrainingTargetConfigurations: IEntityTypeConfiguration<TrainingTarg
     public void Configure(EntityTypeBuilder<TrainingTarget> builder)
     {
         builder.HasKey(target => new {target.TrainingId, target.TrainingTargetAudienceId});
-        builder.HasOne(detail => detail.Training).WithMany(training => training.Targets)
+        builder.HasOne(detail => detail.Training)
+            .WithMany(training => training.Targets)
             .HasForeignKey(detail => detail.TrainingId);
 
         builder.ToTable("TrainingTarget");
