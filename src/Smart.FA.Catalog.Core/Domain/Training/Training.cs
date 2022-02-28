@@ -12,7 +12,7 @@ public class Training : Entity, IAggregateRoot
 {
     #region Private fields
 
-    private readonly List<TrainerEnrollment> _trainerEnrollments = new();
+    private readonly List<TrainerAssignment> _trainerAssignments = new();
     private readonly List<TrainingIdentity> _identities = new();
     private readonly List<TrainingTarget> _targets = new();
     private readonly List<TrainingDetail> _details = new();
@@ -22,7 +22,7 @@ public class Training : Entity, IAggregateRoot
 
     #region Properties
 
-    public virtual IReadOnlyCollection<TrainerEnrollment> TrainerEnrollments => _trainerEnrollments.AsReadOnly();
+    public virtual IReadOnlyCollection<TrainerAssignment> TrainerAssignments => _trainerAssignments.AsReadOnly();
     public virtual IReadOnlyCollection<TrainingIdentity> Identities => _identities.AsReadOnly();
     public virtual IReadOnlyCollection<TrainingTarget> Targets => _targets.AsReadOnly();
     public virtual IReadOnlyCollection<TrainingDetail> Details => _details.AsReadOnly();
@@ -44,7 +44,7 @@ public class Training : Entity, IAggregateRoot
         SwitchTrainingTypes(types);
         SwitchTargetAudience(targetAudiences);
         SwitchSlotNumberType(slotNumberTypes);
-        EnrollTrainer(trainer);
+        AssignTrainer(trainer);
         TrainerCreatorId = trainer.Id;
     }
 
@@ -80,25 +80,25 @@ public class Training : Entity, IAggregateRoot
             .Select(slotNumberType => new TrainingSlot(this, slotNumberType)));
     }
 
-    public void EnrollTrainer(Trainer? trainer)
+    public void AssignTrainer(Trainer? trainer)
     {
-        Guard.Requires(() => trainer is not null, "There should be at least one trainer enrolled (owner)");
-        TrainerEnrollment trainerEnrollment = new(this, trainer!);
-        if (_trainerEnrollments.Contains(trainerEnrollment)) throw new Exception();
-        _trainerEnrollments.Add(trainerEnrollment);
+        Guard.Requires(() => trainer is not null, "There should be at least one trainer assigned (owner)");
+        TrainerAssignment trainerAssignment = new(this, trainer!);
+        if (_trainerAssignments.Contains(trainerAssignment)) throw new Exception();
+        _trainerAssignments.Add(trainerAssignment);
     }
 
-    public void EnrollTrainers(IEnumerable<Trainer> trainers)
+    public void AssignTrainers(IEnumerable<Trainer> trainers)
     {
-        DisEnrollAll();
+        UnAssignAll();
         foreach (var trainer in trainers)
         {
-            EnrollTrainer(trainer);
+            AssignTrainer(trainer);
         }
     }
 
-    public void DisEnrollAll()
-        => _trainerEnrollments.RemoveAll(enrollment => enrollment.TrainerId != TrainerCreatorId);
+    public void UnAssignAll()
+        => _trainerAssignments.RemoveAll(assignment => assignment.TrainerId != TrainerCreatorId);
 
     public Result<Training, IEnumerable<Error>> Validate()
     {
@@ -114,7 +114,7 @@ public class Training : Entity, IAggregateRoot
         Status = Status.Validate(_identities);
 
         var trainingDetail = Details.FirstOrDefault(training => training.Language == Language.Create("EN").Value) ?? Details.First();
-        AddDomainEvent(new ValidateTrainingEvent(trainingDetail.Title!, Id, TrainerEnrollments.Select(enrollment => enrollment.TrainerId)));
+        AddDomainEvent(new ValidateTrainingEvent(trainingDetail.Title!, Id, TrainerAssignments.Select(assignment => assignment.TrainerId)));
 
         return Result.Success<Training, IEnumerable<Error>>(this);
     }

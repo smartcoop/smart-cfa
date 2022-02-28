@@ -18,17 +18,17 @@ public class TrainingRepository : ITrainingRepository
     public async Task<IReadOnlyList<Training>> GetListAsync(int trainerId, Specification<Training> specification, CancellationToken cancellationToken)
         => await _catalogContext
             .Trainings
-            .Include(training => training.TrainerEnrollments)
+            .Include(training => training.TrainerAssignments)
             .Where(specification.ToExpression())
             .Where(training =>
                         training
-                            .TrainerEnrollments
-                            .Select(enrollment => enrollment.TrainerId)
+                            .TrainerAssignments
+                            .Select(assignment => assignment.TrainerId)
                             .Contains(trainerId))
             .ToListAsync(cancellationToken);
 
     public async Task<Training?> GetFullAsync(int trainingId, CancellationToken cancellationToken)
-        => await _catalogContext.Trainings.Include(training => training.TrainerEnrollments)
+        => await _catalogContext.Trainings.Include(training => training.TrainerAssignments)
             .Include(training => training.Details)
             .Include(training => training.Identities)
             .Include(training => training.Slots)

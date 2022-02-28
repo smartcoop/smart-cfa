@@ -14,15 +14,15 @@ public class TrainerRepository : ITrainerRepository
     }
 
     public async Task<IReadOnlyList<Trainer>> GetListAsync(int trainingId, CancellationToken cancellationToken)
-        => await _catalogContext.TrainerEnrollments.Include(enrollment => enrollment.Trainer)
-            .Where(enrollment =>enrollment.TrainingId == trainingId)
-            .Select(enrollment => enrollment.Trainer)
+        => await _catalogContext.TrainerAssignments.Include(assignement => assignement.Trainer)
+            .Where(assignment =>assignment.TrainingId == trainingId)
+            .Select(assignment => assignment.Trainer)
             .ToListAsync(cancellationToken);
 
     public async Task<IReadOnlyList<Trainer>> GetListAsync(IEnumerable<int> trainingIds, CancellationToken cancellationToken)
-        => await _catalogContext.TrainerEnrollments.Include(enrollment => enrollment.Trainer)
-            .Where(enrollment => trainingIds.Contains(enrollment.TrainingId))
-            .Select(enrollment => enrollment.Trainer)
+        => await _catalogContext.TrainerAssignments.Include(assignment => assignment.Trainer)
+            .Where(assignment => trainingIds.Contains(assignment.TrainingId))
+            .Select(assignment => assignment.Trainer)
             .ToListAsync(cancellationToken);
 
     public async Task<Trainer> FindAsync(int trainerId, CancellationToken cancellationToken)

@@ -1,6 +1,6 @@
 namespace Core.Domain;
 
-public class TrainerEnrollment
+public class TrainerAssignment
 {
 
     #region Properties
@@ -15,12 +15,12 @@ public class TrainerEnrollment
 
     #region Constructors
 
-    protected TrainerEnrollment()
+    protected TrainerAssignment()
     {
 
     }
 
-    public TrainerEnrollment(Training training, Trainer trainer)
+    public TrainerAssignment(Training training, Trainer trainer)
     {
         Training = training;
         Trainer = trainer;

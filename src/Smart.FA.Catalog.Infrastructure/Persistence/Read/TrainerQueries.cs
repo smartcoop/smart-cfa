@@ -26,7 +26,7 @@ public class TrainerQueries : ITrainerQueries
                        Title,
                        DefaultLanguage
                     FROM dbo.Trainer T
-                    INNER JOIN dbo.TrainerEnrollment TE ON T.Id = TE.TrainerId
+                    INNER JOIN dbo.TrainerAssignment TE ON T.Id = TE.TrainerId
                     WHERE TE.TrainingId IN @TrainingIds";
         await using var connection = new SqlConnection(_connectionString);
         return await connection.QueryAsync<TrainerDto>(sql, new {TrainingIds = trainingIds});

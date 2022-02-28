@@ -13,8 +13,9 @@ public class TrainerConfiguration : EntityConfigurationBase<Trainer>
         base.Configure(builder);
 
         builder.Property(trainer => trainer.Id).ValueGeneratedOnAdd();
-        builder.HasMany(trainer => trainer.Enrollments).WithOne(enrollment => enrollment.Trainer)
-            .HasForeignKey(enrollment => enrollment.TrainerId);
+        builder.HasMany(trainer => trainer.Assignments)
+            .WithOne(assignment => assignment.Trainer)
+            .HasForeignKey(assignment => assignment.TrainerId);
         builder.HasKey(trainer => trainer.Id);
         builder.OwnsOne(p => p.Name, p =>
             {
