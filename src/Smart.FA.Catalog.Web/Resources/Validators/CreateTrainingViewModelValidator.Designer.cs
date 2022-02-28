@@ -61,7 +61,7 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A training required a goal.
+        ///   Looks up a localized string similar to A training requires a goal.
         /// </summary>
         internal static string training_empty_goal {
             get {
@@ -70,7 +70,7 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A training required a methodology.
+        ///   Looks up a localized string similar to A training requires a methodology.
         /// </summary>
         internal static string training_empty_methodology {
             get {

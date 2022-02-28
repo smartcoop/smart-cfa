@@ -22,7 +22,7 @@
     <value>A training requires a title</value>
   </data>
   <data name="training.empty.methodology" xml:space="preserve">
-    <value>A training required a methodology</value>
+    <value>A training requires a methodology</value>
   </data>
   <data name="training.missing.slot.type" xml:space="preserve">
     <value>A training needs at least one slot type</value>
@@ -34,6 +34,6 @@
     <value>A training needs at least one target audience</value>
   </data>
   <data name="training.empty.goal" xml:space="preserve">
-    <value>A training required a goal</value>
+    <value>A training requires a goal</value>
   </data>
 </root>
