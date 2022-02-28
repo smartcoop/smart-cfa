@@ -35,19 +35,6 @@
                 </div>
             </div>
         }
-
-        @if (Model.ValidationErrors.Any())
-        {
-            <div class="c-alert c-alert--default">
-                <ul>
-                    @foreach (var error in Model.ValidationErrors)
-                    {
-                        <li>@error</li>
-                    }
-                </ul>
-            </div>
-        }
-        <div asp-validation-summary="All"></div>
         <div class="o-form-group-layout o-form-group-layout--standard">
             <smart-form-group-input-text label="Titre de la formation / module" asp-for="UpdateTrainingViewModel.Title"></smart-form-group-input-text>
 
