@@ -4,10 +4,13 @@ using Smart.Design.Razor.Extensions;
 using Web.Extensions;
 using Web.Extensions.Middlewares;
 using FluentValidation.AspNetCore;
+using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json");
+
+builder.Host.UseNLog();
 
 builder.Services
     .AddHttpContextAccessor();
@@ -20,12 +23,16 @@ builder.Services
     .AddSmartDesign();
 builder.Services
     .AddRazorPages()
-    .AddFluentValidation(cfg =>
+    .AddFluentValidation(configuration =>
     {
-        cfg.RegisterValidatorsFromAssemblyContaining<Program>();
-        cfg.DisableDataAnnotationsValidation = true;
+        configuration.RegisterValidatorsFromAssemblyContaining<Program>();
+        configuration.DisableDataAnnotationsValidation = true;
     })
-    .AddViewLocalization(options => options.ResourcesPath = "Resources");
+    .AddViewLocalization(options =>
+    {
+        options.ResourcesPath = "Resources";
+    });
+
 
 #if DEBUG
 builder.Services
@@ -55,8 +62,9 @@ if (app.Environment.IsProduction())
 else
 {
     app.UseDeveloperExceptionPage();
-    builder.ApplyMigrations();
 }
+
+builder.ApplyMigrations();
 
 app.Use(async (context, next) =>
 {
@@ -67,7 +75,6 @@ app.Use(async (context, next) =>
         await next();
     }
 });
-
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
