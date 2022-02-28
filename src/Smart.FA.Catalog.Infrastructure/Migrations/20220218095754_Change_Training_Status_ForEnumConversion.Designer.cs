@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Migrations
 {
-    [DbContext(typeof(Context))]
+    [DbContext(typeof(CatalogContext))]
     [Migration("20220218095754_Change_Training_Status_ForEnumConversion")]
     partial class Change_Training_Status_ForEnumConversion
     {

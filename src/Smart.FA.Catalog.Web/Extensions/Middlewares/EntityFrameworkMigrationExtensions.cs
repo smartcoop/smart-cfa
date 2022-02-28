@@ -20,10 +20,10 @@ public static class EntityFrameworkMigrationExtensions
         {
             try
             {
-                using var connection = new SqlConnection(builder.Configuration.GetConnectionString("Training"));
+                using var connection = new SqlConnection(builder.Configuration.GetConnectionString("Catalog"));
                 using (var scope = services.CreateScope())
                 {
-                    var context = scope.ServiceProvider.GetRequiredService<Context>();
+                    var context = scope.ServiceProvider.GetRequiredService<CatalogContext>();
                     Console.WriteLine($"trying to connect to {connection.DataSource}...");
                     context.Database.Migrate();
                 }
@@ -39,12 +39,12 @@ public static class EntityFrameworkMigrationExtensions
         }
     }
 
-    public static void Seed(Context context)
+    public static void Seed(CatalogContext catalogContext)
     {
         var trainer = new Trainer(Name.Create("Victor", "vD").Value,
             TrainerIdentity.Create("1", ApplicationType.Default).Value,"Developer", "Hello I am Victor van Duynen",
             Language.Create("FR").Value);
-        context.Trainers.Add(trainer);
-        context.SaveChanges();
+        catalogContext.Trainers.Add(trainer);
+        catalogContext.SaveChanges();
     }
 }

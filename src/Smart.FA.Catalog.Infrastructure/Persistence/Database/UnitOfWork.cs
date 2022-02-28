@@ -6,12 +6,12 @@ namespace Infrastructure.Persistence.Database;
 
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly Context _context;
+    private readonly CatalogContext _catalogContext;
     private IDbContextTransaction? _transaction;
 
-    public UnitOfWork(Context context)
+    public UnitOfWork(CatalogContext catalogContext)
     {
-        _context = context;
+        _catalogContext = catalogContext;
     }
 
     public void RegisterNew(object entity)
@@ -19,11 +19,11 @@ public class UnitOfWork : IUnitOfWork
         switch (entity)
         {
             case Entity domainEntity when !IsRegistered(domainEntity):
-                _context.Add(domainEntity);
+                _catalogContext.Add(domainEntity);
                 return;
 
             case ValueObject domainValueObject when !IsRegistered(domainValueObject):
-                _context.Add(domainValueObject);
+                _catalogContext.Add(domainValueObject);
                 return;
         }
     }
@@ -33,8 +33,8 @@ public class UnitOfWork : IUnitOfWork
         if (entity is not Entity domainEntity) return;
         if (!IsRegistered(domainEntity)) return;
 
-        if (_context.Entry(domainEntity).State != EntityState.Modified)
-            _context.Update(domainEntity);
+        if (_catalogContext.Entry(domainEntity).State != EntityState.Modified)
+            _catalogContext.Update(domainEntity);
     }
 
     public void RegisterClean(object entity)
@@ -42,7 +42,7 @@ public class UnitOfWork : IUnitOfWork
         if (entity is not Entity domainEntity) return;
         if (!IsRegistered(domainEntity)) return;
 
-        _context.Entry(domainEntity).State = EntityState.Unchanged;
+        _catalogContext.Entry(domainEntity).State = EntityState.Unchanged;
     }
 
     public void RegisterDeleted(object entity)
@@ -54,8 +54,8 @@ public class UnitOfWork : IUnitOfWork
 
             case Entity domainEntity:
                 {
-                    if (_context.Entry(domainEntity).State != EntityState.Deleted)
-                        _context.Remove(domainEntity);
+                    if (_catalogContext.Entry(domainEntity).State != EntityState.Deleted)
+                        _catalogContext.Remove(domainEntity);
 
                     break;
                 }
@@ -64,8 +64,8 @@ public class UnitOfWork : IUnitOfWork
 
             case ValueObject domainValueObject:
                 {
-                    if (_context.Entry(domainValueObject).State != EntityState.Deleted)
-                        _context.Remove(domainValueObject);
+                    if (_catalogContext.Entry(domainValueObject).State != EntityState.Deleted)
+                        _catalogContext.Remove(domainValueObject);
 
                     break;
                 }
@@ -74,12 +74,12 @@ public class UnitOfWork : IUnitOfWork
 
     public void Commit()
     {
-        _context.SaveChanges();
+        _catalogContext.SaveChanges();
     }
 
     public void Rollback()
     {
-        var changedEntries = _context.ChangeTracker.Entries()
+        var changedEntries = _catalogContext.ChangeTracker.Entries()
                                      .Where(x => x.State != EntityState.Unchanged).ToList();
         changedEntries.ForEach(e =>
        {
@@ -101,7 +101,7 @@ public class UnitOfWork : IUnitOfWork
 
     public void BeginTransaction()
     {
-        _transaction = _context.Database.BeginTransaction();
+        _transaction = _catalogContext.Database.BeginTransaction();
     }
 
     public void CommitTransaction()
@@ -119,7 +119,7 @@ public class UnitOfWork : IUnitOfWork
 
     private bool IsRegistered(Entity entity)
     {
-        return _context.ChangeTracker
+        return _catalogContext.ChangeTracker
                        .Entries()
                        .Any(ee => ee.Entity is Entity trackedEntity
                                && trackedEntity.GetType() == entity.GetType()
@@ -128,7 +128,7 @@ public class UnitOfWork : IUnitOfWork
 
     private bool IsRegistered(ValueObject valueObject)
     {
-        return _context.ChangeTracker
+        return _catalogContext.ChangeTracker
                        .Entries()
                        .Any(ee => ee.Entity is ValueObject trackedValueObject
                                && trackedValueObject.GetType() == valueObject.GetType()

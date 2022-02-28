@@ -8,15 +8,15 @@ namespace Infrastructure.Persistence.Write;
 
 public class TrainingRepository : ITrainingRepository
 {
-    private readonly Context _context;
+    private readonly CatalogContext _catalogContext;
 
-    public TrainingRepository(Context context)
+    public TrainingRepository(CatalogContext catalogContext)
     {
-        _context = context;
+        _catalogContext = catalogContext;
     }
 
     public async Task<IReadOnlyList<Training>> GetListAsync(int trainerId, Specification<Training> specification, CancellationToken cancellationToken)
-        => await _context
+        => await _catalogContext
             .Trainings
             .Include(training => training.TrainerEnrollments)
             .Where(specification.ToExpression())
@@ -28,7 +28,7 @@ public class TrainingRepository : ITrainingRepository
             .ToListAsync(cancellationToken);
 
     public async Task<Training?> GetFullAsync(int trainingId, CancellationToken cancellationToken)
-        => await _context.Trainings.Include(training => training.TrainerEnrollments)
+        => await _catalogContext.Trainings.Include(training => training.TrainerEnrollments)
             .Include(training => training.Details)
             .Include(training => training.Identities)
             .Include(training => training.Slots)
@@ -36,5 +36,5 @@ public class TrainingRepository : ITrainingRepository
             .FirstOrDefaultAsync(training => training.Id == trainingId, cancellationToken);
 
     public async Task<Training> FindAsync(int trainingId, CancellationToken cancellationToken)
-        => await _context.Trainings.SingleAsync( training => training.Id == trainingId, cancellationToken);
+        => await _catalogContext.Trainings.SingleAsync( training => training.Id == trainingId, cancellationToken);
 }

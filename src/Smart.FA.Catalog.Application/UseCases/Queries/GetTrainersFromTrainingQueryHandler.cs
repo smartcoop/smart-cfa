@@ -10,19 +10,19 @@ namespace Application.UseCases.Queries;
 public class GetTrainersFromTrainingQueryHandler : IRequestHandler<GetTrainersFromTrainingRequest, GetTrainersFromTrainingResponse>
 {
     private readonly ILogger<GetTrainersFromTrainingQueryHandler> _logger;
-    private readonly Context _context;
+    private readonly CatalogContext _catalogContext;
 
-    public GetTrainersFromTrainingQueryHandler(ILogger<GetTrainersFromTrainingQueryHandler> logger, Context context)
+    public GetTrainersFromTrainingQueryHandler(ILogger<GetTrainersFromTrainingQueryHandler> logger, CatalogContext catalogContext)
     {
         _logger = logger;
-        _context = context;
+        _catalogContext = catalogContext;
     }
     public async Task<GetTrainersFromTrainingResponse> Handle(GetTrainersFromTrainingRequest request, CancellationToken cancellationToken)
     {
         GetTrainersFromTrainingResponse response = new();
         try
         {
-            var training = await _context.Trainings.FindAsync(new object?[] { request.TrainingId }, cancellationToken: cancellationToken);
+            var training = await _catalogContext.Trainings.FindAsync(new object?[] { request.TrainingId }, cancellationToken: cancellationToken);
             response.Trainers = training?.TrainerEnrollments.Select(ttt => ttt.Trainer).ToList();
             response.SetSuccess();
         }

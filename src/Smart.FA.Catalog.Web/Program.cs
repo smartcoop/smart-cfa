@@ -36,13 +36,13 @@ builder.Services
 
 #if DEBUG
 builder.Services
-    .AddInfrastructure(builder.Configuration.GetConnectionString("Training"),
+    .AddInfrastructure(builder.Configuration.GetConnectionString("Catalog"),
         builder.Configuration.GetConnectionString("Account"),
         true,
         builder.Configuration.GetSection("MailOptions"));
 #else
 builder.Services
-    .AddInfrastructure(builder.Configuration.GetConnectionString("Training"),
+    .AddInfrastructure(builder.Configuration.GetConnectionString("Catalog"),
     builder.Configuration.GetConnectionString("Account"),
                     false,
         builder.Configuration.GetSection("MailOptions"));

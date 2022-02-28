@@ -15,14 +15,14 @@ public class GetTrainerFromUserAppQueryHandler : IRequestHandler<GetTrainerFromU
 {
     private readonly ILogger<GetTrainerFromUserAppQueryHandler> _logger;
     private readonly UserStrategyResolver _userStrategyResolver;
-    private readonly Context _context;
+    private readonly CatalogContext _catalogContext;
 
     public GetTrainerFromUserAppQueryHandler(ILogger<GetTrainerFromUserAppQueryHandler> logger,
-        UserStrategyResolver userStrategyResolver, Context context)
+        UserStrategyResolver userStrategyResolver, CatalogContext catalogContext)
     {
         _logger = logger;
         _userStrategyResolver = userStrategyResolver;
-        _context = context;
+        _catalogContext = catalogContext;
     }
 
     public async Task<GetTrainerFromUserAppResponse> Handle(GetTrainerFromUserAppRequest request, CancellationToken cancellationToken)
@@ -33,14 +33,14 @@ public class GetTrainerFromUserAppQueryHandler : IRequestHandler<GetTrainerFromU
             var userStrategy =  _userStrategyResolver.Resolve(request.ApplicationType!);
             var user = await userStrategy.GetAsync(request.UserId!);
             var linkedTrainer =
-                await _context.Trainers.FirstOrDefaultAsync(trainer => trainer.Identity.UserId == request.UserId, cancellationToken);
+                await _catalogContext.Trainers.FirstOrDefaultAsync(trainer => trainer.Identity.UserId == request.UserId, cancellationToken);
             if (linkedTrainer is null)
             {
                 linkedTrainer = new Trainer(Name.Create(user.FirstName, user.LastName).Value,
                     TrainerIdentity.Create(user.UserId, Enumeration.FromDisplayName<ApplicationType>(user.ApplicationType)).Value,string.Empty, string.Empty,
                     Language.Create("EN").Value);
-                await _context.Trainers.AddAsync(linkedTrainer, cancellationToken);
-                await _context.SaveChangesAsync(cancellationToken);
+                await _catalogContext.Trainers.AddAsync(linkedTrainer, cancellationToken);
+                await _catalogContext.SaveChangesAsync(cancellationToken);
             }
 
             resp.Trainer = linkedTrainer;

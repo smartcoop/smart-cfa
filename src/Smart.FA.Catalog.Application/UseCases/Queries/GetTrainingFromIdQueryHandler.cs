@@ -9,12 +9,12 @@ namespace Application.UseCases.Queries;
 public class GetTrainingFromIdQueryHandler: IRequestHandler<GetTrainingFromIdRequest, GetTrainingFromIdResponse>
 {
     private readonly ILogger<GetTrainingFromIdQueryHandler> _logger;
-    private readonly Context _context;
+    private readonly CatalogContext _catalogContext;
 
-    public GetTrainingFromIdQueryHandler(ILogger<GetTrainingFromIdQueryHandler> logger, Context context )
+    public GetTrainingFromIdQueryHandler(ILogger<GetTrainingFromIdQueryHandler> logger, CatalogContext catalogContext )
     {
         _logger = logger;
-        _context = context;
+        _catalogContext = catalogContext;
     }
     public async Task<GetTrainingFromIdResponse> Handle(GetTrainingFromIdRequest request, CancellationToken cancellationToken)
     {
@@ -22,7 +22,7 @@ public class GetTrainingFromIdQueryHandler: IRequestHandler<GetTrainingFromIdReq
 
         try
         {
-            var training = await _context.Trainings.FindAsync(new object?[] { request.TrainingId }, cancellationToken: cancellationToken);
+            var training = await _catalogContext.Trainings.FindAsync(new object?[] { request.TrainingId }, cancellationToken: cancellationToken);
             resp.Training = training!;
             resp.SetSuccess();
         }
