@@ -20,7 +20,7 @@ public class TrainerTests
     {
         var trainer = _trainerFactory.CreateClean();
 
-        trainer.Enrollments.Should().BeEmpty();
+        trainer.Assignments.Should().BeEmpty();
     }
 
     [Theory]
@@ -66,27 +66,27 @@ public class TrainerTests
         trainer.Biography.Should().BeEquivalentTo(description);
     }
     [Fact]
-    public void CanEnrollInTraining()
+    public void CanAssignInTraining()
     {
         var otherTrainer = _trainerFactory.CreateClean();
         var training = _trainingFactory.Create(otherTrainer);
-        var trainerToEnroll = _trainerFactory.CreateClean();
+        var trainerToAssign = _trainerFactory.CreateClean();
 
-        trainerToEnroll.EnrollIn(training);
+        trainerToAssign.AssignTo(training);
 
-        trainerToEnroll.Enrollments.Select(enrollment => enrollment.Training).Should().Contain(training);
+        trainerToAssign.Assignments.Select(assignment => assignment.Training).Should().Contain(training);
     }
 
     [Fact]
-    public void CanDisenrollFromTraining()
+    public void CanGetUnAssignedFromTraining()
     {
         var training = _trainingFactory.CreateClean();
-        var trainerToEnroll = _trainerFactory.CreateClean();
-        trainerToEnroll.EnrollIn(training);
+        var trainerToAssign = _trainerFactory.CreateClean();
+        trainerToAssign.AssignTo(training);
 
-        trainerToEnroll.DisenrollFrom(training);
+        trainerToAssign.UnAssignFrom(training);
 
-        trainerToEnroll.Enrollments.Should().BeEmpty();
+        trainerToAssign.Assignments.Should().BeEmpty();
     }
 
 }

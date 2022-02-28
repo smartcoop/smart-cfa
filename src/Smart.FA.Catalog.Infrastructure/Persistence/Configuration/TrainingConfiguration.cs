@@ -23,12 +23,12 @@ internal class TrainingConfiguration : EntityConfigurationBase<Training>
         builder.HasMany(training => training.Targets)
             .WithOne()
             .HasForeignKey(target => target.TrainingId);
-        builder.HasMany(training => training.TrainerEnrollments)
-            .WithOne(enrollment => enrollment.Training)
-            .HasForeignKey(enrollment => enrollment.TrainingId);
+        builder.HasMany(training => training.TrainerAssignments)
+            .WithOne(assignment => assignment.Training)
+            .HasForeignKey(assignment => assignment.TrainingId);
         builder.HasMany(training => training.Slots)
             .WithOne(slot => slot.Training)
-            .HasForeignKey(enrollment => enrollment.TrainingId);
+            .HasForeignKey(slot => slot.TrainingId);
         builder.Property(training => training.Status)
             .HasConversion(status => status.Id,
             status => Enumeration.FromValue<TrainingStatus>(status))

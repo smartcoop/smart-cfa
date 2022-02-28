@@ -6,7 +6,7 @@ public class Trainer : Entity, IAggregateRoot
 {
     #region Private fields
 
-    private readonly List<TrainerEnrollment> _enrollments = new();
+    private readonly List<TrainerAssignment> _assignments = new();
 
     #endregion
 
@@ -21,7 +21,7 @@ public class Trainer : Entity, IAggregateRoot
 
     public TrainerIdentity Identity { get; } = null!;
 
-    public virtual IReadOnlyCollection<TrainerEnrollment> Enrollments => _enrollments.AsReadOnly();
+    public virtual IReadOnlyCollection<TrainerAssignment> Assignments => _assignments.AsReadOnly();
 
     #endregion
 
@@ -60,21 +60,21 @@ public class Trainer : Entity, IAggregateRoot
         Title = newTitle;
     }
 
-    public void EnrollIn(Training training)
+    public void AssignTo(Training training)
     {
-        Guard.Requires(() => !_enrollments.Select(enrollment => enrollment.Training).Contains(training),
-            "The trainer is already enrolled in that training");
-        _enrollments.Add(new TrainerEnrollment(training, this));
+        Guard.Requires(() => !_assignments.Select(assignment => assignment.Training).Contains(training),
+            "The trainer is already assigned to that training");
+        _assignments.Add(new TrainerAssignment(training, this));
     }
 
-    public void DisenrollFrom(Training training)
+    public void UnAssignFrom(Training training)
     {
-        var trainingNumberRemoved = _enrollments.RemoveAll(enrollment => enrollment.Training == training);
-        Guard.Ensures(() => trainingNumberRemoved != 0, "The trainer has never enrolled in that training");
+        var trainingNumberRemoved = _assignments.RemoveAll(assignment => assignment.Training == training);
+        Guard.Ensures(() => trainingNumberRemoved != 0, "The trainer was never assigned to that training");
     }
 
     public List<Training> GetTrainings()
-        => Enrollments.Any() ? Enrollments.Select(enrollment => enrollment.Training).ToList() : new List<Training>();
+        => Assignments.Any() ? Assignments.Select(assignment => assignment.Training).ToList() : new List<Training>();
 
     public void Rename(Name name) => Name = name;
     public void ChangeDefaultLanguage(Language language) => DefaultLanguage = language;

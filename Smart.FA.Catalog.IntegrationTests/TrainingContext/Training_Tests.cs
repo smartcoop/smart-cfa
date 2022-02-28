@@ -27,7 +27,7 @@ public class TrainingTests: IntegrationTestBase
         var completeTraining = await context.Trainings.FindAsync(training.Id);
 
         completeTraining.Should().NotBeNull();
-        completeTraining!.TrainerEnrollments.Should().NotBeNull();
-        completeTraining.TrainerEnrollments.Select(tt => tt.Trainer).Should().Contain(trainer);
+        completeTraining!.TrainerAssignments.Should().NotBeNull();
+        completeTraining.TrainerAssignments.Select(tt => tt.Trainer).Should().Contain(trainer);
     }
 }

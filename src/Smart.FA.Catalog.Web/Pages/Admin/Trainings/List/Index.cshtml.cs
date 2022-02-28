@@ -2,6 +2,7 @@ using Application.UseCases.Commands;
 using Application.UseCases.Queries;
 using Core.Domain.Dto;
 using Core.SeedWork;
+using Infrastructure.Persistence;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -12,13 +13,15 @@ namespace Web.Pages.Admin.Trainings.List;
 
 public class ListModel : AdminPage
 {
+    private readonly CatalogContext _context;
     private readonly AdminOptions _adminOptions;
     public PagedList<TrainingDto>? Trainings { get; set; } = null!;
 
     [BindProperty(SupportsGet = true)] public int CurrentPage { get; set; } = 1;
 
-    public ListModel(IMediator mediator, IOptions<AdminOptions> adminOptions) : base(mediator)
+    public ListModel(IMediator mediator, IOptions<AdminOptions> adminOptions, CatalogContext context) : base(mediator)
     {
+        _context = context;
         _adminOptions = adminOptions.Value ?? throw new ArgumentNullException(nameof(adminOptions));
     }
 

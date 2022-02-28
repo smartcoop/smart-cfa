@@ -22,7 +22,7 @@ public class CatalogContext : DbContext
 
     public DbSet<Trainer> Trainers { get; set; } = null!;
     public DbSet<Training> Trainings { get; set; } = null!;
-    public DbSet<TrainerEnrollment> TrainerEnrollments { get; set; } = null!;
+    public DbSet<TrainerAssignment> TrainerAssignments { get; set; } = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
