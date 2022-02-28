@@ -3,6 +3,8 @@ using Core.Domain;
 using Core.Domain.Dto;
 using Core.Domain.Enumerations;
 using Core.Domain.Interfaces;
+using Core.Exceptions;
+using Core.LogEvents;
 using Core.SeedWork;
 using Core.Services;
 using Infrastructure.Persistence;
@@ -37,7 +39,9 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
         try
         {
             var training = await _trainingRepository.GetFullAsync(request.TrainingId, cancellationToken);
-            if (training is null) throw new Exception("No trainings cannot be found with that id");
+
+            if (training is null) throw new TrainingException(Errors.Training.NotFound(request.TrainingId));
+
             training.UpdateDetails(request.Detail.Title!, request.Detail.Goal!, request.Detail.Methodology!,
                 Language.Create(request.Detail.Language).Value);
             training.SwitchTrainingTypes(request.Types);
@@ -45,12 +49,15 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
             training.SwitchSlotNumberType(request.SlotNumberTypes);
             var trainers = await _trainerRepository.GetListAsync(request.TrainingId, cancellationToken);
             training.EnrollTrainers(trainers);
+
             if (request.IsDraft is not true)
             {
                 training.Validate();
             }
             _unitOfWork.RegisterDirty(training);
             _unitOfWork.Commit();
+
+            _logger.LogInformation(LogEventIds.TrainingUpdated, "Training with id {Id} has been updated", training.Id);
 
             resp.Training = training;
             resp.SetSuccess();
