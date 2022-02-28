@@ -22,11 +22,11 @@ public class Training : Entity, IAggregateRoot
 
     #region Properties
 
-    public virtual IReadOnlyCollection<TrainerEnrollment> TrainerEnrollments => _trainerEnrollments;
-    public virtual IReadOnlyCollection<TrainingIdentity> Identities => _identities;
-    public virtual IReadOnlyCollection<TrainingTarget> Targets => _targets;
-    public virtual IReadOnlyCollection<TrainingDetail> Details => _details;
-    public virtual IReadOnlyCollection<TrainingSlot> Slots => _slots;
+    public virtual IReadOnlyCollection<TrainerEnrollment> TrainerEnrollments => _trainerEnrollments.AsReadOnly();
+    public virtual IReadOnlyCollection<TrainingIdentity> Identities => _identities.AsReadOnly();
+    public virtual IReadOnlyCollection<TrainingTarget> Targets => _targets.AsReadOnly();
+    public virtual IReadOnlyCollection<TrainingDetail> Details => _details.AsReadOnly();
+    public virtual IReadOnlyCollection<TrainingSlot> Slots => _slots.AsReadOnly();
 
     public int TrainerCreatorId { get; }
     public TrainingStatus Status { get; private set; } = TrainingStatus.Draft;

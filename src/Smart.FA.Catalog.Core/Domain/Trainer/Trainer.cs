@@ -21,7 +21,7 @@ public class Trainer : Entity, IAggregateRoot
 
     public TrainerIdentity Identity { get; } = null!;
 
-    public virtual IReadOnlyCollection<TrainerEnrollment> Enrollments => _enrollments;
+    public virtual IReadOnlyCollection<TrainerEnrollment> Enrollments => _enrollments.AsReadOnly();
 
     #endregion
 
