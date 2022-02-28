@@ -4,7 +4,7 @@ namespace Core.Exceptions;
 
 public class GuardClauseException: DomainException
 {
-    public GuardClauseException(Error error) : base(error.Code, error.Message)
+    public GuardClauseException(Error error) : base(error)
     {
     }
 }

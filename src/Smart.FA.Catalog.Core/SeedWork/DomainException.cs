@@ -1,11 +1,18 @@
+using Core.Exceptions;
+
 namespace Core.SeedWork;
 
 public abstract class DomainException : Exception
 {
-    public string Code { get; set; }
+    public Error Error { get; }
 
-    protected DomainException(string code, string? message) : base(message)
+    protected DomainException(Error error) : base(error.Message)
     {
-        Code = code;
+        Error = error;
+    }
+
+    public override string ToString()
+    {
+        return Error.Serialize();
     }
 }
