@@ -3,6 +3,7 @@ using Core.Domain;
 using Core.Domain.Dto;
 using Core.Domain.Enumerations;
 using Core.Domain.Interfaces;
+using Core.LogEvents;
 using Core.SeedWork;
 using CSharpFunctionalExtensions;
 using MediatR;
@@ -39,6 +40,8 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingReques
             }
             _unitOfWork.RegisterNew(training);
             _unitOfWork.Commit();
+
+            _logger.LogInformation(LogEventIds.TrainingCreated, "Training with id {Id} has been created", training.Id);
 
             resp.SetSuccess();
         }

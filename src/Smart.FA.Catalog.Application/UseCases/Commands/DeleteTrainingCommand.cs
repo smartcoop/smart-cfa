@@ -1,4 +1,5 @@
 using Application.SeedWork;
+using Core.LogEvents;
 using Core.SeedWork;
 using Infrastructure.Persistence;
 using MediatR;
@@ -27,6 +28,9 @@ public class DeleteTrainingCommand: IRequestHandler<DeleteTrainingRequest, Delet
             var training = await _context.Trainings.FindAsync(new object?[] { request.TrainingId }, cancellationToken: cancellationToken);
             _unitOfWork.RegisterDeleted(training!);
             _unitOfWork.Commit();
+
+            _logger.LogInformation(LogEventIds.TrainingDeleted, "Training with id {Id} has been deleted", training!.Id);
+
             resp.SetSuccess();
         }
         catch (Exception e)
