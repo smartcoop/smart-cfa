@@ -4,6 +4,7 @@ public static partial class Errors
 {
     public static class Training
     {
+        public static Error NotFound(int id) => new("training.not.found", $"Training with id {id} was not found");
         public static Error TooManyEnrollments() =>
             new("trainer.too.many.enrollments", "Training cannot have more than 2 enrollments");
 

@@ -1,5 +1,6 @@
 // Application
 
+using Core.Exceptions;
 using Core.SeedWork;
 
 namespace Application.SeedWork;
@@ -34,12 +35,22 @@ public class ResponseBase
     }
 
     /// <summary>
+    /// Adds an error object to the response
+    /// </summary>
+    /// <param name="message">The error message</param>
+    public void AddError(Error error)
+    {
+        IsSuccess = false;
+        _errors.Add(new ApplicationError(error.Code, error.Message));
+    }
+
+    /// <summary>
     /// Adds string error to the response
     /// </summary>
     /// <param name="exception">The exception</param>
     public void AddError(DomainException exception)
     {
-        AddError(exception.Code, exception.Message);
+        AddError(exception.Error);
     }
 
     /// <summary>
