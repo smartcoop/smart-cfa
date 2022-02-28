@@ -41,7 +41,7 @@ public static class ServiceCollectionExtensions
         bool useConsoleLogger)
     {
         services.AddScoped(provider =>
-            new Context(connectionString, useConsoleLogger, provider.GetRequiredService<EventDispatcher>()));
+            new CatalogContext(connectionString, useConsoleLogger, provider.GetRequiredService<EventDispatcher>()));
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         return services;
     }

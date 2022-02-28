@@ -11,13 +11,13 @@ public class DeleteTrainingCommand: IRequestHandler<DeleteTrainingRequest, Delet
 {
     private readonly ILogger<DeleteTrainingCommand> _logger;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly Context _context;
+    private readonly CatalogContext _catalogContext;
 
-    public DeleteTrainingCommand(ILogger<DeleteTrainingCommand> logger, IUnitOfWork unitOfWork, Context context)
+    public DeleteTrainingCommand(ILogger<DeleteTrainingCommand> logger, IUnitOfWork unitOfWork, CatalogContext catalogContext)
     {
         _logger = logger;
         _unitOfWork = unitOfWork;
-        _context = context;
+        _catalogContext = catalogContext;
     }
     public async Task<DeleteTrainingResponse> Handle(DeleteTrainingRequest request, CancellationToken cancellationToken)
     {
@@ -25,7 +25,7 @@ public class DeleteTrainingCommand: IRequestHandler<DeleteTrainingRequest, Delet
 
         try
         {
-            var training = await _context.Trainings.FindAsync(new object?[] { request.TrainingId }, cancellationToken: cancellationToken);
+            var training = await _catalogContext.Trainings.FindAsync(new object?[] { request.TrainingId }, cancellationToken: cancellationToken);
             _unitOfWork.RegisterDeleted(training!);
             _unitOfWork.Commit();
 

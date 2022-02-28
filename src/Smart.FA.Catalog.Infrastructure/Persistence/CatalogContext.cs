@@ -7,13 +7,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Persistence;
 
-public class Context : DbContext
+public class CatalogContext : DbContext
 {
     private readonly string _connectionString;
     private readonly bool _useConsoleLogger;
     private readonly EventDispatcher? _eventDispatcher;
 
-    public Context(string connectionString, bool useConsoleLogger, EventDispatcher? eventDispatcher)
+    public CatalogContext(string connectionString, bool useConsoleLogger, EventDispatcher? eventDispatcher)
     {
         _connectionString = connectionString;
         _useConsoleLogger = useConsoleLogger;

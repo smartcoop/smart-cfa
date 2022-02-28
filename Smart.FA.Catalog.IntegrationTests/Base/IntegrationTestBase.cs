@@ -7,7 +7,7 @@ public class IntegrationTestBase
 {
     private static readonly DesignTimeContextFactory ContextFactory = new();
 
-    protected static Context GivenTrainingContext(bool beginTransaction = true)
+    protected static CatalogContext GivenTrainingContext(bool beginTransaction = true)
     {
         var context = ContextFactory.CreateDbContext(null);
         if (beginTransaction)

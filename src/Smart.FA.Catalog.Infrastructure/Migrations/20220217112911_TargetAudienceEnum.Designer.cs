@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Migrations
 {
-    [DbContext(typeof(Context))]
+    [DbContext(typeof(CatalogContext))]
     [Migration("20220217112911_TargetAudienceEnum")]
     partial class TargetAudienceEnum
     {

@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
 namespace Infrastructure;
-public class DesignTimeContextFactory : IDesignTimeDbContextFactory<Context>
+public class DesignTimeContextFactory : IDesignTimeDbContextFactory<CatalogContext>
 {
-    public Context CreateDbContext(string[]? args)
+    public CatalogContext CreateDbContext(string[]? args)
     {
         var basePath = Directory.GetCurrentDirectory();
         var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
@@ -15,7 +15,7 @@ public class DesignTimeContextFactory : IDesignTimeDbContextFactory<Context>
         return Create(basePath, environmentName!, true);
     }
 
-    private static Context Create(string basePath, string environmentName, bool useConsoleLogger)
+    private static CatalogContext Create(string basePath, string environmentName, bool useConsoleLogger)
     {
         const string appSettingsFileName = "appsettings.Infrastructure";
         var builder = new ConfigurationBuilder()
@@ -26,17 +26,17 @@ public class DesignTimeContextFactory : IDesignTimeDbContextFactory<Context>
                      .AddEnvironmentVariables();
 
         var config = builder.Build();
-        var connectionString = config.GetConnectionString("Training");
+        var connectionString = config.GetConnectionString("Catalog");
         if (string.IsNullOrWhiteSpace(connectionString))
             throw new InvalidOperationException(
-                "Could not find a connection string named 'Training'.");
+                "Could not find a connection string named 'Catalog'.");
 
-        var optionsBuilder = new DbContextOptionsBuilder<Context>();
+        var optionsBuilder = new DbContextOptionsBuilder<CatalogContext>();
         Console.WriteLine($"Setting provider");
 
         optionsBuilder.UseSqlServer(connectionString);
         Console.WriteLine($"\nDesignTimeContextFactory.Create(string):\n\tConnection string: {connectionString}\n");
         var options = optionsBuilder.Options;
-        return new Context(connectionString, useConsoleLogger, null);
+        return new CatalogContext(connectionString, useConsoleLogger, null);
     }
 }
