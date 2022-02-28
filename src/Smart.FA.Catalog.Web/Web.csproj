@@ -14,7 +14,10 @@
     <PackageReference Include="FluentValidation" Version="10.3.6" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
-    <PackageReference Include="Smart.Design.Razor" Version="1.0.12" />
+    <PackageReference Include="NLog" Version="4.7.14" />
+    <PackageReference Include="NLog.Targets.ElasticSearch" Version="7.7.0" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.14.0" />
+    <PackageReference Include="Smart.Design.Razor" Version="1.0.14-beta" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,11 +29,11 @@
     <Content Update="appsettings.Development.json">
       <DependentUpon>appsettings.json</DependentUpon>
     </Content>
-    <Content Update="appsettings.Local.json">
-      <DependentUpon>appsettings.json</DependentUpon>
-    </Content>
     <Content Update="wwwroot\js\lib.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="appsettings.Local.json">
+      <DependentUpon>appsettings.json</DependentUpon>
     </Content>
   </ItemGroup>
   
