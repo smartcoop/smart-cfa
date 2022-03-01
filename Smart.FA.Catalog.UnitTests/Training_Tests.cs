@@ -72,7 +72,7 @@ public class TrainingTests
         var trainer = _trainerFactory.CreateClean();
         var training = _trainingFactory.Create(trainer);
 
-        var action = () => training.AddDetails(title, goal, methodology,  Language.Create(language).Value);
+        var action = () => training.AddDetails(title, goal, methodology, Language.Create(language).Value);
 
         action.Should().Throw<Exception>();
         training.Details.Should().HaveCount(1);
@@ -101,13 +101,13 @@ public class TrainingTests
     {
         var trainer = _trainerFactory.CreateClean();
         var training = _trainingFactory.Create(trainer);
-        var language =  Language.Create(_fixture.Create<string>().Substring(0, 2)).Value;
+        var language = Language.Create(_fixture.Create<string>().Substring(0, 2)).Value;
         var newTitle = _fixture.Create<string>();
 
         training.AddDetails(_fixture.Create<string>(), _fixture.Create<string>(),
             _fixture.Create<string>(), language);
         var action = () => training.UpdateDetails(newTitle, _fixture.Create<string>(),
-            _fixture.Create<string>(),language);
+            _fixture.Create<string>(), language);
 
 
         action.Should().NotThrow<Exception>();
@@ -132,10 +132,9 @@ public class TrainingTests
     public void StatusCanBeAutoValidated()
     {
         var trainer = _trainerFactory.CreateClean();
-        var training = new Training(trainer, new TrainingDetailDto(_fixture.Create<string>(),null,"FR", null),new List<TrainingType> {TrainingType.LanguageCourse},
-            new List<TrainingSlotNumberType>{TrainingSlotNumberType.Group}, new List<TrainingTargetAudience> {TrainingTargetAudience.Employee});
-        training.UpdateDetails("Hello", "My Goal", "A methodology", Language.Create("FR").Value);
+        var training = _trainingFactory.CreateWithAutoValidation(trainer);
 
+        training.UpdateDetails("Hello", "My Goal", "A methodology", Language.Create("FR").Value);
         var result = training.Validate();
 
         result.IsSuccess.Should().BeTrue();
@@ -146,8 +145,7 @@ public class TrainingTests
     public void StatusMustBeManuallyValidated()
     {
         var trainer = _trainerFactory.CreateClean();
-        var training = new Training(trainer, new TrainingDetailDto(_fixture.Create<string>(),null,"FR", null),new List<TrainingType> {TrainingType.Professional},
-            new List<TrainingSlotNumberType>{TrainingSlotNumberType.Group}, new List<TrainingTargetAudience> {TrainingTargetAudience.Employee});
+        var training = _trainingFactory.CreateWithManualValidation(trainer);
         training.UpdateDetails("Hello", "My Goal", "A methodology", Language.Create("FR").Value);
 
         var result = training.Validate();
@@ -182,13 +180,21 @@ public class TrainingTests
     public void CanBeSwitchedFromSingleToGroupSlotNumber()
     {
         var trainer = _trainerFactory.CreateClean();
-        var training = new Training(trainer, new TrainingDetailDto(_fixture.Create<string>(),null,"FR", null) , new List<TrainingType> {TrainingType.Professional},
-            new List<TrainingSlotNumberType>{TrainingSlotNumberType.Single}, new List<TrainingTargetAudience> {TrainingTargetAudience.Employee});
+        var training = new Training
+        (
+            trainer
+            , new TrainingDetailDto(_fixture.Create<string>(), null, "FR", null)
+            , new List<TrainingType> {TrainingType.Professional}
+            , new List<TrainingSlotNumberType> {TrainingSlotNumberType.Single}
+            , new List<TrainingTargetAudience> {TrainingTargetAudience.Employee}
+            , new List<TrainingTopic> {TrainingTopic.Communication}
+        );
 
-        training.SwitchSlotNumberType(new List<TrainingSlotNumberType>{TrainingSlotNumberType.Group});
+        training.SwitchSlotNumberType(new List<TrainingSlotNumberType> {TrainingSlotNumberType.Group});
 
         training.Slots.Should().ContainSingle();
-        training.Slots.Select(slot => slot.TrainingSlotNumberSlotType).First().Should().BeSameAs(TrainingSlotNumberType.Group);
+        training.Slots.Select(slot => slot.TrainingSlotNumberSlotType).First().Should()
+            .BeSameAs(TrainingSlotNumberType.Group);
     }
 
     [Fact]

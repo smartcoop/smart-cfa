@@ -22,8 +22,14 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMailService _mailService;
 
-    public UpdateTrainingCommandHandler(ILogger<UpdateTrainingCommandHandler> logger,
-        ITrainingRepository trainingRepository, ITrainerRepository trainerRepository, IUnitOfWork unitOfWork, IMailService mailService)
+    public UpdateTrainingCommandHandler
+    (
+        ILogger<UpdateTrainingCommandHandler> logger
+        , ITrainingRepository trainingRepository
+        , ITrainerRepository trainerRepository
+        , IUnitOfWork unitOfWork
+        , IMailService mailService
+    )
     {
         _logger = logger;
         _trainingRepository = trainingRepository;
@@ -47,6 +53,7 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
             training.SwitchTrainingTypes(request.Types);
             training.SwitchTargetAudience(request.TargetAudiences);
             training.SwitchSlotNumberType(request.SlotNumberTypes);
+            training.SwitchTopics(request.Topics);
             var trainers = await _trainerRepository.GetListAsync(request.TrainingId, cancellationToken);
             training.AssignTrainers(trainers);
 
@@ -54,6 +61,7 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
             {
                 training.Validate();
             }
+
             _unitOfWork.RegisterDirty(training);
             _unitOfWork.Commit();
 
@@ -64,7 +72,7 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
         }
         catch (Exception e)
         {
-             _logger.LogError("{Exception}", e.ToString());
+            _logger.LogError("{Exception}", e.ToString());
             throw;
         }
 
@@ -79,6 +87,7 @@ public class UpdateTrainingRequest : IRequest<UpdateTrainingResponse>
     public List<TrainingTargetAudience>? TargetAudiences { get; init; }
     public List<TrainingType> Types { get; init; } = null!;
     public List<TrainingSlotNumberType> SlotNumberTypes { get; init; } = null!;
+    public List<TrainingTopic> Topics { get; init; } = null!;
     public List<int> TrainerIds { get; init; } = null!;
     public bool IsDraft { get; set; }
 }

@@ -32,7 +32,7 @@ public class ListModel : AdminPage
         var response = await Mediator.Send(new GetPagedTrainingsFromTrainerRequest
         {
             TrainerId = user.Trainer.Id,
-            Language =  user.Trainer.DefaultLanguage,
+            Language = user.Trainer.DefaultLanguage,
             PageItem = new PageItem(CurrentPage, _adminOptions.Training!.NumberOfTrainingsDisplayed)
         });
         Trainings = response.Trainings;

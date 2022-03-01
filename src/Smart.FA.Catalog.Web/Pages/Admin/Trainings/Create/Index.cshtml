@@ -3,7 +3,7 @@
 @using Core.SeedWork
 @using Microsoft.Extensions.Localization
 @using Web.Pages.Admin.Trainings.Create
-@inject IStringLocalizer<CreateModel> Localizer
+@inject IStringLocalizer<CreateModel> _localizer
 @model Web.Pages.Admin.Trainings.Create.CreateModel
 @{
     Layout = "_AdminLayout";
@@ -12,6 +12,7 @@
 }
 
 <smart-container size="Medium">
+
     @section HeaderToolbar
     {
         <div class="c-navbar c-navbar--bordered-bottom">
@@ -37,6 +38,7 @@
             </div>
         </div>
     }
+
     <form method="post" id="form">
         <div class="o-form-group-layout o-form-group-layout--standard">
             <smart-form-group-input-text label="Titre de la formation / module" asp-for="CreateTrainingViewModel.Title"></smart-form-group-input-text>
@@ -46,7 +48,7 @@
             <smart-formgroup label="La formation">
                 @foreach (var trainingType in Enumeration.GetAll<TrainingType>())
                 {
-                    <smart-checkbox label="@Localizer[trainingType.Name]" asp-for="CreateTrainingViewModel.TrainingTypeIds" value="@trainingType.Id"></smart-checkbox>
+                    <smart-checkbox label="@_localizer[trainingType.Name]" asp-for="CreateTrainingViewModel.TrainingTypeIds" value="@trainingType.Id"></smart-checkbox>
                 }
                 <smart-checkbox label="Autre"></smart-checkbox>
                 <div class="u-spacer-left-xl">
@@ -57,7 +59,7 @@
             <smart-formgroup label="Public cible">
                 @foreach (var targetAudience in Enumeration.GetAll<TrainingTargetAudience>())
                 {
-                    <smart-checkbox label="@Localizer[targetAudience.Name]" asp-for="CreateTrainingViewModel.TargetAudienceIds" value="@targetAudience.Id"></smart-checkbox>
+                    <smart-checkbox label="@_localizer[targetAudience.Name]" asp-for="CreateTrainingViewModel.TargetAudienceIds" value="@targetAudience.Id"></smart-checkbox>
                 }
                 <smart-checkbox label="Autre"></smart-checkbox>
                 <div class="u-spacer-left-xl">
@@ -68,11 +70,22 @@
             <smart-formgroup label="S'agit-il d'un cours ?">
                 @foreach (var slotNumberType in Enumeration.GetAll<TrainingSlotNumberType>())
                 {
-                    <smart-radio asp-for="CreateTrainingViewModel.SlotNumberTypeIds" value="@slotNumberType.Id" label="@Localizer[slotNumberType.Name]"></smart-radio>
+                    <smart-checkbox asp-for="CreateTrainingViewModel.SlotNumberTypeIds" value="@slotNumberType.Id" label="@_localizer[slotNumberType.Name]"></smart-checkbox>
                 }
             </smart-formgroup>
-            <smart-form-group-textarea rows="5" asp-for="CreateTrainingViewModel.Goal" label="@Localizer[nameof(Model.CreateTrainingViewModel.Goal)]"></smart-form-group-textarea>
-            <smart-form-group-textarea rows="5" asp-for="CreateTrainingViewModel.Methodology" label="@Localizer[nameof(Model.CreateTrainingViewModel.Methodology)]"></smart-form-group-textarea>
+
+            <smart-formgroup label="Sectors">
+                @foreach (var topic in Enumeration.GetAll<TrainingTopic>())
+                {
+                    <smart-checkbox label="@_localizer[topic.Name]" asp-for="CreateTrainingViewModel.TopicIds" value="@topic.Id"></smart-checkbox>
+                }
+                <smart-checkbox label="Autre"></smart-checkbox>
+                <div class="u-spacer-left-xl">
+                    <smart-form-group-input-text label="Precisez"></smart-form-group-input-text>
+                </div>
+            </smart-formgroup>
+            <smart-form-group-textarea rows="5" asp-for="CreateTrainingViewModel.Goal" label="@_localizer[nameof(Model.CreateTrainingViewModel.Goal)]"></smart-form-group-textarea>
+            <smart-form-group-textarea rows="5" asp-for="CreateTrainingViewModel.Methodology" label="@_localizer[nameof(Model.CreateTrainingViewModel.Methodology)]"></smart-form-group-textarea>
             <input type="hidden" id="isDraft" value="false" asp-for="CreateTrainingViewModel.IsDraft"/>
             <div class="u-spacer"></div>
         </div>
@@ -88,4 +101,3 @@
 </smart-container>
 
 <div class="u-spacer"></div>
-

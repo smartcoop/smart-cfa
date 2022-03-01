@@ -5,4 +5,5 @@ public record TrainingDto
     short StatusId,
     string Title,
     string? Goal,
-    string Language);
+    string Language,
+    int TopicId);

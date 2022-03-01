@@ -2,7 +2,9 @@
 @using Smart.Design.Razor.TagHelpers.Pill
 @using Core.SeedWork
 @using Core.Domain.Enumerations
+@using Microsoft.Extensions.Localization
 @using Web.Pages.Admin.Trainings.List
+@inject IStringLocalizer<ListModel> _localizer
 @model Web.Pages.Admin.Trainings.List.ListModel
 @{
     Layout = "_AdminLayout";
@@ -31,7 +33,7 @@
 }
 
 <div class="o-card-grid small-up-1">
-    @foreach (var training in Model.Trainings!)
+    @foreach (var training in Model.Trainings!.GroupBy(training => training.TrainingId))
     {
         <smart-card>
             <smart-card-body contains-actions="true">
@@ -39,11 +41,11 @@
                     <div class="c-toolbar">
                         <div class="c-toolbar__right">
                             <div class="c-toolbar__item">
-                                <a href="/admin/trainings/update/@training.TrainingId">
+                                <a href="/admin/trainings/update/@training.Key">
                                     <smart-button leading-icon="EditAlt" button-style="Borderless"></smart-button>
                                 </a>
                             </div>
-                            <form method="post" asp-page-handler="Delete" asp-route-id="@training.TrainingId">
+                            <form method="post" asp-page-handler="Delete" asp-route-id="@training.Key">
                                 <button class="c-button c-button--borderless">
                                     <smart-icon icon="Delete"/>
                                 </button>
@@ -54,13 +56,13 @@
                 <smart-card-content>
                     <smart-grid>
                         <smart-grid-column width="8">
-                            <smart-card-title text="@training.Title"></smart-card-title>
+                            <smart-card-title text="@training.First().Title"></smart-card-title>
                         </smart-grid-column>
                         <smart-grid-column width="4">
-                            <smart-pill status="@PillStatus.Default" label="@(Enumeration.FromValue<TrainingStatus>(training.StatusId).DisplayStatus())"></smart-pill>
+                            <smart-pill status="@PillStatus.Default" label="@(Enumeration.FromValue<TrainingStatus>(training.First().StatusId).DisplayStatus())"></smart-pill>
                         </smart-grid-column>
                     </smart-grid>
-                    <span>Marketing, communication et canaux numériques</span>
+                    <span>@string.Join(", ", training.Where(training => training.TopicId != 0).Select(training => _localizer[Enumeration.FromValue<TrainingTopic>(training.TopicId).Name]))</span>
                 </smart-card-content>
             </smart-card-body>
         </smart-card>
@@ -69,15 +71,15 @@
 
 <div class="c-toolbar">
     <div class="c-toolbar__left">
-        @if (Model.Trainings.HasPreviousPage)
+        @if (Model?.Trainings?.HasPreviousPage ?? false)
         {
             <a asp-page="/admin/trainings/list/index" asp-route-CurrentPage="@(Model.CurrentPage - 1)">Previous</a>
         }
     </div>
 
-    <div> @Model.Trainings.Count/@Model.Trainings.TotalCount Trainings - Page @Model.CurrentPage/@Model.Trainings.TotalPages</div>
+    <div> @(Model?.Trainings?.Count ?? 0)/@(Model?.Trainings?.TotalCount ?? 0) Trainings - Page @(Model?.CurrentPage ?? 0)/@(Model?.Trainings?.TotalPages ?? 0)</div>
     <div class="c-toolbar__right">
-        @if (Model.Trainings.HasNextPage)
+        @if (Model?.Trainings?.HasNextPage ?? false)
         {
             <a asp-page="/admin/trainings/list/index" asp-route-CurrentPage="@(Model.CurrentPage + 1)">Next</a>
         }

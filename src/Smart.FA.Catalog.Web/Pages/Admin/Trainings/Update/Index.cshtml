@@ -35,6 +35,7 @@
                 </div>
             </div>
         }
+
         <div class="o-form-group-layout o-form-group-layout--standard">
             <smart-form-group-input-text label="Titre de la formation / module" asp-for="UpdateTrainingViewModel.Title"></smart-form-group-input-text>
 
@@ -68,7 +69,16 @@
                     <smart-checkbox asp-for="UpdateTrainingViewModel.SlotNumberTypeIds" value="@slotNumberType.Id" label="@_localizer[slotNumberType.Name]" checked="Model.UpdateTrainingViewModel.SlotNumberTypeIds?.Contains(slotNumberType.Id) ?? false"></smart-checkbox>
                 }
             </smart-formgroup>
-
+            <smart-formgroup label="Sectors">
+                @foreach (var topic in Enumeration.GetAll<TrainingTopic>())
+                {
+                    <smart-checkbox label="@_localizer[topic.Name]" asp-for="UpdateTrainingViewModel.TopicIds" value="@topic.Id"></smart-checkbox>
+                }
+                <smart-checkbox label="Autre"></smart-checkbox>
+                <div class="u-spacer-left-xl">
+                    <smart-form-group-input-text label="Precisez"></smart-form-group-input-text>
+                </div>
+            </smart-formgroup>
             <smart-form-group-textarea rows="5" asp-for="UpdateTrainingViewModel.Goal" label="@_localizer[nameof(Model.UpdateTrainingViewModel.Goal)]"></smart-form-group-textarea>
             <smart-form-group-textarea rows="5" asp-for="UpdateTrainingViewModel.Methodology" label="@_localizer[nameof(Model.UpdateTrainingViewModel.Methodology)]"></smart-form-group-textarea>
             <input type="hidden" id="isDraft" value="false" asp-for="UpdateTrainingViewModel.IsDraft"/>

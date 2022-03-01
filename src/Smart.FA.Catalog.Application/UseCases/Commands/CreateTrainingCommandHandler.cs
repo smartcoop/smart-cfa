@@ -32,12 +32,14 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingReques
         try
         {
             var trainer = await _trainerRepository.FindAsync(request.TrainerId, cancellationToken);
-            var training = new Training(trainer, request.Detail, request.Types, request.SlotNumberTypes, request.TargetAudiences);
+            var training = new Training(trainer, request.Detail, request.Types, request.SlotNumberTypes,
+                request.TargetAudiences, request.Topics);
             if (request.IsDraft is false)
             {
                 var result = training.Validate();
                 await result.OnFailure(errors => throw new Exception(string.Join(Environment.NewLine, errors)));
             }
+
             _unitOfWork.RegisterNew(training);
             _unitOfWork.Commit();
 
@@ -63,6 +65,7 @@ public class CreateTrainingRequest : IRequest<CreateTrainingResponse>
     public List<TrainingTargetAudience> TargetAudiences { get; init; } = null!;
     public List<TrainingType> Types { get; init; } = null!;
     public List<TrainingSlotNumberType> SlotNumberTypes { get; init; } = null!;
+    public List<TrainingTopic> Topics { get; init; } = null!;
 }
 
 public class CreateTrainingResponse : ResponseBase
