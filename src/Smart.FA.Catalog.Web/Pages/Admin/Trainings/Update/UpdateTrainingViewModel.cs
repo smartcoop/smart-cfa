@@ -10,19 +10,13 @@ namespace Web.Pages.Admin.Trainings.Update;
 public class UpdateTrainingViewModel
 {
     public string? Title { get; init; }
-
     public List<int>? SlotNumberTypeIds { get; init; }
-
     public List<int>? TrainingTypeIds { get; init; }
-
     public List<int>? TargetAudienceIds { get; init; }
-
+    public List<int>? TopicIds { get; init; }
     public string? Goal { get; init; }
-
     public string? Methodology { get; init; }
-
     public bool IsDraft { get; set; }
-
 }
 
 public static class EditTrainingViewModelMapping
@@ -33,16 +27,17 @@ public static class EditTrainingViewModelMapping
             Detail =
                 new TrainingDetailDto
                 (
-                    model.Title,
-                    model.Goal,
-                    language,
-                     model.Methodology
+                    model.Title
+                    , model.Goal
+                    , language
+                    , model.Methodology
                 ),
-            TrainingId = trainingId,
-            Types = Enumeration.FromValues<TrainingType>(model.TrainingTypeIds ?? new()),
-            TargetAudiences = Enumeration.FromValues<TrainingTargetAudience>(model.TargetAudienceIds ?? new()),
-            SlotNumberTypes = Enumeration.FromValues<TrainingSlotNumberType>(model.SlotNumberTypeIds ?? new()),
-            TrainerIds = new List<int>{trainerId},
+            TrainingId = trainingId
+            , Types = Enumeration.FromValues<TrainingType>(model.TrainingTypeIds ?? new())
+            , TargetAudiences = Enumeration.FromValues<TrainingTargetAudience>(model.TargetAudienceIds ?? new())
+            , SlotNumberTypes = Enumeration.FromValues<TrainingSlotNumberType>(model.SlotNumberTypeIds ?? new())
+            , Topics = Enumeration.FromValues<TrainingTopic>(model.TopicIds ?? new())
+            , TrainerIds = new List<int>{trainerId},
         };
 
 
@@ -77,21 +72,4 @@ public static class EditTrainingViewModelMapping
 
         return response;
     }
-
-    public static GetTrainingValidationErrorsRequest MapDraftToRequest(this UpdateTrainingViewModel model, int trainerId, Language language)
-        => new()
-        {
-            Detail = new
-                TrainingDetailDto
-                (
-                    model.Title,
-                    model.Goal,
-                    language.Value,
-                    model.Methodology
-                ),
-            TrainerId = trainerId,
-            Types = Enumeration.FromValues<TrainingType>(model.TrainingTypeIds ?? new()),
-            TargetAudiences = Enumeration.FromValues<TrainingTargetAudience>(model.TargetAudienceIds ?? new()),
-            SlotNumberTypes = Enumeration.FromValues<TrainingSlotNumberType>(model.SlotNumberTypeIds ?? new())
-        };
 }

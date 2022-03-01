@@ -29,6 +29,9 @@ internal class TrainingConfiguration : EntityConfigurationBase<Training>
         builder.HasMany(training => training.Slots)
             .WithOne(slot => slot.Training)
             .HasForeignKey(slot => slot.TrainingId);
+        builder.HasMany(training => training.Topics)
+            .WithOne(category => category.Training)
+            .HasForeignKey(category => category.TrainingId);
         builder.Property(training => training.Status)
             .HasConversion(status => status.Id,
             status => Enumeration.FromValue<TrainingStatus>(status))

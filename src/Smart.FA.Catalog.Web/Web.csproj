@@ -71,6 +71,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CreateModel.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Pages\Admin\Trainings\List\ListModel.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ListModel.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -83,6 +87,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>CreateTrainingViewModelValidator.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Pages\Admin\Trainings\List\ListModel.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ListModel.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 

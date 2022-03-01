@@ -31,8 +31,19 @@ public class TrainingRepositoryTests : IntegrationTestBase
         var trainerToAdd = _trainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
         context.Trainers.Attach(trainerToAdd);
         var language = Language.Create(_fixture.Create<string>().Substring(0, 2)).Value;
-        var trainingToAdd = new Training(trainerToAdd, new TrainingDetailDto(_fixture.Create<string>(),null,language.Value, null),new List<TrainingType> {TrainingType.LanguageCourse},
-            new List<TrainingSlotNumberType>{TrainingSlotNumberType.Group}, new List<TrainingTargetAudience> {TrainingTargetAudience.Employee});
+        var trainingToAdd = new Training
+        (
+            trainerToAdd
+            , new TrainingDetailDto
+            (
+                _fixture.Create<string>()
+                , null, language.Value, null
+            )
+            , new List<TrainingType> {TrainingType.LanguageCourse}
+            , new List<TrainingSlotNumberType> {TrainingSlotNumberType.Group}
+            , new List<TrainingTargetAudience> {TrainingTargetAudience.Employee}
+            , new List<TrainingTopic>() {TrainingTopic.Communication}
+        );
         context.Trainings.Attach(trainingToAdd);
         await context.SaveChangesAsync();
 

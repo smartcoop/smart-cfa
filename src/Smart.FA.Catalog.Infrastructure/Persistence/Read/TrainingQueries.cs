@@ -31,17 +31,23 @@ public class TrainingQueries : ITrainingQueries
         return await connection.QuerySingleAsync<TrainingDto>(sql, new {trainingId, language});
     }
 
-    public async Task<IEnumerable<TrainingDto>> GetListAsync(int trainerId, string language,
-        CancellationToken cancellationToken)
+    public async Task<IEnumerable<TrainingDto>> GetListAsync
+    (
+        int trainerId
+        , string language
+        , CancellationToken cancellationToken
+    )
     {
         var sql = @"SELECT
 	                    T.Id 'TrainingId',
 	                    T.StatusId,
 	                    TD.Title,
 	                    TD.Goal,
-                        TD.Language
+                        TD.Language,
+                        TC.TrainingTopicId 'TopicId'
                     FROM dbo.Training T
                     INNER JOIN dbo.TrainerAssignment TE ON T.Id = TE.TrainingId
+                    LEFT JOIN dbo.TrainingCategory TC ON T.Id = TC.TrainingId
                     INNER JOIN dbo.TrainingDetail TD ON T.Id = TD.TrainingId
                     WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language ";
         await using var connection = new SqlConnection(_connectionString);
@@ -56,9 +62,11 @@ public class TrainingQueries : ITrainingQueries
 	                    T.StatusId,
 	                    TD.Title,
 	                    TD.Goal,
-                        TD.Language
+                        TD.Language,
+                        TC.TrainingTopicId 'TopicId'
                     FROM dbo.Training T
                     INNER JOIN dbo.TrainerAssignment TE ON T.Id = TE.TrainingId
+                    LEFT JOIN dbo.TrainingCategory TC ON T.Id = TC.TrainingId
                     INNER JOIN dbo.TrainingDetail TD ON T.Id = TD.TrainingId
                     WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language
                     ORDER BY T.Id
@@ -68,6 +76,7 @@ public class TrainingQueries : ITrainingQueries
 	                    COUNT(*)
                     FROM dbo.Training T
                     INNER JOIN dbo.TrainerAssignment TE ON T.Id = TE.TrainingId
+                    LEFT JOIN dbo.TrainingCategory TC ON T.Id = TC.TrainingId
                     INNER JOIN dbo.TrainingDetail TD ON T.Id = TD.TrainingId
                     WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language";
 
@@ -75,7 +84,8 @@ public class TrainingQueries : ITrainingQueries
         await connection.OpenAsync(cancellationToken);
         await using var transaction = connection.BeginTransaction();
         var count = await transaction.QuerySingleAsync<int>(countsql, new {trainerId, language});
-        var list = await transaction.QueryAsync<TrainingDto>(sql, new {trainerId, language, pageItem.Offset, pageItem.PageSize});
+        var list = await transaction.QueryAsync<TrainingDto>(sql,
+            new {trainerId, language, pageItem.Offset, pageItem.PageSize});
         transaction.Commit();
         return new PagedList<TrainingDto>(list, pageItem, count);
     }

@@ -17,6 +17,7 @@ public class Training : Entity, IAggregateRoot
     private readonly List<TrainingTarget> _targets = new();
     private readonly List<TrainingDetail> _details = new();
     private readonly List<TrainingSlot> _slots = new();
+    private readonly List<TrainingCategory> _topics = new();
 
     #endregion
 
@@ -27,6 +28,7 @@ public class Training : Entity, IAggregateRoot
     public virtual IReadOnlyCollection<TrainingTarget> Targets => _targets.AsReadOnly();
     public virtual IReadOnlyCollection<TrainingDetail> Details => _details.AsReadOnly();
     public virtual IReadOnlyCollection<TrainingSlot> Slots => _slots.AsReadOnly();
+    public virtual IReadOnlyCollection<TrainingCategory> Topics => _topics.AsReadOnly();
 
     public int TrainerCreatorId { get; }
     public TrainingStatus Status { get; private set; } = TrainingStatus.Draft;
@@ -35,15 +37,22 @@ public class Training : Entity, IAggregateRoot
 
     #region Constructors
 
-    public Training(Trainer trainer, TrainingDetailDto trainingDetail, IEnumerable<TrainingType> types,
-        IEnumerable<TrainingSlotNumberType> slotNumberTypes,
-        IEnumerable<TrainingTargetAudience> targetAudiences)
+    public Training
+    (
+        Trainer trainer
+        , TrainingDetailDto trainingDetail
+        , IEnumerable<TrainingType> types
+        , IEnumerable<TrainingSlotNumberType> slotNumberTypes
+        , IEnumerable<TrainingTargetAudience> targetAudiences
+        , IEnumerable<TrainingTopic> topics
+    )
     {
         AddDetails(trainingDetail.Title!, trainingDetail.Goal!, trainingDetail.Methodology!,
             Language.Create(trainingDetail.Language).Value);
         SwitchTrainingTypes(types);
         SwitchTargetAudience(targetAudiences);
         SwitchSlotNumberType(slotNumberTypes);
+        SwitchTopics(topics);
         AssignTrainer(trainer);
         TrainerCreatorId = trainer.Id;
     }
@@ -80,6 +89,14 @@ public class Training : Entity, IAggregateRoot
             .Select(slotNumberType => new TrainingSlot(this, slotNumberType)));
     }
 
+    public void SwitchTopics(IEnumerable<TrainingTopic>? topics)
+    {
+        Guard.Requires(() => topics != null, "topics should not be null");
+        _topics.Clear();
+        _topics.AddRange(topics!.Distinct()
+            .Select(topic => new TrainingCategory(this, topic)));
+    }
+
     public void AssignTrainer(Trainer? trainer)
     {
         Guard.Requires(() => trainer is not null, "There should be at least one trainer assigned (owner)");
@@ -103,18 +120,21 @@ public class Training : Entity, IAggregateRoot
     public Result<Training, IEnumerable<Error>> Validate()
     {
         var validator = new TrainingValidator();
-        var validationResult =  validator.Validate(this);
+        var validationResult = validator.Validate(this);
 
         if (validationResult.IsValid is false)
         {
-          var errors = validationResult.Errors.Select( validationError => Errors.Training.ValidationError(validationError.ErrorMessage));
-          return Result.Failure<Training, IEnumerable<Error>>(errors);
+            var errors = validationResult.Errors.Select(validationError =>
+                Errors.Training.ValidationError(validationError.ErrorMessage));
+            return Result.Failure<Training, IEnumerable<Error>>(errors);
         }
 
         Status = Status.Validate(_identities);
 
-        var trainingDetail = Details.FirstOrDefault(training => training.Language == Language.Create("EN").Value) ?? Details.First();
-        AddDomainEvent(new ValidateTrainingEvent(trainingDetail.Title!, Id, TrainerAssignments.Select(assignment => assignment.TrainerId)));
+        var trainingDetail = Details.FirstOrDefault(training => training.Language == Language.Create("EN").Value) ??
+                             Details.First();
+        AddDomainEvent(new ValidateTrainingEvent(trainingDetail.Title!, Id,
+            TrainerAssignments.Select(assignment => assignment.TrainerId)));
 
         return Result.Success<Training, IEnumerable<Error>>(this);
     }
