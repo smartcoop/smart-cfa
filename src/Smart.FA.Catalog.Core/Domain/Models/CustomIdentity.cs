@@ -1,22 +1,24 @@
 using System.Security.Principal;
-using Core.Domain;
 
-namespace Web.Identity;
+namespace Core.Domain.Models;
 
 public class CustomIdentity : IIdentity
 {
-    public Trainer Trainer { get; }
+    public int Id { get; set; }
 
+    public Trainer Trainer { get; }
 
     public string AuthenticationType => "Custom";
 
     public bool IsAuthenticated => true;
+
     public string? Name { get; }
 
     public CustomIdentity(Trainer trainer)
     {
         Trainer = trainer;
-        Name = GetUserData();
+        Id      = trainer.Id;
+        Name    = GetUserData();
     }
 
     public override string ToString()
@@ -24,6 +26,5 @@ public class CustomIdentity : IIdentity
         return GetUserData();
     }
 
-    public string GetUserData()
-        => $"{Trainer.Name.FirstName} {Trainer.Name.LastName}";
+    public string GetUserData() => $"{Trainer.Name.FirstName} {Trainer.Name.LastName}";
 }
