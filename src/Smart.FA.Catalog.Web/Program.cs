@@ -7,8 +7,7 @@ using FluentValidation.AspNetCore;
 using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json");
+builder.Configuration.AddJsonFile("appsettings.Local.json", true, true);
 
 builder.Host.UseNLog();
 
