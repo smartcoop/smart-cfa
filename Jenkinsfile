@@ -3,12 +3,12 @@
           checkout scm
       }
       stage('Deploy build') {
-        if (['feature/init_local'].contains(env.BRANCH_NAME) ) {
+        if (['feature/develop'].contains(env.BRANCH_NAME) ) {
           sh "./jenkins-build.sh"
         }
       }
       stage('Deploy run') {
-        if (['feature/init_local'].contains(env.BRANCH_NAME) ) {
+        if (['feature/develop'].contains(env.BRANCH_NAME) ) {
           sh "./jenkins-run.sh"
         }
       }
