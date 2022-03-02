@@ -5,30 +5,25 @@ services:
     build:
       context: .
       dockerfile: DB.Dockerfile
-    ports:
-    - "1433:1433"
-    hostname: cfa-datasource
+    hostname: "datasource_${DOCKER_NAME}"
     restart: always
     networks:
-      cfa:
-        ipv4_address: 172.22.1.3
+      - "cfa"
   api:
     depends_on:
       - datasource
     build:
       context: .
       dockerfile: Web.Dockerfile
-    ports:
-      - "8080:80"
-    hostname: cfa-api
+    hostname: api_${DOCKER_NAME}
     restart: always
     networks:
-      cfa:
-        ipv4_address: 172.22.1.2
+      - "cfa"
 networks:
   cfa:
+    name: cfa
     ipam:
       driver: default
       config:
-        - subnet: 172.22.1.0/24
-          gateway: 172.22.1.1
+        - subnet: 172.21.1.0/24
+          gateway: 172.21.1.1
