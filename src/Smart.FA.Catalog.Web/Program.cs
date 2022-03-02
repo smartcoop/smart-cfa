@@ -50,6 +50,9 @@ builder.Services
 
 var app = builder.Build();
 
+// We don't await this operation now but it will awaited just before app.Run()
+var seedingTask = app.Services.GetRequiredService<IBootStrapService>().SeedAndApplyMigrationsAsync();
+
 app.UseForwardedHeaders();
 
 app.UseProxyHeaders();
@@ -63,8 +66,6 @@ else
 {
     app.UseDeveloperExceptionPage();
 }
-
-builder.ApplyMigrations();
 
 app.Use(async (context, next) =>
 {
@@ -84,5 +85,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+await seedingTask;
 
 app.Run();

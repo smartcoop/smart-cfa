@@ -53,6 +53,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped(_ => new UserStrategyResolver(userAccountConnectionString));
         services.AddScoped<IMailService, MailService>();
 
+        services.AddTransient<IBootStrapService, BootStrapService>();
+
         return services;
     }
 
