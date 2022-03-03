@@ -4,7 +4,7 @@ namespace Core.Domain.Models;
 
 public class CustomIdentity : IIdentity
 {
-    public int Id { get; set; }
+    public int Id => Trainer.Id;
 
     public Trainer Trainer { get; }
 
@@ -17,14 +17,13 @@ public class CustomIdentity : IIdentity
     public CustomIdentity(Trainer trainer)
     {
         Trainer = trainer;
-        Id      = trainer.Id;
-        Name    = GetUserData();
+        Name    = GetUserFormattedName();
     }
 
     public override string ToString()
     {
-        return GetUserData();
+        return GetUserFormattedName();
     }
 
-    public string GetUserData() => $"{Trainer.Name.FirstName} {Trainer.Name.LastName}";
+    public string GetUserFormattedName() => $"{Trainer.Name.FirstName} {Trainer.Name.LastName}";
 }
