@@ -1,6 +1,6 @@
+using Core.Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Web.Identity;
 
 namespace Web.Pages.Admin.Trainings.Create;
 

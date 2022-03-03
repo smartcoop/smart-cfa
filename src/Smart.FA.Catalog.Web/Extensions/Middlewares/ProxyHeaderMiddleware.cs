@@ -2,9 +2,9 @@ using System.Globalization;
 using System.Security.Principal;
 using Application.UseCases.Queries;
 using Core.Domain.Enumerations;
+using Core.Domain.Models;
 using Core.SeedWork;
 using MediatR;
-using Web.Identity;
 
 namespace Web.Extensions.Middlewares;
 
