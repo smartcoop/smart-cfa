@@ -29,10 +29,19 @@ public class TrainerConfiguration : EntityConfigurationBase<Trainer>
             p.Property(pp => pp.UserId).HasColumnName("UserId").HasMaxLength(200).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
         });
 
-        builder.Property(trainer => trainer.DefaultLanguage).HasConversion(language => language.Value,
-            language => Language.Create(language).Value);
+        builder.Property(trainer => trainer.DefaultLanguage)
+            .HasConversion
+            (
+                language => language.Value,
+                language => Language.Create(language).Value
+            );
+
         builder.Property(trainer => trainer.Biography).HasMaxLength(1500);
         builder.Property(trainer => trainer.Title).HasMaxLength(150);
+
+        builder.HasMany(trainer => trainer.PersonalSocialNetworks)
+            .WithOne(socialNetwork => socialNetwork.Trainer)
+            .HasForeignKey(personalSocialNetwork => personalSocialNetwork.TrainerId);
 
         builder.ToTable("Trainer");
     }
