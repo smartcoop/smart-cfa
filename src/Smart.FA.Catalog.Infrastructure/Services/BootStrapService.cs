@@ -22,9 +22,9 @@ public class BootStrapService : IBootStrapService
     }
 
     /// <inheritdoc />
-    public async Task SeedAndApplyMigrationsAsync()
+    public async Task ApplyMigrationsAndSeedAsync()
     {
-        // we cannot inject Catalog context inside the constructor nor using the IServiceProvider.
+        // We cannot inject Catalog context inside the constructor nor using the IServiceProvider.
         // The reason behind this is the CatalogContext has a scoped lifetime.
         // Therefore we need to achieve this by using a IServiceScope.
         using var serviceScope = _factory.CreateScope();
@@ -43,21 +43,23 @@ public class BootStrapService : IBootStrapService
 
     private async Task<bool> SafeApplyMigrationsWithRetriesAsync(CatalogContext catalogContext, IDbConnection currentConnection)
     {
-        for (var i = 0; i < 150; i++)
+        int DelayToWaitBetweenRetriesInMilliseconds(int retryAttempt) => (int)(Math.Max(5 - retryAttempt, 0) + Math.Pow(2, Math.Min(retryAttempt, 5))) * 1_000;
+        for (var retryAttempt = 0; retryAttempt < 6; retryAttempt++)
         {
-            if (await SafeApplyMigrationsAsync(catalogContext))
+            if (await SafeApplyMigrationsAndSeedAsync(catalogContext))
             {
                 _logger.LogInformation("Seeding [{database}] database completed successfully", currentConnection.Database);
                 return true;
             }
 
-            await Task.Delay(1000);
+            // Arithmetic progression is: 6, 6, 7, 10, 17, 32 seconds. With 32 seconds being the maximum value.
+            await Task.Delay(DelayToWaitBetweenRetriesInMilliseconds(retryAttempt));
         }
 
         return false;
     }
 
-    private async Task<bool> SafeApplyMigrationsAsync(CatalogContext context)
+    private async Task<bool> SafeApplyMigrationsAndSeedAsync(CatalogContext context)
     {
         try
         {
@@ -74,7 +76,7 @@ public class BootStrapService : IBootStrapService
         }
     }
 
-    //TODO use an actual file such as an csv.
+    //TODO implementation an actual non hardcoded mechanism.
     private Task SeedTrainersAsync(CatalogContext catalogContext)
     {
         var trainer = new Trainer(Name.Create("Victor", "vD").Value,

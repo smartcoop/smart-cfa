@@ -1,4 +1,5 @@
 using Application.Extensions;
+using Core.Services;
 using Infrastructure.Extensions;
 using Smart.Design.Razor.Extensions;
 using Web.Extensions;
@@ -51,7 +52,7 @@ builder.Services
 var app = builder.Build();
 
 // We don't await this operation now but it will awaited just before app.Run()
-var seedingTask = app.Services.GetRequiredService<IBootStrapService>().SeedAndApplyMigrationsAsync();
+var seedingTask = app.Services.GetRequiredService<IBootStrapService>().ApplyMigrationsAndSeedAsync();
 
 app.UseForwardedHeaders();
 
