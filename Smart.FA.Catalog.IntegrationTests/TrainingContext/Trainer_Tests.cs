@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoFixture;
 using Core.Domain;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ namespace Smart.FA.Catalog.IntegrationTests.TrainingContext;
 public class TrainerTests : IntegrationTestBase
 {
     private readonly TrainerFactory _trainerFactory = new();
+    private readonly UserFactory _userFactory = new();
 
     [Theory]
     [InlineData("Victor", "vD")]
@@ -49,7 +51,19 @@ public class TrainerTests : IntegrationTestBase
         foundTrainer!.Name.Should().BeSameAs(newName.Value);
     }
 
+    [Fact]
+    public async Task CanCreateFromUser()
+    {
+        await using var context = GivenTrainingContext();
+        var user = _userFactory.CreateClean();
+        var trainer = _trainerFactory.CreateFromUser(user);
 
+        context.Trainers.Add(trainer);
+        await context.SaveChangesAsync();
 
-
+        trainer.Should().NotBeNull();
+        trainer!.Name.FirstName.Should().NotBeEmpty();
+        trainer.Name.LastName.Should().NotBeEmpty();
+        trainer.DefaultLanguage.Value.Should().NotBeEmpty();
+    }
 }
