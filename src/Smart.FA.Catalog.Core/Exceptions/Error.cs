@@ -30,7 +30,7 @@ namespace Core.Exceptions
             if (serialized == "A non-empty request body is required.")
                 return Errors.General.ValueIsRequired();
 
-            var data = serialized.Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries);
+            var data = serialized.Split(new[] {Separator}, StringSplitOptions.RemoveEmptyEntries);
 
             if (data.Length < 2)
                 throw new Exception($"Invalid error serialization: '{serialized}'");
@@ -78,13 +78,19 @@ namespace Core.Exceptions
                     $"The collection must contain {max} items or more. It contains {current} items.");
             }
 
+            public static Error UnexpectedHandlerError()
+            {
+                return new Error(
+                    "unexpected.handler.error",
+                    "An unexpected error occurred during the executing of the request");
+            }
+
             public static Error InternalServerError(string message)
             {
                 return new Error("internal.server.error", message);
             }
 
             public static Error GuardClauseBlockage(string message) => new("guard.clause.blockage", message);
-
         }
 
         public static class User
