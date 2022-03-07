@@ -1,67 +1,46 @@
 using Application.SeedWork;
 using Core.Domain;
+using Core.Domain.Dto;
 using Core.Domain.Enumerations;
 using Core.SeedWork;
-using Core.Services;
 using Infrastructure.Persistence;
-using Infrastructure.Services;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Application.UseCases.Queries;
 
-public class GetTrainerFromUserAppQueryHandler : IRequestHandler<GetTrainerFromUserAppRequest, GetTrainerFromUserAppResponse>
+public class
+    GetTrainerFromUserAppQueryHandler : IRequestHandler<GetTrainerFromUserAppRequest, GetTrainerFromUserAppResponse>
 {
     private readonly ILogger<GetTrainerFromUserAppQueryHandler> _logger;
-    private readonly UserStrategyResolver _userStrategyResolver;
-    private readonly CatalogContext _catalogContext;
+    private readonly CatalogContext _context;
 
-    public GetTrainerFromUserAppQueryHandler(ILogger<GetTrainerFromUserAppQueryHandler> logger,
-        UserStrategyResolver userStrategyResolver, CatalogContext catalogContext)
+    public GetTrainerFromUserAppQueryHandler(ILogger<GetTrainerFromUserAppQueryHandler> logger, CatalogContext context)
     {
         _logger = logger;
-        _userStrategyResolver = userStrategyResolver;
-        _catalogContext = catalogContext;
+        _context = context;
     }
 
-    public async Task<GetTrainerFromUserAppResponse> Handle(GetTrainerFromUserAppRequest request, CancellationToken cancellationToken)
+    public async Task<GetTrainerFromUserAppResponse> Handle(GetTrainerFromUserAppRequest query,
+        CancellationToken cancellationToken)
     {
-        GetTrainerFromUserAppResponse resp = new();
-        try
-        {
-            var userStrategy =  _userStrategyResolver.Resolve(request.ApplicationType!);
-            var user = await userStrategy.GetAsync(request.UserId!);
-            var linkedTrainer =
-                await _catalogContext.Trainers.FirstOrDefaultAsync(trainer => trainer.Identity.UserId == request.UserId, cancellationToken);
-            if (linkedTrainer is null)
-            {
-                linkedTrainer = new Trainer(Name.Create(user.FirstName, user.LastName).Value,
-                    TrainerIdentity.Create(user.UserId, Enumeration.FromDisplayName<ApplicationType>(user.ApplicationType)).Value,string.Empty, string.Empty,
-                    Language.Create("EN").Value);
-                await _catalogContext.Trainers.AddAsync(linkedTrainer, cancellationToken);
-                await _catalogContext.SaveChangesAsync(cancellationToken);
-            }
+        GetTrainerFromUserAppResponse response = new();
+        response.Trainer = await _context.Trainers.FirstOrDefaultAsync(trainer =>
+            trainer.Identity.UserId == query.User.UserId && trainer.Identity.ApplicationTypeId ==
+            Enumeration.FromDisplayName<ApplicationType>(query.User.ApplicationType).Id, cancellationToken);
+        response.SetSuccess();
 
-            resp.Trainer = linkedTrainer;
-            resp.SetSuccess();
-        }
-        catch (Exception e)
-        {
-            _logger.LogError(e.ToString());
-            throw;
-        }
-        return resp;
+        return response;
     }
-}
-
-public class GetTrainerFromUserAppRequest : IRequest<GetTrainerFromUserAppResponse>
-{
-    public string UserId { get; init; } = null!;
-    public ApplicationType ApplicationType { get; init; } = null!;
 }
 
 public class GetTrainerFromUserAppResponse : ResponseBase
 {
     public Trainer? Trainer { get; set; }
+}
+
+public class GetTrainerFromUserAppRequest : IRequest<GetTrainerFromUserAppResponse>
+{
+    public UserDto User { get; set; } = null!;
 }
