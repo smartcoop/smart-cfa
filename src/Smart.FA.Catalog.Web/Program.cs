@@ -1,4 +1,5 @@
 using Application.Extensions;
+using Application.SeedWork;
 using Infrastructure.Extensions;
 using Smart.Design.Razor.Extensions;
 using Web.Extensions;
@@ -28,6 +29,7 @@ builder.Services
     .AddFluentValidation(configuration =>
     {
         configuration.RegisterValidatorsFromAssemblyContaining<Program>();
+        configuration.RegisterValidatorsFromAssemblyContaining<ResponseBase>();
         configuration.DisableDataAnnotationsValidation = true;
     })
     .AddViewLocalization(options =>
