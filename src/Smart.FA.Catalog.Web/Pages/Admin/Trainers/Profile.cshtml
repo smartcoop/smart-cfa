@@ -1,0 +1,50 @@
+﻿@page "/admin/myprofile"
+@model Web.Pages.Admin.Trainers.ProfileModel
+@{
+    Layout = "Shared/_AdminLayout";
+}
+
+@section HeaderToolbar {
+<div class="c-navbar c-navbar--bordered-bottom">
+    <div class="c-toolbar">
+        <div class="c-toolbar__left">
+            <div class="c-toolbar__item">
+                <h2 class="c-toolbar__title">Profile edition</h2>
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+<smart-container size="Medium">
+    @if (Model.EditionSucceeded)
+    {
+        <smart-spacer bottom="Large">
+            <smart-alert message="Profile updated with success" style="Success" is-closable="true"></smart-alert>
+        </smart-spacer>
+    }
+
+    <smart-form>
+        <smart-panel header="@Model.UserIdentity.Identity.Name">
+            <smart-form-group-input-text label="Fonction" asp-for="EditProfileCommand.Title"></smart-form-group-input-text>
+            <smart-form-group-textarea rows="6" label="Bio" asp-for="EditProfileCommand.Bio" helper-text="Max 500 characters"></smart-form-group-textarea>
+        </smart-panel>
+
+        <smart-spacer all="ExtraLarge"></smart-spacer>
+
+        <smart-panel header="Socials">
+            @foreach (var socialVm in Model.SocialNetworkViewModels)
+            {
+                <smart-spacer bottom="Large">
+                    <smart-formgroup label="@socialVm.Name">
+                        <smart-input-group icon="@socialVm.Icon" name="@("social" + "-" + socialVm.SocialNetworkId)" value="@socialVm.Url"></smart-input-group>
+                    </smart-formgroup>
+                </smart-spacer>
+            }
+        </smart-panel>
+
+        <smart-spacer Top="Large">
+            <smart-button button-type="Submit" label="Publier" is-block="true"></smart-button>
+        </smart-spacer>
+    </smart-form>
+</smart-container>
