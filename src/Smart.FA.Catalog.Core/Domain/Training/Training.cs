@@ -40,15 +40,15 @@ public class Training : Entity, IAggregateRoot
     public Training
     (
         Trainer trainer
-        , TrainingDetailDto trainingDetail
+        , TrainingDetailDto detail
         , IEnumerable<TrainingType> types
         , IEnumerable<TrainingSlotNumberType> slotNumberTypes
         , IEnumerable<TrainingTargetAudience> targetAudiences
         , IEnumerable<TrainingTopic> topics
     )
     {
-        AddDetails(trainingDetail.Title!, trainingDetail.Goal!, trainingDetail.Methodology!,
-            Language.Create(trainingDetail.Language).Value);
+        AddDetails(detail.Title!, detail.Goal!, detail.Methodology!,
+            Language.Create(detail.Language).Value);
         SwitchTrainingTypes(types);
         SwitchTargetAudience(targetAudiences);
         SwitchSlotNumberType(slotNumberTypes);
