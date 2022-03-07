@@ -26,7 +26,7 @@ public class ProxyHeaderMiddleware
     public async Task InvokeAsync(HttpContext context, IMediator mediator )
     {
         var userId = (string.IsNullOrEmpty(context.Request.Headers["user_id"].ToString())  ? "1" : context.Request.Headers["user_id"].ToString())!;
-        var appName =  string.IsNullOrEmpty(context.Request.Headers["app_name"].ToString()) ? ApplicationType.Default.Name : context.Request.Headers["app_name"].ToString();
+        var appName =  string.IsNullOrEmpty(context.Request.Headers["app_name"].ToString()) ? ApplicationType.Account.Name : context.Request.Headers["app_name"].ToString();
         var applicationType = Enumeration.FromDisplayName<ApplicationType>(appName);
 
         var userResponse = await mediator.Send(new GetUserAppFromIdRequest{UserId = userId, ApplicationType = applicationType});
@@ -34,7 +34,7 @@ public class ProxyHeaderMiddleware
 
         if (trainerResponse.Trainer is null)
         {
-            var newTrainerResponse = await mediator.Send(new CreateTrainerFromUserAppRequest());
+            var newTrainerResponse = await mediator.Send(new CreateTrainerFromUserAppRequest{User = userResponse.User});
             trainerResponse.Trainer = newTrainerResponse.Trainer;
         }
 

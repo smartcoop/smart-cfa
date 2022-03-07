@@ -6,21 +6,21 @@ namespace Smart.FA.Catalog.IntegrationTests.Base;
 
 public class ConnectionSetup
 {
-    public const string DatabaseName = "Training";
+    public const string DatabaseName = "Catalog";
 
     public static SqlConnectionStringBuilder Master =>
         new SqlConnectionStringBuilder
         {
-            DataSource = @"(LocalDB)\MSSQLLocalDB",
+            DataSource = @"(localdb)\MSSQLLocalDb",
             InitialCatalog = "master",
             IntegratedSecurity = true
         };
 
-    public static SqlConnectionStringBuilder Training =>
+    public static SqlConnectionStringBuilder Catalog =>
         new SqlConnectionStringBuilder
         {
-            DataSource = @"(LocalDB)\MSSQLLocalDB",
-            InitialCatalog = "Training",
+            DataSource = @"(localdb)\MSSQLLocalDb",
+            InitialCatalog = "Catalog",
             IntegratedSecurity = true
         };
 

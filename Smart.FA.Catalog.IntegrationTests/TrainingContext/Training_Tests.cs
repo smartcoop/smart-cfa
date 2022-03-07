@@ -17,7 +17,7 @@ public class TrainingTests: IntegrationTestBase
     [InlineData("Victor", "vD")]
     public async Task CanCreate(string firstName, string lastName)
     {
-        await using var context = GivenTrainingContext(false);
+        await using var context = GivenCatalogContext(false);
         var trainer = _trainerFactory.Create(firstName, lastName);
         context.Trainers.Attach(trainer);
         var training = _trainingFactory.Create(trainer);

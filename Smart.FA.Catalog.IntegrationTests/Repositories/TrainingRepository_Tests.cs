@@ -20,14 +20,14 @@ public class TrainingRepositoryTests : IntegrationTestBase
 {
     private readonly TrainerFactory _trainerFactory = new();
     private readonly Fixture _fixture = new();
-    private readonly TrainingQueries _trainingQueries = new(ConnectionSetup.Training.ConnectionString);
+    private readonly TrainingQueries _trainingQueries = new(ConnectionSetup.Catalog.ConnectionString);
 
     [Fact]
     public async Task GetPaginatedReadOnlyListFromTrainerId()
     {
         var pageSize = 1;
         var currentPage = 1;
-        await using var context = GivenTrainingContext(false);
+        await using var context = GivenCatalogContext(false);
         var trainerToAdd = _trainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
         context.Trainers.Attach(trainerToAdd);
         var language = Language.Create(_fixture.Create<string>().Substring(0, 2)).Value;
