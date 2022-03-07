@@ -86,5 +86,14 @@ namespace Core.Exceptions
             public static Error GuardClauseBlockage(string message) => new("guard.clause.blockage", message);
 
         }
+
+        public static class User
+        {
+            public static Error NotFound(string? id = null)
+            {
+                var forId = id == null ? "" : $" for Id '{id}'";
+                return new Error("user.not.found", $"User not found{forId}");
+            }
+        }
     }
 }
