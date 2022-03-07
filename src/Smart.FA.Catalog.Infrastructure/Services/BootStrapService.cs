@@ -38,9 +38,16 @@ public class BootStrapService : IBootStrapService
         if (!completedWithSuccess)
         {
             _logger.LogError("Seeding [{database}] database couldn't complete", currentConnection.Database);
+            throw new Exception("Applying migrations and seed the database was not successful, aborting the startup of the application");
         }
     }
 
+    /// <summary>
+    /// Applies migrations and then seeds the database.
+    /// </summary>
+    /// <param name="catalogContext"><see cref="DbContext" /> on which the operations has to be performed.</param>
+    /// <param name="currentConnection">Current connection of <paramref name="catalogContext"/>.</param>
+    /// <returns>A task representing the asynchronous operation. The task's result is a boolean whose value tells if the operation was successful.</returns>
     private async Task<bool> SafeApplyMigrationsWithRetriesAsync(CatalogContext catalogContext, IDbConnection currentConnection)
     {
         int DelayToWaitBetweenRetriesInMilliseconds(int retryAttempt) => (int)(Math.Max(5 - retryAttempt, 0) + Math.Pow(2, Math.Min(retryAttempt, 5))) * 1_000;
