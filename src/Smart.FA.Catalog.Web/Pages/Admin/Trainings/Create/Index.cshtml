@@ -11,34 +11,30 @@
     ViewData["Title"] = "Add a training";
 }
 
-<smart-container size="Medium">
-
-    @section HeaderToolbar
-    {
-        <div class="c-navbar c-navbar--bordered-bottom">
-            <div class="c-toolbar">
-                <div class="c-toolbar__left">
-                    <div class="c-toolbar__item">
-                        @if (Request.Query.ContainsKey("fromlist"))
-                        {
-                            <a class="c-button c-button--icon c-button--borderless" href="/admin/trainings/list/index">
-                                <div class="c-button__content">
-                                    <smart-icon icon="ArrowLeft"></smart-icon>
-                                    <div class="u-sr-accessible">Back</div>
-                                </div>
-                            </a>
-                        }
+@section HeaderToolbar
+{
+    <div class="c-toolbar">
+        <div class="c-toolbar__left">
+            <div class="c-toolbar__item">
+                @if (Request.Query.ContainsKey("fromlist"))
+                {
+                <a class="c-button c-button--icon c-button--borderless" href="/admin/trainings/list/index">
+                    <div class="c-button__content">
+                        <smart-icon icon="ArrowLeft"></smart-icon>
+                        <div class="u-sr-accessible">Back</div>
                     </div>
-                    <div class="c-toolbar__item">
-                        <h2 class="c-toolbar__title">@ViewData["ToolBarTitle"]</h2>
-                    </div>
-
-                </div>
-
+                </a>
+                }
             </div>
-        </div>
-    }
+            <div class="c-toolbar__item">
+                <h2 class="c-toolbar__title">@ViewData["ToolBarTitle"]</h2>
+            </div>
 
+        </div>
+    </div>
+}
+
+<smart-container size="Medium">
     <form method="post" id="form">
         <div class="o-form-group-layout o-form-group-layout--standard">
             <smart-form-group-input-text label="Titre de la formation / module" asp-for="CreateTrainingViewModel.Title"></smart-form-group-input-text>
@@ -86,7 +82,7 @@
             </smart-formgroup>
             <smart-form-group-textarea rows="5" asp-for="CreateTrainingViewModel.Goal" label="@_localizer[nameof(Model.CreateTrainingViewModel.Goal)]"></smart-form-group-textarea>
             <smart-form-group-textarea rows="5" asp-for="CreateTrainingViewModel.Methodology" label="@_localizer[nameof(Model.CreateTrainingViewModel.Methodology)]"></smart-form-group-textarea>
-            <input type="hidden" id="isDraft" value="false" asp-for="CreateTrainingViewModel.IsDraft"/>
+            <input type="hidden" id="isDraft" value="false" asp-for="CreateTrainingViewModel.IsDraft" />
             <div class="u-spacer"></div>
         </div>
         <div class="c-toolbar__right">
