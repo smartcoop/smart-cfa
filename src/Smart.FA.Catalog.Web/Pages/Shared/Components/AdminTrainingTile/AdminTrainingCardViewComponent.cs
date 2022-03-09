@@ -1,7 +1,7 @@
 using Core.Domain.Dto;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Web.ViewComponents2;
+namespace Web.Pages.Shared.Components.AdminTrainingTile;
 
 [ViewComponent(Name = "AdminTrainingTile")]
 public class AdminTrainingCardViewComponent : ViewComponent
