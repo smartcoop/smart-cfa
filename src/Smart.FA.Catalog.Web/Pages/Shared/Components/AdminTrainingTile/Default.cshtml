@@ -1,0 +1,27 @@
+﻿@using Core.Domain.Enumerations
+@using Core.SeedWork
+@using Microsoft.Extensions.Localization
+@using Web.Pages.Admin.Trainings.List
+@using Smart.Design.Razor.TagHelpers.Pill
+@using Web.ViewComponents2
+@inject IStringLocalizer<AdminTrainingCardViewComponent> _localizer
+@model IGrouping<int, Core.Domain.Dto.TrainingDto>
+<smart-card>
+    <smart-card-body>
+        <smart-card-title text="@Model.First().Title"></smart-card-title>
+        <smart-muted-text text="@string.Join(", ", @Model.Where(training => training.TopicId != 0).Select(training => _localizer[Enumeration.FromValue<TrainingTopic>(training.TopicId).Name]))"></smart-muted-text>
+    </smart-card-body>
+    <smart-card-actions>
+        <div class="o-flex o-flex--vertical-center o-flex--justify-between o-flex--spaced-wide">
+            <smart-pill label="@(Enumeration.FromValue<TrainingStatus>(Model.First().StatusId).DisplayStatus())"></smart-pill>
+            <div class="c-button-toolbar">
+                <a href="/admin/trainings/update/@Model.Key">
+                    <smart-button leading-icon="EditAlt" button-style="Borderless"></smart-button>
+                </a>
+                <form method="post" asp-page-handler="Delete" asp-route-id="@Model.Key">
+                    <smart-button icon-only="true" leading-icon="Delete" button-style="Borderless" button-type="Submit"></smart-button>
+                </form>
+            </div>
+        </div>
+    </smart-card-actions>
+</smart-card>
