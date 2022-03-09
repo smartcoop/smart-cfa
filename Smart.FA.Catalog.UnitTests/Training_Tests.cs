@@ -8,7 +8,7 @@ using Core.Domain.Enumerations;
 using Core.Exceptions;
 using Core.Services;
 using FluentAssertions;
-using Moq;
+using NSubstitute;
 using Smart.FA.Catalog.Tests.Common;
 using Xunit;
 
@@ -17,11 +17,11 @@ namespace Smart.FA.Catalog.UnitTests;
 public class TrainingTests
 {
     private Fixture _fixture = new();
-    private readonly Mock<IMailService> _mailService;
+    private readonly IMailService _mailService;
 
     public TrainingTests()
     {
-        _mailService = new Mock<IMailService>();
+        _mailService = Substitute.For<IMailService>();
     }
 
     [Fact]
