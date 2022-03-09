@@ -16,8 +16,6 @@ namespace Smart.FA.Catalog.IntegrationTests.Repositories;
 [Collection("Integration test collection")]
 public class TrainerRepositoryTests : IntegrationTestBase
 {
-    private readonly TrainerFactory _trainerFactory = new();
-    private readonly TrainingFactory _trainingFactory = new();
     private readonly Fixture _fixture = new();
     private readonly TrainerQueries _trainerQueries = new(ConnectionSetup.Catalog.ConnectionString);
 
@@ -26,10 +24,10 @@ public class TrainerRepositoryTests : IntegrationTestBase
     {
         await using var context = GivenCatalogContext();
         var trainerRepository = new TrainerRepository(context);
-        var trainer = _trainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
+        var trainer = TrainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
         context.Trainers.Attach(trainer);
         context.SaveChanges();
-        var training = _trainingFactory.Create(trainer);
+        var training = TrainingFactory.Create(trainer);
         context.Trainings.Add(training);
         context.SaveChanges();
 
@@ -42,9 +40,9 @@ public class TrainerRepositoryTests : IntegrationTestBase
     public async Task GetReadOnlyListFromTrainingId()
     {
         await using var context = GivenCatalogContext(false);
-        var trainerToAdd = _trainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
+        var trainerToAdd = TrainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
         context.Trainers.Attach(trainerToAdd);
-        var trainingToAdd = _trainingFactory.Create(trainerToAdd);
+        var trainingToAdd = TrainingFactory.Create(trainerToAdd);
         context.Trainings.Attach(trainingToAdd);
         await context.SaveChangesAsync();
 
@@ -61,7 +59,7 @@ public class TrainerRepositoryTests : IntegrationTestBase
     {
         await using var context = GivenCatalogContext();
         var trainerRepository = new TrainerRepository(context);
-        var trainer = _trainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
+        var trainer = TrainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
         context.Trainers.Attach(trainer);
         await context.SaveChangesAsync();
 

@@ -15,8 +15,6 @@ namespace Smart.FA.Catalog.IntegrationTests.TrainingContext;
 [Collection("Integration test collection")]
 public class TrainerTests : IntegrationTestBase
 {
-    private readonly TrainerFactory _trainerFactory = new();
-    private readonly UserFactory _userFactory = new();
     private readonly Fixture _fixture = new();
 
     [Theory]
@@ -24,7 +22,7 @@ public class TrainerTests : IntegrationTestBase
     public async Task CanCreateTrainer(string firstName, string lastName)
     {
         await using var context = GivenCatalogContext();
-        var trainer = _trainerFactory.Create(firstName, lastName);
+        var trainer = TrainerFactory.Create(firstName, lastName);
 
         context.Trainers.Attach(trainer);
         await context.SaveChangesAsync();
@@ -42,7 +40,7 @@ public class TrainerTests : IntegrationTestBase
     public async Task CanChangeTrainerName(string firstName, string lastName)
     {
         await using var context = GivenCatalogContext();
-        var trainer = _trainerFactory.Create(firstName, lastName);
+        var trainer = TrainerFactory.Create(firstName, lastName);
         context.Trainers.Attach(trainer);
         await context.SaveChangesAsync();
         var newName = Name.Create("Maxime", "P.");
@@ -57,8 +55,8 @@ public class TrainerTests : IntegrationTestBase
     public async Task CanCreateFromUser()
     {
         await using var context = GivenCatalogContext();
-        var user = _userFactory.CreateClean();
-        var trainer = _trainerFactory.CreateFromUser(user);
+        var user = UserFactory.CreateClean();
+        var trainer = TrainerFactory.CreateFromUser(user);
 
         context.Trainers.Add(trainer);
         await context.SaveChangesAsync();
@@ -81,7 +79,7 @@ public class TrainerTests : IntegrationTestBase
         {
             string? applicationName = Enumeration.FromValue<ApplicationType>(applicationTypeId ?? 0).Name;
             var user = new UserDto(userId!, _fixture.Create<string>(), _fixture.Create<string>(), applicationName);
-            var trainer = _trainerFactory.CreateFromUser(user);
+            var trainer = TrainerFactory.CreateFromUser(user);
             context.Trainers.Add(trainer);
             await context.SaveChangesAsync();
         };

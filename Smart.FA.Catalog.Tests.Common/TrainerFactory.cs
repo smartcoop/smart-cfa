@@ -7,11 +7,11 @@ using CSharpFunctionalExtensions;
 
 namespace Smart.FA.Catalog.Tests.Common;
 
-public class TrainerFactory
+public static class TrainerFactory
 {
-    public Trainer CreateClean()
+    private static Fixture fixture = new();
+    public static Trainer CreateClean()
     {
-        var fixture = new Fixture();
         var defaultLanguage = Language.Create(fixture.Create<string>().Substring(0, 2));
         var name = Name.Create(fixture.Create<string>(), fixture.Create<string>());
 
@@ -29,7 +29,7 @@ public class TrainerFactory
         );
     }
 
-    public Trainer Create(string firstName, string lastName)
+    public static Trainer Create(string firstName, string lastName)
     {
         var fixture = new Fixture();
         var defaultLanguage = Language.Create(fixture.Create<string>().Substring(0, 2));
@@ -43,7 +43,7 @@ public class TrainerFactory
             , fixture.Create<string>(), defaultLanguage.Value);
     }
 
-    public Trainer CreateFromUser(UserDto user)
+    public static Trainer CreateFromUser(UserDto user)
     {
         var fixture = new Fixture();
         var defaultLanguage = Language.Create(fixture.Create<string>().Substring(0, 2));

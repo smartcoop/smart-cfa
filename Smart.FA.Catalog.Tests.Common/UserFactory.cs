@@ -5,11 +5,11 @@ using Core.Domain.Enumerations;
 
 namespace Smart.FA.Catalog.Tests.Common;
 
-public class UserFactory
+public static class UserFactory
 {
-    private Fixture fixture = new();
+    private static Fixture fixture = new();
 
-    public UserDto CreateClean()
+    public static UserDto CreateClean()
     {
         return new UserDto
         (

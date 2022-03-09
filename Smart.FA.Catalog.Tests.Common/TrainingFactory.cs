@@ -5,11 +5,12 @@ using Core.Domain.Enumerations;
 
 namespace Smart.FA.Catalog.Tests.Common;
 
-public class TrainingFactory
+public static class TrainingFactory
 {
-    public Training Create(Trainer trainer)
+    private static Fixture fixture = new();
+
+    public  static Training Create(Trainer trainer)
     {
-        Fixture fixture = new();
         return new Training
         (
             trainer
@@ -21,15 +22,13 @@ public class TrainingFactory
         );
     }
 
-    public Training CreateClean()
+    public static Training CreateClean()
     {
-        TrainerFactory trainerFactory = new();
-        return Create(trainerFactory.CreateClean());
+        return Create(TrainerFactory.CreateClean());
     }
 
-    public Training CreateWithManualValidation(Trainer trainer)
+    public static Training CreateWithManualValidation(Trainer trainer)
     {
-        Fixture fixture = new();
         return new Training
         (
             trainer
@@ -41,9 +40,8 @@ public class TrainingFactory
         );
     }
 
-    public Training CreateWithAutoValidation(Trainer trainer)
+    public static Training CreateWithAutoValidation(Trainer trainer)
     {
-        Fixture fixture = new();
         return new Training
         (
             trainer
