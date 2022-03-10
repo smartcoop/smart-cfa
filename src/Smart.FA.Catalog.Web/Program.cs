@@ -37,6 +37,8 @@ builder.Services
         options.ResourcesPath = "Resources";
     });
 
+builder.WebHost.UseWebRoot("wwwroot");
+builder.WebHost.UseStaticWebAssets();
 
 #if DEBUG
 builder.Services
@@ -79,6 +81,7 @@ app.Use(async (context, next) =>
         await next();
     }
 });
+
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
