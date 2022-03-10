@@ -14,7 +14,7 @@
 </div>
 }
 
-<smart-container size="Medium">
+<div class="o-container">
     @if (Model.EditionSucceeded)
     {
         <smart-spacer bottom="Large">
@@ -23,10 +23,31 @@
     }
 
     <smart-form>
-        <smart-panel header="@Model.UserIdentity.Identity.Name">
-            <smart-form-group-input-text label="Fonction" asp-for="EditProfileCommand.Title"></smart-form-group-input-text>
-            <smart-form-group-textarea rows="6" label="Bio" asp-for="EditProfileCommand.Bio" helper-text="Max 500 characters"></smart-form-group-textarea>
-        </smart-panel>
+        <smart-grid>
+            <smart-grid-column width="7">
+                <smart-panel header="@Model.UserIdentity.Identity.Name">
+                    <smart-form-group-input-text label="Fonction" asp-for="EditProfileCommand.Title"></smart-form-group-input-text>
+                    <smart-form-group-textarea rows="6" label="Bio" asp-for="EditProfileCommand.Bio" helper-text="Max 500 characters"></smart-form-group-textarea>
+                </smart-panel>
+            </smart-grid-column>
+
+            @*Trainer profile picture*@
+
+            <smart-grid-column width="5">
+                <smart-spacer left="ExtraLarge" top="ExtraLarge">
+                    <div class="o-form-group">
+                        <label class="o-form-group__label trainer-picture-label" style="text-align: center;">Trainer picture</label>
+                        <div class="o-form-group__controls o-flex o-flex--horizontal-center">
+                            <div class="c-avatar c-avatar--img c-avatar--extra-large">
+                                <img src="https://i1.sndcdn.com/avatars-000304411295-zx2krs-t200x200.jpg" alt="avatar" style="">
+                            </div>
+                        </div>
+                    </div>
+                </smart-spacer>
+            </smart-grid-column>
+
+            @* --------------------------*@
+        </smart-grid>
 
         <smart-spacer all="ExtraLarge"></smart-spacer>
 
@@ -45,4 +66,4 @@
             <smart-button button-type="Submit" label="Publier" is-block="true"></smart-button>
         </smart-spacer>
     </smart-form>
-</smart-container>
+</div>

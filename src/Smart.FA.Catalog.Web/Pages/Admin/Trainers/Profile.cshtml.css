@@ -1,0 +1,13 @@
+.c-avatar--extra-large {
+    width: 25rem;
+    height: 25rem;
+    min-width: 25rem;
+    min-height: 25rem;
+    line-height: 25rem;
+    font-size: 2.4rem;
+}
+
+.trainer-picture-label {
+    font-size: 2.2rem !important;
+    text-align: center !important;
+}
