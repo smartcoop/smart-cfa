@@ -20,7 +20,7 @@ public class ConnectionSetup
         new SqlConnectionStringBuilder
         {
             DataSource = @"(LocalDB)\MSSQLLocalDB",
-            InitialCatalog = "Training",
+            InitialCatalog = "Catalog",
             IntegratedSecurity = true
         };
 
