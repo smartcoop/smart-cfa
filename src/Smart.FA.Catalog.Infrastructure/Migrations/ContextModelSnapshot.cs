@@ -222,6 +222,34 @@ namespace Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Core.Domain.PersonalSocialNetwork", b =>
+                {
+                    b.Property<int>("TrainerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SocialNetwork")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LastModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UrlToProfile")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("TrainerId", "SocialNetwork");
+
+                    b.HasIndex("SocialNetwork");
+
+                    b.ToTable("TrainerPersonalNetwork", (string)null);
+                });
+
             modelBuilder.Entity("Core.Domain.Trainer", b =>
                 {
                     b.Property<int>("Id")
@@ -374,6 +402,17 @@ namespace Infrastructure.Migrations
                     b.ToTable("TrainingTarget", (string)null);
                 });
 
+            modelBuilder.Entity("Core.Domain.PersonalSocialNetwork", b =>
+                {
+                    b.HasOne("Core.Domain.Trainer", "Trainer")
+                        .WithMany("PersonalSocialNetworks")
+                        .HasForeignKey("TrainerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Trainer");
+                });
+
             modelBuilder.Entity("Core.Domain.Trainer", b =>
                 {
                     b.OwnsOne("Core.Domain.Name", "Name", b1 =>
@@ -509,6 +548,8 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Core.Domain.Trainer", b =>
                 {
                     b.Navigation("Assignments");
+
+                    b.Navigation("PersonalSocialNetworks");
                 });
 
             modelBuilder.Entity("Core.Domain.Training", b =>

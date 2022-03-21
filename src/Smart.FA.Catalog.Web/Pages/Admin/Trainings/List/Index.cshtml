@@ -35,37 +35,7 @@
 <div class="o-card-grid small-up-1">
     @foreach (var training in Model.Trainings!.GroupBy(training => training.TrainingId))
     {
-        <smart-card>
-            <smart-card-body contains-actions="true">
-                <smart-card-actions>
-                    <div class="c-toolbar">
-                        <div class="c-toolbar__right">
-                            <div class="c-toolbar__item">
-                                <a href="/admin/trainings/update/@training.Key">
-                                    <smart-button leading-icon="EditAlt" button-style="Borderless"></smart-button>
-                                </a>
-                            </div>
-                            <form method="post" asp-page-handler="Delete" asp-route-id="@training.Key">
-                                <button class="c-button c-button--borderless">
-                                    <smart-icon icon="Delete"/>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </smart-card-actions>
-                <smart-card-content>
-                    <smart-grid>
-                        <smart-grid-column width="8">
-                            <smart-card-title text="@training.First().Title"></smart-card-title>
-                        </smart-grid-column>
-                        <smart-grid-column width="4">
-                            <smart-pill status="@PillStatus.Default" label="@(Enumeration.FromValue<TrainingStatus>(training.First().StatusId).DisplayStatus())"></smart-pill>
-                        </smart-grid-column>
-                    </smart-grid>
-                    <span>@string.Join(", ", training.Where(training => training.TopicId != 0).Select(training => _localizer[Enumeration.FromValue<TrainingTopic>(training.TopicId).Name]))</span>
-                </smart-card-content>
-            </smart-card-body>
-        </smart-card>
+        @await Component.InvokeAsync("AdminTrainingTile", new { model = training})
     }
 </div>
 

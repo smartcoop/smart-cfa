@@ -1,4 +1,5 @@
 using Application.Extensions;
+using Application.SeedWork;
 using Core.Services;
 using Infrastructure.Extensions;
 using Smart.Design.Razor.Extensions;
@@ -8,8 +9,10 @@ using FluentValidation.AspNetCore;
 using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json");
+
+// appsettings.Local.json will have precedence over anything else as it is set in last.
+// https://github.com/dotnet/aspnetcore/blob/c5207d21ed68041879e1256406b458d130b420ab/src/DefaultBuilder/src/WebHost.cs#L170
+builder.Configuration.AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: true);
 
 builder.Host.UseNLog();
 
@@ -27,6 +30,7 @@ builder.Services
     .AddFluentValidation(configuration =>
     {
         configuration.RegisterValidatorsFromAssemblyContaining<Program>();
+        configuration.RegisterValidatorsFromAssemblyContaining<ResponseBase>();
         configuration.DisableDataAnnotationsValidation = true;
     })
     .AddViewLocalization(options =>
@@ -34,6 +38,8 @@ builder.Services
         options.ResourcesPath = "Resources";
     });
 
+builder.WebHost.UseWebRoot("wwwroot");
+builder.WebHost.UseStaticWebAssets();
 
 #if DEBUG
 builder.Services
@@ -77,6 +83,7 @@ app.Use(async (context, next) =>
         await next();
     }
 });
+
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();

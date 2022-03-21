@@ -1,6 +1,6 @@
+using Core.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Web.Identity;
 using Web.Pages.Admin;
 
 namespace Web.Pages;

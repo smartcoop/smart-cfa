@@ -1,0 +1,16 @@
+.trainer-picture-label {
+    font-size: 2.2rem !important;
+    text-align: center !important;
+}
+
+.c-avatar--extra-large {
+    width: 90%;
+    height: auto;
+}
+
+@media (min-width: 750px) {
+    .c-avatar--extra-large {
+        width: 50%;
+        height: auto;
+    }
+}

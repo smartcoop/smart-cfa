@@ -11,14 +11,12 @@ namespace Smart.FA.Catalog.UnitTests;
 
 public class TrainerTests
 {
-    private readonly TrainerFactory _trainerFactory = new();
-    private readonly TrainingFactory _trainingFactory = new();
     private readonly Fixture _fixture = new();
 
     [Fact]
     public void HasInitiallyNoTraining()
     {
-        var trainer = _trainerFactory.CreateClean();
+        var trainer = TrainerFactory.CreateClean();
 
         trainer.Assignments.Should().BeEmpty();
     }
@@ -68,9 +66,9 @@ public class TrainerTests
     [Fact]
     public void CanAssignInTraining()
     {
-        var otherTrainer = _trainerFactory.CreateClean();
-        var training = _trainingFactory.Create(otherTrainer);
-        var trainerToAssign = _trainerFactory.CreateClean();
+        var otherTrainer = TrainerFactory.CreateClean();
+        var training = TrainingFactory.Create(otherTrainer);
+        var trainerToAssign = TrainerFactory.CreateClean();
 
         trainerToAssign.AssignTo(training);
 
@@ -80,8 +78,8 @@ public class TrainerTests
     [Fact]
     public void CanGetUnAssignedFromTraining()
     {
-        var training = _trainingFactory.CreateClean();
-        var trainerToAssign = _trainerFactory.CreateClean();
+        var training = TrainingFactory.CreateClean();
+        var trainerToAssign = TrainerFactory.CreateClean();
         trainerToAssign.AssignTo(training);
 
         trainerToAssign.UnAssignFrom(training);

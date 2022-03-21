@@ -40,15 +40,15 @@ public class Training : Entity, IAggregateRoot
     public Training
     (
         Trainer trainer
-        , TrainingDetailDto trainingDetail
+        , TrainingDetailDto detail
         , IEnumerable<TrainingType> types
         , IEnumerable<TrainingSlotNumberType> slotNumberTypes
         , IEnumerable<TrainingTargetAudience> targetAudiences
         , IEnumerable<TrainingTopic> topics
     )
     {
-        AddDetails(trainingDetail.Title!, trainingDetail.Goal!, trainingDetail.Methodology!,
-            Language.Create(trainingDetail.Language).Value);
+        AddDetails(detail.Title!, detail.Goal, detail.Methodology,
+            Language.Create(detail.Language).Value);
         SwitchTrainingTypes(types);
         SwitchTargetAudience(targetAudiences);
         SwitchSlotNumberType(slotNumberTypes);
@@ -139,7 +139,7 @@ public class Training : Entity, IAggregateRoot
         return Result.Success<Training, IEnumerable<Error>>(this);
     }
 
-    public void AddDetails(string title, string goal, string methodology, Language language)
+    public void AddDetails(string title, string? goal, string? methodology, Language language)
     {
         Guard.AgainstNull(title, nameof(title));
         Guard.Requires(() => _details.FirstOrDefault(detail => detail.Language.Value == language.Value) == null,

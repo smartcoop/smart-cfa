@@ -1,7 +1,7 @@
 using Application.UseCases.Queries;
+using Core.Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Web.Identity;
 
 namespace Web.Pages.Admin.Trainings.Update;
 
