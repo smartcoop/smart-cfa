@@ -12,10 +12,10 @@ public static class ServiceCollectionExtensions
     {
         services
             .AddMediatR(Assembly.GetExecutingAssembly())
-            .AddPipelineBehaviours();
+            .AddMediatrPipelineBehaviours();
     }
 
-    private static IServiceCollection AddPipelineBehaviours(this IServiceCollection services)
+    private static IServiceCollection AddMediatrPipelineBehaviours(this IServiceCollection services)
     {
         return services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingPipelineBehavior<,>));
     }
