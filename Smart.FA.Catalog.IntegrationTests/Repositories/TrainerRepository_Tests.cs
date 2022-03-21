@@ -22,7 +22,7 @@ public class TrainerRepositoryTests : IntegrationTestBase
     [Fact]
     public async Task GetListFromTrainingId()
     {
-        await using var context = GivenTrainingContext();
+        await using var context = GivenCatalogContext();
         var trainerRepository = new TrainerRepository(context);
         var trainer = TrainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
         context.Trainers.Attach(trainer);
@@ -39,7 +39,7 @@ public class TrainerRepositoryTests : IntegrationTestBase
     [Fact]
     public async Task GetReadOnlyListFromTrainingId()
     {
-        await using var context = GivenTrainingContext(false);
+        await using var context = GivenCatalogContext(false);
         var trainerToAdd = TrainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
         context.Trainers.Attach(trainerToAdd);
         var trainingToAdd = TrainingFactory.Create(trainerToAdd);
@@ -57,7 +57,7 @@ public class TrainerRepositoryTests : IntegrationTestBase
     [Fact]
     public async Task GetFromId()
     {
-        await using var context = GivenTrainingContext();
+        await using var context = GivenCatalogContext();
         var trainerRepository = new TrainerRepository(context);
         var trainer = TrainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
         context.Trainers.Attach(trainer);

@@ -21,7 +21,7 @@ public class TrainerTests : IntegrationTestBase
     [InlineData("Victor", "vD")]
     public async Task CanCreateTrainer(string firstName, string lastName)
     {
-        await using var context = GivenTrainingContext();
+        await using var context = GivenCatalogContext();
         var trainer = TrainerFactory.Create(firstName, lastName);
 
         context.Trainers.Attach(trainer);
@@ -39,7 +39,7 @@ public class TrainerTests : IntegrationTestBase
     [InlineData("Victor", "vD")]
     public async Task CanChangeTrainerName(string firstName, string lastName)
     {
-        await using var context = GivenTrainingContext();
+        await using var context = GivenCatalogContext();
         var trainer = TrainerFactory.Create(firstName, lastName);
         context.Trainers.Attach(trainer);
         await context.SaveChangesAsync();
@@ -54,7 +54,7 @@ public class TrainerTests : IntegrationTestBase
     [Fact]
     public async Task CanCreateFromUser()
     {
-        await using var context = GivenTrainingContext();
+        await using var context = GivenCatalogContext();
         var user = UserFactory.CreateClean();
         var trainer = TrainerFactory.CreateFromUser(user);
 
@@ -73,7 +73,7 @@ public class TrainerTests : IntegrationTestBase
     [InlineData(null, 1)]
     public async Task CantCreateFromInvalidUser(string? userId, int? applicationTypeId)
     {
-        await using var context = GivenTrainingContext();
+        await using var context = GivenCatalogContext();
 
         var action = async () =>
         {

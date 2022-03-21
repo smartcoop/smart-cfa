@@ -20,7 +20,7 @@ public class UserTests: IntegrationTestBase
     public async Task CanGet()
     {
         var logger = Substitute.For<ILogger<GetTrainerFromUserAppQueryHandler>>();
-        await using var context = GivenTrainingContext();
+        await using var context = GivenCatalogContext();
         var userStrategyResolver = Substitute.For<UserStrategyResolver>("");
         var handler = Substitute.For<GetTrainerFromUserAppQueryHandler>(logger, context, userStrategyResolver );
         var request = new GetTrainerFromUserAppRequest {ApplicationType = ApplicationType.Account, UserId = _fixture.Create<string>()};
