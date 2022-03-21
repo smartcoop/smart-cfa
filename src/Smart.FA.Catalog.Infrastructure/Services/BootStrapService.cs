@@ -33,7 +33,7 @@ public class BootStrapService : IBootStrapService
 
         _logger.LogInformation("Seeding [{database}] database on SQL instance {server}", currentConnection.Database, currentConnection.DataSource);
 
-        var completedWithSuccess = await SafeApplyMigrationsWithRetriesAsync(catalogContext, currentConnection);
+        var completedWithSuccess = await SafeApplyMigrationsAndSeedWithRetriesAsync(catalogContext, currentConnection);
 
         if (!completedWithSuccess)
         {
@@ -48,7 +48,7 @@ public class BootStrapService : IBootStrapService
     /// <param name="catalogContext"><see cref="DbContext" /> on which the operations has to be performed.</param>
     /// <param name="currentConnection">Current connection of <paramref name="catalogContext"/>.</param>
     /// <returns>A task representing the asynchronous operation. The task's result is a boolean whose value tells if the operation was successful.</returns>
-    private async Task<bool> SafeApplyMigrationsWithRetriesAsync(CatalogContext catalogContext, IDbConnection currentConnection)
+    private async Task<bool> SafeApplyMigrationsAndSeedWithRetriesAsync(CatalogContext catalogContext, IDbConnection currentConnection)
     {
         int DelayToWaitBetweenRetriesInMilliseconds(int retryAttempt) => (int)(Math.Max(5 - retryAttempt, 0) + Math.Pow(2, Math.Min(retryAttempt, 5))) * 1_000;
         for (var retryAttempt = 0; retryAttempt < 6; retryAttempt++)
@@ -71,7 +71,7 @@ public class BootStrapService : IBootStrapService
         try
         {
             await context.Database.MigrateAsync();
-            await SeedTrainersAsync(context);
+            await SeedDatabaseAsync(context);
 
             // Operation completed successfully
             return true;
@@ -81,6 +81,11 @@ public class BootStrapService : IBootStrapService
             _logger.LogError(exception, "Failure while applying migrations and seeding database.");
             return false;
         }
+    }
+
+    private async Task SeedDatabaseAsync(CatalogContext catalogContext)
+    {
+        await SeedTrainersAsync(catalogContext);
     }
 
     //TODO implementation an actual non hardcoded mechanism.
