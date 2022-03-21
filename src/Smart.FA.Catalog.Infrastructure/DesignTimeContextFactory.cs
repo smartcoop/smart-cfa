@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Smart.FA.Catalog.Infrastructure.Persistence;
+using Microsoft.Extensions.Options;
 
 namespace Smart.FA.Catalog.Infrastructure;
 public class DesignTimeContextFactory : IDesignTimeDbContextFactory<CatalogContext>
@@ -18,11 +19,11 @@ public class DesignTimeContextFactory : IDesignTimeDbContextFactory<CatalogConte
     {
         const string appSettingsFileName = "appsettings.Infrastructure";
         var builder = new ConfigurationBuilder()
-                     .SetBasePath(basePath)
-                     .AddJsonFile($"{appSettingsFileName}.json", false)
-                     .AddJsonFile($"{appSettingsFileName}.{environmentName}.json", true)
-                     .AddJsonFile($"{appSettingsFileName}.Local.json", true)
-                     .AddEnvironmentVariables();
+            .SetBasePath(basePath)
+            .AddJsonFile($"{appSettingsFileName}.json", false)
+            .AddJsonFile($"{appSettingsFileName}.{environmentName}.json", true)
+            .AddJsonFile($"{appSettingsFileName}.Local.json", true)
+            .AddEnvironmentVariables();
 
         var config = builder.Build();
         var connectionString = config.GetConnectionString("Catalog");
@@ -36,6 +37,8 @@ public class DesignTimeContextFactory : IDesignTimeDbContextFactory<CatalogConte
         optionsBuilder.UseSqlServer(connectionString);
         Console.WriteLine($"\nDesignTimeContextFactory.Create(string):\n\tConnection string: {connectionString}\n");
         var options = optionsBuilder.Options;
-        return new CatalogContext(connectionString, useConsoleLogger, null);
+        var dalOptions =
+            Microsoft.Extensions.Options.Options.Create(new DALOptions {UseConsoleLogger = true});
+        return new CatalogContext(options, dalOptions, null);
     }
 }

@@ -14,15 +14,21 @@ namespace Smart.FA.Catalog.Infrastructure.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static void AddInfrastructure(this IServiceCollection services, string trainingConnectionString,
-        string userAccountConnectionString,
-        bool useConsoleLogger, IConfigurationSection mailOptionSection)
+    public static void AddInfrastructure
+    (
+        this IServiceCollection services
+        , string catalogConnectionString
+        , string userAccountConnectionString
+        , IConfigurationSection mailOptionSection
+        , IConfigurationSection dalOptionSection
+    )
     {
-        services.AddContext(trainingConnectionString, useConsoleLogger)
+        services
             .AddEventDispatcher()
             .AddRepositories()
             .AddServices(userAccountConnectionString, mailOptionSection)
-            .AddQueries(trainingConnectionString);
+            .AddQueries(catalogConnectionString)
+            .AddDbContext(catalogConnectionString, dalOptionSection);
     }
 
     private static IServiceCollection AddEventDispatcher(this IServiceCollection services)
@@ -33,23 +39,12 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    private static IServiceCollection AddContext(this IServiceCollection services, string connectionString,
-        bool useConsoleLogger)
-    {
-        services.AddScoped(provider =>
-            new CatalogContext(connectionString, useConsoleLogger, provider.GetRequiredService<EventDispatcher>()));
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
-        return services;
-    }
-
     private static IServiceCollection AddServices(this IServiceCollection services, string userAccountConnectionString,
         IConfigurationSection mailOptionSection)
     {
         services.Configure<MailOptions>(mailOptionSection);
         services.AddScoped(_ => new UserStrategyResolver(userAccountConnectionString));
         services.AddScoped<IMailService, MailService>();
-
-        services.AddTransient<IBootStrapService, BootStrapService>();
 
         return services;
     }
@@ -68,6 +63,14 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ITrainerQueries>(_ => new TrainerQueries(connectionString));
         services.AddScoped<ITrainingQueries>(_ => new TrainingQueries(connectionString));
 
+        return services;
+    }
+
+    private static IServiceCollection AddDbContext(this IServiceCollection services, string connectionString, IConfigurationSection dalOptionSection)
+    {
+        services.Configure<DALOptions>(dalOptionSection);
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddDbContext<CatalogContext>(options => options.UseSqlServer(connectionString));
         return services;
     }
 }
