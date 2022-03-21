@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Infrastructure.Extensions;
+using Microsoft.Extensions.Options;
 
 namespace Smart.FA.Catalog.Infrastructure.Persistence;
 
@@ -13,10 +14,14 @@ public class CatalogContext : DbContext
     private readonly bool _useConsoleLogger;
     private readonly EventDispatcher? _eventDispatcher;
 
-    public CatalogContext(string connectionString, bool useConsoleLogger, EventDispatcher? eventDispatcher)
+    public CatalogContext
+    (
+        DbContextOptions<CatalogContext> contextOptions
+        , IOptions<DALOptions> dalOptions
+        , EventDispatcher eventDispatcher
+    ) : base(contextOptions)
     {
-        _connectionString = connectionString;
-        _useConsoleLogger = useConsoleLogger;
+        _useConsoleLogger = dalOptions.Value.UseConsoleLogger;
         _eventDispatcher = eventDispatcher;
     }
 
@@ -34,7 +39,6 @@ public class CatalogContext : DbContext
         });
 
         optionsBuilder
-            .UseSqlServer(_connectionString)
             .UseLazyLoadingProxies();
         if (_useConsoleLogger)
         {
@@ -78,7 +82,7 @@ public class CatalogContext : DbContext
     {
         var entries = ChangeTracker
             .Entries<Entity>()
-            .Where(entry =>  entry.State is EntityState.Added or EntityState.Modified);
+            .Where(entry => entry.State is EntityState.Added or EntityState.Modified);
 
         foreach (var entityEntry in entries)
         {
