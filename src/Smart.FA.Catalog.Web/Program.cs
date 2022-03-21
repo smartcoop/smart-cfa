@@ -1,5 +1,6 @@
 using Application.Extensions;
 using Application.SeedWork;
+using Core.Services;
 using Infrastructure.Extensions;
 using Smart.Design.Razor.Extensions;
 using Web.Extensions;
@@ -56,6 +57,9 @@ builder.Services
 
 var app = builder.Build();
 
+// We don't await this operation now but it will awaited just before app.Run()
+var seedingTask = app.Services.GetRequiredService<IBootStrapService>().ApplyMigrationsAndSeedAsync();
+
 app.UseForwardedHeaders();
 
 app.UseProxyHeaders();
@@ -69,8 +73,6 @@ else
 {
     app.UseDeveloperExceptionPage();
 }
-
-builder.ApplyMigrations();
 
 app.Use(async (context, next) =>
 {
@@ -91,5 +93,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+await seedingTask;
 
 app.Run();
