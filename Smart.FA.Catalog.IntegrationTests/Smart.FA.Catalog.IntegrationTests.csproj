@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
+
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -25,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Smart.FA.Catalog.Tests.Common\Smart.FA.Catalog.Tests.Common.csproj" />
-    <ProjectReference Include="..\src\Smart.FA.Catalog.Infrastructure\Smart.FA.Catalog.Infrastructure.csproj" />
+    <ProjectReference Include="..\src\Smart.FA.Catalog.Application\Application.csproj" />
+    <ProjectReference Include="..\src\Smart.FA.Catalog.Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 </Project>
