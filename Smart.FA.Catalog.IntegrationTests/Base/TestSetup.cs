@@ -28,7 +28,7 @@ public class TestSetup : IntegrationTestBase, IDisposable
                 ON (NAME = '{ConnectionSetup.DatabaseName}',
                 FILENAME = '{ConnectionSetup.Filename}')");
 
-        using (var context = GivenTrainingContext(beginTransaction: false))
+        using (var context = GivenCatalogContext(beginTransaction: false))
         {
             context.Database.Migrate();
             context.SaveChanges();

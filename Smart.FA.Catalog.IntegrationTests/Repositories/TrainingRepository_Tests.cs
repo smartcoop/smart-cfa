@@ -27,7 +27,7 @@ public class TrainingRepositoryTests : IntegrationTestBase
     {
         var pageSize = 1;
         var currentPage = 1;
-        await using var context = GivenTrainingContext(false);
+        await using var context = GivenCatalogContext(false);
         var trainerToAdd = TrainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
         context.Trainers.Attach(trainerToAdd);
         var language = Language.Create(_fixture.Create<string>().Substring(0, 2)).Value;
