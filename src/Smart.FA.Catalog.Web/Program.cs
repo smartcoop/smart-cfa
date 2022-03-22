@@ -43,14 +43,14 @@ builder.WebHost.UseStaticWebAssets();
 builder.Services
     .AddInfrastructure(builder.Configuration.GetConnectionString("Catalog"),
         builder.Configuration.GetConnectionString("Account"),
-        true,
-        builder.Configuration.GetSection("MailOptions"));
+        builder.Configuration.GetSection("MailOptions"),
+        builder.Configuration.GetSection("EFCore"));
 #else
 builder.Services
     .AddInfrastructure(builder.Configuration.GetConnectionString("Catalog"),
     builder.Configuration.GetConnectionString("Account"),
-                    false,
-        builder.Configuration.GetSection("MailOptions"));
+    builder.Configuration.GetSection("MailOptions")
+        builder.Configuration.GetSection("EFCore"));
 #endif
 
 var app = builder.Build();

@@ -1,4 +1,3 @@
-using Infrastructure;
 using Smart.FA.Catalog.Infrastructure;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 

@@ -26,7 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Smart.FA.Catalog.Tests.Common\Smart.FA.Catalog.Tests.Common.csproj" />
-    <ProjectReference Include="..\src\Smart.FA.Catalog.Application\Application.csproj" />
-    <ProjectReference Include="..\src\Smart.FA.Catalog.Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\src\Smart.FA.Catalog.Application\Smart.FA.Catalog.Application.csproj" />
+    <ProjectReference Include="..\src\Smart.FA.Catalog.Infrastructure\Smart.FA.Catalog.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

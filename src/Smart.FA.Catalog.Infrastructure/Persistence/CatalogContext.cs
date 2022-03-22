@@ -1,51 +1,27 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Infrastructure.Extensions;
-using Microsoft.Extensions.Options;
 
 namespace Smart.FA.Catalog.Infrastructure.Persistence;
 
 public class CatalogContext : DbContext
 {
-    private readonly string _connectionString;
-    private readonly bool _useConsoleLogger;
     private readonly EventDispatcher? _eventDispatcher;
 
     public CatalogContext
     (
         DbContextOptions<CatalogContext> contextOptions
-        , IOptions<DALOptions> dalOptions
-        , EventDispatcher eventDispatcher
+        , EventDispatcher?               eventDispatcher
     ) : base(contextOptions)
     {
-        _useConsoleLogger = dalOptions.Value.UseConsoleLogger;
         _eventDispatcher = eventDispatcher;
     }
 
     public DbSet<Trainer> Trainers { get; set; } = null!;
     public DbSet<Training> Trainings { get; set; } = null!;
     public DbSet<TrainerAssignment> TrainerAssignments { get; set; } = null!;
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        var loggerFactory = LoggerFactory.Create(builder =>
-        {
-            builder.AddFilter((category, level) =>
-                    category == DbLoggerCategory.Database.Command.Name && level == LogLevel.Information)
-                .AddConsole();
-        });
-
-        optionsBuilder
-            .UseLazyLoadingProxies();
-        if (_useConsoleLogger)
-        {
-            optionsBuilder.UseLoggerFactory(loggerFactory)
-                .EnableSensitiveDataLogging();
-        }
-    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

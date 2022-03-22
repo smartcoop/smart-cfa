@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Smart.FA.Catalog.Infrastructure.Persistence;
-using Microsoft.Extensions.Options;
 
 namespace Smart.FA.Catalog.Infrastructure;
 public class DesignTimeContextFactory : IDesignTimeDbContextFactory<CatalogContext>
@@ -37,8 +36,6 @@ public class DesignTimeContextFactory : IDesignTimeDbContextFactory<CatalogConte
         optionsBuilder.UseSqlServer(connectionString);
         Console.WriteLine($"\nDesignTimeContextFactory.Create(string):\n\tConnection string: {connectionString}\n");
         var options = optionsBuilder.Options;
-        var dalOptions =
-            Microsoft.Extensions.Options.Options.Create(new DALOptions {UseConsoleLogger = true});
-        return new CatalogContext(options, dalOptions, null);
+        return new CatalogContext(options, default);
     }
 }

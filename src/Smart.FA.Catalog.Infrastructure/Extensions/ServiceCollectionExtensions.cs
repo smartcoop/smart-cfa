@@ -1,8 +1,13 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using NLog.Extensions.Logging;
 using Smart.FA.Catalog.Core.Domain.Interfaces;
 using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Core.Services;
+using Smart.FA.Catalog.Infrastructure.Options;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 using Smart.FA.Catalog.Infrastructure.Persistence.Database;
 using Smart.FA.Catalog.Infrastructure.Persistence.Read;
@@ -45,7 +50,7 @@ public static class ServiceCollectionExtensions
         services.Configure<MailOptions>(mailOptionSection);
         services.AddScoped(_ => new UserStrategyResolver(userAccountConnectionString));
         services.AddScoped<IMailService, MailService>();
-
+        services.AddScoped<IBootStrapService, BootStrapService>();
         return services;
     }
 
@@ -66,11 +71,32 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    private static IServiceCollection AddDbContext(this IServiceCollection services, string connectionString, IConfigurationSection dalOptionSection)
+    private static IServiceCollection AddDbContext(this IServiceCollection services, string connectionString,
+        IConfigurationSection efCoreSection)
     {
-        services.Configure<DALOptions>(dalOptionSection);
+        services.Configure<EFCore>(efCoreSection);
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddDbContext<CatalogContext>(options => options.UseSqlServer(connectionString));
+        services.AddDbContext<CatalogContext>((serviceProvider, options) =>
+        {
+            var efCoreOptions = serviceProvider.GetRequiredService<IOptions<EFCore>>();
+            var loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder.AddFilter((category, level) =>
+                        category == DbLoggerCategory.Database.Command.Name && level == LogLevel.Information)
+                    .AddNLog()
+                    .AddConsole();
+            });
+
+            options
+                .UseSqlServer(connectionString)
+                .UseLazyLoadingProxies();
+            if (efCoreOptions.Value.UseConsoleLogger)
+            {
+                options
+                    .UseLoggerFactory(loggerFactory)
+                    .EnableSensitiveDataLogging();
+            }
+        });
         return services;
     }
 }
