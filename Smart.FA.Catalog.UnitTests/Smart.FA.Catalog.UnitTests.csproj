@@ -3,12 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
-
     <IsPackable>false</IsPackable>
-
-    <RootNamespace>Smart.FA.Catalog.UnitTests</RootNamespace>
-
-    <AssemblyName>Smart.FA.Catalog.UnitTests</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Smart.FA.Catalog.Tests.Common\Tests.Common.csproj" />
+    <ProjectReference Include="..\Smart.FA.Catalog.Tests.Common\Smart.FA.Catalog.Tests.Common.csproj" />
   </ItemGroup>
 
 </Project>
