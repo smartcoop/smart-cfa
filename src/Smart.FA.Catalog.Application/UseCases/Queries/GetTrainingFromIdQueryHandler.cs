@@ -16,6 +16,7 @@ public class GetTrainingFromIdQueryHandler: IRequestHandler<GetTrainingFromIdReq
         _logger = logger;
         _catalogContext = catalogContext;
     }
+
     public async Task<GetTrainingFromIdResponse> Handle(GetTrainingFromIdRequest request, CancellationToken cancellationToken)
     {
         GetTrainingFromIdResponse resp = new();

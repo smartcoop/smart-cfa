@@ -20,14 +20,22 @@ public class UpdateModel : AdminPage
         SetSideMenuItem();
     }
 
-    public async Task OnGet(int id)
+    public async Task<ActionResult> OnGet(int id)
     {
         var user = (HttpContext.User.Identity as CustomIdentity)!;
         TrainingId = id;
-        var response =
-            await Mediator.Send(new GetTrainingFromIdRequest {TrainingId = TrainingId}, CancellationToken.None);
+        var response = await Mediator.Send(new GetTrainingFromIdRequest {TrainingId = TrainingId}, CancellationToken.None);
+
+        // We need to check if Training is not null otherwise MapToGetResponse will throw an exception.
+        if (response.Training is null)
+        {
+            return NotFound();
+        }
+
         UpdateTrainingViewModel = response.MapGetToResponse(user.Trainer.DefaultLanguage);
         Init();
+
+        return Page();
     }
 
     public async Task<IActionResult> OnPostUpdateAsync(int id)
