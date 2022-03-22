@@ -1,8 +1,8 @@
-using Core.Domain;
-using Core.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Smart.FA.Catalog.Core.Domain;
+using Smart.FA.Catalog.Core.Domain.Interfaces;
 
-namespace Infrastructure.Persistence.Write;
+namespace Smart.FA.Catalog.Infrastructure.Persistence.Write;
 
 public class TrainerRepository : ITrainerRepository
 {

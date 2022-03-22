@@ -1,7 +1,7 @@
-using Core.Exceptions;
 using CSharpFunctionalExtensions;
+using Smart.FA.Catalog.Core.Exceptions;
 
-namespace Core.Domain;
+namespace Smart.FA.Catalog.Core.Domain.ValueObjects;
 
 public class Language: ValueObject
 {

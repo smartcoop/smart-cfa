@@ -1,12 +1,12 @@
-using Application.SeedWork;
-using Core.Domain;
-using Core.Domain.Dto;
-using Core.Domain.Interfaces;
-using Core.SeedWork;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Smart.FA.Catalog.Application.SeedWork;
+using Smart.FA.Catalog.Core.Domain.Dto;
+using Smart.FA.Catalog.Core.Domain.Interfaces;
+using Smart.FA.Catalog.Core.Domain.ValueObjects;
+using Smart.FA.Catalog.Core.SeedWork;
 
-namespace Application.UseCases.Queries;
+namespace Smart.FA.Catalog.Application.UseCases.Queries;
 
 public class GetPagedTrainingsFromTrainerQueryHandler : IRequestHandler<GetPagedTrainingsFromTrainerRequest,
     GetPagedTrainingsFromTrainerResponse>

@@ -1,4 +1,4 @@
-namespace Core.Domain.Dto;
+namespace Smart.FA.Catalog.Core.Domain.Dto;
 
 public record TrainingDetailDto
 (string? Title,

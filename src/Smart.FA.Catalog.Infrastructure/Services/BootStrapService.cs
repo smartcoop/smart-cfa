@@ -1,13 +1,14 @@
 using System.Data;
-using Core.Domain;
-using Core.Domain.Enumerations;
-using Core.Services;
-using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Smart.FA.Catalog.Core.Domain;
+using Smart.FA.Catalog.Core.Domain.User.Enumerations;
+using Smart.FA.Catalog.Core.Domain.ValueObjects;
+using Smart.FA.Catalog.Core.Services;
+using Smart.FA.Catalog.Infrastructure.Persistence;
 
-namespace Infrastructure.Services;
+namespace Smart.FA.Catalog.Infrastructure.Services;
 
 /// <inheritdoc />
 public class BootStrapService : IBootStrapService

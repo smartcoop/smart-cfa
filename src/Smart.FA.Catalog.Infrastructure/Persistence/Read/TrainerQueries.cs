@@ -1,11 +1,9 @@
-using System.Data;
-using Core.Domain;
-using Core.Domain.Dto;
-using Core.Domain.Interfaces;
 using Dapper;
 using Microsoft.Data.SqlClient;
+using Smart.FA.Catalog.Core.Domain.Dto;
+using Smart.FA.Catalog.Core.Domain.Interfaces;
 
-namespace Infrastructure.Persistence.Read;
+namespace Smart.FA.Catalog.Infrastructure.Persistence.Read;
 
 public class TrainerQueries : ITrainerQueries
 {

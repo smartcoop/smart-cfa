@@ -1,6 +1,6 @@
-﻿using Core.SeedWork;
+﻿using Smart.FA.Catalog.Core.SeedWork;
 
-namespace Core.Exceptions;
+namespace Smart.FA.Catalog.Core.Exceptions;
 
 public class TrainingException: DomainException
 {

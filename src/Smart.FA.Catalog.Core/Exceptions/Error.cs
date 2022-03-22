@@ -1,6 +1,6 @@
 ﻿using CSharpFunctionalExtensions;
 
-namespace Core.Exceptions
+namespace Smart.FA.Catalog.Core.Exceptions
 {
     public sealed class Error : ValueObject
     {

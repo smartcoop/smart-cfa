@@ -1,7 +1,7 @@
 using AutoFixture;
-using Core.Domain;
-using Core.Domain.Dto;
-using Core.Domain.Enumerations;
+using Smart.FA.Catalog.Core.Domain;
+using Smart.FA.Catalog.Core.Domain.Dto;
+using Smart.FA.Catalog.Core.Domain.Enumerations;
 
 namespace Smart.FA.Catalog.Tests.Common;
 

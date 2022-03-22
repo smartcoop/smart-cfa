@@ -1,6 +1,6 @@
-using Core.Domain.Dto;
+using Smart.FA.Catalog.Core.Domain.User.Dto;
 
-namespace Core.Services;
+namespace Smart.FA.Catalog.Core.Services;
 
 public interface IUserStrategy
 {

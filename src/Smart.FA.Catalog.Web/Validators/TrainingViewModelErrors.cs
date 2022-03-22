@@ -1,6 +1,6 @@
-using Core.Exceptions;
+using Smart.FA.Catalog.Core.Exceptions;
 
-namespace Web.Validators;
+namespace Smart.FA.Catalog.Web.Validators;
 
 public static class Errors
 {

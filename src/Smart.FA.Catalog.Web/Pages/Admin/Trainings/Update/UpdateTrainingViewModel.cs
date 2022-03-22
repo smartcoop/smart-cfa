@@ -1,11 +1,11 @@
-using Application.UseCases.Commands;
-using Application.UseCases.Queries;
-using Core.Domain;
-using Core.Domain.Dto;
-using Core.Domain.Enumerations;
-using Core.SeedWork;
+using Smart.FA.Catalog.Application.UseCases.Commands;
+using Smart.FA.Catalog.Application.UseCases.Queries;
+using Smart.FA.Catalog.Core.Domain.Dto;
+using Smart.FA.Catalog.Core.Domain.Enumerations;
+using Smart.FA.Catalog.Core.Domain.ValueObjects;
+using Smart.FA.Catalog.Core.SeedWork;
 
-namespace Web.Pages.Admin.Trainings.Update;
+namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.Update;
 
 public class UpdateTrainingViewModel
 {

@@ -1,6 +1,6 @@
 using System.Security.Principal;
 
-namespace Core.Domain.Models;
+namespace Smart.FA.Catalog.Core.Domain.Models;
 
 public class CustomIdentity : IIdentity
 {

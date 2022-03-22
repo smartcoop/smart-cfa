@@ -1,10 +1,10 @@
 using System.Net.Mail;
-using Core.Services;
-using Infrastructure.Services.Options;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Smart.FA.Catalog.Core.Services;
+using Smart.FA.Catalog.Infrastructure.Services.Options;
 
-namespace Infrastructure.Services;
+namespace Smart.FA.Catalog.Infrastructure.Services;
 
 public class MailService : IMailService
 {

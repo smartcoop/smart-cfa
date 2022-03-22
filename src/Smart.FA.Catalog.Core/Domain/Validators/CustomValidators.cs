@@ -1,11 +1,11 @@
-using Core.Exceptions;
-using Core.SeedWork;
 using CSharpFunctionalExtensions;
 using FluentValidation;
+using Smart.FA.Catalog.Core.Exceptions;
+using Smart.FA.Catalog.Core.SeedWork;
 using Entity = CSharpFunctionalExtensions.Entity;
 using ValueObject = CSharpFunctionalExtensions.ValueObject;
 
-namespace Core.Domain.Validators;
+namespace Smart.FA.Catalog.Core.Domain.Validators;
 
 public static class CustomValidators
 {

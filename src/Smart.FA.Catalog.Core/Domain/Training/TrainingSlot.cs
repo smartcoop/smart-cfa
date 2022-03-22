@@ -1,6 +1,6 @@
-using Core.Domain.Enumerations;
+using Smart.FA.Catalog.Core.Domain.Enumerations;
 
-namespace Core.Domain;
+namespace Smart.FA.Catalog.Core.Domain;
 
 public class TrainingSlot
 {

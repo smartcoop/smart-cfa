@@ -1,11 +1,11 @@
-using Core.Domain;
-using Core.Extensions;
-using Infrastructure.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Smart.FA.Catalog.Core.Domain;
+using Smart.FA.Catalog.Core.Extensions;
+using Smart.FA.Catalog.Infrastructure.Persistence;
 
-namespace Application.UseCases.Queries;
+namespace Smart.FA.Catalog.Application.UseCases.Queries;
 
 /// <summary>
 /// Query returning the necessary data to render the profile page of a <see cref="Trainer"/>.

@@ -1,14 +1,14 @@
-using Core.Domain.Dto;
-using Core.Domain.Enumerations;
-using Core.Domain.Validators;
-using Core.Exceptions;
-using Core.SeedWork;
 using CSharpFunctionalExtensions;
-using Entity = Core.SeedWork.Entity;
+using Smart.FA.Catalog.Core.Domain.Dto;
+using Smart.FA.Catalog.Core.Domain.Enumerations;
+using Smart.FA.Catalog.Core.Domain.Validators;
+using Smart.FA.Catalog.Core.Domain.ValueObjects;
+using Smart.FA.Catalog.Core.Exceptions;
+using Smart.FA.Catalog.Core.SeedWork;
 
-namespace Core.Domain;
+namespace Smart.FA.Catalog.Core.Domain;
 
-public class Training : Entity, IAggregateRoot
+public class Training : SeedWork.Entity, IAggregateRoot
 {
     #region Private fields
 

@@ -7,6 +7,8 @@
     <UserSecretsId>0f8533a3-380e-451d-b31c-a421c93ce84f</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
+    <AssemblyName>Smart.FA.Catalog.Web</AssemblyName>
+    <RootNamespace>Smart.FA.Catalog.Web</RootNamespace>
 
   </PropertyGroup>
 

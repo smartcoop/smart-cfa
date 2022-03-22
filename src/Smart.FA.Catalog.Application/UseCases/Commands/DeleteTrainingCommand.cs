@@ -1,11 +1,11 @@
-using Application.SeedWork;
-using Core.LogEvents;
-using Core.SeedWork;
-using Infrastructure.Persistence;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Smart.FA.Catalog.Application.SeedWork;
+using Smart.FA.Catalog.Core.LogEvents;
+using Smart.FA.Catalog.Core.SeedWork;
+using Smart.FA.Catalog.Infrastructure.Persistence;
 
-namespace Application.UseCases.Commands;
+namespace Smart.FA.Catalog.Application.UseCases.Commands;
 
 public class DeleteTrainingCommand: IRequestHandler<DeleteTrainingRequest, DeleteTrainingResponse>
 {

@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using AutoFixture;
-using Core.Domain.Dto;
-using Core.Domain.Enumerations;
+using Smart.FA.Catalog.Core.Domain.User.Dto;
+using Smart.FA.Catalog.Core.Domain.User.Enumerations;
 
 namespace Smart.FA.Catalog.Tests.Common;
 

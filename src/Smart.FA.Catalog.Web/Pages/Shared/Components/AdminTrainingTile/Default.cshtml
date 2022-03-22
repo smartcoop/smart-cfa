@@ -1,10 +1,12 @@
-﻿@using Core.Domain.Enumerations
-@using Core.SeedWork
-@using Microsoft.Extensions.Localization
+﻿@using Microsoft.Extensions.Localization
 @using Web.Pages.Admin.Trainings.List
 @using Smart.Design.Razor.TagHelpers.Pill
+@using Smart.FA.Catalog.Core.Domain.Enumerations
+@using Smart.FA.Catalog.Core.SeedWork
+@using Smart.FA.Catalog.Web.Pages.Admin.Trainings.List
+@using Smart.FA.Catalog.Web.Pages.Shared.Components.AdminTrainingTile
 @inject IStringLocalizer<AdminTrainingCardViewComponent> _localizer
-@model IGrouping<int, Core.Domain.Dto.TrainingDto>
+@model IGrouping<int, Smart.FA.Catalog.Core.Domain.Dto.TrainingDto>
 <smart-card>
     <smart-card-body>
         <smart-card-title text="@Model.First().Title"></smart-card-title>

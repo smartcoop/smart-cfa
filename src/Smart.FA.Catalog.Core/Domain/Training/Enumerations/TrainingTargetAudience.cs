@@ -1,6 +1,6 @@
-using Core.SeedWork;
+using Smart.FA.Catalog.Core.SeedWork;
 
-namespace Core.Domain.Enumerations;
+namespace Smart.FA.Catalog.Core.Domain.Enumerations;
 
 public class TrainingTargetAudience: Enumeration
 {

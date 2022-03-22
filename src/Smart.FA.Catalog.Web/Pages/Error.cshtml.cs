@@ -1,10 +1,10 @@
 using System.Diagnostics;
-using Core.SeedWork;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Smart.FA.Catalog.Core.SeedWork;
 
-namespace Web.Pages;
+namespace Smart.FA.Catalog.Web.Pages;
 
 [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 [IgnoreAntiforgeryToken]

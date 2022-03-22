@@ -1,11 +1,11 @@
-using Core.Domain.Dto;
-using Core.Domain.Interfaces;
-using Core.SeedWork;
 using Dapper;
 using Dapper.Transaction;
 using Microsoft.Data.SqlClient;
+using Smart.FA.Catalog.Core.Domain.Dto;
+using Smart.FA.Catalog.Core.Domain.Interfaces;
+using Smart.FA.Catalog.Core.SeedWork;
 
-namespace Infrastructure.Persistence.Read;
+namespace Smart.FA.Catalog.Infrastructure.Persistence.Read;
 
 public class TrainingQueries : ITrainingQueries
 {

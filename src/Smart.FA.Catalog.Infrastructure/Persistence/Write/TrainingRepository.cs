@@ -1,10 +1,9 @@
-using System.Linq.Expressions;
-using Core.Domain;
-using Core.Domain.Interfaces;
-using Core.SeedWork;
 using Microsoft.EntityFrameworkCore;
+using Smart.FA.Catalog.Core.Domain;
+using Smart.FA.Catalog.Core.Domain.Interfaces;
+using Smart.FA.Catalog.Core.SeedWork;
 
-namespace Infrastructure.Persistence.Write;
+namespace Smart.FA.Catalog.Infrastructure.Persistence.Write;
 
 public class TrainingRepository : ITrainingRepository
 {

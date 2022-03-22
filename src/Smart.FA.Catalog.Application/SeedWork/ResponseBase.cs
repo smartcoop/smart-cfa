@@ -1,9 +1,9 @@
 // Application
 
-using Core.Exceptions;
-using Core.SeedWork;
+using Smart.FA.Catalog.Core.Exceptions;
+using Smart.FA.Catalog.Core.SeedWork;
 
-namespace Application.SeedWork;
+namespace Smart.FA.Catalog.Application.SeedWork;
 
 /// <summary>
 /// Base response for Mediatr handlers

@@ -1,8 +1,7 @@
-using Core.Domain;
-using Core.Domain.Enumerations;
-using Infrastructure.Persistence.Configuration.EntityConfigurations;
+using Smart.FA.Catalog.Core.Domain.Enumerations;
+using Smart.FA.Catalog.Infrastructure.Persistence.Configuration.EntityConfigurations;
 
-namespace Infrastructure.Persistence.Configuration;
+namespace Smart.FA.Catalog.Infrastructure.Persistence.Configuration;
 
 public class TrainingTopicConfigurations : EnumerationConfigurationBase<TrainingTopic>
 {

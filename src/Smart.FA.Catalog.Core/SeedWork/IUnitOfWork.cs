@@ -1,4 +1,4 @@
-namespace Core.SeedWork;
+namespace Smart.FA.Catalog.Core.SeedWork;
 
 public interface IUnitOfWork
 {

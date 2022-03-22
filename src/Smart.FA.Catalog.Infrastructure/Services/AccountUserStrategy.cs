@@ -1,10 +1,10 @@
-using Core.Domain.Dto;
-using Core.Domain.Enumerations;
-using Core.Services;
 using Dapper;
 using Microsoft.Data.SqlClient;
+using Smart.FA.Catalog.Core.Domain.User.Dto;
+using Smart.FA.Catalog.Core.Domain.User.Enumerations;
+using Smart.FA.Catalog.Core.Services;
 
-namespace Infrastructure.Services;
+namespace Smart.FA.Catalog.Infrastructure.Services;
 
 public class AccountUserStrategy : IUserStrategy
 {

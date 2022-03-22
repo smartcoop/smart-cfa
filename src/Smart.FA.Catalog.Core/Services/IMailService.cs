@@ -1,4 +1,4 @@
-namespace Core.Services;
+namespace Smart.FA.Catalog.Core.Services;
 
 public interface IMailService
 {

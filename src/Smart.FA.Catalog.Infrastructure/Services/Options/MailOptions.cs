@@ -1,4 +1,4 @@
-namespace Infrastructure.Services.Options;
+namespace Smart.FA.Catalog.Infrastructure.Services.Options;
 
 public class MailOptions
 {

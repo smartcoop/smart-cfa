@@ -1,12 +1,12 @@
-using Application.Extensions;
-using Application.SeedWork;
-using Core.Services;
-using Infrastructure.Extensions;
 using Smart.Design.Razor.Extensions;
-using Web.Extensions;
-using Web.Extensions.Middlewares;
 using FluentValidation.AspNetCore;
 using NLog.Web;
+using Smart.FA.Catalog.Application.Extensions;
+using Smart.FA.Catalog.Application.SeedWork;
+using Smart.FA.Catalog.Core.Services;
+using Smart.FA.Catalog.Infrastructure.Extensions;
+using Smart.FA.Catalog.Web.Extensions;
+using Smart.FA.Catalog.Web.Extensions.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 

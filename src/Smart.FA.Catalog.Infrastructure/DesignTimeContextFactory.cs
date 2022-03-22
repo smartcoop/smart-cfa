@@ -1,10 +1,9 @@
-using Core.SeedWork;
-using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using Smart.FA.Catalog.Infrastructure.Persistence;
 
-namespace Infrastructure;
+namespace Smart.FA.Catalog.Infrastructure;
 public class DesignTimeContextFactory : IDesignTimeDbContextFactory<CatalogContext>
 {
     public CatalogContext CreateDbContext(string[]? args)

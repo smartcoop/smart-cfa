@@ -1,6 +1,6 @@
-using Core.Domain.Dto;
+using Smart.FA.Catalog.Core.Domain.Dto;
 
-namespace Core.Domain.Interfaces;
+namespace Smart.FA.Catalog.Core.Domain.Interfaces;
 
 public interface ITrainerQueries
 {

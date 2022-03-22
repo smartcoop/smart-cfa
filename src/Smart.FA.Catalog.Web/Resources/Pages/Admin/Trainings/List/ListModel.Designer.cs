@@ -8,10 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Web.Resources.Pages.Admin.Trainings.List {
-    using System;
-    
-    
+namespace Smart.FA.Catalog.Web.Resources.Pages.Admin.Trainings.List {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -23,15 +20,15 @@ namespace Web.Resources.Pages.Admin.Trainings.List {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class ListModel {
-        
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal ListModel() {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -45,7 +42,7 @@ namespace Web.Resources.Pages.Admin.Trainings.List {
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
@@ -59,7 +56,7 @@ namespace Web.Resources.Pages.Admin.Trainings.List {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Communication.
         /// </summary>
@@ -68,7 +65,7 @@ namespace Web.Resources.Pages.Admin.Trainings.List {
                 return ResourceManager.GetString("Communication", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Soin aux personnes.
         /// </summary>
@@ -77,7 +74,7 @@ namespace Web.Resources.Pages.Admin.Trainings.List {
                 return ResourceManager.GetString("Health", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Informatique et technologies.
         /// </summary>
@@ -86,7 +83,7 @@ namespace Web.Resources.Pages.Admin.Trainings.List {
                 return ResourceManager.GetString("InformationTechnology", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Cours de langue.
         /// </summary>
@@ -95,7 +92,7 @@ namespace Web.Resources.Pages.Admin.Trainings.List {
                 return ResourceManager.GetString("LanguageCourse", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Matière scolaire / universitaire.
         /// </summary>
@@ -104,7 +101,7 @@ namespace Web.Resources.Pages.Admin.Trainings.List {
                 return ResourceManager.GetString("School", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Sciences humaines et sociales.
         /// </summary>

@@ -1,4 +1,4 @@
-namespace Core.Domain.Interfaces;
+namespace Smart.FA.Catalog.Core.Domain.Interfaces;
 
 public interface ITrainerRepository
 {

@@ -1,6 +1,6 @@
-using Core.SeedWork;
+using Smart.FA.Catalog.Core.SeedWork;
 
-namespace Core.Domain;
+namespace Smart.FA.Catalog.Core.Domain.Enumerations;
 
 /// <summary>
 /// Enumerates the list of Social Networks supported by the system.

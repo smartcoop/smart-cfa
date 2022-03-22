@@ -1,7 +1,7 @@
-using Core.Domain.Enumerations;
 using Smart.Design.Razor.TagHelpers.Pill;
+using Smart.FA.Catalog.Core.Domain.Enumerations;
 
-namespace Web.Pages.Admin.Trainings.List;
+namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.List;
 
 public record TrainingListingViewModel
 {

@@ -1,4 +1,4 @@
-namespace Core.Domain;
+namespace Smart.FA.Catalog.Core.Domain;
 
 public class TrainerAssignment
 {

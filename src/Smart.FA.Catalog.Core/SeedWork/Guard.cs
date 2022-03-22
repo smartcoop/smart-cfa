@@ -1,7 +1,7 @@
 using System.Diagnostics;
-using Core.Exceptions;
+using Smart.FA.Catalog.Core.Exceptions;
 
-namespace Core.SeedWork;
+namespace Smart.FA.Catalog.Core.SeedWork;
 
 public static class Guard
 {

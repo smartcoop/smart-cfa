@@ -1,15 +1,15 @@
-using Application.SeedWork;
-using Core.Domain;
-using Core.Domain.Dto;
-using Core.Domain.Enumerations;
-using Core.Domain.Interfaces;
-using Core.LogEvents;
-using Core.SeedWork;
 using CSharpFunctionalExtensions;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Smart.FA.Catalog.Application.SeedWork;
+using Smart.FA.Catalog.Core.Domain;
+using Smart.FA.Catalog.Core.Domain.Dto;
+using Smart.FA.Catalog.Core.Domain.Enumerations;
+using Smart.FA.Catalog.Core.Domain.Interfaces;
+using Smart.FA.Catalog.Core.LogEvents;
+using Smart.FA.Catalog.Core.SeedWork;
 
-namespace Application.UseCases.Commands;
+namespace Smart.FA.Catalog.Application.UseCases.Commands;
 
 public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingRequest, CreateTrainingResponse>
 {

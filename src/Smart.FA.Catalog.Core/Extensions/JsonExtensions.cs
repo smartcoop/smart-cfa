@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace Core.Extensions;
+namespace Smart.FA.Catalog.Core.Extensions;
 
 public static class JsonExtensions
 {

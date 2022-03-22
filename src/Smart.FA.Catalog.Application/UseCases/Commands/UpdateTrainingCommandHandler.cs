@@ -1,18 +1,17 @@
-using Application.SeedWork;
-using Core.Domain;
-using Core.Domain.Dto;
-using Core.Domain.Enumerations;
-using Core.Domain.Interfaces;
-using Core.Exceptions;
-using Core.LogEvents;
-using Core.SeedWork;
-using Core.Services;
-using Infrastructure.Persistence;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Smart.FA.Catalog.Application.SeedWork;
+using Smart.FA.Catalog.Core.Domain;
+using Smart.FA.Catalog.Core.Domain.Dto;
+using Smart.FA.Catalog.Core.Domain.Enumerations;
+using Smart.FA.Catalog.Core.Domain.Interfaces;
+using Smart.FA.Catalog.Core.Domain.ValueObjects;
+using Smart.FA.Catalog.Core.Exceptions;
+using Smart.FA.Catalog.Core.LogEvents;
+using Smart.FA.Catalog.Core.SeedWork;
+using Smart.FA.Catalog.Core.Services;
 
-namespace Application.UseCases.Commands;
+namespace Smart.FA.Catalog.Application.UseCases.Commands;
 
 public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingRequest, UpdateTrainingResponse>
 {

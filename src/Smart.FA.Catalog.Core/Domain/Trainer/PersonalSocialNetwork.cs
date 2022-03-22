@@ -1,6 +1,7 @@
-using Core.SeedWork;
+using Smart.FA.Catalog.Core.Domain.Enumerations;
+using Smart.FA.Catalog.Core.SeedWork;
 
-namespace Core.Domain;
+namespace Smart.FA.Catalog.Core.Domain;
 
 /// <summary>
 /// Represents a trainer's social network URL to its profile.

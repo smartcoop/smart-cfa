@@ -1,11 +1,11 @@
-using Application.UseCases.Commands;
-using Application.UseCases.Queries;
-using Core.Services;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Web.ViewModels.Trainers;
+using Smart.FA.Catalog.Application.UseCases.Commands;
+using Smart.FA.Catalog.Application.UseCases.Queries;
+using Smart.FA.Catalog.Core.Services;
+using Smart.FA.Catalog.Web.ViewModels.Trainers;
 
-namespace Web.Pages.Admin.Trainers;
+namespace Smart.FA.Catalog.Web.Pages.Admin.Trainers;
 
 public class ProfileModel : AdminPage
 {

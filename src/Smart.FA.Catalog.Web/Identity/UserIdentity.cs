@@ -1,8 +1,8 @@
-using Core.Domain;
-using Core.Domain.Models;
-using Core.Services;
+using Smart.FA.Catalog.Core.Domain;
+using Smart.FA.Catalog.Core.Domain.Models;
+using Smart.FA.Catalog.Core.Services;
 
-namespace Web.Identity;
+namespace Smart.FA.Catalog.Web.Identity;
 
 /// <inheritdoc />
 public class UserIdentity : IUserIdentity

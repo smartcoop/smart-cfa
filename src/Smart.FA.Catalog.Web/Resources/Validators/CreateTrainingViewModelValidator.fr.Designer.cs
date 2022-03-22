@@ -8,10 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Web.Resources.Validators {
-    using System;
-    
-    
+namespace Smart.FA.Catalog.Web.Resources.Validators {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -23,15 +20,15 @@ namespace Web.Resources.Validators {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class CreateTrainingViewModelValidator_fr {
-        
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal CreateTrainingViewModelValidator_fr() {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -45,7 +42,7 @@ namespace Web.Resources.Validators {
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
@@ -59,7 +56,7 @@ namespace Web.Resources.Validators {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Une formation a besoin d&apos;un but.
         /// </summary>
@@ -68,7 +65,7 @@ namespace Web.Resources.Validators {
                 return ResourceManager.GetString("training.empty.goal", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Une formation a besoin d&apos;une méthodologie.
         /// </summary>
@@ -77,7 +74,7 @@ namespace Web.Resources.Validators {
                 return ResourceManager.GetString("training.empty.methodology", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Une formation a besoin d&apos;un titre.
         /// </summary>
@@ -86,7 +83,7 @@ namespace Web.Resources.Validators {
                 return ResourceManager.GetString("training.empty.title", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Une formation a besoin d&apos;au moins une audience cible.
         /// </summary>
@@ -95,7 +92,7 @@ namespace Web.Resources.Validators {
                 return ResourceManager.GetString("training.missing.audience", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Une formation a besoin d&apos;un nombre de participant.
         /// </summary>
@@ -104,7 +101,7 @@ namespace Web.Resources.Validators {
                 return ResourceManager.GetString("training.missing.slot.type", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Une formation a besoin d&apos;être dans au moins une catégorie.
         /// </summary>

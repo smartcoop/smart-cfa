@@ -1,5 +1,6 @@
 using Infrastructure;
-using Infrastructure.Persistence;
+using Smart.FA.Catalog.Infrastructure;
+using Smart.FA.Catalog.Infrastructure.Persistence;
 
 namespace Smart.FA.Catalog.IntegrationTests.Base;
 

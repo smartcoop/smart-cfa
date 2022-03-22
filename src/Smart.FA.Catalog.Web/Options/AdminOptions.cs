@@ -1,4 +1,4 @@
-namespace Web.Options;
+namespace Smart.FA.Catalog.Web.Options;
 
 public class AdminOptions
 {

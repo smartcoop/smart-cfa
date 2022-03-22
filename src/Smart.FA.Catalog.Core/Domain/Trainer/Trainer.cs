@@ -1,6 +1,8 @@
-using Core.SeedWork;
+using Smart.FA.Catalog.Core.Domain.Enumerations;
+using Smart.FA.Catalog.Core.Domain.ValueObjects;
+using Smart.FA.Catalog.Core.SeedWork;
 
-namespace Core.Domain;
+namespace Smart.FA.Catalog.Core.Domain;
 
 public class Trainer : Entity, IAggregateRoot
 {

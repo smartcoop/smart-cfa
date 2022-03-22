@@ -1,10 +1,11 @@
-using Core.Domain;
-using Infrastructure.Persistence.Configuration.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Smart.FA.Catalog.Core.Domain;
+using Smart.FA.Catalog.Core.Domain.ValueObjects;
+using Smart.FA.Catalog.Infrastructure.Persistence.Configuration.EntityConfigurations;
 
-namespace Infrastructure.Persistence.Configuration;
+namespace Smart.FA.Catalog.Infrastructure.Persistence.Configuration;
 
 public class TrainerConfiguration : EntityConfigurationBase<Trainer>
 {

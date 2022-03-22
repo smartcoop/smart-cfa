@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace Core.LogEvents;
+namespace Smart.FA.Catalog.Core.LogEvents;
 
 public static partial class LogEventIds
 {

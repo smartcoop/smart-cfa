@@ -1,11 +1,11 @@
-﻿using Application.SeedWork;
-using Core.Exceptions;
-using Core.LogEvents;
-using Core.SeedWork;
-using MediatR;
+﻿using MediatR;
 using Microsoft.Extensions.Logging;
+using Smart.FA.Catalog.Application.SeedWork;
+using Smart.FA.Catalog.Core.Exceptions;
+using Smart.FA.Catalog.Core.LogEvents;
+using Smart.FA.Catalog.Core.SeedWork;
 
-namespace Application.Interceptors;
+namespace Smart.FA.Catalog.Application.Interceptors;
 
 /// <summary>
 /// Global logger applied on all handlers.
