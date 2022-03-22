@@ -7,9 +7,6 @@
     <UserSecretsId>0f8533a3-380e-451d-b31c-a421c93ce84f</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
-    <AssemblyName>Smart.FA.Catalog.Web</AssemblyName>
-    <RootNamespace>Smart.FA.Catalog.Web</RootNamespace>
-
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Smart.FA.Catalog.Application\Application.csproj" />
-    <ProjectReference Include="..\Smart.FA.Catalog.Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\Smart.FA.Catalog.Application\Smart.FA.Catalog.Application.csproj" />
+    <ProjectReference Include="..\Smart.FA.Catalog.Infrastructure\Smart.FA.Catalog.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

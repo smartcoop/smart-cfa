@@ -4,12 +4,10 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>Smart.FA.Catalog.Tests.Common</RootNamespace>
-    <AssemblyName>Smart.FA.Catalog.Tests.Common</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Smart.FA.Catalog.Core\Core.csproj" />
+    <ProjectReference Include="..\src\Smart.FA.Catalog.Core\Smart.FA.Catalog.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

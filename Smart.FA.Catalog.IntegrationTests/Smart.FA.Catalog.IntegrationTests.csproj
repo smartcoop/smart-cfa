@@ -3,12 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
-
     <IsPackable>false</IsPackable>
-
-    <RootNamespace>Smart.FA.Catalog.IntegrationTests</RootNamespace>
-
-    <AssemblyName>Smart.FA.Catalog.IntegrationTests</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Smart.FA.Catalog.Tests.Common\Tests.Common.csproj" />
-    <ProjectReference Include="..\src\Smart.FA.Catalog.Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\Smart.FA.Catalog.Tests.Common\Smart.FA.Catalog.Tests.Common.csproj" />
+    <ProjectReference Include="..\src\Smart.FA.Catalog.Infrastructure\Smart.FA.Catalog.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

@@ -4,8 +4,6 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyName>Smart.FA.Catalog.Infrastructure</AssemblyName>
-    <RootNamespace>Smart.FA.Catalog.Infrastructure</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Smart.FA.Catalog.Core\Core.csproj" />
+    <ProjectReference Include="..\Smart.FA.Catalog.Core\Smart.FA.Catalog.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
