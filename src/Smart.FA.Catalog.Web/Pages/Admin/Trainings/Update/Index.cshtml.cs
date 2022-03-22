@@ -35,6 +35,7 @@ public class UpdateModel : AdminPage
         var user = (HttpContext.User.Identity as CustomIdentity)!;
         if (!ModelState.IsValid)
         {
+            Init();
             return Page();
         }
 
