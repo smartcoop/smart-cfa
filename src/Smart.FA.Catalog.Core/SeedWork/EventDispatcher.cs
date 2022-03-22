@@ -1,6 +1,6 @@
-using Core.Domain;
+using Smart.FA.Catalog.Core.Domain;
 
-namespace Core.SeedWork;
+namespace Smart.FA.Catalog.Core.SeedWork;
 
 public class EventDispatcher
 {

@@ -1,8 +1,8 @@
-using Core.SeedWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using Smart.FA.Catalog.Core.SeedWork;
 
-namespace Infrastructure.Persistence.Database;
+namespace Smart.FA.Catalog.Infrastructure.Persistence.Database;
 
 public class UnitOfWork : IUnitOfWork
 {

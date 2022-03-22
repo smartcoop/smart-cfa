@@ -1,20 +1,16 @@
-using System.Data;
-using Core.Domain.Enumerations;
-using Core.Domain.Interfaces;
-using Core.SeedWork;
-using Core.Services;
-using Infrastructure.Persistence;
-using Infrastructure.Persistence.Database;
-using Infrastructure.Persistence.Read;
-using Infrastructure.Persistence.Write;
-using Infrastructure.Services;
-using Infrastructure.Services.Options;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Smart.FA.Catalog.Core.Domain.Interfaces;
+using Smart.FA.Catalog.Core.SeedWork;
+using Smart.FA.Catalog.Core.Services;
+using Smart.FA.Catalog.Infrastructure.Persistence;
+using Smart.FA.Catalog.Infrastructure.Persistence.Database;
+using Smart.FA.Catalog.Infrastructure.Persistence.Read;
+using Smart.FA.Catalog.Infrastructure.Persistence.Write;
+using Smart.FA.Catalog.Infrastructure.Services;
+using Smart.FA.Catalog.Infrastructure.Services.Options;
 
-namespace Infrastructure.Extensions;
+namespace Smart.FA.Catalog.Infrastructure.Extensions;
 
 public static class ServiceCollectionExtensions
 {

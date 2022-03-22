@@ -1,9 +1,10 @@
 using AutoFixture;
-using Core.Domain;
-using Core.Domain.Dto;
-using Core.Domain.Enumerations;
-using Core.SeedWork;
 using CSharpFunctionalExtensions;
+using Smart.FA.Catalog.Core.Domain;
+using Smart.FA.Catalog.Core.Domain.User.Dto;
+using Smart.FA.Catalog.Core.Domain.User.Enumerations;
+using Smart.FA.Catalog.Core.Domain.ValueObjects;
+using Smart.FA.Catalog.Core.SeedWork;
 
 namespace Smart.FA.Catalog.Tests.Common;
 

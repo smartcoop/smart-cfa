@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace Core.SeedWork;
+namespace Smart.FA.Catalog.Core.SeedWork;
 
 public abstract class ValueObject
 {

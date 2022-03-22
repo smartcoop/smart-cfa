@@ -1,7 +1,7 @@
-using Core.Domain;
-using Core.Domain.Models;
+using Smart.FA.Catalog.Core.Domain;
+using Smart.FA.Catalog.Core.Domain.Models;
 
-namespace Core.Services;
+namespace Smart.FA.Catalog.Core.Services;
 
 /// <summary>
 /// Exposes the <see cref="CustomIdentity" /> of the current connected user.

@@ -1,9 +1,10 @@
 using System;
 using System.Linq;
 using AutoFixture;
-using Core.Domain;
-using Core.Domain.Enumerations;
 using FluentAssertions;
+using Smart.FA.Catalog.Core.Domain;
+using Smart.FA.Catalog.Core.Domain.User.Enumerations;
+using Smart.FA.Catalog.Core.Domain.ValueObjects;
 using Smart.FA.Catalog.Tests.Common;
 using Xunit;
 

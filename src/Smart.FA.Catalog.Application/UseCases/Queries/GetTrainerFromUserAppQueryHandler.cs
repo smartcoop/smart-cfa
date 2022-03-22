@@ -1,15 +1,15 @@
-using Application.SeedWork;
-using Core.Domain;
-using Core.Domain.Dto;
-using Core.Domain.Enumerations;
-using Core.Exceptions;
-using Infrastructure.Persistence;
-using Infrastructure.Services;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Smart.FA.Catalog.Application.SeedWork;
+using Smart.FA.Catalog.Core.Domain;
+using Smart.FA.Catalog.Core.Domain.User.Dto;
+using Smart.FA.Catalog.Core.Domain.User.Enumerations;
+using Smart.FA.Catalog.Core.Exceptions;
+using Smart.FA.Catalog.Infrastructure.Persistence;
+using Smart.FA.Catalog.Infrastructure.Services;
 
-namespace Application.UseCases.Queries;
+namespace Smart.FA.Catalog.Application.UseCases.Queries;
 
 public class
     GetTrainerFromUserAppQueryHandler : IRequestHandler<GetTrainerFromUserAppRequest, GetTrainerFromUserAppResponse>

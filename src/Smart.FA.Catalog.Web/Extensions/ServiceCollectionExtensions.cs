@@ -1,11 +1,8 @@
-using Application.Interceptors;
-using Core.Services;
-using MediatR;
-using Web.Extensions.Middlewares;
-using Web.Identity;
-using Web.Options;
+using Smart.FA.Catalog.Core.Services;
+using Smart.FA.Catalog.Web.Identity;
+using Smart.FA.Catalog.Web.Options;
 
-namespace Web.Extensions;
+namespace Smart.FA.Catalog.Web.Extensions;
 
 public static class ServiceCollectionExtensions
 {

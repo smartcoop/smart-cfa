@@ -32,11 +32,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "src\Smart.FA.Catalo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "src\Smart.FA.Catalog.Web\Web.csproj", "{ADB7CE09-C689-4CB9-9F4D-C964B1752E82}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.IntegrationTests", "Smart.FA.Catalog.IntegrationTests\Smart.FA.Catalog.IntegrationTests.csproj", "{BBE101FD-3BFE-40C6-8ABA-5D5C268541EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationTests", "Smart.FA.Catalog.IntegrationTests\IntegrationTests.csproj", "{BBE101FD-3BFE-40C6-8ABA-5D5C268541EF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.UnitTests", "Smart.FA.Catalog.UnitTests\Smart.FA.Catalog.UnitTests.csproj", "{B8F4E02A-C635-4729-8E94-117F4886BE65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "Smart.FA.Catalog.UnitTests\UnitTests.csproj", "{B8F4E02A-C635-4729-8E94-117F4886BE65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.FA.Catalog.Tests.Common", "Smart.FA.Catalog.Tests.Common\Smart.FA.Catalog.Tests.Common.csproj", "{BEB6142A-19A0-410D-BA50-1E0DD035A643}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Common", "Smart.FA.Catalog.Tests.Common\Tests.Common.csproj", "{BEB6142A-19A0-410D-BA50-1E0DD035A643}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

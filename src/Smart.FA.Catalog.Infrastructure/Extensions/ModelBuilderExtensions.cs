@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Infrastructure.Extensions;
+namespace Smart.FA.Catalog.Infrastructure.Extensions;
 
 internal static class ModelBuilderExtensions
 {

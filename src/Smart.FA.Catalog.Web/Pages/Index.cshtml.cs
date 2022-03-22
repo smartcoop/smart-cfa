@@ -1,9 +1,9 @@
-using Core.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Web.Pages.Admin;
+using Smart.FA.Catalog.Core.Domain.Models;
+using Smart.FA.Catalog.Web.Pages.Admin;
 
-namespace Web.Pages;
+namespace Smart.FA.Catalog.Web.Pages;
 
 [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 [IgnoreAntiforgeryToken]

@@ -1,14 +1,15 @@
-﻿using Application.SeedWork;
-using Core.Domain;
-using Core.Domain.Dto;
-using Core.Domain.Enumerations;
-using Core.LogEvents;
-using Core.SeedWork;
-using Infrastructure.Persistence;
-using MediatR;
+﻿using MediatR;
 using Microsoft.Extensions.Logging;
+using Smart.FA.Catalog.Application.SeedWork;
+using Smart.FA.Catalog.Core.Domain;
+using Smart.FA.Catalog.Core.Domain.User.Dto;
+using Smart.FA.Catalog.Core.Domain.User.Enumerations;
+using Smart.FA.Catalog.Core.Domain.ValueObjects;
+using Smart.FA.Catalog.Core.LogEvents;
+using Smart.FA.Catalog.Core.SeedWork;
+using Smart.FA.Catalog.Infrastructure.Persistence;
 
-namespace Application.UseCases.Commands;
+namespace Smart.FA.Catalog.Application.UseCases.Commands;
 
 public class
     CreateTrainerFromUserAppCommandHandler : IRequestHandler<CreateTrainerFromUserAppRequest,

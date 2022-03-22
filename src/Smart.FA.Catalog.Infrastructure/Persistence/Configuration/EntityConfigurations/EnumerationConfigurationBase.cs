@@ -1,8 +1,8 @@
-using Core.SeedWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Smart.FA.Catalog.Core.SeedWork;
 
-namespace Infrastructure.Persistence.Configuration.EntityConfigurations;
+namespace Smart.FA.Catalog.Infrastructure.Persistence.Configuration.EntityConfigurations;
 
 public class EnumerationConfigurationBase<T> : IEntityTypeConfiguration<T>
     where T : Enumeration

@@ -1,11 +1,11 @@
-using Core.Domain.Enumerations;
-using Core.Domain.Validators;
-using Core.SeedWork;
-using Microsoft.Extensions.Localization;
-using Web.Pages.Admin.Trainings.Create;
 using FluentValidation;
+using Microsoft.Extensions.Localization;
+using Smart.FA.Catalog.Core.Domain.Enumerations;
+using Smart.FA.Catalog.Core.Domain.Validators;
+using Smart.FA.Catalog.Core.SeedWork;
+using Smart.FA.Catalog.Web.Pages.Admin.Trainings.Create;
 
-namespace Web.Validators;
+namespace Smart.FA.Catalog.Web.Validators;
 
 public class CreateTrainingViewModelValidator : AbstractValidator<CreateTrainingViewModel>
 {

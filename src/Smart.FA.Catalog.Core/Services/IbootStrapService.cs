@@ -1,4 +1,4 @@
-namespace Core.Services;
+namespace Smart.FA.Catalog.Core.Services;
 
 /// <summary>
 /// Executes operations that need to be performed upon booting.

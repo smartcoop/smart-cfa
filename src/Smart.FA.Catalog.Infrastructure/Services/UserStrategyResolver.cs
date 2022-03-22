@@ -1,7 +1,7 @@
-using Core.Domain.Enumerations;
-using Core.Services;
+using Smart.FA.Catalog.Core.Domain.User.Enumerations;
+using Smart.FA.Catalog.Core.Services;
 
-namespace Infrastructure.Services;
+namespace Smart.FA.Catalog.Infrastructure.Services;
 
 public class UserStrategyResolver
 {

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Xunit;
 using FluentAssertions;
-using LogEventIds = Core.LogEvents.LogEventIds;
+using LogEventIds = Smart.FA.Catalog.Core.LogEvents.LogEventIds;
 
 namespace Smart.FA.Catalog.UnitTests;
 

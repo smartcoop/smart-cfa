@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Web.Pages.Admin;
+namespace Smart.FA.Catalog.Web.Pages.Admin;
 
 public abstract class AdminPage : PageModel
 {

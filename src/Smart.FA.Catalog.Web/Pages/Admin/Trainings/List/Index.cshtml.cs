@@ -1,15 +1,15 @@
-using Application.UseCases.Commands;
-using Application.UseCases.Queries;
-using Core.Domain.Dto;
-using Core.Domain.Models;
-using Core.SeedWork;
-using Infrastructure.Persistence;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Web.Options;
+using Smart.FA.Catalog.Application.UseCases.Commands;
+using Smart.FA.Catalog.Application.UseCases.Queries;
+using Smart.FA.Catalog.Core.Domain.Dto;
+using Smart.FA.Catalog.Core.Domain.Models;
+using Smart.FA.Catalog.Core.SeedWork;
+using Smart.FA.Catalog.Infrastructure.Persistence;
+using Smart.FA.Catalog.Web.Options;
 
-namespace Web.Pages.Admin.Trainings.List;
+namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.List;
 
 public class ListModel : AdminPage
 {

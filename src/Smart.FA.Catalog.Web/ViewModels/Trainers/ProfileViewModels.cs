@@ -1,10 +1,10 @@
-using Application.UseCases.Commands;
-using Application.UseCases.Queries;
-using Core.Domain;
-using Core.SeedWork;
 using Smart.Design.Razor.TagHelpers.Icon;
+using Smart.FA.Catalog.Application.UseCases.Commands;
+using Smart.FA.Catalog.Application.UseCases.Queries;
+using Smart.FA.Catalog.Core.Domain.Enumerations;
+using Smart.FA.Catalog.Core.SeedWork;
 
-namespace Web.ViewModels.Trainers;
+namespace Smart.FA.Catalog.Web.ViewModels.Trainers;
 
 public class SocialNetworkViewModel
 {

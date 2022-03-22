@@ -1,11 +1,10 @@
-using Application.SeedWork;
-using Core.Domain;
-using Infrastructure.Persistence;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Smart.FA.Catalog.Application.SeedWork;
+using Smart.FA.Catalog.Core.Domain;
+using Smart.FA.Catalog.Infrastructure.Persistence;
 
-namespace Application.UseCases.Queries;
+namespace Smart.FA.Catalog.Application.UseCases.Queries;
 
 public class GetTrainersFromTrainingQueryHandler : IRequestHandler<GetTrainersFromTrainingRequest, GetTrainersFromTrainingResponse>
 {

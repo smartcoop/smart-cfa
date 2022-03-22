@@ -1,8 +1,8 @@
-using Core.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Smart.FA.Catalog.Core.Domain;
 
-namespace Infrastructure.Persistence.Configuration;
+namespace Smart.FA.Catalog.Infrastructure.Persistence.Configuration;
 
 public class TrainingTargetConfigurations: IEntityTypeConfiguration<TrainingTarget>
 {

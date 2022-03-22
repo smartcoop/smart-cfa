@@ -4,6 +4,8 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <RootNamespace>Smart.FA.Catalog.Core</RootNamespace>
+    <AssemblyName>Smart.FA.Catalog.Core</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

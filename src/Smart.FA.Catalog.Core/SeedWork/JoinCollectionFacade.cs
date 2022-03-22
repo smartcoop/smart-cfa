@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace Core.SeedWork;
+namespace Smart.FA.Catalog.Core.SeedWork;
 
 public class JoinCollectionFacade<T, TJoin> : ICollection<T>
 {

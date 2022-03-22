@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 
-namespace Core.SeedWork;
+namespace Smart.FA.Catalog.Core.SeedWork;
 
 internal sealed class IdentitySpecification<T> : Specification<T>
 {

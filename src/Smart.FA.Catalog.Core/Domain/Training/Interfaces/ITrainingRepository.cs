@@ -1,6 +1,6 @@
-using Core.SeedWork;
+using Smart.FA.Catalog.Core.SeedWork;
 
-namespace Core.Domain.Interfaces;
+namespace Smart.FA.Catalog.Core.Domain.Interfaces;
 
 public interface ITrainingRepository
 {

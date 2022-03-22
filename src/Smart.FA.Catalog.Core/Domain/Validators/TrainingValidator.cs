@@ -1,8 +1,7 @@
-using Core.Domain.Enumerations;
-using Core.Exceptions;
 using FluentValidation;
+using Smart.FA.Catalog.Core.Exceptions;
 
-namespace Core.Domain.Validators;
+namespace Smart.FA.Catalog.Core.Domain.Validators;
 
 public class TrainingValidator: AbstractValidator<Training>
 {

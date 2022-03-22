@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace Core.SeedWork;
+namespace Smart.FA.Catalog.Core.SeedWork;
 
 public abstract class DomainEvent : INotification
 {

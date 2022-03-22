@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace Core.SeedWork;
+namespace Smart.FA.Catalog.Core.SeedWork;
 
 public class Bus : IBus
 {

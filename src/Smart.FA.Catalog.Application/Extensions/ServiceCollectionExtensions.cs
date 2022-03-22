@@ -1,10 +1,9 @@
 using System.Reflection;
-using Application.Interceptors;
-using Application.SeedWork;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Smart.FA.Catalog.Application.Interceptors;
 
-namespace Application.Extensions;
+namespace Smart.FA.Catalog.Application.Extensions;
 
 public static class ServiceCollectionExtensions
 {

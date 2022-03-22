@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Web.Resources.Pages.Admin.Trainings.Create {
+namespace Smart.FA.Catalog.Web.Resources.Pages.Admin.Trainings.Create {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -20,15 +20,15 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class CreateModel {
-        
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal CreateModel() {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -42,7 +42,7 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
@@ -56,7 +56,7 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Salariés en entreprise.
         /// </summary>
@@ -65,7 +65,7 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
                 return ResourceManager.GetString("Employee", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Objectifs de la formation.
         /// </summary>
@@ -74,7 +74,7 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
                 return ResourceManager.GetString("Goal", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Collectif.
         /// </summary>
@@ -83,7 +83,7 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
                 return ResourceManager.GetString("Group", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to est un cours de langue.
         /// </summary>
@@ -92,7 +92,7 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
                 return ResourceManager.GetString("LanguageCourse", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Modalités pédagogique.
         /// </summary>
@@ -101,7 +101,7 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
                 return ResourceManager.GetString("Methodology", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to rentre dans le cadre de l&apos;Education permanente.
         /// </summary>
@@ -110,7 +110,7 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
                 return ResourceManager.GetString("PermanentSchoolCourse", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to est professionnelle/ professionnalisante.
         /// </summary>
@@ -119,7 +119,7 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
                 return ResourceManager.GetString("Professional", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to est un enseignement de matières scolaires / assimilées.
         /// </summary>
@@ -128,7 +128,7 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
                 return ResourceManager.GetString("SchoolCourse", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Individuel.
         /// </summary>
@@ -137,7 +137,7 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
                 return ResourceManager.GetString("Single", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Etudiant(s)/ Elève(s).
         /// </summary>
@@ -146,7 +146,7 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
                 return ResourceManager.GetString("Student", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Chômeur(s) suivant un cursus professionnel.
         /// </summary>

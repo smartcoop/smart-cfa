@@ -1,9 +1,8 @@
-using Core.Exceptions;
-using Core.SeedWork;
 using CSharpFunctionalExtensions;
+using Smart.FA.Catalog.Core.Exceptions;
 using ValueObject = CSharpFunctionalExtensions.ValueObject;
 
-namespace Core.Domain;
+namespace Smart.FA.Catalog.Core.Domain.ValueObjects;
 
 public class Name: ValueObject
 {

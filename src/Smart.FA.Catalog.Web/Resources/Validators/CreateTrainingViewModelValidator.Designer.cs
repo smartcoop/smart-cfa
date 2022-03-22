@@ -8,10 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Web.Resources.Pages.Admin.Trainings.Create {
-    using System;
-    
-    
+namespace Smart.FA.Catalog.Web.Resources.Validators {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -23,15 +20,15 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class CreateTrainingViewModelValidator {
-        
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal CreateTrainingViewModelValidator() {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -45,7 +42,7 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
@@ -59,7 +56,7 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to A training requires a goal.
         /// </summary>
@@ -68,7 +65,7 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
                 return ResourceManager.GetString("training.empty.goal", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to A training requires a methodology.
         /// </summary>
@@ -77,7 +74,7 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
                 return ResourceManager.GetString("training.empty.methodology", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to A training requires a title.
         /// </summary>
@@ -86,7 +83,7 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
                 return ResourceManager.GetString("training.empty.title", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to A training needs at least one target audience.
         /// </summary>
@@ -95,7 +92,7 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
                 return ResourceManager.GetString("training.missing.audience", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to A training needs at least one slot type.
         /// </summary>
@@ -104,7 +101,7 @@ namespace Web.Resources.Pages.Admin.Trainings.Create {
                 return ResourceManager.GetString("training.missing.slot.type", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to A training needs to be in at least one category.
         /// </summary>

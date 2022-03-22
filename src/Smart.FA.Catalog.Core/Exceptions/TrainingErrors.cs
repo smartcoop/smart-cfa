@@ -1,4 +1,4 @@
-namespace Core.Exceptions;
+namespace Smart.FA.Catalog.Core.Exceptions;
 
 public static partial class Errors
 {

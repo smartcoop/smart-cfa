@@ -1,11 +1,11 @@
 using System;
 using System.Threading.Tasks;
 using AutoFixture;
-using Core.Domain;
-using Core.Domain.Dto;
-using Core.Domain.Enumerations;
-using Core.SeedWork;
 using FluentAssertions;
+using Smart.FA.Catalog.Core.Domain.User.Dto;
+using Smart.FA.Catalog.Core.Domain.User.Enumerations;
+using Smart.FA.Catalog.Core.Domain.ValueObjects;
+using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.IntegrationTests.Base;
 using Smart.FA.Catalog.Tests.Common;
 using Xunit;

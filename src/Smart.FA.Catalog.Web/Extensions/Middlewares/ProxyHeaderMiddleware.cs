@@ -1,13 +1,13 @@
 using System.Globalization;
 using System.Security.Principal;
-using Application.UseCases.Commands;
-using Application.UseCases.Queries;
-using Core.Domain.Enumerations;
-using Core.Domain.Models;
-using Core.SeedWork;
 using MediatR;
+using Smart.FA.Catalog.Application.UseCases.Commands;
+using Smart.FA.Catalog.Application.UseCases.Queries;
+using Smart.FA.Catalog.Core.Domain.Models;
+using Smart.FA.Catalog.Core.Domain.User.Enumerations;
+using Smart.FA.Catalog.Core.SeedWork;
 
-namespace Web.Extensions.Middlewares;
+namespace Smart.FA.Catalog.Web.Extensions.Middlewares;
 
 /// <summary>
 /// The authentication is working with a system from Nginx (the proxy in front of our apps) called x-accel (https://www.nginx.com/resources/wiki/start/topics/examples/x-accel/).

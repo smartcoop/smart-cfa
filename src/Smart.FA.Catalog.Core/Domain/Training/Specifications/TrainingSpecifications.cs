@@ -1,8 +1,8 @@
 using System.Linq.Expressions;
-using Core.Domain.Enumerations;
-using Core.SeedWork;
+using Smart.FA.Catalog.Core.Domain.Enumerations;
+using Smart.FA.Catalog.Core.SeedWork;
 
-namespace Core.Domain.Specifications;
+namespace Smart.FA.Catalog.Core.Domain.Specifications;
 
 public class ValidStatusSpecification : Specification<Training>
 {

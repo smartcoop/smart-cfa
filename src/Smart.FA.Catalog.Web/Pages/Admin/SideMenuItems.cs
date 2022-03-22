@@ -1,6 +1,6 @@
-using Core.SeedWork;
+using Smart.FA.Catalog.Core.SeedWork;
 
-namespace Web.Pages.Admin;
+namespace Smart.FA.Catalog.Web.Pages.Admin;
 
 public class SideMenuItem : Enumeration
 {

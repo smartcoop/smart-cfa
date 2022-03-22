@@ -1,14 +1,15 @@
-using Application.SeedWork;
-using Core.Domain;
-using Core.Extensions;
-using Core.SeedWork;
 using FluentValidation;
-using Infrastructure.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Smart.FA.Catalog.Application.SeedWork;
+using Smart.FA.Catalog.Core.Domain;
+using Smart.FA.Catalog.Core.Domain.Enumerations;
+using Smart.FA.Catalog.Core.Extensions;
+using Smart.FA.Catalog.Core.SeedWork;
+using Smart.FA.Catalog.Infrastructure.Persistence;
 
-namespace Application.UseCases.Commands;
+namespace Smart.FA.Catalog.Application.UseCases.Commands;
 
 /// <summary>
 /// Command to edit the profile of a trainer.

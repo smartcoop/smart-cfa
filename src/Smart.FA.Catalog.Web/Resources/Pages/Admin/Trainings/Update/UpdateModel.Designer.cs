@@ -8,7 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Web.Resources.Pages.Admin.Trainings.Create {
+using Smart.FA.Catalog.Web.Resources.Pages.Admin.Trainings.Create;
+
+namespace Smart.FA.Catalog.Web.Resources.Pages.Admin.Trainings.Update {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

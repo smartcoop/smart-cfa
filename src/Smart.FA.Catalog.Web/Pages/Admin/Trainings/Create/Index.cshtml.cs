@@ -1,8 +1,8 @@
-using Core.Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Smart.FA.Catalog.Core.Domain.Models;
 
-namespace Web.Pages.Admin.Trainings.Create;
+namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.Create;
 
 public class CreateModel : AdminPage
 {

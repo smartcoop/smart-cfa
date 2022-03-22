@@ -1,11 +1,11 @@
 using System.Reflection;
-using Core.Domain;
-using Core.SeedWork;
-using Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Smart.FA.Catalog.Core.Domain;
+using Smart.FA.Catalog.Core.SeedWork;
+using Smart.FA.Catalog.Infrastructure.Extensions;
 
-namespace Infrastructure.Persistence;
+namespace Smart.FA.Catalog.Infrastructure.Persistence;
 
 public class CatalogContext : DbContext
 {
