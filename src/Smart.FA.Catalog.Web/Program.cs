@@ -72,17 +72,9 @@ if (app.Environment.IsProduction())
 else
 {
     app.UseDeveloperExceptionPage();
+    app.UseStatusCodePagesWithReExecute("/{0}");
 }
 
-app.Use(async (context, next) =>
-{
-    await next();
-    if (context.Response.StatusCode == 404)
-    {
-        context.Request.Path = "/404";
-        await next();
-    }
-});
 
 app.UseHttpsRedirection();
 
