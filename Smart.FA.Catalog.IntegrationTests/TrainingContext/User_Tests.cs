@@ -1,12 +1,12 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Application.UseCases.Queries;
 using AutoFixture;
-using Core.Domain.Enumerations;
 using FluentAssertions;
-using Infrastructure.Services;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
+using Smart.FA.Catalog.Application.UseCases.Queries;
+using Smart.FA.Catalog.Core.Domain.User.Enumerations;
+using Smart.FA.Catalog.Infrastructure.Services;
 using Xunit;
 using Smart.FA.Catalog.IntegrationTests.Base;
 
