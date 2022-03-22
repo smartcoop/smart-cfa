@@ -17,7 +17,7 @@ public class UserTests: IntegrationTestBase
     private readonly Fixture _fixture = new();
 
     [Fact]
-    public async Task CanGet()
+    public async Task GetTrainerFromUserAppRequest()
     {
         var logger = Substitute.For<ILogger<GetTrainerFromUserAppQueryHandler>>();
         await using var context = GivenCatalogContext();
@@ -25,9 +25,9 @@ public class UserTests: IntegrationTestBase
         var handler = Substitute.For<GetTrainerFromUserAppQueryHandler>(logger, context, userStrategyResolver );
         var request = new GetTrainerFromUserAppRequest {ApplicationType = ApplicationType.Account, UserId = _fixture.Create<string>()};
 
-        var user = await handler.Handle(request, CancellationToken.None);
+        var trainer = await handler.Handle(request, CancellationToken.None);
 
-        user.Should().NotBeNull();
-        user.User.UserId.Should().Equals(request.UserId);
+        trainer.Should().NotBeNull();
+        trainer.User.UserId.Should().Equals(request.UserId);
     }
 }
