@@ -18,14 +18,17 @@ public record TrainingListingViewModel
 
 public static class StatusExtension
 {
-    public static string DisplayStatus(this TrainingStatus trainingStatus)
+    public static string DisplayStatusName(this TrainingStatus trainingStatus)
     {
         if (Equals(trainingStatus, TrainingStatus.Draft))
-            return "Brouillon";
+            return CatalogResources.Draft;
 
         if (Equals(trainingStatus, TrainingStatus.WaitingForValidation))
-            return "En attente de validation";
+            return CatalogResources.PendingValidation;
 
-        return Equals(trainingStatus, TrainingStatus.Validated) ? "Validé" : string.Empty;
+        if (Equals(trainingStatus, TrainingStatus.Validated))
+            return CatalogResources.Validated;
+
+        return string.Empty;
     }
 }

@@ -48,4 +48,8 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="../Smart.FA.Catalog.Core/GlobalUsing.cs" />
+  </ItemGroup>
+
 </Project>

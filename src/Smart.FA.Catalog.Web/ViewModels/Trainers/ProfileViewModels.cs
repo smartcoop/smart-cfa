@@ -55,7 +55,7 @@ public static class Mappers
         return new SocialNetworkViewModel()
         {
             SocialNetworkId = socialNetwork.Id,
-            Name            = socialNetwork.Name,
+            Name            = socialNetwork.DisplayName(),
             Icon            = socialNetwork.ToImage()
         };
     }

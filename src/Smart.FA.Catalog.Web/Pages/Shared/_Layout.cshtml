@@ -1,3 +1,15 @@
+﻿@using Microsoft.AspNetCore.Localization
+@using Microsoft.Extensions.Options
+@inject IOptions<RequestLocalizationOptions> _requestLocalizationOptions;
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var supportedLanguges = _requestLocalizationOptions
+            .Value?
+            .SupportedUICultures?
+            .Select(supportedCulture => new SelectListItem(supportedCulture.DisplayName, supportedCulture.TwoLetterISOLanguageName)) ??
+        throw new InvalidOperationException("Supported culture not defined");
+}
+
 <!DOCTYPE html>
 <html lang="en" class="u-maximize-height" dir="ltr">
 
@@ -6,7 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/_content/Smart.Design.Razor/css/main.css"/>
-    <link rel="stylesheet" href="~/@(nameof(Web)).styles.css" />
+    <link rel="stylesheet" href="~/Smart.FA.Catalog.Web.styles.css" />
 </head>
 <body class="u-maximize-height u-overflow-hidden">
 <div class="c-app-layout">
@@ -23,6 +35,16 @@
                     </div>
                 </div>
                 <div class="c-toolbar__right">
+                    <div class="c-toolbar__item">
+                        <div class="c-select-holder">
+                            <select id="culture"
+                                    name="culture"
+                                    class="c-select"
+                                    asp-items="supportedLanguges"
+                                    asp-for="@requestCulture.RequestCulture.UICulture.Name">
+                            </select>
+                        </div>
+                    </div>
                     <div class="c-toolbar__item">
                         <a class="c-user-navigation" href="#" data-menu="userMenu">
                             <div class="c-avatar c-avatar--img">

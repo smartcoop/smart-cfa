@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Security.Principal;
 using MediatR;
 using Smart.FA.Catalog.Application.UseCases.Commands;
@@ -39,7 +38,6 @@ public class ProxyHeaderMiddleware
             response.Trainer = newTrainerResponse.Trainer;
         }
 
-        CultureInfo.CurrentUICulture = new CultureInfo(response.Trainer!.DefaultLanguage.Value);
         context.User = new GenericPrincipal(new CustomIdentity(response.Trainer!), null );
         await _next(context);
     }

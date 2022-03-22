@@ -10,7 +10,7 @@ namespace Smart.FA.Catalog.Web.Validators;
 
 public class UpdateTrainingViewModelValidator : AbstractValidator<UpdateTrainingViewModel>
 {
-    public UpdateTrainingViewModelValidator(IStringLocalizer<CreateTrainingViewModel> localizer)
+    public UpdateTrainingViewModelValidator(IStringLocalizer<CatalogResources> localizer)
     {
         CustomValidators.NotEmpty(RuleFor(request => request.Title)).WithMessage(localizer[Errors.TrainingViewModel.EmptyTitle().Code]);
         When(request =>  request.IsDraft is not true,

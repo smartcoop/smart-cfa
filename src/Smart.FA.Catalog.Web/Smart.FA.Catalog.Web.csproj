@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -40,66 +40,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\Admin\Trainings\Create\Index.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Index.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Pages\Trainings\Create\CreateModel.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>CreateModel.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Pages\Admin\Trainings\Create\CreateModel.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>CreateModel.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <Content Remove="wwwroot\icons\link.svg" />
     <Content Remove="wwwroot\favicon.ico" />
     <EmbeddedResource Include="wwwroot\favicon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Validators\CreateTrainingViewModelValidator.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>CreateTrainingViewModelValidator.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Validators\CreateTrainingViewModelValidator.fr.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>CreateTrainingViewModelValidator.fr.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Pages\Admin\Trainings\Edit\EditModel.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>CreateModel.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Pages\Admin\Trainings\Update\UpdateModel.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>CreateModel.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Pages\Admin\Trainings\List\ListModel.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ListModel.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\Admin\Trainings\Create\Index.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Index.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Resources\Validators\CreateTrainingViewModelValidator.fr.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>CreateTrainingViewModelValidator.fr.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Resources\Pages\Admin\Trainings\List\ListModel.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ListModel.resx</DependentUpon>
-    </Compile>
+    <Compile Include="../Smart.FA.Catalog.Core/GlobalUsing.cs" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Resources\Pages\Admin" />
-  </ItemGroup>
-
 
 </Project>
