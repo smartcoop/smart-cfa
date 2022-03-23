@@ -123,7 +123,7 @@ public class TrainerNotFoundResponse : ProfileEditionResponse
     public TrainerNotFoundResponse(int trainerId)
     {
         Found = false;
-        AddError("TrainerNotFound", $"Trainer was not found, id provided is {trainerId}");
+        AddError("TrainerNotFound", CatalogResources.TrainerNotFound_TrainerId);
     }
 }
 
@@ -143,7 +143,9 @@ public class EditProfileCommandValidator : AbstractValidator<EditProfileCommand>
     public EditProfileCommandValidator()
     {
         RuleFor(command => command.Bio)
+            .MinimumLength(30)
+            .WithMessage(CatalogResources.BioMustBe30Chars)
             .MaximumLength(500)
-            .WithMessage("Biography cannot exceed 500 characters");
+            .WithMessage(CatalogResources.BioCannotExceed500Chars);
     }
 }

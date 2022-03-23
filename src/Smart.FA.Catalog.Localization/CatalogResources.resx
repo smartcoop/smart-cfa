@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ProfileEdition" xml:space="preserve">
+    <value>Edition de profil</value>
+  </data>
+  <data name="ProfileUpdatedWithSuccess" xml:space="preserve">
+    <value>Profil mis à jour</value>
+  </data>
+  <data name="TrainerTitle" xml:space="preserve">
+    <value>Fonction</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Sauvegarder</value>
+  </data>
+  <data name="Max500Characters" xml:space="preserve">
+    <value>Maximum 500 caractères</value>
+  </data>
+  <data name="SocialNetworks" xml:space="preserve">
+    <value>Réseaux sociaux</value>
+  </data>
+  <data name="PersonalWebsite" xml:space="preserve">
+    <value>Site personnel</value>
+  </data>
+  <data name="BioCannotExceed500Chars" xml:space="preserve">
+    <value>La biographie ne peut excéder 500 charactères</value>
+  </data>
+  <data name="TrainerNotFound_TrainerId" xml:space="preserve">
+    <value>Le formateur n'a pas été trouvé</value>
+  </data>
+  <data name="MyTrainerProfile" xml:space="preserve">
+    <value>Mon profil formateur</value>
+  </data>
+  <data name="MyTrainings" xml:space="preserve">
+    <value>Mes formations</value>
+  </data>
+  <data name="AddNewTraining" xml:space="preserve">
+    <value>Encoder une formation</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Précédant</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Suivant</value>
+  </data>
+  <data name="Draft" xml:space="preserve">
+    <value>Brouillon</value>
+  </data>
+  <data name="PendingValidation" xml:space="preserve">
+    <value>Én attente de validation</value>
+  </data>
+  <data name="Validated" xml:space="preserve">
+    <value>Validé</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Retour</value>
+  </data>
+  <data name="TrainingTitleCreationLabel" xml:space="preserve">
+    <value>Titre de la formation</value>
+  </data>
+  <data name="TheTraining" xml:space="preserve">
+    <value>La formation</value>
+  </data>
+  <data name="Training_IsPermanentEducation" xml:space="preserve">
+    <value>entre dans le cadre de l'Education permanente</value>
+  </data>
+  <data name="Training_IsScholarTraining" xml:space="preserve">
+    <value>est un enseignement de matières scolaires / assimilées</value>
+  </data>
+  <data name="Student" xml:space="preserve">
+    <value>Étudiant-es / Élève(s)</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>Autre</value>
+  </data>
+  <data name="Training_Collective" xml:space="preserve">
+    <value>Collective</value>
+  </data>
+  <data name="InformationTechnology" xml:space="preserve">
+    <value>Technologie de l'information</value>
+  </data>
+  <data name="SocialScience" xml:space="preserve">
+    <value>Sciences humaines et sociales</value>
+  </data>
+  <data name="School" xml:space="preserve">
+    <value>Matière scolaire / universitaire</value>
+  </data>
+  <data name="HealthCare" xml:space="preserve">
+    <value>Soin aux personnes</value>
+  </data>
+  <data name="Communication" xml:space="preserve">
+    <value>Communication</value>
+  </data>
+  <data name="LanguageCourse" xml:space="preserve">
+    <value>Cours de langue</value>
+  </data>
+  <data name="Methodology" xml:space="preserve">
+    <value>Méthodologie</value>
+  </data>
+  <data name="TrainingGoal" xml:space="preserve">
+    <value>Objectif de la formation</value>
+  </data>
+  <data name="Sectors" xml:space="preserve">
+    <value>Secteurs</value>
+  </data>
+  <data name="Training_Group" xml:space="preserve">
+    <value>Collective</value>
+  </data>
+  <data name="Training_Single" xml:space="preserve">
+    <value>Individuelle</value>
+  </data>
+  <data name="Training_IsItATrainingThat" xml:space="preserve">
+    <value>S'agit-il d'une formation ?</value>
+  </data>
+  <data name="Unemployed" xml:space="preserve">
+    <value>Demandeur-euse d'emploi</value>
+  </data>
+  <data name="Specify" xml:space="preserve">
+    <value>Spécifiez</value>
+  </data>
+  <data name="SchoolCourse" xml:space="preserve">
+    <value>est un enseignement de matières scolaires / assimilées</value>
+  </data>
+  <data name="Publish" xml:space="preserve">
+    <value>Publier</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Se déconnecter</value>
+  </data>
+  <data name="TrainingTarget" xml:space="preserve">
+    <value>Public cible</value>
+  </data>
+  <data name="Cancelled" xml:space="preserve">
+    <value>Annulé</value>
+  </data>
+  <data name="Refused" xml:space="preserve">
+    <value>Refusé</value>
+  </data>
+  <data name="EditTraining" xml:space="preserve">
+    <value>Édition de la formation</value>
+  </data>
+  <data name="FieldRequired" xml:space="preserve">
+    <value>Ce champs est requis</value>
+  </data>
+  <data name="Training_InGroup" xml:space="preserve">
+    <value>en groupe</value>
+  </data>
+  <data name="Training_IsProfessional" xml:space="preserve">
+    <value>est professionelle / professionalisante</value>
+  </data>
+  <data name="Training_IsLanguageCourse" xml:space="preserve">
+    <value>est un cours de langue</value>
+  </data>
+  <data name="Marketing" xml:space="preserve">
+    <value>Marketing</value>
+  </data>
+  <data name="Sport" xml:space="preserve">
+    <value>Sport</value>
+  </data>
+  <data name="Topics" xml:space="preserve">
+    <value>Matière(s)</value>
+  </data>
+  <data name="Training_DescriptionLabel" xml:space="preserve">
+    <value>Présentation de la formation</value>
+  </data>
+  <data name="Min30CharMax500Char" xml:space="preserve">
+    <value>min 30 caractères / max 500 caractères</value>
+  </data>
+  <data name="MaximumTwoChoices" xml:space="preserve">
+    <value>Deux choix maximum possibles</value>
+  </data>
+  <data name="IsItATraining" xml:space="preserve">
+    <value>S'agit-il d'une formation</value>
+  </data>
+  <data name="FieldsThatWillAppearInThePublicCatalog" xml:space="preserve">
+    <value>Champs qui apparaîtront dans le catalog public</value>
+  </data>
+  <data name="EconomyMarketing" xml:space="preserve">
+    <value>Économie / Marketing</value>
+  </data>
+  <data name="Culture" xml:space="preserve">
+    <value>Art / Culture</value>
+  </data>
+  <data name="CharterUse" xml:space="preserve">
+    <value>Charte d'utilisation</value>
+  </data>
+  <data name="Emloyee" xml:space="preserve">
+    <value>Salarié-es en entreprise et / ou indépendant-es</value>
+  </data>
+  <data name="TrainerPicture" xml:space="preserve">
+    <value>Photo de profil</value>
+  </data>
+  <data name="Min30Characters" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BioMustBe30Chars" xml:space="preserve">
+    <value>La biographie doit être constituée d'au moins 30 charactères</value>
+  </data>
+</root>

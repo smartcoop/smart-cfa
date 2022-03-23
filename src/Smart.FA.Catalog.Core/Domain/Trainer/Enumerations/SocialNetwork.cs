@@ -23,4 +23,15 @@ public class SocialNetwork : Enumeration
     {
 
     }
+
+    public string DisplayName()
+    {
+        // Personal website
+        if (Id == 6)
+        {
+            return CatalogResources.PersonalWebsite;
+        }
+
+        return Name;
+    }
 }

@@ -1,6 +1,16 @@
-@using Smart.FA.Catalog.Core.SeedWork
+﻿@using Smart.FA.Catalog.Core.SeedWork
 @using Smart.FA.Catalog.Web.Pages.Admin
-@using Web.Pages.Admin
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.Extensions.Options
+@inject IOptions<RequestLocalizationOptions> _requestLocalizationOptions;
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var supportedLanguges = _requestLocalizationOptions
+            .Value?
+            .SupportedUICultures?
+            .Select(supportedCulture => new SelectListItem(supportedCulture.DisplayName, supportedCulture.TwoLetterISOLanguageName)) ??
+        throw new InvalidOperationException("Supported culture not defined");
+}
 <!DOCTYPE html>
 <html class="u-maximize-height" dir="ltr" lang="en">
 <head>
@@ -8,7 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/_content/Smart.Design.Razor/css/main.css"/>
-    <link rel="stylesheet" href="~/@(nameof(Web)).styles.css" />
+    <link rel="stylesheet" href="~/Smart.FA.Catalog.Web.styles.css" />
 </head>
 <body class="u-maximize-height u-overflow-hidden">
 <div class="c-app-layout">
@@ -26,6 +36,16 @@
                 </div>
                 <div class="c-toolbar__right">
                     <div class="c-toolbar__item">
+                        <div class="c-select-holder">
+                            <select id="culture"
+                                    name="culture"
+                                    class="c-select"
+                                    asp-items="supportedLanguges"
+                                    asp-for="@requestCulture.RequestCulture.UICulture.Name">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="c-toolbar__item">
                         <a class="c-user-navigation" href="#" data-menu="userMenu">
                             <div class="c-avatar c-avatar--img">
                                 <img src="https://i1.sndcdn.com/avatars-000304411295-zx2krs-t200x200.jpg" alt="avatar">
@@ -34,11 +54,11 @@
                         </a>
                         <ul class="c-menu c-menu--large" id="userMenu">
                             <li class="c-menu__item">
-                                <a class="c-menu__label" href="/admin/myprofile">My profile</a>
+                                <a class="c-menu__label" href="/admin/myprofile">@CatalogResources.MyTrainerProfile</a>
                             </li>
                             <li class="c-menu__divider" role="presentational"></li>
                             <li class="c-menu__item">
-                                <a class="c-menu__label" href="#">Sign out</a>
+                                <a class="c-menu__label" href="#">@CatalogResources.SignOut</a>
                             </li>
                         </ul>
                     </div>
@@ -53,7 +73,7 @@
                     @foreach (var sideMenuItem in Enumeration.GetAll<SideMenuItem>())
                     {
                         <li class="c-side-menu__item @((SideMenuItem) ViewData[nameof(SideMenuItem)]! == sideMenuItem ? "c-side-menu__item--active" : "")">
-                            <a class="c-side-menu__link" href="@sideMenuItem.Href">@sideMenuItem.Name</a>
+                            <a class="c-side-menu__link" href="@sideMenuItem.Href">@sideMenuItem.DisplayName()</a>
                         </li>
                     }
                 </ul>

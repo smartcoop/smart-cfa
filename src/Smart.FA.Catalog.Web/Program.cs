@@ -32,11 +32,10 @@ builder.Services
         configuration.RegisterValidatorsFromAssemblyContaining<Program>();
         configuration.RegisterValidatorsFromAssemblyContaining<ResponseBase>();
         configuration.DisableDataAnnotationsValidation = true;
-    })
-    .AddViewLocalization(options =>
-    {
-        options.ResourcesPath = "Resources";
     });
+
+// Add localization.
+builder.Services.AddCatalogLocalization();
 
 builder.WebHost.UseWebRoot("wwwroot");
 builder.WebHost.UseStaticWebAssets();
@@ -75,6 +74,8 @@ else
     app.UseStatusCodePagesWithReExecute("/{0}");
 }
 
+
+app.UseRequestLocalization();
 
 app.UseHttpsRedirection();
 

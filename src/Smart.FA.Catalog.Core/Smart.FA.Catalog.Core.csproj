@@ -12,4 +12,13 @@
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Smart.FA.Catalog.Localization\Smart.FA.Catalog.Localization.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="../Smart.FA.Catalog.Core/GlobalUsing.cs" />
+  </ItemGroup>
+
 </Project>

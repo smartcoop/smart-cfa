@@ -1,14 +1,11 @@
 ﻿@page
-@using Smart.Design.Razor.TagHelpers.Pill
 @using Microsoft.Extensions.Localization
-@using Smart.FA.Catalog.Web.Pages.Admin.Trainings.List
-@using Web.Pages.Admin.Trainings.List
-@inject IStringLocalizer<ListModel> _localizer
-@model Web.Pages.Admin.Trainings.List.ListModel
+@inject IStringLocalizer<CatalogResources> _localizer
+@model Smart.FA.Catalog.Web.Pages.Admin.Trainings.List.ListModel
 @{
     Layout = "_AdminLayout";
-    ViewData["ToolBarTitle"] = "My Trainings";
-    ViewData["Title"] = "My Trainings";
+    ViewData["ToolBarTitle"] = @CatalogResources.MyTrainings;
+    ViewData["Title"] = CatalogResources.MyTrainings;
 }
 
 @section HeaderToolbar {
@@ -16,14 +13,14 @@
         <div class="c-toolbar">
             <div class="c-toolbar__left">
                 <div class="c-toolbar__item">
-                    <h2 class="c-toolbar__title">@ViewData["ToolBarTitle"]</h2>
+                    <h2 class="c-toolbar__title">@CatalogResources.MyTrainings</h2>
                 </div>
             </div>
 
             <smart-button-toolbar>
                 <div class="c-toolbar__right">
                     <a href="/admin/trainings/create?fromlist=">
-                        <smart-button label="Add new training" leading-icon="Add"></smart-button>
+                        <smart-button label="@CatalogResources.AddNewTraining" leading-icon="Add"></smart-button>
                     </a>
                 </div>
             </smart-button-toolbar>
@@ -42,15 +39,15 @@
     <div class="c-toolbar__left">
         @if (Model?.Trainings?.HasPreviousPage ?? false)
         {
-            <a asp-page="/admin/trainings/list/index" asp-route-CurrentPage="@(Model.CurrentPage - 1)">Previous</a>
+            <a asp-page="/admin/trainings/list/index" asp-route-CurrentPage="@(Model.CurrentPage - 1)">@CatalogResources.Previous</a>
         }
     </div>
 
-    <div> @(Model?.Trainings?.Count ?? 0)/@(Model?.Trainings?.TotalCount ?? 0) Trainings - Page @(Model?.CurrentPage ?? 0)/@(Model?.Trainings?.TotalPages ?? 0)</div>
+    <div>Page @(Model?.CurrentPage ?? 0)/@(Model?.Trainings?.TotalPages ?? 0)</div>
     <div class="c-toolbar__right">
         @if (Model?.Trainings?.HasNextPage ?? false)
         {
-            <a asp-page="/admin/trainings/list/index" asp-route-CurrentPage="@(Model.CurrentPage + 1)">Next</a>
+            <a asp-page="/admin/trainings/list/index" asp-route-CurrentPage="@(Model.CurrentPage + 1)">@CatalogResources.Next</a>
         }
     </div>
 </div>

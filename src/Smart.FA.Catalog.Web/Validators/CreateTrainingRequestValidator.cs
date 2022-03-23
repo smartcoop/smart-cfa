@@ -9,11 +9,11 @@ namespace Smart.FA.Catalog.Web.Validators;
 
 public class CreateTrainingViewModelValidator : AbstractValidator<CreateTrainingViewModel>
 {
-    public CreateTrainingViewModelValidator(IStringLocalizer<CreateTrainingViewModelValidator> localizer)
+    public CreateTrainingViewModelValidator(IStringLocalizer<CatalogResources> localizer)
     {
         CustomValidators.NotEmpty(RuleFor(request => request.Title)).WithMessage(localizer[Errors.TrainingViewModel.EmptyTitle().Code]);
         When(request =>  request.IsDraft is not true,
-            () => CustomValidators.NotEmpty(RuleFor(request => request.Methodology)).WithMessage(localizer[Errors.TrainingViewModel.EmptyMethodology().Code]));
+            () => CustomValidators.NotEmpty(RuleFor(request => request.Methodology)).WithMessage(CatalogResources.FieldRequired));
         When(request =>  request.IsDraft is not true,
             () => CustomValidators.NotEmpty(RuleFor(request => request.Goal)).WithMessage(localizer[Errors.TrainingViewModel.EmptyGoal().Code]));
         When(request => request.IsDraft is not true,

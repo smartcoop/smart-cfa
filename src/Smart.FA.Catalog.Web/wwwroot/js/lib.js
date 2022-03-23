@@ -27,3 +27,25 @@ function scrollToFirstErrorElement() {
 function RegisterScrollToFirstElementInError() {
     window.addEventListener("load", scrollToFirstErrorElement);
 }
+
+// Handling of the culture switching.
+document.addEventListener("DOMContentLoaded",
+    function() {
+        RegisterCultureChange();
+    });
+
+function ChangeCulture(culture) {
+    // this is the cookie asp expects to have. Note that the path is set to '/'.
+    let cookie = `.AspNetCore.Culture=c=${culture}|uic=${culture};path=/`; //"=en|uic=en"
+    document.cookie = cookie;
+
+    // We can reload the page to the user is happy.
+    location.reload();
+}
+
+function RegisterCultureChange() {
+    document.getElementById("culture").addEventListener("change",
+        function(event) {
+            ChangeCulture(event.target.value);
+        });
+}
