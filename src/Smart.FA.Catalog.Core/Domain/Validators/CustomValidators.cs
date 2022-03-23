@@ -9,9 +9,10 @@ namespace Smart.FA.Catalog.Core.Domain.Validators;
 
 public static class CustomValidators
 {
-      public static IRuleBuilderOptions<T, TProperty> NotEmpty<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder)
+      public static IRuleBuilderOptions<T, TProperty> NotEmptyWithGenericMessage<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder)
         {
-            return DefaultValidatorExtensions.NotEmpty(ruleBuilder)
+            return ruleBuilder
+                .NotEmpty()
                 .WithMessage(Errors.General.ValueIsRequired().Serialize());
         }
 

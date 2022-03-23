@@ -1,30 +1,63 @@
 using FluentValidation;
 using Microsoft.Extensions.Localization;
-using Smart.FA.Catalog.Core.Domain.Enumerations;
-using Smart.FA.Catalog.Core.Domain.Validators;
-using Smart.FA.Catalog.Core.SeedWork;
-using Smart.FA.Catalog.Web.Pages.Admin.Trainings.Create;
 using Smart.FA.Catalog.Web.Pages.Admin.Trainings.Update;
 
 namespace Smart.FA.Catalog.Web.Validators;
 
+/// <summary>
+/// Validates the request to update a training.
+/// </summary>
 public class UpdateTrainingViewModelValidator : AbstractValidator<UpdateTrainingViewModel>
 {
     public UpdateTrainingViewModelValidator(IStringLocalizer<CatalogResources> localizer)
     {
-        CustomValidators.NotEmpty(RuleFor(request => request.Title)).WithMessage(localizer[Errors.TrainingViewModel.EmptyTitle().Code]);
-        When(request =>  request.IsDraft is not true,
-            () => CustomValidators.NotEmpty(RuleFor(request => request.Methodology)).WithMessage(localizer[Errors.TrainingViewModel.EmptyMethodology().Code]));
-        When(request =>  request.IsDraft is not true,
-            () => CustomValidators.NotEmpty(RuleFor(request => request.Goal)).WithMessage(localizer[Errors.TrainingViewModel.EmptyGoal().Code]));
-        When(request => request.IsDraft is not true,
-            () => CustomValidators.NotEmpty(RuleFor(request => request.SlotNumberTypeIds)).WithMessage(localizer[Errors.TrainingViewModel.MissingSlotType().Code])
-                .ForEach(types => types.MustBeEnumeration(Enumeration.FromValue<TrainingSlotNumberType>)));
-        When(request => request.IsDraft is not true,
-            () => CustomValidators.NotEmpty(RuleFor(request => request.TargetAudienceIds)).WithMessage(localizer[Errors.TrainingViewModel.MissingTargetAudience().Code])
-                .ForEach(types => types.MustBeEnumeration(Enumeration.FromValue<TrainingTargetAudience>)));
-        When(request =>  request.IsDraft is not true,
-            () => CustomValidators.NotEmpty(RuleFor(request => request.TrainingTypeIds)).WithMessage(localizer[Errors.TrainingViewModel.MissingType().Code])
-                .ForEach(types => types.MustBeEnumeration(Enumeration.FromValue<TrainingType>)));
+        RuleFor(viewModel => viewModel.Title)
+            .NotEmpty()
+            .WithMessage(CatalogResources.TrainingTitleIsRequired);
+
+        // When we register a draft we are very permissive.
+        // Only the title is required.
+        // However to be able to publish more rules are required.
+        When(IsNotDraft, ApplyRemainingRules);
+    }
+
+    private void ApplyRemainingRules()
+    {
+        RuleFor(viewModel => viewModel.Methodology)
+            .NotEmpty()
+            .WithMessage(CatalogResources.FieldRequired)
+            .MinimumLength(30)
+            .WithMessage(" ")
+            .MaximumLength(500)
+            .WithMessage(" ");
+
+        RuleFor(viewModel => viewModel.Goal)
+            .NotEmpty()
+            .WithMessage(CatalogResources.FieldRequired)
+            .MinimumLength(30)
+            .WithMessage(" ")
+            .MaximumLength(500)
+            .WithMessage(" ");
+
+        RuleFor(viewModel => viewModel.TopicIds)
+            .NotEmpty()
+            .WithMessage(CatalogResources.YouMustSelectedAtLeastOneTopic);
+
+        RuleFor(viewModel => viewModel.TrainingTypeIds)
+            .NotEmpty()
+            .WithMessage(CatalogResources.PleaseSelectOneOption);
+
+        RuleFor(viewModel => viewModel.SlotNumberTypeIds)
+            .NotEmpty()
+            .WithMessage(CatalogResources.PleaseSelectOneOption);
+
+        RuleFor(viewModel => viewModel.TargetAudienceIds)
+            .NotEmpty()
+            .WithMessage(CatalogResources.PleaseSelectOneOption);
+    }
+
+    private bool IsNotDraft(UpdateTrainingViewModel viewModel)
+    {
+        return !viewModel.IsDraft;
     }
 }
