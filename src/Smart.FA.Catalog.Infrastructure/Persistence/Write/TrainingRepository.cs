@@ -32,6 +32,7 @@ public class TrainingRepository : ITrainingRepository
             .Include(training => training.Identities)
             .Include(training => training.Slots)
             .Include(training => training.Targets)
+            .Include(training => training.Topics)
             .FirstOrDefaultAsync(training => training.Id == trainingId, cancellationToken);
 
     public async Task<Training> FindAsync(int trainingId, CancellationToken cancellationToken)

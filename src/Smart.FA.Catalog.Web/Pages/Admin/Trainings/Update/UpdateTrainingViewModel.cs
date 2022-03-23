@@ -51,7 +51,8 @@ public static class EditTrainingViewModelMapping
             Methodology = detail?.Methodology,
             TargetAudienceIds = model.Training.Targets.Select(target => target.TrainingTargetAudienceId).ToList(),
             TrainingTypeIds = model.Training.Identities.Select(identity => identity.TrainingTypeId).ToList(),
-            SlotNumberTypeIds = model.Training.Slots.Select(slot => slot.TrainingSlotTypeId).ToList()
+            SlotNumberTypeIds = model.Training.Slots.Select(slot => slot.TrainingSlotTypeId).ToList(),
+            TopicIds = model.Training.Topics.Select(topic => topic.TrainingTopicId).ToList()
         };
 
         return response;
