@@ -15,6 +15,12 @@ function scrollToFirstErrorElement() {
     if (elementsInError.length) {
         let firstInvalidControl = elementsInError[0];
         let labelOffset = 500;
+
+        // The way to scroll to a div element is a bit different than inputs.
+        if (firstInvalidControl.tagName === "div" || firstInvalidControl.tagName === "DIV") {
+            firstInvalidControl.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+            return;
+        }
         window.scroll({
             top: (firstInvalidControl.getBoundingClientRect().top + window.scrollY - labelOffset),
             left: 0,

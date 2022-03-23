@@ -322,6 +322,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Veuillez sélectionner au moins une option.
+        /// </summary>
+        public static string PleaseSelectOneOption {
+            get {
+                return ResourceManager.GetString("PleaseSelectOneOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Précédant.
         /// </summary>
         public static string Previous {
@@ -399,6 +408,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string Sectors {
             get {
                 return ResourceManager.GetString("Sectors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Veuillez selectionner au moins un public cible.
+        /// </summary>
+        public static string SelectOneTrainingTargetAudience {
+            get {
+                return ResourceManager.GetString("SelectOneTrainingTargetAudience", resourceCulture);
             }
         }
         
@@ -601,6 +619,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Présentation de la formation.
+        /// </summary>
+        public static string TrainingPresentation {
+            get {
+                return ResourceManager.GetString("TrainingPresentation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Public cible.
         /// </summary>
         public static string TrainingTarget {
@@ -619,6 +646,24 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Un titre de formation est requis.
+        /// </summary>
+        public static string TrainingTitleIsRequired {
+            get {
+                return ResourceManager.GetString("TrainingTitleIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Justification de la réduction de la TVA.
+        /// </summary>
+        public static string TrainingVatJustification {
+            get {
+                return ResourceManager.GetString("TrainingVatJustification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Demandeur-euse d&apos;emploi.
         /// </summary>
         public static string Unemployed {
@@ -633,6 +678,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string Validated {
             get {
                 return ResourceManager.GetString("Validated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vous devez selectionner au moins une matière.
+        /// </summary>
+        public static string YouMustSelectedAtLeastOneTopic {
+            get {
+                return ResourceManager.GetString("YouMustSelectedAtLeastOneTopic", resourceCulture);
             }
         }
     }

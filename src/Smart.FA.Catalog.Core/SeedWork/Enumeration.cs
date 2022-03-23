@@ -90,6 +90,14 @@ public abstract class Enumeration : IComparable
         return matchingItem;
     }
 
+    public bool IsContainedIn(IEnumerable<int>? ids)
+    {
+        if (ids == null || !ids.Any())
+            return false;
+
+        return ids.Contains(Id);
+    }
+
     public int CompareTo(object? obj) => obj is null ? default : Id.CompareTo(((Enumeration) obj).Id);
 
     #endregion

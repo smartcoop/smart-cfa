@@ -20,7 +20,7 @@
                 <a class="c-button c-button--icon c-button--borderless" href="/admin/trainings/list/index">
                     <div class="c-button__content">
                         <smart-icon icon="ArrowLeft"></smart-icon>
-                        <div class="u-sr-accessible">Back</div>
+                        <div class="u-sr-accessible">@CatalogResources.Back</div>
                     </div>
                 </a>
                 }
@@ -33,66 +33,77 @@
     </div>
 }
 
-<smart-container size="Medium">
-    <form method="post" id="form">
-        <div class="o-form-group-layout o-form-group-layout--standard">
-            <smart-form-group-input-text label="@CatalogResources.TrainingTitleCreationLabel" asp-for="CreateTrainingViewModel.Title"></smart-form-group-input-text>
+<smart-container size="Large">
+<form method="post" id="form">
+    <div class="o-form-group-layout o-form-group-layout--standard">
 
-            <smart-formgroup></smart-formgroup>
+        <smart-panel header="@CatalogResources.FieldsThatWillAppearInThePublicCatalog">
+            <smart-form-group-input-text label="@CatalogResources.TrainingTitleCreationLabel *" asp-for="CreateTrainingViewModel.Title"></smart-form-group-input-text>
+            <smart-form-group-textarea rows="5" label="@CatalogResources.TrainingPresentation *" asp-for="CreateTrainingViewModel.Methodology" helper-text="@CatalogResources.Min30CharMax500Char"></smart-form-group-textarea>
+            <smart-form-group-textarea rows="5" label="@CatalogResources.TrainingGoal *" asp-for="CreateTrainingViewModel.Goal" helper-text="@CatalogResources.Min30CharMax500Char"></smart-form-group-textarea>
+            <smart-formgroup label="@CatalogResources.Topics *">
+                <smart-grid>
+                    @foreach (var topics in Enumeration.GetAll<TrainingTopic>().Chunk(2))
+                    {
+                        @foreach (var topic in topics)
+                        {
+                            <smart-grid-column width="4">
+                                <smart-checkbox label="@_localizer[topic.Name]" asp-for="CreateTrainingViewModel.TopicIds" value="@topic.Id" checked="@(topic.IsContainedIn(Model.CreateTrainingViewModel.TopicIds))"></smart-checkbox>
+                            </smart-grid-column>
+                        }
+                        @if (topics.Length > 1)
+                        {
+                            <smart-grid-column width="4"></smart-grid-column>
+                        }
+                    }
+                    <smart-grid-column width="8">
+                        <smart-checkbox label="@CatalogResources.Other"></smart-checkbox>
+                    </smart-grid-column>
+                </smart-grid>
+                <smart-validation-message asp-for="CreateTrainingViewModel.TopicIds"></smart-validation-message>
+            </smart-formgroup>
+        </smart-panel>
 
-            <smart-formgroup label="@CatalogResources.TheTraining">
+        <smart-spacer top="ExtraLarge" bottom="ExtraLarge"></smart-spacer>
+
+        <smart-panel header="@CatalogResources.TrainingVatJustification">
+            <smart-formgroup label="@CatalogResources.TheTraining *">
                 @foreach (var trainingType in Enumeration.GetAll<TrainingType>())
                 {
-                    <smart-checkbox label="@_localizer["Training_Is" + trainingType.Name]" asp-for="CreateTrainingViewModel.TrainingTypeIds" value="@trainingType.Id"></smart-checkbox>
+                    <smart-checkbox label="@_localizer["Training_Is" + trainingType.Name]" asp-for="CreateTrainingViewModel.TrainingTypeIds" value="@trainingType.Id" checked="@(trainingType.IsContainedIn(Model.CreateTrainingViewModel.TrainingTypeIds))"></smart-checkbox>
                 }
                 <smart-checkbox label="Autre"></smart-checkbox>
-                <div class="u-spacer-left-xl">
-                    <smart-form-group-input-text label="@CatalogResources.Specify"></smart-form-group-input-text>
-                </div>
+                <smart-validation-message asp-for="CreateTrainingViewModel.TrainingTypeIds"></smart-validation-message>
             </smart-formgroup>
 
-            <smart-formgroup label="@CatalogResources.TrainingTarget">
+            <smart-formgroup label="@CatalogResources.TrainingTarget *">
                 @foreach (var targetAudience in Enumeration.GetAll<TrainingTargetAudience>())
                 {
-                    <smart-checkbox label="@_localizer[targetAudience.Name]" asp-for="CreateTrainingViewModel.TargetAudienceIds" value="@targetAudience.Id"></smart-checkbox>
+                    <smart-checkbox label="@_localizer[targetAudience.Name]" asp-for="CreateTrainingViewModel.TargetAudienceIds" value="@targetAudience.Id" checked="@(targetAudience.IsContainedIn(Model.CreateTrainingViewModel.TargetAudienceIds))"></smart-checkbox>
                 }
                 <smart-checkbox label="@CatalogResources.Other"></smart-checkbox>
-                <div class="u-spacer-left-xl">
-                    <smart-form-group-input-text label="@CatalogResources.Specify"></smart-form-group-input-text>
-                </div>
+                <smart-validation-message asp-for="CreateTrainingViewModel.TargetAudienceIds"></smart-validation-message>
             </smart-formgroup>
 
-            <smart-formgroup label="@CatalogResources.Training_IsItATrainingThat">
+            <smart-formgroup label="@CatalogResources.Training_IsItATrainingThat *">
                 @foreach (var slotNumberType in Enumeration.GetAll<TrainingSlotNumberType>())
                 {
-                    <smart-checkbox asp-for="CreateTrainingViewModel.SlotNumberTypeIds" value="@slotNumberType.Id" label="@_localizer["Training_" + slotNumberType.Name]"></smart-checkbox>
+                    <smart-checkbox asp-for="CreateTrainingViewModel.SlotNumberTypeIds" value="@slotNumberType.Id" label="@_localizer["Training_" + slotNumberType.Name]" checked="@(slotNumberType.IsContainedIn(Model.CreateTrainingViewModel.SlotNumberTypeIds))"></smart-checkbox>
                 }
             </smart-formgroup>
+            <smart-validation-message asp-for="CreateTrainingViewModel.SlotNumberTypeIds"></smart-validation-message>
+        </smart-panel>
 
-            <smart-formgroup label="@CatalogResources.Topics">
-                @foreach (var topic in Enumeration.GetAll<TrainingTopic>())
-                {
-                    <smart-checkbox label="@_localizer[topic.Name]" asp-for="CreateTrainingViewModel.TopicIds" value="@topic.Id"></smart-checkbox>
-                }
-                <smart-checkbox label="Autre"></smart-checkbox>
-                <div class="u-spacer-left-xl">
-                    <smart-form-group-input-text label="@CatalogResources.Specify"></smart-form-group-input-text>
-                </div>
-            </smart-formgroup>
-            <smart-form-group-textarea rows="5" asp-for="CreateTrainingViewModel.Goal" label="@CatalogResources.TrainingGoal"></smart-form-group-textarea>
-            <smart-form-group-textarea rows="5" asp-for="CreateTrainingViewModel.Methodology" label="@CatalogResources.Methodology"></smart-form-group-textarea>
-            <input type="hidden" id="isDraft" value="false" asp-for="CreateTrainingViewModel.IsDraft" />
-            <div class="u-spacer"></div>
+        <input type="hidden" id="isDraft" value="false" asp-for="CreateTrainingViewModel.IsDraft"/>
+
+    </div>
+    <div class="u-spacer-top-xl c-toolbar__right">
+        <div class="c-toolbar__item">
+            <smart-button id="Save" label="@CatalogResources.Draft" button-style="Secondary" leading-icon="Save" button-type="Submit"></smart-button>
         </div>
-        <div class="c-toolbar__right">
-            <div class="c-toolbar__item">
-                <smart-button id="Save" label="@CatalogResources.Draft" button-style="Secondary" leading-icon="Save" button-type="Submit" asp-page-handler="Save"> </smart-button>
-            </div>
-            <div class="c-toolbar__item">
-                <smart-button id="Publish" label="@CatalogResources.Publish" button-style="Primary" leading-icon="Send" button-type="Submit" asp-page-handler="Save"> </smart-button>
-            </div>
+        <div class="c-toolbar__item">
+            <smart-button id="Publish" label="@CatalogResources.Publish" button-style="Primary" leading-icon="Send" button-type="Submit"> </smart-button>
         </div>
-    </form>
+    </div>
+</form>
 </smart-container>
-
-<div class="u-spacer"></div>
