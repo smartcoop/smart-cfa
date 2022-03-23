@@ -25,11 +25,12 @@ public class CreateModel : AdminPage
         Init();
     }
 
-    public async Task<IActionResult> OnPostSaveAsync()
+    public async Task<IActionResult> OnPostAsync()
     {
         var user = (HttpContext.User.Identity as CustomIdentity)!;
         if (!ModelState.IsValid)
         {
+            Init();
             return Page();
         }
         var request = CreateTrainingViewModel.MapToRequest(user.Trainer.Id, user.Trainer.DefaultLanguage);
