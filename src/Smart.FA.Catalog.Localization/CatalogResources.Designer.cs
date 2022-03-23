@@ -88,7 +88,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to La biographie doit être constituée d&apos;au moins 30 charactères.
         /// </summary>
         public static string BioMustBe30Chars {
             get {
@@ -153,9 +153,9 @@ namespace Smart.FA.Catalog.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Salarié-es en entreprise et / ou indépendant-es.
         /// </summary>
-        public static string Emloyee {
+        public static string Employee {
             get {
-                return ResourceManager.GetString("Emloyee", resourceCulture);
+                return ResourceManager.GetString("Employee", resourceCulture);
             }
         }
         
