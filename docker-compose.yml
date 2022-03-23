@@ -5,7 +5,8 @@ services:
     build:
       context: .
       dockerfile: DB.Dockerfile
-    hostname: "datasource_${DOCKER_NAME}"
+    hostname: "${DOCKER_NAME}-datasource"
+    container_name: "${DOCKER_NAME}-datasource"
     restart: always
     networks:
       - "cfa"
@@ -15,7 +16,8 @@ services:
     build:
       context: .
       dockerfile: Web.Dockerfile
-    hostname: api_${DOCKER_NAME}
+    hostname: ${DOCKER_NAME}-api
+    container_name: ${DOCKER_NAME}-api
     restart: always
     networks:
       - "cfa"

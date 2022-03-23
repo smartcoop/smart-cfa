@@ -5,7 +5,7 @@
 set -e
 
 # Convert uppercase to lowercase.
-DOCKER_NAME=$(echo cfa_${BRANCH_NAME} | sed -e 's/\(.*\)/\L\1/' -e 's/origin\/master/master/g' -e 's/origin\/feature\//feature-/g' -e 's/origin\/hotfix\//hotfix-/g' -e 's/feature\//feature-/g' -e 's/hotfix\//hotfix-/g')
+DOCKER_NAME=$(echo cfa-${BRANCH_NAME} | sed -e 's/\(.*\)/\L\1/' -e 's/origin\/master/master/g' -e 's/origin\/feature\//feature-/g' -e 's/origin\/hotfix\//hotfix-/g' -e 's/feature\//feature-/g' -e 's/hotfix\//hotfix-/g')
 DOCKER_HOSTNAME=$(echo ${DOCKER_NAME})
 
 echo
@@ -22,6 +22,7 @@ GIT_AUTHOR_NAME="$(git log -n1 --format=format:"%aN")"
 GIT_AUTHOR_EMAIL="$(git log -n1 --format=format:"%cE")"
 
 echo "Starting jenkins-deploy.sh script...."
+echo "DOCKER_NAME: ${DOCKER_NAME}"
 echo "Branch name: ${DOCKER_HOSTNAME}"
 echo "Domain: ${DOCKER_HOSTNAME}.smartcoop.dev"
 echo "Git commit: ${GIT_COMMIT}"
