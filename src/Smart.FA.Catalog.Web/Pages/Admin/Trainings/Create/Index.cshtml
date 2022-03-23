@@ -43,7 +43,7 @@
             <smart-formgroup label="@CatalogResources.TheTraining">
                 @foreach (var trainingType in Enumeration.GetAll<TrainingType>())
                 {
-                    <smart-checkbox label="@_localizer[trainingType.Name]" asp-for="CreateTrainingViewModel.TrainingTypeIds" value="@trainingType.Id"></smart-checkbox>
+                    <smart-checkbox label="@_localizer["Training_Is" + trainingType.Name]" asp-for="CreateTrainingViewModel.TrainingTypeIds" value="@trainingType.Id"></smart-checkbox>
                 }
                 <smart-checkbox label="Autre"></smart-checkbox>
                 <div class="u-spacer-left-xl">

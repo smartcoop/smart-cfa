@@ -13,4 +13,14 @@ public class SideMenuItem : Enumeration
     {
         Href = href;
     }
+
+    public string DisplayName()
+    {
+        return Id switch
+        {
+            1 => CatalogResources.MyTrainerProfile,
+            2 => CatalogResources.MyTrainings,
+            _ => throw new ArgumentOutOfRangeException($"Sidemenu enumeration `{Id}` is unknown")
+        };
+    }
 }

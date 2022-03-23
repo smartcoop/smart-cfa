@@ -300,7 +300,7 @@
   <data name="CharterUse" xml:space="preserve">
     <value>Charte d'utilisation</value>
   </data>
-  <data name="Emloyee" xml:space="preserve">
+  <data name="Employee" xml:space="preserve">
     <value>Salarié-es en entreprise et / ou indépendant-es</value>
   </data>
   <data name="TrainerPicture" xml:space="preserve">
