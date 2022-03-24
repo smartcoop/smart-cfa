@@ -2,7 +2,7 @@
 @using Microsoft.Extensions.Options
 @inject IOptions<RequestLocalizationOptions> _requestLocalizationOptions;
 @{
-    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>() ?? throw new InvalidOperationException($"Couldn't get {nameof(IRequestCultureFeature)}");
     var supportedLanguges = _requestLocalizationOptions
             .Value?
             .SupportedUICultures?

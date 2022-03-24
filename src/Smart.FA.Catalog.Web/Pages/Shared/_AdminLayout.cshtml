@@ -4,8 +4,8 @@
 @using Microsoft.Extensions.Options
 @inject IOptions<RequestLocalizationOptions> _requestLocalizationOptions;
 @{
-    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
-    var supportedLanguges = _requestLocalizationOptions
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>() ?? throw new InvalidOperationException($"Couldn't get {nameof(IRequestCultureFeature)}");
+    var supportedUiCultures = _requestLocalizationOptions
             .Value?
             .SupportedUICultures?
             .Select(supportedCulture => new SelectListItem(supportedCulture.DisplayName, supportedCulture.TwoLetterISOLanguageName)) ??
@@ -40,7 +40,7 @@
                             <select id="culture"
                                     name="culture"
                                     class="c-select"
-                                    asp-items="supportedLanguges"
+                                    asp-items="supportedUiCultures"
                                     asp-for="@requestCulture.RequestCulture.UICulture.Name">
                             </select>
                         </div>
