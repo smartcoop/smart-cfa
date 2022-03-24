@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		docker-compose.dcproj = docker-compose.dcproj
 		docker-compose.yml = docker-compose.yml
 		Web.Dockerfile = Web.Dockerfile
+		.env = .env
+		docker-compose-local.yml = docker-compose-local.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{D485BE00-A082-47D7-827D-0FD646807006}"
