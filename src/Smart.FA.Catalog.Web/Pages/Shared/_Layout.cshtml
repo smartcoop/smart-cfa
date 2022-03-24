@@ -9,10 +9,8 @@
             .Select(supportedCulture => new SelectListItem(supportedCulture.DisplayName, supportedCulture.TwoLetterISOLanguageName)) ??
         throw new InvalidOperationException("Supported culture not defined");
 }
-
 <!DOCTYPE html>
 <html lang="en" class="u-maximize-height" dir="ltr">
-
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -66,9 +64,7 @@
         </div>
     </header>
     <main class="u-maximize-width u-scroll-wrapper">
-        <div class="c-app-layout-inner">
             @RenderBody()
-        </div>
     </main>
 </div>
 @await RenderSectionAsync("Scripts", required: false)

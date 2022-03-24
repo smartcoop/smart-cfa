@@ -1,0 +1,21 @@
+﻿@page
+@model Smart.FA.Catalog.Web.Pages.Admin.IndexModel
+@{
+    Layout = "Shared/_AdminLayout";
+}
+
+<h2 class="c-h2">@CatalogResources.Hello  @Model.UserIdentity.CurrentTrainer.Name.ToString()</h2>
+
+<smart-panel header="@CatalogResources.AdminHomepage_WhatIsFormateurAssocieTitle">
+    <p>@CatalogResources.LoremIpsum</p>
+</smart-panel>
+
+<smart-spacer bottom="ExtraLarge" top="ExtraLarge"></smart-spacer>
+
+<smart-panel header="@CatalogResources.AdminHomepage_AcceptCharter">
+    <p>@CatalogResources.LoremIpsum</p>
+
+    <smart-spacer top="Large">
+        <smart-checkbox label="@CatalogResources.AdminHomepage_AcceptCharter"></smart-checkbox>
+    </smart-spacer>
+</smart-panel>

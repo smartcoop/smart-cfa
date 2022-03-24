@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Smart.FA.Catalog.Core.Domain.Models;
-using Smart.FA.Catalog.Web.Pages.Admin;
 
 namespace Smart.FA.Catalog.Web.Pages;
 
@@ -18,10 +17,8 @@ public class IndexModel : PageModel
 
     public IActionResult OnGet()
     {
-        ViewData[nameof(SideMenuItem)] = SideMenuItem.MyTrainings;
         Identity = HttpContext.User.Identity as CustomIdentity;
-        // if (!User.Identity!.IsAuthenticated)
-        //     return RedirectToPage("Admin/Account/Index");
+
         return Page();
     }
 }

@@ -70,6 +70,33 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accepter la Charte d&apos;utilisation de Formateurs Associés.
+        /// </summary>
+        public static string AdminHomepage_AcceptCharter {
+            get {
+                return ResourceManager.GetString("AdminHomepage_AcceptCharter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Je m&apos;engage à respecter la Charter d&apos;utilisation de Formateur Associé.
+        /// </summary>
+        public static string AdminHomepage_IAcceptCharter {
+            get {
+                return ResourceManager.GetString("AdminHomepage_IAcceptCharter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formateurs Associés: quoi ? Pourquoi ? Commment ?.
+        /// </summary>
+        public static string AdminHomepage_WhatIsFormateurAssocieTitle {
+            get {
+                return ResourceManager.GetString("AdminHomepage_WhatIsFormateurAssocieTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Retour.
         /// </summary>
         public static string Back {
@@ -187,6 +214,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bonjour.
+        /// </summary>
+        public static string Hello {
+            get {
+                return ResourceManager.GetString("Hello", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Technologie de l&apos;information.
         /// </summary>
         public static string InformationTechnology {
@@ -210,6 +246,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string LanguageCourse {
             get {
                 return ResourceManager.GetString("LanguageCourse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ullamcorper odio id iaculis lacinia. Aenean iaculis sit amet dolor non interdum. Ut odio odio, vulputate non urna a, consequat facilisis arcu. Pellentesque venenatis ex varius blandit vulputate. Donec maximus commodo mi, at convallis metus tempus vitae. Phasellus malesuada, massa sed dictum tristique, odio tellus blandit ante, eget efficitur diam massa sed dolor. Sed rutrum magna ut urna maximus, vel consectetur urna tempus. Integer tellus ipsum [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string LoremIpsum {
+            get {
+                return ResourceManager.GetString("LoremIpsum", resourceCulture);
             }
         }
         
@@ -286,6 +331,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string MyUserSpace {
+            get {
+                return ResourceManager.GetString("MyUserSpace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Suivant.
         /// </summary>
         public static string Next {
@@ -304,7 +358,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Én attente de validation.
+        ///   Looks up a localized string similar to En attente de validation.
         /// </summary>
         public static string PendingValidation {
             get {
