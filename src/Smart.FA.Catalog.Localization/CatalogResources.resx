@@ -330,4 +330,23 @@
   <data name="TrainingTitleIsRequired" xml:space="preserve">
     <value>Un titre de formation est requis</value>
   </data>
+  <data name="AdminHomepage_WhatIsFormateurAssocieTitle" xml:space="preserve">
+    <value>Formateurs Associés: quoi ? Pourquoi ? Commment ?</value>
+  </data>
+  <data name="AdminHomepage_AcceptCharter" xml:space="preserve">
+    <value>Accepter la Charte d'utilisation de Formateurs Associés</value>
+  </data>
+  <data name="LoremIpsum" xml:space="preserve">
+    <value>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ullamcorper odio id iaculis lacinia. Aenean iaculis sit amet dolor non interdum. Ut odio odio, vulputate non urna a, consequat facilisis arcu. Pellentesque venenatis ex varius blandit vulputate. Donec maximus commodo mi, at convallis metus tempus vitae. Phasellus malesuada, massa sed dictum tristique, odio tellus blandit ante, eget efficitur diam massa sed dolor. Sed rutrum magna ut urna maximus, vel consectetur urna tempus. Integer tellus ipsum, dictum ullamcorper gravida eget, pharetra id elit. Nam vestibulum tincidunt ex at auctor. Nam ultrices tortor eu nunc sodales lacinia. Sed laoreet blandit lorem, et tempor est tempor et
+</value>
+  </data>
+  <data name="AdminHomepage_IAcceptCharter" xml:space="preserve">
+    <value>Je m'engage à respecter la Charter d'utilisation de Formateur Associé</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Bonjour</value>
+  </data>
+  <data name="MyUserSpace" xml:space="preserve">
+    <value>Mon espace utilisateur</value>
+  </data>
 </root>
