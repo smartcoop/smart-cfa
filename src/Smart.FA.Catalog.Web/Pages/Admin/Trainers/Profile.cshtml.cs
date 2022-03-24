@@ -19,7 +19,7 @@ public class ProfileModel : AdminPage
     /// </summary>
     internal bool EditionSucceeded { get; set; }
 
-    protected internal ICollection<SocialNetworkViewModel> SocialNetworkViewModels { get; set; }
+    protected internal ICollection<SocialNetworkViewModel>? SocialNetworkViewModels { get; set; }
 
     public ProfileModel(IMediator mediator, IUserIdentity userIdentity) : base(mediator)
     {
@@ -78,7 +78,7 @@ public class ProfileModel : AdminPage
     {
         // The request gives us a collection of the following key par values for social networks.:
         // "social-" + [SocialId] + [url value of the profile]
-        EditProfileCommand.Socials = Request.Form
+        EditProfileCommand!.Socials = Request.Form
             .Where(formElement => formElement.Key.StartsWith("social-", StringComparison.OrdinalIgnoreCase))
             .ToDictionary(key => key.Key.Split("-")[1], value => value.Value.ToString());
     }

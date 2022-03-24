@@ -8,6 +8,6 @@ public class AdminTrainingCardViewComponent : ViewComponent
 {
     public IViewComponentResult Invoke(IGrouping<int, TrainingDto> model)
     {
-        return View(model);
+        return View(model ?? throw new ArgumentNullException(nameof(model)));
     }
 }

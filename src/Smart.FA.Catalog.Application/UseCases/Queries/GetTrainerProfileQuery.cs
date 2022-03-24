@@ -63,8 +63,7 @@ public class GetTrainerProfileQueryHandler : IRequestHandler<GetTrainerProfileQu
                 Name      = trainer.Name.FirstName + " " + trainer.Name.LastName,
                 Title     = trainer.Title,
                 Socials   = trainer.PersonalSocialNetworks
-            })
-            .FirstOrDefaultAsync(trainer => trainer.TrainerId == query.TrainerId, cancellationToken);
+            }).FirstOrDefaultAsync(trainer => trainer.TrainerId == query.TrainerId, cancellationToken);
 
         return trainer is not null
             ? new TrainerProfile()
@@ -89,7 +88,7 @@ public class TrainerProfile
 
     public string? Title { get; set; }
 
-    public IEnumerable<Social>? Socials { get; set; }
+    public IEnumerable<Social> Socials { get; set; } = null!;
 
     public class Social
     {
