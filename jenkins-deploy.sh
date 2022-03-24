@@ -33,7 +33,7 @@ echo "Git author email: ${GIT_AUTHOR_EMAIL}"
 
 echo "DOCKER_NAME=${DOCKER_NAME}" > .env
 
-sed -e "s/host.docker.internal/smart-${DOCKER_NAME}_datasource_1/" \
+sed -e "s/host.docker.internal/${DOCKER_NAME}-datasource/" \
    ./src/Smart.FA.Catalog.Web/appsettings.Staging.json > ./src/Smart.FA.Catalog.Web/appsettings.Staging.tmp.json
 mv ./src/Smart.FA.Catalog.Web/appsettings.Staging.tmp.json ./src/Smart.FA.Catalog.Web/appsettings.Staging.json
 
