@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  datasource:
+    build:
+      context: .
+      dockerfile: DB.Dockerfile
+    hostname: "${DOCKER_NAME}-datasource"
+    container_name: "${DOCKER_NAME}-datasource"
+    restart: always
+    ports:
+      - "1433:1433"
+    networks:
+      - "cfa"
+  api:
+    depends_on:
+      - datasource
+    build:
+      context: .
+      dockerfile: Web.Dockerfile
+    hostname: ${DOCKER_NAME}-api
+    container_name: ${DOCKER_NAME}-api
+    restart: always
+    ports:
+      - "5000:80"
+    networks:
+      - "cfa"
+networks:
+  cfa:
+    name: cfa
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.21.1.0/24
+          gateway: 172.21.1.1
