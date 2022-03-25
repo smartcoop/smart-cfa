@@ -18,7 +18,10 @@ public class Trainer : Entity, IAggregateRoot
     public virtual Name Name { get; private set; } = null!;
 
     public string Biography { get; private set; } = null!;
-    public string Title { get; set; } = null!;
+
+    public string Title { get; private set; } = null!;
+
+    public string? Email { get; private set; }
 
     public Language DefaultLanguage { get; private set; } = null!;
 
@@ -82,6 +85,7 @@ public class Trainer : Entity, IAggregateRoot
         => Assignments.Any() ? Assignments.Select(assignment => assignment.Training).ToList() : new List<Training>();
 
     public void Rename(Name name) => Name = name;
+
     public void ChangeDefaultLanguage(Language language) => DefaultLanguage = language;
 
     /// <summary>
@@ -108,6 +112,17 @@ public class Trainer : Entity, IAggregateRoot
         {
             _personalSocialNetworks.Add(new PersonalSocialNetwork(Id, socialNetwork, urlToProfile));
         }
+    }
+
+    /// <summary>
+    /// Changes the <see cref="Trainer" />'s email address.
+    /// </summary>
+    /// <param name="email">The new email.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="email" /> is null.</exception>
+    /// <exception cref="ArgumentException"><paramref name="email" />'s format is invalid.</exception>
+    public void ChangeEmail(string? email)
+    {
+        Email = Guard.AgainstInvalidEmail(email, nameof(email));
     }
 
     #endregion

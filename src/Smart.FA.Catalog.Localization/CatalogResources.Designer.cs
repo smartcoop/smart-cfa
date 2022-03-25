@@ -178,6 +178,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Un email est requis.
+        /// </summary>
+        public static string EmailIsRequired {
+            get {
+                return ResourceManager.GetString("EmailIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Salarié-es en entreprise et / ou indépendant-es.
         /// </summary>
         public static string Employee {
@@ -228,6 +237,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string InformationTechnology {
             get {
                 return ResourceManager.GetString("InformationTechnology", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email invalide.
+        /// </summary>
+        public static string InvalidEmail {
+            get {
+                return ResourceManager.GetString("InvalidEmail", resourceCulture);
             }
         }
         
@@ -331,7 +349,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Mon espace utilisateur.
         /// </summary>
         public static string MyUserSpace {
             get {

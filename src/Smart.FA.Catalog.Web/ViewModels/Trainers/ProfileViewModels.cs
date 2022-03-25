@@ -25,7 +25,8 @@ public static class Mappers
         {
             TrainerId = trainerProfile.TrainerId!.Value,
             Bio       = trainerProfile.Bio,
-            Title     = trainerProfile.Title
+            Title     = trainerProfile.Title,
+            Email     = trainerProfile.Email
         };
     }
 

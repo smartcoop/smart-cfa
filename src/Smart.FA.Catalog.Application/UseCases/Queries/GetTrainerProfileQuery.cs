@@ -62,6 +62,7 @@ public class GetTrainerProfileQueryHandler : IRequestHandler<GetTrainerProfileQu
                 Bio       = trainer.Biography,
                 Name      = trainer.Name.FirstName + " " + trainer.Name.LastName,
                 Title     = trainer.Title,
+                Email     = trainer.Email,
                 Socials   = trainer.PersonalSocialNetworks
             }).FirstOrDefaultAsync(trainer => trainer.TrainerId == query.TrainerId, cancellationToken);
 
@@ -72,6 +73,7 @@ public class GetTrainerProfileQueryHandler : IRequestHandler<GetTrainerProfileQu
                 Bio       = trainer.Bio,
                 Name      = trainer.Name,
                 Title     = trainer.Title,
+                Email     = trainer.Email,
                 Socials   = trainer.Socials.ToTrainerProfileSocials()
             }
             : null;
@@ -87,6 +89,8 @@ public class TrainerProfile
     public string? Name { get; set; }
 
     public string? Title { get; set; }
+
+    public string? Email { get; set; }
 
     public IEnumerable<Social> Socials { get; set; } = null!;
 
