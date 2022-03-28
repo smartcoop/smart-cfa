@@ -28,7 +28,7 @@
     </div>
 }
 
-<div>
+<div class="o-card-grid small-up-1">
     @foreach (var training in Model.Trainings!.GroupBy(training => training.TrainingId))
     {
         @await Component.InvokeAsync("AdminTrainingTile", new { model = training})
