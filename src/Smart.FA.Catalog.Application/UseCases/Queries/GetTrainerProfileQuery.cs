@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Extensions;
+using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 
 namespace Smart.FA.Catalog.Application.UseCases.Queries;
@@ -23,7 +24,8 @@ public class GetTrainerProfileQuery : IRequest<TrainerProfile>
 public class GetTrainerProfileQueryHandler : IRequestHandler<GetTrainerProfileQuery, TrainerProfile>
 {
     private readonly ILogger<GetTrainerProfileQueryHandler> _logger;
-    private readonly CatalogContext _catalogContext;
+    private readonly CatalogContext                         _catalogContext;
+    private readonly IS3StorageService                      _storageService;
 
     /// <summary>
     /// Represents the response of the query when the trainer was not found.
@@ -31,10 +33,16 @@ public class GetTrainerProfileQueryHandler : IRequestHandler<GetTrainerProfileQu
     /// </summary>
     private static TrainerProfile TrainerNotFoundResponse => new();
 
-    public GetTrainerProfileQueryHandler(ILogger<GetTrainerProfileQueryHandler> logger, CatalogContext catalogContext)
+    public GetTrainerProfileQueryHandler
+    (
+        ILogger<GetTrainerProfileQueryHandler> logger,
+        CatalogContext                         catalogContext,
+        IS3StorageService                      storageService
+    )
     {
         _logger         = logger;
         _catalogContext = catalogContext;
+        _storageService = storageService;
     }
 
     public async Task<TrainerProfile> Handle(GetTrainerProfileQuery query, CancellationToken cancellationToken)
@@ -58,25 +66,38 @@ public class GetTrainerProfileQueryHandler : IRequestHandler<GetTrainerProfileQu
             .Include(trainer => trainer.PersonalSocialNetworks)
             .Select(trainer => new
             {
-                TrainerId = trainer.Id,
-                Bio       = trainer.Biography,
-                Name      = trainer.Name.FirstName + " " + trainer.Name.LastName,
-                Title     = trainer.Title,
-                Email     = trainer.Email,
-                Socials   = trainer.PersonalSocialNetworks
-            }).FirstOrDefaultAsync(trainer => trainer.TrainerId == query.TrainerId, cancellationToken);
+                TrainerId        = trainer.Id,
+                Bio              = trainer.Biography,
+                Name             = trainer.Name.FirstName + " " + trainer.Name.LastName,
+                Title            = trainer.Title,
+                Socials          = trainer.PersonalSocialNetworks,
+                ProfileImagePath = trainer.ProfileImagePath,
+                Email            = trainer.Email
+            })
+            .FirstOrDefaultAsync(trainer => trainer.TrainerId == query.TrainerId, cancellationToken);
 
-        return trainer is not null
-            ? new TrainerProfile()
-            {
-                TrainerId = trainer.TrainerId,
-                Bio       = trainer.Bio,
-                Name      = trainer.Name,
-                Title     = trainer.Title,
-                Email     = trainer.Email,
-                Socials   = trainer.Socials.ToTrainerProfileSocials()
-            }
-            : null;
+
+        if (trainer is null)
+        {
+            return null;
+        }
+
+        Stream? profileImage = null;
+        if (trainer.ProfileImagePath is not null)
+        {
+            profileImage = await _storageService.GetAsync(trainer.ProfileImagePath, cancellationToken);
+        }
+
+        return new TrainerProfile
+        {
+            TrainerId    = trainer.TrainerId,
+            Bio          = trainer.Bio,
+            Name         = trainer.Name,
+            Title        = trainer.Title,
+            Socials      = trainer.Socials.ToTrainerProfileSocials(),
+            ProfileImage = profileImage,
+            Email        = trainer.Email
+        };
     }
 }
 
@@ -100,16 +121,14 @@ public class TrainerProfile
 
         public string? Url { get; set; }
     }
+
+    public Stream? ProfileImage { get; set; }
 }
 
 public static class Mappers
 {
     public static IEnumerable<TrainerProfile.Social> ToTrainerProfileSocials(this IEnumerable<PersonalSocialNetwork> personalSocialNetworks)
     {
-        return personalSocialNetworks.Select(socialNetwork => new TrainerProfile.Social()
-        {
-            SocialNetworkId = socialNetwork.SocialNetwork.Id,
-            Url             = socialNetwork.UrlToProfile
-        });
+        return personalSocialNetworks.Select(socialNetwork => new TrainerProfile.Social() {SocialNetworkId = socialNetwork.SocialNetwork.Id, Url = socialNetwork.UrlToProfile});
     }
 }

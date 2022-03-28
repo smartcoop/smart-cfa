@@ -19,9 +19,11 @@ public class Trainer : Entity, IAggregateRoot
 
     public string Biography { get; private set; } = null!;
 
-    public string Title { get; private set; } = null!;
+    public string Title { get; set; } = null!;
 
     public string? Email { get; private set; }
+
+    public string? ProfileImagePath { get; set; } = null!;
 
     public Language DefaultLanguage { get; private set; } = null!;
 
@@ -29,7 +31,8 @@ public class Trainer : Entity, IAggregateRoot
 
     public virtual IReadOnlyCollection<TrainerAssignment> Assignments => _assignments.AsReadOnly();
 
-    public virtual IReadOnlyCollection<PersonalSocialNetwork> PersonalSocialNetworks => _personalSocialNetworks.AsReadOnly();
+    public virtual IReadOnlyCollection<PersonalSocialNetwork> PersonalSocialNetworks =>
+        _personalSocialNetworks.AsReadOnly();
 
     #endregion
 
@@ -66,6 +69,13 @@ public class Trainer : Entity, IAggregateRoot
         Guard.Requires(() => newTitle.Length <= 150
             , "Title is too long");
         Title = newTitle;
+    }
+
+    public void UpdateProfileImagePath(string profileImagePath)
+    {
+        Guard.AgainstNull(profileImagePath, nameof(profileImagePath));
+        Guard.Requires(() => profileImagePath.Length <= 50, "URL for profile path is too long");
+        ProfileImagePath = profileImagePath;
     }
 
     public void AssignTo(Training training)
