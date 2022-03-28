@@ -29,29 +29,20 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingReques
     public async Task<CreateTrainingResponse> Handle(CreateTrainingRequest request, CancellationToken cancellationToken)
     {
         CreateTrainingResponse resp = new();
-        try
+
+        var trainer = await _trainerRepository.FindAsync(request.TrainerId, cancellationToken);
+        var training = new Training(trainer, request.Detail, request.Types, request.SlotNumberTypes, request.TargetAudiences, request.Topics);
+        if (request.IsDraft is false)
         {
-            var trainer = await _trainerRepository.FindAsync(request.TrainerId, cancellationToken);
-            var training = new Training(trainer, request.Detail, request.Types, request.SlotNumberTypes,
-                request.TargetAudiences, request.Topics);
-            if (request.IsDraft is false)
-            {
-                var result = training.Validate();
-                await result.OnFailure(errors => throw new Exception(string.Join(Environment.NewLine, errors)));
-            }
-
-            _unitOfWork.RegisterNew(training);
-            _unitOfWork.Commit();
-
-            _logger.LogInformation(LogEventIds.TrainingCreated, "Training with id {Id} has been created", training.Id);
-
-            resp.SetSuccess();
+            var result = training.Validate();
+            await result.OnFailure(errors => throw new Exception(string.Join(Environment.NewLine, errors)));
         }
-        catch (Exception e)
-        {
-            _logger.LogError("{Exception}", e.ToString());
-            throw;
-        }
+
+        _unitOfWork.RegisterNew(training);
+        _unitOfWork.Commit();
+        _logger.LogInformation(LogEventIds.TrainingCreated, "Training with id {Id} has been created", training.Id);
+
+        resp.SetSuccess();
 
         return resp;
     }

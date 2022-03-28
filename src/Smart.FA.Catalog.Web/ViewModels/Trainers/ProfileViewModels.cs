@@ -26,7 +26,11 @@ public static class Mappers
             TrainerId = trainerProfile.TrainerId!.Value,
             Bio       = trainerProfile.Bio,
             Title     = trainerProfile.Title,
-            Email     = trainerProfile.Email
+            Email     = trainerProfile.Email,
+            ProfilePicture = trainerProfile.ProfileImage is null
+                ? null
+                : new FormFile(trainerProfile.ProfileImage, 0, trainerProfile.ProfileImage.Length,
+                    Guid.NewGuid().ToString(), Guid.NewGuid().ToString())
         };
     }
 
@@ -53,12 +57,7 @@ public static class Mappers
 
     public static SocialNetworkViewModel ToViewModel(this SocialNetwork socialNetwork)
     {
-        return new SocialNetworkViewModel()
-        {
-            SocialNetworkId = socialNetwork.Id,
-            Name            = socialNetwork.DisplayName(),
-            Icon            = socialNetwork.ToImage()
-        };
+        return new SocialNetworkViewModel() {SocialNetworkId = socialNetwork.Id, Name = socialNetwork.Name, Icon = socialNetwork.ToImage()};
     }
 
     /// <summary>

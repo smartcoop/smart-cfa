@@ -11,17 +11,19 @@ public class ProfileModel : AdminPage
 {
     public IUserIdentity UserIdentity { get; }
 
-    [BindProperty]
-    public EditProfileCommand? EditProfileCommand { get; set; }
+    [BindProperty] public EditProfileCommand? EditProfileCommand { get; set; }
 
     /// <summary>
     /// State boolean that indicates if the current page results from a successful profile edition.
     /// </summary>
     internal bool EditionSucceeded { get; set; }
 
-    protected internal ICollection<SocialNetworkViewModel>? SocialNetworkViewModels { get; set; }
+    public Stream? ProfilePicture { get; set; }
 
-    public ProfileModel(IMediator mediator, IUserIdentity userIdentity) : base(mediator)
+    protected internal ICollection<SocialNetworkViewModel> SocialNetworkViewModels { get; set; }
+
+    public ProfileModel(IMediator mediator, IUserIdentity userIdentity, IS3StorageService storageService) :
+        base(mediator)
     {
         UserIdentity = userIdentity;
     }
@@ -47,7 +49,14 @@ public class ProfileModel : AdminPage
             ParseSocialMedias();
             EditProfileCommand!.TrainerId = UserIdentity.CurrentTrainer.Id;
             var editionResponse = await Mediator.Send(EditProfileCommand);
-            EditionSucceeded    = !editionResponse.HasErrors();
+            if (EditProfileCommand.ProfilePicture is not null)
+            {
+                var imageUploadRequest = new UploadImageToStorageCommandRequest {Trainer = UserIdentity.CurrentTrainer, ProfilePicture = EditProfileCommand.ProfilePicture};
+                var profileResult      = await Mediator.Send(imageUploadRequest);
+                ProfilePicture = profileResult.ProfilePictureStream;
+            }
+
+            EditionSucceeded = !editionResponse.HasErrors();
         }
 
         SetSideMenuItem();
@@ -70,7 +79,7 @@ public class ProfileModel : AdminPage
 
     private async Task LoadSocialsAsync()
     {
-        var trainerProfile      = await Mediator.Send(new GetTrainerProfileQuery(UserIdentity.CurrentTrainer .Id));
+        var trainerProfile = await Mediator.Send(new GetTrainerProfileQuery(UserIdentity.CurrentTrainer.Id));
         SocialNetworkViewModels = trainerProfile.Socials.ToSocialViewModels();
     }
 
@@ -78,9 +87,27 @@ public class ProfileModel : AdminPage
     {
         // The request gives us a collection of the following key par values for social networks.:
         // "social-" + [SocialId] + [url value of the profile]
-        EditProfileCommand!.Socials = Request.Form
+        EditProfileCommand.Socials = Request.Form
             .Where(formElement => formElement.Key.StartsWith("social-", StringComparison.OrdinalIgnoreCase))
             .ToDictionary(key => key.Key.Split("-")[1], value => value.Value.ToString());
+    }
+
+    public async Task<FileResult?> OnGetLoadImageAsync()
+    {
+        var profilePicture = await Mediator.Send(new GetTrainerProfileImageRequest {Trainer = UserIdentity.CurrentTrainer});
+        var response       = profilePicture.ImageStream is null ? null : new FileStreamResult(profilePicture.ImageStream, "image/jpeg");
+        return response;
+    }
+
+    public async Task<ActionResult> OnPostDeleteImageAsync()
+    {
+        if (EditProfileCommand?.ProfilePicture is not null)
+        {
+            await Mediator.Send(new DeleteTrainerProfileImageRequest {Trainer = UserIdentity.CurrentTrainer});
+        }
+
+        await LoadDataAsync();
+        return Page();
     }
 
     protected override SideMenuItem GetSideMenuItem() => SideMenuItem.MyProfile;

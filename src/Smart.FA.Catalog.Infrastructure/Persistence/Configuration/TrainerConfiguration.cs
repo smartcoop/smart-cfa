@@ -39,6 +39,7 @@ public class TrainerConfiguration : EntityConfigurationBase<Trainer>
 
         builder.Property(trainer => trainer.Biography).HasMaxLength(1500);
         builder.Property(trainer => trainer.Title).HasMaxLength(150);
+        builder.Property(trainer => trainer.ProfileImagePath).HasMaxLength(50);
 
         builder.HasMany(trainer => trainer.PersonalSocialNetworks)
             .WithOne(socialNetwork => socialNetwork.Trainer)

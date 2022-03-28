@@ -1,7 +1,9 @@
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Smart.FA.Catalog.Application.Extensions;
 using Smart.FA.Catalog.Application.Extensions.FluentValidation;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Core.Domain;
@@ -24,6 +26,8 @@ public class EditProfileCommand : IRequest<ProfileEditionResponse>
     public string? Title { get; set; }
 
     public Dictionary<string, string>? Socials { get; set; }
+
+    public IFormFile? ProfilePicture { get; set; }
 
     public string? Email { get; set; }
 }
@@ -93,6 +97,8 @@ public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, Pro
     {
         trainer.UpdateBiography(command.Bio ?? string.Empty);
         trainer.UpdateTitle(command.Title ?? string.Empty);
+        trainer.UpdateProfileImagePath(trainer.GenerateTrainerProfilePictureName());
+
         trainer.ChangeEmail(command.Email);
         foreach (var commandSocial in command.Socials!)
         {
