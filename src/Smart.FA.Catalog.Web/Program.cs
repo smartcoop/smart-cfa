@@ -21,8 +21,7 @@ builder.Services
 builder.Services
     .AddApplication();
 builder.Services
-    .AddApi(builder.Configuration
-        .GetSection("AdminOptions"));
+    .AddApi(builder.Configuration);
 builder.Services
     .AddSmartDesign();
 builder.Services

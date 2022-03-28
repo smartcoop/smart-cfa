@@ -1,3 +1,4 @@
+using Smart.FA.Catalog.Application.Models.Options;
 using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Web.Identity;
 using Smart.FA.Catalog.Web.Options;
@@ -6,15 +7,18 @@ namespace Smart.FA.Catalog.Web.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static void AddApi(this IServiceCollection services, IConfigurationSection adminOptionsSection)
+    public static void AddApi(this IServiceCollection services, IConfiguration configuration)
     {
         services
             .AddScoped<IUserIdentity, UserIdentity>()
-            .AddOptions(adminOptionsSection);
+            .AddOptions(configuration);
     }
 
-    private static IServiceCollection AddOptions(this IServiceCollection services, IConfigurationSection adminOptionsSection)
+    private static IServiceCollection AddOptions(this IServiceCollection services, IConfiguration configuration)
     {
-        return services.Configure<AdminOptions>(adminOptionsSection);
+        services.Configure<AdminOptions>(configuration.GetSection(AdminOptions.SectionName));
+        services.Configure<MediatROptions>(configuration.GetSection(MediatROptions.SectionName));
+
+        return services;
     }
 }
