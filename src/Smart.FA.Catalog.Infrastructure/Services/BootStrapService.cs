@@ -1,4 +1,5 @@
 using System.Data;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -14,12 +15,34 @@ namespace Smart.FA.Catalog.Infrastructure.Services;
 public class BootStrapService : IBootStrapService
 {
     private readonly ILogger<BootStrapService> _logger;
-    private readonly IServiceScopeFactory _factory;
+    private readonly IServiceScopeFactory      _factory;
+    private readonly IWebHostEnvironment       _environment;
 
-    public BootStrapService(ILogger<BootStrapService> logger, IServiceScopeFactory factory)
+    public BootStrapService(ILogger<BootStrapService> logger, IServiceScopeFactory factory, IWebHostEnvironment environment)
     {
-        _logger  = logger;
-        _factory = factory;
+        _logger           = logger;
+        _factory          = factory;
+        _environment = environment;
+    }
+
+    /// <summary>
+    /// Seed-upload a default image in the S3 storage.
+    /// The default image will be served for members who have yet to upload a personal profile picture.
+    /// </summary>
+    public async Task AddDefaultTrainerProfilePictureImage()
+    {
+
+        using var serviceScope   = _factory.CreateScope();
+        var       storageService = serviceScope.ServiceProvider.GetRequiredService<IS3StorageService>();
+
+        var fileName = "default_image.jpg";
+
+        _logger.LogInformation("Seeding storage service with default image for trainer profile under the name {FileName}", fileName);
+
+        var filePath = Path.Combine(_environment.WebRootPath,fileName);
+        var file     = File.OpenRead(filePath);
+
+        await  storageService.UploadAsync(file, fileName, CancellationToken.None);
     }
 
     /// <inheritdoc />

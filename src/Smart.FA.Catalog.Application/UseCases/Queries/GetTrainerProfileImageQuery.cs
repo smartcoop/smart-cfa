@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
+using Smart.FA.Catalog.Application.Extensions;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Services;
@@ -9,28 +10,28 @@ namespace Smart.FA.Catalog.Application.UseCases.Queries;
 public class GetTrainerProfileImageQuery : IRequestHandler<GetTrainerProfileImageRequest, GetTrainerProfileImageResponse>
 {
     private readonly ILogger<GetTrainerProfileImageQuery> _logger;
-    private readonly IS3StorageService _storageService;
+    private readonly IS3StorageService                    _storageService;
 
     public GetTrainerProfileImageQuery
     (
         ILogger<GetTrainerProfileImageQuery> logger,
-        IS3StorageService storageService
+        IS3StorageService                    storageService
     )
     {
-        _logger = logger;
+        _logger         = logger;
         _storageService = storageService;
     }
 
     public async Task<GetTrainerProfileImageResponse> Handle(GetTrainerProfileImageRequest query,
-        CancellationToken cancellationToken)
+        CancellationToken                                                                  cancellationToken)
     {
         GetTrainerProfileImageResponse response = new();
-        if (query.Trainer.ProfileImagePath is null)
-        {
-            return response;
-        }
 
-        response.ImageStream = await _storageService.GetAsync(query.Trainer.ProfileImagePath, cancellationToken);
+        //In case the trainer has yet to upload his profile picture, a default image is served on his profile page.
+        response.ImageStream = query.Trainer.ProfileImagePath is null
+            ? await _storageService.GetAsync(ProfilePictureExtensions.GenerateDefaultTrainerProfilePictureName(), cancellationToken)
+            : await _storageService.GetAsync(query.Trainer.ProfileImagePath, cancellationToken);
+
         response.SetSuccess();
         return response;
     }

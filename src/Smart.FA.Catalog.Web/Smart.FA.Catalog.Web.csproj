@@ -39,6 +39,9 @@
     <Content Update="appsettings.Staging.json">
       <DependentUpon>appsettings.json</DependentUpon>
     </Content>
+    <Content Update="wwwroot\default_image.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
