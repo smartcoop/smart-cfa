@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Smart.FA.Catalog.Core.Exceptions;
+using Smart.FA.Catalog.Core.Helpers;
 
 namespace Smart.FA.Catalog.Core.SeedWork;
 
@@ -21,5 +22,16 @@ public static class Guard
     {
         if (argumentValue is null)
             throw new ArgumentNullException(argumentName);
+    }
+
+    public static string AgainstInvalidEmail(string? email, string parameterName, string? message = null)
+    {
+        AgainstNull(email, parameterName);
+        if (!EmailValidator.Validate(email!))
+        {
+            throw new ArgumentException(message ?? $"{email} is an invalid email", parameterName);
+        }
+
+        return email!;
     }
 }

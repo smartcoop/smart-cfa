@@ -2,6 +2,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Smart.FA.Catalog.Application.Extensions.FluentValidation;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.Enumerations;
@@ -23,6 +24,8 @@ public class EditProfileCommand : IRequest<ProfileEditionResponse>
     public string? Title { get; set; }
 
     public Dictionary<string, string>? Socials { get; set; }
+
+    public string? Email { get; set; }
 }
 
 public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, ProfileEditionResponse>
@@ -90,6 +93,7 @@ public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, Pro
     {
         trainer.UpdateBiography(command.Bio ?? string.Empty);
         trainer.UpdateTitle(command.Title ?? string.Empty);
+        trainer.ChangeEmail(command.Email);
         foreach (var commandSocial in command.Socials!)
         {
             var socialNetwork = Enumeration.FromValue<SocialNetwork>(int.Parse(commandSocial.Key));
@@ -147,5 +151,8 @@ public class EditProfileCommandValidator : AbstractValidator<EditProfileCommand>
             .WithMessage(CatalogResources.BioMustBe30Chars)
             .MaximumLength(500)
             .WithMessage(CatalogResources.BioCannotExceed500Chars);
+
+        RuleFor(command => command.Email)
+            .ValidEmail();
     }
 }
