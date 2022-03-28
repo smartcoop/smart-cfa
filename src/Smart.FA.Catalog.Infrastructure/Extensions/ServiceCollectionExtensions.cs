@@ -1,3 +1,5 @@
+using Amazon;
+using Amazon.S3;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,7 +27,8 @@ public static class ServiceCollectionExtensions
         , string catalogConnectionString
         , string userAccountConnectionString
         , IConfigurationSection mailOptionSection
-        , IConfigurationSection dalOptionSection
+        , IConfigurationSection efCoreOptionSection
+        , IConfigurationSection minioOptionSection
     )
     {
         services
@@ -33,7 +36,9 @@ public static class ServiceCollectionExtensions
             .AddRepositories()
             .AddServices(userAccountConnectionString, mailOptionSection)
             .AddQueries(catalogConnectionString)
-            .AddDbContext(catalogConnectionString, dalOptionSection);
+            .AddQueries(catalogConnectionString)
+            .AddDbContext(catalogConnectionString, efCoreOptionSection)
+            .AddS3Storage(minioOptionSection);
     }
 
     private static IServiceCollection AddEventPublisher(this IServiceCollection services)
@@ -94,6 +99,27 @@ public static class ServiceCollectionExtensions
                     .EnableSensitiveDataLogging();
             }
         });
+        return services;
+    }
+
+    private static IServiceCollection AddS3Storage(this IServiceCollection services,
+        IConfigurationSection minioOptionsSection)
+    {
+        services.Configure<S3StorageOptions>(minioOptionsSection);
+        services.AddScoped<IAmazonS3>(serviceProvider =>
+        {
+            var options = serviceProvider.GetRequiredService<IOptions<S3StorageOptions>>().Value;
+            return new AmazonS3Client(options.Credentials.AccessKey, options.Credentials.SecretKey,
+                new AmazonS3Config
+                {
+                    RegionEndpoint = RegionEndpoint.GetBySystemName(options.AWS.RegionEndpoint),
+                    ServiceURL = options.AWS.ServiceUrl,
+                    ForcePathStyle = options.AWS.ForcePathStyle,
+                    Timeout = TimeSpan.FromSeconds(20)
+                });
+        });
+        services.AddScoped<IS3StorageService, S3StorageService>();
+
         return services;
     }
 }
