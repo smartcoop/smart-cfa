@@ -32,10 +32,17 @@ echo "Git author name: ${GIT_AUTHOR_NAME}"
 echo "Git author email: ${GIT_AUTHOR_EMAIL}"
 
 echo "DOCKER_NAME=${DOCKER_NAME}" > .env
+echo "DOCKER_SQL_USER=${USERNAME}" >> .env
+echo "DOCKER_SQL_PASSWORD=${PASSWORD}" >> .env
+echo "DOCKER_ENVIRONMENT=Staging" >> .env
 
-sed -e "s/host.docker.internal/${DOCKER_NAME}-datasource/" \
-   ./src/Smart.FA.Catalog.Web/appsettings.Staging.json > ./src/Smart.FA.Catalog.Web/appsettings.Staging.tmp.json
+sed -e "s/{catalog-server-name}/${DOCKER_NAME}-datasource/" \
+    -e "s/{catalog-server-user-id}/$USERNAME/" \
+    -e "s/{catalog-server-user-password}/$PASSWORD/" \
+    ./src/Smart.FA.Catalog.Web/appsettings.Staging.json > ./src/Smart.FA.Catalog.Web/appsettings.Staging.tmp.json
+
 mv ./src/Smart.FA.Catalog.Web/appsettings.Staging.tmp.json ./src/Smart.FA.Catalog.Web/appsettings.Staging.json
+
 
 echo "build docker DB and API"
 docker-compose --env-file ./.env build

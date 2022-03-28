@@ -10,6 +10,8 @@ services:
     restart: always
     networks:
       - "cfa"
+    environment:
+      - "SA_PASSWORD=${DOCKER_SQL_PASSWORD}"
   api:
     depends_on:
       - datasource
@@ -21,6 +23,8 @@ services:
     restart: always
     networks:
       - "cfa"
+    environment:
+      - "ASPNETCORE_ENVIRONMENT=${DOCKER_ENVIRONMENT}"
 networks:
   cfa:
     name: cfa

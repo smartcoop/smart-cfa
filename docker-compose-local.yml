@@ -10,6 +10,8 @@ services:
     restart: always
     ports:
       - "1433:1433"
+    environment:
+      - "SA_PASSWORD=TheLocalStoragePassword!"
     networks:
       - "cfa"
   api:
@@ -25,6 +27,12 @@ services:
       - "5000:80"
     networks:
       - "cfa"
+    environment:
+      - "ASPNETCORE_ENVIRONMENT=${DOCKER_ENVIRONMENT}"
+    command:
+      /opt/mssql/bin/sqlservr --accept-eula & sleep 70 \
+      && /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'localStoragePassword!' \
+      && pkill sqlservr
 networks:
   cfa:
     name: cfa
