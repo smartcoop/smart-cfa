@@ -7,6 +7,6 @@ public static class ProfilePictureExtensions
     public static string GenerateTrainerProfilePictureName(this Trainer trainer) =>
         $"{trainer.Id}/{trainer.Name.LastName}-{trainer.Name.FirstName}";
 
-    public static string GenerateDefaultTrainerProfilePictureName(this Trainer trainer) =>
-        "default_image";
+    public static string GenerateDefaultTrainerProfilePictureName() =>
+        "default_image.jpg";
 }

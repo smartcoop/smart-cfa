@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // appsettings.Local.json will have precedence over anything else as it is set in last.
 // https://github.com/dotnet/aspnetcore/blob/c5207d21ed68041879e1256406b458d130b420ab/src/DefaultBuilder/src/WebHost.cs#L170
-// builder.Configuration.AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: true);
+builder.Configuration.AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: true);
 
 builder.Host.UseNLog();
 
@@ -60,7 +60,8 @@ builder.Services
 var app = builder.Build();
 
 // We don't await this operation now but it will awaited just before app.Run()
-var seedingTask = app.Services.GetRequiredService<IBootStrapService>().ApplyMigrationsAndSeedAsync();
+var dbSeedingTask = app.Services.GetRequiredService<IBootStrapService>().ApplyMigrationsAndSeedAsync();
+var storageSeedingTask = app.Services.GetRequiredService<IBootStrapService>().AddDefaultTrainerProfilePictureImage();
 
 app.UseForwardedHeaders();
 
@@ -90,6 +91,7 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
-await seedingTask;
+await dbSeedingTask;
+await storageSeedingTask;
 
 app.Run();
