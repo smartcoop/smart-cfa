@@ -6,8 +6,8 @@ namespace Smart.FA.Catalog.Application.Extensions.FluentValidation;
 public static class OnStringRuleBuilderExtensions
 {
     /// <summary>
-    /// Defines a rules to validate a email format.
-    /// THe rule checks if the email is null or empty, then validates the format of the email.
+    /// Defines a rules to validate an email format.
+    /// The rule checks if the email is null or empty, then validates the format of the email.
     /// </summary>
     /// <typeparam name="T">Type of the object being validated.</typeparam>
     /// <param name="ruleBuilder">The <see cref="IRuleBuilder{T,TProperty}" /> on which is applied the rule.</param>

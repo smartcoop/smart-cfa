@@ -24,12 +24,12 @@ public static class Guard
             throw new ArgumentNullException(argumentName);
     }
 
-    public static string AgainstInvalidEmail(string? email, string parameter, string? message = null)
+    public static string AgainstInvalidEmail(string? email, string parameterName, string? message = null)
     {
-        AgainstNull(email, parameter);
+        AgainstNull(email, parameterName);
         if (!EmailValidator.Validate(email!))
         {
-            throw new ArgumentException(message ?? $"{email} is an invalid email", parameter);
+            throw new ArgumentException(message ?? $"{email} is an invalid email", parameterName);
         }
 
         return email!;
