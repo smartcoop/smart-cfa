@@ -2,13 +2,11 @@ using System.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.User.Enumerations;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
 using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Infrastructure.Persistence;
-using Smart.FA.Catalog.Infrastructure.Services.Options;
 
 namespace Smart.FA.Catalog.Infrastructure.Services;
 
@@ -69,7 +67,7 @@ public class BootStrapService : IBootStrapService
     /// <returns>A task representing the asynchronous operation. The task's result is a boolean whose value tells if the operation was successful.</returns>
     private async Task<bool> SafeApplyMigrationsAndSeedWithRetriesAsync(CatalogContext catalogContext, IDbConnection currentConnection)
     {
-        int DelayToWaitBetweenRetriesInMilliseconds(int retryAttempt) => (int) (Math.Max(5 - retryAttempt, 0) + Math.Pow(2, Math.Min(retryAttempt, 5))) * 1_000;
+        int DelayToWaitBetweenRetriesInMilliseconds(int retryAttempt) => (int)(Math.Max(5 - retryAttempt, 0) + Math.Pow(2, Math.Min(retryAttempt, 5))) * 1_000;
         for (var retryAttempt = 0; retryAttempt < 6; retryAttempt++)
         {
             if (await SafeApplyMigrationsAndSeedAsync(catalogContext))
