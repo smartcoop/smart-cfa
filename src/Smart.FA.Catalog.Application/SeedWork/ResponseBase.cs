@@ -37,11 +37,24 @@ public class ResponseBase
     /// <summary>
     /// Adds an error object to the response
     /// </summary>
-    /// <param name="message">The error message</param>
+    /// <param name="error">The error to add to the response</param>
     public void AddError(Error error)
     {
         IsSuccess = false;
         _errors.Add(new ApplicationError(error.Code, error.Message));
+    }
+
+    /// <summary>
+    /// Adds multiple errors object to the response (for stacking errors)
+    /// </summary>
+    /// <param name="errors">The errors to add to the response</param>
+    public void AddErrors(IEnumerable<Error> errors)
+    {
+        IsSuccess = false;
+        foreach (var error in errors)
+        {
+            AddError(error);
+        }
     }
 
     /// <summary>

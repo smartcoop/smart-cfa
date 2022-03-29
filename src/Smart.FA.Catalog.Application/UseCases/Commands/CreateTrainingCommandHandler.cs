@@ -1,4 +1,3 @@
-using CSharpFunctionalExtensions;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Smart.FA.Catalog.Application.SeedWork;
@@ -32,10 +31,14 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingReques
 
         var trainer = await _trainerRepository.FindAsync(request.TrainerId, cancellationToken);
         var training = new Training(trainer, request.Detail, request.Types, request.SlotNumberTypes, request.TargetAudiences, request.Topics);
-        if (request.IsDraft is false)
+        if (!request.IsDraft)
         {
             var result = training.Validate();
-            await result.OnFailure(errors => throw new Exception(string.Join(Environment.NewLine, errors)));
+            if (result.IsFailure)
+            {
+                resp.AddErrors(result.Error);
+                return resp;
+            }
         }
 
         _unitOfWork.RegisterNew(training);
