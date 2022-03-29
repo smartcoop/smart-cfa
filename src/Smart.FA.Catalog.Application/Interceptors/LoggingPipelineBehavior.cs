@@ -1,7 +1,10 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Smart.FA.Catalog.Application.Models.Options;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Core.Exceptions;
+using Smart.FA.Catalog.Core.Extensions;
 using Smart.FA.Catalog.Core.LogEvents;
 using Smart.FA.Catalog.Core.SeedWork;
 
@@ -16,22 +19,30 @@ namespace Smart.FA.Catalog.Application.Interceptors;
 public class LoggingPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse> where TResponse : ResponseBase, new()
 {
-    private readonly ILogger<LoggingPipelineBehavior<TRequest, TResponse>> _logger;
+    private readonly ILogger<Mediator> _logger;
+    private readonly MediatROptions _mediatROptions;
+
     public LoggingPipelineBehavior
     (
-        ILogger<LoggingPipelineBehavior<TRequest, TResponse>> logger
-    )
+        ILogger<Mediator> logger,
+        IOptions<MediatROptions> mediatROptions)
     {
         _logger = logger;
+        _mediatROptions = mediatROptions.Value ??
+                          throw new ArgumentException($"{nameof(LoggingPipelineBehavior<TRequest, TResponse>)}: {nameof(mediatROptions)} not found", nameof(mediatROptions));
     }
 
     public async Task<TResponse> Handle
     (
-        TRequest request
-        , CancellationToken cancellationToken,
+        TRequest request,
+        CancellationToken cancellationToken,
         RequestHandlerDelegate<TResponse> next
     )
     {
+        if (_mediatROptions.LogRequests)
+        {
+            _logger.LogInformation("Incoming request: {requestName} - {request}", request.GetType().Name, request.ToJson());
+        }
         TResponse response = new();
         try
         {
