@@ -8,15 +8,11 @@ namespace Smart.FA.Catalog.Infrastructure.Persistence;
 
 public class CatalogContext : DbContext
 {
-    private readonly EventDispatcher? _eventDispatcher;
+    private readonly IDomainEventPublisher _eventPublisher;
 
-    public CatalogContext
-    (
-        DbContextOptions<CatalogContext> contextOptions
-        , EventDispatcher?               eventDispatcher
-    ) : base(contextOptions)
+    public CatalogContext(DbContextOptions<CatalogContext> contextOptions, IDomainEventPublisher eventPublisher) : base(contextOptions)
     {
-        _eventDispatcher = eventDispatcher;
+        _eventPublisher = eventPublisher;
     }
 
     public DbSet<Trainer> Trainers { get; set; } = null!;
@@ -29,21 +25,18 @@ public class CatalogContext : DbContext
         modelBuilder.ApplyDateTimeConverters();
     }
 
-    public override int SaveChanges()
+    public override int SaveChanges(bool acceptAllChangesOnSuccess)
     {
-        AddDateTimeToEntities();
-        RemoveEnumerationsFromTracker();
-        DispatchEventFromEntities();
-        return base.SaveChanges();
+        return SaveChangesAsync(acceptAllChangesOnSuccess).GetAwaiter().GetResult();
     }
 
-    public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,
-        CancellationToken cancellationToken = new CancellationToken())
+    public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
     {
         AddDateTimeToEntities();
         RemoveEnumerationsFromTracker();
-        DispatchEventFromEntities();
-        return await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+        var numberOfEntitiesWritten = await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+        await PublishEntityDomainEventsAsync();
+        return numberOfEntitiesWritten;
     }
 
     private void RemoveEnumerationsFromTracker()
@@ -71,16 +64,13 @@ public class CatalogContext : DbContext
         }
     }
 
-    private void DispatchEventFromEntities()
+    private Task PublishEntityDomainEventsAsync()
     {
-        var entries = ChangeTracker
+        var entitiesWithEvents = ChangeTracker
             .Entries<Entity>()
             .Select(entry => entry.Entity)
-            .Where(entity => entity.DomainEvents.Any());
-        foreach (var entity in entries)
-        {
-            _eventDispatcher!.Dispatch(entity.DomainEvents);
-            entity.ClearDomainEvents();
-        }
+            .Where(entity => entity.DomainEvents.Count == 0);
+
+        return _eventPublisher.PublishEntitiesEventsAsync(entitiesWithEvents);
     }
 }

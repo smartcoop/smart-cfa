@@ -29,19 +29,16 @@ public static class ServiceCollectionExtensions
     )
     {
         services
-            .AddEventDispatcher()
+            .AddEventPublisher()
             .AddRepositories()
             .AddServices(userAccountConnectionString, mailOptionSection)
             .AddQueries(catalogConnectionString)
             .AddDbContext(catalogConnectionString, dalOptionSection);
     }
 
-    private static IServiceCollection AddEventDispatcher(this IServiceCollection services)
+    private static IServiceCollection AddEventPublisher(this IServiceCollection services)
     {
-        services.AddScoped<IBus, Bus>();
-        services.AddScoped<MessageBus>();
-        services.AddScoped<EventDispatcher>();
-        return services;
+        return services.AddScoped<IDomainEventPublisher, DomainEventPublisher>();
     }
 
     private static IServiceCollection AddServices(this IServiceCollection services, string userAccountConnectionString,
