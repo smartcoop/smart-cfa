@@ -355,4 +355,10 @@
   <data name="InvalidEmail" xml:space="preserve">
     <value>Email invalide</value>
   </data>
+  <data name="ProfilePage_Image_FileTooBig" xml:space="preserve">
+    <value>Le fichier est trop volumineux</value>
+  </data>
+  <data name="ProfilePage_Image_WrongFileType" xml:space="preserve">
+    <value>Le fichier est du mauvais type</value>
+  </data>
 </root>
