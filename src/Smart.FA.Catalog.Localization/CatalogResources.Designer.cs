@@ -421,6 +421,24 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Le fichier est trop volumineux.
+        /// </summary>
+        public static string ProfilePage_Image_FileTooBig {
+            get {
+                return ResourceManager.GetString("ProfilePage_Image_FileTooBig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Le fichier est du mauvais type.
+        /// </summary>
+        public static string ProfilePage_Image_WrongFileType {
+            get {
+                return ResourceManager.GetString("ProfilePage_Image_WrongFileType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Profil mis à jour.
         /// </summary>
         public static string ProfileUpdatedWithSuccess {
