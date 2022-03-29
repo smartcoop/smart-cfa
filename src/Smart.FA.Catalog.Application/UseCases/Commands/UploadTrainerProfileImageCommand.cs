@@ -8,21 +8,20 @@ using Smart.FA.Catalog.Core.Services;
 
 namespace Smart.FA.Catalog.Application.UseCases.Commands;
 
-public class
-    UploadImageToStorageCommand : IRequestHandler<UploadImageToStorageCommandRequest,
-        UploadImageToStorageCommandResponse>
+public class UploadTrainerProfileImageCommand : IRequestHandler<UploadImageToStorageCommandRequest, UploadImageToStorageCommandResponse>
 {
-    private readonly ILogger<UploadImageToStorageCommand> _logger;
+    private readonly ILogger<UploadTrainerProfileImageCommand> _logger;
     private readonly IS3StorageService _storageService;
 
-    public UploadImageToStorageCommand(ILogger<UploadImageToStorageCommand> logger, IS3StorageService storageService)
+    public UploadTrainerProfileImageCommand(ILogger<UploadTrainerProfileImageCommand> logger, IS3StorageService storageService)
     {
         _logger = logger;
         _storageService = storageService;
     }
 
     /// <summary>
-    /// Delete any existing profile picture for the trainer and Upload a new one with a name based on id the <see cref="command.Trainer"/> on the S3 Storage server
+    /// Upload a new one with a name based on id the <see cref="command.Trainer"/> on the S3 Storage server.
+    /// If the image already exists, it will delete it and replace it with the new one.
     /// </summary>
     /// <param name="command.ProfilePicture">The raw file</param>
     /// <param name="command.Trainer">The trainer whose picture needs to be modified</param>
