@@ -13,5 +13,9 @@ public interface IBootStrapService
     /// <exception cref="Exception">A generic exception in case the operation failed.</exception>
     Task ApplyMigrationsAndSeedAsync();
 
-    Task AddDefaultTrainerProfilePictureImage();
+    /// <summary>
+    /// Seed-upload a default image in the S3 storage.
+    /// The default image will be served for members who have yet to upload a personal profile picture.
+    /// </summary>
+    Task AddDefaultTrainerProfilePictureImage(string webRootPath);
 }

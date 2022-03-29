@@ -1,13 +1,14 @@
 using System.Data;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.User.Enumerations;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
 using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Infrastructure.Persistence;
+using Smart.FA.Catalog.Infrastructure.Services.Options;
 
 namespace Smart.FA.Catalog.Infrastructure.Services;
 
@@ -15,34 +16,28 @@ namespace Smart.FA.Catalog.Infrastructure.Services;
 public class BootStrapService : IBootStrapService
 {
     private readonly ILogger<BootStrapService> _logger;
-    private readonly IServiceScopeFactory      _factory;
-    private readonly IWebHostEnvironment       _environment;
+    private readonly IServiceScopeFactory _factory;
 
-    public BootStrapService(ILogger<BootStrapService> logger, IServiceScopeFactory factory, IWebHostEnvironment environment)
+    public BootStrapService(ILogger<BootStrapService> logger, IServiceScopeFactory factory)
     {
-        _logger           = logger;
-        _factory          = factory;
-        _environment = environment;
+        _logger = logger;
+        _factory = factory;
     }
 
-    /// <summary>
-    /// Seed-upload a default image in the S3 storage.
-    /// The default image will be served for members who have yet to upload a personal profile picture.
-    /// </summary>
-    public async Task AddDefaultTrainerProfilePictureImage()
+    /// <inheritdoc />
+    public async Task AddDefaultTrainerProfilePictureImage(string webRootPath)
     {
-
-        using var serviceScope   = _factory.CreateScope();
-        var       storageService = serviceScope.ServiceProvider.GetRequiredService<IS3StorageService>();
-
-        var fileName = "default_image.jpg";
+        using var serviceScope = _factory.CreateScope();
+        var storageService = serviceScope.ServiceProvider.GetRequiredService<IS3StorageService>();
+        var s3StorageOptions = serviceScope.ServiceProvider.GetRequiredService<IOptions<S3StorageOptions>>();
+        var fileName = s3StorageOptions.Value.DefaultTrainerProfilePictureName;
 
         _logger.LogInformation("Seeding storage service with default image for trainer profile under the name {FileName}", fileName);
 
-        var filePath = Path.Combine(_environment.WebRootPath,fileName);
-        var file     = File.OpenRead(filePath);
+        var filePath = Path.Combine(webRootPath, "default_image.jpg");
+        var file = File.OpenRead(filePath);
 
-        await  storageService.UploadAsync(file, fileName, CancellationToken.None);
+        await storageService.UploadAsync(file, fileName, CancellationToken.None);
     }
 
     /// <inheritdoc />
@@ -52,8 +47,8 @@ public class BootStrapService : IBootStrapService
         // The reason behind this is the CatalogContext has a scoped lifetime.
         // Therefore we need to achieve this by using a IServiceScope.
         using var serviceScope = _factory.CreateScope();
-        var catalogContext     = serviceScope.ServiceProvider.GetRequiredService<CatalogContext>();
-        var currentConnection  = catalogContext.Database.GetDbConnection();
+        var catalogContext = serviceScope.ServiceProvider.GetRequiredService<CatalogContext>();
+        var currentConnection = catalogContext.Database.GetDbConnection();
 
         _logger.LogInformation("Seeding [{database}] database on SQL instance {server}", currentConnection.Database, currentConnection.DataSource);
 
@@ -74,7 +69,7 @@ public class BootStrapService : IBootStrapService
     /// <returns>A task representing the asynchronous operation. The task's result is a boolean whose value tells if the operation was successful.</returns>
     private async Task<bool> SafeApplyMigrationsAndSeedWithRetriesAsync(CatalogContext catalogContext, IDbConnection currentConnection)
     {
-        int DelayToWaitBetweenRetriesInMilliseconds(int retryAttempt) => (int)(Math.Max(5 - retryAttempt, 0) + Math.Pow(2, Math.Min(retryAttempt, 5))) * 1_000;
+        int DelayToWaitBetweenRetriesInMilliseconds(int retryAttempt) => (int) (Math.Max(5 - retryAttempt, 0) + Math.Pow(2, Math.Min(retryAttempt, 5))) * 1_000;
         for (var retryAttempt = 0; retryAttempt < 6; retryAttempt++)
         {
             if (await SafeApplyMigrationsAndSeedAsync(catalogContext))

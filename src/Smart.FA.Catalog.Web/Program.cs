@@ -59,10 +59,6 @@ builder.Services
 
 var app = builder.Build();
 
-// We don't await this operation now but it will awaited just before app.Run()
-var dbSeedingTask = app.Services.GetRequiredService<IBootStrapService>().ApplyMigrationsAndSeedAsync();
-var storageSeedingTask = app.Services.GetRequiredService<IBootStrapService>().AddDefaultTrainerProfilePictureImage();
-
 app.UseForwardedHeaders();
 
 app.UseProxyHeaders();
@@ -91,7 +87,6 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
-await dbSeedingTask;
-await storageSeedingTask;
+await app.ExecuteBootStrapService();
 
 app.Run();
