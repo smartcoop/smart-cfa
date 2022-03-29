@@ -28,7 +28,7 @@ public class DeleteTrainerProfileImageCommand : IRequestHandler<DeleteTrainerPro
 
 public class DeleteTrainerProfileImageRequest : IRequest<DeleteTrainerProfileImageResponse>
 {
-    public Trainer Trainer { get; set; }
+    public Trainer Trainer { get; set; } = null!;
 }
 
 public class DeleteTrainerProfileImageResponse : ResponseBase
