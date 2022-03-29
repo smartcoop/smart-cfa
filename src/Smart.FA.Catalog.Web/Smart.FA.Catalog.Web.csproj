@@ -12,6 +12,7 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="10.3.6" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="Mime-Detective" Version="22.7.19" />
     <PackageReference Include="Mime-Detective.Definitions.Condensed" Version="22.7.19" />
