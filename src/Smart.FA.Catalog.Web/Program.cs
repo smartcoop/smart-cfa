@@ -41,21 +41,12 @@ builder.Services.AddCatalogLocalization();
 builder.WebHost.UseWebRoot("wwwroot");
 builder.WebHost.UseStaticWebAssets();
 
-#if DEBUG
 builder.Services
     .AddInfrastructure(builder.Configuration.GetConnectionString("Catalog"),
         builder.Configuration.GetConnectionString("Account"),
         builder.Configuration.GetSection("MailOptions"),
         builder.Configuration.GetSection("EFCore"),
         builder.Configuration.GetSection("S3Storage"));
-#else
-builder.Services
-    .AddInfrastructure(builder.Configuration.GetConnectionString("Catalog"),
-    builder.Configuration.GetConnectionString("Account"),
-    builder.Configuration.GetSection("MailOptions")
-        builder.Configuration.GetSection("EFCore"),
-        builder.Configuration.GetSection("S3Storage"));
-#endif
 
 var app = builder.Build();
 
