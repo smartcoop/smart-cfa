@@ -42,7 +42,7 @@ public class GetTrainerProfileImageQuery : IRequestHandler<GetTrainerProfileImag
 
 public class GetTrainerProfileImageRequest : IRequest<GetTrainerProfileImageResponse>
 {
-    public Trainer Trainer { get; set; }
+    public Trainer Trainer { get; set; } = null!;
 }
 
 public class GetTrainerProfileImageResponse : ResponseBase

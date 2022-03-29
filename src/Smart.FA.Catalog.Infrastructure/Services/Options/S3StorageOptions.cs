@@ -2,15 +2,15 @@
 
 public class S3StorageOptions
 {
-    public AWSCredentials Credentials { get; set; }
+    public AWSCredentials Credentials { get; set; } = null!;
 
-    public AWSOptions AWS { get; set; }
+    public AWSOptions AWS { get; set; } = null!;
 
-    public string DefaultTrainerProfilePictureName { get; set; }
+    public string DefaultTrainerProfilePictureName { get; set; } = null!;
 
     public long FileSizeLimit { get; set; }
 
-    private string _imageBucketName;
+    private string _imageBucketName = null!;
 
     public string ImageBucketName
     {
@@ -21,13 +21,13 @@ public class S3StorageOptions
 
 public class AWSCredentials
 {
-    public string AccessKey { get; set; }
-    public string SecretKey { get; set; }
+    public string AccessKey { get; set; } = null!;
+    public string SecretKey { get; set; } = null!;
 }
 
 public class AWSOptions
 {
-    public string RegionEndpoint { get; set; }
-    public string ServiceUrl { get; set; }
+    public string RegionEndpoint { get; set; } = null!;
+    public string ServiceUrl { get; set; } = null!;
     public bool ForcePathStyle { get; set; }
 }
