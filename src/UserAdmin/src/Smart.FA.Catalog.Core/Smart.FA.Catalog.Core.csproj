@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Smart.FA.Catalog.Shared\Smart.FA.Catalog.Shared.csproj" />
     <ProjectReference Include="..\Smart.FA.Catalog.Localization\Smart.FA.Catalog.Localization.csproj" />
   </ItemGroup>
 

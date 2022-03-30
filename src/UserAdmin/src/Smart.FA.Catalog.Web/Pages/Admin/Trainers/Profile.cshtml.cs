@@ -20,7 +20,7 @@ public class ProfileModel : AdminPage
 
     public Stream? ProfilePicture { get; set; }
 
-    protected internal ICollection<SocialNetworkViewModel> SocialNetworkViewModels { get; set; }
+    protected internal ICollection<SocialNetworkViewModel> SocialNetworkViewModels { get; set; } = null!;
 
     public ProfileModel(IMediator mediator, IUserIdentity userIdentity, IS3StorageService storageService) :
         base(mediator)

@@ -3,6 +3,8 @@ using Smart.FA.Catalog.Application.UseCases.Commands;
 using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Domain.Enumerations;
 using Smart.FA.Catalog.Core.SeedWork;
+using Smart.FA.Catalog.Shared.Domain.Enumerations;
+using Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer;
 
 namespace Smart.FA.Catalog.Web.ViewModels.Trainers;
 

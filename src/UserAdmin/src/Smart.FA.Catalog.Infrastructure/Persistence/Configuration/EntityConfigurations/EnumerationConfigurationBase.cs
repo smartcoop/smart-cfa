@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Smart.FA.Catalog.Core.SeedWork;
+using Smart.FA.Catalog.Shared.Domain.Enumerations;
 
 namespace Smart.FA.Catalog.Infrastructure.Persistence.Configuration.EntityConfigurations;
 

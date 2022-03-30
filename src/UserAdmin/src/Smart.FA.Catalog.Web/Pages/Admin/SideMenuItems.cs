@@ -1,4 +1,5 @@
 using Smart.FA.Catalog.Core.SeedWork;
+using Smart.FA.Catalog.Shared.Domain.Enumerations;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin;
 

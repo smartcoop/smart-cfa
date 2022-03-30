@@ -11,6 +11,7 @@ using Smart.FA.Catalog.Core.Domain.ValueObjects;
 using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Infrastructure.Persistence.Read;
 using Smart.FA.Catalog.IntegrationTests.Base;
+using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 using Smart.FA.Catalog.Tests.Common;
 using Xunit;
 

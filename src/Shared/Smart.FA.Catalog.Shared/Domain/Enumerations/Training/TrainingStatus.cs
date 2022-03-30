@@ -1,6 +1,4 @@
-using Smart.FA.Catalog.Core.SeedWork;
-
-namespace Smart.FA.Catalog.Core.Domain.Enumerations;
+namespace Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
 public class TrainingStatus : Enumeration
 {
@@ -17,10 +15,4 @@ public class TrainingStatus : Enumeration
     {
 
     }
-}
-
-public static class TrainingStatusExtensions
-{
-    public static TrainingStatus Validate(this TrainingStatus status, IEnumerable<TrainingIdentity> identities)
-        => identities.IsTrainingAutoValidated() ? TrainingStatus.Validated : TrainingStatus.WaitingForValidation;
 }

@@ -1,6 +1,4 @@
-﻿using Smart.FA.Catalog.Core.SeedWork;
-
-namespace Smart.FA.Catalog.Core.Domain.Enumerations;
+namespace Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
 public class TrainingTopic: Enumeration
 {
