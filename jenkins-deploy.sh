@@ -39,9 +39,9 @@ echo "DOCKER_ENVIRONMENT=Staging" >> .env
 sed -e "s/{catalog-server-name}/${DOCKER_NAME}-datasource/" \
     -e "s/{catalog-server-user-id}/$USERNAME/" \
     -e "s/{catalog-server-user-password}/$PASSWORD/" \
-    ./src/Smart.FA.Catalog.Web/appsettings.Staging.json > ./src/Smart.FA.Catalog.Web/appsettings.Staging.tmp.json
+    ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.json > ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.tmp.json
 
-mv ./src/Smart.FA.Catalog.Web/appsettings.Staging.tmp.json ./src/Smart.FA.Catalog.Web/appsettings.Staging.json
+mv ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.tmp.json ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.json
 
 
 echo "build docker DB and API"
