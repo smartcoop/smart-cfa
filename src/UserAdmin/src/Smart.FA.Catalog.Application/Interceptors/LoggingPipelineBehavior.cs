@@ -1,3 +1,5 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -41,8 +43,9 @@ public class LoggingPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TR
     {
         if (_mediatROptions.LogRequests)
         {
-            _logger.LogInformation("Incoming request: {requestName} - {request}", request.GetType().Name, request.ToJson());
+            LogMediatRRequest(request);
         }
+
         TResponse response = new();
         try
         {
@@ -60,5 +63,17 @@ public class LoggingPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TR
         }
 
         return response;
+    }
+
+    private void LogMediatRRequest(TRequest request)
+    {
+        // ReferenceHandler.Preserve prevents circular references when serializing.
+        // Ses https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-preserve-references?pivots=dotnet-6-0.
+        var jsonSerializerOptions = new JsonSerializerOptions()
+        {
+            WriteIndented    = true,
+            ReferenceHandler = ReferenceHandler.Preserve
+        };
+        _logger.LogInformation("Incoming request: {requestName} - {request}", request.GetType().Name, request.ToJson(jsonSerializerOptions));
     }
 }
