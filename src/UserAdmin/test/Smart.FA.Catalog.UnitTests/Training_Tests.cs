@@ -10,6 +10,7 @@ using Smart.FA.Catalog.Core.Domain.Enumerations;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
 using Smart.FA.Catalog.Core.Exceptions;
 using Smart.FA.Catalog.Core.Services;
+using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 using Smart.FA.Catalog.Tests.Common;
 using Xunit;
 

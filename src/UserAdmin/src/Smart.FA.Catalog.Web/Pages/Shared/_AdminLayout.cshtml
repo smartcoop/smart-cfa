@@ -2,6 +2,7 @@
 @using Smart.FA.Catalog.Web.Pages.Admin
 @using Microsoft.AspNetCore.Localization
 @using Microsoft.Extensions.Options
+@using Smart.FA.Catalog.Shared.Domain.Enumerations
 @inject IOptions<RequestLocalizationOptions> _requestLocalizationOptions;
 @{
     var requestCulture = Context.Features.Get<IRequestCultureFeature>() ?? throw new InvalidOperationException($"Couldn't get {nameof(IRequestCultureFeature)}");

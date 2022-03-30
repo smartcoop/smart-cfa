@@ -1,6 +1,6 @@
-using Smart.FA.Catalog.Core.SeedWork;
+using Smart.FA.Catalog.Localization;
 
-namespace Smart.FA.Catalog.Core.Domain.Enumerations;
+namespace Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer;
 
 /// <summary>
 /// Enumerates the list of Social Networks supported by the system.
@@ -22,16 +22,5 @@ public class SocialNetwork : Enumeration
     protected SocialNetwork(int id, string name) : base(id, name)
     {
 
-    }
-
-    public string DisplayName()
-    {
-        // Personal website
-        if (Id == 6)
-        {
-            return CatalogResources.PersonalWebsite;
-        }
-
-        return Name;
     }
 }

@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using static System.String;
 
-namespace Smart.FA.Catalog.Core.SeedWork;
+namespace Smart.FA.Catalog.Shared.Domain.Enumerations;
 
 public abstract class Enumeration : IComparable
 {

@@ -2,6 +2,7 @@ using CSharpFunctionalExtensions;
 using FluentValidation;
 using Smart.FA.Catalog.Core.Exceptions;
 using Smart.FA.Catalog.Core.SeedWork;
+using Smart.FA.Catalog.Shared.Domain.Enumerations;
 using Entity = CSharpFunctionalExtensions.Entity;
 using ValueObject = CSharpFunctionalExtensions.ValueObject;
 

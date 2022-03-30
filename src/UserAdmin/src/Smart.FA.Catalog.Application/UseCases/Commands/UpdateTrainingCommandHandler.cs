@@ -10,6 +10,7 @@ using Smart.FA.Catalog.Core.Exceptions;
 using Smart.FA.Catalog.Core.LogEvents;
 using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Core.Services;
+using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
 namespace Smart.FA.Catalog.Application.UseCases.Commands;
 

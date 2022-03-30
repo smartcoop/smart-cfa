@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Infrastructure.Extensions;
+using Smart.FA.Catalog.Shared.Domain.Enumerations;
 
 namespace Smart.FA.Catalog.Infrastructure.Persistence;
 

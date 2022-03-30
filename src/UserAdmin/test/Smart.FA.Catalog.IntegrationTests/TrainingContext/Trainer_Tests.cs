@@ -7,6 +7,7 @@ using Smart.FA.Catalog.Core.Domain.User.Enumerations;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
 using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.IntegrationTests.Base;
+using Smart.FA.Catalog.Shared.Domain.Enumerations;
 using Smart.FA.Catalog.Tests.Common;
 using Xunit;
 

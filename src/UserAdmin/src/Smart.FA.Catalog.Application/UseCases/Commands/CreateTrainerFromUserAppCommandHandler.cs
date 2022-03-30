@@ -8,6 +8,7 @@ using Smart.FA.Catalog.Core.Domain.ValueObjects;
 using Smart.FA.Catalog.Core.LogEvents;
 using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Infrastructure.Persistence;
+using Smart.FA.Catalog.Shared.Domain.Enumerations;
 
 namespace Smart.FA.Catalog.Application.UseCases.Commands;
 

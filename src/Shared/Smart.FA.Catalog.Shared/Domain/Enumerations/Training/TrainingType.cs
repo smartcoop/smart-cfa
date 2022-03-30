@@ -1,6 +1,4 @@
-using Smart.FA.Catalog.Core.SeedWork;
-
-namespace Smart.FA.Catalog.Core.Domain.Enumerations;
+namespace Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
 public class TrainingType : Enumeration
 {
@@ -17,10 +15,4 @@ public class TrainingType : Enumeration
     {
 
     }
-}
-
-public static class TrainingTypeExtensions
-{
-    public static bool IsTrainingAutoValidated(this IEnumerable<TrainingIdentity> trainingTypes)
-        => trainingTypes.Select(identity => identity.TrainingType).Contains(TrainingType.LanguageCourse);
 }
