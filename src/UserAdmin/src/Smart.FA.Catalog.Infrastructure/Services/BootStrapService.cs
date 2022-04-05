@@ -32,7 +32,7 @@ public class BootStrapService : IBootStrapService
         var s3StorageOptions = serviceScope.ServiceProvider.GetRequiredService<IOptions<S3StorageOptions>>();
         var fileName = s3StorageOptions.Value.DefaultTrainerProfilePictureName;
 
-        _logger.LogInformation("Seeding storage service with default image for trainer profile under the name {FileName}", fileName);
+        _logger.LogInformation("Seeding storage service with default image for trainer profile under the name {FileName} with url {ServiceUrl} ", fileName, s3StorageOptions.Value.AWS.ServiceUrl);
 
         var filePath = Path.Combine(webRootPath, "default_image.jpg");
         var file = File.OpenRead(filePath);
