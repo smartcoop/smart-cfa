@@ -4,48 +4,82 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Smart.FA.Catalog.Showcase.Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />-->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Smart.FA.Catalog.Showcase.Web.styles.css" asp-append-version="true" />
+    <!--<link rel="stylesheet" href="~/Smart.FA.Catalog.Showcase.Web.styles.css" asp-append-version="true" />-->
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Smart.FA.Catalog.Showcase.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+<body class="body-page">
+    <div class="page">
+        <header class="header">
+            <div class="header-band">
+                <a href="#" class="header-band__link"> Accès membre </a>
+            </div>
+            <nav class="header-nav">
+                <div class="header-nav__logo_container">
+                    <a href="index.php" class="header-nav__logo-link"><img src="images/smart-logo--white-with-padding.svg" alt="Smart logo" class="header-nav__logo">
+                    </a>
+                </div>
+                <ul class="header-nav__ul">
+                    <li class="header-nav__item">
+                        <a href="index.php" class="header-nav__link">Formateurs Associés</a>
+                    </li>
+                    <li class="header-nav__item">
+                        <a href="formations.php" class="header-nav__link">Formations</a>
+                    </li>
+                    <li class="header-nav__item">
+                        <a href="formateurs.php" class="header-nav__link">Formateurs</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main role="main" class="main">
+            @RenderBody()
+        </main>
+        
+
+        <footer class="footer">
+            <div class="footer-section">
+                <div class="footer-section__item">
+                    <h2 class="footer-section__title">Accès rapides</h2>
+                    <ul class="footer__links">
+                        <li><a href="mentions-legales.php" class="footer__link">Mentions légales</a></li>
+                        <li><a href="contact.php" class="footer__link">Contact</a></li>
+                        <li><a href="rgpd.php" class="footer__link">RGPD / Confidentialité</a></li>
+                        <li><a href="charte.php" class="footer__link">Charte d'utilisation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section__item">
+                    <h2 class="footer-section__title">Nos sites</h2>
+                    <ul class="footer__links">
+                        <li><a href="https://kronik.smart.coop" class="footer__link"><span class="label">Kronik, le blog</span></a></li>
+                        <li><a href="https://smartbe.be" class="footer__link"><span class="label">Smartbe.be</span></a></li>
+                    </ul>
+                </div>
+                <div class="footer-section__item">
+                    <h2 class="footer-section__title">Suivre</h2>
+                    <ul class="footer_icons">
+                        <li class="footer_icons__item">
+                            <a href="https://twitter.com/SMartBe_FR" class="footer_icons__link"><img src="./icons/twitter.svg" class="o-svg-icon" /></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                        <li class="footer_icons__item">
+                            <a href="https://www.facebook.com/SMartBeFR/" class="footer_icons__link"><img src="./icons/facebook.svg" class="o-svg-icon s" /></a>
+                        </li>
+                        <li class="footer_icons__item">
+                            <a href="https://www.linkedin.com/company/smartbefr/" class="footer_icons__link"><img src="./icons/linkedin.svg" class="o-svg-icon" /></a>
+                        </li>
+                        <li class="footer_icons__item">
+                            <a href="https://www.youtube.com/channel/UCWfo_GiuDq6qNiW2IT5JOJg" class="footer_icons__link"><img src="./icons/youtube.svg" class="o-svg-icon" /></a>
+
                         </li>
                     </ul>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+            <p class="footer-attribution">
+                &copy; Smart. All rights reserved 2022
+            </p>
+        </footer>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - Smart.FA.Catalog.Showcase.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
