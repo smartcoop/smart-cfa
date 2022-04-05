@@ -4,9 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Smart.FA.Catalog.Showcase.Web</title>
-    <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />-->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <!--<link rel="stylesheet" href="~/Smart.FA.Catalog.Showcase.Web.styles.css" asp-append-version="true" />-->
 </head>
 <body class="body-page">
     <div class="page">
@@ -16,18 +14,19 @@
             </div>
             <nav class="header-nav">
                 <div class="header-nav__logo_container">
-                    <a href="index.php" class="header-nav__logo-link"><img src="images/smart-logo--white-with-padding.svg" alt="Smart logo" class="header-nav__logo">
+                    <a class="header-nav__logo-link" asp-area="" asp-page="/Index">
+                        <img src="images/smart-logo--white-with-padding.svg" alt="Smart logo" class="header-nav__logo">
                     </a>
                 </div>
                 <ul class="header-nav__ul">
                     <li class="header-nav__item">
-                        <a href="index.php" class="header-nav__link">Formateurs Associés</a>
+                        <a class="header-nav__link" asp-area="" asp-page="/Index">Formateurs Associés</a>
                     </li>
                     <li class="header-nav__item">
-                        <a href="formations.php" class="header-nav__link">Formations</a>
+                        <a class="header-nav__link" asp-area="" asp-page="/Trainings">Formations</a>
                     </li>
                     <li class="header-nav__item">
-                        <a href="formateurs.php" class="header-nav__link">Formateurs</a>
+                        <a class="header-nav__link" asp-area="" asp-page="/Trainers">Formateurs</a>
                     </li>
                 </ul>
             </nav>
@@ -43,10 +42,10 @@
                 <div class="footer-section__item">
                     <h2 class="footer-section__title">Accès rapides</h2>
                     <ul class="footer__links">
-                        <li><a href="mentions-legales.php" class="footer__link">Mentions légales</a></li>
-                        <li><a href="contact.php" class="footer__link">Contact</a></li>
-                        <li><a href="rgpd.php" class="footer__link">RGPD / Confidentialité</a></li>
-                        <li><a href="charte.php" class="footer__link">Charte d'utilisation</a></li>
+                        <li><a class="footer__link" asp-area="" asp-page="/Legal">Mentions légales</a></li>
+                        <li><a class="footer__link" asp-area="" asp-page="/Contact">Contact</a></li>
+                        <li><a class="footer__link" asp-area="" asp-page="/Gdpr">RGPD / Confidentialité</a></li>
+                        <li><a class="footer__link" asp-area="" asp-page="/UserPolicy">Charte d'utilisation</a></li>
                     </ul>
                 </div>
                 <div class="footer-section__item">
@@ -80,6 +79,7 @@
             </p>
         </footer>
     </div>
-
+    <script src="~/js/index.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
