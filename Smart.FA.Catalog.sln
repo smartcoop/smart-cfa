@@ -55,7 +55,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.UnitTests"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.Showcase.Web", "src\Sowcase\src\Smart.FA.Catalog.Showcase.Web\Smart.FA.Catalog.Showcase.Web.csproj", "{9B506225-A3F2-4EF9-8435-D8DC26D0693C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.FA.Catalog.Shared", "src\Shared\Smart.FA.Catalog.Shared\Smart.FA.Catalog.Shared.csproj", "{244709FB-2162-48D2-B558-DB70CA63A8C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.Shared", "src\Shared\Smart.FA.Catalog.Shared\Smart.FA.Catalog.Shared.csproj", "{244709FB-2162-48D2-B558-DB70CA63A8C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
