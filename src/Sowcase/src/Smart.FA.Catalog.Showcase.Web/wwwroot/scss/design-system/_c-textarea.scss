@@ -1,0 +1,39 @@
+/* ==========================================================================
+  c-textarea
+   ========================================================================== */
+
+.c-textarea {
+  border: 0.1rem solid $color-gray-200;
+  border-radius: 0.3rem;
+  padding: 1rem 1.2rem;
+  display: block;
+  color: $color-semantic-body-text;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  width: 100%;
+
+  &::placeholder {
+    color: $color-gray-400;
+  }
+
+  @include textfield-focus;
+}
+
+
+*[disabled] .c-textarea,
+.c-textarea[disabled] {
+  background: $color-gray-100;
+  color: $color-gray-500;
+  pointer-events: none;
+}
+
+.c-textarea--error,
+.o-form-group--error .c-textarea {
+  border-color: $c-input-error-accent-color;
+
+  &:focus {
+    outline: 0;
+    border-color: $c-input-error-accent-color;
+    box-shadow: 0 0 0 2px $color-red-150;
+  }
+}

@@ -1,0 +1,54 @@
+/* ==========================================================================
+  Component: Key value list
+   ========================================================================== */
+
+.c-key-value {
+  .c-key-value-item + .c-key-value-item {
+    margin-top: 2.4rem;
+  }
+}
+
+.c-key-value-item__key {
+  padding: 0.4em 0;
+  color: $color-semantic-header-text;
+  font-weight: 500;
+}
+
+.c-key-value--horizontal {
+  .c-key-value-item {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .c-key-value-item__value {
+    padding: 0.6rem 0;
+  }
+
+  .c-key-value-item__key {
+    flex: 0 0 45%;
+    max-width: 25rem;
+    margin-bottom: 0;
+  }
+
+  .c-key-value-item + .c-key-value-item {
+    margin-top: 0.4rem;
+  }
+}
+
+.c-key-value--short {
+  .c-key-value-item__key {
+    flex: 0 0 35%;
+  }
+}
+
+.c-key-value--long {
+  .c-key-value-item__key {
+    flex: 0 0 65%;
+  }
+}
+
+.c-key-value--very-long {
+  .c-key-value-item__key {
+    flex: 0 0 75%;
+  }
+}

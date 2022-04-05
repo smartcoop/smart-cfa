@@ -1,0 +1,73 @@
+/* ==========================================================================
+  c-alert-skins
+  ---
+  Rules of this file: you CAN'T touch the box model here, just colors.
+   ========================================================================== */
+
+/* Component
+   ========================================================================== */
+
+.c-alert {
+  border-radius: 0.3rem;
+  border: 0.1rem solid $color-blue-400;
+  background: $color-blue-25;
+  position: relative;
+
+  &:before {
+    content: '';
+    height: calc(100% + .1rem);
+    width: 0.4rem;
+    border-radius: 0.3rem 0 0 .3rem;
+    position: absolute;
+    left: -.1rem;
+    bottom: -.05rem;
+    background: $color-blue-400;
+  }
+
+  > .o-svg-icon {
+    color: $color-blue-600;
+  }
+}
+
+.c-alert--success {
+  background: $color-green-50;
+  border-color: $color-green-300;
+
+  &:before {
+    background: $color-green-300;
+  }
+
+  > .o-svg-icon {
+    color: $color-semantic-success;
+  }
+}
+
+.c-alert--error {
+  background: $color-red-50;
+  border-color: $color-red-400;
+
+  &:before {
+    background: $color-red-400;
+  }
+
+  > .o-svg-icon {
+    color: $color-semantic-error;
+  }
+}
+
+.c-alert--warning {
+  background: $color-yellow-50;
+  border-color: $color-yellow-300;
+
+  &:before {
+    background: $color-yellow-300;
+  }
+
+  > .o-svg-icon {
+    color: $color-yellow-800;
+  }
+}
+
+.c-alert--light {
+  background: $color-white;
+}

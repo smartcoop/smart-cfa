@@ -1,0 +1,14 @@
+/* ==========================================================================
+  c-button-group
+   ========================================================================== */
+
+.c-button-group {
+  display: flex;
+  .c-button.c-button--secondary {
+    flex: 1;
+    &:not(:first-child),
+    &:not(:last-child) {
+      border-radius: 0;
+    }
+  }
+}

@@ -1,0 +1,66 @@
+/* ==========================================================================
+  Component: Select
+  ---
+  Styles for basic <select>
+   ========================================================================== */
+
+/* Component
+   ========================================================================== */
+
+.c-select {
+  appearance: none;
+  background: $c-input-bg-color; // We use properties from textfield here
+  border: 1px solid $c-input-border-color;
+  border-radius: $c-input-border-radius; // We use properties from textfield here
+  font-size: inherit;
+  height: 3.6rem;
+  color: $color-semantic-body-text;
+  padding: 0.8rem 2.8rem 0.8rem 0.8rem;
+  width: 100%;
+
+  @include textfield-focus;
+}
+
+*[disabled] .c-select,
+.c-select[disabled] {
+  background: $color-gray-100;
+  color: $color-gray-500;
+  pointer-events: none;
+}
+
+
+// A wrapper, so we can position a CSS created arrow
+.c-select-holder {
+  position: relative;
+  &:after {
+    pointer-events: none;
+    content: ' ';
+    position: absolute;
+    right: 1rem;
+    top: 1.7rem;
+    width: 0;
+    height: 0;
+    border-width: 1rem;
+    border: 0.5rem solid $color-gray-500;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
+  }
+}
+
+.c-select--error,
+.o-form-group--error .c-select {
+  border-color: $c-input-error-accent-color;
+
+  &:focus {
+    outline: 0;
+    border-color: $c-input-error-accent-color;
+    box-shadow: 0 0 0 2px $color-red-150;
+  }
+}
+
+// Widths
+.c-select--w-xsmall { width: 6.4rem; }
+.c-select--w-small { width: 12rem; }
+.c-select--w-medium { width: 20rem; }
+.c-select--w-large { width: 44rem; }

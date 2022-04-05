@@ -1,0 +1,49 @@
+/* ==========================================================================
+  c-accordion
+   ========================================================================== */
+
+/* Variables
+   ========================================================================== */
+
+$c-accordion-border: $color-gray-100 !default;
+
+/* Component
+   ========================================================================== */
+
+.c-accordion__item {
+  & + .c-accordion__item {
+    margin-top: 1.6rem;
+  }
+
+  .c-accordion__item-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .c-accordion__item-title {
+    font-weight: 500;
+  }
+
+  .c-accordion__item-header .c-button {
+    margin-right: .4rem;
+  }
+
+  .c-accordion__item-content {
+    margin-left: 4rem;
+    max-height: 0px;
+    overflow: hidden;
+    line-height: 1.6; 
+    transition: max-height 200ms ease-in-out;
+  }
+
+  .c-button--icon {
+    transition: transform 200ms ease-in-out;
+  }
+
+  &.js-active {
+    .c-button--icon {
+      transform: rotate(90deg);
+    }
+  }
+}

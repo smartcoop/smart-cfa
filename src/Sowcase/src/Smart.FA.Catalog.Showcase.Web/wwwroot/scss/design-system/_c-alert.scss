@@ -1,0 +1,68 @@
+/* ==========================================================================
+  c-alert
+  ---
+  Use alerts for messaging across the application.
+  ---
+  Rules of this file: this file is ONLY for layout, please see alert-skins.scss for colors
+   ========================================================================== */
+
+/* Variables
+   ========================================================================== */
+
+$c-alert-border-radius: 0.3rem !default;
+
+/* Component
+      ========================================================================== */
+
+.c-alert {
+  padding: ($g-spacer-unit * 3);
+  border-radius: $c-alert-border-radius;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  flex-flow: row wrap;
+
+  > * {
+    flex-basis: auto;
+  }
+
+  .c-button--icon:last-child {
+    cursor: pointer;
+    padding: 0.6rem;
+    margin: -0.6rem;
+  }
+
+  &+.c-alert {
+    margin-top: $g-spacer-unit * 2;
+  }
+}
+
+.c-alert__body {
+  display: flex;
+  flex: 1;
+
+  &:not(:first-child) {
+    margin-left: $g-spacer-unit * 2;
+  }
+
+  &:not(:last-child) {
+    margin-right: $g-spacer-unit * 2;
+  }
+}
+
+.c-alert.c-alert--medium {
+  max-width: 66rem;
+}
+
+.c-alert.c-alert--large {
+  max-width: 88rem;
+}
+
+.c-alert__message .c-content p:only-child {
+  margin: 0;
+}
+
+.c-alert.c-alert--full {
+  max-width: none;
+  margin: $g-spacer-unit * 2;
+}

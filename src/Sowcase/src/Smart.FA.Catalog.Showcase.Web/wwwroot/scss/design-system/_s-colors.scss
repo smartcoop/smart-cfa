@@ -1,0 +1,85 @@
+/* ==========================================================================
+  Colors
+  Only define colors here. Don't use sass color functions, stick to hex values,
+  or the color component in styleguide won't regenerate automatically anymore.
+ ========================================================================== */
+
+/* Base
+ ========================================================================== */
+
+$color-white: #FFFFFF;
+$color-gray-25: #F9F9F9;
+$color-gray-50: #F2F2F2;
+$color-gray-100: #E5E5E5;
+$color-gray-150: #D9D9D9;
+$color-gray-200: #CCCCCC;
+$color-gray-300: #B3B3B3;
+$color-gray-400: #999999;
+$color-gray-500: #808080;
+$color-gray-600: #666666;
+$color-gray-650: #595959;
+$color-gray-800: #333333;
+$color-gray-900: #1A1A1A;
+$color-black: #000000;
+
+
+/* Reds
+ ========================================================================== */
+
+$color-red-50: #FEE7E9;
+$color-red-150: #FFB0B9;
+$color-red-300: #FF8F9A;
+$color-red-400: #FF6979;
+$color-red-600: #FF4054;
+$color-red-700: #B32D3B;
+
+
+/* Yellows
+========================================================================== */
+
+$color-yellow-50: #FCF7E8;
+$color-yellow-300: #F8DB94;
+$color-yellow-400: #F3CC69;
+$color-yellow-500: #F4C95D;
+$color-yellow-800: #C28D0A;
+$color-yellow-900: #6B4F0A;
+
+
+/* Greens
+ ========================================================================== */
+
+$color-green-50: #ECF9F6;
+$color-green-200: #ADDACF;
+$color-green-300: #85C8B8;
+$color-green-400: #33A388;
+$color-green-500: #00A57D;
+
+
+/* Blues
+ ========================================================================== */
+
+$color-blue-25: #F3F7FE;
+$color-blue-50: #E7EFFE;
+$color-blue-300: #A7C8FF;
+$color-blue-400: #8AB5FF;
+$color-blue-600: #1267FB;
+$color-blue-700: #154EB1;
+
+
+/* Semantic colors
+ ========================================================================== */
+
+$color-semantic-primary: #FF4054;
+$color-semantic-header-text: #000000;
+$color-semantic-body-text: #333333;
+$color-semantic-icon: #595959;
+$color-semantic-muted-text: #808080;
+$color-semantic-input-border: #D4D4D4;
+$color-semantic-border: #E5E5E5;
+$color-semantic-disabled: #999999;
+$color-semantic-background: #F2F2F2;
+$color-semantic-error: #FF4054;
+$color-semantic-success: #00A57D;
+$color-semantic-warning: #F4C95D;
+$color-semantic-link: #1267FB;
+

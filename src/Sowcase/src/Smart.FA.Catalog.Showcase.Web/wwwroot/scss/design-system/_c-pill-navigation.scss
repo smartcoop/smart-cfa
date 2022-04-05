@@ -1,0 +1,56 @@
+/* ==========================================================================
+  c-pill-navigation
+   ========================================================================== */
+
+.c-pill-navigation {
+  display: flex;
+}
+
+.c-pill-navigation__item {
+  display: block;
+}
+
+.c-pill-navigation__item > a,
+.c-pill-navigation__item > button {
+  display: block;
+  padding: .8rem 1.6rem;
+  color: $color-semantic-body-text;
+  font-weight: 500;
+  &:hover,
+  &:active,
+  &:focus {
+    background: $color-gray-25;
+  }
+}
+
+.c-pill-navigation__item--has-child-menu > button {
+  padding: .8rem 2.8rem .8rem 1.6rem;
+  appearance: none;
+  background: none;
+  border: none;
+  position: relative;
+  margin: 0;
+  cursor: pointer;
+  line-height: 1.5;
+  &:after {
+    pointer-events: none;
+    content: ' ';
+    position: absolute;
+    right: 1.4rem;
+    top: 1.8rem;
+    width: 0;
+    height: 0;
+    border-width: 1rem;
+    border: 0.5rem solid $color-gray-500;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
+  }
+}
+
+.c-pill-navigation__item--active > a {
+  background: $color-gray-50;
+  border-radius: .3rem;
+}
+
+

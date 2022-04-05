@@ -1,0 +1,171 @@
+/* ==========================================================================
+  Component: Text Field
+  ---
+  Styles for text inputs
+   ========================================================================== */
+
+/* Variables
+   ========================================================================== */
+
+$c-input-border-radius: 0.3rem !default;
+$c-input-dark-text-color: $color-semantic-body-text !default;
+$c-input-focus-icon-color: $color-semantic-icon !default;
+$c-input-bg-color: #fff !default;
+$c-input-border-color: $color-gray-200 !default;
+$c-input-readonly-border-color: $color-gray-200 !default;
+$c-input-accent-color: $color-blue-600 !default;
+$c-input-error-accent-color: $color-red-600 !default;
+$c-input-padding: 0.8rem !default;
+
+/* Mixins
+   ========================================================================== */
+
+@mixin textfield-focus {
+  &:focus {
+    outline: 0;
+    border-color: $c-input-accent-color;
+    box-shadow: inset 0 0 0 0.1rem $c-input-accent-color;
+  }
+}
+
+/* Component
+   ========================================================================== */
+
+.c-input {
+  border-radius: $c-input-border-radius;
+  background: $c-input-bg-color;
+  border: 1px solid $c-input-border-color;
+  font-size: inherit;
+  height: 3.6rem;
+  padding: $c-input-padding;
+  width: 100%;
+  appearance: none;
+  @include textfield-focus;
+  &::placeholder {
+    color: $color-gray-400;
+  }
+}
+
+*[disabled] .c-input,
+.c-input[disabled] {
+  background: $color-gray-100;
+  color: $color-gray-500;
+  pointer-events: none;
+}
+
+.c-input--error,
+.o-form-group--error .c-input {
+  border-color: $c-input-error-accent-color;
+
+  &:focus {
+    outline: 0;
+    border-color: $c-input-error-accent-color;
+    box-shadow: 0 0 0 2px $color-red-150;
+  }
+}
+
+textarea.c-input {
+  height: auto;
+  line-height: 1.5;
+}
+
+// Heights (for textareas)
+textarea.c-input--h-small { height: 12rem; }
+textarea.c-input--h-medium { height: 16rem; }
+textarea.c-input--h-large { height: 20rem; }
+
+// Widths
+.c-input--w-xsmall { width: 6.4rem; }
+.c-input--w-small { width: 12rem; }
+.c-input--w-medium { width: 20rem; }
+.c-input--w-large { width: 44rem; }
+
+.c-input--max-width {
+  @media (min-width: $g-bp3) {
+    max-width: 70%;
+  }
+}
+
+.c-input[readonly] {
+  background-color: $c-input-readonly-border-color;
+}
+
+.c-input--code {
+  font-family: $g-code-font-family;
+  line-height: 2.4rem;
+  font-size: 85%;
+}
+
+/* Input group
+========================================================================== */
+
+.c-input-group {
+  display: flex;
+  position: relative;
+}
+
+.c-input-group__input {
+  width: calc(100% - 3.6rem);
+}
+
+.c-input-group__append,
+.c-input-group__prepend {
+  height: 3.6rem;
+  width: 3.6rem;
+  min-width: 3.6rem;
+  color: $color-gray-500;
+  background: $color-gray-50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0.8rem;
+  border: 1px solid $color-gray-200;
+  position: absolute;
+}
+
+.c-input-group__prepend {
+  border-radius: 0.4rem 0 0 0.4rem;
+  border-right: none;
+
+  ~ .c-input-group__input {
+    margin-left: 36px;
+  }
+}
+
+.c-input-group__append {
+  border-radius: 0 0.4rem 0.4rem 0;
+  border-left: none;
+  right: 0;
+}
+
+.c-input-group > .c-input-group__input:not(:last-child) .c-input {
+  border-radius: 0.4rem 0 0 0.4rem;
+}
+
+.c-input-group > .c-input-group__input:not(:first-child) .c-input {
+  border-radius: 0 0.4rem 0.4rem 0;
+}
+
+.c-input-group--error,
+.o-form-group--error .c-input-group {
+  .c-input-group__append,
+  .c-input-group__prepend {
+    border-color: $c-input-error-accent-color;
+  }
+
+  &:focus-within {
+    .c-input-group__append,
+    .c-input-group__prepend {
+      outline: 0;
+      border-color: $c-input-error-accent-color;
+      box-shadow: 0 0 0 2px $color-red-150;
+    }
+  }
+}
+
+*[disabled] .c-input-group__append,
+*[disabled] .c-input-group__prepend,
+.c-input-group--disabled .c-input-group__append,
+.c-input-group--disabled .c-input-group__prepend {
+  background-color: $color-gray-150;
+}

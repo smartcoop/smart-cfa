@@ -1,0 +1,101 @@
+.c-design-system-nav__desktop {
+  display: none;
+}
+
+@media (min-width: $g-bp3) {
+
+  .c-design-system-nav__desktop {
+    display: block;
+  }
+
+  // Hide the button on desktop
+  #c-design-system-nav-open {
+    display: none;
+  }
+}
+
+.c-design-system-nav__mobile {
+  display: none;
+  background: #FFF;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+
+  li[role="presentational"] {
+    height: .1rem;
+    margin: .4rem 0;
+    background: $color-gray-100;
+  }
+  > ul {
+    margin-top: 2.4rem;
+    margin-bottom: 2.4rem;
+
+    ul {
+      margin-left: 1.2rem;
+    }
+  }
+  a, span {
+    display: block;
+    padding: .8rem 1.2rem .8rem 1.2rem;
+    position: relative;
+    color: $color-semantic-body-text;
+  }
+  li.selected a {
+    &:before {
+      content: '';
+      height: 100%;
+      width: 0.4rem;
+      position: absolute;
+      border-radius: 0.3rem 0 0 0.3rem;
+      left: 0;
+      bottom: 0;
+      background: $color-red-600;
+    }
+  }
+  a:hover,
+  a:active,
+  a:focus {
+    background: $color-gray-50;
+  }
+  span {
+    color: $color-gray-400;
+  }
+  ul {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+}
+
+.c-design-system-nav__mobile--visible {
+  position: fixed;
+  display: block;
+  inset: 0;
+  height: calc(100% - 6.4rem);
+  top: 6.4rem;
+}
+
+.c-design-system-logo {
+  height: 2.8rem;
+
+  @media (min-width: $g-bp3) {
+    height: 3.6rem;
+  }
+}
+
+.c-design-system-nav-open {
+  display: block;
+}
+
+.c-design-system-nav-close {
+  display: none;
+}
+
+.u-kill-scroll {
+  .c-design-system-nav-open {
+    display: none;
+  }
+
+  .c-design-system-nav-close {
+    display: block;
+  }
+}
