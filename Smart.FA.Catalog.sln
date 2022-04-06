@@ -59,6 +59,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.Showcase.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.FA.Catalog.Showcase.Domain", "src\Showcase\src\Smart.FA.Catalog.Showcase.Domain\Smart.FA.Catalog.Showcase.Domain.csproj", "{21E6B700-9D55-4BCD-B2AF-797881A91782}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.FA.Catalog.Showcase.Infrastructure", "src\Showcase\src\Smart.FA.Catalog.Showcase.Infrastructure\Smart.FA.Catalog.Showcase.Infrastructure.csproj", "{FB2BC42C-1D4C-4D4E-ADA2-DC5F8E3D8E13}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,6 +111,10 @@ Global
 		{21E6B700-9D55-4BCD-B2AF-797881A91782}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21E6B700-9D55-4BCD-B2AF-797881A91782}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21E6B700-9D55-4BCD-B2AF-797881A91782}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB2BC42C-1D4C-4D4E-ADA2-DC5F8E3D8E13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB2BC42C-1D4C-4D4E-ADA2-DC5F8E3D8E13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB2BC42C-1D4C-4D4E-ADA2-DC5F8E3D8E13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB2BC42C-1D4C-4D4E-ADA2-DC5F8E3D8E13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,6 +136,7 @@ Global
 		{244709FB-2162-48D2-B558-DB70CA63A8C5} = {15EEF2EE-2A73-4312-8E72-D1CAD4BA2419}
 		{571EBDB3-989A-49DA-97A8-AA4391637AD6} = {5FB74010-24CB-47D8-8665-CD813A22499B}
 		{21E6B700-9D55-4BCD-B2AF-797881A91782} = {5FB74010-24CB-47D8-8665-CD813A22499B}
+		{FB2BC42C-1D4C-4D4E-ADA2-DC5F8E3D8E13} = {5FB74010-24CB-47D8-8665-CD813A22499B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D2F2190D-B4DE-48B8-B87C-7AA80A91538E}
