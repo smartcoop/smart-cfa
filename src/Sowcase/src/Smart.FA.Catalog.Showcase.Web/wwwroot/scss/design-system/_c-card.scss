@@ -1,0 +1,71 @@
+/* ==========================================================================
+  Component: c-panel
+   ========================================================================== */
+
+/* Variables
+   ========================================================================== */
+
+$c-card-padding: 2.4rem !default;
+$c-card-border-radius: 0.4rem !default;
+$c-card-border-color: $color-gray-150 !default;
+
+/* Component
+   ========================================================================== */
+
+.c-card {
+  display: block;
+  color: $g-text-color;
+  text-decoration: none;
+  position: relative;
+  height: 100%;
+  border: .1rem solid $c-card-border-color;
+  border-radius: $c-card-border-radius;
+  background-color: #fff;
+
+  @media (min-width: $g-bp2) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+}
+
+a.c-card:hover {
+  border-color: $color-gray-300;
+  background: $color-gray-25;
+}
+
+.c-card--background-gray {
+  background: $color-gray-50;
+}
+
+.c-card__title {
+  color: $color-semantic-header-text;
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.c-card__body {
+  padding: $c-card-padding;
+  flex: 1;
+  @media (min-width: $g-bp1) {
+    padding: $c-card-padding
+  }
+}
+
+.c-card__img {
+  width: 100%;
+}
+
+.c-card__actions {
+  padding: $c-card-padding;
+  flex: 0;
+}
+
+.c-card__body + .c-card__actions {
+  @media (max-width: $g-bp2) {
+    margin-top: -2.4rem;
+  }
+  @media (min-width: $g-bp2) {
+    margin-left: -2.4rem;
+  }
+}

@@ -1,0 +1,89 @@
+/* ==========================================================================
+   c-tabs
+   ========================================================================== */
+
+/* Variables
+   ========================================================================== */
+
+$c-tabs-item-color: $color-semantic-muted-text !default;
+$c-tabs-item-active-color: $color-semantic-header-text !default;
+$c-tabs-item-border-color: $color-gray-200 !default;
+$c-tabs-item-hover-border-color: $color-gray-200 !default;
+$c-tabs-active-border-width: 0.3rem !default;
+
+/* Component
+   ========================================================================== */
+
+.c-tabs {
+  > ul {
+
+    @media screen and (min-width: $g-bp1) {
+      display: flex;
+      height: 4.8rem;
+      max-height: 4.8rem;
+    }
+
+    > li {
+      flex-basis: auto;
+      height: 100%;
+      display: flex;
+      align-items: center;
+
+      @media screen and (min-width: $g-bp1) {
+        justify-content: center;
+      }
+
+      & + li {
+        @media screen and (min-width: $g-bp1) {
+          margin-left: $g-spacer-unit * 3;
+        }
+
+        @media screen and (max-width: ($g-bp1 - 1px)) {
+          margin-top: $g-spacer-unit;
+        }
+      }
+    }
+  }
+
+}
+
+.c-tabs__item {
+  color: $c-tabs-item-color;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  font-weight: 500;
+  height: 100%;
+  padding: 0.8rem 0;
+
+  &:hover {
+    box-shadow: inset 0 -#{$c-tabs-active-border-width} 0 $color-semantic-border;
+  }
+
+  &:focus {
+    color: $c-tabs-item-active-color;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  &[aria-selected="true"] {
+    box-shadow: inset 0 -#{$c-tabs-active-border-width} 0 $color-black;
+    color: $c-tabs-item-active-color;
+    position: relative; // makes box-shadow to be on top of the global border
+    z-index: $g-c-tabs-z;
+  }
+}
+
+.c-tabs.c-tabs--border-bottom > ul {
+  border-bottom: 1px solid $c-tabs-item-border-color;
+
+  li {
+    margin-top: 0.1rem;
+  }
+}
+
+.c-tabs__section {
+  margin-top: $g-spacer-unit * 2;
+}

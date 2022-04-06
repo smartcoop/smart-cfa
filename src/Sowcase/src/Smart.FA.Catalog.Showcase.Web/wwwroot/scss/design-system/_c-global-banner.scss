@@ -1,0 +1,42 @@
+/* ==========================================================================
+  Component: Global banner
+   ========================================================================== */
+
+.c-global-banner {
+  padding: 1.2rem 2.4rem;
+  position: relative;
+  min-height: 5.6rem;
+  display: flex;
+  align-items: center;
+
+  &.c-global-banner--default {
+    background-color: $color-blue-600;
+    color: $color-white;
+
+    .c-button--icon,
+    .o-svg-icon {
+      color: $color-white;
+    }
+  }
+  &.c-global-banner--warning {
+    background-color: $color-semantic-warning;
+
+    .o-svg-icon {
+      color: $color-semantic-icon;
+    }
+  }
+
+  .o-svg-icon {
+    margin-right: 1.6rem;
+    flex-shrink: 0;
+  }
+
+  .c-button--icon {
+    position: absolute;
+    right: 1.2rem;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 2.4rem;
+  }
+}

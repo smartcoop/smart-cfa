@@ -1,0 +1,130 @@
+/* ==========================================================================
+  Stylesheet for Smart
+  ITCSS + BEM
+  ---
+  This SCSS code is inspired by BEM (Block Element Modifier) and ITCSS (Inverted Triangle CSS) methodologies.
+  For BEM Please refer to http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/
+  For ITCSS Please refer to https://speakerdeck.com/dafed/managing-css-projects-with-itcss
+   ========================================================================== */
+
+/* Settings: preprocessor variables, colors, global settings
+   ========================================================================== */
+
+@import "_s-colors";
+@import "_s-fonts";
+@import "_s-variables";
+
+/* Generic: CSS reset, box-sizing, global CSS tweaks
+   ========================================================================== */
+
+@import "_reset";
+
+/* Elements: element selectors, CMS-generated content
+   ========================================================================== */
+
+@import "_e-base";
+
+/* Objects: layout-related CSS, grid, SVG icons frame, flexbox classes
+   ========================================================================== */
+
+@import "_o-container";
+@import "_o-card-grid";
+@import "_o-flex";
+@import "_o-form-group";
+@import "_o-grid";
+@import "_o-svg-icon";
+
+
+/* Content styling (styling for base html elements)
+   + helpers for article style content
+   ========================================================================== */
+
+@import "_c-content";
+@import "_c-display";
+@import "_c-content-display";
+@import "_c-video-wrapper";
+@import "_c-figure";
+
+/* Components: separately styled components (buttons, form inputs, toolbars...)
+   ========================================================================== */
+
+@import "_c-accordion";
+@import "_c-alert";
+@import "_c-alert-skins";
+@import "_c-alert-stack";
+@import "_c-app-layout";
+@import "_c-avatar";
+@import "_c-avatar-and-text";
+@import "_c-badge";
+@import "_c-blank-slate";
+@import "_c-bordered-list";
+@import "_c-bordered-list-horizontal";
+@import "_c-brand";
+@import "_c-button";
+@import "_c-button-group";
+@import "_c-button-skins";
+@import "_c-button-toolbar";
+@import "_c-card";
+@import "_c-checkbox-radio";
+@import "_c-dialog";
+@import "_c-error-page";
+@import "_c-file-attachment";
+@import "_c-file-attachment-list";
+@import "_c-file-upload";
+@import "_c-filter-pill";
+@import "_c-filter-pill-list";
+@import "_c-form-help-text";
+@import "_c-global-banner";
+@import "_c-hr";
+@import "_c-icon-list";
+@import "_c-input";
+@import "_c-input-with-icon";
+@import "_c-key-value";
+@import "_c-menu";
+@import "_c-navbar";
+@import "_c-or";
+@import "_c-pagination";
+@import "_c-pagination-simple";
+@import "_c-panel";
+@import "_c-pill-navigation";
+@import "_c-popover";
+@import "_c-progress-bar";
+@import "_c-select";
+@import "_c-select-custom";
+@import "_c-side-menu";
+@import "_c-loader";
+@import "_c-status-pill";
+@import "_c-table";
+@import "_c-tabs";
+@import "_c-textarea";
+@import "_c-toolbar";
+@import "_c-toolbar-title";
+@import "_c-tooltip";
+@import "_c-user-navigation";
+@import "_c-wizard";
+
+/* Components specific to design system website
+   ========================================================================== */
+
+@import "_c-avatar-and-text-list";
+@import "_c-blog-article";
+@import "_c-blog-article-list";
+@import "_c-design-system-home-illustration";
+@import "_c-design-system-nav";
+@import "_c-navbar-components";
+
+/* Utilities: specific helper classes, overrides
+   ========================================================================== */
+
+@import '_u-scroll-wrapper';
+@import "_u-bg";
+@import "_u-generic";
+@import "_u-spacer";
+@import "_u-shadow";
+@import "_u-text";
+
+/* Vendor
+  3rd party code
+  ========================================================================== */
+
+@import "_v-htmx";

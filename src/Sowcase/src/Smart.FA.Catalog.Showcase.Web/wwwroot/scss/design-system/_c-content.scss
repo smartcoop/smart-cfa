@@ -1,0 +1,116 @@
+/* ==========================================================================
+  c-content
+  ---
+  Usage: wrap a .c-content class around content to turn it into rich text.
+
+  .c-h1, .c-h2, .c-body-1, c-body 2
+  ---
+  Usage: use these classes to style individual components like their rich text equivalent
+   ========================================================================== */
+
+.c-h1, .c-h2, .c-h3, .c-h4,
+.c-content h1,
+.c-content h2,
+.c-content h3,
+.c-content h4 {
+  color: $g-headings-color;
+}
+
+.c-h1, .c-content h1 {
+  font-family: $g-headings-font-family;
+  font-weight: 500;
+  font-size: 2.4rem;
+  margin: 0 0 3.2rem;
+  line-height: 1.25;
+}
+
+.c-h2, .c-content h2 {
+  font-family: $g-headings-font-family;
+  font-weight: 500;
+  font-size: 2.2rem;
+  margin: 0 0 2.4rem;
+  line-height: 1.3;
+}
+
+.c-h3, .c-content h3 {
+  font-family: $g-headings-font-family;
+  font-weight: 500;
+  font-size: 2rem;
+  margin: 0 0 1.6rem;
+  line-height: 1.4;
+}
+
+.c-h4, .c-content h4 {
+  font-family: $g-base-font-family;
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin: 0 0 0.8rem;
+}
+
+.c-body-1 {
+  font-size: $g-base-font-size;
+  margin: 1.5rem 0;
+}
+
+.c-body-2, .c-content p small {
+  font-size: 1.4rem;
+  margin: 1.4rem 0;
+}
+
+.c-subline {
+  font-size: 1.4rem;
+  color: $color-semantic-muted-text;
+}
+
+.c-link,
+.c-content a:not(.c-button) {
+  text-decoration: none;
+  border-bottom: .1rem solid rgba($color-blue-600,.33);
+
+  &.u-text-muted {
+    color: $color-semantic-muted-text;
+    border-color: rgba($color-gray-500, .33);
+  }
+}
+
+.c-content {
+
+  p {
+    margin: 1.5rem 0;
+  }
+
+  dl {
+    border: 1px solid $color-gray-100;
+    border-radius: .3rem;
+    overflow: hidden;
+    padding: 1.2rem;
+    margin: 1.5rem 0;
+    dt {
+      float: left;
+      width: 30%;
+      clear: left;
+      font-weight: 500;
+    }
+    dd {
+      float: left;
+      width: 70%;
+    }
+  }
+
+  ul, ol {
+    padding-left: 3rem;
+    margin: 1.5rem 0;
+    ul, ol {
+      margin: 0;
+    }
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+}
