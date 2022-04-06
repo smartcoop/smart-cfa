@@ -1,0 +1,55 @@
+﻿@page
+@model Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingListModel
+
+@{
+    ViewData["Title"] = "TrainingList";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Training List</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TrainingList[0].TrainingTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrainingList[0].TrainingLanguage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrainingList[0].TrainerFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrainingList[0].TrainerLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrainingList[0].TopicName)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.TrainingList) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrainingTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrainingLanguage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrainerFirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrainerLastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TopicName)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
