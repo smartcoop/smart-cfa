@@ -48,8 +48,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
         , IEnumerable<TrainingTopic> topics
     )
     {
-        AddDetails(detail.Title!, detail.Goal, detail.Methodology,
-            Language.Create(detail.Language).Value);
+        AddDetails(detail.Title!, detail.Goal, detail.Methodology, detail.PracticalModalities, Language.Create(detail.Language).Value);
         SwitchTrainingTypes(types);
         SwitchTargetAudience(targetAudiences);
         SwitchSlotNumberType(slotNumberTypes);
@@ -140,20 +139,20 @@ public class Training : SeedWork.Entity, IAggregateRoot
         return Result.Success<Training, IEnumerable<Error>>(this);
     }
 
-    public void AddDetails(string title, string? goal, string? methodology, Language language)
+    public void AddDetails(string title, string? goal, string? methodology, string? practicalModalities, Language language)
     {
         Guard.AgainstNull(title, nameof(title));
         Guard.Requires(() => _details.FirstOrDefault(detail => detail.Language.Value == language.Value) == null,
             "A description for that language already exists");
-        _details.Add(new TrainingDetail(this, title!, goal, methodology, language));
+        _details.Add(new TrainingDetail(this, title!, goal, methodology, practicalModalities,language));
     }
 
-    public void UpdateDetails(string title, string goal, string methodology, Language language)
+    public void UpdateDetails(string title, string? goal, string? methodology, string? practicalModalities, Language language)
     {
         var detailToModify = _details.FirstOrDefault(detail => detail.Language.Value == language.Value);
         Guard.Requires(() => detailToModify != null,
             "No descriptions for that language exist");
-        detailToModify!.UpdateDescription(title, goal, methodology);
+        detailToModify!.UpdateDescription(title, goal, methodology, practicalModalities);
     }
 
     #endregion

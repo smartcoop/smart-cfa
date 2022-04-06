@@ -15,5 +15,7 @@ public class TrainingDetailValidation: AbstractValidator<TrainingDetail>
             .NotEmptyWithGenericMessage().WithMessage(Errors.General.MissingField("goal").Message);
         RuleFor(request => request.Methodology)
             .NotEmptyWithGenericMessage().WithMessage(Errors.General.MissingField("methodology").Message);
+        RuleFor(request => request.PracticalModalities)
+            .NotEmptyWithGenericMessage().WithMessage(Errors.General.MissingField("practicalModalities").Message);
     }
 }

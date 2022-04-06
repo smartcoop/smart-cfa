@@ -39,6 +39,14 @@ public class UpdateTrainingViewModelValidator : AbstractValidator<UpdateTraining
             .MaximumLength(500)
             .WithMessage(" ");
 
+        RuleFor(viewModel => viewModel.PracticalModalities)
+            .NotEmpty()
+            .WithMessage(CatalogResources.FieldRequired)
+            .MinimumLength(30)
+            .WithMessage(CatalogResources.Min30CharMax1000Char)
+            .MaximumLength(1000)
+            .WithMessage(CatalogResources.Min30CharMax1000Char);
+
         RuleFor(viewModel => viewModel.TopicIds)
             .NotEmpty()
             .WithMessage(CatalogResources.YouMustSelectedAtLeastOneTopic);

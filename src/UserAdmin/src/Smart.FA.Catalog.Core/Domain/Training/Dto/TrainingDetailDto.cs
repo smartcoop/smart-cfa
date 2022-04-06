@@ -4,4 +4,5 @@ public record TrainingDetailDto
 (string? Title,
 string? Goal,
 string Language,
-string? Methodology);
+string? Methodology,
+string? PracticalModalities);

@@ -20,6 +20,9 @@ public class TrainingDetailConfigurations : IEntityTypeConfiguration<TrainingDet
         builder.Property(detail => detail.Methodology)
             .HasMaxLength(1500)
             .IsRequired(false);
+        builder.Property(detail => detail.PracticalModalities)
+            .HasMaxLength(1500)
+            .IsRequired(false);
         builder.Property(trainer => trainer.Language)
             .HasConversion(language => language.Value,
             language => Language.Create(language).Value).HasColumnName("Language").HasColumnType("NCHAR(2)");

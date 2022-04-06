@@ -11,6 +11,7 @@ public class TrainingDetail
     private string _title = null!;
     private string? _goal;
     private string? _methodology;
+    private string? _practicalModalities;
 
     #endregion
 
@@ -50,13 +51,23 @@ public class TrainingDetail
         }
     }
 
+    public string? PracticalModalities
+    {
+        get => _practicalModalities;
+        set
+        {
+            ValidateMaxLength(value, nameof(PracticalModalities), 1500);
+            _practicalModalities = value;
+        }
+    }
+
     public Language Language { get; } = null!;
 
     #endregion
 
     #region Constructors
 
-    internal TrainingDetail(Training training, string title, string? goal, string? methodology, Language language)
+    internal TrainingDetail(Training training, string title, string? goal, string? methodology, string? practicalModalities, Language language)
     {
         Training = training;
         TrainingId = training.Id;
@@ -64,6 +75,7 @@ public class TrainingDetail
         Goal = goal;
         Methodology = methodology;
         Language = language;
+        PracticalModalities = practicalModalities;
     }
 
     protected TrainingDetail()
@@ -74,11 +86,12 @@ public class TrainingDetail
 
     #region Methods
 
-    public void UpdateDescription(string title, string goal, string methodology)
+    public void UpdateDescription(string title, string? goal, string? methodology, string? practicalModalities)
     {
         Title = title;
         Goal = goal;
         Methodology = methodology;
+        PracticalModalities = practicalModalities;
     }
 
     #endregion
@@ -91,8 +104,8 @@ public class TrainingDetail
     private static readonly Expression<Action<string?, string?, int>> LengthMaxValidation =
         (fieldValue, fieldName, maxValue) =>
             Guard.Requires(() =>
-                    string.IsNullOrEmpty(fieldValue) || fieldValue.Length < 1500,
-                $"{nameof(fieldName)} has a maximum value of 1500 characters");
+                    string.IsNullOrEmpty(fieldValue) || fieldValue.Length < maxValue,
+                $"{nameof(fieldName)} has a maximum value of {maxValue} characters");
 
     #endregion
 }

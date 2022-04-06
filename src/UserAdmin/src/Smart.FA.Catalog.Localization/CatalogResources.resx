@@ -216,6 +216,9 @@
   <data name="TrainingGoal" xml:space="preserve">
     <value>Objectif de la formation</value>
   </data>
+  <data name="PracticalModalities" xml:space="preserve">
+    <value>Modalités pratiques de la formation</value>
+  </data>
   <data name="Sectors" xml:space="preserve">
     <value>Secteurs</value>
   </data>
@@ -281,6 +284,9 @@
   </data>
   <data name="Min30CharMax500Char" xml:space="preserve">
     <value>min 30 caractères / max 500 caractères</value>
+  </data>
+  <data name="Min30CharMax1000Char" xml:space="preserve">
+    <value>min 30 caractères / max 1000 caractères</value>
   </data>
   <data name="MaximumTwoChoices" xml:space="preserve">
     <value>Deux choix maximum possibles</value>

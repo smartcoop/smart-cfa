@@ -48,8 +48,7 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
 
             if (training is null) throw new TrainingException(Errors.Training.NotFound(request.TrainingId));
 
-            training.UpdateDetails(request.Detail.Title!, request.Detail.Goal!, request.Detail.Methodology!,
-                Language.Create(request.Detail.Language).Value);
+            training.UpdateDetails(request.Detail.Title!, request.Detail.Goal!, request.Detail.Methodology!, request.Detail.PracticalModalities, Language.Create(request.Detail.Language).Value);
             training.SwitchTrainingTypes(request.Types);
             training.SwitchTargetAudience(request.TargetAudiences);
             training.SwitchSlotNumberType(request.SlotNumberTypes);

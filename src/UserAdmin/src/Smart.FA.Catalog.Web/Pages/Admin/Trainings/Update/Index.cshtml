@@ -1,7 +1,5 @@
 ﻿@page "{id:int}"
 @using Microsoft.Extensions.Localization
-@using Smart.FA.Catalog.Core.Domain.Enumerations
-@using Smart.FA.Catalog.Core.SeedWork
 @using Smart.FA.Catalog.Shared.Domain.Enumerations
 @using Smart.FA.Catalog.Shared.Domain.Enumerations.Training
 @using Smart.FA.Catalog.Web.Extensions
@@ -43,9 +41,9 @@
         <div class="o-form-group-layout o-form-group-layout--standard">
             <smart-panel header="@CatalogResources.FieldsThatWillAppearInThePublicCatalog">
                 <smart-form-group-input-text label="@CatalogResources.TrainingTitleCreationLabel *" asp-for="UpdateTrainingViewModel.Title"></smart-form-group-input-text>
-
                 <smart-form-group-textarea label="@CatalogResources.TrainingPresentation *" asp-for="UpdateTrainingViewModel.Methodology" helper-text="@CatalogResources.Min30CharMax500Char"></smart-form-group-textarea>
-                <smart-form-group-textarea  label="@CatalogResources.TrainingGoal *" asp-for="UpdateTrainingViewModel.Goal" helper-text="@CatalogResources.Min30CharMax500Char"></smart-form-group-textarea>
+                <smart-form-group-textarea label="@CatalogResources.TrainingGoal *" asp-for="UpdateTrainingViewModel.Goal" helper-text="@CatalogResources.Min30CharMax500Char"></smart-form-group-textarea>
+                <smart-form-group-textarea label="@CatalogResources.PracticalModalities *" asp-for="UpdateTrainingViewModel.PracticalModalities" helper-text="@CatalogResources.Min30CharMax1000Char"></smart-form-group-textarea>
                 <smart-formgroup label="@CatalogResources.Topics *">
                     <smart-grid>
                         @foreach (var topics in Enumeration.GetAll<TrainingTopic>().Chunk(2))
@@ -98,7 +96,7 @@
                     <smart-validation-message asp-for="UpdateTrainingViewModel.SlotNumberTypeIds"></smart-validation-message>
                 </smart-formgroup>
             </smart-panel>
-              <input type="hidden" id="isDraft" value="false" asp-for="UpdateTrainingViewModel.IsDraft"/>
+            <input type="hidden" id="isDraft" value="false" asp-for="UpdateTrainingViewModel.IsDraft"/>
 
             <div class="u-spacer"></div>
         </div>

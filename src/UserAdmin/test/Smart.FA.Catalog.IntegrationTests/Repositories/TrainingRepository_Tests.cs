@@ -37,8 +37,11 @@ public class TrainingRepositoryTests : IntegrationTestBase
             trainerToAdd
             , new TrainingDetailDto
             (
-                _fixture.Create<string>()
-                , null, language.Value, null
+                _fixture.Create<string>(),
+                null,
+                language.Value,
+                null,
+                null
             )
             , new List<TrainingType> {TrainingType.LanguageCourse}
             , new List<TrainingSlotNumberType> {TrainingSlotNumberType.Group}
