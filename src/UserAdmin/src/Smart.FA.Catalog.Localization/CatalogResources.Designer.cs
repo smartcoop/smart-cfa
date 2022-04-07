@@ -97,6 +97,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Êtes vous sûr-e ?.
+        /// </summary>
+        public static string AreYouSure {
+            get {
+                return ResourceManager.GetString("AreYouSure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Retour.
         /// </summary>
         public static string Back {
@@ -124,6 +133,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Annuler.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Annulé.
         /// </summary>
         public static string Cancelled {
@@ -147,6 +165,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string Communication {
             get {
                 return ResourceManager.GetString("Communication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Supprimer.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
             }
         }
         
@@ -804,6 +831,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string Validated {
             get {
                 return ResourceManager.GetString("Validated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vous êtes sur le point de supprimer la formation.
+        /// </summary>
+        public static string YouAreAboutToDeleteTraining {
+            get {
+                return ResourceManager.GetString("YouAreAboutToDeleteTraining", resourceCulture);
             }
         }
         

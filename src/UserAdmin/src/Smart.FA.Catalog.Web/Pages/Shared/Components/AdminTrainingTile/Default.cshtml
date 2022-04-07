@@ -17,8 +17,12 @@
                 <a href="/admin/trainings/update/@Model!.TrainingId">
                     <smart-button leading-icon="EditAlt" button-style="Borderless"></smart-button>
                 </a>
-                <form method="post" asp-page-handler="Delete" asp-route-id="@Model!.TrainingId">
-                    <smart-button icon-only="true" leading-icon="Delete" button-style="Borderless" button-type="Submit"></smart-button>
+                <form id="delete-training-form-@Model.TrainingId" method="post" asp-page-handler="Delete" asp-route-id="@Model!.TrainingId">
+                    <button class="c-button c-button--borderless c-button--icon" type="button" data-trainingid="@Model.TrainingId" data-dialog="delete-training-dialog-confirmation" onclick="setTrainingId(@Model.TrainingId)">
+                        <span class="c-button__content">
+                            <smart-icon icon="Delete"></smart-icon>
+                        </span>
+                    </button>
                 </form>
             </div>
         </div>
