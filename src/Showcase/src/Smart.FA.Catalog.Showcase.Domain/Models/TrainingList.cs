@@ -10,5 +10,6 @@ public partial class TrainingList
     public string TrainingLanguage { get; set; }
     public string TrainerFirstName { get; set; }
     public string TrainerLastName { get; set; }
-    public string TopicName { get; set; }
+    public int TrainingTopic { get; set; }
+    public short TrainingStatus { get; set; }
 }
