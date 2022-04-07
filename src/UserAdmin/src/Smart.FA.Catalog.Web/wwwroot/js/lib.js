@@ -6,7 +6,7 @@ $(document).ready(
     {
         let validateButton = document.getElementById("Save");
         if (!validateButton) {
-           // return;
+           return;
         }
         validateButton.addEventListener("click", function(e)
         {
