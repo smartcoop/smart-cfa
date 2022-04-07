@@ -15,6 +15,21 @@ public class UpdateTrainingViewModelValidator : AbstractValidator<UpdateTraining
             .NotEmpty()
             .WithMessage(CatalogResources.TrainingTitleIsRequired);
 
+        When(viewModel => viewModel.Methodology is not null, () =>
+            RuleFor(viewModel => viewModel.Methodology)
+                .MaximumLength(1000)
+                .WithMessage(CatalogResources.Max1000Characters));
+
+        When(viewModel => viewModel.Goal is not null, () =>
+            RuleFor(viewModel => viewModel.Goal)
+                .MaximumLength(1000)
+                .WithMessage(CatalogResources.Max1000Characters));
+
+        When(viewModel => viewModel.PracticalModalities is not null, () =>
+            RuleFor(viewModel => viewModel.PracticalModalities)
+                .MaximumLength(1000)
+                .WithMessage(CatalogResources.Max1000Characters));
+
         // When we register a draft we are very permissive.
         // Only the title is required.
         // However to be able to publish more rules are required.
@@ -27,25 +42,19 @@ public class UpdateTrainingViewModelValidator : AbstractValidator<UpdateTraining
             .NotEmpty()
             .WithMessage(CatalogResources.FieldRequired)
             .MinimumLength(30)
-            .WithMessage(" ")
-            .MaximumLength(500)
-            .WithMessage(" ");
+            .WithMessage(CatalogResources.Min30Char);
 
         RuleFor(viewModel => viewModel.Goal)
             .NotEmpty()
             .WithMessage(CatalogResources.FieldRequired)
             .MinimumLength(30)
-            .WithMessage(" ")
-            .MaximumLength(500)
-            .WithMessage(" ");
+            .WithMessage(CatalogResources.Min30Char);
 
         RuleFor(viewModel => viewModel.PracticalModalities)
             .NotEmpty()
             .WithMessage(CatalogResources.FieldRequired)
             .MinimumLength(30)
-            .WithMessage(CatalogResources.Min30CharMax1000Char)
-            .MaximumLength(1000)
-            .WithMessage(CatalogResources.Min30CharMax1000Char);
+            .WithMessage(CatalogResources.Min30Char);
 
         RuleFor(viewModel => viewModel.TopicIds)
             .NotEmpty()

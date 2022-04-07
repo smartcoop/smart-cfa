@@ -144,7 +144,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
         Guard.AgainstNull(title, nameof(title));
         Guard.Requires(() => _details.FirstOrDefault(detail => detail.Language.Value == language.Value) == null,
             "A description for that language already exists");
-        _details.Add(new TrainingDetail(this, title!, goal, methodology, practicalModalities,language));
+        _details.Add(new TrainingDetail(this, title!, goal, methodology, practicalModalities, language));
     }
 
     public void UpdateDetails(string title, string? goal, string? methodology, string? practicalModalities, Language language)

@@ -132,6 +132,9 @@
   <data name="Max500Characters" xml:space="preserve">
     <value>Maximum 500 caractères</value>
   </data>
+  <data name="Max1000Characters" xml:space="preserve">
+    <value>Maximum 1000 caractères</value>
+  </data>
   <data name="SocialNetworks" xml:space="preserve">
     <value>Réseaux sociaux</value>
   </data>
@@ -287,6 +290,9 @@
   </data>
   <data name="Min30CharMax1000Char" xml:space="preserve">
     <value>min 30 caractères / max 1000 caractères</value>
+  </data>
+  <data name="Min30Char" xml:space="preserve">
+    <value>Minimum 30 caractères</value>
   </data>
   <data name="MaximumTwoChoices" xml:space="preserve">
     <value>Deux choix maximum possibles</value>

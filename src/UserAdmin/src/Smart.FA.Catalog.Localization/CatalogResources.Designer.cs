@@ -286,6 +286,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum 1000 caractères.
+        /// </summary>
+        public static string Max1000Characters {
+            get {
+                return ResourceManager.GetString("Max1000Characters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum 500 caractères.
         /// </summary>
         public static string Max500Characters {
@@ -309,6 +318,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string Methodology {
             get {
                 return ResourceManager.GetString("Methodology", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum 30 caractères.
+        /// </summary>
+        public static string Min30Char {
+            get {
+                return ResourceManager.GetString("Min30Char", resourceCulture);
             }
         }
         

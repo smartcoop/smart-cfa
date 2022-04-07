@@ -26,7 +26,7 @@ public class TrainingDetail
         set
         {
             Guard.AgainstNull(value, nameof(Title));
-            ValidateMaxLength(value, nameof(Methodology), 500);
+            Guard.AgainstMaxStringLength(value, nameof(Title), 500);
             _title = value;
         }
     }
@@ -36,7 +36,11 @@ public class TrainingDetail
         get => _goal;
         set
         {
-            ValidateMaxLength(value, nameof(Methodology), 1500);
+            if (value is not null)
+            {
+                Guard.AgainstMaxStringLength(value, nameof(Goal), 1000);
+            }
+
             _goal = value;
         }
     }
@@ -46,7 +50,11 @@ public class TrainingDetail
         get => _methodology;
         set
         {
-            ValidateMaxLength(value, nameof(Methodology), 1500);
+            if (value is not null)
+            {
+                Guard.AgainstMaxStringLength(value, nameof(Methodology), 1000);
+            }
+
             _methodology = value;
         }
     }
@@ -56,7 +64,11 @@ public class TrainingDetail
         get => _practicalModalities;
         set
         {
-            ValidateMaxLength(value, nameof(PracticalModalities), 1500);
+            if (value is not null)
+            {
+                Guard.AgainstMaxStringLength(value, nameof(PracticalModalities), 1000);
+            }
+
             _practicalModalities = value;
         }
     }
@@ -93,19 +105,6 @@ public class TrainingDetail
         Methodology = methodology;
         PracticalModalities = practicalModalities;
     }
-
-    #endregion
-
-    #region Validation
-
-    private void ValidateMaxLength(string? field, string? name, int maxValue) =>
-        LengthMaxValidation.Compile()(field, name, maxValue);
-
-    private static readonly Expression<Action<string?, string?, int>> LengthMaxValidation =
-        (fieldValue, fieldName, maxValue) =>
-            Guard.Requires(() =>
-                    string.IsNullOrEmpty(fieldValue) || fieldValue.Length < maxValue,
-                $"{nameof(fieldName)} has a maximum value of {maxValue} characters");
 
     #endregion
 }

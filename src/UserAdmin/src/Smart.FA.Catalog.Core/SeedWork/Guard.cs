@@ -34,4 +34,19 @@ public static class Guard
 
         return email!;
     }
+
+    public static void AgainstMaxStringLength(string value, string valueName, int maxValue, string? message = null)
+    {
+        if (value.Length > maxValue)
+        {
+            throw new ArgumentException(message ?? $"{valueName} needs a maximum length of {maxValue} characters");
+        }
+    }
+    public static void AgainstMinStringLength(string value, string valueName, int minValue, string? message = null)
+    {
+        if (value.Length < minValue)
+        {
+            throw new ArgumentException(message ?? $"{valueName} needs a minimum length of {minValue} characters");
+        }
+    }
 }
