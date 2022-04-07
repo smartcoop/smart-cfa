@@ -25,17 +25,18 @@ public class TrainingDto
         Language = language;
         TopicIds = topicIds;
     }
+
     public TrainingDto(int trainingId,
         short statusId,
         string title,
         string? goal,
-        string Language)
+        string language)
     {
-        this.TrainingId = trainingId;
-        this.StatusId = statusId;
-        this.Title = title;
-        this.Goal = goal;
-        this.Language = Language;
-        this.TopicIds = new List<int>();
+        TrainingId = trainingId;
+        StatusId = statusId;
+        Title = title;
+        Goal = goal;
+        Language = language;
+        TopicIds = new List<int>();
     }
 }
