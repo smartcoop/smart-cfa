@@ -6,50 +6,54 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Training List</h1>
+<section class="main__presentation">
+    <div class="main-title">Formations</div>
+    <div class="main-subtitle">Liste des formations</div>
+    <div class="main__presentation-txt">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in ullamcorper tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis eget varius nisl, et eleifend est. In condimentum, arcu eget ornare aliquam,
+        urna quam luctus quam, ut vestibulum nulla turpis ultricies lectus. Nunc gravida gravida feugiat. Quisque pellentesque libero in massa fringilla, vel gravida ex ultricies. Proin in mi dolor. Fusce mollis neque tellus, vel malesuada nibh malesuada
+        vitae. Curabitur sed ultrices nulla. Donec vulputate quis lorem ut ultricies. Nulla vestibulum suscipit aliquet. Aliquam dictum justo posuere, iaculis orci quis, viverra enim. Vivamus nec leo et est hendrerit tempus. Aliquam viverra dapibus elit.
+        Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sit amet aliquet ligula, id consequat lectus.
+    </div>
+</section>
+<section class="section__training-search">
+    @*TO DO: include search bar*@
+    @*TO DO: include training search filters*@
+</section>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TrainingList[0].TrainingTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TrainingList[0].TrainingLanguage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TrainingList[0].TrainerFirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TrainingList[0].TrainerLastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TrainingList[0].TopicName)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.TrainingList) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TrainingTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TrainingLanguage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TrainerFirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TrainerLastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TopicName)
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<section class="section__training-list">
+    @foreach (var item in Model.TrainingList) {
+        @*TO DO: create ViewComponent for the trainings list items*@
+        <div class="training-list">
+            <div class="training-list__container">
+                <div class="training-list__container-left">
+                    <div class="training-list__title">
+                        @*Note: asp-route-id is'nt maybe the best option. We have to decide what needs to be put in the url. Is it the training's id or name or ?*@
+                        <a class="training-list__training-link" asp-page="Training/TrainingDetail" asp-route-id="1">@Html.DisplayFor(modelItem => item.TrainingTitle)</a>
+                    </div>
+                    <div class="training-list__trainer">
+                        @Html.DisplayFor(modelItem => item.TrainerFirstName) @Html.DisplayFor(modelItem => item.TrainerLastName)
+                    </div>
+                    <div class="training-list__sectors ">
+                        <img src="~/icons/tag--blue.svg" class="o-svg-icon--small sectors-icon" />
+                        <!-- Boucle sur les secteurs/categories/matières rattachés à la formation -->
+                        @* Based on @Html.DisplayFor(modelItem => item.TopicName)*@
+                        @*Start loop*@
+                            @*Note: the cat parameter in the url will apply a filter on the trainings list*@
+                            <a class="training-list__category-link" asp-page="Training/TrainingList" asp-route-cat="TopicName">TopicName</a>
+                            @*If not last item: add ", " after item*@
+                        @*End loop*@
+                    </div>
+                </div>
+                <div class="training-list__container-right">
+                    <div class="training-list__more">
+                        @*Note: same remarks here about asp-route-id*@
+                        <a class="training-list__more-link" asp-page="Training/TrainingDetail" asp-route-id="1"><img src="~/icons/chevron-right--blue.svg" class="o-svg-icon--large chevron-icon" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @*TO DO: ADD PAGINATION to display only 10 trainings (order random) *@
+</section>
+
