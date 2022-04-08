@@ -22,33 +22,31 @@
 </section>
 
 <section class="section__training-list">
-    @foreach (var item in Model.TrainingList) {
+    @foreach (var training in Model.Trainings) {
         @*TO DO: create ViewComponent for the trainings list items*@
         <div class="training-list">
             <div class="training-list__container">
                 <div class="training-list__container-left">
                     <div class="training-list__title">
                         @*Note: asp-route-id is'nt maybe the best option. We have to decide what needs to be put in the url. Is it the training's id or name or ?*@
-                        <a class="training-list__training-link" asp-page="Training/TrainingDetail" asp-route-id="1">@Html.DisplayFor(modelItem => item.TrainingTitle)</a>
+                        <a class="training-list__training-link" asp-page="TrainingListViewModel/TrainingListViewModelDetail" asp-route-id="1">@training.TrainingTitle</a>
                     </div>
                     <div class="training-list__trainer">
-                        @Html.DisplayFor(modelItem => item.TrainerFirstName) @Html.DisplayFor(modelItem => item.TrainerLastName)
+                        @Html.DisplayFor(modelItem => training.TrainerFirstName) @Html.DisplayFor(modelItem => training.TrainerLastName)
                     </div>
                     <div class="training-list__sectors ">
                         <img src="~/icons/tag--blue.svg" class="o-svg-icon--small sectors-icon" />
-                        <!-- Boucle sur les secteurs/categories/matières rattachés à la formation -->
-                        @* Based on @Html.DisplayFor(modelItem => item.TopicName)*@
-                        @*Start loop*@
-                            @*Note: the cat parameter in the url will apply a filter on the trainings list*@
-                            <a class="training-list__category-link" asp-page="Training/TrainingList" asp-route-cat="TopicName">TopicName</a>
-                            @*If not last item: add ", " after item*@
-                        @*End loop*@
+                        <!-- Show all training topics -->
+                        @foreach (var topic in training.Topics)
+                        {
+                            <a class="training-list__category-link" asp-page="TrainingListViewModel/TrainingListViewModelList" asp-route-cat="TopicName">@topic.Id</a>
+                        }
                     </div>
                 </div>
                 <div class="training-list__container-right">
                     <div class="training-list__more">
-                        @*Note: same remarks here about asp-route-id*@
-                        <a class="training-list__more-link" asp-page="Training/TrainingDetail" asp-route-id="1"><img src="~/icons/chevron-right--blue.svg" class="o-svg-icon--large chevron-icon" /></a>
+                        <!--Link for training details-->
+                        <a class="training-list__more-link" asp-page="TrainingListViewModel/TrainingListViewModelDetail" asp-route-id=@training.TrainingId><img src="~/icons/chevron-right--blue.svg" class="o-svg-icon--large chevron-icon" /></a>
                     </div>
                 </div>
             </div>
