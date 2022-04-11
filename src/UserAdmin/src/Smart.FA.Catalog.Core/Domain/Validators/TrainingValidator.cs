@@ -3,7 +3,7 @@ using Smart.FA.Catalog.Core.Exceptions;
 
 namespace Smart.FA.Catalog.Core.Domain.Validators;
 
-public class TrainingValidator: AbstractValidator<Training>
+public class TrainingValidator : AbstractValidator<Training>
 {
     public TrainingValidator()
     {
