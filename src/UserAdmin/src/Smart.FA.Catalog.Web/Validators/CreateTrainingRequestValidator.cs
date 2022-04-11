@@ -17,20 +17,17 @@ public class CreateTrainingRequestValidator : AbstractValidator<CreateTrainingVi
             .MaximumLength(500)
             .WithMessage(CatalogResources.TrainingTitleIsRequired);
 
-        When(viewModel => viewModel.Methodology is not null, () =>
             RuleFor(viewModel => viewModel.Methodology)
                 .MaximumLength(1000)
-                .WithMessage(CatalogResources.Max1000Characters));
+                .WithMessage(CatalogResources.Max1000Characters);
 
-        When(viewModel => viewModel.Goal is not null, () =>
             RuleFor(viewModel => viewModel.Goal)
                 .MaximumLength(1000)
-                .WithMessage(CatalogResources.Max1000Characters));
+                .WithMessage(CatalogResources.Max1000Characters);
 
-        When(viewModel => viewModel.PracticalModalities is not null, () =>
             RuleFor(viewModel => viewModel.PracticalModalities)
                 .MaximumLength(1000)
-                .WithMessage(CatalogResources.Max1000Characters));
+                .WithMessage(CatalogResources.Max1000Characters);
 
         // When we register a draft we are very permissive.
         // Only the title is required.
