@@ -26,51 +26,26 @@ public class TrainingDetail
         set
         {
             Guard.AgainstNull(value, nameof(Title));
-            Guard.AgainstMaxStringLength(value, nameof(Title), 500);
-            _title = value;
+            _title = Guard.AgainstMaxLength(value, nameof(Title), 500)!;
         }
     }
 
     public string? Goal
     {
         get => _goal;
-        set
-        {
-            if (value is not null)
-            {
-                Guard.AgainstMaxStringLength(value, nameof(Goal), 1000);
-            }
-
-            _goal = value;
-        }
+        set => _goal = Guard.AgainstMaxLength(value, nameof(Goal), 1000);
     }
 
     public string? Methodology
     {
         get => _methodology;
-        set
-        {
-            if (value is not null)
-            {
-                Guard.AgainstMaxStringLength(value, nameof(Methodology), 1000);
-            }
-
-            _methodology = value;
-        }
+        set => _methodology = Guard.AgainstMaxLength(value, nameof(Methodology), 1000);
     }
 
     public string? PracticalModalities
     {
         get => _practicalModalities;
-        set
-        {
-            if (value is not null)
-            {
-                Guard.AgainstMaxStringLength(value, nameof(PracticalModalities), 1000);
-            }
-
-            _practicalModalities = value;
-        }
+        set => _practicalModalities = Guard.AgainstMaxLength(value, nameof(PracticalModalities), 1000);
     }
 
     public Language Language { get; } = null!;
