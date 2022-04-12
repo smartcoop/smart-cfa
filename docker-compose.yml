@@ -33,8 +33,8 @@ services:
     volumes:
       - /minio/data:/data
     environment:
-      - "MINIO_ROOT_USER=admin"
-      - "MINIO_ROOT_PASSWORD=adminpassword!"
+      - "MINIO_ROOT_USER=${DOCKER_MINIO_USER}"
+      - "MINIO_ROOT_PASSWORD=${DOCKER_MINIO_PASSWORD}"
     command: server /data --console-address ":9001"
 
   minioclient:
@@ -44,7 +44,7 @@ services:
       - minio
     entrypoint: >
       bash -c
-           "/usr/bin/mc alias set myminio http://${DOCKER_NAME}-minio admin adminpassword!;
+           "/usr/bin/mc alias set myminio http://${DOCKER_NAME}-minio:9000 ${DOCKER_MINIO_USER} ${DOCKER_MINIO_PASSWORD};
             /usr/bin/mc mb myminio/cfa;
             /usr/bin/mc policy set public myminio/cfa;
             /usr/bin/mc admin user add myminio newuser newuser123;
