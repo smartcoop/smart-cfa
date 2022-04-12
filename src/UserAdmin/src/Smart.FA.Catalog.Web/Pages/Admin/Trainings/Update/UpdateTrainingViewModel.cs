@@ -1,9 +1,7 @@
 using Smart.FA.Catalog.Application.UseCases.Commands;
 using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Domain.Dto;
-using Smart.FA.Catalog.Core.Domain.Enumerations;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
-using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Shared.Domain.Enumerations;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
@@ -19,6 +17,7 @@ public class UpdateTrainingViewModel
     public string? Goal { get; init; }
     public string? Methodology { get; init; }
     public bool IsDraft { get; set; }
+    public string? PracticalModalities { get; set; }
 }
 
 public static class EditTrainingViewModelMapping
@@ -33,6 +32,7 @@ public static class EditTrainingViewModelMapping
                     , model.Goal
                     , language
                     , model.Methodology
+                    , model.PracticalModalities
                 ),
             TrainingId = trainingId
             , Types = Enumeration.FromValues<TrainingType>(model.TrainingTypeIds ?? new())
@@ -51,6 +51,7 @@ public static class EditTrainingViewModelMapping
             Goal = detail?.Goal,
             Title = detail?.Title,
             Methodology = detail?.Methodology,
+            PracticalModalities = detail?.PracticalModalities,
             TargetAudienceIds = model.Training.Targets.Select(target => target.TrainingTargetAudienceId).ToList(),
             TrainingTypeIds = model.Training.Identities.Select(identity => identity.TrainingTypeId).ToList(),
             SlotNumberTypeIds = model.Training.Slots.Select(slot => slot.TrainingSlotTypeId).ToList(),
@@ -68,6 +69,7 @@ public static class EditTrainingViewModelMapping
             Goal = detail?.Goal,
             Title = detail?.Title,
             Methodology = detail?.Methodology,
+            PracticalModalities = detail?.PracticalModalities,
             TargetAudienceIds = model.Training.Targets.Select(target => target.TrainingTargetAudienceId).ToList(),
             TrainingTypeIds = model.Training.Identities.Select(identity => identity.TrainingTypeId).ToList(),
             SlotNumberTypeIds = model.Training.Slots.Select(slot => slot.TrainingSlotTypeId).ToList()

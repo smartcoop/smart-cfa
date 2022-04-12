@@ -57,7 +57,7 @@ public class TrainingTests
         var training = TrainingFactory.Create(trainer);
 
         var action = () => training.AddDetails(_fixture.Create<string>(), _fixture.Create<string>(),
-            _fixture.Create<string>(),
+            _fixture.Create<string>(),_fixture.Create<string>(),
             Language.Create(_fixture.Create<string>().Substring(0, 2)).Value);
 
         action.Should().NotThrow<Exception>();
@@ -66,13 +66,13 @@ public class TrainingTests
 
 
     [Theory]
-    [InlineData("Title", "Goal", "Methodology", "FRE")]
-    public void CantAddInvalidDetails(string title, string goal, string methodology, string language)
+    [InlineData("Title", "Goal", "Methodology", "PracticalModalities", "FRE")]
+    public void CantAddInvalidDetails(string title, string goal, string methodology, string practicalModalities, string language)
     {
         var trainer = TrainerFactory.CreateClean();
         var training = TrainingFactory.Create(trainer);
 
-        var action = () => training.AddDetails(title, goal, methodology, Language.Create(language).Value);
+        var action = () => training.AddDetails(title, goal, methodology, practicalModalities, Language.Create(language).Value);
 
         action.Should().Throw<Exception>();
         training.Details.Should().HaveCount(1);
@@ -87,9 +87,9 @@ public class TrainingTests
 
 
         training.AddDetails(_fixture.Create<string>(), _fixture.Create<string>(),
-            _fixture.Create<string>(), language);
+            _fixture.Create<string>(), _fixture.Create<string>(), language);
         var action = () => training.AddDetails(_fixture.Create<string>(), _fixture.Create<string>(),
-            _fixture.Create<string>(), language);
+            _fixture.Create<string>(), _fixture.Create<string>(), language);
 
         action.Should().Throw<Exception>();
         training.Details.Should().HaveCount(2);
@@ -105,9 +105,9 @@ public class TrainingTests
         var newTitle = _fixture.Create<string>();
 
         training.AddDetails(_fixture.Create<string>(), _fixture.Create<string>(),
-            _fixture.Create<string>(), language);
+            _fixture.Create<string>(), _fixture.Create<string>(), language);
         var action = () => training.UpdateDetails(newTitle, _fixture.Create<string>(),
-            _fixture.Create<string>(), language);
+            _fixture.Create<string>(),_fixture.Create<string>(), language);
 
 
         action.Should().NotThrow<Exception>();
@@ -134,7 +134,7 @@ public class TrainingTests
         var trainer = TrainerFactory.CreateClean();
         var training = TrainingFactory.CreateWithAutoValidation(trainer);
 
-        training.UpdateDetails("Hello", "My Goal", "A methodology", Language.Create("FR").Value);
+        training.UpdateDetails("Hello", "My Goal", "A methodology", "practical modalities",Language.Create("FR").Value);
         var result = training.Validate();
 
         result.IsSuccess.Should().BeTrue();
@@ -146,7 +146,7 @@ public class TrainingTests
     {
         var trainer = TrainerFactory.CreateClean();
         var training = TrainingFactory.CreateWithManualValidation(trainer);
-        training.UpdateDetails("Hello", "My Goal", "A methodology", Language.Create("FR").Value);
+        training.UpdateDetails("Hello", "My Goal", "A methodology", "practical modalities", Language.Create("FR").Value);
 
         var result = training.Validate();
 
@@ -183,7 +183,7 @@ public class TrainingTests
         var training = new Training
         (
             trainer
-            , new TrainingDetailDto(_fixture.Create<string>(), null, "FR", null)
+            , new TrainingDetailDto(_fixture.Create<string>(), null, "FR", null, null)
             , new List<TrainingType> {TrainingType.Professional}
             , new List<TrainingSlotNumberType> {TrainingSlotNumberType.Single}
             , new List<TrainingTargetAudience> {TrainingTargetAudience.Employee}

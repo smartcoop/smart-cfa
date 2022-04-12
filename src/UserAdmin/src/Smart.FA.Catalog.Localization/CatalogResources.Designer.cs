@@ -286,6 +286,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum 1000 caractères.
+        /// </summary>
+        public static string Max1000Characters {
+            get {
+                return ResourceManager.GetString("Max1000Characters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum 500 caractères.
         /// </summary>
         public static string Max500Characters {
@@ -313,11 +322,29 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Minimum 30 caractères.
+        /// </summary>
+        public static string Min30Char {
+            get {
+                return ResourceManager.GetString("Min30Char", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
         public static string Min30Characters {
             get {
                 return ResourceManager.GetString("Min30Characters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to min 30 caractères / max 1000 caractères.
+        /// </summary>
+        public static string Min30CharMax1000Char {
+            get {
+                return ResourceManager.GetString("Min30CharMax1000Char", resourceCulture);
             }
         }
         
@@ -399,6 +426,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string PleaseSelectOneOption {
             get {
                 return ResourceManager.GetString("PleaseSelectOneOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modalités pratiques de la formation.
+        /// </summary>
+        public static string PracticalModalities {
+            get {
+                return ResourceManager.GetString("PracticalModalities", resourceCulture);
             }
         }
         

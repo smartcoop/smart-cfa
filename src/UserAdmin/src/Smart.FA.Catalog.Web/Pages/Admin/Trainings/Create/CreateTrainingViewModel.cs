@@ -17,6 +17,7 @@ public class CreateTrainingViewModel
     public List<int>? TopicIds { get; set; }
     public string? Goal { get; set; }
     public string? Methodology { get; set; }
+    public string? PracticalModalities { get; set; }
     public bool IsDraft { get; set; }
 }
 
@@ -33,6 +34,7 @@ public static class CreateTrainingViewModelMapping
                     , model.Goal
                     , language.Value
                     , model.Methodology
+                    , model.PracticalModalities
                 ),
             TrainerId = trainerId,
             Types = Enumeration.FromValues<TrainingType>(model.TrainingTypeIds ?? new()),

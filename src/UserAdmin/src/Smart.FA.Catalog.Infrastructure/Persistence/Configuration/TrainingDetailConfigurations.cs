@@ -15,10 +15,13 @@ public class TrainingDetailConfigurations : IEntityTypeConfiguration<TrainingDet
             .Property(detail => detail.Title)
             .HasMaxLength(500);
         builder.Property(detail => detail.Goal)
-            .HasMaxLength(1500)
+            .HasMaxLength(1000)
             .IsRequired(false);
         builder.Property(detail => detail.Methodology)
-            .HasMaxLength(1500)
+            .HasMaxLength(1000)
+            .IsRequired(false);
+        builder.Property(detail => detail.PracticalModalities)
+            .HasMaxLength(1000)
             .IsRequired(false);
         builder.Property(trainer => trainer.Language)
             .HasConversion(language => language.Value,

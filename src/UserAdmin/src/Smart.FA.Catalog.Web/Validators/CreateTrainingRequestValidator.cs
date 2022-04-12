@@ -8,13 +8,26 @@ namespace Smart.FA.Catalog.Web.Validators;
 /// <summary>
 /// Validates the request to create a <see cref="Training" />.
 /// </summary>
-public class CreateTrainingViewModelValidator : AbstractValidator<CreateTrainingViewModel>
+public class CreateTrainingRequestValidator : AbstractValidator<CreateTrainingViewModel>
 {
-    public CreateTrainingViewModelValidator(IStringLocalizer<CatalogResources> localizer)
+    public CreateTrainingRequestValidator(IStringLocalizer<CatalogResources> localizer)
     {
         RuleFor(viewModel => viewModel.Title)
             .NotEmpty()
+            .MaximumLength(500)
             .WithMessage(CatalogResources.TrainingTitleIsRequired);
+
+            RuleFor(viewModel => viewModel.Methodology)
+                .MaximumLength(1000)
+                .WithMessage(CatalogResources.Max1000Characters);
+
+            RuleFor(viewModel => viewModel.Goal)
+                .MaximumLength(1000)
+                .WithMessage(CatalogResources.Max1000Characters);
+
+            RuleFor(viewModel => viewModel.PracticalModalities)
+                .MaximumLength(1000)
+                .WithMessage(CatalogResources.Max1000Characters);
 
         // When we register a draft we are very permissive.
         // Only the title is required.
@@ -31,17 +44,19 @@ public class CreateTrainingViewModelValidator : AbstractValidator<CreateTraining
             .NotEmpty()
             .WithMessage(CatalogResources.FieldRequired)
             .MinimumLength(30)
-            .WithMessage(" ")
-            .MaximumLength(500)
-            .WithMessage(" ");
+            .WithMessage(CatalogResources.Min30Char);
 
         RuleFor(viewModel => viewModel.Goal)
             .NotEmpty()
             .WithMessage(CatalogResources.FieldRequired)
             .MinimumLength(30)
-            .WithMessage(" ")
-            .MaximumLength(500)
-            .WithMessage(" ");
+            .WithMessage(CatalogResources.Min30Char);
+
+        RuleFor(viewModel => viewModel.PracticalModalities)
+            .NotEmpty()
+            .WithMessage(CatalogResources.FieldRequired)
+            .MinimumLength(30)
+            .WithMessage(CatalogResources.Min30Char);
 
         RuleFor(viewModel => viewModel.SlotNumberTypeIds)
             .NotEmpty()

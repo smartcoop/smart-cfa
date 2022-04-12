@@ -11,6 +11,7 @@ public class TrainingDetail
     private string _title = null!;
     private string? _goal;
     private string? _methodology;
+    private string? _practicalModalities;
 
     #endregion
 
@@ -25,29 +26,26 @@ public class TrainingDetail
         set
         {
             Guard.AgainstNull(value, nameof(Title));
-            ValidateMaxLength(value, nameof(Methodology), 500);
-            _title = value;
+            _title = Guard.AgainstMaxLength(value, nameof(Title), 500)!;
         }
     }
 
     public string? Goal
     {
         get => _goal;
-        set
-        {
-            ValidateMaxLength(value, nameof(Methodology), 1500);
-            _goal = value;
-        }
+        set => _goal = Guard.AgainstMaxLength(value, nameof(Goal), 1000);
     }
 
     public string? Methodology
     {
         get => _methodology;
-        set
-        {
-            ValidateMaxLength(value, nameof(Methodology), 1500);
-            _methodology = value;
-        }
+        set => _methodology = Guard.AgainstMaxLength(value, nameof(Methodology), 1000);
+    }
+
+    public string? PracticalModalities
+    {
+        get => _practicalModalities;
+        set => _practicalModalities = Guard.AgainstMaxLength(value, nameof(PracticalModalities), 1000);
     }
 
     public Language Language { get; } = null!;
@@ -56,7 +54,7 @@ public class TrainingDetail
 
     #region Constructors
 
-    internal TrainingDetail(Training training, string title, string? goal, string? methodology, Language language)
+    internal TrainingDetail(Training training, string title, string? goal, string? methodology, string? practicalModalities, Language language)
     {
         Training = training;
         TrainingId = training.Id;
@@ -64,6 +62,7 @@ public class TrainingDetail
         Goal = goal;
         Methodology = methodology;
         Language = language;
+        PracticalModalities = practicalModalities;
     }
 
     protected TrainingDetail()
@@ -74,25 +73,13 @@ public class TrainingDetail
 
     #region Methods
 
-    public void UpdateDescription(string title, string goal, string methodology)
+    public void UpdateDescription(string title, string? goal, string? methodology, string? practicalModalities)
     {
         Title = title;
         Goal = goal;
         Methodology = methodology;
+        PracticalModalities = practicalModalities;
     }
-
-    #endregion
-
-    #region Validation
-
-    private void ValidateMaxLength(string? field, string? name, int maxValue) =>
-        LengthMaxValidation.Compile()(field, name, maxValue);
-
-    private static readonly Expression<Action<string?, string?, int>> LengthMaxValidation =
-        (fieldValue, fieldName, maxValue) =>
-            Guard.Requires(() =>
-                    string.IsNullOrEmpty(fieldValue) || fieldValue.Length < 1500,
-                $"{nameof(fieldName)} has a maximum value of 1500 characters");
 
     #endregion
 }

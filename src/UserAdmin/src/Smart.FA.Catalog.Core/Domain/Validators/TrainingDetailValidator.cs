@@ -3,9 +3,9 @@ using Smart.FA.Catalog.Core.Exceptions;
 
 namespace Smart.FA.Catalog.Core.Domain.Validators;
 
-public class TrainingDetailValidation: AbstractValidator<TrainingDetail>
+public class TrainingDetailValidator: AbstractValidator<TrainingDetail>
 {
-    public TrainingDetailValidation()
+    public TrainingDetailValidator()
     {
         RuleFor(request => request.Title)
             .NotEmptyWithGenericMessage().WithMessage(Errors.General.MissingField("title").Message);
@@ -15,5 +15,7 @@ public class TrainingDetailValidation: AbstractValidator<TrainingDetail>
             .NotEmptyWithGenericMessage().WithMessage(Errors.General.MissingField("goal").Message);
         RuleFor(request => request.Methodology)
             .NotEmptyWithGenericMessage().WithMessage(Errors.General.MissingField("methodology").Message);
+        RuleFor(request => request.PracticalModalities)
+            .NotEmptyWithGenericMessage().WithMessage(Errors.General.MissingField("practicalModalities").Message);
     }
 }

@@ -34,4 +34,34 @@ public static class Guard
 
         return email!;
     }
+
+    public static string? AgainstMaxLength(string? input, string parameterName, int maxValue, string? message = null)
+    {
+        if (input is not null && input.Length > maxValue)
+        {
+            throw new ArgumentException(message ?? $"{parameterName} needs a maximum length of {maxValue} characters");
+        }
+
+        return input;
+    }
+
+    public static string? AgainstMinLength(string? input, string parameterName, int minValue, string? message = null)
+    {
+        if (input is not null && input.Length < minValue)
+        {
+            throw new ArgumentException(message ?? $"{parameterName} needs a minimum length of {minValue} characters");
+        }
+
+        return input;
+    }
+
+    public static string? AgainstInBetweenLength(string? input, string parameterName, int minValue, int maxValue, string? message = null)
+    {
+        if (input is not null && input.Length < minValue && input.Length > maxValue)
+        {
+            throw new ArgumentException(message ?? $"{parameterName} needs a minimum length of {minValue} characters");
+        }
+
+        return input;
+    }
 }
