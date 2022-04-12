@@ -6,7 +6,7 @@ namespace Smart.FA.Catalog.Web.Pages.Shared.Components.AdminTrainingTile;
 [ViewComponent(Name = "AdminTrainingTile")]
 public class AdminTrainingCardViewComponent : ViewComponent
 {
-    public IViewComponentResult Invoke(IGrouping<int, TrainingDto> model)
+    public IViewComponentResult Invoke(TrainingDto model)
     {
         return View(model ?? throw new ArgumentNullException(nameof(model)));
     }

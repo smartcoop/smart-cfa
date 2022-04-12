@@ -1,5 +1,7 @@
 ﻿@page
 @using Microsoft.Extensions.Localization
+@using Smart.FA.Catalog.Core.Domain.Dto
+@using Smart.FA.Catalog.Core.SeedWork
 @inject IStringLocalizer<CatalogResources> _localizer
 @model Smart.FA.Catalog.Web.Pages.Admin.Trainings.List.ListModel
 @{
@@ -29,7 +31,7 @@
 }
 
 <div class="o-card-grid small-up-1">
-    @foreach (var training in Model.Trainings!.GroupBy(training => training.TrainingId))
+    @foreach (var training in Model.Trainings!)
     {
         @await Component.InvokeAsync("AdminTrainingTile", new { model = training})
     }
