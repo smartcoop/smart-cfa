@@ -1,11 +1,13 @@
 using Smart.Design.Razor.Extensions;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using NLog.Web;
 using Smart.FA.Catalog.Application.Extensions;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Infrastructure.Extensions;
 using Smart.FA.Catalog.Web.Extensions;
 using Smart.FA.Catalog.Web.Extensions.Middlewares;
+using Smart.FA.Catalog.Web.Policies.Requirements;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +47,15 @@ builder.Services
         builder.Configuration.GetSection("EFCore"),
         builder.Configuration.GetSection("S3Storage"));
 
+builder.Services.AddAuthorization(options => { options.AddPolicy("AtLeastOneValidUserChartApproved", policy => { policy.Requirements.Add(new AtLeastOneValidUserChartApprovalRequirement()); }); });
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.AccessDeniedPath = "/admin";
+    });
+
+builder.Services.ConfigureApplicationCookie(options => options.AccessDeniedPath = "/");
 var app = builder.Build();
 
 app.UseForwardedHeaders();

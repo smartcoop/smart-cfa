@@ -1,10 +1,12 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Domain.Models;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.Update;
 
+[Authorize(Policy = "AtLeastOneValidUserChartApproved")]
 public class UpdateModel : AdminPage
 {
     private int TrainingId { get; set; }

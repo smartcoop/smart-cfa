@@ -4,18 +4,22 @@
     Layout = "Shared/_AdminLayout";
 }
 
-<h2 class="c-h2">@CatalogResources.Hello  @Model.UserIdentity.CurrentTrainer.Name.ToString()</h2>
-
+<h2 class="c-h2">@CatalogResources.Hello @Model.UserIdentity.CurrentTrainer.Name.ToString()</h2>
 <smart-panel header="@CatalogResources.AdminHomepage_WhatIsFormateurAssocieTitle">
     <p>@CatalogResources.LoremIpsum</p>
 </smart-panel>
 
 <smart-spacer bottom="ExtraLarge" top="ExtraLarge"></smart-spacer>
 
-<smart-panel header="@CatalogResources.AdminHomepage_AcceptCharter">
-    <p>@CatalogResources.LoremIpsum</p>
-
-    <smart-spacer top="Large">
-        <smart-checkbox label="@CatalogResources.AdminHomepage_AcceptCharter"></smart-checkbox>
-    </smart-spacer>
-</smart-panel>
+<form method="post" id="form">
+    <smart-panel header="@CatalogResources.AdminHomepage_AcceptCharter">
+        <a href="@Model.GetLastChartUrl().Result" target="_blank">@CatalogResources.AdminHomePage_UserChart</a>
+        <smart-spacer top="Large">
+            <smart-checkbox label="@CatalogResources.AdminHomepage_AcceptCharter" asp-for="@Model.HasAcceptedUserChart"></smart-checkbox>
+            <smart-validation-message asp-for="@Model"></smart-validation-message>
+        </smart-spacer>
+        <smart-spacer top="Large">
+            <smart-button id="Accept" label="@CatalogResources.UserChartAccept" button-style="Primary" leading-icon="Send" button-type="Submit" disabled=@(HttpContext.Request.Cookies.TryGetValue("HasAcceptedUserChart", out _)) > </smart-button>
+        </smart-spacer>
+    </smart-panel>
+</form>

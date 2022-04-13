@@ -1,4 +1,7 @@
+using System;
+using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Smart.FA.Catalog.Application.UseCases.Commands;
@@ -11,6 +14,7 @@ using Smart.FA.Catalog.Web.Options;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.List;
 
+[Authorize(Policy = "AtLeastOneValidUserChartApproved")]
 public class ListModel : AdminPage
 {
     private readonly CatalogContext _context;

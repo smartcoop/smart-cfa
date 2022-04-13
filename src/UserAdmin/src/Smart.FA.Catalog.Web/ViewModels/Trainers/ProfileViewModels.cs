@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Http;
 using Smart.Design.Razor.TagHelpers.Icon;
 using Smart.FA.Catalog.Application.UseCases.Commands;
 using Smart.FA.Catalog.Application.UseCases.Queries;

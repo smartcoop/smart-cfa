@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Smart.FA.Catalog.Application.UseCases.Commands;
 using Smart.FA.Catalog.Application.UseCases.Queries;
@@ -7,6 +8,7 @@ using Smart.FA.Catalog.Web.ViewModels.Trainers;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin.Trainers;
 
+[Authorize(Policy = "AtLeastOneValidUserChartApproved")]
 public class ProfileModel : AdminPage
 {
     public IUserIdentity UserIdentity { get; }

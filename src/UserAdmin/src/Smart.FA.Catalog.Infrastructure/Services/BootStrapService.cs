@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Smart.FA.Catalog.Core.Domain;
+using Smart.FA.Catalog.Core.Domain.Factories;
 using Smart.FA.Catalog.Core.Domain.User.Enumerations;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
 using Smart.FA.Catalog.Core.Services;
@@ -28,13 +29,38 @@ public class BootStrapService : IBootStrapService
     public async Task AddDefaultTrainerProfilePictureImage(string webRootPath)
     {
         using var serviceScope = _factory.CreateScope();
-        var storageService = serviceScope.ServiceProvider.GetRequiredService<IS3StorageService>();
         var s3StorageOptions = serviceScope.ServiceProvider.GetRequiredService<IOptions<S3StorageOptions>>();
         var fileName = s3StorageOptions.Value.DefaultTrainerProfilePictureName;
+        var filePath = Path.Combine(webRootPath, "default_image.jpg");
 
         _logger.LogInformation("Seeding storage service with default image for trainer profile under the name {FileName} with url {ServiceUrl} ", fileName, s3StorageOptions.Value.AWS.ServiceUrl);
 
-        var filePath = Path.Combine(webRootPath, "default_image.jpg");
+        await UploadDefaultDocumentToS3Storage(filePath, fileName);
+    }
+
+    /// <inheritdoc />
+    public async Task AddDefaultUserChart(string webRootPath, string userChartName)
+    {
+        using var serviceScope = _factory.CreateScope();
+        var catalogContext = serviceScope.ServiceProvider.GetRequiredService<CatalogContext>();
+        var userChart = await catalogContext.UserCharts.OrderByDescending(userChart => userChart.CreatedAt).FirstOrDefaultAsync();
+        if (userChart is null)
+        {
+            throw new Exception("There are no user charts in DB");
+        }
+
+        var filePath = Path.Combine(webRootPath, "default_user_chart.pdf");
+
+        _logger.LogInformation("Seeding storage service with default image for user chart under the name {FileName}", userChartName);
+
+        await UploadDefaultDocumentToS3Storage(filePath, userChartName);
+    }
+
+    private async Task UploadDefaultDocumentToS3Storage(string filePath, string fileName)
+    {
+        using var serviceScope = _factory.CreateScope();
+        var storageService = serviceScope.ServiceProvider.GetRequiredService<IS3StorageService>();
+
         var file = File.OpenRead(filePath);
 
         await storageService.UploadAsync(file, fileName, CancellationToken.None);
@@ -69,7 +95,7 @@ public class BootStrapService : IBootStrapService
     /// <returns>A task representing the asynchronous operation. The task's result is a boolean whose value tells if the operation was successful.</returns>
     private async Task<bool> SafeApplyMigrationsAndSeedWithRetriesAsync(CatalogContext catalogContext, IDbConnection currentConnection)
     {
-        int DelayToWaitBetweenRetriesInMilliseconds(int retryAttempt) => (int)(Math.Max(5 - retryAttempt, 0) + Math.Pow(2, Math.Min(retryAttempt, 5))) * 1_000;
+        int DelayToWaitBetweenRetriesInMilliseconds(int retryAttempt) => (int) (Math.Max(5 - retryAttempt, 0) + Math.Pow(2, Math.Min(retryAttempt, 5))) * 1_000;
         for (var retryAttempt = 0; retryAttempt < 6; retryAttempt++)
         {
             if (await SafeApplyMigrationsAndSeedAsync(catalogContext))
@@ -104,18 +130,15 @@ public class BootStrapService : IBootStrapService
 
     private async Task SeedDatabaseAsync(CatalogContext catalogContext)
     {
-        await SeedTrainersAsync(catalogContext);
+        await SeedUserChartAsync(catalogContext);
     }
 
-    //TODO implementation an actual non hardcoded mechanism.
-    private Task SeedTrainersAsync(CatalogContext catalogContext)
+    private async Task SeedUserChartAsync(CatalogContext catalogContext)
     {
-        var trainer = new Trainer(Name.Create("Victor", "vD").Value,
-            TrainerIdentity.Create("1", ApplicationType.Default).Value,
-            "Developer",
-            "Hello I am Victor van Duynen",
-            Language.Create("FR").Value);
-        catalogContext.Trainers.Add(trainer);
-        return catalogContext.SaveChangesAsync();
+        if (!catalogContext.UserCharts.Any())
+        {
+            catalogContext.UserCharts.Add(UserChartFactory.CreateDefault());
+            await catalogContext.SaveChangesAsync();
+        }
     }
 }

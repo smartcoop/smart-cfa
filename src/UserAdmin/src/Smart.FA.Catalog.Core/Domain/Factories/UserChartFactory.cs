@@ -2,5 +2,5 @@
 
 public static class UserChartFactory
 {
-    public static UserChartRevision CreateDefault() => new ("default", "V1", DateTime.UtcNow, null);
+    public static UserChart CreateDefault() => new UserChart("default", "V1", null, null);
 }
