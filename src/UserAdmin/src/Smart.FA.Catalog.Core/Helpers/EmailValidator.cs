@@ -369,7 +369,7 @@ public static class EmailValidator
         int index = 0;
 
         if (email == null)
-            throw new ArgumentNullException(nameof(email));
+            return false;
 
         if (email.Length == 0 || email.Length > 254)
             return false;

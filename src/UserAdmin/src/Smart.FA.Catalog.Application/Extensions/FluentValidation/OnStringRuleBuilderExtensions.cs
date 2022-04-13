@@ -12,9 +12,10 @@ public static class OnStringRuleBuilderExtensions
     /// <typeparam name="T">Type of the object being validated.</typeparam>
     /// <param name="ruleBuilder">The <see cref="IRuleBuilder{T,TProperty}" /> on which is applied the rule.</param>
     /// <returns>The source builder source, namely <paramref name="ruleBuilder" />.</returns>
-    public static IRuleBuilder<T, string?> ValidEmail<T>(this IRuleBuilder<T, string?> ruleBuilder)
+    public static IRuleBuilder<T, string?> ValidEmail<T>(this IRuleBuilderInitial<T, string?> ruleBuilder)
     {
         return ruleBuilder
+            .Cascade(CascadeMode.Stop)
             .NotEmpty()
             .WithMessage(CatalogResources.EmailIsRequired)
             .Must(email => EmailValidator.Validate(email))
