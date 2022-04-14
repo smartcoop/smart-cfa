@@ -373,4 +373,16 @@
   <data name="ProfilePage_Image_WrongFileType" xml:space="preserve">
     <value>Le fichier est du mauvais type</value>
   </data>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>Êtes vous sûr-e ?</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="YouAreAboutToDeleteTraining" xml:space="preserve">
+    <value>Vous êtes sur le point de supprimer la formation</value>
+  </data>
 </root>
