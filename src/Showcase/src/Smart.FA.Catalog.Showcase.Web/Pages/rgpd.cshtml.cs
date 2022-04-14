@@ -1,12 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Smart.FA.Catalog.Showcase.Web.Pages
+namespace Smart.FA.Catalog.Showcase.Web.Pages;
+
+public class RgpdModel : PageModel
 {
-    public class rgpdModel : PageModel
+    public void OnGet()
     {
-        public void OnGet()
-        {
-        }
     }
 }
