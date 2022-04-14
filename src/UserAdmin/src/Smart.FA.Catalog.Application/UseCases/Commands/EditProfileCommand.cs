@@ -10,9 +10,7 @@ using Smart.FA.Catalog.Application.Extensions;
 using Smart.FA.Catalog.Application.Extensions.FluentValidation;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Core.Domain;
-using Smart.FA.Catalog.Core.Domain.Enumerations;
 using Smart.FA.Catalog.Core.Extensions;
-using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 using Smart.FA.Catalog.Infrastructure.Services.Options;
 using Smart.FA.Catalog.Shared.Domain.Enumerations;
@@ -173,6 +171,7 @@ public class EditProfileCommandValidator : AbstractValidator<EditProfileCommand>
 
         RuleFor(command => command.Email)
             .ValidEmail();
+
         When(request => request.ProfilePicture is not null,
             () => RuleFor(request => request.ProfilePicture!)
                 .Cascade(CascadeMode.Stop)
