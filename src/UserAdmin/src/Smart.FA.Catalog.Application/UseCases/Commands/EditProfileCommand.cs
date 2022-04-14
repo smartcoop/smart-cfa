@@ -170,6 +170,9 @@ public class EditProfileCommandValidator : AbstractValidator<EditProfileCommand>
             .WithMessage(CatalogResources.BioCannotExceed500Chars);
 
         RuleFor(command => command.Email)
+            .Cascade(CascadeMode.Stop)
+            .NotEmpty()
+            .WithMessage(CatalogResources.EmailIsRequired)
             .ValidEmail();
 
         When(request => request.ProfilePicture is not null,

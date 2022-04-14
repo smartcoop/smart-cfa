@@ -364,7 +364,7 @@ public static class EmailValidator
     /// <exception cref="System.ArgumentNullException">
     /// <paramref name="email"/> is <c>null</c>.
     /// </exception>
-    public static bool Validate(string email, bool allowTopLevelDomains = false, bool allowInternational = false)
+    public static bool Validate(string? email, bool allowTopLevelDomains = false, bool allowInternational = false)
     {
         int index = 0;
 
