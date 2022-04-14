@@ -1,7 +1,13 @@
 $(document).ready(
+    // This is used only by the creation and edition page therefore it could be moved somewhere else.
+    // If one has the heart to do so he/she is welcome :).
+    // Btw try avoiding jQuery please :(.
     function(event)
     {
         let validateButton = document.getElementById("Save");
+        if (!validateButton) {
+           return;
+        }
         validateButton.addEventListener("click", function(e)
         {
             let model = document.getElementById("isDraft");
