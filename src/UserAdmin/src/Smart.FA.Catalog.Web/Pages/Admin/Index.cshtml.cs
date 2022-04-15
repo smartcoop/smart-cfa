@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Smart.FA.Catalog.Application.UseCases.Commands;
@@ -50,6 +49,6 @@ public class IndexModel : AdminPage
 
         // If we ever find ourselves in a case where no user chart can be retrieved from storage, we should display the base user chart in wwwroot (to avoid any legal conflict)
         // However it also means it should be updated regularly
-        return response.LastUserChartUrl?.ToString() ?? "/default_user_chart.pdf";
+        return response.LatestUserChartUrl?.ToString() ?? "/default_user_chart.pdf";
     }
 }

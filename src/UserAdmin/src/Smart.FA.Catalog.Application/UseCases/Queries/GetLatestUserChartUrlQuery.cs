@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Smart.FA.Catalog.Application.Extensions;
 using Smart.FA.Catalog.Application.SeedWork;
@@ -26,7 +25,7 @@ public class GetLatestUserChartUrlQuery : IRequestHandler<GetLatestUserChartUrlR
     public async Task<GetLatestUserChartUrlResponse> Handle(GetLatestUserChartUrlRequest request, CancellationToken cancellationToken)
     {
         GetLatestUserChartUrlResponse response = new();
-        var userChart = await _catalogContext.UserCharts.GetLatestOrDefault(cancellationToken);
+        var userChart = await _catalogContext.UserCharts.GetLatestCreatedOrDefault(cancellationToken);
 
         if (userChart is null)
         {
@@ -35,7 +34,7 @@ public class GetLatestUserChartUrlQuery : IRequestHandler<GetLatestUserChartUrlR
 
         var userChartUrl = _storageService.GetPreSignedUrl(userChart.GenerateUserChartName(), DateTime.UtcNow.AddHours(1))!;
 
-        response.LastUserChartUrl = ReplaceWithGlobalHost(userChartUrl);
+        response.LatestUserChartUrl = ReplaceWithGlobalHost(userChartUrl);
         response.SetSuccess();
         return response;
     }
@@ -70,5 +69,5 @@ public class GetLatestUserChartUrlRequest : IRequest<GetLatestUserChartUrlRespon
 
 public class GetLatestUserChartUrlResponse : ResponseBase
 {
-    public Uri? LastUserChartUrl { get; set; } = null!;
+    public Uri? LatestUserChartUrl { get; set; } = null!;
 }
