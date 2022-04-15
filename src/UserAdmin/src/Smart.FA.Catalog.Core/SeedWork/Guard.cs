@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using Smart.FA.Catalog.Core.Exceptions;
 using Smart.FA.Catalog.Core.Helpers;
 
 namespace Smart.FA.Catalog.Core.SeedWork;
@@ -9,7 +8,7 @@ public static class Guard
     public static void Requires(Func<bool> predicate, string message)
     {
         if (predicate()) return;
-        throw new GuardClauseException(Errors.General.GuardClauseBlockage(message));
+        throw new Exception(message);
     }
 
     [Conditional("DEBUG")]
