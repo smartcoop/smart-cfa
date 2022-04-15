@@ -154,4 +154,9 @@ public class Trainer : Entity, IAggregateRoot
     }
 
     #endregion
+
+    public override string ToString()
+    {
+        return Name.ToString();
+    }
 }

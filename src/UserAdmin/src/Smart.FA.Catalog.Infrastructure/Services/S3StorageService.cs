@@ -75,7 +75,6 @@ public class S3StorageService : IS3StorageService
     public Uri? GetPreSignedUrl(string fileName, DateTime expirationDate)
     {
         var absoluteUrl =_client.GetPreSignedURL(new GetPreSignedUrlRequest {Key = fileName, BucketName = _options.ImageBucketName, Expires = expirationDate}) ?? null;
-        var uri = absoluteUrl is null ? null : new Uri(absoluteUrl);
-        return uri;
+        return  absoluteUrl is null ? null : new Uri(absoluteUrl);
     }
 }

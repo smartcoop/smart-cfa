@@ -5,26 +5,26 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
-    public partial class Add_UserChartRevision_Approval_To_Trainer : Migration
+    public partial class Add_UserChart_Approval_To_Trainer : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "UserChartRevision",
+                name: "UserChart",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Version = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(255)", nullable: false),
-                    ValidFrom = table.Column<DateTime>(type: "datetime2(0)", nullable: false),
-                    ValidUntil = table.Column<DateTime>(type: "datetime2(0)", nullable: true),
+                    ValidityDate = table.Column<DateTime>(type: "datetime2(0)", nullable: true),
+                    ExpirationDate = table.Column<DateTime>(type: "datetime2(0)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserChartRevision", x => x.Id);
+                    table.PrimaryKey("PK_UserChart", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -44,9 +44,9 @@ namespace Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TrainerApproval_UserChartRevision_UserChartId",
+                        name: "FK_TrainerApproval_UserChart_UserChartId",
                         column: x => x.UserChartId,
-                        principalTable: "UserChartRevision",
+                        principalTable: "UserChart",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -63,7 +63,7 @@ namespace Infrastructure.Migrations
                 name: "TrainerApproval");
 
             migrationBuilder.DropTable(
-                name: "UserChartRevision");
+                name: "UserChart");
         }
     }
 }
