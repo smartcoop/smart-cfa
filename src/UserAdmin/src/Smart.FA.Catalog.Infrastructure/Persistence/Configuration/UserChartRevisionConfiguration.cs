@@ -5,21 +5,21 @@ using Smart.FA.Catalog.Infrastructure.Persistence.Configuration.EntityConfigurat
 
 namespace Smart.FA.Catalog.Infrastructure.Persistence.Configuration;
 
-public class UserChartConfiguration: EntityConfigurationBase<UserChart>
+public class UserChartConfiguration: EntityConfigurationBase<UserChartRevision>
 {
-    public override void Configure(EntityTypeBuilder<UserChart> builder)
+    public override void Configure(EntityTypeBuilder<UserChartRevision> builder)
     {
         base.Configure(builder);
         builder.Property(userChart => userChart.Title).HasColumnType("nvarchar(255)");
         builder.Property(userChart => userChart.Version).HasColumnType("nvarchar(50)");
-        builder.Property(userChart => userChart.ExpirationDate).IsRequired(false).HasColumnType("datetime2(0)");
-        builder.Property(userChart => userChart.ValidityDate).IsRequired(false).HasColumnType("datetime2(0)");
+        builder.Property(userChart => userChart.ValidFrom).HasColumnType("datetime2(0)");
+        builder.Property(userChart => userChart.ValidUntil).IsRequired(false).HasColumnType("datetime2(0)");
 
         builder.HasMany(userChart => userChart.TrainerApprovals)
-            .WithOne(approval => approval.UserChart)
+            .WithOne(approval => approval.UserChartRevision)
             .HasForeignKey(approval => approval.UserChartId);
 
-        builder.ToTable("UserChart");
+        builder.ToTable("UserChartRevision");
 
     }
 }

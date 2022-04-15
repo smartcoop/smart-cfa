@@ -12,8 +12,8 @@ using Smart.FA.Catalog.Infrastructure.Persistence;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    [Migration("20220415152311_Add_UserChartRevision_Approval_To_Trainer")]
-    partial class Add_UserChartRevision_Approval_To_Trainer
+    [Migration("20220415155319_Add_UserChartRevision_To_Trainer")]
+    partial class Add_UserChartRevision_To_Trainer
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

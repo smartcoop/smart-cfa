@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.DependencyInjection;
 using Smart.FA.Catalog.Application.Models.Options;
 using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Web.Identity;
@@ -21,7 +20,7 @@ public static class ServiceCollectionExtensions
     {
         services.Configure<AdminOptions>(configuration.GetSection(AdminOptions.SectionName));
         services.Configure<MediatROptions>(configuration.GetSection(MediatROptions.SectionName));
-        services.AddScoped<IAuthorizationHandler, UserChartApprovalHandler>();
+        services.AddScoped<IAuthorizationHandler, UserChartRevisionApprovalHandler>();
 
         return services;
     }

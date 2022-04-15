@@ -13,7 +13,7 @@ public class IndexModel : AdminPage
 
     public async Task<IActionResult> OnGetAsync()
     {
-        if (HttpContext.Request.Cookies.TryGetValue("AtLeastOneValidUserChartApproved", out _))
+        if (HttpContext.Request.Cookies.TryGetValue("AtLeastOneValidUserChartRevisionApproved", out _))
         {
             return RedirectToPage("/Admin/Trainings/List/Index");
         }
@@ -45,7 +45,7 @@ public class IndexModel : AdminPage
 
     public async Task<string> GetLastChartUrl()
     {
-        var response = await Mediator.Send(new GetLatestUserChartUrlRequest());
+        var response = await Mediator.Send(new GetLatestUserChartRevisionUrlRequest());
 
         // If we ever find ourselves in a case where no user chart can be retrieved from storage, we should display the base user chart in wwwroot (to avoid any legal conflict)
         // However it also means it should be updated regularly

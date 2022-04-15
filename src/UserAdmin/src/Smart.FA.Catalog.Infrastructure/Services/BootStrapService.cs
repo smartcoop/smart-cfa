@@ -41,10 +41,10 @@ public class BootStrapService : IBootStrapService
     {
         using var serviceScope = _factory.CreateScope();
         var catalogContext = serviceScope.ServiceProvider.GetRequiredService<CatalogContext>();
-        var userChart = await catalogContext.UserCharts.OrderByDescending(userChart => userChart.CreatedAt).FirstOrDefaultAsync();
+        var userChart = await catalogContext.UserChartRevisions.OrderByDescending(userChart => userChart.CreatedAt).FirstOrDefaultAsync();
         if (userChart is null)
         {
-            throw new UserChartException(Errors.UserChart.DontExist);
+            throw new UserChartRevisionException(Errors.UserChartRevision.DontExist);
         }
 
         var filePath = Path.Combine(webRootPath, "default_user_chart.pdf");
@@ -133,9 +133,9 @@ public class BootStrapService : IBootStrapService
 
     private async Task SeedUserChartAsync(CatalogContext catalogContext)
     {
-        if (!catalogContext.UserCharts.Any())
+        if (!catalogContext.UserChartRevisions.Any())
         {
-            catalogContext.UserCharts.Add(UserChartFactory.CreateDefault());
+            catalogContext.UserChartRevisions.Add(UserChartRevisionFactory.CreateDefault());
             await catalogContext.SaveChangesAsync();
         }
     }

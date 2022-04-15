@@ -1,13 +1,11 @@
-using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Smart.FA.Catalog.Core.Domain.Models;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.Create;
 
-[Authorize(Policy = "AtLeastOneValidUserChartApproved")]
+[Authorize(Policy = "AtLeastOneValidUserChartRevisionApproved")]
 public class CreateModel : AdminPage
 {
     private readonly ILogger<CreateModel> _logger;

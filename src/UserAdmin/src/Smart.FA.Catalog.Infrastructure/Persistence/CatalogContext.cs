@@ -20,7 +20,7 @@ public class CatalogContext : DbContext
 
     public DbSet<Training> Trainings { get; set; } = null!;
 
-    public DbSet<UserChartRevision> UserCharts { get; set; } = null!;
+    public DbSet<UserChartRevision> UserChartRevisions { get; set; } = null!;
 
     public DbSet<TrainerAssignment> TrainerAssignments { get; set; } = null!;
 

@@ -9,27 +9,27 @@ using Smart.FA.Catalog.Infrastructure.Persistence;
 
 namespace Smart.FA.Catalog.Application.UseCases.Queries;
 
-public class GetLatestUserChartUrlQuery : IRequestHandler<GetLatestUserChartUrlRequest, GetLatestUserChartUrlResponse>
+public class GetLatestUserChartRevisionUrlQuery : IRequestHandler<GetLatestUserChartRevisionUrlRequest, GetLatestUserChartRevisionUrlResponse>
 {
-    private readonly ILogger<GetLatestUserChartUrlQuery> _logger;
+    private readonly ILogger<GetLatestUserChartRevisionUrlQuery> _logger;
     private readonly CatalogContext _catalogContext;
     private readonly IS3StorageService _storageService;
 
-    public GetLatestUserChartUrlQuery(ILogger<GetLatestUserChartUrlQuery> logger, CatalogContext catalogContext, IS3StorageService storageService)
+    public GetLatestUserChartRevisionUrlQuery(ILogger<GetLatestUserChartRevisionUrlQuery> logger, CatalogContext catalogContext, IS3StorageService storageService)
     {
         _logger = logger;
         _catalogContext = catalogContext;
         _storageService = storageService;
     }
 
-    public async Task<GetLatestUserChartUrlResponse> Handle(GetLatestUserChartUrlRequest request, CancellationToken cancellationToken)
+    public async Task<GetLatestUserChartRevisionUrlResponse> Handle(GetLatestUserChartRevisionUrlRequest request, CancellationToken cancellationToken)
     {
-        GetLatestUserChartUrlResponse response = new();
-        var userChart = await _catalogContext.UserCharts.GetLatestCreatedOrDefault(cancellationToken);
+        GetLatestUserChartRevisionUrlResponse response = new();
+        var userChart = await _catalogContext.UserChartRevisions.GetLatestCreatedOrDefault(cancellationToken);
 
         if (userChart is null)
         {
-            throw new UserChartException(Errors.UserChart.DontExist);
+            throw new UserChartRevisionException(Errors.UserChartRevision.DontExist);
         }
 
         var userChartUrl = _storageService.GetPreSignedUrl(userChart.GenerateUserChartName(), DateTime.UtcNow.AddHours(1))!;
@@ -63,11 +63,11 @@ public class GetLatestUserChartUrlQuery : IRequestHandler<GetLatestUserChartUrlR
     }
 }
 
-public class GetLatestUserChartUrlRequest : IRequest<GetLatestUserChartUrlResponse>
+public class GetLatestUserChartRevisionUrlRequest : IRequest<GetLatestUserChartRevisionUrlResponse>
 {
 }
 
-public class GetLatestUserChartUrlResponse : ResponseBase
+public class GetLatestUserChartRevisionUrlResponse : ResponseBase
 {
     public Uri? LatestUserChartUrl { get; set; } = null!;
 }
