@@ -2,7 +2,6 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 using Smart.FA.Catalog.Core.SeedWork;
 
 namespace Smart.FA.Catalog.Web.Pages;
