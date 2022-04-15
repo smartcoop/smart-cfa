@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Core.Domain;
+using Smart.FA.Catalog.Core.LogEvents;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 
 namespace Smart.FA.Catalog.Application.UseCases.Commands;
@@ -17,15 +18,19 @@ public class UploadUserChartCommand : IRequestHandler<UploadUserChartRequest, Up
         _context = context;
     }
 
-    public Task<UploadUserChartResponse> Handle(UploadUserChartRequest request, CancellationToken cancellationToken)
+    public async Task<UploadUserChartResponse> Handle(UploadUserChartRequest request, CancellationToken cancellationToken)
     {
         UploadUserChartResponse response = new();
         UserChart userChart = new(request.Title, request.Version, request.ValidityDate, request.ExpirationDate);
         _context.UserCharts.Add(userChart);
+        await _context.SaveChangesAsync(cancellationToken);
+
+        _logger.LogInformation(LogEventIds.UserChartCreated, "A new user chart with title {Title} version {Version} has been uploaded", request.Title, request.Version);
+
         response.UserChart = userChart;
         response.SetSuccess();
 
-        return Task.FromResult(response);
+        return response;
     }
 }
 

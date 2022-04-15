@@ -3,10 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.Factories;
-using Smart.FA.Catalog.Core.Domain.User.Enumerations;
-using Smart.FA.Catalog.Core.Domain.ValueObjects;
+using Smart.FA.Catalog.Core.Exceptions;
 using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 using Smart.FA.Catalog.Infrastructure.Services.Options;
@@ -46,7 +44,7 @@ public class BootStrapService : IBootStrapService
         var userChart = await catalogContext.UserCharts.OrderByDescending(userChart => userChart.CreatedAt).FirstOrDefaultAsync();
         if (userChart is null)
         {
-            throw new Exception("There are no user charts in DB");
+            throw new UserChartException(Errors.UserChart.DontExist);
         }
 
         var filePath = Path.Combine(webRootPath, "default_user_chart.pdf");

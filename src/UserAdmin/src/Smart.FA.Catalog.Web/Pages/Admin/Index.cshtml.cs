@@ -40,14 +40,16 @@ public class IndexModel : AdminPage
             ModelState.AddModelError(string.Empty, CatalogResources.AdminHomePage_HasNotAcceptedUserChart);
         }
 
-        await Mediator.Send(new SetTrainerHasAcceptedLastUserChartRequest {TrainerId = UserIdentity.Id});
+        await Mediator.Send(new SetTrainerHasAcceptedLatestUserChartRequest {TrainerId = UserIdentity.Id});
         return RedirectToPage("/Admin/Trainings/List/Index");
     }
 
     public async Task<string> GetLastChartUrl()
     {
-        var response = await Mediator.Send(new GetLastUserChartUrlRequest());
+        var response = await Mediator.Send(new GetLatestUserChartUrlRequest());
 
-        return response.LastUserChartUrl.ToString();
+        // If we ever find ourselves in a case where no user chart can be retrieved from storage, we should display the base user chart in wwwroot (to avoid any legal conflict)
+        // However it also means it should be updated regularly
+        return response.LastUserChartUrl?.ToString() ?? "/default_user_chart.pdf";
     }
 }

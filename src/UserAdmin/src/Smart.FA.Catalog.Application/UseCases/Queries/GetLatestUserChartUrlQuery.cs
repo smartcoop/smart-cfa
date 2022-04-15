@@ -3,28 +3,35 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Smart.FA.Catalog.Application.Extensions;
 using Smart.FA.Catalog.Application.SeedWork;
+using Smart.FA.Catalog.Core.Exceptions;
 using Smart.FA.Catalog.Core.Services;
+using Smart.FA.Catalog.Infrastructure.Extensions;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 
 namespace Smart.FA.Catalog.Application.UseCases.Queries;
 
-public class GetLastUserChartUrlQuery : IRequestHandler<GetLastUserChartUrlRequest, GetLastUserChartUrlResponse>
+public class GetLatestUserChartUrlQuery : IRequestHandler<GetLatestUserChartUrlRequest, GetLatestUserChartUrlResponse>
 {
-    private readonly ILogger<GetLastUserChartUrlQuery> _logger;
+    private readonly ILogger<GetLatestUserChartUrlQuery> _logger;
     private readonly CatalogContext _catalogContext;
     private readonly IS3StorageService _storageService;
 
-    public GetLastUserChartUrlQuery(ILogger<GetLastUserChartUrlQuery> logger, CatalogContext catalogContext, IS3StorageService storageService)
+    public GetLatestUserChartUrlQuery(ILogger<GetLatestUserChartUrlQuery> logger, CatalogContext catalogContext, IS3StorageService storageService)
     {
         _logger = logger;
         _catalogContext = catalogContext;
         _storageService = storageService;
     }
 
-    public async Task<GetLastUserChartUrlResponse> Handle(GetLastUserChartUrlRequest request, CancellationToken cancellationToken)
+    public async Task<GetLatestUserChartUrlResponse> Handle(GetLatestUserChartUrlRequest request, CancellationToken cancellationToken)
     {
-        GetLastUserChartUrlResponse response = new();
-        var userChart = await _catalogContext.UserCharts.OrderByDescending(userChart => userChart.CreatedAt).FirstAsync(cancellationToken);
+        GetLatestUserChartUrlResponse response = new();
+        var userChart = await _catalogContext.UserCharts.GetLatestOrDefault(cancellationToken);
+
+        if (userChart is null)
+        {
+            throw new UserChartException(Errors.UserChart.DontExist);
+        }
 
         var userChartUrl = _storageService.GetPreSignedUrl(userChart.GenerateUserChartName(), DateTime.UtcNow.AddHours(1))!;
 
@@ -40,7 +47,7 @@ public class GetLastUserChartUrlQuery : IRequestHandler<GetLastUserChartUrlReque
     /// <see cref="https://github.com/minio/minio-js/issues/514"/>
     /// <param name="baseUrl"></param>
     /// <returns></returns>
-    private Uri ReplaceWithGlobalHost(Uri? baseUrl)
+    private Uri? ReplaceWithGlobalHost(Uri? baseUrl)
     {
         var uriBuilder = baseUrl is null ? null : new UriBuilder(baseUrl);
 
@@ -53,15 +60,15 @@ public class GetLastUserChartUrlQuery : IRequestHandler<GetLastUserChartUrlReque
             uriBuilder.Host = "localhost";
         }
 
-        return uriBuilder!.Uri;
+        return uriBuilder?.Uri;
     }
 }
 
-public class GetLastUserChartUrlRequest : IRequest<GetLastUserChartUrlResponse>
+public class GetLatestUserChartUrlRequest : IRequest<GetLatestUserChartUrlResponse>
 {
 }
 
-public class GetLastUserChartUrlResponse : ResponseBase
+public class GetLatestUserChartUrlResponse : ResponseBase
 {
-    public Uri LastUserChartUrl { get; set; } = null!;
+    public Uri? LastUserChartUrl { get; set; } = null!;
 }
