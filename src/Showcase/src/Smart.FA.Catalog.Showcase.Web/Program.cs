@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+// Add localization.
+builder.Services.AddShowcaseLocalization();
 builder.Services.AddDbContext<CatalogShowcaseContext>((_, efOptions) =>
 {
     efOptions.UseSqlServer(builder.Configuration.GetConnectionString("Catalog"));
