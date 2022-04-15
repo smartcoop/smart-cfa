@@ -47,7 +47,7 @@ builder.Services
         builder.Configuration.GetSection("EFCore"),
         builder.Configuration.GetSection("S3Storage"));
 
-builder.Services.AddAuthorization(options => { options.AddPolicy("AtLeastOneValidUserChartRevisionApproved", policy => { policy.Requirements.Add(new AtLeastOneValidUserChartRevisionApprovalRequirement()); }); });
+builder.Services.AddAuthorization(options => { options.AddPolicy(Smart.FA.Catalog.Web.Policies.List.AtLeastOneValidUserChartRevisionApproval, policy => { policy.Requirements.Add(new AtLeastOneValidUserChartRevisionApprovalRequirement()); }); });
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>

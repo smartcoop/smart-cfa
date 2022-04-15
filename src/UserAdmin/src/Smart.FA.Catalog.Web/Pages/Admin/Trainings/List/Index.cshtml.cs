@@ -12,7 +12,7 @@ using Smart.FA.Catalog.Web.Options;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.List;
 
-[Authorize(Policy = "AtLeastOneValidUserChartRevisionApproved")]
+[Authorize(Policy = Policies.List.AtLeastOneValidUserChartRevisionApproval)]
 public class ListModel : AdminPage
 {
     private readonly CatalogContext _context;

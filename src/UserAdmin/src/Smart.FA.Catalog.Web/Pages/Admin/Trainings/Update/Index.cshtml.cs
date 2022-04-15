@@ -6,7 +6,7 @@ using Smart.FA.Catalog.Core.Domain.Models;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.Update;
 
-[Authorize(Policy = "AtLeastOneValidUserChartRevisionApproved")]
+[Authorize(Policy = Policies.List.AtLeastOneValidUserChartRevisionApproval)]
 public class UpdateModel : AdminPage
 {
     private int TrainingId { get; set; }

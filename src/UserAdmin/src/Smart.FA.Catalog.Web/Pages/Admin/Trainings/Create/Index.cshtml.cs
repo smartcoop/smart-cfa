@@ -5,7 +5,7 @@ using Smart.FA.Catalog.Core.Domain.Models;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.Create;
 
-[Authorize(Policy = "AtLeastOneValidUserChartRevisionApproved")]
+[Authorize(Policy = Policies.List.AtLeastOneValidUserChartRevisionApproval)]
 public class CreateModel : AdminPage
 {
     private readonly ILogger<CreateModel> _logger;
