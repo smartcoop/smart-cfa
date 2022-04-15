@@ -3,14 +3,16 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using MimeDetective;
+using MimeDetective.Definitions;
 using Smart.FA.Catalog.Application.Extensions;
 using Smart.FA.Catalog.Application.Extensions.FluentValidation;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Core.Domain;
-using Smart.FA.Catalog.Core.Domain.Enumerations;
 using Smart.FA.Catalog.Core.Extensions;
-using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Infrastructure.Persistence;
+using Smart.FA.Catalog.Infrastructure.Services.Options;
 using Smart.FA.Catalog.Shared.Domain.Enumerations;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer;
 
@@ -99,7 +101,10 @@ public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, Pro
     {
         trainer.UpdateBiography(command.Bio ?? string.Empty);
         trainer.UpdateTitle(command.Title ?? string.Empty);
-        trainer.UpdateProfileImagePath(trainer.GenerateTrainerProfilePictureName());
+        if (command.ProfilePicture is not null)
+        {
+            trainer.UpdateProfileImagePath(trainer.GenerateTrainerProfilePictureName());
+        }
 
         trainer.ChangeEmail(command.Email);
         foreach (var commandSocial in command.Socials!)
@@ -152,8 +157,12 @@ public class ProfileEditionResponse : ResponseBase
 /// </summary>
 public class EditProfileCommandValidator : AbstractValidator<EditProfileCommand>
 {
-    public EditProfileCommandValidator()
+    private readonly IOptions<S3StorageOptions> _storageOptions;
+
+    public EditProfileCommandValidator(IOptions<S3StorageOptions> storageOptions)
     {
+        _storageOptions = storageOptions;
+
         RuleFor(command => command.Bio)
             .MinimumLength(30)
             .WithMessage(CatalogResources.BioMustBe30Chars)
@@ -161,6 +170,31 @@ public class EditProfileCommandValidator : AbstractValidator<EditProfileCommand>
             .WithMessage(CatalogResources.BioCannotExceed500Chars);
 
         RuleFor(command => command.Email)
+            .Cascade(CascadeMode.Stop)
+            .NotEmpty()
+            .WithMessage(CatalogResources.EmailIsRequired)
             .ValidEmail();
+
+        When(request => request.ProfilePicture is not null,
+            () => RuleFor(request => request.ProfilePicture!)
+                .Cascade(CascadeMode.Stop)
+                .Must(IsUnderMaxSize).WithMessage(CatalogResources.ProfilePage_Image_FileTooBig)
+                .MustAsync(IsCorrectTypeAsync).WithMessage(CatalogResources.ProfilePage_Image_WrongFileType));
+    }
+
+    private async Task<bool> IsCorrectTypeAsync(IFormFile file, CancellationToken cancellationToken)
+    {
+        var mimeInspector = new ContentInspectorBuilder {Definitions = Default.FileTypes.Images.All()}.Build();
+
+        var fileStream = file.OpenReadStream();
+        MemoryStream memoryStream = new();
+        await fileStream.CopyToAsync(memoryStream, cancellationToken);
+        var result = mimeInspector.Inspect(memoryStream.ToArray());
+        return !result.IsDefaultOrEmpty;
+    }
+
+    private bool IsUnderMaxSize(IFormFile file)
+    {
+        return file.Length < _storageOptions.Value.FileSizeLimit;
     }
 }

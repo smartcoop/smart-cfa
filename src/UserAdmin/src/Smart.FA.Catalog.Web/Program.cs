@@ -3,11 +3,9 @@ using FluentValidation.AspNetCore;
 using NLog.Web;
 using Smart.FA.Catalog.Application.Extensions;
 using Smart.FA.Catalog.Application.SeedWork;
-using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Infrastructure.Extensions;
 using Smart.FA.Catalog.Web.Extensions;
 using Smart.FA.Catalog.Web.Extensions.Middlewares;
-using Smart.FA.Catalog.Web.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,7 +29,6 @@ builder.Services
     {
         configuration.RegisterValidatorsFromAssemblyContaining<Program>();
         configuration.RegisterValidatorsFromAssemblyContaining<ResponseBase>();
-        configuration.RegisterValidatorsFromAssemblyContaining<UpdateTrainerRequestValidator>();
         configuration.DisableDataAnnotationsValidation = true;
     });
 

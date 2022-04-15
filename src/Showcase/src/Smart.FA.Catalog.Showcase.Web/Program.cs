@@ -1,4 +1,5 @@
-using Smart.FA.Catalog.Showcase.Web.Extensions;
+using Microsoft.EntityFrameworkCore;
+using Smart.FA.Catalog.Showcase.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,11 @@ builder.Services.AddRazorPages();
 
 // Add localization.
 builder.Services.AddShowcaseLocalization();
+builder.Services.AddDbContext<CatalogShowcaseContext>((_, efOptions) =>
+{
+    efOptions.UseSqlServer(builder.Configuration.GetConnectionString("Catalog"));
+});
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
