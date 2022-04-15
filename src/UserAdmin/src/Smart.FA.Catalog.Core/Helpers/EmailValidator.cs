@@ -364,12 +364,12 @@ public static class EmailValidator
     /// <exception cref="System.ArgumentNullException">
     /// <paramref name="email"/> is <c>null</c>.
     /// </exception>
-    public static bool Validate(string email, bool allowTopLevelDomains = false, bool allowInternational = false)
+    public static bool Validate(string? email, bool allowTopLevelDomains = false, bool allowInternational = false)
     {
         int index = 0;
 
         if (email == null)
-            throw new ArgumentNullException(nameof(email));
+            return false;
 
         if (email.Length == 0 || email.Length > 254)
             return false;

@@ -15,8 +15,6 @@ public static class OnStringRuleBuilderExtensions
     public static IRuleBuilder<T, string?> ValidEmail<T>(this IRuleBuilder<T, string?> ruleBuilder)
     {
         return ruleBuilder
-            .NotEmpty()
-            .WithMessage(CatalogResources.EmailIsRequired)
             .Must(email => EmailValidator.Validate(email))
             .WithMessage(CatalogResources.InvalidEmail);
     }
