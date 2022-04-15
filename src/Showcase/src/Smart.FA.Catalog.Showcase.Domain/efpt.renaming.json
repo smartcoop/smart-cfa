@@ -1,38 +1,42 @@
-[
-  {
-    "SchemaName": "dbo",
-    "Tables": [
-      {
-        "Columns": [
-          {
-            "Name": "Id",
-            "NewName": "TrainingId"
-          },
-          {
-            "Name": "Title",
-            "NewName": "TrainingTitle"
-          },
-          {
-            "Name": "Language",
-            "NewName": "TrainingLanguage"
-          },
-          {
-            "Name": "FirstName",
-            "NewName": "TrainerFirstName"
-          },
-          {
-            "Name": "LastName",
-            "NewName": "TrainerLastName"
-          },
-          {
-            "Name": "Name",
-            "NewName": "TopicName"
-          }
-        ],
-        "Name": "v_TrainingList",
-        "NewName": "TrainingList"
-      }
-    ],
-    "UseSchemaName": false
-  }
+﻿[
+   {
+      "SchemaName": "dbo",
+      "Tables": [
+         {
+            "Columns": [
+               {
+                  "Name": "Id",
+                  "NewName": "TrainingId"
+               },
+               {
+                  "Name": "Title",
+                  "NewName": "TrainingTitle"
+               },
+               {
+                  "Name": "Language",
+                  "NewName": "TrainingLanguage"
+               },
+               {
+                  "Name": "FirstName",
+                  "NewName": "TrainerFirstName"
+               },
+               {
+                  "Name": "LastName",
+                  "NewName": "TrainerLastName"
+               },
+               {
+                  "Name": "TrainingTopicId",
+                  "NewName": "TrainingTopic"
+               },
+               {
+                  "Name": "StatusId",
+                  "NewName": "TrainingStatus"
+               }
+            ],
+            "Name": "v_TrainingList",
+            "NewName": "TrainingList"
+         }
+      ],
+      "UseSchemaName": false
+   }
 ]
