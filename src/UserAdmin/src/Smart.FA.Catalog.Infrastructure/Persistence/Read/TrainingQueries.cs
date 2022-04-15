@@ -3,7 +3,7 @@ using Dapper.Transaction;
 using Microsoft.Data.SqlClient;
 using Smart.FA.Catalog.Core.Domain.Dto;
 using Smart.FA.Catalog.Core.Domain.Interfaces;
-using Smart.FA.Catalog.Core.SeedWork;
+using Smart.FA.Catalog.Shared.Collections;
 
 namespace Smart.FA.Catalog.Infrastructure.Persistence.Read;
 

@@ -1,4 +1,4 @@
-namespace Smart.FA.Catalog.Core.SeedWork;
+namespace Smart.FA.Catalog.Shared.Collections;
 
 /// <summary>
 /// The recommended Pagination class for EF-MVC of Microsoft (https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/sort-filter-page?view=aspnetcore-6.0)
@@ -20,7 +20,7 @@ public class PagedList<T> : List<T>
         PageIndex = pageItem.PageIndex;
         PageSize = pageItem.PageSize;
         TotalCount = count;
-        TotalPages = (int) Math.Ceiling(TotalCount / (double) PageSize);
+        TotalPages = (int)Math.Ceiling(TotalCount / (double)PageSize);
         this.AddRange(source);
     }
 

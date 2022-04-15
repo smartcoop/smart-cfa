@@ -1,7 +1,6 @@
 using System.Diagnostics;
-using Smart.FA.Catalog.Core.Helpers;
 
-namespace Smart.FA.Catalog.Core.SeedWork;
+namespace Smart.FA.Catalog.Shared.Collections;
 
 public static class Guard
 {
