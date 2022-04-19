@@ -41,7 +41,7 @@ echo "MINIO_ROOT_PASSWORD=${DOCKER_MINIO_PASSWORD}" >> .env
 sed -e "s/{catalog-server-name}/${DOCKER_NAME}-datasource/" \
     -e "s/{catalog-server-user-id}/$USERNAME/" \
     -e "s/{catalog-server-user-password}/$PASSWORD/" \
-    -e "s/{docker_name-minio}/http:\/\/${DOCKER_NAME}-minio:9000/" \
+    -e "s/{docker_name-minio}/${DOCKER_NAME}-minio/" \
     ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.json > ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.tmp.json
 
 mv ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.tmp.json ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.json
