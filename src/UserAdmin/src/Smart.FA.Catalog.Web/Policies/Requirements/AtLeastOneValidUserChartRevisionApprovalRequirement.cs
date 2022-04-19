@@ -27,7 +27,7 @@ public class UserChartRevisionApprovalHandler : AuthorizationHandler<AtLeastOneV
 
     protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, AtLeastOneValidUserChartRevisionApprovalRequirement requirement)
     {
-        var currentDate = DateTime.UtcNow;
+        var currentDate = DateTime.UtcNow.Date;
 
         var hasTrainerValidUserChartApprovals = await _catalogContext.Trainers
             .Where(trainer => trainer.Id == _userIdentity.Id)
