@@ -11,7 +11,7 @@ public class IndexModel : AdminPage
     public IUserIdentity UserIdentity { get; }
     [BindProperty] public bool HasAcceptedUserChart { get; set; } = false;
 
-    public async Task<IActionResult> OnGetAsync()
+    public IActionResult OnGet()
     {
         if (HttpContext.Request.Cookies.TryGetValue("AtLeastOneValidUserChartRevisionApproved", out _))
         {
@@ -39,7 +39,7 @@ public class IndexModel : AdminPage
             ModelState.AddModelError(string.Empty, CatalogResources.AdminHomePage_HasNotAcceptedUserChart);
         }
 
-        await Mediator.Send(new SetTrainerHasAcceptedLatestUserChartRequest {TrainerId = UserIdentity.Id});
+        await Mediator.Send(new SetTrainerHasAcceptedLatestUserChartRequest { TrainerId = UserIdentity.Id });
         return RedirectToPage("/Admin/Trainings/List/Index");
     }
 
@@ -47,7 +47,7 @@ public class IndexModel : AdminPage
     {
         var response = await Mediator.Send(new GetLatestUserChartRevisionUrlRequest());
 
-        // If we ever find ourselves in a case where no user chart can be retrieved from storage, we should display the base user chart in wwwroot (to avoid any legal conflict)
+        // If we ever find ourselves in a case where no user chart can't be retrieved from storage, we should display the base user chart in wwwroot (to avoid any legal conflict)
         // However it also means it should be updated regularly
         return response.LatestUserChartUrl?.ToString() ?? "/default_user_chart.pdf";
     }
