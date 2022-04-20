@@ -52,7 +52,7 @@ builder.Services.AddAuthorization(options => { options.AddPolicy(Smart.FA.Catalo
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.AccessDeniedPath = "/admin";
+        options.AccessDeniedPath = new PathString("/admin");
     });
 
 builder.Services.ConfigureApplicationCookie(options => options.AccessDeniedPath = "/");
