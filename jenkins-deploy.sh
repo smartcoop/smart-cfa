@@ -35,10 +35,13 @@ echo "DOCKER_NAME=${DOCKER_NAME}" > .env
 echo "DOCKER_SQL_USER=${USERNAME}" >> .env
 echo "DOCKER_SQL_PASSWORD=${PASSWORD}" >> .env
 echo "DOCKER_ENVIRONMENT=Staging" >> .env
+echo "MINIO_ROOT_USER=${DOCKER_MINIO_USER}" >> .env
+echo "MINIO_ROOT_PASSWORD=${DOCKER_MINIO_PASSWORD}" >> .env
 
 sed -e "s/{catalog-server-name}/${DOCKER_NAME}-datasource/" \
     -e "s/{catalog-server-user-id}/$USERNAME/" \
     -e "s/{catalog-server-user-password}/$PASSWORD/" \
+    -e "s/{docker_name-minio}/${DOCKER_NAME}-minio/" \
     ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.json > ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.tmp.json
 
 mv ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.tmp.json ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.json
