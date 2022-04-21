@@ -22,7 +22,7 @@ public class SetTrainerHasAcceptedLatestUserChartRevisionCommand : IRequestHandl
     public async Task<SetTrainerHasAcceptedLatestUserChartRevisionResponse> Handle(SetTrainerHasAcceptedLatestUserChartRequest request, CancellationToken cancellationToken)
     {
         SetTrainerHasAcceptedLatestUserChartRevisionResponse response = new();
-        var latestUserChartRevision = await _context.UserChartRevisions.GetLatestCreatedOrDefault(cancellationToken);
+        var latestUserChartRevision = await _context.UserChartRevisions.GetLatestCreatedOrDefaultAsync(cancellationToken);
 
         if (latestUserChartRevision is null)
         {

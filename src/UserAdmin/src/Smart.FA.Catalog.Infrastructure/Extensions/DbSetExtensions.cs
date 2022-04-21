@@ -12,6 +12,6 @@ public static class DbSetExtensions
     /// <param name="entityDbSet"> <see cref="DbSet{TEntity}" /> The set of entities on which will be performed the operation.</param>
     /// <param name="cancellationToken">A token to cancel the asynchronous operation.</param>
     /// <returns> A task representing the asynchronous operations. The task result is a <see cref="Nullable{T}" /> with T being an <see cref="Entity" />.</returns>
-    public static async Task<TEntity?> GetLatestCreatedOrDefault<TEntity>(this DbSet<TEntity> entityDbSet, CancellationToken cancellationToken = default) where TEntity : Entity
+    public static async Task<TEntity?> GetLatestCreatedOrDefaultAsync<TEntity>(this DbSet<TEntity> entityDbSet, CancellationToken cancellationToken = default) where TEntity : Entity
         => await entityDbSet.OrderByDescending(entity => entity.CreatedAt).FirstOrDefaultAsync(cancellationToken);
 }
