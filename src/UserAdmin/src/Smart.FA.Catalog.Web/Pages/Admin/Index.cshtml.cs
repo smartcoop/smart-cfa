@@ -11,7 +11,7 @@ public class IndexModel : AdminPage
     public IUserIdentity UserIdentity { get; }
     [BindProperty] public bool HasAcceptedUserChart { get; set; } = false;
 
-    public IActionResult OnGet()
+    public ActionResult OnGet()
     {
         if (HttpContext.Request.Cookies.TryGetValue("AtLeastOneValidUserChartRevisionApproved", out _))
         {
@@ -32,11 +32,12 @@ public class IndexModel : AdminPage
         return SideMenuItem.MyTrainings;
     }
 
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<ActionResult> OnPostAsync()
     {
         if (HasAcceptedUserChart is false)
         {
             ModelState.AddModelError(string.Empty, CatalogResources.AdminHomePage_HasNotAcceptedUserChart);
+            return Page();
         }
 
         await Mediator.Send(new SetTrainerHasAcceptedLatestUserChartRequest { TrainerId = UserIdentity.Id });
