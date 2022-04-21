@@ -160,6 +160,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cliquez ici pour ajouter une formation.
+        /// </summary>
+        public static string ClickHereToAddANewTraining {
+            get {
+                return ResourceManager.GetString("ClickHereToAddANewTraining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Communication.
         /// </summary>
         public static string Communication {
@@ -840,6 +849,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string YouAreAboutToDeleteTraining {
             get {
                 return ResourceManager.GetString("YouAreAboutToDeleteTraining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vous n&apos;avez aucune formation.
+        /// </summary>
+        public static string YouDontHaveAnyTrainings {
+            get {
+                return ResourceManager.GetString("YouDontHaveAnyTrainings", resourceCulture);
             }
         }
         
