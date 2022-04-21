@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
-using Smart.FA.Catalog.Application.Extensions;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Core.Exceptions;
+using Smart.FA.Catalog.Core.Extensions;
 using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Infrastructure.Extensions;
 using Smart.FA.Catalog.Infrastructure.Persistence;
@@ -25,7 +25,7 @@ public class GetLatestUserChartRevisionUrlQuery : IRequestHandler<GetLatestUserC
     public async Task<GetLatestUserChartRevisionUrlResponse> Handle(GetLatestUserChartRevisionUrlRequest request, CancellationToken cancellationToken)
     {
         GetLatestUserChartRevisionUrlResponse response = new();
-        var userChart = await _catalogContext.UserChartRevisions.GetLatestCreatedOrDefault(cancellationToken);
+        var userChart = await _catalogContext.UserChartRevisions.GetLatestCreatedOrDefaultAsync(cancellationToken);
 
         if (userChart is null)
         {
@@ -53,10 +53,13 @@ public class GetLatestUserChartRevisionUrlQuery : IRequestHandler<GetLatestUserC
         _logger.LogInformation("Generated url for user chart pdf is {Url}", uriBuilder?.Uri.ToString() ?? string.Empty);
 
         //TODO: We will need to figure out another workaround for Dev' and Staging deployment with devops since minio is dockerized and port mapping on host machine are not allowed
-        if (uriBuilder is not null && string.Equals(uriBuilder.Host, "host.docker.internal"))
+        if (uriBuilder is not null)
         {
             uriBuilder.Scheme = "http";
-            uriBuilder.Host = "localhost";
+            if (string.Equals(uriBuilder.Host, "host.docker.internal"))
+            {
+                uriBuilder.Host = "localhost";
+            }
         }
 
         return uriBuilder?.Uri;
