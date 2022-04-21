@@ -12,6 +12,6 @@ public static class BootStrapServiceExtensions
         var environment = builder.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
         await bootstrapService.ApplyMigrationsAndSeedAsync();
         await bootstrapService.AddDefaultTrainerProfilePictureImage(environment.WebRootPath);
-        await bootstrapService.AddDefaultUserChart(environment.WebRootPath, UserChartRevisionExtensions.GenerateUserChartNameDefault());
+        await bootstrapService.AddDefaultUserChart(environment.WebRootPath);
     }
 }

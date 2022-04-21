@@ -38,7 +38,7 @@ public class BootStrapService : IBootStrapService
     }
 
     /// <inheritdoc />
-    public async Task AddDefaultUserChart(string webRootPath, string userChartName)
+    public async Task AddDefaultUserChart(string webRootPath)
     {
         using var serviceScope = _factory.CreateScope();
         var catalogContext = serviceScope.ServiceProvider.GetRequiredService<CatalogContext>();
@@ -49,6 +49,7 @@ public class BootStrapService : IBootStrapService
         }
 
         var filePath = Path.Combine(webRootPath, "default_user_chart.pdf");
+        var userChartName = userChart.GenerateUserChartName();
 
         _logger.LogInformation("Seeding storage service with default image for user chart under the name {FileName}", userChartName);
 

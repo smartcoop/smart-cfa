@@ -26,5 +26,5 @@ public interface IBootStrapService
     /// <remarks>
     /// This method should be triggered after the database seed since it relies on an actual record of the database to find the related name of the user chart
     /// </remarks>
-    Task AddDefaultUserChart(string webRootPath, string userChartName);
+    Task AddDefaultUserChart(string webRootPath);
 }
