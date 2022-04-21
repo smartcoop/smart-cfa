@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Smart.FA.Catalog.Showcase.Infrastructure.Data;
+using Smart.FA.Catalog.Showcase.Web.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
