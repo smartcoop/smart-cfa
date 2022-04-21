@@ -55,7 +55,6 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = new PathString("/admin");
     });
 
-builder.Services.ConfigureApplicationCookie(options => options.AccessDeniedPath = "/");
 var app = builder.Build();
 
 app.UseForwardedHeaders();
