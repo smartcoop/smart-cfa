@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Smart.FA.Catalog.Core.Domain.Factories;
 using Smart.FA.Catalog.Core.Exceptions;
+using Smart.FA.Catalog.Core.Extensions;
 using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 using Smart.FA.Catalog.Infrastructure.Services.Options;
@@ -51,7 +52,7 @@ public class BootStrapService : IBootStrapService
 
         _logger.LogInformation("Seeding storage service with default image for user chart under the name {FileName}", userChartName);
 
-        await UploadDefaultDocumentToS3Storage(filePath, userChartName);
+        await UploadDefaultDocumentToS3Storage(filePath, userChart.GenerateUserChartName());
     }
 
     private async Task UploadDefaultDocumentToS3Storage(string filePath, string fileName)
