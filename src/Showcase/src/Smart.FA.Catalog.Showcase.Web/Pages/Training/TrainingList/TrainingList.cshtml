@@ -39,7 +39,11 @@
                         <!-- Show all training topics -->
                         @foreach (var topic in training.Topics)
                         {
-                            <a class="training-list__category-link" asp-page="TrainingListViewModel/TrainingListViewModelList" asp-route-cat="TopicName">@topic.Id</a>
+                            <a class="training-list__category-link" asp-page="TrainingListViewModel/TrainingListViewModelList" asp-route-cat="TopicName">@topic.Name</a>
+                            if (!Equals(topic, training.Topics.Last()))
+                            {
+                                <span>, </span>
+                            }
                         }
                     </div>
                 </div>
