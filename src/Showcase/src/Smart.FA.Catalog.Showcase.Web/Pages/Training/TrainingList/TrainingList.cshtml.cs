@@ -19,7 +19,7 @@ public class TrainingListModel : PageModel
     public async Task OnGetAsync()
     {
         var trainingList = await _context.TrainingList
-            .Where(training => training.TrainingStatus == TrainingStatus.Validated.Id)
+            .Where(training => training.TrainingStatus == TrainingStatusType.Validated.Id)
             .OrderBy(t => t.TrainingId)
             .ToListAsync();
 
@@ -33,7 +33,7 @@ public class TrainingListModel : PageModel
                 TrainingTitle = groupedTraining.FirstOrDefault().TrainingTitle,
                 TrainerFirstName = groupedTraining.FirstOrDefault().TrainerFirstName,
                 TrainerLastName = groupedTraining.FirstOrDefault().TrainerLastName,
-                TrainingStatus = TrainingStatus.FromValue<TrainingStatus>(groupedTraining.FirstOrDefault().TrainingStatus),
+                TrainingStatusType = TrainingStatusType.FromValue<TrainingStatusType>(groupedTraining.FirstOrDefault().TrainingStatus),
                 Topics = groupedTraining.Select(x => TrainingTopic.FromValue<TrainingTopic>(x.TrainingTopic))
                     .ToList(),
                 TrainingLanguages = groupedTraining.Select(x => (x.TrainingLanguage)).Distinct().ToList()

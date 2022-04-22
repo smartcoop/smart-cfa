@@ -10,5 +10,5 @@ public class TrainingListViewModel
     public string TrainerLastName { get; set; }
     public List<TrainingTopic> Topics { get; set; } = new List<TrainingTopic>();
     public List<string> TrainingLanguages { get; set; } = new List<string>();
-    public TrainingStatus TrainingStatus { get; set; }
+    public TrainingStatusType TrainingStatusType { get; set; }
 }

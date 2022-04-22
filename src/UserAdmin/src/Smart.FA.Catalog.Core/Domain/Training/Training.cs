@@ -32,7 +32,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
     public virtual IReadOnlyCollection<TrainingCategory> Topics => _topics.AsReadOnly();
 
     public int TrainerCreatorId { get; }
-    public TrainingStatus Status { get; private set; } = TrainingStatus.Draft;
+    public TrainingStatusType StatusType { get; private set; } = TrainingStatusType.Draft;
      
     #endregion
 
@@ -129,7 +129,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
             return Result.Failure<Training, IEnumerable<Error>>(errors);
         }
 
-        Status = Status.Validate(_vatExemptionClaims);
+        StatusType = StatusType.Validate(_vatExemptionClaims);
 
         var trainingDetail = Details.FirstOrDefault(training => training.Language == Language.Create("EN").Value) ??
                              Details.First();

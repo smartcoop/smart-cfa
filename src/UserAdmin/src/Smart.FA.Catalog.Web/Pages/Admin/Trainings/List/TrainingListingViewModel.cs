@@ -12,22 +12,22 @@ public record TrainingListingViewModel
 
     public List<string>? Tags { get; set; }
 
-    public TrainingStatus? Status { get; set; }
+    public TrainingStatusType? Status { get; set; }
 
     public PillStatus PillStatus { get; set; }
 }
 
 public static class StatusExtension
 {
-    public static string DisplayStatusName(this TrainingStatus trainingStatus)
+    public static string DisplayStatusName(this TrainingStatusType trainingStatusType)
     {
-        if (Equals(trainingStatus, TrainingStatus.Draft))
+        if (Equals(trainingStatusType, TrainingStatusType.Draft))
             return CatalogResources.Draft;
 
-        if (Equals(trainingStatus, TrainingStatus.WaitingForValidation))
+        if (Equals(trainingStatusType, TrainingStatusType.WaitingForValidation))
             return CatalogResources.PendingValidation;
 
-        if (Equals(trainingStatus, TrainingStatus.Validated))
+        if (Equals(trainingStatusType, TrainingStatusType.Validated))
             return CatalogResources.Validated;
 
         return string.Empty;

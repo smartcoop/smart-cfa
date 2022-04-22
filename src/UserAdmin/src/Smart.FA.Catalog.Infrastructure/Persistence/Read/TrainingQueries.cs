@@ -20,7 +20,7 @@ public class TrainingQueries : ITrainingQueries
     {
         var sql = @"SELECT
 	                    T.Id 'TrainingId',
-	                    T.StatusId,
+	                    T.TrainingStatusId,
 	                    TD.Title,
 	                    TD.Goal,
                         TD.Language
@@ -40,7 +40,7 @@ public class TrainingQueries : ITrainingQueries
     {
         var sql = @"SELECT
 	                    T.Id 'TrainingId',
-	                    T.StatusId,
+	                    T.TrainingStatusId,
 	                    TD.Title,
 	                    TD.Goal,
                         TD.Language,
@@ -69,7 +69,7 @@ public class TrainingQueries : ITrainingQueries
     {
         var sql = @"SELECT
 	                    T.Id 'TrainingId',
-	                    T.StatusId,
+	                    T.StatusTypeId,
 	                    TD.Title,
 	                    TD.Goal,
                         TD.Language,
@@ -112,7 +112,7 @@ public class TrainingQueries : ITrainingQueries
         //Regroup all training records by id
         var result = list.GroupBy(dto => dto.TrainingId).Select(trainingGroup =>
             new TrainingDto(trainingGroup.Key,
-                trainingGroup.First().StatusId,
+                trainingGroup.First().StatusTypeId,
                 trainingGroup.First().Title,
                 trainingGroup.First().Goal,
                 trainingGroup.First().Language,

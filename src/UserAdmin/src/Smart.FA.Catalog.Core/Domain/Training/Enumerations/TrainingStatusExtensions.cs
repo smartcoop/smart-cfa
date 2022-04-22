@@ -2,8 +2,8 @@ using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
 namespace Smart.FA.Catalog.Core.Domain.Enumerations;
 
-public static class TrainingStatusExtensions
+public static class TrainingStatusTypeExtensions
 {
-    public static TrainingStatus Validate(this TrainingStatus status, IEnumerable<VatExemptionClaim> vatExemptionClaims)
-        => vatExemptionClaims.IsTrainingAutoValidated() ? TrainingStatus.Validated : TrainingStatus.WaitingForValidation;
+    public static TrainingStatusType Validate(this TrainingStatusType statusType, IEnumerable<VatExemptionClaim> vatExemptionClaims)
+        => vatExemptionClaims.IsTrainingAutoValidated() ? TrainingStatusType.Validated : TrainingStatusType.WaitingForValidation;
 }

@@ -34,11 +34,10 @@ internal class TrainingConfiguration : EntityConfigurationBase<Training>
         builder.HasMany(training => training.Topics)
             .WithOne(category => category.Training)
             .HasForeignKey(category => category.TrainingId);
-        builder.Property(training => training.Status)
+        builder.Property(training => training.StatusType)
             .HasConversion(status => status.Id,
-            status => Enumeration.FromValue<TrainingStatus>(status))
-            .HasColumnName("StatusId")
-            .HasColumnType("smallint");
+            status => Enumeration.FromValue<TrainingStatusType>(status))
+            .HasColumnName("StatusTypeId");
 
         builder.ToTable("Training");
     }
