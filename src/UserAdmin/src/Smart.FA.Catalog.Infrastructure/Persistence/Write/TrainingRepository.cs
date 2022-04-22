@@ -29,7 +29,7 @@ public class TrainingRepository : ITrainingRepository
     public async Task<Training?> GetFullAsync(int trainingId, CancellationToken cancellationToken)
         => await _catalogContext.Trainings.Include(training => training.TrainerAssignments)
             .Include(training => training.Details)
-            .Include(training => training.Identities)
+            .Include(training => training.VatExemptionClaims)
             .Include(training => training.Attendances)
             .Include(training => training.Targets)
             .Include(training => training.Topics)

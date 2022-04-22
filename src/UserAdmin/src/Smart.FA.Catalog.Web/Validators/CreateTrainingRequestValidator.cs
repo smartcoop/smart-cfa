@@ -62,7 +62,7 @@ public class CreateTrainingRequestValidator : AbstractValidator<CreateTrainingVi
             .NotEmpty()
             .WithMessage(CatalogResources.FieldRequired);
 
-        RuleFor(viewModel => viewModel.TrainingTypeIds)
+        RuleFor(viewModel => viewModel.VatExemptionTypeIds)
             .NotEmpty()
             .WithMessage(CatalogResources.PleaseSelectOneOption);
 

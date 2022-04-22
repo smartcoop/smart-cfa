@@ -3,30 +3,30 @@ using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
 namespace Smart.FA.Catalog.Core.Domain;
 
-public class TrainingIdentity
+public class VatExemptionClaim
 {
     #region Properties
 
     public int TrainingId { get; set; }
-    public int TrainingTypeId { get; set; }
-    public virtual TrainingType TrainingType { get; } = null!;
+    public int VatExemptionTypeId { get; set; }
+    public virtual VatExemptionType VatExemptionType { get; } = null!;
     public virtual Training Training { get; } = null!;
 
     #endregion
 
     #region Constructors
 
-    protected TrainingIdentity()
+    protected VatExemptionClaim()
     {
 
     }
 
-    public TrainingIdentity(Training training, TrainingType trainingType)
+    public VatExemptionClaim(Training training, VatExemptionType vatExemptionType)
     {
         Training = training;
-        TrainingType = trainingType;
+        VatExemptionType = vatExemptionType;
         TrainingId = training.Id;
-        TrainingTypeId = trainingType.Id;
+        VatExemptionTypeId = vatExemptionType.Id;
     }
 
     #endregion

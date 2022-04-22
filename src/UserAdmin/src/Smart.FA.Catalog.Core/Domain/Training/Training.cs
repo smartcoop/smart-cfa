@@ -14,7 +14,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
     #region Private fields
 
     private readonly List<TrainerAssignment> _trainerAssignments = new();
-    private readonly List<TrainingIdentity> _identities = new();
+    private readonly List<VatExemptionClaim> _vatExemptionClaims = new();
     private readonly List<TrainingTarget> _targets = new();
     private readonly List<TrainingDetail> _details = new();
     private readonly List<TrainingAttendance> _attendances = new();
@@ -25,7 +25,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
     #region Properties
 
     public virtual IReadOnlyCollection<TrainerAssignment> TrainerAssignments => _trainerAssignments.AsReadOnly();
-    public virtual IReadOnlyCollection<TrainingIdentity> Identities => _identities.AsReadOnly();
+    public virtual IReadOnlyCollection<VatExemptionClaim> VatExemptionClaims => _vatExemptionClaims.AsReadOnly();
     public virtual IReadOnlyCollection<TrainingTarget> Targets => _targets.AsReadOnly();
     public virtual IReadOnlyCollection<TrainingDetail> Details => _details.AsReadOnly();
     public virtual IReadOnlyCollection<TrainingAttendance> Attendances => _attendances.AsReadOnly();
@@ -33,7 +33,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
 
     public int TrainerCreatorId { get; }
     public TrainingStatus Status { get; private set; } = TrainingStatus.Draft;
-
+     
     #endregion
 
     #region Constructors
@@ -42,14 +42,14 @@ public class Training : SeedWork.Entity, IAggregateRoot
     (
         Trainer trainer
         , TrainingDetailDto detail
-        , IEnumerable<TrainingType> types
+        , IEnumerable<VatExemptionType> vatExemptionTypes
         , IEnumerable<AttendanceType> attendanceTypes
         , IEnumerable<TrainingTargetAudience> targetAudiences
         , IEnumerable<TrainingTopic> topics
     )
     {
         AddDetails(detail.Title!, detail.Goal, detail.Methodology, detail.PracticalModalities, Language.Create(detail.Language).Value);
-        SwitchTrainingTypes(types);
+        SwitchVatExemptionTypes(vatExemptionTypes);
         SwitchTargetAudience(targetAudiences);
         SwitchAttendanceTypes(attendanceTypes);
         SwitchTopics(topics);
@@ -65,12 +65,12 @@ public class Training : SeedWork.Entity, IAggregateRoot
 
     #region Public methods
 
-    public void SwitchTrainingTypes(IEnumerable<TrainingType>? trainingTypes)
+    public void SwitchVatExemptionTypes(IEnumerable<VatExemptionType>? vatExemptionTypes)
     {
-        Guard.Requires(() => trainingTypes != null, "training types should not be null");
-        _identities.Clear();
-        _identities.AddRange(trainingTypes!.Distinct()
-            .Select(trainingType => new TrainingIdentity(this, trainingType)));
+        Guard.AgainstNull(vatExemptionTypes, nameof(vatExemptionTypes));
+        _vatExemptionClaims.Clear();
+        _vatExemptionClaims.AddRange(vatExemptionTypes!.Distinct()
+            .Select(vatExemptionType => new VatExemptionClaim(this, vatExemptionType)));
     }
 
     public void SwitchTargetAudience(IEnumerable<TrainingTargetAudience>? trainingTargetAudiences)
@@ -129,7 +129,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
             return Result.Failure<Training, IEnumerable<Error>>(errors);
         }
 
-        Status = Status.Validate(_identities);
+        Status = Status.Validate(_vatExemptionClaims);
 
         var trainingDetail = Details.FirstOrDefault(training => training.Language == Language.Create("EN").Value) ??
                              Details.First();

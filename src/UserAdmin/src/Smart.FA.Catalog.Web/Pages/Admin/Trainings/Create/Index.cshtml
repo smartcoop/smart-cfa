@@ -69,12 +69,12 @@
 
             <smart-panel header="@CatalogResources.TrainingVatJustification">
                 <smart-formgroup label="@CatalogResources.TheTraining *">
-                    @foreach (var trainingType in Enumeration.GetAll<TrainingType>())
+                    @foreach (var vatExemptionType in Enumeration.GetAll<VatExemptionType>())
                     {
-                        <smart-checkbox label="@_localizer["Training_Is" + trainingType.Name]" asp-for="CreateTrainingViewModel.TrainingTypeIds" value="@trainingType.Id" checked="@(trainingType.IsContainedIn(Model.CreateTrainingViewModel.TrainingTypeIds))"></smart-checkbox>
+                        <smart-checkbox label="@_localizer["Training_Is" + vatExemptionType.Name]" asp-for="CreateTrainingViewModel.VatExemptionTypeIds" value="@vatExemptionType.Id" checked="@(vatExemptionType.IsContainedIn(Model.CreateTrainingViewModel.VatExemptionTypeIds))"></smart-checkbox>
                     }
                     <smart-checkbox label="Autre"></smart-checkbox>
-                    <smart-validation-message asp-for="CreateTrainingViewModel.TrainingTypeIds"></smart-validation-message>
+                    <smart-validation-message asp-for="CreateTrainingViewModel.VatExemptionTypeIds"></smart-validation-message>
                 </smart-formgroup>
 
                 <smart-formgroup label="@CatalogResources.TrainingTarget *">

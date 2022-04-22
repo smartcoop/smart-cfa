@@ -16,7 +16,7 @@ public static class TrainingFactory
         (
             trainer
             , new TrainingDetailDto(fixture.Create<string>(), null, "FR", null, null)
-            , new List<TrainingType> {TrainingType.Professional}
+            , new List<VatExemptionType> {VatExemptionType.Professional}
             , new List<AttendanceType> {AttendanceType.Group}
             , new List<TrainingTargetAudience> {TrainingTargetAudience.Employee}
             , new List<TrainingTopic> {TrainingTopic.Communication}
@@ -34,7 +34,7 @@ public static class TrainingFactory
         (
             trainer
             , new TrainingDetailDto(fixture.Create<string>(), null, "FR", null, null)
-            , new List<TrainingType> {TrainingType.Professional}
+            , new List<VatExemptionType> {VatExemptionType.Professional}
             , new List<AttendanceType> {AttendanceType.Group}
             , new List<TrainingTargetAudience> {TrainingTargetAudience.Employee}
             , new List<TrainingTopic> {TrainingTopic.Communication}
@@ -47,7 +47,7 @@ public static class TrainingFactory
         (
             trainer
             , new TrainingDetailDto(fixture.Create<string>(), null, "FR", null, null)
-            , new List<TrainingType> {TrainingType.LanguageCourse}
+            , new List<VatExemptionType> {VatExemptionType.LanguageCourse}
             , new List<AttendanceType> {AttendanceType.Group}
             , new List<TrainingTargetAudience> {TrainingTargetAudience.Employee}
             , new List<TrainingTopic> {TrainingTopic.Communication}

@@ -43,7 +43,7 @@ public class TrainingRepositoryTests : IntegrationTestBase
                 null,
                 null
             )
-            , new List<TrainingType> {TrainingType.LanguageCourse}
+            , new List<VatExemptionType> {VatExemptionType.LanguageCourse}
             , new List<AttendanceType> {AttendanceType.Group}
             , new List<TrainingTargetAudience> {TrainingTargetAudience.Employee}
             , new List<TrainingTopic>() {TrainingTopic.Communication}

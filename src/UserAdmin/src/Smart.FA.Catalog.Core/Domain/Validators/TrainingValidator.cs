@@ -7,7 +7,7 @@ public class TrainingValidator : AbstractValidator<Training>
 {
     public TrainingValidator()
     {
-        RuleFor(request => request.Identities)
+        RuleFor(request => request.VatExemptionClaims)
             .NotEmptyWithGenericMessage().WithMessage(Errors.General.MissingField("identity").Message);
         RuleFor(request => request.Targets)
             .NotEmptyWithGenericMessage().WithMessage(Errors.General.MissingField("target").Message);

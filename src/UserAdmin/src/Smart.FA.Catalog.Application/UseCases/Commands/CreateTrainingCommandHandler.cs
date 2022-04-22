@@ -31,7 +31,7 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingReques
         CreateTrainingResponse resp = new();
 
         var trainer = await _trainerRepository.FindAsync(request.TrainerId, cancellationToken);
-        var training = new Training(trainer, request.Detail, request.Types, request.AttendanceTypes, request.TargetAudiences, request.Topics);
+        var training = new Training(trainer, request.Detail, request.VatExemptionTypes, request.AttendanceTypes, request.TargetAudiences, request.Topics);
         if (!request.IsDraft)
         {
             var result = training.Validate();
@@ -58,7 +58,7 @@ public class CreateTrainingRequest : IRequest<CreateTrainingResponse>
     public bool IsDraft { get; set; }
     public TrainingDetailDto Detail { get; init; } = null!;
     public List<TrainingTargetAudience> TargetAudiences { get; init; } = null!;
-    public List<TrainingType> Types { get; init; } = null!;
+    public List<VatExemptionType> VatExemptionTypes { get; init; } = null!;
     public List<AttendanceType> AttendanceTypes { get; init; } = null!;
     public List<TrainingTopic> Topics { get; init; } = null!;
 }

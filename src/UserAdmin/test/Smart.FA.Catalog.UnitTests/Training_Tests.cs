@@ -161,8 +161,8 @@ public class TrainingTests
 
         var training = TrainingFactory.Create(trainer);
 
-        training.Identities.Should().NotBeNull();
-        training.Identities.Should().NotBeEmpty();
+        training.VatExemptionClaims.Should().NotBeNull();
+        training.VatExemptionClaims.Should().NotBeEmpty();
     }
 
     [Fact]
@@ -184,7 +184,7 @@ public class TrainingTests
         (
             trainer
             , new TrainingDetailDto(_fixture.Create<string>(), null, "FR", null, null)
-            , new List<TrainingType> {TrainingType.Professional}
+            , new List<VatExemptionType> {VatExemptionType.Professional}
             , new List<AttendanceType> {AttendanceType.Single}
             , new List<TrainingTargetAudience> {TrainingTargetAudience.Employee}
             , new List<TrainingTopic> {TrainingTopic.Communication}

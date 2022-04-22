@@ -49,7 +49,7 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
             if (training is null) throw new TrainingException(Errors.Training.NotFound(request.TrainingId));
 
             training.UpdateDetails(request.Detail.Title!, request.Detail.Goal!, request.Detail.Methodology!, request.Detail.PracticalModalities, Language.Create(request.Detail.Language).Value);
-            training.SwitchTrainingTypes(request.Types);
+            training.SwitchVatExemptionTypes(request.VatExemptionTypes);
             training.SwitchTargetAudience(request.TargetAudiences);
             training.SwitchAttendanceTypes(request.AttendanceTypes);
             training.SwitchTopics(request.Topics);
@@ -84,7 +84,7 @@ public class UpdateTrainingRequest : IRequest<UpdateTrainingResponse>
     public int TrainingId { get; init; }
     public TrainingDetailDto Detail { get; init; } = null!;
     public List<TrainingTargetAudience>? TargetAudiences { get; init; }
-    public List<TrainingType> Types { get; init; } = null!;
+    public List<VatExemptionType> VatExemptionTypes { get; init; } = null!;
     public List<AttendanceType> AttendanceTypes { get; init; } = null!;
     public List<TrainingTopic> Topics { get; init; } = null!;
     public List<int> TrainerIds { get; init; } = null!;
