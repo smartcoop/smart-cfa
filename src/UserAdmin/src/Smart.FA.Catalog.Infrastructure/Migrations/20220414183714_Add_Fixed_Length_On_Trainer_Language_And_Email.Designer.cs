@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 
@@ -11,9 +12,10 @@ using Smart.FA.Catalog.Infrastructure.Persistence;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220414183714_Add_Fixed_Length_On_Trainer_Language_And_Email")]
+    partial class Add_Fixed_Length_On_Trainer_Language_And_Email
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -212,56 +214,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("TrainingId", "TrainingTargetAudienceId");
 
                     b.ToTable("TrainingTarget", (string)null);
-                });
-
-            modelBuilder.Entity("Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer.SocialNetwork", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.ToTable("SocialNetwork");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Twitter"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Instagram"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Facebook"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Github"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "LinkedIn"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Personal website"
-                        });
                 });
 
             modelBuilder.Entity("Smart.FA.Catalog.Shared.Domain.Enumerations.Training.TrainingSlotNumberType", b =>
