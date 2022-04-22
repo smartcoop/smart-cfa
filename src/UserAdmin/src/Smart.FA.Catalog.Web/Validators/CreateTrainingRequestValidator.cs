@@ -66,7 +66,7 @@ public class CreateTrainingRequestValidator : AbstractValidator<CreateTrainingVi
             .NotEmpty()
             .WithMessage(CatalogResources.PleaseSelectOneOption);
 
-        RuleFor(viewModel => viewModel.TargetAudienceIds)
+        RuleFor(viewModel => viewModel.TargetAudienceTypeIds)
             .NotEmpty()
             .WithMessage(CatalogResources.SelectOneTrainingTargetAudience);
 

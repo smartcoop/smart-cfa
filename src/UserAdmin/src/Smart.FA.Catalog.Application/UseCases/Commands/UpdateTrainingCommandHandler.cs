@@ -50,7 +50,7 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
 
             training.UpdateDetails(request.DetailsDto.Title!, request.DetailsDto.Goal!, request.DetailsDto.Methodology!, request.DetailsDto.PracticalModalities, Language.Create(request.DetailsDto.Language).Value);
             training.SwitchVatExemptionTypes(request.VatExemptionTypes);
-            training.SwitchTargetAudience(request.TargetAudiences);
+            training.SwitchTargetAudience(request.TargetAudienceTypes);
             training.SwitchAttendanceTypes(request.AttendanceTypes);
             training.SwitchTopics(request.Topics);
             var trainers = await _trainerRepository.GetListAsync(request.TrainingId, cancellationToken);
@@ -83,7 +83,7 @@ public class UpdateTrainingRequest : IRequest<UpdateTrainingResponse>
 {
     public int TrainingId { get; init; }
     public TrainingLocalizedDetailsDto DetailsDto { get; init; } = null!;
-    public List<TrainingTargetAudience>? TargetAudiences { get; init; }
+    public List<TargetAudienceType>? TargetAudienceTypes { get; init; }
     public List<VatExemptionType> VatExemptionTypes { get; init; } = null!;
     public List<AttendanceType> AttendanceTypes { get; init; } = null!;
     public List<Topic> Topics { get; init; } = null!;

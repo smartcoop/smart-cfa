@@ -44,7 +44,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
         , Dto.TrainingLocalizedDetailsDto detailDto
         , IEnumerable<VatExemptionType> vatExemptionTypes
         , IEnumerable<AttendanceType> attendanceTypes
-        , IEnumerable<TrainingTargetAudience> targetAudiences
+        , IEnumerable<TargetAudienceType> targetAudiences
         , IEnumerable<Topic> topics
     )
     {
@@ -73,7 +73,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
             .Select(vatExemptionType => new VatExemptionClaim(this, vatExemptionType)));
     }
 
-    public void SwitchTargetAudience(IEnumerable<TrainingTargetAudience>? trainingTargetAudiences)
+    public void SwitchTargetAudience(IEnumerable<TargetAudienceType>? trainingTargetAudiences)
     {
         Guard.Requires(() => trainingTargetAudiences != null, "training audiences should not be null");
         _targets.Clear();

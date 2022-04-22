@@ -12,7 +12,7 @@ public class UpdateTrainingViewModel
     public string? Title { get; init; }
     public List<int>? AttendanceTypeIds { get; init; }
     public List<int>? VatExemptionClaimIds { get; init; }
-    public List<int>? TargetAudienceIds { get; init; }
+    public List<int>? TargetAudienceTypeIds { get; init; }
     public List<int>? TopicIds { get; init; }
     public string? Goal { get; init; }
     public string? Methodology { get; init; }
@@ -36,7 +36,7 @@ public static class EditTrainingViewModelMapping
                 ),
             TrainingId = trainingId
             , VatExemptionTypes = Enumeration.FromValues<VatExemptionType>(model.VatExemptionClaimIds ?? new())
-            , TargetAudiences = Enumeration.FromValues<TrainingTargetAudience>(model.TargetAudienceIds ?? new())
+            , TargetAudienceTypes = Enumeration.FromValues<TargetAudienceType>(model.TargetAudienceTypeIds ?? new())
             , AttendanceTypes = Enumeration.FromValues<AttendanceType>(model.AttendanceTypeIds ?? new())
             , Topics = Enumeration.FromValues<Topic>(model.TopicIds ?? new())
             , TrainerIds = new List<int>{trainerId},
@@ -52,7 +52,7 @@ public static class EditTrainingViewModelMapping
             Title = details?.Title,
             Methodology = details?.Methodology,
             PracticalModalities = details?.PracticalModalities,
-            TargetAudienceIds = model.Training.Targets.Select(target => target.TrainingTargetAudienceId).ToList(),
+            TargetAudienceTypeIds = model.Training.Targets.Select(target => target.TargetAudienceTypeId).ToList(),
             VatExemptionClaimIds = model.Training.VatExemptionClaims.Select(vatExemptionClaim => vatExemptionClaim.VatExemptionTypeId).ToList(),
             AttendanceTypeIds = model.Training.Attendances.Select(attendance => attendance.AttendanceTypeId).ToList(),
             TopicIds = model.Training.Topics.Select(topic => topic.TopicId).ToList()
@@ -70,7 +70,7 @@ public static class EditTrainingViewModelMapping
             Title = detail?.Title,
             Methodology = detail?.Methodology,
             PracticalModalities = detail?.PracticalModalities,
-            TargetAudienceIds = model.Training.Targets.Select(target => target.TrainingTargetAudienceId).ToList(),
+            TargetAudienceTypeIds = model.Training.Targets.Select(target => target.TargetAudienceTypeId).ToList(),
             VatExemptionClaimIds = model.Training.VatExemptionClaims.Select(identity => identity.VatExemptionTypeId).ToList(),
             AttendanceTypeIds = model.Training.Attendances.Select(attendance => attendance.AttendanceTypeId).ToList()
         };

@@ -1,0 +1,12 @@
+namespace Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
+
+public class TargetAudienceType: Enumeration
+{
+    public static readonly TargetAudienceType Employee = new(1, nameof(Employee));
+    public static readonly TargetAudienceType Student = new(2, nameof(Student));
+    public static readonly TargetAudienceType Unemployed = new(3, nameof(Unemployed));
+
+    protected TargetAudienceType(int id, string name) : base(id, name)
+    {
+    }
+}

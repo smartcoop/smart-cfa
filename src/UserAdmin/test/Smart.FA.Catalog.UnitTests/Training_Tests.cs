@@ -186,7 +186,7 @@ public class TrainingTests
             , new TrainingLocalizedDetailsDto(_fixture.Create<string>(), null, "FR", null, null)
             , new List<VatExemptionType> {VatExemptionType.Professional}
             , new List<AttendanceType> {AttendanceType.Single}
-            , new List<TrainingTargetAudience> {TrainingTargetAudience.Employee}
+            , new List<TargetAudienceType> {TargetAudienceType.Employee}
             , new List<Topic> {Topic.Communication}
         );
 

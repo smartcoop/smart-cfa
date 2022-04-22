@@ -13,7 +13,7 @@ public class CreateTrainingViewModel
     public string? Title { get; set; }
     public List<int>? AttendanceTypeIds { get; set; }
     public List<int>? VatExemptionTypeIds { get; set; }
-    public List<int>? TargetAudienceIds { get; set; }
+    public List<int>? TargetAudienceTypeIds { get; set; }
     public List<int>? TopicIds { get; set; }
     public string? Goal { get; set; }
     public string? Methodology { get; set; }
@@ -38,7 +38,7 @@ public static class CreateTrainingViewModelMapping
                 ),
             TrainerId = trainerId,
             VatExemptionTypes = Enumeration.FromValues<VatExemptionType>(model.VatExemptionTypeIds ?? new()),
-            TargetAudiences = Enumeration.FromValues<TrainingTargetAudience>(model.TargetAudienceIds ?? new()),
+            TargetAudiences = Enumeration.FromValues<TargetAudienceType>(model.TargetAudienceTypeIds ?? new()),
             AttendanceTypes = Enumeration.FromValues<AttendanceType>(model.AttendanceTypeIds ?? new()),
             Topics = Enumeration.FromValues<Topic>(model.TopicIds ?? new()),
             IsDraft = model.IsDraft

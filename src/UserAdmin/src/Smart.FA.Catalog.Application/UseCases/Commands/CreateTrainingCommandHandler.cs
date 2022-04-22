@@ -57,7 +57,7 @@ public class CreateTrainingRequest : IRequest<CreateTrainingResponse>
     public int TrainerId { get; init; }
     public bool IsDraft { get; set; }
     public TrainingLocalizedDetailsDto DetailsDto { get; init; } = null!;
-    public List<TrainingTargetAudience> TargetAudiences { get; init; } = null!;
+    public List<TargetAudienceType> TargetAudiences { get; init; } = null!;
     public List<VatExemptionType> VatExemptionTypes { get; init; } = null!;
     public List<AttendanceType> AttendanceTypes { get; init; } = null!;
     public List<Topic> Topics { get; init; } = null!;

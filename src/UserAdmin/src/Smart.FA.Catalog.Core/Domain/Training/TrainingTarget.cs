@@ -8,9 +8,9 @@ public class TrainingTarget
     #region Properties
 
     public int TrainingId { get; }
-    public int TrainingTargetAudienceId { get; }
+    public int TargetAudienceTypeId { get; }
     public virtual Training Training { get; } = null!;
-    public virtual TrainingTargetAudience TrainingTargetAudience { get; } = null!;
+    public virtual TargetAudienceType TargetAudienceType { get; } = null!;
 
     #endregion
 
@@ -21,12 +21,12 @@ public class TrainingTarget
 
     }
 
-    public TrainingTarget(Training training, TrainingTargetAudience trainingTargetAudience)
+    public TrainingTarget(Training training, TargetAudienceType targetAudienceType)
     {
         Training = training;
-        TrainingTargetAudience = trainingTargetAudience;
+        TargetAudienceType = targetAudienceType;
         TrainingId = training.Id;
-        TrainingTargetAudienceId = trainingTargetAudience.Id;
+        TargetAudienceTypeId = targetAudienceType.Id;
     }
 
     #endregion
