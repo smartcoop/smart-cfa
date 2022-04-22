@@ -112,8 +112,8 @@ public class TrainingTests
 
         action.Should().NotThrow<Exception>();
         training.Details.Should().HaveCount(2);
-        training.Details.FirstOrDefault(detail => detail.Language == language).Should().NotBeNull();
-        training.Details.FirstOrDefault(detail => detail.Language == language)!.Title.Should().Be(newTitle);
+        training.Details.FirstOrDefault(details => details.Language == language).Should().NotBeNull();
+        training.Details.FirstOrDefault(details => details.Language == language)!.Title.Should().Be(newTitle);
     }
 
 
@@ -183,7 +183,7 @@ public class TrainingTests
         var training = new Training
         (
             trainer
-            , new TrainingDetailDto(_fixture.Create<string>(), null, "FR", null, null)
+            , new TrainingLocalizedDetailsDto(_fixture.Create<string>(), null, "FR", null, null)
             , new List<VatExemptionType> {VatExemptionType.Professional}
             , new List<AttendanceType> {AttendanceType.Single}
             , new List<TrainingTargetAudience> {TrainingTargetAudience.Employee}

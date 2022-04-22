@@ -1,6 +1,6 @@
 namespace Smart.FA.Catalog.Core.Domain.Dto;
 
-public record TrainingDetailDto
+public record TrainingLocalizedDetailsDto
 (string? Title,
 string? Goal,
 string Language,

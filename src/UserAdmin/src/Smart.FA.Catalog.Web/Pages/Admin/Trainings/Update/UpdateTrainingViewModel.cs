@@ -25,8 +25,8 @@ public static class EditTrainingViewModelMapping
     public static UpdateTrainingRequest MapToUpdateRequest(this UpdateTrainingViewModel model, string language, int trainingId, int trainerId)
         => new()
         {
-            Detail =
-                new TrainingDetailDto
+            DetailsDto =
+                new TrainingLocalizedDetailsDto
                 (
                     model.Title
                     , model.Goal
@@ -45,13 +45,13 @@ public static class EditTrainingViewModelMapping
 
     public static UpdateTrainingViewModel MapGetToResponse(this GetTrainingFromIdResponse model, Language language)
     {
-        var detail = model.Training!.Details.FirstOrDefault(detail => detail.Language == language);
+        var details = model.Training!.Details.FirstOrDefault(localizedDetails => localizedDetails.Language == language);
         UpdateTrainingViewModel response = new()
         {
-            Goal = detail?.Goal,
-            Title = detail?.Title,
-            Methodology = detail?.Methodology,
-            PracticalModalities = detail?.PracticalModalities,
+            Goal = details?.Goal,
+            Title = details?.Title,
+            Methodology = details?.Methodology,
+            PracticalModalities = details?.PracticalModalities,
             TargetAudienceIds = model.Training.Targets.Select(target => target.TrainingTargetAudienceId).ToList(),
             VatExemptionClaimIds = model.Training.VatExemptionClaims.Select(vatExemptionClaim => vatExemptionClaim.VatExemptionTypeId).ToList(),
             AttendanceTypeIds = model.Training.Attendances.Select(attendance => attendance.AttendanceTypeId).ToList(),

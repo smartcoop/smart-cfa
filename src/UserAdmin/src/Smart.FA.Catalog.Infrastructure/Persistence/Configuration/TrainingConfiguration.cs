@@ -18,7 +18,7 @@ internal class TrainingConfiguration : EntityConfigurationBase<Training>
             .ValueGeneratedOnAdd();
         builder.HasMany(training => training.Details)
             .WithOne()
-            .HasForeignKey(detail => detail.TrainingId);
+            .HasForeignKey(localizedDetails => localizedDetails.TrainingId);
         builder.HasMany(training => training.VatExemptionClaims)
             .WithOne()
             .HasForeignKey(vatExemptionClaim => vatExemptionClaim.TrainingId);

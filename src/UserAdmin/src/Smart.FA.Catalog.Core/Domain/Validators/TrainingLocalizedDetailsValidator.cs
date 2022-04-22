@@ -3,9 +3,9 @@ using Smart.FA.Catalog.Core.Exceptions;
 
 namespace Smart.FA.Catalog.Core.Domain.Validators;
 
-public class TrainingDetailValidator: AbstractValidator<TrainingDetail>
+public class TrainingLocalizedDetailsValidator: AbstractValidator<TrainingLocalizedDetails>
 {
-    public TrainingDetailValidator()
+    public TrainingLocalizedDetailsValidator()
     {
         RuleFor(request => request.Title)
             .NotEmptyWithGenericMessage().WithMessage(Errors.General.MissingField("title").Message);

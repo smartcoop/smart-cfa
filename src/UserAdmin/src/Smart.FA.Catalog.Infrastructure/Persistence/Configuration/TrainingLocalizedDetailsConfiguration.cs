@@ -5,31 +5,31 @@ using Smart.FA.Catalog.Core.Domain.ValueObjects;
 
 namespace Smart.FA.Catalog.Infrastructure.Persistence.Configuration;
 
-public class TrainingDetailConfigurations : IEntityTypeConfiguration<TrainingDetail>
+public class TrainingLocalizedDetailsConfiguration : IEntityTypeConfiguration<TrainingLocalizedDetails>
 {
-    public void Configure(EntityTypeBuilder<TrainingDetail> builder)
+    public void Configure(EntityTypeBuilder<TrainingLocalizedDetails> builder)
     {
         builder
-            .HasKey(detail => new {detail.TrainingId, detail.Language});
+            .HasKey(localizedDetails => new {localizedDetails.TrainingId, localizedDetails.Language});
         builder
-            .Property(detail => detail.Title)
+            .Property(details => details.Title)
             .HasMaxLength(500);
-        builder.Property(detail => detail.Goal)
+        builder.Property(details => details.Goal)
             .HasMaxLength(1000)
             .IsRequired(false);
-        builder.Property(detail => detail.Methodology)
+        builder.Property(details => details.Methodology)
             .HasMaxLength(1000)
             .IsRequired(false);
-        builder.Property(detail => detail.PracticalModalities)
+        builder.Property(details => details.PracticalModalities)
             .HasMaxLength(1000)
             .IsRequired(false);
         builder.Property(trainer => trainer.Language)
             .HasConversion(language => language.Value,
             language => Language.Create(language).Value).HasColumnName("Language").HasColumnType("NCHAR(2)");
-        builder.HasOne(detail => detail.Training)
+        builder.HasOne(details => details.Training)
             .WithMany(training => training.Details)
-            .HasForeignKey(detail => detail.TrainingId);
+            .HasForeignKey(details => details.TrainingId);
 
-        builder.ToTable("TrainingDetail");
+        builder.ToTable("TrainingLocalizedDetails");
     }
 }

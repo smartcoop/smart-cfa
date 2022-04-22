@@ -1,10 +1,9 @@
-using System.Linq.Expressions;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
 using Smart.FA.Catalog.Core.SeedWork;
 
 namespace Smart.FA.Catalog.Core.Domain;
 
-public class TrainingDetail
+public class TrainingLocalizedDetails
 {
     #region Private fields
 
@@ -54,7 +53,7 @@ public class TrainingDetail
 
     #region Constructors
 
-    internal TrainingDetail(Training training, string title, string? goal, string? methodology, string? practicalModalities, Language language)
+    internal TrainingLocalizedDetails(Training training, string title, string? goal, string? methodology, string? practicalModalities, Language language)
     {
         Training = training;
         TrainingId = training.Id;
@@ -65,7 +64,7 @@ public class TrainingDetail
         PracticalModalities = practicalModalities;
     }
 
-    protected TrainingDetail()
+    protected TrainingLocalizedDetails()
     {
     }
 

@@ -25,7 +25,7 @@ public class TrainingQueries : ITrainingQueries
 	                    TD.Goal,
                         TD.Language
                     FROM dbo.Training T
-                    INNER JOIN dbo.TrainingDetail TD ON T.Id = TD.TrainingId
+                    INNER JOIN dbo.TrainingLocalizedDetails TD ON T.Id = TD.TrainingId
                     WHERE TD.TrainingId = @TrainingId AND TD.Language = @Language";
         await using var connection = new SqlConnection(_connectionString);
         return await connection.QuerySingleAsync<TrainingDto>(sql, new {trainingId, language});
@@ -48,7 +48,7 @@ public class TrainingQueries : ITrainingQueries
                     FROM dbo.Training T
                     INNER JOIN dbo.TrainerAssignment TE ON T.Id = TE.TrainingId
                     LEFT JOIN dbo.TrainingTopic TC ON T.Id = TC.TrainingId
-                    INNER JOIN dbo.TrainingDetail TD ON T.Id = TD.TrainingId
+                    INNER JOIN dbo.TrainingLocalizedDetails TD ON T.Id = TD.TrainingId
                     WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language ";
         await using var connection = new SqlConnection(_connectionString);
         return await connection.QueryAsync<TrainingDto, int?, TrainingDto>(sql, (dto, topicId) =>
@@ -78,7 +78,7 @@ public class TrainingQueries : ITrainingQueries
                     OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY) T
                     INNER JOIN dbo.TrainerAssignment TE ON T.Id = TE.TrainingId
                     LEFT JOIN dbo.TrainingTopic TC ON T.Id = TC.TrainingId
-                    INNER JOIN dbo.TrainingDetail TD ON T.Id = TD.TrainingId
+                    INNER JOIN dbo.TrainingLocalizedDetails TD ON T.Id = TD.TrainingId
                     WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language";
 
         var countsql = @"SELECT
@@ -86,7 +86,7 @@ public class TrainingQueries : ITrainingQueries
                         FROM (SELECT T.Id FROM dbo.Training T
                         INNER JOIN dbo.TrainerAssignment TE ON T.Id = TE.TrainingId
                         LEFT JOIN dbo.TrainingTopic TC ON T.Id = TC.TrainingId
-                        INNER JOIN dbo.TrainingDetail TD ON T.Id = TD.TrainingId
+                        INNER JOIN dbo.TrainingLocalizedDetails TD ON T.Id = TD.TrainingId
                         WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language
                         GROUP BY T.Id) A";
 

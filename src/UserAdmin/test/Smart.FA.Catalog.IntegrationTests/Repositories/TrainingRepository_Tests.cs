@@ -35,7 +35,7 @@ public class TrainingRepositoryTests : IntegrationTestBase
         var trainingToAdd = new Training
         (
             trainerToAdd
-            , new TrainingDetailDto
+            , new TrainingLocalizedDetailsDto
             (
                 _fixture.Create<string>(),
                 null,

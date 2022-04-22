@@ -27,8 +27,8 @@ public static class CreateTrainingViewModelMapping
         Language language)
         => new()
         {
-            Detail = new
-                TrainingDetailDto
+            DetailsDto = new
+                TrainingLocalizedDetailsDto
                 (
                     model.Title
                     , model.Goal
