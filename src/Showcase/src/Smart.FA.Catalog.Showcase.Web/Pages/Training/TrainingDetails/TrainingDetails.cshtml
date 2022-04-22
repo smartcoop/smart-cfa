@@ -1,8 +1,8 @@
-﻿@page
+﻿@page "Training/TrainingDetails/TrainingDetail"
 @model Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingDetails.TrainingDetailsModel
 
 @{
-    ViewData["Title"] = "TrainingDetails";
+    ViewData["Title"] = Model.Training.TrainingTitle; ;
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 

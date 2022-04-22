@@ -21,14 +21,16 @@ public class TrainingDetailsModel : PageModel
     {
         if (id == null)
         {
-            return RedirectToPage("/Error");
+            TempData["errorMessage"] = "Cette id est null";
+            return RedirectToPage("/404");
         }
 
         var trainingDetails = await _context.TrainingDetails.Where(m => m.TrainingId == id).ToListAsync();
 
         if (!trainingDetails.Any())
         {
-            return RedirectToPage("/Error");
+            TempData["errorMessage"] = "cette formation n'existe pas!";
+            return RedirectToPage("/404");
         }
 
         Training = MapTrainingDetails(trainingDetails);
@@ -37,17 +39,22 @@ public class TrainingDetailsModel : PageModel
 
     private TrainingDetailsViewModel MapTrainingDetails(List<Domain.Models.TrainingDetails> trainingDetails)
     {
-        TrainingDetailsViewModel training = new TrainingDetailsViewModel();
-        training.TrainingId = trainingDetails.FirstOrDefault().TrainingId;
-        training.TrainingGoal = trainingDetails.FirstOrDefault().TrainingGoal;
-        training.TrainingMethodology = trainingDetails.FirstOrDefault().TrainingMethodology;
-        training.TrainingTitle = trainingDetails.FirstOrDefault().TrainingTitle;
-        training.TrainerFirstName = trainingDetails.FirstOrDefault().TrainerFirstName;
-        training.TrainerLastName = trainingDetails.FirstOrDefault().TrainerLastName;
-        training.TrainingStatus = TrainingStatus.FromValue<TrainingStatus>(trainingDetails.FirstOrDefault().TrainingStatusId);
-        training.Topics = trainingDetails.Select(x => TrainingTopic.FromValue<TrainingTopic>(x.TrainingTopicId)).ToList();
-        training.TrainingLanguages = trainingDetails.Select(x => (x.TrainingLanguage)).Distinct().ToList();
+        if (trainingDetails is null)
+        {
+            return null;
+        }
 
-        return training;
+        var firstLine = trainingDetails.FirstOrDefault();
+        return new TrainingDetailsViewModel
+        {
+            TrainingId = firstLine.TrainingId,
+            TrainingGoal = firstLine.TrainingGoal,
+            TrainingMethodology = firstLine.TrainingMethodology,
+            TrainerFirstName = firstLine.TrainerFirstName,
+            TrainerLastName = firstLine.TrainerLastName,
+            TrainingStatus = TrainingStatus.FromValue<TrainingStatus>(firstLine.TrainingStatusId),
+            Topics = trainingDetails.Select(x => TrainingTopic.FromValue<TrainingTopic>(x.TrainingTopicId)).ToList(),
+            TrainingLanguages = trainingDetails.Select(x => x.TrainingLanguage).Distinct().ToList()
+        };
     }
 }
