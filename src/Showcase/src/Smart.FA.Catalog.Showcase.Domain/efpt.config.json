@@ -1,43 +1,47 @@
 ﻿{
-  "CodeGenerationMode": 0,
-  "ContextClassName": "CatalogContext",
-  "ContextNamespace": null,
-  "DefaultDacpacSchema": null,
-  "FilterSchemas": false,
-  "IncludeConnectionString": false,
-  "ModelNamespace": null,
-  "OutputContextPath": null,
-  "OutputPath": "Models",
-  "ProjectRootNamespace": "Smart.FA.Catalog.Showcase.Domain",
-  "Schemas": null,
-  "SelectedHandlebarsLanguage": 0,
-  "SelectedToBeGenerated": 2,
-  "Tables": [
-    {
-      "Name": "[dbo].[v_TrainingDetails]",
-      "ObjectType": 3
-    },
-    {
-      "Name": "[dbo].[v_TrainingList]",
-      "ObjectType": 3
-    }
-  ],
-  "UiHint": "(LocalDB)\\MSSQLLocalDB.Catalog",
-  "UseBoolPropertiesWithoutDefaultSql": false,
-  "UseDatabaseNames": false,
-  "UseDbContextSplitting": false,
-  "UseFluentApiOnly": true,
-  "UseHandleBars": false,
-  "UseHierarchyId": false,
-  "UseInflector": false,
-  "UseLegacyPluralizer": false,
-  "UseManyToManyEntity": false,
-  "UseNoConstructor": false,
-  "UseNoDefaultConstructor": false,
-  "UseNoNavigations": false,
-  "UseNoObjectFilter": false,
-  "UseNodaTime": false,
-  "UseNullableReferences": false,
-  "UseSchemaFolders": false,
-  "UseSpatial": false
+   "CodeGenerationMode": 2,
+   "ContextClassName": "CatalogShowcaseContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": "",
+   "OutputPath": "Models",
+   "ProjectRootNamespace": "Smart.FA.Catalog.Showcase.Domain",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 2,
+   "Tables": [
+      {
+         "Name": "[dbo].[v_TrainerDetails]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_TrainingDetails]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[v_TrainingList]",
+         "ObjectType": 3
+      }
+   ],
+   "UiHint": "(LocalDB)\\MSSQLLocalDB.Catalog",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
 }

@@ -14,12 +14,40 @@ public partial class CatalogShowcaseContext : DbContext
     {
     }
 
+    public virtual DbSet<TrainerDetails> TrainerDetails { get; set; }
     public virtual DbSet<TrainingDetails> TrainingDetails { get; set; }
     public virtual DbSet<TrainingList> TrainingList { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+        modelBuilder.Entity<TrainerDetails>(entity =>
+        {
+            entity.HasKey(x => new { x.Id, x.SocialNetwork });
+
+            entity.ToView("v_TrainerDetails");
+
+            entity.Property(e => e.Biography)
+                .IsRequired()
+                .HasMaxLength(1500);
+
+            entity.Property(e => e.FirstName)
+                .IsRequired()
+                .HasMaxLength(200);
+
+            entity.Property(e => e.LastName)
+                .IsRequired()
+                .HasMaxLength(200);
+
+            entity.Property(e => e.Title)
+                .IsRequired()
+                .HasMaxLength(150);
+
+            entity.Property(e => e.SocialNetwork).HasColumnName("SocialNetwork");
+
+            entity.Property(e => e.UrlToProfile).HasColumnName("UrlToProfile");
+        });
 
         modelBuilder.Entity<TrainingDetails>(entity =>
         {
@@ -80,6 +108,10 @@ public partial class CatalogShowcaseContext : DbContext
                 .IsRequired()
                 .HasMaxLength(200)
                 .HasColumnName("LastName");
+
+            entity.Property(e => e.TrainerId)
+                .IsRequired()
+                .HasColumnName("trainerId");
 
             entity.Property(e => e.TrainingId).HasColumnName("Id");
 
