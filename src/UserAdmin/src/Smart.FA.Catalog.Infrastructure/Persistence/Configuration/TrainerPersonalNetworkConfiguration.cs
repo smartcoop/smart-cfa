@@ -9,32 +9,28 @@ using Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer;
 
 namespace Smart.FA.Catalog.Infrastructure.Persistence.Configuration;
 
-public class TrainerPersonalNetworkConfiguration : EntityConfigurationBase<PersonalSocialNetwork>
+public class TrainerSocialNetworkConfiguration : IEntityTypeConfiguration<TrainerSocialNetwork>
 {
-    public override void Configure(EntityTypeBuilder<PersonalSocialNetwork> builder)
+    public void Configure(EntityTypeBuilder<TrainerSocialNetwork> builder)
     {
-        base.Configure(builder);
+        builder.ToTable("TrainerSocialNetwork");
 
-        // We don't want to have a table just called PersonalSocialNetwork.
-        // Otherwise it could be not clear to whom it is linked.
-        builder.ToTable("TrainerPersonalNetwork");
-
-        builder.HasKey(personalSocialNetwork => new
+        builder.HasKey(trainerSocialNetwork => new
         {
-            personalSocialNetwork.TrainerId, personalSocialNetwork.SocialNetwork
+            trainerSocialNetwork.TrainerId, trainerSocialNetwork.SocialNetwork
         });
 
-        builder.HasIndex(personalSocialNetwork => personalSocialNetwork.SocialNetwork);
+        builder.HasIndex(trainerSocialNetwork => trainerSocialNetwork.SocialNetwork);
 
         builder
-            .Property(personalSocialNetwork => personalSocialNetwork.SocialNetwork)
+            .Property(trainerSocialNetwork => trainerSocialNetwork.SocialNetwork)
             .HasConversion
             (
                 socialNetwork => socialNetwork.Id,
                 socialNetworkId => Enumeration.FromValue<SocialNetwork>(socialNetworkId)
-            );
+            ).HasColumnName($"{nameof(TrainerSocialNetwork)}Id");
 
-        builder.Property(p => p.UrlToProfile)
+        builder.Property(trainerSocialNetwork => trainerSocialNetwork.UrlToProfile)
             .HasMaxLength(255);
     }
 }

@@ -7,7 +7,7 @@ namespace Smart.FA.Catalog.Core.Domain;
 /// <summary>
 /// Represents a trainer's social network URL to its profile.
 /// </summary>
-public class PersonalSocialNetwork : Entity
+public class TrainerSocialNetwork
 {
     public int TrainerId { get; private set; }
 
@@ -17,17 +17,17 @@ public class PersonalSocialNetwork : Entity
 
     public virtual Trainer? Trainer { get; private set; }
 
-    protected PersonalSocialNetwork()
+    protected TrainerSocialNetwork()
     {
 
     }
 
-    public PersonalSocialNetwork(int trainerId, SocialNetwork socialNetwork, string? urlToSocialNetworkProfile)
+    public TrainerSocialNetwork(int trainerId, SocialNetwork socialNetwork, string? urlToSocialNetworkProfile)
     {
-        SetPersonalSocialNetworkInfo(trainerId, socialNetwork, urlToSocialNetworkProfile);
+        SetSocialNetworkInfo(trainerId, socialNetwork, urlToSocialNetworkProfile);
     }
 
-    public void SetPersonalSocialNetworkInfo(int trainerId, SocialNetwork? socialNetwork, string? urlToSocialNetworkProfile)
+    public void SetSocialNetworkInfo(int trainerId, SocialNetwork? socialNetwork, string? urlToSocialNetworkProfile)
     {
         Guard.Requires(() => trainerId != 0, "The trainer cannot be transient");
         Guard.AgainstNull(socialNetwork, nameof(socialNetwork));

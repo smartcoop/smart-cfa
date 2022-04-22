@@ -63,14 +63,14 @@ public class GetTrainerProfileQueryHandler : IRequestHandler<GetTrainerProfileQu
     private async Task<TrainerProfile?> GetTrainerProfileAsync(GetTrainerProfileQuery query, CancellationToken cancellationToken)
     {
         var trainer = await _catalogContext.Trainers
-            .Include(trainer => trainer.PersonalSocialNetworks)
+            .Include(trainer => trainer.SocialNetworks)
             .Select(trainer => new
             {
                 TrainerId        = trainer.Id,
                 Bio              = trainer.Biography,
                 Name             = trainer.Name.FirstName + " " + trainer.Name.LastName,
                 Title            = trainer.Title,
-                Socials          = trainer.PersonalSocialNetworks,
+                Socials          = trainer.SocialNetworks,
                 ProfileImagePath = trainer.ProfileImagePath,
                 Email            = trainer.Email
             })
@@ -127,8 +127,8 @@ public class TrainerProfile
 
 public static class Mappers
 {
-    public static IEnumerable<TrainerProfile.Social> ToTrainerProfileSocials(this IEnumerable<PersonalSocialNetwork> personalSocialNetworks)
+    public static IEnumerable<TrainerProfile.Social> ToTrainerProfileSocials(this IEnumerable<TrainerSocialNetwork> socialNetworks)
     {
-        return personalSocialNetworks.Select(socialNetwork => new TrainerProfile.Social() {SocialNetworkId = socialNetwork.SocialNetwork.Id, Url = socialNetwork.UrlToProfile});
+        return socialNetworks.Select(socialNetwork => new TrainerProfile.Social() { SocialNetworkId = socialNetwork.SocialNetwork.Id, Url = socialNetwork.UrlToProfile });
     }
 }

@@ -45,9 +45,9 @@ public class TrainerConfiguration : EntityConfigurationBase<Trainer>
         // Maximum possible length for an email is 254.
         builder.Property(trainer => trainer.Email).HasMaxLength(254);
 
-        builder.HasMany(trainer => trainer.PersonalSocialNetworks)
+        builder.HasMany(trainer => trainer.SocialNetworks)
             .WithOne(socialNetwork => socialNetwork.Trainer)
-            .HasForeignKey(personalSocialNetwork => personalSocialNetwork.TrainerId);
+            .HasForeignKey(socialNetwork => socialNetwork.TrainerId);
 
         builder.ToTable("Trainer");
     }
