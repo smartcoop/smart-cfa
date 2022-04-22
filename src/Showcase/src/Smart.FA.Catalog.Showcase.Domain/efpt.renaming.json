@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "SchemaName": "dbo",
     "Tables": [
@@ -19,6 +19,10 @@
           {
             "Name": "Goal",
             "NewName": "TrainingGoal"
+          },
+          {
+            "Name": "PracticalModalities",
+            "NewName": "TrainingPracticalModalities"
           },
           {
             "Name": "Language",
