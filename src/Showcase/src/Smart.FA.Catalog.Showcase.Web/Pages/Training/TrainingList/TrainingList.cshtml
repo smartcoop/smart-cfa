@@ -29,7 +29,7 @@
                 <div class="training-list__container-left">
                     <div class="training-list__title">
                         @*Note: asp-route-id is'nt maybe the best option. We have to decide what needs to be put in the url. Is it the training's id or name or ?*@
-                        <a class="training-list__training-link" asp-page="../TrainingDetails/TrainingDetails" asp-route-id="@training.TrainingId">@training.TrainingTitle</a>
+                        <a class="training-list__training-link" asp-page="/Training/TrainingDetails/TrainingDetails" asp-route-id="@training.TrainingId">@training.TrainingTitle</a>
                     </div>
                     <div class="training-list__trainer">
                         @Html.DisplayFor(modelItem => training.TrainerFirstName) @Html.DisplayFor(modelItem => training.TrainerLastName)
@@ -46,7 +46,7 @@
                 <div class="training-list__container-right">
                     <div class="training-list__more">
                         <!--Link for training details-->
-                        <a class="training-list__more-link" asp-page="../TrainingDetails/TrainingDetails" asp-route-id=@training.TrainingId><img src="~/icons/chevron-right--blue.svg" class="o-svg-icon--large chevron-icon" /></a>
+                        <a class="training-list__more-link" asp-page="/Training/TrainingDetails/TrainingDetails" asp-route-id=@training.TrainingId><img src="~/icons/chevron-right--blue.svg" class="o-svg-icon--large chevron-icon" /></a>
                     </div>
                 </div>
             </div>
