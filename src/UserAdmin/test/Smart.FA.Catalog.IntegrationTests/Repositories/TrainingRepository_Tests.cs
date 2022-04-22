@@ -44,7 +44,7 @@ public class TrainingRepositoryTests : IntegrationTestBase
                 null
             )
             , new List<TrainingType> {TrainingType.LanguageCourse}
-            , new List<TrainingSlotNumberType> {TrainingSlotNumberType.Group}
+            , new List<AttendanceType> {AttendanceType.Group}
             , new List<TrainingTargetAudience> {TrainingTargetAudience.Employee}
             , new List<TrainingTopic>() {TrainingTopic.Communication}
         );

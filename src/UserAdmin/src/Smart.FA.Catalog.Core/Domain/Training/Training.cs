@@ -17,7 +17,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
     private readonly List<TrainingIdentity> _identities = new();
     private readonly List<TrainingTarget> _targets = new();
     private readonly List<TrainingDetail> _details = new();
-    private readonly List<TrainingSlot> _slots = new();
+    private readonly List<TrainingAttendance> _attendances = new();
     private readonly List<TrainingCategory> _topics = new();
 
     #endregion
@@ -28,7 +28,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
     public virtual IReadOnlyCollection<TrainingIdentity> Identities => _identities.AsReadOnly();
     public virtual IReadOnlyCollection<TrainingTarget> Targets => _targets.AsReadOnly();
     public virtual IReadOnlyCollection<TrainingDetail> Details => _details.AsReadOnly();
-    public virtual IReadOnlyCollection<TrainingSlot> Slots => _slots.AsReadOnly();
+    public virtual IReadOnlyCollection<TrainingAttendance> Attendances => _attendances.AsReadOnly();
     public virtual IReadOnlyCollection<TrainingCategory> Topics => _topics.AsReadOnly();
 
     public int TrainerCreatorId { get; }
@@ -43,7 +43,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
         Trainer trainer
         , TrainingDetailDto detail
         , IEnumerable<TrainingType> types
-        , IEnumerable<TrainingSlotNumberType> slotNumberTypes
+        , IEnumerable<AttendanceType> attendanceTypes
         , IEnumerable<TrainingTargetAudience> targetAudiences
         , IEnumerable<TrainingTopic> topics
     )
@@ -51,7 +51,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
         AddDetails(detail.Title!, detail.Goal, detail.Methodology, detail.PracticalModalities, Language.Create(detail.Language).Value);
         SwitchTrainingTypes(types);
         SwitchTargetAudience(targetAudiences);
-        SwitchSlotNumberType(slotNumberTypes);
+        SwitchAttendanceTypes(attendanceTypes);
         SwitchTopics(topics);
         AssignTrainer(trainer);
         TrainerCreatorId = trainer.Id;
@@ -81,12 +81,12 @@ public class Training : SeedWork.Entity, IAggregateRoot
             .Select(trainingAudience => new TrainingTarget(this, trainingAudience)));
     }
 
-    public void SwitchSlotNumberType(IEnumerable<TrainingSlotNumberType>? slotNumberTypes)
+    public void SwitchAttendanceTypes(IEnumerable<AttendanceType>? attendanceTypes)
     {
-        Guard.Requires(() => slotNumberTypes != null, "slot number types should not be null");
-        _slots.Clear();
-        _slots.AddRange(slotNumberTypes!.Distinct()
-            .Select(slotNumberType => new TrainingSlot(this, slotNumberType)));
+        Guard.AgainstNull(attendanceTypes, nameof(attendanceTypes));
+        _attendances.Clear();
+        _attendances.AddRange(attendanceTypes!.Distinct()
+            .Select(attendanceType => new TrainingAttendance(this, attendanceType)));
     }
 
     public void SwitchTopics(IEnumerable<TrainingTopic>? topics)

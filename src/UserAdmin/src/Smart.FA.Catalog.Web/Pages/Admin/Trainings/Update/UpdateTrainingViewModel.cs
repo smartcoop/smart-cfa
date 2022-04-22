@@ -10,7 +10,7 @@ namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.Update;
 public class UpdateTrainingViewModel
 {
     public string? Title { get; init; }
-    public List<int>? SlotNumberTypeIds { get; init; }
+    public List<int>? AttendanceTypeIds { get; init; }
     public List<int>? TrainingTypeIds { get; init; }
     public List<int>? TargetAudienceIds { get; init; }
     public List<int>? TopicIds { get; init; }
@@ -37,7 +37,7 @@ public static class EditTrainingViewModelMapping
             TrainingId = trainingId
             , Types = Enumeration.FromValues<TrainingType>(model.TrainingTypeIds ?? new())
             , TargetAudiences = Enumeration.FromValues<TrainingTargetAudience>(model.TargetAudienceIds ?? new())
-            , SlotNumberTypes = Enumeration.FromValues<TrainingSlotNumberType>(model.SlotNumberTypeIds ?? new())
+            , AttendanceTypes = Enumeration.FromValues<AttendanceType>(model.AttendanceTypeIds ?? new())
             , Topics = Enumeration.FromValues<TrainingTopic>(model.TopicIds ?? new())
             , TrainerIds = new List<int>{trainerId},
         };
@@ -54,7 +54,7 @@ public static class EditTrainingViewModelMapping
             PracticalModalities = detail?.PracticalModalities,
             TargetAudienceIds = model.Training.Targets.Select(target => target.TrainingTargetAudienceId).ToList(),
             TrainingTypeIds = model.Training.Identities.Select(identity => identity.TrainingTypeId).ToList(),
-            SlotNumberTypeIds = model.Training.Slots.Select(slot => slot.TrainingSlotTypeId).ToList(),
+            AttendanceTypeIds = model.Training.Attendances.Select(attendance => attendance.AttendanceTypeId).ToList(),
             TopicIds = model.Training.Topics.Select(topic => topic.TrainingTopicId).ToList()
         };
 
@@ -72,7 +72,7 @@ public static class EditTrainingViewModelMapping
             PracticalModalities = detail?.PracticalModalities,
             TargetAudienceIds = model.Training.Targets.Select(target => target.TrainingTargetAudienceId).ToList(),
             TrainingTypeIds = model.Training.Identities.Select(identity => identity.TrainingTypeId).ToList(),
-            SlotNumberTypeIds = model.Training.Slots.Select(slot => slot.TrainingSlotTypeId).ToList()
+            AttendanceTypeIds = model.Training.Attendances.Select(attendance => attendance.AttendanceTypeId).ToList()
         };
 
         return response;

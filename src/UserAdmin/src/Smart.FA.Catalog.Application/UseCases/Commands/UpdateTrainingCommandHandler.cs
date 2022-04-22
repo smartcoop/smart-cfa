@@ -51,7 +51,7 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
             training.UpdateDetails(request.Detail.Title!, request.Detail.Goal!, request.Detail.Methodology!, request.Detail.PracticalModalities, Language.Create(request.Detail.Language).Value);
             training.SwitchTrainingTypes(request.Types);
             training.SwitchTargetAudience(request.TargetAudiences);
-            training.SwitchSlotNumberType(request.SlotNumberTypes);
+            training.SwitchAttendanceTypes(request.AttendanceTypes);
             training.SwitchTopics(request.Topics);
             var trainers = await _trainerRepository.GetListAsync(request.TrainingId, cancellationToken);
             training.AssignTrainers(trainers);
@@ -85,7 +85,7 @@ public class UpdateTrainingRequest : IRequest<UpdateTrainingResponse>
     public TrainingDetailDto Detail { get; init; } = null!;
     public List<TrainingTargetAudience>? TargetAudiences { get; init; }
     public List<TrainingType> Types { get; init; } = null!;
-    public List<TrainingSlotNumberType> SlotNumberTypes { get; init; } = null!;
+    public List<AttendanceType> AttendanceTypes { get; init; } = null!;
     public List<TrainingTopic> Topics { get; init; } = null!;
     public List<int> TrainerIds { get; init; } = null!;
     public bool IsDraft { get; set; }

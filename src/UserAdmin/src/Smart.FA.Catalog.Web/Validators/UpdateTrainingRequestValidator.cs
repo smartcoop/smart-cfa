@@ -61,7 +61,7 @@ public class UpdateTrainingViewModelValidator : AbstractValidator<UpdateTraining
             .NotEmpty()
             .WithMessage(CatalogResources.PleaseSelectOneOption);
 
-        RuleFor(viewModel => viewModel.SlotNumberTypeIds)
+        RuleFor(viewModel => viewModel.AttendanceTypeIds)
             .NotEmpty()
             .WithMessage(CatalogResources.PleaseSelectOneOption);
 

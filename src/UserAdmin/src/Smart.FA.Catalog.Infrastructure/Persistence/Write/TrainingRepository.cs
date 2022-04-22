@@ -30,7 +30,7 @@ public class TrainingRepository : ITrainingRepository
         => await _catalogContext.Trainings.Include(training => training.TrainerAssignments)
             .Include(training => training.Details)
             .Include(training => training.Identities)
-            .Include(training => training.Slots)
+            .Include(training => training.Attendances)
             .Include(training => training.Targets)
             .Include(training => training.Topics)
             .FirstOrDefaultAsync(training => training.Id == trainingId, cancellationToken);

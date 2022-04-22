@@ -87,12 +87,12 @@
                 </smart-formgroup>
 
                 <smart-formgroup label="@CatalogResources.Training_IsItATrainingThat *">
-                    @foreach (var slotNumberType in Enumeration.GetAll<TrainingSlotNumberType>())
+                    @foreach (var attendanceType in Enumeration.GetAll<AttendanceType>())
                     {
-                        <smart-checkbox asp-for="CreateTrainingViewModel.SlotNumberTypeIds" value="@slotNumberType.Id" label="@_localizer["Training_" + slotNumberType.Name]" checked="@(slotNumberType.IsContainedIn(Model.CreateTrainingViewModel.SlotNumberTypeIds))"></smart-checkbox>
+                        <smart-checkbox asp-for="CreateTrainingViewModel.AttendanceTypeIds" value="@attendanceType.Id" label="@_localizer["Training_" + attendanceType.Name]" checked="@(attendanceType.IsContainedIn(Model.CreateTrainingViewModel.AttendanceTypeIds))"></smart-checkbox>
                     }
                 </smart-formgroup>
-                <smart-validation-message asp-for="CreateTrainingViewModel.SlotNumberTypeIds"></smart-validation-message>
+                <smart-validation-message asp-for="CreateTrainingViewModel.AttendanceTypeIds"></smart-validation-message>
             </smart-panel>
 
             <input type="hidden" id="isDraft" value="false" asp-for="CreateTrainingViewModel.IsDraft"/>

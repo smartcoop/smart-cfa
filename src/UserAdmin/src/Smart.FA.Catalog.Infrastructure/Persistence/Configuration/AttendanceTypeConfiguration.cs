@@ -4,7 +4,7 @@ using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
 namespace Smart.FA.Catalog.Infrastructure.Persistence.Configuration;
 
-public class TrainingSlotNumberTypeConfigurations: EnumerationConfigurationBase<TrainingSlotNumberType>
+public class AttendanceTypeConfiguration: EnumerationConfigurationBase<AttendanceType>
 {
 
 }

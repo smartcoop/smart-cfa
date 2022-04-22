@@ -3,30 +3,30 @@ using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
 namespace Smart.FA.Catalog.Core.Domain;
 
-public class TrainingSlot
+public class TrainingAttendance
 {
     #region Properties
 
     public int TrainingId { get; private set; }
-    public int TrainingSlotTypeId { get; private set; }
-    public virtual TrainingSlotNumberType TrainingSlotNumberSlotType { get; } = null!;
+    public int AttendanceTypeId { get; private set; }
+    public virtual AttendanceType AttendanceType { get; } = null!;
     public virtual Training Training { get; } = null!;
 
     #endregion
 
     #region Constructors
 
-    protected TrainingSlot()
+    protected TrainingAttendance()
     {
 
     }
 
-    public TrainingSlot(Training training, TrainingSlotNumberType trainingSlotNumberType)
+    public TrainingAttendance(Training training, AttendanceType attendanceType)
     {
         Training = training;
-        TrainingSlotNumberSlotType = trainingSlotNumberType;
+        AttendanceType = attendanceType;
         TrainingId = training.Id;
-        TrainingSlotTypeId = trainingSlotNumberType.Id;
+        AttendanceTypeId = attendanceType.Id;
     }
 
     #endregion

@@ -11,7 +11,7 @@ namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.Create;
 public class CreateTrainingViewModel
 {
     public string? Title { get; set; }
-    public List<int>? SlotNumberTypeIds { get; set; }
+    public List<int>? AttendanceTypeIds { get; set; }
     public List<int>? TrainingTypeIds { get; set; }
     public List<int>? TargetAudienceIds { get; set; }
     public List<int>? TopicIds { get; set; }
@@ -39,7 +39,7 @@ public static class CreateTrainingViewModelMapping
             TrainerId = trainerId,
             Types = Enumeration.FromValues<TrainingType>(model.TrainingTypeIds ?? new()),
             TargetAudiences = Enumeration.FromValues<TrainingTargetAudience>(model.TargetAudienceIds ?? new()),
-            SlotNumberTypes = Enumeration.FromValues<TrainingSlotNumberType>(model.SlotNumberTypeIds ?? new()),
+            AttendanceTypes = Enumeration.FromValues<AttendanceType>(model.AttendanceTypeIds ?? new()),
             Topics = Enumeration.FromValues<TrainingTopic>(model.TopicIds ?? new()),
             IsDraft = model.IsDraft
         };

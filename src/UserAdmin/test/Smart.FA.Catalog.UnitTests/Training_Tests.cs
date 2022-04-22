@@ -177,7 +177,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void CanBeSwitchedFromSingleToGroupSlotNumber()
+    public void AttendanceTypeCanBeSwitchedFromSingleToGroup()
     {
         var trainer = TrainerFactory.CreateClean();
         var training = new Training
@@ -185,16 +185,16 @@ public class TrainingTests
             trainer
             , new TrainingDetailDto(_fixture.Create<string>(), null, "FR", null, null)
             , new List<TrainingType> {TrainingType.Professional}
-            , new List<TrainingSlotNumberType> {TrainingSlotNumberType.Single}
+            , new List<AttendanceType> {AttendanceType.Single}
             , new List<TrainingTargetAudience> {TrainingTargetAudience.Employee}
             , new List<TrainingTopic> {TrainingTopic.Communication}
         );
 
-        training.SwitchSlotNumberType(new List<TrainingSlotNumberType> {TrainingSlotNumberType.Group});
+        training.SwitchAttendanceTypes(new List<AttendanceType> {AttendanceType.Group});
 
-        training.Slots.Should().ContainSingle();
-        training.Slots.Select(slot => slot.TrainingSlotNumberSlotType).First().Should()
-            .BeSameAs(TrainingSlotNumberType.Group);
+        training.Attendances.Should().ContainSingle();
+        training.Attendances.Select(trainingAttendance => trainingAttendance.AttendanceType).First().Should()
+            .BeSameAs(AttendanceType.Group);
     }
 
     [Fact]
