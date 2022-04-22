@@ -45,7 +45,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
         , IEnumerable<VatExemptionType> vatExemptionTypes
         , IEnumerable<AttendanceType> attendanceTypes
         , IEnumerable<TrainingTargetAudience> targetAudiences
-        , IEnumerable<TrainingTopic> topics
+        , IEnumerable<Topic> topics
     )
     {
         AddDetails(detail.Title!, detail.Goal, detail.Methodology, detail.PracticalModalities, Language.Create(detail.Language).Value);
@@ -89,7 +89,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
             .Select(attendanceType => new TrainingAttendance(this, attendanceType)));
     }
 
-    public void SwitchTopics(IEnumerable<TrainingTopic>? topics)
+    public void SwitchTopics(IEnumerable<Topic>? topics)
     {
         Guard.Requires(() => topics != null, "topics should not be null");
         _topics.Clear();

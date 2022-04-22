@@ -187,7 +187,7 @@ public class TrainingTests
             , new List<VatExemptionType> {VatExemptionType.Professional}
             , new List<AttendanceType> {AttendanceType.Single}
             , new List<TrainingTargetAudience> {TrainingTargetAudience.Employee}
-            , new List<TrainingTopic> {TrainingTopic.Communication}
+            , new List<Topic> {Topic.Communication}
         );
 
         training.SwitchAttendanceTypes(new List<AttendanceType> {AttendanceType.Group});

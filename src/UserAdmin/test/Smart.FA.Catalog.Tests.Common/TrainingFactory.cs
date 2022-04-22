@@ -19,7 +19,7 @@ public static class TrainingFactory
             , new List<VatExemptionType> {VatExemptionType.Professional}
             , new List<AttendanceType> {AttendanceType.Group}
             , new List<TrainingTargetAudience> {TrainingTargetAudience.Employee}
-            , new List<TrainingTopic> {TrainingTopic.Communication}
+            , new List<Topic> {Topic.Communication}
         );
     }
 
@@ -37,7 +37,7 @@ public static class TrainingFactory
             , new List<VatExemptionType> {VatExemptionType.Professional}
             , new List<AttendanceType> {AttendanceType.Group}
             , new List<TrainingTargetAudience> {TrainingTargetAudience.Employee}
-            , new List<TrainingTopic> {TrainingTopic.Communication}
+            , new List<Topic> {Topic.Communication}
         );
     }
 
@@ -50,7 +50,7 @@ public static class TrainingFactory
             , new List<VatExemptionType> {VatExemptionType.LanguageCourse}
             , new List<AttendanceType> {AttendanceType.Group}
             , new List<TrainingTargetAudience> {TrainingTargetAudience.Employee}
-            , new List<TrainingTopic> {TrainingTopic.Communication}
+            , new List<Topic> {Topic.Communication}
         );
     }
 }

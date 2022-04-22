@@ -40,7 +40,7 @@ public static class CreateTrainingViewModelMapping
             VatExemptionTypes = Enumeration.FromValues<VatExemptionType>(model.VatExemptionTypeIds ?? new()),
             TargetAudiences = Enumeration.FromValues<TrainingTargetAudience>(model.TargetAudienceIds ?? new()),
             AttendanceTypes = Enumeration.FromValues<AttendanceType>(model.AttendanceTypeIds ?? new()),
-            Topics = Enumeration.FromValues<TrainingTopic>(model.TopicIds ?? new()),
+            Topics = Enumeration.FromValues<Topic>(model.TopicIds ?? new()),
             IsDraft = model.IsDraft
         };
 }

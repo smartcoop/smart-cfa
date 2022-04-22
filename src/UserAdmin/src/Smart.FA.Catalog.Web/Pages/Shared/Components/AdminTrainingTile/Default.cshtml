@@ -8,7 +8,7 @@
 <smart-card>
     <smart-card-body>
         <smart-card-title text="@Model.Title"></smart-card-title>
-        <smart-muted-text text="@string.Join(", ", Model.TopicIds!.Select(topic => _localizer[Enumeration.FromValue<TrainingTopic>(topic).Name])) "></smart-muted-text>
+        <smart-muted-text text="@string.Join(", ", Model.TopicIds!.Select(topic => _localizer[Enumeration.FromValue<Topic>(topic).Name])) "></smart-muted-text>
     </smart-card-body>
     <smart-card-actions>
         <div class="o-flex o-flex--vertical-center o-flex--justify-between o-flex--spaced-wide">

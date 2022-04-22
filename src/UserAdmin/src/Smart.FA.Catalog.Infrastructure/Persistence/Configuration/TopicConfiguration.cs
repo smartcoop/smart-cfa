@@ -4,7 +4,7 @@ using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
 namespace Smart.FA.Catalog.Infrastructure.Persistence.Configuration;
 
-public class TrainingTopicConfigurations : EnumerationConfigurationBase<TrainingTopic>
+public class TopicConfiguration : EnumerationConfigurationBase<Topic>
 {
 
 }

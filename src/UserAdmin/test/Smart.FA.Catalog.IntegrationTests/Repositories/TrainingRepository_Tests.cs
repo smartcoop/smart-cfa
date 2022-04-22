@@ -46,7 +46,7 @@ public class TrainingRepositoryTests : IntegrationTestBase
             , new List<VatExemptionType> {VatExemptionType.LanguageCourse}
             , new List<AttendanceType> {AttendanceType.Group}
             , new List<TrainingTargetAudience> {TrainingTargetAudience.Employee}
-            , new List<TrainingTopic>() {TrainingTopic.Communication}
+            , new List<Topic>() {Topic.Communication}
         );
         context.Trainings.Attach(trainingToAdd);
         await context.SaveChangesAsync();

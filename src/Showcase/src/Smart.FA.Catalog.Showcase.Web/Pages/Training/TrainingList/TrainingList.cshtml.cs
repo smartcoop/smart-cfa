@@ -34,7 +34,7 @@ public class TrainingListModel : PageModel
                 TrainerFirstName = groupedTraining.FirstOrDefault().TrainerFirstName,
                 TrainerLastName = groupedTraining.FirstOrDefault().TrainerLastName,
                 TrainingStatusType = TrainingStatusType.FromValue<TrainingStatusType>(groupedTraining.FirstOrDefault().TrainingStatus),
-                Topics = groupedTraining.Select(x => TrainingTopic.FromValue<TrainingTopic>(x.TrainingTopic))
+                Topics = groupedTraining.Select(x => Topic.FromValue<Topic>(x.TrainingTopic))
                     .ToList(),
                 TrainingLanguages = groupedTraining.Select(x => (x.TrainingLanguage)).Distinct().ToList()
             });

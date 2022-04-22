@@ -8,7 +8,7 @@ public class TrainingCategoryConfigurations: IEntityTypeConfiguration<TrainingCa
 {
     public void Configure(EntityTypeBuilder<TrainingCategory> builder)
     {
-        builder.HasKey(category => new {category.TrainingId, category.TrainingTopicId});
+        builder.HasKey(category => new {category.TrainingId, category.TopicId});
         builder.HasOne(category => category.Training)
             .WithMany(training => training.Topics)
             .HasForeignKey(slot => slot.TrainingId);

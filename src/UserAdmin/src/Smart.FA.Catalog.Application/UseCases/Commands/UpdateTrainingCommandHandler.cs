@@ -86,7 +86,7 @@ public class UpdateTrainingRequest : IRequest<UpdateTrainingResponse>
     public List<TrainingTargetAudience>? TargetAudiences { get; init; }
     public List<VatExemptionType> VatExemptionTypes { get; init; } = null!;
     public List<AttendanceType> AttendanceTypes { get; init; } = null!;
-    public List<TrainingTopic> Topics { get; init; } = null!;
+    public List<Topic> Topics { get; init; } = null!;
     public List<int> TrainerIds { get; init; } = null!;
     public bool IsDraft { get; set; }
 }

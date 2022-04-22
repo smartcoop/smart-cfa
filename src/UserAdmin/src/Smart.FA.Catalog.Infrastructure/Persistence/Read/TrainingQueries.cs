@@ -44,7 +44,7 @@ public class TrainingQueries : ITrainingQueries
 	                    TD.Title,
 	                    TD.Goal,
                         TD.Language,
-                        TC.TrainingTopicId 'TopicId'
+                        TC.TopicId 'TopicId'
                     FROM dbo.Training T
                     INNER JOIN dbo.TrainerAssignment TE ON T.Id = TE.TrainingId
                     LEFT JOIN dbo.TrainingCategory TC ON T.Id = TC.TrainingId
@@ -73,7 +73,7 @@ public class TrainingQueries : ITrainingQueries
 	                    TD.Title,
 	                    TD.Goal,
                         TD.Language,
-                        TC.TrainingTopicId 'TopicId'
+                        TC.TopicId 'TopicId'
                     FROM (SELECT * FROM dbo.Training T ORDER BY T.Id
                     OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY) T
                     INNER JOIN dbo.TrainerAssignment TE ON T.Id = TE.TrainingId

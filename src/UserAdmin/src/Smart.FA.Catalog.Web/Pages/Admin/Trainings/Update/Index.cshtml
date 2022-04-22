@@ -46,7 +46,7 @@
                 <smart-form-group-textarea label="@CatalogResources.PracticalModalities *" asp-for="UpdateTrainingViewModel.PracticalModalities" helper-text="@CatalogResources.Min30CharMax1000Char"></smart-form-group-textarea>
                 <smart-formgroup label="@CatalogResources.Topics *">
                     <smart-grid>
-                        @foreach (var topics in Enumeration.GetAll<TrainingTopic>().Chunk(2))
+                        @foreach (var topics in Enumeration.GetAll<Topic>().Chunk(2))
                         {
                             @foreach (var topic in topics)
                             {

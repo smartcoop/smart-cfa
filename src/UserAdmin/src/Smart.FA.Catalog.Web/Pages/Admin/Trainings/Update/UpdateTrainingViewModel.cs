@@ -38,7 +38,7 @@ public static class EditTrainingViewModelMapping
             , VatExemptionTypes = Enumeration.FromValues<VatExemptionType>(model.VatExemptionClaimIds ?? new())
             , TargetAudiences = Enumeration.FromValues<TrainingTargetAudience>(model.TargetAudienceIds ?? new())
             , AttendanceTypes = Enumeration.FromValues<AttendanceType>(model.AttendanceTypeIds ?? new())
-            , Topics = Enumeration.FromValues<TrainingTopic>(model.TopicIds ?? new())
+            , Topics = Enumeration.FromValues<Topic>(model.TopicIds ?? new())
             , TrainerIds = new List<int>{trainerId},
         };
 
@@ -55,7 +55,7 @@ public static class EditTrainingViewModelMapping
             TargetAudienceIds = model.Training.Targets.Select(target => target.TrainingTargetAudienceId).ToList(),
             VatExemptionClaimIds = model.Training.VatExemptionClaims.Select(vatExemptionClaim => vatExemptionClaim.VatExemptionTypeId).ToList(),
             AttendanceTypeIds = model.Training.Attendances.Select(attendance => attendance.AttendanceTypeId).ToList(),
-            TopicIds = model.Training.Topics.Select(topic => topic.TrainingTopicId).ToList()
+            TopicIds = model.Training.Topics.Select(topic => topic.TopicId).ToList()
         };
 
         return response;

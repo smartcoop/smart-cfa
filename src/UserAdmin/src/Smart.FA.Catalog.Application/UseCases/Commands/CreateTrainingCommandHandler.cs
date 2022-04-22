@@ -60,7 +60,7 @@ public class CreateTrainingRequest : IRequest<CreateTrainingResponse>
     public List<TrainingTargetAudience> TargetAudiences { get; init; } = null!;
     public List<VatExemptionType> VatExemptionTypes { get; init; } = null!;
     public List<AttendanceType> AttendanceTypes { get; init; } = null!;
-    public List<TrainingTopic> Topics { get; init; } = null!;
+    public List<Topic> Topics { get; init; } = null!;
 }
 
 public class CreateTrainingResponse : ResponseBase

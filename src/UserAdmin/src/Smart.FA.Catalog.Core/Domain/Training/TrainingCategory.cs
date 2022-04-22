@@ -1,4 +1,4 @@
-﻿using Smart.FA.Catalog.Core.Domain.Enumerations;
+using Smart.FA.Catalog.Core.Domain.Enumerations;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
 namespace Smart.FA.Catalog.Core.Domain;
@@ -8,8 +8,8 @@ public class TrainingCategory
     #region Properties
 
     public int TrainingId { get; private set; }
-    public int TrainingTopicId { get; private set; }
-    public virtual TrainingTopic TrainingTopic { get; } = null!;
+    public int TopicId { get; private set; }
+    public virtual Topic Topic { get; } = null!;
     public virtual Training Training { get; } = null!;
 
     #endregion
@@ -21,12 +21,12 @@ public class TrainingCategory
 
     }
 
-    public TrainingCategory(Training training, TrainingTopic trainingTopic)
+    public TrainingCategory(Training training, Topic topic)
     {
         Training = training;
-        TrainingTopic = trainingTopic;
+        Topic = topic;
         TrainingId = training.Id;
-        TrainingTopicId = trainingTopic.Id;
+        TopicId = topic.Id;
     }
 
     #endregion
