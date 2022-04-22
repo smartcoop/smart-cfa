@@ -1,9 +1,8 @@
-using Smart.FA.Catalog.Core.Domain.Enumerations;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
 namespace Smart.FA.Catalog.Core.Domain;
 
-public class TrainingTarget
+public class TrainingTargetAudience
 {
     #region Properties
 
@@ -16,12 +15,12 @@ public class TrainingTarget
 
     #region Constructors
 
-    protected TrainingTarget()
+    protected TrainingTargetAudience()
     {
 
     }
 
-    public TrainingTarget(Training training, TargetAudienceType targetAudienceType)
+    public TrainingTargetAudience(Training training, TargetAudienceType targetAudienceType)
     {
         Training = training;
         TargetAudienceType = targetAudienceType;

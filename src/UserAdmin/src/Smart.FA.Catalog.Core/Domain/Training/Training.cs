@@ -15,7 +15,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
 
     private readonly List<TrainerAssignment> _trainerAssignments = new();
     private readonly List<VatExemptionClaim> _vatExemptionClaims = new();
-    private readonly List<TrainingTarget> _targets = new();
+    private readonly List<TrainingTargetAudience> _targets = new();
     private readonly List<TrainingLocalizedDetails> _details = new();
     private readonly List<TrainingAttendance> _attendances = new();
     private readonly List<TrainingTopic> _topics = new();
@@ -26,7 +26,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
 
     public virtual IReadOnlyCollection<TrainerAssignment> TrainerAssignments => _trainerAssignments.AsReadOnly();
     public virtual IReadOnlyCollection<VatExemptionClaim> VatExemptionClaims => _vatExemptionClaims.AsReadOnly();
-    public virtual IReadOnlyCollection<TrainingTarget> Targets => _targets.AsReadOnly();
+    public virtual IReadOnlyCollection<TrainingTargetAudience> Targets => _targets.AsReadOnly();
     public virtual IReadOnlyCollection<TrainingLocalizedDetails> Details => _details.AsReadOnly();
     public virtual IReadOnlyCollection<TrainingAttendance> Attendances => _attendances.AsReadOnly();
     public virtual IReadOnlyCollection<TrainingTopic> Topics => _topics.AsReadOnly();
@@ -78,7 +78,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
         Guard.Requires(() => trainingTargetAudiences != null, "training audiences should not be null");
         _targets.Clear();
         _targets.AddRange(trainingTargetAudiences!.Distinct()
-            .Select(trainingAudience => new TrainingTarget(this, trainingAudience)));
+            .Select(trainingAudience => new TrainingTargetAudience(this, trainingAudience)));
     }
 
     public void SwitchAttendanceTypes(IEnumerable<AttendanceType>? attendanceTypes)
