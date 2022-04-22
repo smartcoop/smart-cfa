@@ -11,12 +11,12 @@ namespace Smart.FA.Catalog.Showcase.Domain.Models
         public string TrainingTitle { get; set; }
         public string TrainingMethodology { get; set; }
         public string TrainingGoal { get; set; }
+        public string TrainingPracticalModalities { get; set; }
         public int TrainingTopicId { get; set; }
         public string TrainingLanguage { get; set; }
         public string TrainerFirstName { get; set; }
         public string TrainerLastName { get; set; }
-        public short TrainingStatusId { get; set; }
         public string TrainerTitle { get; set; }
-        public string TrainingPracticalModalities { get; set; }
+        public short TrainingStatusId { get; set; }
     }
 }

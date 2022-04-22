@@ -6,6 +6,7 @@ public class TrainingListViewModel
 {
     public int TrainingId { get; set; }
     public string TrainingTitle { get; set; }
+    public int TrainerId { get; set; }
     public string TrainerFirstName { get; set; }
     public string TrainerLastName { get; set; }
     public List<TrainingTopic> Topics { get; set; } = new List<TrainingTopic>();
