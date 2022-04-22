@@ -18,7 +18,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
     private readonly List<TrainingTarget> _targets = new();
     private readonly List<TrainingDetail> _details = new();
     private readonly List<TrainingAttendance> _attendances = new();
-    private readonly List<TrainingCategory> _topics = new();
+    private readonly List<TrainingTopic> _topics = new();
 
     #endregion
 
@@ -29,7 +29,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
     public virtual IReadOnlyCollection<TrainingTarget> Targets => _targets.AsReadOnly();
     public virtual IReadOnlyCollection<TrainingDetail> Details => _details.AsReadOnly();
     public virtual IReadOnlyCollection<TrainingAttendance> Attendances => _attendances.AsReadOnly();
-    public virtual IReadOnlyCollection<TrainingCategory> Topics => _topics.AsReadOnly();
+    public virtual IReadOnlyCollection<TrainingTopic> Topics => _topics.AsReadOnly();
 
     public int TrainerCreatorId { get; }
     public TrainingStatusType StatusType { get; private set; } = TrainingStatusType.Draft;
@@ -94,7 +94,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
         Guard.Requires(() => topics != null, "topics should not be null");
         _topics.Clear();
         _topics.AddRange(topics!.Distinct()
-            .Select(topic => new TrainingCategory(this, topic)));
+            .Select(topic => new TrainingTopic(this, topic)));
     }
 
     public void AssignTrainer(Trainer? trainer)

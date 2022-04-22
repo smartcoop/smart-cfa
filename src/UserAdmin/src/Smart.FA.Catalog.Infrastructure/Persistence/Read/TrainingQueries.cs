@@ -47,7 +47,7 @@ public class TrainingQueries : ITrainingQueries
                         TC.TopicId 'TopicId'
                     FROM dbo.Training T
                     INNER JOIN dbo.TrainerAssignment TE ON T.Id = TE.TrainingId
-                    LEFT JOIN dbo.TrainingCategory TC ON T.Id = TC.TrainingId
+                    LEFT JOIN dbo.TrainingTopic TC ON T.Id = TC.TrainingId
                     INNER JOIN dbo.TrainingDetail TD ON T.Id = TD.TrainingId
                     WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language ";
         await using var connection = new SqlConnection(_connectionString);
@@ -77,7 +77,7 @@ public class TrainingQueries : ITrainingQueries
                     FROM (SELECT * FROM dbo.Training T ORDER BY T.Id
                     OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY) T
                     INNER JOIN dbo.TrainerAssignment TE ON T.Id = TE.TrainingId
-                    LEFT JOIN dbo.TrainingCategory TC ON T.Id = TC.TrainingId
+                    LEFT JOIN dbo.TrainingTopic TC ON T.Id = TC.TrainingId
                     INNER JOIN dbo.TrainingDetail TD ON T.Id = TD.TrainingId
                     WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language";
 
@@ -85,7 +85,7 @@ public class TrainingQueries : ITrainingQueries
 	                        COUNT(*)
                         FROM (SELECT T.Id FROM dbo.Training T
                         INNER JOIN dbo.TrainerAssignment TE ON T.Id = TE.TrainingId
-                        LEFT JOIN dbo.TrainingCategory TC ON T.Id = TC.TrainingId
+                        LEFT JOIN dbo.TrainingTopic TC ON T.Id = TC.TrainingId
                         INNER JOIN dbo.TrainingDetail TD ON T.Id = TD.TrainingId
                         WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language
                         GROUP BY T.Id) A";

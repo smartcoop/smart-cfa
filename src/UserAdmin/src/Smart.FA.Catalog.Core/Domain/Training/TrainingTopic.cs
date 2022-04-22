@@ -3,7 +3,7 @@ using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
 namespace Smart.FA.Catalog.Core.Domain;
 
-public class TrainingCategory
+public class TrainingTopic
 {
     #region Properties
 
@@ -16,12 +16,12 @@ public class TrainingCategory
 
     #region Constructors
 
-    protected TrainingCategory()
+    protected TrainingTopic()
     {
 
     }
 
-    public TrainingCategory(Training training, Topic topic)
+    public TrainingTopic(Training training, Topic topic)
     {
         Training = training;
         Topic = topic;
