@@ -1,4 +1,13 @@
 ﻿@page
 @model Smart.FA.Catalog.Showcase.Web.Pages.LegalNoticeModel
 @{
+    ViewData["Title"] = @ShowcaseResources.LegalNotice_TitlePage;
 }
+
+<section class="main__presentation">
+    <div class="main-title">@ShowcaseResources.LegalNotice_TitlePage</div>
+    <div class="main-subtitle">@ShowcaseResources.PublicPage_Subtitle</div>
+    <div class="main__presentation-txt">
+        @ShowcaseResources.LoremIpsum
+    </div>
+</section>
