@@ -99,7 +99,13 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
   <data name="LoremIpsum" xml:space="preserve">
-    <value>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in ullamcorper tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis eget varius nisl, et leifend est. In condimentum, arcu eget ornare aliquam, urna quam luctus quam, ut vestibulum nulla turpis ultricies lectus. Nunc gravida gravida feugiat. Quisque pellentesque libero in massa fringilla, vel gravida ex ultricies. Proin in mi dolor. Fusce mollis neque tellus, vel malesuada nibh malesuada vitae. Curabitur sed ultrices nulla. Donec vulputate quis lorem ut ultricies. Nulla vestibulum suscipit aliquet. Aliquam dictum justo posuere, iaculis orci quis, viverra enim. Vivamus nec leo et est hendrerit tempus. Aliquam viverra dapibus elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sit amet aliquet ligula, id consequat lectus.</value>
+    <value>Pour toute autre question concernant Smart, rendez-vous sur notre site www.smartbe.be  </value>
+  </data>
+  <data name="Contact_TitlePage" xml:space="preserve">
+    <value>Contacter Formateurs Associés</value>
+  </data>
+  <data name="Contact_Presentation" xml:space="preserve">
+    <value>Vous avez des questions en lien avec la formation chez Smart, n’hésitez pas à nous contacter via le formulaire ci-dessous. &lt;br/&gt;&lt;br/&gt;Pour toute autre question concernant Smart, rendez-vous sur notre site &lt;a href="https://smartbe.be"&gt;www.smartbe.be  </value>
   </data>
   <data name="TitteTrainings" xml:space="preserve">
     <value>Formations</value>
