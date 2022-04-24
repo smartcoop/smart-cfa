@@ -1,4 +1,37 @@
 ﻿@page
 @model Smart.FA.Catalog.Showcase.Web.Pages.ContactModel
 @{
+    ViewData["Title"] = @ShowcaseResources.Contact_TitlePage;
 }
+
+<section class="main__presentation">
+    <div class="main-title">@ShowcaseResources.Contact_TitlePage</div>
+    <div class="main__presentation-txt">
+        <p>@ShowcaseResources.Contact_Presentation</p>
+        <p><br/>@ShowcaseResources.Contact_Presentation_SecondPart <a href="@ShowcaseResources.Contact_Presentation_Link">@ShowcaseResources.Contact_Presentation_Link</a></p>
+    </div>
+    <div class="main__contact-form">
+        <div class="o-form-group-layout o-form-group-layout--standard">
+            <div class="o-form-group ">
+                <label class="o-form-group__label" for="formValidationnameId">@ShowcaseResources.Contact_LabelName</label>
+                <div class="o-form-group__controls">
+                    <input class="c-input" type="email" value="@ShowcaseResources.Contact_DefaultName" id="formValidationnameId" />
+                </div>
+            </div>
+            <div class="o-form-group ">
+                <label class="o-form-group__label" for="formValidationEmailId">@ShowcaseResources.Contact_LabelEmail</label>
+                <div class="o-form-group__controls">
+                    <input class="c-input" type="email" value="@ShowcaseResources.Contact_DefaultEmail" id="formValidationEmailId" />
+                </div>
+            </div>
+                        
+            <div class="o-form-group ">
+                <label class="o-form-group__label" for="textareaId">@ShowcaseResources.Contact_LabelMessage</label>
+                <textarea class="c-textarea" rows="5" id="textareaId"></textarea>
+            </div>
+            <div class="o-form-group">
+                <input class="c-button c-button--primary" type="submit" value="@ShowcaseResources.Contact_LabelSend" />
+            </div>
+        </div>
+    </div>
+</section>
