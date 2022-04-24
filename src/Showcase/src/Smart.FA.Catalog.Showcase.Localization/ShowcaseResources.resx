@@ -104,4 +104,10 @@
   <data name="TitteTrainings" xml:space="preserve">
     <value>Formations</value>
   </data>
+  <data name="LegalNotice_TitlePage" xml:space="preserve">
+    <value>Mentions Légales</value>
+  </data>
+  <data name="PublicPage_Subtitle" xml:space="preserve">
+    <value>Sous titre</value>
+  </data>
 </root>
