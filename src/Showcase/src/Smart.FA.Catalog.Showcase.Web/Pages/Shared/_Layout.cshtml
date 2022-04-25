@@ -15,7 +15,7 @@
             <nav class="header-nav">
                 <div class="header-nav__logo_container">
                     <a class="header-nav__logo-link" asp-area="" asp-page="/Index">
-                        <img src="images/smart-logo--white-with-padding.svg" alt="Smart logo" class="header-nav__logo">
+                        <img src="~/images/smart-logo--white-with-padding.svg" alt="Smart logo" class="header-nav__logo">
                     </a>
                 </div>
                 <ul class="header-nav__ul">
@@ -23,7 +23,7 @@
                         <a class="header-nav__link" asp-area="" asp-page="/Index">Formateurs Associés</a>
                     </li>
                     <li class="header-nav__item">
-                        <a class="header-nav__link" asp-area="" asp-page="/Training/TrainingList/TrainingList">Formations</a>
+                        <a class="header-nav__link" asp-area="" asp-page="@Routes.TrainingList">Formations</a>
                     </li>
                     <li class="header-nav__item">
                         <a class="header-nav__link" asp-area="" asp-page="/Trainers">Formateurs</a>
