@@ -6,11 +6,17 @@ using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Infrastructure.Extensions;
 using Smart.FA.Catalog.Web.Extensions;
 using Smart.FA.Catalog.Web.Extensions.Middlewares;
+using Smart.FA.Catalog.Web.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+// Fix an issue with kerberos authentication on a linux server
+NetSecurityNativeFix.Initialize();
+
 // appsettings.Local.json will have precedence over anything else as it is set in last.
 // https://github.com/dotnet/aspnetcore/blob/c5207d21ed68041879e1256406b458d130b420ab/src/DefaultBuilder/src/WebHost.cs#L170
+builder.Configuration.AddJsonFile("appsettings.PreProduction.json", optional: true, reloadOnChange: true);
 builder.Configuration.AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: true);
 
 builder.Host.UseNLog();
