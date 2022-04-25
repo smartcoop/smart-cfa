@@ -28,7 +28,7 @@ public class TrainerSocialNetworkConfiguration : IEntityTypeConfiguration<Traine
             (
                 socialNetwork => socialNetwork.Id,
                 socialNetworkId => Enumeration.FromValue<SocialNetwork>(socialNetworkId)
-            ).HasColumnName($"{nameof(TrainerSocialNetwork)}Id");
+            ).HasColumnName($"{nameof(SocialNetwork)}Id");
 
         builder.Property(trainerSocialNetwork => trainerSocialNetwork.UrlToProfile)
             .HasMaxLength(255);

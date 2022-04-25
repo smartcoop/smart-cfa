@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 
@@ -11,9 +12,10 @@ using Smart.FA.Catalog.Infrastructure.Persistence;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220425085424_Change_Training_Network_ForeignKey_Name")]
+    partial class Change_Training_Network_ForeignKey_Name
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
