@@ -11,30 +11,30 @@
         <p><br/>@ShowcaseResources.Contact_Presentation_SecondPart <a href="@ShowcaseResources.Contact_Presentation_Link">@ShowcaseResources.Contact_Presentation_Link</a></p>
     </div>
     <div class="main__contact-form">
-        <div class="o-form-group-layout o-form-group-layout--standard">
-            <div class="o-form-group ">
+        <form  class="o-form-group-layout o-form-group-layout--standard" method="post"> 
+            <div class="o-form-group">
                 <label class="o-form-group__label" for="formValidationnameId">@ShowcaseResources.Contact_LabelName</label>
                 <div class="o-form-group__controls">
-                    <input class="c-input" type="text" placeholder="@ShowcaseResources.Contact_DefaultName" id="formValidationnameId" required />
+                    <input class="c-input" type="text" placeholder="@ShowcaseResources.Contact_DefaultName" id="formValidationnameId" required/>
                     <div class="contact-form__error" id="errorValidationName"></div>
                 </div>
             </div>
-            <div class="o-form-group ">
+            <div class="o-form-group">
                 <label class="o-form-group__label" for="formValidationEmailId">@ShowcaseResources.Contact_LabelEmail</label>
                 <div class="o-form-group__controls">
                     <input class="c-input" type="email" placeholder="@ShowcaseResources.Contact_DefaultEmail" id="formValidationEmailId" required/>
                     <div class="contact-form__error" id="errorValidationEmail"></div>
                 </div>
             </div>
-                        
-            <div class="o-form-group ">
+
+            <div class="o-form-group">
                 <label class="o-form-group__label" for="textareaId">@ShowcaseResources.Contact_LabelMessage</label>
                 <textarea class="c-textarea" rows="5" id="textareaId" required maxlength="1000"></textarea>
                 <div class="contact-form__error" id="errorValidationMessage"></div>
             </div>
             <div class="o-form-group">
-                <input class="c-button c-button--primary" type="submit" value="@ShowcaseResources.Contact_LabelSend" />
+                <input class="c-button c-button--primary" type="submit" value="@ShowcaseResources.Contact_LabelSend"/>
             </div>
-        </div>
+        </form>
     </div>
 </section>
