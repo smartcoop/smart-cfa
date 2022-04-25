@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		docker-compose.dcproj = docker-compose.dcproj
 		docker-compose.yml = docker-compose.yml
 		Web.Dockerfile = Web.Dockerfile
+		docker-compose-startup.yml = docker-compose-startup.yml
+		startup.bat = startup.bat
 		docker_startup_script.bat = docker_startup_script.bat
 	EndProjectSection
 EndProject
