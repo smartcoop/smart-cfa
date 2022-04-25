@@ -16,18 +16,21 @@
                 <label class="o-form-group__label" for="formValidationnameId">@ShowcaseResources.Contact_LabelName</label>
                 <div class="o-form-group__controls">
                     <input class="c-input" type="email" placeholder="@ShowcaseResources.Contact_DefaultName" id="formValidationnameId" />
+                    <div class="contact-form__error" id="errorValidationName"></div>
                 </div>
             </div>
             <div class="o-form-group ">
                 <label class="o-form-group__label" for="formValidationEmailId">@ShowcaseResources.Contact_LabelEmail</label>
                 <div class="o-form-group__controls">
                     <input class="c-input" type="email" placeholder="@ShowcaseResources.Contact_DefaultEmail" id="formValidationEmailId" />
+                    <div class="contact-form__error" id="errorValidationEmail"></div>
                 </div>
             </div>
                         
             <div class="o-form-group ">
                 <label class="o-form-group__label" for="textareaId">@ShowcaseResources.Contact_LabelMessage</label>
                 <textarea class="c-textarea" rows="5" id="textareaId"></textarea>
+                <div class="contact-form__error" id="errorValidationMessage"></div>
             </div>
             <div class="o-form-group">
                 <input class="c-button c-button--primary" type="submit" value="@ShowcaseResources.Contact_LabelSend" />
