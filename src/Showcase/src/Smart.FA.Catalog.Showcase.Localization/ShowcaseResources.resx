@@ -131,4 +131,7 @@
   <data name="Contact_DefaultEmail" xml:space="preserve">
     <value>nom@gmail.com</value>
   </data>
+  <data name="Contact_ConfirmationMessage" xml:space="preserve">
+    <value>Votre message a bien été envoyé.</value>
+  </data>
 </root>

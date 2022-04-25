@@ -61,7 +61,16 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Votre message a bien été envoyé..
+        /// </summary>
+        public static string Contact_ConfirmationMessage {
+            get {
+                return ResourceManager.GetString("Contact_ConfirmationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to nom@gmail.com.
         /// </summary>
         public static string Contact_DefaultEmail {
             get {
@@ -70,7 +79,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Martin Dupont.
         /// </summary>
         public static string Contact_DefaultName {
             get {

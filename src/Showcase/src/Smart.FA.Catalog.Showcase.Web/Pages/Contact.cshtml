@@ -21,7 +21,7 @@
             </div>
             <div class="c-alert__body">
                 <div class="c-alert__text">
-                    <h4 class="c-h4">Votre message a bien été envoyé.</h4>
+                    <h4 class="c-h4">@ShowcaseResources.Contact_ConfirmationMessage</h4>
                 </div>
             </div>
         </div>
@@ -31,21 +31,21 @@
             <div class="o-form-group">
                 <label class="o-form-group__label" for="formValidationnameId">@ShowcaseResources.Contact_LabelName</label>
                 <div class="o-form-group__controls">
-                    <input class="c-input" type="text" placeholder="@ShowcaseResources.Contact_DefaultName" id="formValidationnameId" required/>
+                    <input name="username" class="c-input" type="text" placeholder="@ShowcaseResources.Contact_DefaultName" id="formValidationnameId" required/>
                     <div class="contact-form__error" id="errorValidationName"></div>
                 </div>
             </div>
             <div class="o-form-group">
                 <label class="o-form-group__label" for="formValidationEmailId">@ShowcaseResources.Contact_LabelEmail</label>
                 <div class="o-form-group__controls">
-                    <input class="c-input" type="email" placeholder="@ShowcaseResources.Contact_DefaultEmail" id="formValidationEmailId" required/>
+                    <input name="useremail" class="c-input" type="email" placeholder="@ShowcaseResources.Contact_DefaultEmail" id="formValidationEmailId" required/>
                     <div class="contact-form__error" id="errorValidationEmail"></div>
                 </div>
             </div>
 
             <div class="o-form-group">
                 <label class="o-form-group__label" for="textareaId">@ShowcaseResources.Contact_LabelMessage</label>
-                <textarea class="c-textarea" rows="5" id="textareaId" required maxlength="1000"></textarea>
+                <textarea name="useremessage" class="c-textarea" rows="5" id="textareaId" required maxlength="1000"></textarea>
                 <div class="contact-form__error" id="errorValidationMessage"></div>
             </div>
             <div class="o-form-group">
