@@ -48,6 +48,7 @@ public class TrainingDetailsModel : PageModel
         return new TrainingDetailsViewModel
         {
             TrainingId = firstLine.TrainingId,
+            TrainingTitle = firstLine.TrainingTitle,
             TrainingGoal = firstLine.TrainingGoal,
             TrainingMethodology = firstLine.TrainingMethodology,
             TrainerFirstName = firstLine.TrainerFirstName,
