@@ -20,7 +20,7 @@ public class TrainingQueries : ITrainingQueries
     {
         var sql = @"SELECT
 	                    T.Id 'TrainingId',
-	                    T.TrainingStatusId,
+	                    T.StatusTypeId,
 	                    TD.Title,
 	                    TD.Goal,
                         TD.Language
@@ -40,11 +40,11 @@ public class TrainingQueries : ITrainingQueries
     {
         var sql = @"SELECT
 	                    T.Id 'TrainingId',
-	                    T.TrainingStatusId,
+	                    T.StatusTypeId,
 	                    TD.Title,
 	                    TD.Goal,
                         TD.Language,
-                        TC.TopicId 'TopicId'
+                        TC.TopicId
                     FROM dbo.Training T
                     INNER JOIN dbo.TrainerAssignment TE ON T.Id = TE.TrainingId
                     LEFT JOIN dbo.TrainingTopic TC ON T.Id = TC.TrainingId
@@ -73,7 +73,7 @@ public class TrainingQueries : ITrainingQueries
 	                    TD.Title,
 	                    TD.Goal,
                         TD.Language,
-                        TC.TopicId 'TopicId'
+                        TC.TopicId
                     FROM (SELECT * FROM dbo.Training T ORDER BY T.Id
                     OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY) T
                     INNER JOIN dbo.TrainerAssignment TE ON T.Id = TE.TrainingId
