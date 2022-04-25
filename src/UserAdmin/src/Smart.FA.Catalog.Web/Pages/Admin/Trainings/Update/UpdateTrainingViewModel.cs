@@ -71,7 +71,7 @@ public static class EditTrainingViewModelMapping
             Methodology = detail?.Methodology,
             PracticalModalities = detail?.PracticalModalities,
             TargetAudienceTypeIds = model.Training.Targets.Select(target => target.TargetAudienceTypeId).ToList(),
-            VatExemptionClaimIds = model.Training.VatExemptionClaims.Select(identity => identity.VatExemptionTypeId).ToList(),
+            VatExemptionClaimIds = model.Training.VatExemptionClaims.Select(vatExemptionClaim => vatExemptionClaim.VatExemptionTypeId).ToList(),
             AttendanceTypeIds = model.Training.Attendances.Select(attendance => attendance.AttendanceTypeId).ToList()
         };
 
