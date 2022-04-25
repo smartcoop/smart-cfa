@@ -37,7 +37,7 @@ internal class TrainingConfiguration : EntityConfigurationBase<Training>
         builder.Property(training => training.StatusType)
             .HasConversion(status => status.Id,
             status => Enumeration.FromValue<TrainingStatusType>(status))
-            .HasColumnName("StatusTypeId");
+            .HasColumnName("TrainingStatusTypeId");
 
         builder.ToTable("Training");
     }

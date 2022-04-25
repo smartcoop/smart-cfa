@@ -5,21 +5,21 @@ namespace Smart.FA.Catalog.Core.Domain.Dto;
 public class TrainingDto
 {
     public int TrainingId { get; }
-    public int StatusTypeId { get; }
+    public int TrainingStatusTypeId { get; }
     public string Title { get; }
     public string? Goal { get; }
     public string Language { get; }
     public List<int>? TopicIds { get; }
 
     public TrainingDto(int trainingId,
-        int statusTypeId,
+        int trainingStatusTypeId,
         string title,
         string? goal,
         string language,
         List<int> topicIds)
     {
         TrainingId = trainingId;
-        StatusTypeId = statusTypeId;
+        TrainingStatusTypeId = trainingStatusTypeId;
         Title = title;
         Goal = goal;
         Language = language;
@@ -27,13 +27,13 @@ public class TrainingDto
     }
 
     public TrainingDto(int trainingId,
-        int statusTypeId,
+        int trainingStatusTypeId,
         string title,
         string? goal,
         string language)
     {
         TrainingId = trainingId;
-        StatusTypeId = statusTypeId;
+        TrainingStatusTypeId = trainingStatusTypeId;
         Title = title;
         Goal = goal;
         Language = language;
