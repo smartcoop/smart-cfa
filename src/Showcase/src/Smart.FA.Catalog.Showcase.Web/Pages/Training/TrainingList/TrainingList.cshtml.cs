@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
-namespace Smart.FA.Catalog.Showcase.Web.Pages.Training;
+namespace Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingList;
 
 public class TrainingListModel : PageModel
 {
