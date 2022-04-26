@@ -21,7 +21,8 @@ public class TrainingDetailsModel : PageModel
     {
         if (id == null)
         {
-            TempData["errorMessage"] = "Cette id est null";
+            //TO DO: add translated custom messages
+            TempData["errorMessage"] = "There is no record for this request. Please try again.";
             return RedirectToPage("/404");
         }
 
@@ -29,7 +30,8 @@ public class TrainingDetailsModel : PageModel
 
         if (!trainingDetails.Any())
         {
-            TempData["errorMessage"] = "cette formation n'existe pas!";
+            //TO DO: add translated custom messages
+            TempData["errorMessage"] = "This training does not exist! Please try again.";
             return RedirectToPage("/404");
         }
 
