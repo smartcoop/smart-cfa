@@ -88,6 +88,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Contact_ErrorMessage {
+            get {
+                return ResourceManager.GetString("Contact_ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adresse email .
         /// </summary>
         public static string Contact_LabelEmail {

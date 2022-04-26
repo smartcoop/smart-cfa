@@ -405,17 +405,7 @@
 .main__contact-form {
     .c-button--primary{float:right;}
 }
-.main__contact-form input:valid,
-.main__contact-form textarea:valid {
-    border: 1px solid $color-semantic-success;
-}
-.main__contact-form .contact-form__error {
-    color: $color-semantic-error;
-}
-#sendmailConfirmation {
-    margin-bottom: 30rem;
-    display: none;
-}
+
 .c-pagination {
     padding: 4rem 0;
 }

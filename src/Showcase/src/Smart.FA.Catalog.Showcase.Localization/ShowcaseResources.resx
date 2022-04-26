@@ -134,4 +134,7 @@
   <data name="Contact_ConfirmationMessage" xml:space="preserve">
     <value>Votre message a bien été envoyé.</value>
   </data>
+  <data name="Contact_ErrorMessage" xml:space="preserve">
+    <value>Un problème est survenu. L'envoi du message a échoué.</value>
+  </data>
 </root>
