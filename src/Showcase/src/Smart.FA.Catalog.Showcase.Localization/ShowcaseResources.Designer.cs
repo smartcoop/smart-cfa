@@ -61,11 +61,47 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Toutes les formations.
+        /// </summary>
+        public static string AllTrainings {
+            get {
+                return ResourceManager.GetString("AllTrainings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in ullamcorper tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis eget varius nisl, et leifend est. In condimentum, arcu eget ornare aliquam, urna quam luctus quam, ut vestibulum nulla turpis ultricies lectus. Nunc gravida gravida feugiat. Quisque pellentesque libero in massa fringilla, vel gravida ex ultricies. Proin in mi dolor. Fusce mollis neque tellus, vel malesuada nibh malesuada vitae. Cur [rest of string was truncated]&quot;;.
         /// </summary>
         public static string LoremIpsum {
             get {
                 return ResourceManager.GetString("LoremIpsum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Objectifs.
+        /// </summary>
+        public static string Objectives {
+            get {
+                return ResourceManager.GetString("Objectives", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modalités pratiques.
+        /// </summary>
+        public static string PracticalModalities {
+            get {
+                return ResourceManager.GetString("PracticalModalities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Présentation.
+        /// </summary>
+        public static string Presentation {
+            get {
+                return ResourceManager.GetString("Presentation", resourceCulture);
             }
         }
     }
