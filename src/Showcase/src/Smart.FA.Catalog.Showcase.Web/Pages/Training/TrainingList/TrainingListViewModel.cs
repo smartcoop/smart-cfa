@@ -1,6 +1,6 @@
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
-namespace Smart.FA.Catalog.Showcase.Web.Pages.Training;
+namespace Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingList;
 
 public class TrainingListViewModel
 {
