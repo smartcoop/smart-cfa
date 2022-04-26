@@ -1,0 +1,35 @@
+﻿@page 
+@model Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingDetails.TrainingDetailsModel
+
+@{
+    ViewData["Title"] = Model.Training.TrainingTitle; ;
+    Layout = Routes.Layout;
+}
+
+<h1>Training Details</h1>
+
+<div>
+    <h4>@Model.Training.TrainingTitle</h4>
+    <div>
+        @foreach (var topic in Model.Training.Topics)
+        {
+            <span> @topic.Name</span>
+        }
+    </div>
+    <hr />
+    <div>
+        <p>
+            Methodology: @Model.Training.TrainingMethodology
+        </p>
+        <p>
+            Goal: @Model.Training.TrainingGoal
+        </p>
+        <p>
+            Trainer first name: @Model.Training.TrainerFirstName
+        </p>
+        <p>
+            Trainer last name:  @Model.Training.TrainerLastName
+        </p>
+    </div>
+
+</div>
