@@ -10,10 +10,7 @@
     <div class="main-title">Formations</div>
     <div class="main-subtitle">Liste des formations</div>
     <div class="main__presentation-txt">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in ullamcorper tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis eget varius nisl, et eleifend est. In condimentum, arcu eget ornare aliquam,
-        urna quam luctus quam, ut vestibulum nulla turpis ultricies lectus. Nunc gravida gravida feugiat. Quisque pellentesque libero in massa fringilla, vel gravida ex ultricies. Proin in mi dolor. Fusce mollis neque tellus, vel malesuada nibh malesuada
-        vitae. Curabitur sed ultrices nulla. Donec vulputate quis lorem ut ultricies. Nulla vestibulum suscipit aliquet. Aliquam dictum justo posuere, iaculis orci quis, viverra enim. Vivamus nec leo et est hendrerit tempus. Aliquam viverra dapibus elit.
-        Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sit amet aliquet ligula, id consequat lectus.
+        @ShowcaseResources.LoremIpsum
     </div>
 </section>
 <section class="section__training-search">
@@ -28,7 +25,6 @@
             <div class="training-list__container">
                 <div class="training-list__container-left">
                     <div class="training-list__title">
-                        @*Note: asp-route-id is'nt maybe the best option. We have to decide what needs to be put in the url. Is it the training's id or name or ?*@
                         <a class="training-list__training-link" asp-page="@Routes.TrainingDetails" asp-route-id="@training.TrainingId">@training.TrainingTitle</a>
                     </div>
                     <div class="training-list__trainer">
