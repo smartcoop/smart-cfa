@@ -99,7 +99,7 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
   <data name="LoremIpsum" xml:space="preserve">
-    <value>Pour toute autre question concernant Smart, rendez-vous sur notre site www.smartbe.be  </value>
+    <value>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc mauris elit, commodo sed risus commodo, lobortis tempor augue. Praesent fermentum posuere congue. Curabitur sit amet finibus turpis. Suspendisse venenatis, ante ac tempor venenatis, mauris ipsum rutrum lacus, sit amet pellentesque mi ligula imperdiet urna. Maecenas eget purus tempus, fringilla nibh vel, vestibulum est. Phasellus ut diam nec mauris pharetra condimentum non id enim. Pellentesque facilisis libero in pretium vestibulum. Ut sapien neque, bibendum vel lacus sit amet, ultrices gravida tortor. Nulla at velit enim. </value>
   </data>
   <data name="Contact_TitlePage" xml:space="preserve">
     <value>Contacter Formateurs Associés</value>
