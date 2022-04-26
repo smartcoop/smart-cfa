@@ -406,6 +406,10 @@
     .c-button--primary{float:right;}
 }
 
+.main__contact-form .contact-form__error {
+    color: $color-semantic-error;
+}
+
 .c-pagination {
     padding: 4rem 0;
 }
