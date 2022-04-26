@@ -61,15 +61,18 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
+
         ///   Looks up a localized string similar to Votre message a bien été envoyé..
         /// </summary>
         public static string Contact_ConfirmationMessage {
             get {
                 return ResourceManager.GetString("Contact_ConfirmationMessage", resourceCulture);
+
             }
         }
         
         /// <summary>
+
         ///   Looks up a localized string similar to nom@gmail.com.
         /// </summary>
         public static string Contact_DefaultEmail {
@@ -89,6 +92,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         
         /// <summary>
         ///   Looks up a localized string similar to .
+
         /// </summary>
         public static string Contact_ErrorMessage {
             get {
@@ -174,6 +178,33 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         public static string LoremIpsum {
             get {
                 return ResourceManager.GetString("LoremIpsum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Objectifs.
+        /// </summary>
+        public static string Objectives {
+            get {
+                return ResourceManager.GetString("Objectives", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modalités pratiques.
+        /// </summary>
+        public static string PracticalModalities {
+            get {
+                return ResourceManager.GetString("PracticalModalities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Présentation.
+        /// </summary>
+        public static string Presentation {
+            get {
+                return ResourceManager.GetString("Presentation", resourceCulture);
             }
         }
     }
