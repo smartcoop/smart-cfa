@@ -8,7 +8,6 @@ using Smart.FA.Catalog.Web.ViewModels.Trainers;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin.Trainers;
 
-[Authorize(Policy = Policies.List.AtLeastOneValidUserChartRevisionApproval)]
 public class ProfileModel : AdminPage
 {
     public IUserIdentity UserIdentity { get; }

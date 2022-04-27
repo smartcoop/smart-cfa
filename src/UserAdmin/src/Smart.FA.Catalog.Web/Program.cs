@@ -26,7 +26,7 @@ builder.Services
 builder.Services
     .AddSmartDesign();
 builder.Services
-    .AddRazorPages()
+    .AddRazorPages(options => { options.Conventions.AuthorizeFolder("/Admin", Smart.FA.Catalog.Web.Policies.List.AtLeastOneValidUserChartRevisionApproval); })
     .AddFluentValidation(configuration =>
     {
         configuration.RegisterValidatorsFromAssemblyContaining<Program>();
@@ -47,13 +47,14 @@ builder.Services
         builder.Configuration.GetSection("EFCore"),
         builder.Configuration.GetSection("S3Storage"));
 
-builder.Services.AddAuthorization(options => { options.AddPolicy(Smart.FA.Catalog.Web.Policies.List.AtLeastOneValidUserChartRevisionApproval, policy => { policy.Requirements.Add(new AtLeastOneValidUserChartRevisionApprovalRequirement()); }); });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(Smart.FA.Catalog.Web.Policies.List.AtLeastOneValidUserChartRevisionApproval,
+        policy => { policy.Requirements.Add(new AtLeastOneValidUserChartRevisionApprovalRequirement()); });
+});
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
-    {
-        options.AccessDeniedPath = new PathString("/UserChart");
-    });
+    .AddCookie(options => { options.AccessDeniedPath = new PathString("/UserChart"); });
 
 var app = builder.Build();
 

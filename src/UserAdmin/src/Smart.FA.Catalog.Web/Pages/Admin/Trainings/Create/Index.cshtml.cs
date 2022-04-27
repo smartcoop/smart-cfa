@@ -5,7 +5,6 @@ using Smart.FA.Catalog.Core.Domain.Models;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.Create;
 
-[Authorize(Policy = Policies.List.AtLeastOneValidUserChartRevisionApproval)]
 public class CreateModel : AdminPage
 {
     private readonly ILogger<CreateModel> _logger;
@@ -35,6 +34,7 @@ public class CreateModel : AdminPage
             Init();
             return Page();
         }
+
         var request = CreateTrainingViewModel.MapToRequest(user.Trainer.Id, user.Trainer.DefaultLanguage);
         var response = await Mediator.Send(request);
         return RedirectToPage("/Admin/Trainings/List/Index");
