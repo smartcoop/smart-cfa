@@ -17,12 +17,14 @@ public class UserChartRevisionApprovalHandler : AuthorizationHandler<AtLeastOneV
     private readonly CatalogContext _catalogContext;
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly IUserIdentity _userIdentity;
+    private readonly IWebHostEnvironment _webHostEnvironment;
 
-    public UserChartRevisionApprovalHandler(CatalogContext catalogContext, IHttpContextAccessor httpContextAccessor, IUserIdentity userIdentity)
+    public UserChartRevisionApprovalHandler(CatalogContext catalogContext, IHttpContextAccessor httpContextAccessor, IUserIdentity userIdentity, IWebHostEnvironment webHostEnvironment)
     {
         _catalogContext = catalogContext;
         _httpContextAccessor = httpContextAccessor;
         _userIdentity = userIdentity;
+        _webHostEnvironment = webHostEnvironment;
     }
 
     protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, AtLeastOneValidUserChartRevisionApprovalRequirement requirement)
@@ -36,7 +38,8 @@ public class UserChartRevisionApprovalHandler : AuthorizationHandler<AtLeastOneV
                 (approval.UserChartRevision.ValidUntil == null || currentDate <= approval.UserChartRevision.ValidUntil!.Value.Date)))
             .AnyAsync();
 
-        if (hasTrainerValidUserChartApprovals)
+        // If we are in staging we don't need to check for any approval of user charts
+        if (_webHostEnvironment.IsStaging() || hasTrainerValidUserChartApprovals)
         {
             _httpContextAccessor.HttpContext!.Response.Cookies.Append("HasAcceptedUserChartRevision", "true", new CookieOptions {MaxAge = TimeSpan.FromMinutes(1)});
             context.Succeed(requirement);
