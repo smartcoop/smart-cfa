@@ -21,6 +21,12 @@ Default connection string is
 
 > appsettings.Local.json is part of the gitignore
 
+A S3 Storage like minio is necessary on port 9000 (by default) in order for the web app to work (it uses it to store files).
+Launching the `startup.bat` file will create and run a minio docker image with the necessary setup (bucket, user creation, and volume mapping on host drive).
+
+The application can also be debugged exclusively inside docker containers.
+Launching the `docker_startup_script.bat` file will create and run the docker images with the proper setup.
+
 #### Docker compose
 Once docker engine is installed on your system, you can simply use the `docker-compose-local.yml` to launch required containers
 to run the application. By Default, the web client should start on port **5000**
@@ -46,7 +52,7 @@ Troubleshooting:
 ### Deployment
 
 Development environment are created dynamically in docker containers and are accessible on Smart's local network.
-The url are generated based on the name of the branch or the pr number.
+The url are generated based on the name of the branch or the pr number with the template *{branch-name}.cfa.smartcoop.dev*.
 
 *e.g: if PR 24 has been created, waiting for approval, and it can compiled, the web app will be available on url `https://pr-24.cfa.smartcoop.dev/`*
 
