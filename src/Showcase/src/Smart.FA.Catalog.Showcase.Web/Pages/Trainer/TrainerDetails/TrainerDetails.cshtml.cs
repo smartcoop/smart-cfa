@@ -62,14 +62,13 @@ public class TrainerDetailsModel : PageModel
         };
 
         //Add trainer's social networks
-        foreach (var detail in trainerDetails)
+        foreach (var detail in trainerDetails.Where(detail => detail.SocialNetwork != null))
         {
-            if (detail.SocialNetwork != null)
-                trainer.TrainerSocialNetworks.Add(new TrainerSocialNetwork()
-                {
-                    SocialNetwork = SocialNetwork.FromValue<SocialNetwork>((int)detail.SocialNetwork),
-                    SocialNetworkUrl = detail.UrlToProfile
-                });
+            trainer.TrainerSocialNetworks.Add(new TrainerSocialNetwork()
+            {
+                SocialNetwork = SocialNetwork.FromValue<SocialNetwork>((int)detail.SocialNetwork),
+                SocialNetworkUrl = detail.UrlToProfile
+            });
         }
 
         //Add trainer's trainings
