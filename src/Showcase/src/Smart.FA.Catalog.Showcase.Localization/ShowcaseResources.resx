@@ -170,4 +170,19 @@
     <value>Présentation</value>
 
   </data>
+  <data name="test" xml:space="preserve">
+    <value />
+  </data>
+  <data name="test" xml:space="preserve">
+    <value>ddddd</value>
+  </data>
+  <data name="test" xml:space="preserve">
+    <value />
+  </data>
+  <data name="test" xml:space="preserve">
+    <value />
+  </data>
+  <data name="test" xml:space="preserve">
+    <value>vvvv</value>
+  </data>
 </root>
