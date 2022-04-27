@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AllTrainers" xml:space="preserve">
+    <value>Tous les formateur·trices</value>
+  </data>
   <data name="AllTrainings" xml:space="preserve">
     <value>Toutes les formations</value>
   </data>
@@ -131,5 +134,8 @@
   </data>
   <data name="Presentation" xml:space="preserve">
     <value>Présentation</value>
+  </data>
+  <data name="TrainingsToFollow" xml:space="preserve">
+    <value>Formations à suivre</value>
   </data>
 </root>
