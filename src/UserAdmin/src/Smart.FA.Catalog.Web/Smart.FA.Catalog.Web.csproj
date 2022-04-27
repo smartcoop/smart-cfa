@@ -41,6 +41,9 @@
     <Content Update="wwwroot\default_image.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Update="wwwroot\default_user_chart.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Update="appsettings.PreProduction.json">
       <DependentUpon>appsettings.json</DependentUpon>
     </Content>

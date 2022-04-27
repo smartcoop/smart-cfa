@@ -1,4 +1,5 @@
-﻿using Smart.FA.Catalog.Core.Services;
+using Smart.FA.Catalog.Application.Extensions;
+using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Infrastructure.Services;
 using Smart.FA.Catalog.Web.Security;
 
@@ -15,5 +16,7 @@ public static class BootStrapServiceExtensions
         var environment = builder.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
         await bootstrapService.AddDefaultTrainerProfilePictureImage(environment.WebRootPath);
         await bootstrapService.ApplyMigrationsAndSeedAsync();
+        await bootstrapService.AddDefaultTrainerProfilePictureImage(environment.WebRootPath);
+        await bootstrapService.AddDefaultUserChart(environment.WebRootPath);
     }
 }
