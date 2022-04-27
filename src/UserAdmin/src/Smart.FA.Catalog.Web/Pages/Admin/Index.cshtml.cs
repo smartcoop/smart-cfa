@@ -1,15 +1,12 @@
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Smart.FA.Catalog.Core.Services;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin;
 
 public class IndexModel : AdminPage
 {
-    public IUserIdentity UserIdentity { get; }
-
-    public void OnGet()
-    {
-    }
+    [BindProperty] public IUserIdentity UserIdentity { get; }
 
     public IndexModel(IMediator mediator, IUserIdentity userIdentity) : base(mediator)
     {
