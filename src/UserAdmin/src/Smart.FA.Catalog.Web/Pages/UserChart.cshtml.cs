@@ -1,35 +1,29 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Smart.FA.Catalog.Application.UseCases.Commands;
 using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Services;
 
-namespace Smart.FA.Catalog.Web.Pages.Admin;
+namespace Smart.FA.Catalog.Web.Pages;
 
-public class UserChartModel : AdminPage
+public class UserChartModel : PageModel
 {
+    private IMediator Mediator { get; }
+
     public IUserIdentity UserIdentity { get; }
+
     [BindProperty] public bool HasAcceptedUserChart { get; set; } = false;
 
     public ActionResult OnGet()
     {
-        if (HttpContext.Request.Cookies.TryGetValue("AtLeastOneValidUserChartRevisionApproved", out _))
-        {
-            return RedirectToPage("/Admin/Index");
-        }
-
         return Page();
     }
 
-    public UserChartModel(IMediator mediator, IUserIdentity userIdentity) : base(mediator)
+    public UserChartModel(IMediator mediator, IUserIdentity userIdentity)
     {
+        Mediator = mediator;
         UserIdentity = userIdentity;
-    }
-
-    protected override SideMenuItem GetSideMenuItem()
-    {
-        // Doesn't matter we return MyTrainings or whatever, we don't see it anyway.
-        return SideMenuItem.MyTrainings;
     }
 
     public async Task<ActionResult> OnPostAsync()
