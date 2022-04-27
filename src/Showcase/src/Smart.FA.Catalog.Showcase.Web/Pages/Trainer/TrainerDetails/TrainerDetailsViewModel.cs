@@ -1,7 +1,5 @@
-
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer;
-using Smart.FA.Catalog.Showcase.Domain.Models;
-using Smart.FA.Catalog.Showcase.Web.Pages.Training;
+using Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingList;
 
 namespace Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerDetails;
 
