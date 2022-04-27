@@ -1,13 +1,13 @@
 ﻿@page 
 @model Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerDetails.TrainerDetailsModel
 @{
-    ViewData["Title"] = @Model.Trainer.TrainerTitle;
-    Layout = "~/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = Model.Trainer.TrainerTitle;
+    Layout = Routes.Layout;
 }
 
 <section class="trainer-card">
     <div class="trainer-card__title">
-        @Model.Trainer.TrainerFirstName  @Model.Trainer.TrainerLastName
+        @Model.Trainer.TrainerFirstName @Model.Trainer.TrainerLastName
     </div>
     <div class="trainer-card__fonction">
         @Model.Trainer.TrainerTitle
@@ -26,10 +26,11 @@
                     <li class="trainer-card__trainer-links">
                         <a href="@socialNetwork.SocialNetworkUrl" target="_blank" class="trainer-card__trainer-link">
                             @{
+                                // No icon to personnel web site
                                 if (socialNetwork.SocialNetwork.Id != 6)
                                 {
                                     var path = "/icons/" + socialNetwork.SocialNetwork.Name + ".svg";
-                                    <img src="@path" class="o-svg-icon--small contact-icon" alt=".TrainerTrainerSocialNetworksIcone" />
+                                    <img src="@path" class="o-svg-icon--small contact-icon" alt="Icon" />
                                 }
                                 @socialNetwork.SocialNetwork.Name
                             }
@@ -41,7 +42,7 @@
     </div>
     <div class="trainer-card__trainings">
         <div class="trainer-card__trainings-label">
-            Formations à suivre
+            @ShowcaseResources.TrainingsToFollow
         </div>
         @foreach (var training in Model.Trainer.TrainerTrainings)
         {
@@ -72,8 +73,8 @@
     </div>
     <div class="trainer-card__footer">
         <div class="trainer-card__back">
-            <a class="trainer-card__back-link" asp-page="~/Training/TrainersList/TrainersList">
-                <img src="~/icons/chevron-left--blue.svg" class="o-svg-icon--small chevron-icon" alt=""/>Tous les formateur·trices
+            <a class="trainer-card__back-link" asp-page="@Routes.TrainerList">
+                <img src="~/icons/chevron-left--blue.svg" class="o-svg-icon--small chevron-icon" alt=""/>@ShowcaseResources.AllTrainers
             </a>
         </div>
     </div>
