@@ -61,7 +61,7 @@ public class ProxyHeaderMiddleware
     private async Task SetUserIdentityAsync(HttpContext context, GetTrainerFromUserAppResponse response)
     {
         var isAdmin  = await _mediator.Send(new HasSmartUserAdminRightsQuery(response.User.UserId));
-        context.User = new GenericPrincipal(new CustomIdentity(response.Trainer!), isAdmin ? new[] { "SuperAdmin" } : null);
+        context.User = new GenericPrincipal(new CustomIdentity(response.Trainer!), roles: isAdmin ? new[] { "SuperAdmin" } : null);
     }
 }
 
