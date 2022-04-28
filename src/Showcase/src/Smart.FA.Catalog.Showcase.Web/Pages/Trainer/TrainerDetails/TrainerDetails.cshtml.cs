@@ -63,10 +63,12 @@ public class TrainerDetailsModel : PageModel
         //Add trainer's social networks
         foreach (var detail in trainerDetails.Where(detail => detail.SocialNetwork is not null))
         {
+            var SocialNetworkName = SocialNetwork.FromValue<SocialNetwork>((int) detail.SocialNetwork);
             trainer.SocialNetworks.Add(new TrainerSocialNetwork()
             {
-                SocialNetwork = SocialNetwork.FromValue<SocialNetwork>((int)detail.SocialNetwork),
+                SocialNetwork = SocialNetworkName,
                 SocialNetworkUrl = detail.UrlToProfile,
+                IconPathFileName = $"/icons/{SocialNetworkName}.svg"
             });
         }
 
