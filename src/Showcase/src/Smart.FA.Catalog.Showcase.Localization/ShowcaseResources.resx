@@ -127,7 +127,7 @@
     <value>Contacter Formateurs Associés</value>
   </data>
   <data name="Contact_Presentation" xml:space="preserve">
-    <value>Vous avez des questions en lien avec la formation chez Smart, n’hésitez pas à nous contacter via le formulaire ci-dessous. &lt;br/&gt;&lt;br/&gt;Pour toute autre question concernant Smart, rendez-vous sur notre site &lt;a href="https://smartbe.be"&gt;www.smartbe.be  </value>
+    <value>Vous avez des questions en lien avec la formation chez Smart, n’hésitez pas à nous contacter via le formulaire ci-dessous. </value>
   </data>
   <data name="TitteTrainings" xml:space="preserve">
     <value>Formations</value>
@@ -146,5 +146,41 @@
   </data>
   <data name="Presentation" xml:space="preserve">
     <value>Présentation</value>
+  </data>
+  <data name="Contact_ConfirmationMessage" xml:space="preserve">
+    <value>Votre message a bien été envoyé.</value>
+  </data>
+  <data name="Contact_DefaultEmail" xml:space="preserve">
+    <value>nom@site.com</value>
+  </data>
+  <data name="Contact_DefaultName" xml:space="preserve">
+    <value>Benoit Dupont</value>
+  </data>
+  <data name="Contact_ErrorMessage" xml:space="preserve">
+    <value>Un problème est survenu. L'envoi du message a échoué.</value>
+  </data>
+  <data name="Contact_LabelEmail" xml:space="preserve">
+    <value>Adresse email</value>
+  </data>
+  <data name="Contact_LabelMessage" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Contact_LabelName" xml:space="preserve">
+    <value>Prénom et Nom</value>
+  </data>
+  <data name="Contact_LabelSend" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="Contact_Presentation" xml:space="preserve">
+    <value>Vous avez des questions en lien avec la formation chez Smart, n’hésitez pas à nous contacter via le formulaire ci-dessous.</value>
+  </data>
+  <data name="Contact_Presentation_Link" xml:space="preserve">
+    <value>https://smartbe.be</value>
+  </data>
+  <data name="Contact_Presentation_SecondPart" xml:space="preserve">
+    <value>Pour toute autre question concernant Smart, rendez-vous sur notre site</value>
+  </data>
+  <data name="Contact_TitlePage" xml:space="preserve">
+    <value>Contacter Formateurs Associés</value>
   </data>
 </root>
