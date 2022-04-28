@@ -69,6 +69,8 @@ public partial class CatalogShowcaseContext : DbContext
                 .HasMaxLength(1500)
                 .HasColumnName("Goal");
 
+            entity.Property(e => e.Id).HasColumnName("TrainerId");
+
             entity.Property(e => e.Id).HasColumnName("Id");
 
             entity.Property(e => e.Language)

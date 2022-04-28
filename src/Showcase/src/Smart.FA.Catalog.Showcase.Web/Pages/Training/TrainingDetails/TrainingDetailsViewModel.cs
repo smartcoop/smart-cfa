@@ -12,6 +12,7 @@ public class TrainingDetailsViewModel
     public string PracticalModalities { get; set; }
     public string TrainerFirstName { get; set; }
     public string TrainerLastName { get; set; }
+    public int TrainerId { get; set; }
     public string TrainerTitle { get; set; }
     public List<TrainingTopic> Topics { get; set; } = new List<TrainingTopic>();
     public List<string> Languages { get; set; } = new List<string>();

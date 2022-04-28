@@ -9,6 +9,7 @@ SELECT training.Id
         ,detail.Language
         ,trainer.FirstName
         ,trainer.LastName
+        ,trainer.Id AS TrainerId
         ,trainer.Title AS trainerTitle
         ,training.StatusId
 FROM [Catalog].[dbo].[Training] AS training

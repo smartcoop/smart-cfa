@@ -44,7 +44,7 @@
         </div>
         <div class="training-card__trainer">
             <div class="training-card__trainer-name">
-                <a class="training-card__trainer-link" asp-page="Trainer/trainerDetails/TrainerDetail" asp-route-id="@Model.Training.TrainingId">
+                <a class="training-card__trainer-link" asp-page="@Routes.TrainerDetails" asp-route-id="@Model.Training.TrainerId">
                      @Model.Training.TrainerFirstName @Model.Training.TrainerLastName
                 </a>
             </div>

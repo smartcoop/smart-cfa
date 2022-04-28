@@ -55,6 +55,7 @@ public class TrainingDetailsModel : PageModel
             PracticalModalities = firstLine.PracticalModalities,
             TrainerFirstName = firstLine.TrainerFirstName,
             TrainerLastName = firstLine.TrainerLastName,
+            TrainerId = firstLine.TrainerId,
             TrainerTitle = firstLine.TrainerTitle,
             Status = TrainingStatus.FromValue<TrainingStatus>(firstLine.StatusId),
             Topics = trainingDetails.Select(x => TrainingTopic.FromValue<TrainingTopic>(x.TrainingTopicId)).ToList(),
