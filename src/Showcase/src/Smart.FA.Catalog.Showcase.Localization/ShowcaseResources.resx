@@ -127,7 +127,7 @@
     <value>Contacter Formateurs Associés</value>
   </data>
   <data name="Contact_Presentation" xml:space="preserve">
-    <value>Vous avez des questions en lien avec la formation chez Smart, n’hésitez pas à nous contacter via le formulaire ci-dessous. &lt;br/&gt;&lt;br/&gt;Pour toute autre question concernant Smart, rendez-vous sur notre site &lt;a href="https://smartbe.be"&gt;www.smartbe.be  </value>
+    <value>Vous avez des questions en lien avec la formation chez Smart, n’hésitez pas à nous contacter via le formulaire ci-dessous. </value>
   </data>
   <data name="TitteTrainings" xml:space="preserve">
     <value>Formations</value>
@@ -154,7 +154,7 @@
     <value>nom@site.com</value>
   </data>
   <data name="Contact_DefaultName" xml:space="preserve">
-    <value>Martin Dupont</value>
+    <value>Benoit Dupont</value>
   </data>
   <data name="Contact_ErrorMessage" xml:space="preserve">
     <value>Un problème est survenu. L'envoi du message a échoué.</value>
