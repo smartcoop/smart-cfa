@@ -8,18 +8,18 @@ namespace Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingList;
 public class TrainingListModel : PageModel
 {
     private readonly Infrastructure.Data.CatalogShowcaseContext _context;
+    public List<TrainingListViewModel> Trainings { get; set; } = new List<TrainingListViewModel>();
+
 
     public TrainingListModel(Infrastructure.Data.CatalogShowcaseContext context)
     {
         _context = context;
     }
 
-    public List<TrainingListViewModel> Trainings { get; set; } = new List<TrainingListViewModel>();
-
     public async Task OnGetAsync()
     {
         var trainingList = await _context.TrainingList
-            .Where(training => training.TrainingStatus == TrainingStatus.Validated.Id)
+            .Where(training => training.Status == TrainingStatus.Validated.Id)
             .OrderBy(t => t.TrainingId)
             .ToListAsync();
 
@@ -30,13 +30,12 @@ public class TrainingListModel : PageModel
             Trainings.Add(new TrainingListViewModel()
             {
                 TrainingId = groupedTraining.Key,
-                TrainingTitle = groupedTraining.FirstOrDefault().TrainingTitle,
+                Title = groupedTraining.FirstOrDefault().Title,
                 TrainerFirstName = groupedTraining.FirstOrDefault().TrainerFirstName,
                 TrainerLastName = groupedTraining.FirstOrDefault().TrainerLastName,
-                TrainingStatus = TrainingStatus.FromValue<TrainingStatus>(groupedTraining.FirstOrDefault().TrainingStatus),
-                Topics = groupedTraining.Select(x => TrainingTopic.FromValue<TrainingTopic>(x.TrainingTopic))
-                    .ToList(),
-                TrainingLanguages = groupedTraining.Select(x => (x.TrainingLanguage)).Distinct().ToList()
+                Status = TrainingStatus.FromValue<TrainingStatus>(groupedTraining.FirstOrDefault().Status),
+                Topics = groupedTraining.Select(x => TrainingTopic.FromValue<TrainingTopic>(x.Topic)).ToList(),
+                Languages = groupedTraining.Select(x => (x.Language)).Distinct().ToList()
             });
         }
     }

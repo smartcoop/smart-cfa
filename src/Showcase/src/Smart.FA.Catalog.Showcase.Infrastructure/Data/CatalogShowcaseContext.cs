@@ -51,7 +51,7 @@ public partial class CatalogShowcaseContext : DbContext
 
         modelBuilder.Entity<TrainingDetails>(entity =>
         {
-            entity.HasKey(x => new { x.TrainingId, x.TrainingLanguage, x.TrainingTopicId });
+            entity.HasKey(x => new { x.Id, x.Language, x.TrainingTopicId });
 
             entity.ToView("v_TrainingDetails");
 
@@ -65,27 +65,27 @@ public partial class CatalogShowcaseContext : DbContext
                 .HasMaxLength(200)
                 .HasColumnName("LastName");
 
-            entity.Property(e => e.TrainingGoal)
+            entity.Property(e => e.Goal)
                 .HasMaxLength(1500)
                 .HasColumnName("Goal");
 
-            entity.Property(e => e.TrainingId).HasColumnName("Id");
+            entity.Property(e => e.Id).HasColumnName("Id");
 
-            entity.Property(e => e.TrainingLanguage)
+            entity.Property(e => e.Language)
                 .IsRequired()
                 .HasMaxLength(2)
                 .HasColumnName("Language")
                 .IsFixedLength(true);
 
-            entity.Property(e => e.TrainingMethodology)
+            entity.Property(e => e.Methodology)
                 .HasMaxLength(1500)
                 .HasColumnName("Methodology"); 
 
-            entity.Property(e => e.TrainingPracticalModalities)
+            entity.Property(e => e.PracticalModalities)
                 .HasMaxLength(1000)
                 .HasColumnName("PracticalModalities");
 
-            entity.Property(e => e.TrainingStatusId).HasColumnName("StatusId");
+            entity.Property(e => e.StatusId).HasColumnName("StatusId");
 
             entity.Property(e => e.TrainingTitle)
                 .IsRequired()
@@ -95,7 +95,7 @@ public partial class CatalogShowcaseContext : DbContext
 
         modelBuilder.Entity<TrainingList>(entity =>
         {
-            entity.HasKey(x => new { x.TrainingId, x.TrainingLanguage, x.TrainingTopic });
+            entity.HasKey(x => new { x.TrainingId, x.Language, x.Topic });
 
             entity.ToView("v_TrainingList");
 
@@ -115,20 +115,20 @@ public partial class CatalogShowcaseContext : DbContext
 
             entity.Property(e => e.TrainingId).HasColumnName("Id");
 
-            entity.Property(e => e.TrainingLanguage)
+            entity.Property(e => e.Language)
                 .IsRequired()
                 .HasMaxLength(2)
                 .HasColumnName("Language")
                 .IsFixedLength(true);
 
-            entity.Property(e => e.TrainingStatus).HasColumnName("StatusId");
+            entity.Property(e => e.Status).HasColumnName("StatusId");
 
-            entity.Property(e => e.TrainingTitle)
+            entity.Property(e => e.Title)
                 .IsRequired()
                 .HasMaxLength(500)
                 .HasColumnName("Title");
 
-            entity.Property(e => e.TrainingTopic).HasColumnName("TrainingTopicId");
+            entity.Property(e => e.Topic).HasColumnName("TrainingTopicId");
         });
 
         OnModelCreatingPartial(modelBuilder);

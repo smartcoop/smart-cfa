@@ -5,13 +5,13 @@ namespace Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerDetails;
 
 public class TrainerDetailsViewModel
 {
-    public int TrainerId { get; set; }
-    public string TrainerFirstName { get; set; }
-    public string TrainerLastName { get; set; }
-    public string TrainerTitle { get; set; }
-    public string TrainerBiography { get; set; }
-    public List<TrainerSocialNetwork> TrainerSocialNetworks { get; set; } = new ();
-    public List<TrainingListViewModel> TrainerTrainings { get; set; } = new ();
+    public int Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Title { get; set; }
+    public string Biography { get; set; }
+    public List<TrainerSocialNetwork> SocialNetworks { get; set; } = new ();
+    public List<TrainingListViewModel> Trainings { get; set; } = new ();
 
 }
 
