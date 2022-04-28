@@ -1,6 +1,7 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Smart.FA.Catalog.Core.Domain;
+using Smart.FA.Catalog.Core.Domain.Authorization;
 using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Infrastructure.Extensions;
 using Smart.FA.Catalog.Shared.Domain.Enumerations;
@@ -16,13 +17,15 @@ public class CatalogContext : DbContext
         _eventPublisher = eventPublisher;
     }
 
+    public DbSet<TrainerAssignment> TrainerAssignments { get; set; } = null!;
+
     public DbSet<Trainer> Trainers { get; set; } = null!;
 
     public DbSet<Training> Trainings { get; set; } = null!;
 
-    public DbSet<UserChartRevision> UserChartRevisions { get; set; } = null!;
+    public DbSet<SuperAdmin> SuperAdmins { get; set; } = null!;
 
-    public DbSet<TrainerAssignment> TrainerAssignments { get; set; } = null!;
+    public DbSet<UserChartRevision> UserChartRevisions { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

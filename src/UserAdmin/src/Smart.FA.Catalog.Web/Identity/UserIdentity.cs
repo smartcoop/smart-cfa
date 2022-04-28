@@ -11,10 +11,13 @@ public class UserIdentity : IUserIdentity
     public int Id => Identity.Id;
 
     /// <inheritdoc />
-    public CustomIdentity Identity { get; init; }
+    public CustomIdentity Identity { get; }
 
     /// <inheritdoc />
-    public Trainer CurrentTrainer { get; init; }
+    public Trainer CurrentTrainer { get; }
+
+    /// <inheritdoc />
+    public bool IsSuperAdmin { get; }
 
     public UserIdentity(IHttpContextAccessor httpContextAccessor)
     {
@@ -23,5 +26,7 @@ public class UserIdentity : IUserIdentity
 
         Identity       = identity;
         CurrentTrainer = identity.Trainer;
+
+        IsSuperAdmin = httpContextAccessor.HttpContext!.User.IsInRole("SuperAdmin");
     }
 }
