@@ -5,6 +5,7 @@ SELECT dbo.Trainer.Id
       ,dbo.Trainer.LastName
       ,dbo.Trainer.Biography
       ,dbo.Trainer.Title
+      ,dbo.Trainer.ProfileImagePath
       ,dbo.TrainerPersonalNetwork.SocialNetwork
       ,dbo.TrainerPersonalNetwork.UrlToProfile
 FROM dbo.Trainer

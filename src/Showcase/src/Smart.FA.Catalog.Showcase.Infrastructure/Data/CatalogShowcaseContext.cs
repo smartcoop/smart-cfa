@@ -44,6 +44,8 @@ public partial class CatalogShowcaseContext : DbContext
                 .IsRequired()
                 .HasMaxLength(150);
 
+            entity.Property(e => e.ProfileImagePath).HasColumnName("ProfileImagePath");
+
             entity.Property(e => e.SocialNetwork).HasColumnName("SocialNetwork");
 
             entity.Property(e => e.UrlToProfile).HasColumnName("UrlToProfile");

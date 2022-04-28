@@ -57,7 +57,8 @@ public class TrainerDetailsModel : PageModel
             Biography = firstLine.Biography,
             FirstName = firstLine.FirstName,
             LastName = firstLine.LastName,
-            Title = firstLine.Title
+            Title = firstLine.Title,
+            ProfileImagePath = firstLine.ProfileImagePath
         };
 
         //Add trainer's social networks

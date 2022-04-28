@@ -9,6 +9,7 @@ public partial class TrainerDetails
     public string LastName { get; set; }
     public string Biography { get; set; }
     public string Title { get; set; }
+    public string ProfileImagePath { get; set; }
     public int? SocialNetwork { get; set; }
     public string UrlToProfile { get; set; }
 }
