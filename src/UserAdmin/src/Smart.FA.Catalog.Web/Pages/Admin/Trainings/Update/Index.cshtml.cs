@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Domain.Models;
