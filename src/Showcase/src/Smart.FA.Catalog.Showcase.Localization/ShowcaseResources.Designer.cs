@@ -212,14 +212,5 @@ namespace Smart.FA.Catalog.Showcase.Localization {
                 return ResourceManager.GetString("Presentation", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string test {
-            get {
-                return ResourceManager.GetString("test", resourceCulture);
-            }
-        }
     }
 }
