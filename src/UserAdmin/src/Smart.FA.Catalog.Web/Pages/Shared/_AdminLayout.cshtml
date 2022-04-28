@@ -1,4 +1,4 @@
-﻿@using Smart.FA.Catalog.Core.SeedWork
+﻿@using Microsoft.AspNetCore.Builder
 @using Smart.FA.Catalog.Web.Pages.Admin
 @using Microsoft.AspNetCore.Localization
 @using Microsoft.Extensions.Options
@@ -20,6 +20,8 @@
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/_content/Smart.Design.Razor/css/main.css"/>
     <link rel="stylesheet" href="~/Smart.FA.Catalog.Web.styles.css" />
+    <link rel="stylesheet" href="@(nameof(Smart.FA.Catalog.Web)).styles.css" />
+
 </head>
 <body class="u-maximize-height u-overflow-hidden">
 <div class="c-app-layout">
@@ -74,7 +76,7 @@
                     @foreach (var sideMenuItem in Enumeration.GetAll<SideMenuItem>())
                     {
                         <li class="c-side-menu__item @((SideMenuItem) ViewData[nameof(SideMenuItem)]! == sideMenuItem ? "c-side-menu__item--active" : "")">
-                            <a class="c-side-menu__link" href="@sideMenuItem.Href">@sideMenuItem.DisplayName()</a>
+                            <a class="c-side-menu__link " href="@sideMenuItem.Href" >@sideMenuItem.DisplayName()</a>
                         </li>
                     }
                 </ul>

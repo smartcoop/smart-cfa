@@ -91,6 +91,21 @@ namespace Infrastructure.Migrations
                     b.ToTable("Trainer", (string)null);
                 });
 
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainerApproval", b =>
+                {
+                    b.Property<int>("TrainerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserChartId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TrainerId", "UserChartId");
+
+                    b.HasIndex("UserChartId");
+
+                    b.ToTable("TrainerApproval", (string)null);
+                });
+
             modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainerAssignment", b =>
                 {
                     b.Property<int>("TrainingId")
@@ -212,6 +227,39 @@ namespace Infrastructure.Migrations
                     b.HasKey("TrainingId", "TrainingTargetAudienceId");
 
                     b.ToTable("TrainingTarget", (string)null);
+                });
+
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.UserChartRevision", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("ValidFrom")
+                        .HasColumnType("datetime2(0)");
+
+                    b.Property<DateTime?>("ValidUntil")
+                        .HasColumnType("datetime2(0)");
+
+                    b.Property<string>("Version")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserChartRevision", (string)null);
                 });
 
             modelBuilder.Entity("Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer.SocialNetwork", b =>
@@ -538,6 +586,25 @@ namespace Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainerApproval", b =>
+                {
+                    b.HasOne("Smart.FA.Catalog.Core.Domain.Trainer", "Trainer")
+                        .WithMany("Approvals")
+                        .HasForeignKey("TrainerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Smart.FA.Catalog.Core.Domain.UserChartRevision", "UserChartRevision")
+                        .WithMany("TrainerApprovals")
+                        .HasForeignKey("UserChartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Trainer");
+
+                    b.Navigation("UserChartRevision");
+                });
+
             modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainerAssignment", b =>
                 {
                     b.HasOne("Smart.FA.Catalog.Core.Domain.Trainer", "Trainer")
@@ -614,6 +681,8 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.Trainer", b =>
                 {
+                    b.Navigation("Approvals");
+
                     b.Navigation("Assignments");
 
                     b.Navigation("PersonalSocialNetworks");
@@ -632,6 +701,11 @@ namespace Infrastructure.Migrations
                     b.Navigation("Topics");
 
                     b.Navigation("TrainerAssignments");
+                });
+
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.UserChartRevision", b =>
+                {
+                    b.Navigation("TrainerApprovals");
                 });
 #pragma warning restore 612, 618
         }

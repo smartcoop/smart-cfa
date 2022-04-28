@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Smart.FA.Catalog.Core.Domain.Models;
 
@@ -33,6 +34,7 @@ public class CreateModel : AdminPage
             Init();
             return Page();
         }
+
         var request = CreateTrainingViewModel.MapToRequest(user.Trainer.Id, user.Trainer.DefaultLanguage);
         var response = await Mediator.Send(request);
         return RedirectToPage("/Admin/Trainings/List/Index");

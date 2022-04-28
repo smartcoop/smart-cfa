@@ -10,6 +10,7 @@ public class Trainer : Entity, IAggregateRoot
     #region Private fields
 
     private readonly List<TrainerAssignment> _assignments = new();
+    private readonly List<TrainerApproval> _approvals = new();
     private readonly List<PersonalSocialNetwork> _personalSocialNetworks = new();
 
     #endregion
@@ -31,6 +32,8 @@ public class Trainer : Entity, IAggregateRoot
     public TrainerIdentity Identity { get; } = null!;
 
     public virtual IReadOnlyCollection<TrainerAssignment> Assignments => _assignments.AsReadOnly();
+
+    public virtual IReadOnlyCollection<TrainerApproval> Approvals => _approvals.AsReadOnly();
 
     public virtual IReadOnlyCollection<PersonalSocialNetwork> PersonalSocialNetworks =>
         _personalSocialNetworks.AsReadOnly();
@@ -136,5 +139,24 @@ public class Trainer : Entity, IAggregateRoot
         Email = Guard.AgainstInvalidEmail(email, nameof(email));
     }
 
+    /// <summary>
+    /// Approve a specific user chart
+    /// </summary>
+    /// <param cref="ArgumentNullException" name="userChart"></param>
+    public void ApproveUserChart(UserChartRevision? userChart)
+    {
+        Guard.AgainstNull(userChart, nameof(userChart));
+        if (_approvals.Select(approval => approval.UserChartId).Contains(userChart!.Id))
+        {
+            return;
+        }
+        _approvals.Add(new TrainerApproval(this, userChart));
+    }
+
     #endregion
+
+    public override string ToString()
+    {
+        return Name.ToString();
+    }
 }

@@ -1,0 +1,63 @@
+﻿@page 
+@model Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingDetails.TrainingDetailsModel
+
+@{
+    ViewData["Title"] = Model.Training.TrainingTitle; ;
+    Layout = Routes.Layout;
+}
+
+<section class="training-card">
+    <div class="training-card__title">
+        @Model.Training.TrainingTitle
+    </div>
+    <div class="training-card__sectors">
+        <img src="~/icons/tag--blue.svg" class="o-svg-icon--small sectors-icon" alt=""/>
+        @foreach (var topic in Model.Training.Topics)
+        {
+            <a class="training-list__category-link" asp-page="TrainingListViewModel/TrainingListViewModelList" asp-route-cat="TopicName">@topic.Name</a>
+            if (!Equals(topic, Model.Training.Topics.Last()))
+            {
+                <span>, </span>
+            }
+        }
+    </div>
+    <div class="training-card__details">
+        <div class="training-card__details-txts">
+            <div class="training-card__details-section">
+                <div class="training-card__details-label">
+                    @ShowcaseResources.Presentation
+                </div>
+                @Model.Training.TrainingMethodology
+            </div>
+            <div class="training-card__details-section">
+                <div class="training-card__details-label">
+                    @ShowcaseResources.Objectives
+                </div>
+                @Model.Training.TrainingGoal
+            </div>
+            <div class="training-card__details-section">
+                <div class="training-card__details-label">
+                    @ShowcaseResources.PracticalModalities
+                </div>
+                @Model.Training.TrainingPracticalModalities
+            </div>
+        </div>
+        <div class="training-card__trainer">
+            <div class="training-card__trainer-name">
+                <a class="training-card__trainer-link" asp-page="Trainer/trainerDetails/TrainerDetail" asp-route-id="@Model.Training.TrainingId">
+                     @Model.Training.TrainerFirstName @Model.Training.TrainerLastName
+                </a>
+            </div>
+            <div class="training-card__trainer-fonction">
+                @Model.Training.TrainerTitle
+            </div>
+        </div>
+    </div>
+    <div class="training-card__footer">
+        <div class="training-card__back">
+            <a class="training-card__back-link" asp-page="/Training/TrainingList/TrainingList">
+                <img src="~/icons/chevron-left--blue.svg" class="o-svg-icon--small chevron-icon" alt=""/>@ShowcaseResources.AllTrainings
+            </a>
+        </div>
+    </div>
+</section>
