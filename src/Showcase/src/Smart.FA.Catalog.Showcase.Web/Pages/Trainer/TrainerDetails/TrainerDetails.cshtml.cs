@@ -12,19 +12,18 @@ namespace Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerDetails;
 public class TrainerDetailsModel : PageModel
 {
     private readonly CatalogShowcaseContext _context;
+    public TrainerDetailsViewModel Trainer { get; set; } = null!;
 
     public TrainerDetailsModel(CatalogShowcaseContext context)
     {
         _context = context;
     }
 
-    public TrainerDetailsViewModel Trainer { get; set; }
-
-    public async Task<IActionResult> OnGetAsync(int? id)
+   public async Task<ActionResult> OnGetAsync(int? id)
     {
         if (id == null)
         {
-            TempData["errorMessage"] = "There is no record for this request. Please try again.";
+            TempData["errorMessage"] = "There is no record for this request.";
             return RedirectToPage("/404");
         }
 
@@ -32,7 +31,7 @@ public class TrainerDetailsModel : PageModel
 
         if (!trainerDetails.Any())
         {
-            TempData["errorMessage"] = "This trainer does not exist! Please try again.";
+            TempData["errorMessage"] = "This trainer does not exist.";
             return RedirectToPage("/404");
         }
 
@@ -54,20 +53,20 @@ public class TrainerDetailsModel : PageModel
 
         var trainer = new TrainerDetailsViewModel
         {
-            TrainerId = firstLine.Id,
-            TrainerBiography = firstLine.Biography,
-            TrainerFirstName = firstLine.FirstName,
-            TrainerLastName = firstLine.LastName,
-            TrainerTitle = firstLine.Title
+            Id = firstLine.Id,
+            Biography = firstLine.Biography,
+            FirstName = firstLine.FirstName,
+            LastName = firstLine.LastName,
+            Title = firstLine.Title
         };
 
         //Add trainer's social networks
-        foreach (var detail in trainerDetails.Where(detail => detail.SocialNetwork != null))
+        foreach (var detail in trainerDetails.Where(detail => detail.SocialNetwork is not null))
         {
-            trainer.TrainerSocialNetworks.Add(new TrainerSocialNetwork()
+            trainer.SocialNetworks.Add(new TrainerSocialNetwork()
             {
                 SocialNetwork = SocialNetwork.FromValue<SocialNetwork>((int)detail.SocialNetwork),
-                SocialNetworkUrl = detail.UrlToProfile
+                SocialNetworkUrl = detail.UrlToProfile,
             });
         }
 
@@ -75,10 +74,11 @@ public class TrainerDetailsModel : PageModel
         var trainerTrainingsByIds = trainerTrainingList.ToLookup(t => t.TrainingId);
         foreach (var trainerTraining in trainerTrainingsByIds)
         {
-            trainer.TrainerTrainings.Add(new TrainingListViewModel()
+            trainer.Trainings.Add(new TrainingListViewModel()
             {
-                TrainingTitle = trainerTraining.FirstOrDefault().TrainingTitle,
-                Topics = trainerTraining.Select(x => TrainingTopic.FromValue<TrainingTopic>(x.TrainingTopic)).ToList()
+                TrainingId = trainerTraining.FirstOrDefault().TrainingId,
+                Title = trainerTraining.FirstOrDefault().Title,
+                Topics = trainerTraining.Select(x => TrainingTopic.FromValue<TrainingTopic>(x.Topic)).ToList()
             });
         }
 

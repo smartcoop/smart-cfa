@@ -1,27 +1,27 @@
 ﻿@page 
 @model Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerDetails.TrainerDetailsModel
 @{
-    ViewData["Title"] = Model.Trainer.TrainerTitle;
+    ViewData["Title"] = Model.Trainer.Title;
     Layout = Routes.Layout;
 }
 
 <section class="trainer-card">
     <div class="trainer-card__title">
-        @Model.Trainer.TrainerFirstName @Model.Trainer.TrainerLastName
+        @Model.Trainer.FirstName @Model.Trainer.LastName
     </div>
     <div class="trainer-card__fonction">
-        @Model.Trainer.TrainerTitle
+        @Model.Trainer.Title
     </div>
     <div class="trainer-card__details">
         <div class="trainer-card__image">
             <img src="" class="trainer-image" alt="trainer-image" />
         </div>
         <div class="trainer-card__details-txts">
-            @Model.Trainer.TrainerBiography
+            @Model.Trainer.Biography
         </div>
         <div class="trainer-card__contacts">
             <ul>
-                @foreach (var socialNetwork in Model.Trainer.TrainerSocialNetworks)
+                @foreach (var socialNetwork in Model.Trainer.SocialNetworks)
                 {
                     <li class="trainer-card__trainer-links">
                         <a href="@socialNetwork.SocialNetworkUrl" target="_blank" class="trainer-card__trainer-link">
@@ -44,12 +44,12 @@
         <div class="trainer-card__trainings-label">
             @ShowcaseResources.TrainingsToFollow
         </div>
-        @foreach (var training in Model.Trainer.TrainerTrainings)
+        @foreach (var training in Model.Trainer.Trainings)
         {
             <div class="training-list__container">
                 <div class="training-list__container-left">
                     <div class="training-list__title">
-                        <a class="training-list__training-link" asp-page="TrainingDetail" asp-route-id="1">@training.TrainingTitle</a>
+                        <a class="training-list__training-link" asp-page="@Routes.TrainingDetails" asp-route-id="@training.TrainingId">@training.Title</a>
                     </div>
                     <div class="training-list__category">
                         <img src="~/icons/tag--blue.svg" class="o-svg-icon--small sectors-icon" alt="" />
@@ -65,7 +65,9 @@
                 </div>
                 <div class="training-list__container-right">
                     <div class="training-list__more">
-                        <a class="training-list__more-link" asp-page="TrainingDetail" asp-route-id="@training.TrainingId"><img src="~/icons/chevron-right--blue.svg" class="o-svg-icon--large chevron-icon" /></a>
+                        <a class="training-list__more-link" asp-page="@Routes.TrainingDetails" asp-route-id="@training.TrainingId">
+                            <img src="~/icons/chevron-right--blue.svg" class="o-svg-icon--large chevron-icon"/>
+                        </a>
                     </div>
                 </div>
             </div>
