@@ -31,7 +31,10 @@ public class HasSmartUserAdminRightsQueryHandler : IRequestHandler<HasSmartUserA
     {
         try
         {
-            return await _catalogContext.SuperAdmins.AnyAsync(superAdmin => superAdmin.UserId == query.UserId, cancellationToken: cancellationToken);
+            return await _catalogContext
+                .SuperAdmins
+                .AsNoTracking()
+                .AnyAsync(superAdmin => superAdmin.UserId == query.UserId, cancellationToken: cancellationToken);
         }
         catch (Exception exception)
         {
