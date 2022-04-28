@@ -169,7 +169,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Contacter Formateurs Associés.
         /// </summary>
         public static string Contact_TitlePage {
             get {
