@@ -10,7 +10,6 @@ public class TrainingListModel : PageModel
     private readonly Infrastructure.Data.CatalogShowcaseContext _context;
     public List<TrainingListViewModel> Trainings { get; set; } = new List<TrainingListViewModel>();
 
-
     public TrainingListModel(Infrastructure.Data.CatalogShowcaseContext context)
     {
         _context = context;
