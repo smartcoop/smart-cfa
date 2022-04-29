@@ -394,4 +394,11 @@
   <data name="YouAreAboutToDeleteTraining" xml:space="preserve">
     <value>Vous êtes sur le point de supprimer la formation</value>
   </data>
+  <data name="ClickHereToAddANewTraining" xml:space="preserve">
+    <value>Cliquez ici pour ajouter une formation</value>
+  </data>
+  <data name="YouDontHaveAnyTrainings" xml:space="preserve">
+    <value>Vous n'avez aucune formation</value>
+  </data>
 </root>
+
