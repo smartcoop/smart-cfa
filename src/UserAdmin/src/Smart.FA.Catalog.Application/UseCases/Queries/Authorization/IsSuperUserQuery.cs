@@ -6,28 +6,28 @@ using Smart.FA.Catalog.Infrastructure.Persistence;
 
 namespace Smart.FA.Catalog.Application.UseCases.Queries.Authorization;
 
-public class HasSuperUserRightsQuery : IRequest<bool>
+public class IsSuperUserQuery : IRequest<bool>
 {
     public string UserId { get; }
 
-    public HasSuperUserRightsQuery(string userId)
+    public IsSuperUserQuery(string userId)
     {
         UserId = userId;
     }
 }
 
-public class HasSuperUserRightsQueryHandler : IRequestHandler<HasSuperUserRightsQuery, bool>
+public class IsSuperUserQueryHandler : IRequestHandler<IsSuperUserQuery, bool>
 {
-    private readonly ILogger<HasSuperUserRightsQueryHandler> _logger;
+    private readonly ILogger<IsSuperUserQueryHandler> _logger;
     private readonly CatalogContext _catalogContext;
 
-    public HasSuperUserRightsQueryHandler(ILogger<HasSuperUserRightsQueryHandler> logger, CatalogContext catalogContext)
+    public IsSuperUserQueryHandler(ILogger<IsSuperUserQueryHandler> logger, CatalogContext catalogContext)
     {
         _logger = logger;
         _catalogContext = catalogContext;
     }
 
-    public async Task<bool> Handle(HasSuperUserRightsQuery query, CancellationToken cancellationToken)
+    public async Task<bool> Handle(IsSuperUserQuery query, CancellationToken cancellationToken)
     {
         try
         {
