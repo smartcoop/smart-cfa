@@ -4,7 +4,7 @@
 namespace Smart.FA.Catalog.Showcase.Domain.Models;
 public partial class TrainingList
 {
-    public int Id { get; set; }
+    public int TrainingId { get; set; }
     public string Title { get; set; } = null!;
     public string Language { get; set; } = null!;
     public string TrainerFirstName { get; set; } = null!;
