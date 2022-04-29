@@ -25,7 +25,7 @@ public class TrainingDetailsModel : PageModel
             return RedirectToPage("/404");
         }
 
-        var trainingDetails = await _context.TrainingDetails.Where(m => m.Id == id).ToListAsync();
+        var trainingDetails = await _context.TrainingDetails.Where(training => training.Id == id).ToListAsync();
 
         if (!trainingDetails.Any())
         {
