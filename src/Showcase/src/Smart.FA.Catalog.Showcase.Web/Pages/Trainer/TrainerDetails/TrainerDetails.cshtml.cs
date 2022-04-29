@@ -62,7 +62,8 @@ public class TrainerDetailsModel : PageModel
         };
 
         //Add trainer's social networks
-        foreach (var detail in trainerDetails.Where(detail => detail.SocialNetwork is not null))
+        foreach (var detail in trainerDetails.Where(detail => detail.SocialNetwork is not null)
+                     .OrderByDescending(s => s.SocialNetwork))
         {
             var SocialNetworkName = SocialNetwork.FromValue<SocialNetwork>((int) detail.SocialNetwork);
             trainer.SocialNetworks.Add(new TrainerSocialNetwork()

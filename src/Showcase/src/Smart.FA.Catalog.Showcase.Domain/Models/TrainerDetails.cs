@@ -2,6 +2,7 @@
 #nullable disable
 
 namespace Smart.FA.Catalog.Showcase.Domain.Models;
+
 public partial class TrainerDetails
 {
     public int Id { get; set; }
