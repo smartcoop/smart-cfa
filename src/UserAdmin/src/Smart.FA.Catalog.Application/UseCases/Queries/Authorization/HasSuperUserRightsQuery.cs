@@ -6,35 +6,35 @@ using Smart.FA.Catalog.Infrastructure.Persistence;
 
 namespace Smart.FA.Catalog.Application.UseCases.Queries.Authorization;
 
-public class HasSmartUserAdminRightsQuery : IRequest<bool>
+public class HasSuperUserRightsQuery : IRequest<bool>
 {
     public string UserId { get; }
 
-    public HasSmartUserAdminRightsQuery(string userId)
+    public HasSuperUserRightsQuery(string userId)
     {
         UserId = userId;
     }
 }
 
-public class HasSmartUserAdminRightsQueryHandler : IRequestHandler<HasSmartUserAdminRightsQuery, bool>
+public class HasSuperUserRightsQueryHandler : IRequestHandler<HasSuperUserRightsQuery, bool>
 {
-    private readonly ILogger<HasSmartUserAdminRightsQueryHandler> _logger;
+    private readonly ILogger<HasSuperUserRightsQueryHandler> _logger;
     private readonly CatalogContext _catalogContext;
 
-    public HasSmartUserAdminRightsQueryHandler(ILogger<HasSmartUserAdminRightsQueryHandler> logger, CatalogContext catalogContext)
+    public HasSuperUserRightsQueryHandler(ILogger<HasSuperUserRightsQueryHandler> logger, CatalogContext catalogContext)
     {
         _logger = logger;
         _catalogContext = catalogContext;
     }
 
-    public async Task<bool> Handle(HasSmartUserAdminRightsQuery query, CancellationToken cancellationToken)
+    public async Task<bool> Handle(HasSuperUserRightsQuery query, CancellationToken cancellationToken)
     {
         try
         {
             return await _catalogContext
-                .SuperAdmins
+                .SuperUsers
                 .AsNoTracking()
-                .AnyAsync(superAdmin => superAdmin.UserId == query.UserId, cancellationToken: cancellationToken);
+                .AnyAsync(superUser => superUser.UserId == query.UserId, cancellationToken: cancellationToken);
         }
         catch (Exception exception)
         {

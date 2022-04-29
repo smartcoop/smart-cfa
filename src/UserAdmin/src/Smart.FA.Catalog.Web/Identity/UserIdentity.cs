@@ -17,7 +17,7 @@ public class UserIdentity : IUserIdentity
     public Trainer CurrentTrainer { get; }
 
     /// <inheritdoc />
-    public bool IsSuperAdmin { get; }
+    public bool IsSuperUser { get; }
 
     public UserIdentity(IHttpContextAccessor httpContextAccessor)
     {
@@ -27,6 +27,6 @@ public class UserIdentity : IUserIdentity
         Identity       = identity;
         CurrentTrainer = identity.Trainer;
 
-        IsSuperAdmin = httpContextAccessor.HttpContext!.User.IsInRole("SuperAdmin");
+        IsSuperUser = httpContextAccessor.HttpContext!.User.IsInRole("SuperUser");
     }
 }

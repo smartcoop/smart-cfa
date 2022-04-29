@@ -26,5 +26,5 @@ public interface IUserIdentity
     /// <summary>
     /// Indicates if the connected user is a super admin.
     /// </summary>
-    public bool IsSuperAdmin { get; }
+    public bool IsSuperUser { get; }
 }

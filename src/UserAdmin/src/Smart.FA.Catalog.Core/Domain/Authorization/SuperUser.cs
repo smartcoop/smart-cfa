@@ -1,16 +1,16 @@
 namespace Smart.FA.Catalog.Core.Domain.Authorization;
 
-public class SuperAdmin
+public class SuperUser
 {
     public string UserId { get; init; } = null!;
 
-    private SuperAdmin()
+    private SuperUser()
     {
     }
 
-    public static SuperAdmin Create(string userId)
+    public static SuperUser Create(string userId)
     {
-        return new SuperAdmin()
+        return new SuperUser()
         {
             UserId = userId
         };
