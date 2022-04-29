@@ -96,8 +96,6 @@ public partial class CatalogShowcaseContext : DbContext
             entity.Property(e => e.TrainerLastName)
                 .HasMaxLength(200)
                 .HasColumnName("LastName");
-
-            entity.Property(e => e.TrainingId).HasColumnName("Id");
         });
 
         OnModelCreatingPartial(modelBuilder);

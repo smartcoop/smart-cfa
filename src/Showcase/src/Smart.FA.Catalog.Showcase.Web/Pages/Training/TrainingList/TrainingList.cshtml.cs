@@ -20,7 +20,7 @@ public class TrainingListModel : PageModel
     {
         var trainingList = await _context.TrainingList
             .Where(training => training.Status == TrainingStatus.Validated.Id)
-            .OrderBy(t => t.TrainingId)
+            .OrderBy(t => t.Id)
             .ToListAsync();
 
         Trainings = trainingList.ToTrainingListViewModels();
