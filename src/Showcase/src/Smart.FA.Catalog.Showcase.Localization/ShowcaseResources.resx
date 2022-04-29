@@ -124,7 +124,22 @@
     <value>Toutes les formations</value>
   </data>
   <data name="LoremIpsum" xml:space="preserve">
-    <value>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in ullamcorper tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis eget varius nisl, et leifend est. In condimentum, arcu eget ornare aliquam, urna quam luctus quam, ut vestibulum nulla turpis ultricies lectus. Nunc gravida gravida feugiat. Quisque pellentesque libero in massa fringilla, vel gravida ex ultricies. Proin in mi dolor. Fusce mollis neque tellus, vel malesuada nibh malesuada vitae. Curabitur sed ultrices nulla. Donec vulputate quis lorem ut ultricies. Nulla vestibulum suscipit aliquet. Aliquam dictum justo posuere, iaculis orci quis, viverra enim. Vivamus nec leo et est hendrerit tempus. Aliquam viverra dapibus elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sit amet aliquet ligula, id consequat lectus.</value>
+    <value>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc mauris elit, commodo sed risus commodo, lobortis tempor augue. Praesent fermentum posuere congue. Curabitur sit amet finibus turpis. Suspendisse venenatis, ante ac tempor venenatis, mauris ipsum rutrum lacus, sit amet pellentesque mi ligula imperdiet urna. Maecenas eget purus tempus, fringilla nibh vel, vestibulum est. Phasellus ut diam nec mauris pharetra condimentum non id enim. Pellentesque facilisis libero in pretium vestibulum. Ut sapien neque, bibendum vel lacus sit amet, ultrices gravida tortor. Nulla at velit enim. </value>
+  </data>
+  <data name="Contact_TitlePage" xml:space="preserve">
+    <value>Contacter Formateurs Associés</value>
+  </data>
+  <data name="Contact_Presentation" xml:space="preserve">
+    <value>Vous avez des questions en lien avec la formation chez Smart, n’hésitez pas à nous contacter via le formulaire ci-dessous.</value>
+  </data>
+  <data name="TitteTrainings" xml:space="preserve">
+    <value>Formations</value>
+  </data>
+  <data name="LegalNotice_TitlePage" xml:space="preserve">
+    <value>Mentions Légales</value>
+  </data>
+  <data name="PublicPage_Subtitle" xml:space="preserve">
+    <value>Sous titre</value>
   </data>
   <data name="Objectives" xml:space="preserve">
     <value>Objectifs</value>
@@ -137,5 +152,56 @@
   </data>
   <data name="TrainingsToFollow" xml:space="preserve">
     <value>Formations à suivre</value>
+  </data>
+  <data name="Contact_ConfirmationMessage" xml:space="preserve">
+    <value>Votre message a bien été envoyé.</value>
+  </data>
+  <data name="Contact_DefaultEmail" xml:space="preserve">
+    <value>nom@site.com</value>
+  </data>
+  <data name="Contact_DefaultName" xml:space="preserve">
+    <value>Benoit Dupont</value>
+  </data>
+  <data name="Contact_ErrorMessage" xml:space="preserve">
+    <value>Un problème est survenu. L'envoi du message a échoué.</value>
+  </data>
+  <data name="Contact_LabelEmail" xml:space="preserve">
+    <value>Adresse email</value>
+  </data>
+  <data name="Contact_LabelMessage" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Contact_LabelName" xml:space="preserve">
+    <value>Prénom et Nom</value>
+  </data>
+  <data name="Contact_LabelSend" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="Contact_Presentation_Link" xml:space="preserve">
+    <value>https://smartbe.be</value>
+  </data>
+  <data name="Contact_Presentation_SecondPart" xml:space="preserve">
+    <value>Pour toute autre question concernant Smart, rendez-vous sur notre site</value>
+  </data>
+  <data name="Homepage_Title" xml:space="preserve">
+    <value>À propos</value>
+  </data>
+  <data name="Homepage_Subtitle" xml:space="preserve">
+    <value>Aperçu des formations </value>
+  </data>
+  <data name="Homepage_IntroductionPart1" xml:space="preserve">
+    <value>Bienvenue dans le monde de la formation de Smart, </value>
+  </data>
+  <data name="Homepage_TrainingCount" xml:space="preserve">
+    <value>Nombre de formations :</value>
+  </data>
+  <data name="Homepage_TrainersCount" xml:space="preserve">
+    <value>Nombre de formateur·trices :</value>
+  </data>
+  <data name="Homepage_IntroductionPart2" xml:space="preserve">
+    <value>Smart est une coopérative de travailleuses et travailleurs qui utilisent sa structure pour exercer leur métier, par exemple de la formation.</value>
+  </data>
+  <data name="Homepage_IntroductionPart3" xml:space="preserve">
+    <value>Ce catalogue en ligne s’adresse à toute personne en recherche d’une formation. Vous trouverez sur ce site des formations de type scolaire, professionnel  (organisées et produites par Formateurs Associés asbl et Productions Associées asbl, le cas échéant) ou encore récréatif (uniquement dans Producteurs Associés asbl). Vous visualisez aisément la personne qui dispense la formation et pouvez la contacter en direct pour obtenir davantage d’informations. </value>
   </data>
 </root>

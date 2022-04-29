@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  minio:
+    image: quay.io/minio/minio
+    hostname: minio-local
+    container_name: minio-local
+    restart: always
+    networks:
+      - "local-cfa"
+    volumes:
+      - /minio/data:/local/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      - "MINIO_ROOT_USER=newadmin"
+      - "MINIO_ROOT_PASSWORD=newadmin123!"
+    command: server /data --console-address ":9001"
+
+  minioclient:
+    image: minio/mc
+    container_name: minio_client-local
+    depends_on:
+      - minio-local
+    entrypoint: >
+      bash -c
+           "/usr/bin/mc alias set myminio http://host.docker.internal:9000 newadmin newadmin123!;
+            /usr/bin/mc mb myminio/cfa;
+            /usr/bin/mc policy set public myminio/cfa;
+            /usr/bin/mc admin user add myminio newuser newuser123;
+            /usr/bin/mc admin policy set myminio readwrite user=newuser
+            /usr/bin/mc admin group add newgroup newuser;
+      exit 0;"
+    networks:
+      - "local-cfa"
+networks:
+  local-cfa:
+    name: local-cfa
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.21.1.0/24
+          gateway: 172.21.1.1
