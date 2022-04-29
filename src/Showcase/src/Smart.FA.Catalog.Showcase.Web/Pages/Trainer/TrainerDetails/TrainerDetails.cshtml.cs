@@ -35,31 +35,8 @@ public class TrainerDetailsModel : PageModel
 
         var trainerTrainingList = _context.TrainingList.Where(trainerTraining => trainerTraining.TrainerId == id).ToList();
 
-        Trainer = MapTrainerDetails(trainerDetails, trainerTrainingList);
+        Trainer = trainerDetails.ToTrainerDetailsViewModel(trainerTrainingList);
+
         return Page();
-    }
-
-    private TrainerDetailsViewModel MapTrainerDetails(List<Domain.Models.TrainerDetails> trainerDetails,
-        List<Domain.Models.TrainingList> trainerTrainingList)
-    {
-        var firstLine = trainerDetails.FirstOrDefault();
-
-        if (firstLine is null)
-        {
-            return new TrainerDetailsViewModel();
-        }
-
-        var trainer = new TrainerDetailsViewModel
-        {
-            Id = firstLine.Id,
-            Biography = firstLine.Biography,
-            FirstName = firstLine.FirstName,
-            LastName = firstLine.LastName,
-            Title = firstLine.Title,
-            //ProfileImagePath = firstLine.ProfileImagePath,
-            SocialNetworks = trainerDetails.ToTrainerSocialNetworks(),
-            Trainings = trainerTrainingList.ToTrainingListViewModels()
-        };
-        return trainer;
     }
 }
