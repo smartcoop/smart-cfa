@@ -10,9 +10,9 @@ namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.Update;
 public class UpdateTrainingViewModel
 {
     public string? Title { get; init; }
-    public List<int>? SlotNumberTypeIds { get; init; }
-    public List<int>? TrainingTypeIds { get; init; }
-    public List<int>? TargetAudienceIds { get; init; }
+    public List<int>? AttendanceTypeIds { get; init; }
+    public List<int>? VatExemptionClaimIds { get; init; }
+    public List<int>? TargetAudienceTypeIds { get; init; }
     public List<int>? TopicIds { get; init; }
     public string? Goal { get; init; }
     public string? Methodology { get; init; }
@@ -25,8 +25,8 @@ public static class EditTrainingViewModelMapping
     public static UpdateTrainingRequest MapToUpdateRequest(this UpdateTrainingViewModel model, string language, int trainingId, int trainerId)
         => new()
         {
-            Detail =
-                new TrainingDetailDto
+            DetailsDto =
+                new TrainingLocalizedDetailsDto
                 (
                     model.Title
                     , model.Goal
@@ -35,27 +35,27 @@ public static class EditTrainingViewModelMapping
                     , model.PracticalModalities
                 ),
             TrainingId = trainingId
-            , Types = Enumeration.FromValues<TrainingType>(model.TrainingTypeIds ?? new())
-            , TargetAudiences = Enumeration.FromValues<TrainingTargetAudience>(model.TargetAudienceIds ?? new())
-            , SlotNumberTypes = Enumeration.FromValues<TrainingSlotNumberType>(model.SlotNumberTypeIds ?? new())
-            , Topics = Enumeration.FromValues<TrainingTopic>(model.TopicIds ?? new())
+            , VatExemptionTypes = Enumeration.FromValues<VatExemptionType>(model.VatExemptionClaimIds ?? new())
+            , TargetAudienceTypes = Enumeration.FromValues<TargetAudienceType>(model.TargetAudienceTypeIds ?? new())
+            , AttendanceTypes = Enumeration.FromValues<AttendanceType>(model.AttendanceTypeIds ?? new())
+            , Topics = Enumeration.FromValues<Topic>(model.TopicIds ?? new())
             , TrainerIds = new List<int>{trainerId},
         };
 
 
     public static UpdateTrainingViewModel MapGetToResponse(this GetTrainingFromIdResponse model, Language language)
     {
-        var detail = model.Training!.Details.FirstOrDefault(detail => detail.Language == language);
+        var details = model.Training!.Details.FirstOrDefault(localizedDetails => localizedDetails.Language == language);
         UpdateTrainingViewModel response = new()
         {
-            Goal = detail?.Goal,
-            Title = detail?.Title,
-            Methodology = detail?.Methodology,
-            PracticalModalities = detail?.PracticalModalities,
-            TargetAudienceIds = model.Training.Targets.Select(target => target.TrainingTargetAudienceId).ToList(),
-            TrainingTypeIds = model.Training.Identities.Select(identity => identity.TrainingTypeId).ToList(),
-            SlotNumberTypeIds = model.Training.Slots.Select(slot => slot.TrainingSlotTypeId).ToList(),
-            TopicIds = model.Training.Topics.Select(topic => topic.TrainingTopicId).ToList()
+            Goal = details?.Goal,
+            Title = details?.Title,
+            Methodology = details?.Methodology,
+            PracticalModalities = details?.PracticalModalities,
+            TargetAudienceTypeIds = model.Training.Targets.Select(target => target.TargetAudienceTypeId).ToList(),
+            VatExemptionClaimIds = model.Training.VatExemptionClaims.Select(vatExemptionClaim => vatExemptionClaim.VatExemptionTypeId).ToList(),
+            AttendanceTypeIds = model.Training.Attendances.Select(attendance => attendance.AttendanceTypeId).ToList(),
+            TopicIds = model.Training.Topics.Select(topic => topic.TopicId).ToList()
         };
 
         return response;
@@ -70,9 +70,9 @@ public static class EditTrainingViewModelMapping
             Title = detail?.Title,
             Methodology = detail?.Methodology,
             PracticalModalities = detail?.PracticalModalities,
-            TargetAudienceIds = model.Training.Targets.Select(target => target.TrainingTargetAudienceId).ToList(),
-            TrainingTypeIds = model.Training.Identities.Select(identity => identity.TrainingTypeId).ToList(),
-            SlotNumberTypeIds = model.Training.Slots.Select(slot => slot.TrainingSlotTypeId).ToList()
+            TargetAudienceTypeIds = model.Training.Targets.Select(target => target.TargetAudienceTypeId).ToList(),
+            VatExemptionClaimIds = model.Training.VatExemptionClaims.Select(vatExemptionClaim => vatExemptionClaim.VatExemptionTypeId).ToList(),
+            AttendanceTypeIds = model.Training.Attendances.Select(attendance => attendance.AttendanceTypeId).ToList()
         };
 
         return response;

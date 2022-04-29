@@ -46,7 +46,7 @@
                 <smart-form-group-textarea label="@CatalogResources.PracticalModalities *" asp-for="UpdateTrainingViewModel.PracticalModalities" helper-text="@CatalogResources.Min30CharMax1000Char"></smart-form-group-textarea>
                 <smart-formgroup label="@CatalogResources.Topics *">
                     <smart-grid>
-                        @foreach (var topics in Enumeration.GetAll<TrainingTopic>().Chunk(2))
+                        @foreach (var topics in Enumeration.GetAll<Topic>().Chunk(2))
                         {
                             @foreach (var topic in topics)
                             {
@@ -71,29 +71,29 @@
 
             <smart-panel header="@CatalogResources.TrainingVatJustification *">
                 <smart-formgroup label="@CatalogResources.TheTraining *">
-                    @foreach (var trainingType in Enumeration.GetAll<TrainingType>())
+                    @foreach (var vatExemptionType in Enumeration.GetAll<VatExemptionType>())
                     {
-                        <smart-checkbox label="@_localizer["Training_Is" + trainingType.Name]" asp-for="UpdateTrainingViewModel.TrainingTypeIds" value="@trainingType.Id" checked="@trainingType.IsContainedIn(Model.UpdateTrainingViewModel.TrainingTypeIds)"></smart-checkbox>
+                        <smart-checkbox label="@_localizer["Training_Is" + vatExemptionType.Name]" asp-for="UpdateTrainingViewModel.VatExemptionClaimIds" value="@vatExemptionType.Id" checked="@vatExemptionType.IsContainedIn(Model.UpdateTrainingViewModel.VatExemptionClaimIds)"></smart-checkbox>
                     }
                     <smart-checkbox label="@CatalogResources.Other"></smart-checkbox>
-                    <smart-validation-message asp-for="UpdateTrainingViewModel.TrainingTypeIds"></smart-validation-message>
+                    <smart-validation-message asp-for="UpdateTrainingViewModel.VatExemptionClaimIds"></smart-validation-message>
                 </smart-formgroup>
 
                 <smart-formgroup label="@CatalogResources.TrainingTarget *">
-                    @foreach (var targetAudience in Enumeration.GetAll<TrainingTargetAudience>())
+                    @foreach (var targetAudience in Enumeration.GetAll<TargetAudienceType>())
                     {
-                        <smart-checkbox label="@_localizer[targetAudience.Name]" asp-for="UpdateTrainingViewModel.TargetAudienceIds" value="@targetAudience.Id" checked="@targetAudience.IsContainedIn(Model.UpdateTrainingViewModel.TargetAudienceIds)"></smart-checkbox>
+                        <smart-checkbox label="@_localizer[targetAudience.Name]" asp-for="UpdateTrainingViewModel.TargetAudienceTypeIds" value="@targetAudience.Id" checked="@targetAudience.IsContainedIn(Model.UpdateTrainingViewModel.TargetAudienceTypeIds)"></smart-checkbox>
                     }
                     <smart-checkbox label="@CatalogResources.Other"></smart-checkbox>
-                    <smart-validation-message asp-for="UpdateTrainingViewModel.TargetAudienceIds"></smart-validation-message>
+                    <smart-validation-message asp-for="UpdateTrainingViewModel.TargetAudienceTypeIds"></smart-validation-message>
                 </smart-formgroup>
 
                 <smart-formgroup label="@CatalogResources.Training_IsItATrainingThat *">
-                    @foreach (var slotNumberType in Enumeration.GetAll<TrainingSlotNumberType>())
+                    @foreach (var attendanceType in Enumeration.GetAll<AttendanceType>())
                     {
-                        <smart-checkbox asp-for="UpdateTrainingViewModel.SlotNumberTypeIds" value="@slotNumberType.Id" label="@_localizer["Training_" + slotNumberType.Name]" checked="slotNumberType.IsContainedIn(Model.UpdateTrainingViewModel.SlotNumberTypeIds)"></smart-checkbox>
+                        <smart-checkbox asp-for="UpdateTrainingViewModel.AttendanceTypeIds" value="@attendanceType.Id" label="@_localizer["Training_" + attendanceType.Name]" checked="attendanceType.IsContainedIn(Model.UpdateTrainingViewModel.AttendanceTypeIds)"></smart-checkbox>
                     }
-                    <smart-validation-message asp-for="UpdateTrainingViewModel.SlotNumberTypeIds"></smart-validation-message>
+                    <smart-validation-message asp-for="UpdateTrainingViewModel.AttendanceTypeIds"></smart-validation-message>
                 </smart-formgroup>
             </smart-panel>
             <input type="hidden" id="isDraft" value="false" asp-for="UpdateTrainingViewModel.IsDraft"/>

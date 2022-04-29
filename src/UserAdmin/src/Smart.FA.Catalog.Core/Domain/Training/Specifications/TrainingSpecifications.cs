@@ -7,10 +7,10 @@ namespace Smart.FA.Catalog.Core.Domain.Specifications;
 
 public class ValidStatusSpecification : Specification<Training>
 {
-    int[] validStatus = {TrainingStatus.Validated.Id, TrainingStatus.WaitingForValidation.Id};
+    int[] validStatus = {TrainingStatusType.Validated.Id, TrainingStatusType.WaitingForValidation.Id};
 
     public override Expression<Func<Training, bool>> ToExpression() =>
-        training => validStatus.Contains(training.Status.Id);
+        training => validStatus.Contains(training.StatusType.Id);
 }
 
 

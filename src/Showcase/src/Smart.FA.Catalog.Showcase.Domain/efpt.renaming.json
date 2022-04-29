@@ -1,9 +1,14 @@
 ﻿[
    {
-      "SchemaName": "dbo",
+      "SchemaName": "Cfa",
       "Tables": [
          {
-            "Columns": [ ],
+            "Columns": [
+               {
+                  "Name": "SocialNetworkId",
+                  "NewName": "SocialNetwork"
+               }
+            ],
             "Name": "v_TrainerDetails",
             "NewName": "TrainerDetails"
          },
@@ -12,6 +17,10 @@
                {
                   "Name": "Title",
                   "NewName": "TrainingTitle"
+               },
+               {
+                  "Name": "TopicId",
+                  "NewName": "TrainingTopicId"
                },
                {
                   "Name": "FirstName",
@@ -24,6 +33,10 @@
                {
                   "Name": "trainerTitle",
                   "NewName": "TrainerTitle"
+               },
+               {
+                  "Name": "TrainingStatusTypeId",
+                  "NewName": "StatusId"
                }
             ],
             "Name": "v_TrainingDetails",
@@ -40,11 +53,11 @@
                   "NewName": "TrainerLastName"
                },
                {
-                  "Name": "TrainingTopicId",
+                  "Name": "TopicId",
                   "NewName": "Topic"
                },
                {
-                  "Name": "StatusId",
+                  "Name": "TrainingStatusTypeId",
                   "NewName": "Status"
                }
             ],

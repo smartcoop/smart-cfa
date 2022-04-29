@@ -35,7 +35,7 @@ public class TrainingRepositoryTests : IntegrationTestBase
         var trainingToAdd = new Training
         (
             trainerToAdd
-            , new TrainingDetailDto
+            , new TrainingLocalizedDetailsDto
             (
                 _fixture.Create<string>(),
                 null,
@@ -43,10 +43,10 @@ public class TrainingRepositoryTests : IntegrationTestBase
                 null,
                 null
             )
-            , new List<TrainingType> {TrainingType.LanguageCourse}
-            , new List<TrainingSlotNumberType> {TrainingSlotNumberType.Group}
-            , new List<TrainingTargetAudience> {TrainingTargetAudience.Employee}
-            , new List<TrainingTopic>() {TrainingTopic.Communication}
+            , new List<VatExemptionType> {VatExemptionType.LanguageCourse}
+            , new List<AttendanceType> {AttendanceType.Group}
+            , new List<TargetAudienceType> {TargetAudienceType.Employee}
+            , new List<Topic>() {Topic.Communication}
         );
         context.Trainings.Attach(trainingToAdd);
         await context.SaveChangesAsync();

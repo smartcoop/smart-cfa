@@ -17,6 +17,7 @@ namespace Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("Cfa")
                 .HasAnnotation("ProductVersion", "6.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
@@ -31,34 +32,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("SuperUser", "Cfa");
-                });
-
-            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.PersonalSocialNetwork", b =>
-                {
-                    b.Property<int>("TrainerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SocialNetwork")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("LastModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UrlToProfile")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.HasKey("TrainerId", "SocialNetwork");
-
-                    b.HasIndex("SocialNetwork");
-
-                    b.ToTable("TrainerPersonalNetwork", (string)null);
                 });
 
             modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.Trainer", b =>
@@ -99,7 +72,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Trainer", (string)null);
+                    b.ToTable("Trainer", "Cfa");
                 });
 
             modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainerApproval", b =>
@@ -131,7 +104,27 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("TrainerId");
 
-                    b.ToTable("TrainerAssignment", (string)null);
+                    b.ToTable("TrainerAssignment", "Cfa");
+                });
+
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainerSocialNetwork", b =>
+                {
+                    b.Property<int>("TrainerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SocialNetwork")
+                        .HasColumnType("int")
+                        .HasColumnName("SocialNetworkId");
+
+                    b.Property<string>("UrlToProfile")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("TrainerId", "SocialNetwork");
+
+                    b.HasIndex("SocialNetwork");
+
+                    b.ToTable("TrainerSocialNetwork", "Cfa");
                 });
 
             modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.Training", b =>
@@ -148,29 +141,31 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("LastModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("smallint")
-                        .HasColumnName("StatusId");
+                    b.Property<int>("StatusType")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1)
+                        .HasColumnName("TrainingStatusTypeId");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Training", (string)null);
+                    b.ToTable("Training", "Cfa");
                 });
 
-            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainingCategory", b =>
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainingAttendance", b =>
                 {
                     b.Property<int>("TrainingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TrainingTopicId")
+                    b.Property<int>("AttendanceTypeId")
                         .HasColumnType("int");
 
-                    b.HasKey("TrainingId", "TrainingTopicId");
+                    b.HasKey("TrainingId", "AttendanceTypeId");
 
-                    b.ToTable("TrainingCategory", (string)null);
+                    b.ToTable("TrainingAttendance", "Cfa");
                 });
 
-            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainingDetail", b =>
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainingLocalizedDetails", b =>
                 {
                     b.Property<int>("TrainingId")
                         .HasColumnType("int");
@@ -198,46 +193,46 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("TrainingId", "Language");
 
-                    b.ToTable("TrainingDetail", (string)null);
+                    b.ToTable("TrainingLocalizedDetails", "Cfa");
                 });
 
-            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainingIdentity", b =>
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainingTargetAudience", b =>
                 {
                     b.Property<int>("TrainingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TrainingTypeId")
+                    b.Property<int>("TargetAudienceTypeId")
                         .HasColumnType("int");
 
-                    b.HasKey("TrainingId", "TrainingTypeId");
+                    b.HasKey("TrainingId", "TargetAudienceTypeId");
 
-                    b.ToTable("TrainingIdentity", (string)null);
+                    b.ToTable("TrainingTargetAudience", "Cfa");
                 });
 
-            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainingSlot", b =>
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainingTopic", b =>
                 {
                     b.Property<int>("TrainingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TrainingSlotTypeId")
+                    b.Property<int>("TopicId")
                         .HasColumnType("int");
 
-                    b.HasKey("TrainingId", "TrainingSlotTypeId");
+                    b.HasKey("TrainingId", "TopicId");
 
-                    b.ToTable("TrainingSlot", (string)null);
+                    b.ToTable("TrainingTopic", "Cfa");
                 });
 
-            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainingTarget", b =>
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.VatExemptionClaim", b =>
                 {
                     b.Property<int>("TrainingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TrainingTargetAudienceId")
+                    b.Property<int>("VatExemptionTypeId")
                         .HasColumnType("int");
 
-                    b.HasKey("TrainingId", "TrainingTargetAudienceId");
+                    b.HasKey("TrainingId", "VatExemptionTypeId");
 
-                    b.ToTable("TrainingTarget", (string)null);
+                    b.ToTable("VatExemptionClaim", "Cfa");
                 });
 
             modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.UserChartRevision", b =>
@@ -288,7 +283,7 @@ namespace Infrastructure.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("SocialNetwork");
+                    b.ToTable("SocialNetwork", "Cfa");
 
                     b.HasData(
                         new
@@ -323,7 +318,7 @@ namespace Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Smart.FA.Catalog.Shared.Domain.Enumerations.Training.TrainingSlotNumberType", b =>
+            modelBuilder.Entity("Smart.FA.Catalog.Shared.Domain.Enumerations.Training.AttendanceType", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -338,7 +333,7 @@ namespace Infrastructure.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("TrainingSlotNumberType");
+                    b.ToTable("AttendanceType", "Cfa");
 
                     b.HasData(
                         new
@@ -353,7 +348,7 @@ namespace Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Smart.FA.Catalog.Shared.Domain.Enumerations.Training.TrainingStatus", b =>
+            modelBuilder.Entity("Smart.FA.Catalog.Shared.Domain.Enumerations.Training.TargetAudienceType", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -368,47 +363,7 @@ namespace Infrastructure.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("TrainingStatus");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Draft"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "PendingValidation"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Validated"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Cancelled"
-                        });
-                });
-
-            modelBuilder.Entity("Smart.FA.Catalog.Shared.Domain.Enumerations.Training.TrainingTargetAudience", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.ToTable("TrainingTargetAudience");
+                    b.ToTable("TargetAudienceType", "Cfa");
 
                     b.HasData(
                         new
@@ -428,7 +383,7 @@ namespace Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Smart.FA.Catalog.Shared.Domain.Enumerations.Training.TrainingTopic", b =>
+            modelBuilder.Entity("Smart.FA.Catalog.Shared.Domain.Enumerations.Training.Topic", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -443,7 +398,7 @@ namespace Infrastructure.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("TrainingTopic");
+                    b.ToTable("Topic", "Cfa");
 
                     b.HasData(
                         new
@@ -493,7 +448,7 @@ namespace Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Smart.FA.Catalog.Shared.Domain.Enumerations.Training.TrainingType", b =>
+            modelBuilder.Entity("Smart.FA.Catalog.Shared.Domain.Enumerations.Training.TrainingStatusType", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -508,7 +463,47 @@ namespace Infrastructure.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("TrainingType");
+                    b.ToTable("TrainingStatusType", "Cfa");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Draft"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "PendingValidation"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Validated"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Cancelled"
+                        });
+                });
+
+            modelBuilder.Entity("Smart.FA.Catalog.Shared.Domain.Enumerations.Training.VatExemptionType", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("VatExemptionType", "Cfa");
 
                     b.HasData(
                         new
@@ -526,17 +521,6 @@ namespace Infrastructure.Migrations
                             Id = 3,
                             Name = "ScholarTraining"
                         });
-                });
-
-            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.PersonalSocialNetwork", b =>
-                {
-                    b.HasOne("Smart.FA.Catalog.Core.Domain.Trainer", "Trainer")
-                        .WithMany("PersonalSocialNetworks")
-                        .HasForeignKey("TrainerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Trainer");
                 });
 
             modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.Trainer", b =>
@@ -560,7 +544,7 @@ namespace Infrastructure.Migrations
 
                             b1.HasKey("TrainerId");
 
-                            b1.ToTable("Trainer");
+                            b1.ToTable("Trainer", "Cfa");
 
                             b1.WithOwner()
                                 .HasForeignKey("TrainerId");
@@ -584,7 +568,7 @@ namespace Infrastructure.Migrations
 
                             b1.HasKey("TrainerId");
 
-                            b1.ToTable("Trainer");
+                            b1.ToTable("Trainer", "Cfa");
 
                             b1.WithOwner()
                                 .HasForeignKey("TrainerId");
@@ -635,10 +619,21 @@ namespace Infrastructure.Migrations
                     b.Navigation("Training");
                 });
 
-            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainingCategory", b =>
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainerSocialNetwork", b =>
+                {
+                    b.HasOne("Smart.FA.Catalog.Core.Domain.Trainer", "Trainer")
+                        .WithMany("SocialNetworks")
+                        .HasForeignKey("TrainerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Trainer");
+                });
+
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainingAttendance", b =>
                 {
                     b.HasOne("Smart.FA.Catalog.Core.Domain.Training", "Training")
-                        .WithMany("Topics")
+                        .WithMany("Attendances")
                         .HasForeignKey("TrainingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -646,7 +641,7 @@ namespace Infrastructure.Migrations
                     b.Navigation("Training");
                 });
 
-            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainingDetail", b =>
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainingLocalizedDetails", b =>
                 {
                     b.HasOne("Smart.FA.Catalog.Core.Domain.Training", "Training")
                         .WithMany("Details")
@@ -657,32 +652,32 @@ namespace Infrastructure.Migrations
                     b.Navigation("Training");
                 });
 
-            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainingIdentity", b =>
-                {
-                    b.HasOne("Smart.FA.Catalog.Core.Domain.Training", "Training")
-                        .WithMany("Identities")
-                        .HasForeignKey("TrainingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Training");
-                });
-
-            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainingSlot", b =>
-                {
-                    b.HasOne("Smart.FA.Catalog.Core.Domain.Training", "Training")
-                        .WithMany("Slots")
-                        .HasForeignKey("TrainingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Training");
-                });
-
-            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainingTarget", b =>
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainingTargetAudience", b =>
                 {
                     b.HasOne("Smart.FA.Catalog.Core.Domain.Training", "Training")
                         .WithMany("Targets")
+                        .HasForeignKey("TrainingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Training");
+                });
+
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainingTopic", b =>
+                {
+                    b.HasOne("Smart.FA.Catalog.Core.Domain.Training", "Training")
+                        .WithMany("Topics")
+                        .HasForeignKey("TrainingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Training");
+                });
+
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.VatExemptionClaim", b =>
+                {
+                    b.HasOne("Smart.FA.Catalog.Core.Domain.Training", "Training")
+                        .WithMany("VatExemptionClaims")
                         .HasForeignKey("TrainingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -696,22 +691,22 @@ namespace Infrastructure.Migrations
 
                     b.Navigation("Assignments");
 
-                    b.Navigation("PersonalSocialNetworks");
+                    b.Navigation("SocialNetworks");
                 });
 
             modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.Training", b =>
                 {
+                    b.Navigation("Attendances");
+
                     b.Navigation("Details");
-
-                    b.Navigation("Identities");
-
-                    b.Navigation("Slots");
 
                     b.Navigation("Targets");
 
                     b.Navigation("Topics");
 
                     b.Navigation("TrainerAssignments");
+
+                    b.Navigation("VatExemptionClaims");
                 });
 
             modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.UserChartRevision", b =>

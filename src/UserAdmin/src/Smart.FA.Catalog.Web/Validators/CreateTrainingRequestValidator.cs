@@ -58,15 +58,15 @@ public class CreateTrainingRequestValidator : AbstractValidator<CreateTrainingVi
             .MinimumLength(30)
             .WithMessage(CatalogResources.Min30Char);
 
-        RuleFor(viewModel => viewModel.SlotNumberTypeIds)
+        RuleFor(viewModel => viewModel.AttendanceTypeIds)
             .NotEmpty()
             .WithMessage(CatalogResources.FieldRequired);
 
-        RuleFor(viewModel => viewModel.TrainingTypeIds)
+        RuleFor(viewModel => viewModel.VatExemptionTypeIds)
             .NotEmpty()
             .WithMessage(CatalogResources.PleaseSelectOneOption);
 
-        RuleFor(viewModel => viewModel.TargetAudienceIds)
+        RuleFor(viewModel => viewModel.TargetAudienceTypeIds)
             .NotEmpty()
             .WithMessage(CatalogResources.SelectOneTrainingTargetAudience);
 

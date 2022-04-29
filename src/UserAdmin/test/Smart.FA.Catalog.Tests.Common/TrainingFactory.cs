@@ -15,11 +15,11 @@ public static class TrainingFactory
         return new Training
         (
             trainer
-            , new TrainingDetailDto(fixture.Create<string>(), null, "FR", null, null)
-            , new List<TrainingType> {TrainingType.Professional}
-            , new List<TrainingSlotNumberType> {TrainingSlotNumberType.Group}
-            , new List<TrainingTargetAudience> {TrainingTargetAudience.Employee}
-            , new List<TrainingTopic> {TrainingTopic.Communication}
+            , new TrainingLocalizedDetailsDto(fixture.Create<string>(), null, "FR", null, null)
+            , new List<VatExemptionType> {VatExemptionType.Professional}
+            , new List<AttendanceType> {AttendanceType.Group}
+            , new List<TargetAudienceType> {TargetAudienceType.Employee}
+            , new List<Topic> {Topic.Communication}
         );
     }
 
@@ -33,11 +33,11 @@ public static class TrainingFactory
         return new Training
         (
             trainer
-            , new TrainingDetailDto(fixture.Create<string>(), null, "FR", null, null)
-            , new List<TrainingType> {TrainingType.Professional}
-            , new List<TrainingSlotNumberType> {TrainingSlotNumberType.Group}
-            , new List<TrainingTargetAudience> {TrainingTargetAudience.Employee}
-            , new List<TrainingTopic> {TrainingTopic.Communication}
+            , new TrainingLocalizedDetailsDto(fixture.Create<string>(), null, "FR", null, null)
+            , new List<VatExemptionType> {VatExemptionType.Professional}
+            , new List<AttendanceType> {AttendanceType.Group}
+            , new List<TargetAudienceType> {TargetAudienceType.Employee}
+            , new List<Topic> {Topic.Communication}
         );
     }
 
@@ -46,11 +46,11 @@ public static class TrainingFactory
         return new Training
         (
             trainer
-            , new TrainingDetailDto(fixture.Create<string>(), null, "FR", null, null)
-            , new List<TrainingType> {TrainingType.LanguageCourse}
-            , new List<TrainingSlotNumberType> {TrainingSlotNumberType.Group}
-            , new List<TrainingTargetAudience> {TrainingTargetAudience.Employee}
-            , new List<TrainingTopic> {TrainingTopic.Communication}
+            , new TrainingLocalizedDetailsDto(fixture.Create<string>(), null, "FR", null, null)
+            , new List<VatExemptionType> {VatExemptionType.LanguageCourse}
+            , new List<AttendanceType> {AttendanceType.Group}
+            , new List<TargetAudienceType> {TargetAudienceType.Employee}
+            , new List<Topic> {Topic.Communication}
         );
     }
 }

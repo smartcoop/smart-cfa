@@ -112,8 +112,8 @@ public class TrainingTests
 
         action.Should().NotThrow<Exception>();
         training.Details.Should().HaveCount(2);
-        training.Details.FirstOrDefault(detail => detail.Language == language).Should().NotBeNull();
-        training.Details.FirstOrDefault(detail => detail.Language == language)!.Title.Should().Be(newTitle);
+        training.Details.FirstOrDefault(details => details.Language == language).Should().NotBeNull();
+        training.Details.FirstOrDefault(details => details.Language == language)!.Title.Should().Be(newTitle);
     }
 
 
@@ -124,7 +124,7 @@ public class TrainingTests
 
         var training = TrainingFactory.Create(trainer);
 
-        training.Status.Should().Be(TrainingStatus.Draft);
+        training.StatusType.Should().Be(TrainingStatusType.Draft);
     }
 
 
@@ -138,7 +138,7 @@ public class TrainingTests
         var result = training.Validate();
 
         result.IsSuccess.Should().BeTrue();
-        training.Status.Should().Be(TrainingStatus.Validated);
+        training.StatusType.Should().Be(TrainingStatusType.Validated);
     }
 
     [Fact]
@@ -151,7 +151,7 @@ public class TrainingTests
         var result = training.Validate();
 
         result.IsSuccess.Should().BeTrue();
-        training.Status.Should().Be(TrainingStatus.WaitingForValidation);
+        training.StatusType.Should().Be(TrainingStatusType.WaitingForValidation);
     }
 
     [Fact]
@@ -161,8 +161,8 @@ public class TrainingTests
 
         var training = TrainingFactory.Create(trainer);
 
-        training.Identities.Should().NotBeNull();
-        training.Identities.Should().NotBeEmpty();
+        training.VatExemptionClaims.Should().NotBeNull();
+        training.VatExemptionClaims.Should().NotBeEmpty();
     }
 
     [Fact]
@@ -177,24 +177,24 @@ public class TrainingTests
     }
 
     [Fact]
-    public void CanBeSwitchedFromSingleToGroupSlotNumber()
+    public void AttendanceTypeCanBeSwitchedFromSingleToGroup()
     {
         var trainer = TrainerFactory.CreateClean();
         var training = new Training
         (
             trainer
-            , new TrainingDetailDto(_fixture.Create<string>(), null, "FR", null, null)
-            , new List<TrainingType> {TrainingType.Professional}
-            , new List<TrainingSlotNumberType> {TrainingSlotNumberType.Single}
-            , new List<TrainingTargetAudience> {TrainingTargetAudience.Employee}
-            , new List<TrainingTopic> {TrainingTopic.Communication}
+            , new TrainingLocalizedDetailsDto(_fixture.Create<string>(), null, "FR", null, null)
+            , new List<VatExemptionType> {VatExemptionType.Professional}
+            , new List<AttendanceType> {AttendanceType.Single}
+            , new List<TargetAudienceType> {TargetAudienceType.Employee}
+            , new List<Topic> {Topic.Communication}
         );
 
-        training.SwitchSlotNumberType(new List<TrainingSlotNumberType> {TrainingSlotNumberType.Group});
+        training.SwitchAttendanceTypes(new List<AttendanceType> {AttendanceType.Group});
 
-        training.Slots.Should().ContainSingle();
-        training.Slots.Select(slot => slot.TrainingSlotNumberSlotType).First().Should()
-            .BeSameAs(TrainingSlotNumberType.Group);
+        training.Attendances.Should().ContainSingle();
+        training.Attendances.Select(trainingAttendance => trainingAttendance.AttendanceType).First().Should()
+            .BeSameAs(AttendanceType.Group);
     }
 
     [Fact]

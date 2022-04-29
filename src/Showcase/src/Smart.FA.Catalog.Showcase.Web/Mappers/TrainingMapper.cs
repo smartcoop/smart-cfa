@@ -25,8 +25,8 @@ public static class TrainingMapper
                 Title = firstLine.Title,
                 TrainerFirstName = firstLine.TrainerFirstName,
                 TrainerLastName = firstLine.TrainerLastName,
-                Status = TrainingStatus.FromValue<TrainingStatus>(firstLine.Status),
-                Topics = groupedTraining.Select(trainerList => TrainingTopic.FromValue<TrainingTopic>(trainerList.Topic)).ToList(),
+                Status = TrainingStatusType.FromValue<TrainingStatusType>(firstLine.Status),
+                Topics = groupedTraining.Select(trainerList => Topic.FromValue<Topic>(trainerList.Topic)).ToList(),
                 Languages = groupedTraining.Select(trainerList => trainerList.Language).Distinct().ToList()
             });
         }

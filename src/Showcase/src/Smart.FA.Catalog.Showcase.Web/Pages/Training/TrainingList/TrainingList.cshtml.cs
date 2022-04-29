@@ -19,7 +19,7 @@ public class TrainingListModel : PageModel
     public async Task<PageResult> OnGetAsync()
     {
         var trainingList = await _context.TrainingList
-            .Where(training => training.Status == TrainingStatus.Validated.Id)
+            .Where(training => training.Status == TrainingStatusType.Validated.Id)
             .OrderBy(t => t.Id)
             .ToListAsync();
 

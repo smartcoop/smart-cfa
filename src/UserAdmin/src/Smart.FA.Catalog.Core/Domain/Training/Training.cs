@@ -14,26 +14,26 @@ public class Training : SeedWork.Entity, IAggregateRoot
     #region Private fields
 
     private readonly List<TrainerAssignment> _trainerAssignments = new();
-    private readonly List<TrainingIdentity> _identities = new();
-    private readonly List<TrainingTarget> _targets = new();
-    private readonly List<TrainingDetail> _details = new();
-    private readonly List<TrainingSlot> _slots = new();
-    private readonly List<TrainingCategory> _topics = new();
+    private readonly List<VatExemptionClaim> _vatExemptionClaims = new();
+    private readonly List<TrainingTargetAudience> _targets = new();
+    private readonly List<TrainingLocalizedDetails> _details = new();
+    private readonly List<TrainingAttendance> _attendances = new();
+    private readonly List<TrainingTopic> _topics = new();
 
     #endregion
 
     #region Properties
 
     public virtual IReadOnlyCollection<TrainerAssignment> TrainerAssignments => _trainerAssignments.AsReadOnly();
-    public virtual IReadOnlyCollection<TrainingIdentity> Identities => _identities.AsReadOnly();
-    public virtual IReadOnlyCollection<TrainingTarget> Targets => _targets.AsReadOnly();
-    public virtual IReadOnlyCollection<TrainingDetail> Details => _details.AsReadOnly();
-    public virtual IReadOnlyCollection<TrainingSlot> Slots => _slots.AsReadOnly();
-    public virtual IReadOnlyCollection<TrainingCategory> Topics => _topics.AsReadOnly();
+    public virtual IReadOnlyCollection<VatExemptionClaim> VatExemptionClaims => _vatExemptionClaims.AsReadOnly();
+    public virtual IReadOnlyCollection<TrainingTargetAudience> Targets => _targets.AsReadOnly();
+    public virtual IReadOnlyCollection<TrainingLocalizedDetails> Details => _details.AsReadOnly();
+    public virtual IReadOnlyCollection<TrainingAttendance> Attendances => _attendances.AsReadOnly();
+    public virtual IReadOnlyCollection<TrainingTopic> Topics => _topics.AsReadOnly();
 
     public int TrainerCreatorId { get; }
-    public TrainingStatus Status { get; private set; } = TrainingStatus.Draft;
-
+    public TrainingStatusType StatusType { get; private set; } = TrainingStatusType.Draft;
+     
     #endregion
 
     #region Constructors
@@ -41,17 +41,17 @@ public class Training : SeedWork.Entity, IAggregateRoot
     public Training
     (
         Trainer trainer
-        , TrainingDetailDto detail
-        , IEnumerable<TrainingType> types
-        , IEnumerable<TrainingSlotNumberType> slotNumberTypes
-        , IEnumerable<TrainingTargetAudience> targetAudiences
-        , IEnumerable<TrainingTopic> topics
+        , Dto.TrainingLocalizedDetailsDto detailDto
+        , IEnumerable<VatExemptionType> vatExemptionTypes
+        , IEnumerable<AttendanceType> attendanceTypes
+        , IEnumerable<TargetAudienceType> targetAudiences
+        , IEnumerable<Topic> topics
     )
     {
-        AddDetails(detail.Title!, detail.Goal, detail.Methodology, detail.PracticalModalities, Language.Create(detail.Language).Value);
-        SwitchTrainingTypes(types);
+        AddDetails(detailDto.Title!, detailDto.Goal, detailDto.Methodology, detailDto.PracticalModalities, Language.Create(detailDto.Language).Value);
+        SwitchVatExemptionTypes(vatExemptionTypes);
         SwitchTargetAudience(targetAudiences);
-        SwitchSlotNumberType(slotNumberTypes);
+        SwitchAttendanceTypes(attendanceTypes);
         SwitchTopics(topics);
         AssignTrainer(trainer);
         TrainerCreatorId = trainer.Id;
@@ -65,36 +65,36 @@ public class Training : SeedWork.Entity, IAggregateRoot
 
     #region Public methods
 
-    public void SwitchTrainingTypes(IEnumerable<TrainingType>? trainingTypes)
+    public void SwitchVatExemptionTypes(IEnumerable<VatExemptionType>? vatExemptionTypes)
     {
-        Guard.Requires(() => trainingTypes != null, "training types should not be null");
-        _identities.Clear();
-        _identities.AddRange(trainingTypes!.Distinct()
-            .Select(trainingType => new TrainingIdentity(this, trainingType)));
+        Guard.AgainstNull(vatExemptionTypes, nameof(vatExemptionTypes));
+        _vatExemptionClaims.Clear();
+        _vatExemptionClaims.AddRange(vatExemptionTypes!.Distinct()
+            .Select(vatExemptionType => new VatExemptionClaim(this, vatExemptionType)));
     }
 
-    public void SwitchTargetAudience(IEnumerable<TrainingTargetAudience>? trainingTargetAudiences)
+    public void SwitchTargetAudience(IEnumerable<TargetAudienceType>? trainingTargetAudiences)
     {
         Guard.Requires(() => trainingTargetAudiences != null, "training audiences should not be null");
         _targets.Clear();
         _targets.AddRange(trainingTargetAudiences!.Distinct()
-            .Select(trainingAudience => new TrainingTarget(this, trainingAudience)));
+            .Select(trainingAudience => new TrainingTargetAudience(this, trainingAudience)));
     }
 
-    public void SwitchSlotNumberType(IEnumerable<TrainingSlotNumberType>? slotNumberTypes)
+    public void SwitchAttendanceTypes(IEnumerable<AttendanceType>? attendanceTypes)
     {
-        Guard.Requires(() => slotNumberTypes != null, "slot number types should not be null");
-        _slots.Clear();
-        _slots.AddRange(slotNumberTypes!.Distinct()
-            .Select(slotNumberType => new TrainingSlot(this, slotNumberType)));
+        Guard.AgainstNull(attendanceTypes, nameof(attendanceTypes));
+        _attendances.Clear();
+        _attendances.AddRange(attendanceTypes!.Distinct()
+            .Select(attendanceType => new TrainingAttendance(this, attendanceType)));
     }
 
-    public void SwitchTopics(IEnumerable<TrainingTopic>? topics)
+    public void SwitchTopics(IEnumerable<Topic>? topics)
     {
         Guard.Requires(() => topics != null, "topics should not be null");
         _topics.Clear();
         _topics.AddRange(topics!.Distinct()
-            .Select(topic => new TrainingCategory(this, topic)));
+            .Select(topic => new TrainingTopic(this, topic)));
     }
 
     public void AssignTrainer(Trainer? trainer)
@@ -129,12 +129,11 @@ public class Training : SeedWork.Entity, IAggregateRoot
             return Result.Failure<Training, IEnumerable<Error>>(errors);
         }
 
-        Status = Status.Validate(_identities);
+        StatusType = StatusType.Validate(_vatExemptionClaims);
 
-        var trainingDetail = Details.FirstOrDefault(training => training.Language == Language.Create("EN").Value) ??
+        var details = Details.FirstOrDefault(training => training.Language == Language.Create("EN").Value) ??
                              Details.First();
-        AddDomainEvent(new ValidateTrainingEvent(trainingDetail.Title!, Id,
-            TrainerAssignments.Select(assignment => assignment.TrainerId)));
+        AddDomainEvent(new ValidateTrainingEvent(details.Title!, Id, TrainerAssignments.Select(assignment => assignment.TrainerId)));
 
         return Result.Success<Training, IEnumerable<Error>>(this);
     }
@@ -142,17 +141,16 @@ public class Training : SeedWork.Entity, IAggregateRoot
     public void AddDetails(string title, string? goal, string? methodology, string? practicalModalities, Language language)
     {
         Guard.AgainstNull(title, nameof(title));
-        Guard.Requires(() => _details.FirstOrDefault(detail => detail.Language.Value == language.Value) == null,
+        Guard.Requires(() => _details.FirstOrDefault(details => details.Language.Value == language.Value) == null,
             "A description for that language already exists");
-        _details.Add(new TrainingDetail(this, title!, goal, methodology, practicalModalities, language));
+        _details.Add(new TrainingLocalizedDetails(this, title!, goal, methodology, practicalModalities, language));
     }
 
     public void UpdateDetails(string title, string? goal, string? methodology, string? practicalModalities, Language language)
     {
-        var detailToModify = _details.FirstOrDefault(detail => detail.Language.Value == language.Value);
-        Guard.Requires(() => detailToModify != null,
-            "No descriptions for that language exist");
-        detailToModify!.UpdateDescription(title, goal, methodology, practicalModalities);
+        var detailsToEdit = _details.FirstOrDefault(details => details.Language.Value == language.Value);
+        Guard.AgainstNull(detailsToEdit, nameof(detailsToEdit));
+        detailsToEdit!.UpdateDescription(title, goal, methodology, practicalModalities);
     }
 
     #endregion

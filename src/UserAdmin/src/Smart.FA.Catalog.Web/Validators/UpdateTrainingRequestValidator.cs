@@ -57,15 +57,15 @@ public class UpdateTrainingViewModelValidator : AbstractValidator<UpdateTraining
             .NotEmpty()
             .WithMessage(CatalogResources.YouMustSelectedAtLeastOneTopic);
 
-        RuleFor(viewModel => viewModel.TrainingTypeIds)
+        RuleFor(viewModel => viewModel.VatExemptionClaimIds)
             .NotEmpty()
             .WithMessage(CatalogResources.PleaseSelectOneOption);
 
-        RuleFor(viewModel => viewModel.SlotNumberTypeIds)
+        RuleFor(viewModel => viewModel.AttendanceTypeIds)
             .NotEmpty()
             .WithMessage(CatalogResources.PleaseSelectOneOption);
 
-        RuleFor(viewModel => viewModel.TargetAudienceIds)
+        RuleFor(viewModel => viewModel.TargetAudienceTypeIds)
             .NotEmpty()
             .WithMessage(CatalogResources.PleaseSelectOneOption);
     }

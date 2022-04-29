@@ -7,7 +7,7 @@ public class TrainingValidator : AbstractValidator<Training>
 {
     public TrainingValidator()
     {
-        RuleFor(request => request.Identities)
+        RuleFor(request => request.VatExemptionClaims)
             .NotEmptyWithGenericMessage().WithMessage(Errors.General.MissingField("identity").Message);
         RuleFor(request => request.Targets)
             .NotEmptyWithGenericMessage().WithMessage(Errors.General.MissingField("target").Message);
@@ -19,6 +19,6 @@ public class TrainingValidator : AbstractValidator<Training>
             .NotEmptyWithGenericMessage().WithMessage(Errors.General.MissingField("trainer").Message);
         RuleFor(request => request.Details)
             .NotEmptyWithGenericMessage().WithMessage(Errors.General.MissingField("description").Message)
-            .ForEach(detail => detail.SetValidator(new TrainingDetailValidator()));
+            .ForEach(details => details.SetValidator(new TrainingLocalizedDetailsValidator()));
     }
 }
