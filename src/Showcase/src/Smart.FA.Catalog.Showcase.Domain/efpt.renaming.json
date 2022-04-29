@@ -23,7 +23,7 @@
                },
                {
                   "Name": "trainerTitle",
-                  "NewName": "Title"
+                  "NewName": "TrainerTitle"
                }
             ],
             "Name": "v_TrainingDetails",
@@ -31,6 +31,10 @@
          },
          {
             "Columns": [
+               {
+                  "Name": "Id",
+                  "NewName": "TrainingId"
+               },
                {
                   "Name": "FirstName",
                   "NewName": "TrainerFirstName"

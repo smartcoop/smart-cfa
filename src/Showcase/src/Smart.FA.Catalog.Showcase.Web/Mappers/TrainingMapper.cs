@@ -13,7 +13,7 @@ public static class TrainingMapper
         }
 
         var trainings = new List<TrainingListViewModel>(trainingList.Count());
-        var trainingsByIds = trainingList.ToLookup(t => t.Id);
+        var trainingsByIds = trainingList.ToLookup(t => t.TrainingId);
 
         foreach (var groupedTraining in trainingsByIds)
         {
