@@ -19,7 +19,7 @@ public class TrainerDetailsModel : PageModel
 
     public async Task<ActionResult> OnGetAsync(int? id)
     {
-        if (id == null)
+        if (id is null)
         {
             TempData["errorMessage"] = "There is no record for this request.";
             return RedirectToPage("/404");
@@ -44,7 +44,7 @@ public class TrainerDetailsModel : PageModel
     {
         var firstLine = trainerDetails.FirstOrDefault();
 
-        if (firstLine == null)
+        if (firstLine is null)
         {
             return new TrainerDetailsViewModel();
         }
