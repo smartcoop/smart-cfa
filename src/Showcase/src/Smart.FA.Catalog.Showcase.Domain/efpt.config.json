@@ -6,12 +6,12 @@
    "FilterSchemas": false,
    "IncludeConnectionString": false,
    "ModelNamespace": null,
-   "OutputContextPath": "",
+   "OutputContextPath": "..\\Smart.FA.Catalog.Showcase.Infrastructure\\Data",
    "OutputPath": "Models",
    "ProjectRootNamespace": "Smart.FA.Catalog.Showcase.Domain",
    "Schemas": null,
    "SelectedHandlebarsLanguage": 0,
-   "SelectedToBeGenerated": 2,
+   "SelectedToBeGenerated": 0,
    "Tables": [
       {
          "Name": "[dbo].[v_TrainerDetails]",
@@ -41,7 +41,7 @@
    "UseNoNavigations": false,
    "UseNoObjectFilter": false,
    "UseNodaTime": false,
-   "UseNullableReferences": false,
+   "UseNullableReferences": true,
    "UseSchemaFolders": false,
    "UseSpatial": false
 }
