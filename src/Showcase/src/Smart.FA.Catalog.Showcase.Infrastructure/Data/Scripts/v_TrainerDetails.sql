@@ -6,7 +6,7 @@ SELECT Cfa.Trainer.Id
       ,Cfa.Trainer.Biography
       ,Cfa.Trainer.Title
       ,Cfa.Trainer.ProfileImagePath
-      ,Cfa.TrainerSocialNetwork.SocialNetworkId As SocialNetwork
+      ,Cfa.TrainerSocialNetwork.SocialNetworkId
       ,Cfa.TrainerSocialNetwork.UrlToProfile
 FROM [Cfa].Trainer
 LEFT OUTER JOIN Cfa.TrainerSocialNetwork ON Cfa.Trainer.Id = Cfa.TrainerSocialNetwork.TrainerId
