@@ -178,6 +178,69 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bienvenue dans le monde de la formation de Smart, .
+        /// </summary>
+        public static string Homepage_IntroductionPart1 {
+            get {
+                return ResourceManager.GetString("Homepage_IntroductionPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smart est une coopérative de travailleuses et travailleurs qui utilisent sa structure pour exercer leur métier, par exemple de la formation..
+        /// </summary>
+        public static string Homepage_IntroductionPart2 {
+            get {
+                return ResourceManager.GetString("Homepage_IntroductionPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ce catalogue en ligne s’adresse à toute personne en recherche d’une formation. Vous trouverez sur ce site des formations de type scolaire, professionnel  (organisées et produites par Formateurs Associés asbl et Productions Associées asbl, le cas échéant) ou encore récréatif (uniquement dans Producteurs Associés asbl). Vous visualisez aisément la personne qui dispense la formation et pouvez la contacter en direct pour obtenir davantage d’informations. .
+        /// </summary>
+        public static string Homepage_IntroductionPart3 {
+            get {
+                return ResourceManager.GetString("Homepage_IntroductionPart3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aperçu des formations .
+        /// </summary>
+        public static string Homepage_Subtitle {
+            get {
+                return ResourceManager.GetString("Homepage_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to À propos.
+        /// </summary>
+        public static string Homepage_Title {
+            get {
+                return ResourceManager.GetString("Homepage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nombre de formateur·trices :.
+        /// </summary>
+        public static string Homepage_TrainersCount {
+            get {
+                return ResourceManager.GetString("Homepage_TrainersCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nombre de formations :.
+        /// </summary>
+        public static string Homepage_TrainingCount {
+            get {
+                return ResourceManager.GetString("Homepage_TrainingCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mentions Légales.
         /// </summary>
         public static string LegalNotice_TitlePage {
