@@ -28,7 +28,7 @@
     </div>
 }
 
-@if (!Model.Trainings?.Any() == true)
+@if (Model.Trainings is not null && !Model.Trainings.Any())
 {
     <div class="c-error-page">
         <h4 class="c-error-page__title" style="font-size: 3.0rem;">@CatalogResources.YouDontHaveAnyTrainings</h4>
