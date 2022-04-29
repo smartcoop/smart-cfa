@@ -11,8 +11,7 @@ public class TrainerDetailsViewModel
     public string Title { get; set; }
     public string Biography { get; set; }
     public List<TrainerSocialNetwork> SocialNetworks { get; set; } = new ();
-    public List<TrainingListViewModel> Trainings { get; set; } = new ();
-
+    public List<TrainingListViewModel> Trainings { get; set; } = new ();    
 }
 
 public class TrainerSocialNetwork
