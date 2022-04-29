@@ -23,10 +23,6 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mappers\" />
-  </ItemGroup>
-
   <ProjectExtensions><VisualStudio><UserProperties sassconfig_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>
