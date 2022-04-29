@@ -1,21 +1,26 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = @ShowcaseResources.Homepage_Title;
 }
 
 <section class="main__presentation">
-    <div class="main-title">Formateurs Associés</div>
-    <div class="main-subtitle">Quoi ? Pourquoi ? Comment ?</div>
+    <div class="main-title">@ShowcaseResources.Homepage_Title</div>
     <div class="main__presentation-txt">
-      @ShowcaseResources.LoremIpsum
+        <p class="main__paragraph">@ShowcaseResources.Homepage_IntroductionPart1</p>
+        <p class="main__paragraph">@ShowcaseResources.Homepage_IntroductionPart2</p>
+        <p class="main__paragraph">@ShowcaseResources.Homepage_IntroductionPart3</p>
     </div>
 </section>
 
 
 <section class="section__training-list">
     <div class="section__label">
-        <h2>Nombre de formations : 122 | Nombre de formateur·trices : 87</h2>
+        @* Ajouter le nombre de formateurs et de formations en lieu et place des xxx *@
+        <h5>@ShowcaseResources.Homepage_TrainingCount xxx | @ShowcaseResources.Homepage_TrainersCount xxx</h5>
+    </div>
+    <div class="section__label">
+        <h2>@ShowcaseResources.Homepage_Subtitle</h2>
     </div>
     @* Boucle sur 10 formations order by random *@
 </section>

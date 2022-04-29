@@ -79,11 +79,29 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to La charte d&apos;utilisateur de formateurs associés n&apos;a pas été accepté.
+        /// </summary>
+        public static string AdminHomePage_HasNotAcceptedUserChart {
+            get {
+                return ResourceManager.GetString("AdminHomePage_HasNotAcceptedUserChart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Je m&apos;engage à respecter la Charter d&apos;utilisation de Formateur Associé.
         /// </summary>
         public static string AdminHomepage_IAcceptCharter {
             get {
                 return ResourceManager.GetString("AdminHomepage_IAcceptCharter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lire la charte utilisateur.
+        /// </summary>
+        public static string AdminHomePage_UserChart {
+            get {
+                return ResourceManager.GetString("AdminHomePage_UserChart", resourceCulture);
             }
         }
         
@@ -156,6 +174,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string CharterUse {
             get {
                 return ResourceManager.GetString("CharterUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cliquez ici pour ajouter une formation.
+        /// </summary>
+        public static string ClickHereToAddANewTraining {
+            get {
+                return ResourceManager.GetString("ClickHereToAddANewTraining", resourceCulture);
             }
         }
         
@@ -826,6 +853,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accepter.
+        /// </summary>
+        public static string UserChartAccept {
+            get {
+                return ResourceManager.GetString("UserChartAccept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Validé.
         /// </summary>
         public static string Validated {
@@ -840,6 +876,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string YouAreAboutToDeleteTraining {
             get {
                 return ResourceManager.GetString("YouAreAboutToDeleteTraining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vous n&apos;avez aucune formation.
+        /// </summary>
+        public static string YouDontHaveAnyTrainings {
+            get {
+                return ResourceManager.GetString("YouDontHaveAnyTrainings", resourceCulture);
             }
         }
         

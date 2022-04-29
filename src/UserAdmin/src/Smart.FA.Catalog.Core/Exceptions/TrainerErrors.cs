@@ -4,6 +4,8 @@ public static partial class Errors
 {
     public static class Trainer
     {
+        public static Error TrainerDoesntExist(int id) => new("no.trainer.with.id.exists", $"No trainer with id {id} exists ");
+
         public static class ProfileImage
         {
             public static Error CantUpload(string fileName) => new("cant.upload.profile.image", $"Profile image {fileName} can't be uploaded");

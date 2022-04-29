@@ -65,4 +65,16 @@ public class S3StorageService : IS3StorageService
         StreamResponse? response = await _client.GetObjectAsync(request, cancellationToken);
         return response?.ResponseStream;
     }
+
+    /// <summary>
+    /// Get the pre-signed url
+    /// </summary>
+    /// <param name="fileName">File to fetch</param>
+    /// <param name="expirationDate">Date of expiration of the generated token</param>
+    /// <returns>The Stream of the file</returns>
+    public Uri? GetPreSignedUrl(string fileName, DateTime expirationDate)
+    {
+        var absoluteUrl =_client.GetPreSignedURL(new GetPreSignedUrlRequest {Key = fileName, BucketName = _options.ImageBucketName, Expires = expirationDate}) ?? null;
+        return  absoluteUrl is null ? null : new Uri(absoluteUrl);
+    }
 }

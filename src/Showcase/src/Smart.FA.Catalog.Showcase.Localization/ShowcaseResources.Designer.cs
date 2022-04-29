@@ -79,7 +79,187 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in ullamcorper tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis eget varius nisl, et leifend est. In condimentum, arcu eget ornare aliquam, urna quam luctus quam, ut vestibulum nulla turpis ultricies lectus. Nunc gravida gravida feugiat. Quisque pellentesque libero in massa fringilla, vel gravida ex ultricies. Proin in mi dolor. Fusce mollis neque tellus, vel malesuada nibh malesuada vitae. Cur [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to Votre message a bien été envoyé..
+        /// </summary>
+        public static string Contact_ConfirmationMessage {
+            get {
+                return ResourceManager.GetString("Contact_ConfirmationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to nom@site.com.
+        /// </summary>
+        public static string Contact_DefaultEmail {
+            get {
+                return ResourceManager.GetString("Contact_DefaultEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Benoit Dupont.
+        /// </summary>
+        public static string Contact_DefaultName {
+            get {
+                return ResourceManager.GetString("Contact_DefaultName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Un problème est survenu. L&apos;envoi du message a échoué..
+        /// </summary>
+        public static string Contact_ErrorMessage {
+            get {
+                return ResourceManager.GetString("Contact_ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adresse email.
+        /// </summary>
+        public static string Contact_LabelEmail {
+            get {
+                return ResourceManager.GetString("Contact_LabelEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message.
+        /// </summary>
+        public static string Contact_LabelMessage {
+            get {
+                return ResourceManager.GetString("Contact_LabelMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prénom et Nom.
+        /// </summary>
+        public static string Contact_LabelName {
+            get {
+                return ResourceManager.GetString("Contact_LabelName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Envoyer.
+        /// </summary>
+        public static string Contact_LabelSend {
+            get {
+                return ResourceManager.GetString("Contact_LabelSend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vous avez des questions en lien avec la formation chez Smart, n’hésitez pas à nous contacter via le formulaire ci-dessous..
+        /// </summary>
+        public static string Contact_Presentation {
+            get {
+                return ResourceManager.GetString("Contact_Presentation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://smartbe.be.
+        /// </summary>
+        public static string Contact_Presentation_Link {
+            get {
+                return ResourceManager.GetString("Contact_Presentation_Link", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pour toute autre question concernant Smart, rendez-vous sur notre site.
+        /// </summary>
+        public static string Contact_Presentation_SecondPart {
+            get {
+                return ResourceManager.GetString("Contact_Presentation_SecondPart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contacter Formateurs Associés.
+        /// </summary>
+        public static string Contact_TitlePage {
+            get {
+                return ResourceManager.GetString("Contact_TitlePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bienvenue dans le monde de la formation de Smart, .
+        /// </summary>
+        public static string Homepage_IntroductionPart1 {
+            get {
+                return ResourceManager.GetString("Homepage_IntroductionPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smart est une coopérative de travailleuses et travailleurs qui utilisent sa structure pour exercer leur métier, par exemple de la formation..
+        /// </summary>
+        public static string Homepage_IntroductionPart2 {
+            get {
+                return ResourceManager.GetString("Homepage_IntroductionPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ce catalogue en ligne s’adresse à toute personne en recherche d’une formation. Vous trouverez sur ce site des formations de type scolaire, professionnel  (organisées et produites par Formateurs Associés asbl et Productions Associées asbl, le cas échéant) ou encore récréatif (uniquement dans Producteurs Associés asbl). Vous visualisez aisément la personne qui dispense la formation et pouvez la contacter en direct pour obtenir davantage d’informations. .
+        /// </summary>
+        public static string Homepage_IntroductionPart3 {
+            get {
+                return ResourceManager.GetString("Homepage_IntroductionPart3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aperçu des formations .
+        /// </summary>
+        public static string Homepage_Subtitle {
+            get {
+                return ResourceManager.GetString("Homepage_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to À propos.
+        /// </summary>
+        public static string Homepage_Title {
+            get {
+                return ResourceManager.GetString("Homepage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nombre de formateur·trices :.
+        /// </summary>
+        public static string Homepage_TrainersCount {
+            get {
+                return ResourceManager.GetString("Homepage_TrainersCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nombre de formations :.
+        /// </summary>
+        public static string Homepage_TrainingCount {
+            get {
+                return ResourceManager.GetString("Homepage_TrainingCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mentions Légales.
+        /// </summary>
+        public static string LegalNotice_TitlePage {
+            get {
+                return ResourceManager.GetString("LegalNotice_TitlePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc mauris elit, commodo sed risus commodo, lobortis tempor augue. Praesent fermentum posuere congue. Curabitur sit amet finibus turpis. Suspendisse venenatis, ante ac tempor venenatis, mauris ipsum rutrum lacus, sit amet pellentesque mi ligula imperdiet urna. Maecenas eget purus tempus, fringilla nibh vel, vestibulum est. Phasellus ut diam nec mauris pharetra condimentum non id enim. Pellentesque facilisis libero in pretium vestibulum. Ut sapien neq [rest of string was truncated]&quot;;.
         /// </summary>
         public static string LoremIpsum {
             get {
@@ -111,6 +291,24 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         public static string Presentation {
             get {
                 return ResourceManager.GetString("Presentation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sous titre.
+        /// </summary>
+        public static string PublicPage_Subtitle {
+            get {
+                return ResourceManager.GetString("PublicPage_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formations.
+        /// </summary>
+        public static string TitteTrainings {
+            get {
+                return ResourceManager.GetString("TitteTrainings", resourceCulture);
             }
         }
         
