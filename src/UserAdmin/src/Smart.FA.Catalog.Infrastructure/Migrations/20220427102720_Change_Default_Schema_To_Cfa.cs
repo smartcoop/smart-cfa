@@ -122,16 +122,6 @@ namespace Infrastructure.Migrations
                 table: "TrainingStatusType",
                 column: "Name",
                 unique: true);
-
-            //migrationBuilder.DropIndex(
-            //    name: "IX_TrainerApproval_UserChartId",
-            //    table: "TrainerApproval");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IX_TrainerApproval_UserChartId",
-            //    table: "TrainerApproval",
-            //    column: "UserChartId",
-            //    schema: "Cfa");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
