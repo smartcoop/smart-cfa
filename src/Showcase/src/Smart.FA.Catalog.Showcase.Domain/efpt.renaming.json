@@ -32,10 +32,6 @@
          {
             "Columns": [
                {
-                  "Name": "Id",
-                  "NewName": "TrainingId"
-               },
-               {
                   "Name": "FirstName",
                   "NewName": "TrainerFirstName"
                },
