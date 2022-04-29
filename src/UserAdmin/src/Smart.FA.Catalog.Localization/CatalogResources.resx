@@ -246,6 +246,9 @@
   <data name="Publish" xml:space="preserve">
     <value>Publier</value>
   </data>
+  <data name="UserChartAccept" xml:space="preserve">
+    <value>Accepter</value>
+  </data>
   <data name="SignOut" xml:space="preserve">
     <value>Se déconnecter</value>
   </data>
@@ -373,6 +376,12 @@
   <data name="ProfilePage_Image_WrongFileType" xml:space="preserve">
     <value>Le fichier est du mauvais type</value>
   </data>
+  <data name="AdminHomePage_HasNotAcceptedUserChart" xml:space="preserve">
+    <value>La charte d'utilisateur de formateurs associés n'a pas été accepté</value>
+  </data>
+  <data name="AdminHomePage_UserChart" xml:space="preserve">
+    <value>Lire la charte utilisateur</value>
+  </data>
   <data name="AreYouSure" xml:space="preserve">
     <value>Êtes vous sûr-e ?</value>
   </data>
@@ -385,4 +394,11 @@
   <data name="YouAreAboutToDeleteTraining" xml:space="preserve">
     <value>Vous êtes sur le point de supprimer la formation</value>
   </data>
+  <data name="ClickHereToAddANewTraining" xml:space="preserve">
+    <value>Cliquez ici pour ajouter une formation</value>
+  </data>
+  <data name="YouDontHaveAnyTrainings" xml:space="preserve">
+    <value>Vous n'avez aucune formation</value>
+  </data>
 </root>
+

@@ -49,6 +49,10 @@ public class TrainerConfiguration : EntityConfigurationBase<Trainer>
             .WithOne(socialNetwork => socialNetwork.Trainer)
             .HasForeignKey(personalSocialNetwork => personalSocialNetwork.TrainerId);
 
+        builder.HasMany(trainer => trainer.Approvals)
+            .WithOne(approval => approval.Trainer)
+            .HasForeignKey(approval => approval.TrainerId);
+
         builder.ToTable("Trainer");
     }
 }
