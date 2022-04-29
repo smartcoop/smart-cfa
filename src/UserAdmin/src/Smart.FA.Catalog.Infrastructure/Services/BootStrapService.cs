@@ -1,4 +1,5 @@
 using System.Data;
+using System.Net;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -27,14 +28,21 @@ public class BootStrapService : IBootStrapService
     /// <inheritdoc />
     public async Task AddDefaultTrainerProfilePictureImage(string webRootPath)
     {
-        using var serviceScope = _factory.CreateScope();
-        var s3StorageOptions = serviceScope.ServiceProvider.GetRequiredService<IOptions<S3StorageOptions>>();
-        var fileName = s3StorageOptions.Value.DefaultTrainerProfilePictureName;
-        var filePath = Path.Combine(webRootPath, "default_image.jpg");
+        try
+        {
+            using var serviceScope = _factory.CreateScope();
+            var s3StorageOptions = serviceScope.ServiceProvider.GetRequiredService<IOptions<S3StorageOptions>>();
+            var fileName = s3StorageOptions.Value.DefaultTrainerProfilePictureName;
+            var filePath = Path.Combine(webRootPath, "default_image.jpg");
 
-        _logger.LogInformation("Seeding storage service with default image for trainer profile under the name {FileName} with url {ServiceUrl} ", fileName, s3StorageOptions.Value.AWS.ServiceUrl);
+            _logger.LogInformation("Seeding storage service with default image for trainer profile under the name {FileName} with url {ServiceUrl} ", fileName, s3StorageOptions.Value.AWS.ServiceUrl);
 
-        await UploadDefaultDocumentToS3Storage(filePath, fileName);
+            await UploadDefaultDocumentToS3Storage(filePath, fileName);
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError(exception, "MinIO seems to be down.");
+        }
     }
 
     /// <inheritdoc />
