@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 
@@ -11,9 +12,10 @@ using Smart.FA.Catalog.Infrastructure.Persistence;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220428215638_Add_SuperAdmin_Table")]
+    partial class Add_SuperAdmin_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +24,7 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.Authorization.SuperUser", b =>
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.Authorization.SuperAdmin", b =>
                 {
                     b.Property<string>("UserId")
                         .HasMaxLength(50)
@@ -30,7 +32,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("SuperUser", "Cfa");
+                    b.ToTable("SuperAdmin", "Cfa");
                 });
 
             modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.PersonalSocialNetwork", b =>
