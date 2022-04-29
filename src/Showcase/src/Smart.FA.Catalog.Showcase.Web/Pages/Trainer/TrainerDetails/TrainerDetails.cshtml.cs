@@ -2,10 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer;
-using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 using Smart.FA.Catalog.Showcase.Infrastructure.Data;
-using Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingList;
+using Smart.FA.Catalog.Showcase.Web.Mappers;
 
 namespace Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerDetails;
 
@@ -19,7 +17,7 @@ public class TrainerDetailsModel : PageModel
         _context = context;
     }
 
-   public async Task<ActionResult> OnGetAsync(int? id)
+    public async Task<ActionResult> OnGetAsync(int? id)
     {
         if (id == null)
         {
@@ -42,7 +40,7 @@ public class TrainerDetailsModel : PageModel
     }
 
     private TrainerDetailsViewModel MapTrainerDetails(List<Domain.Models.TrainerDetails> trainerDetails,
-                                                      List<Domain.Models.TrainingList> trainerTrainingList)
+        List<Domain.Models.TrainingList> trainerTrainingList)
     {
         var firstLine = trainerDetails.FirstOrDefault();
 
@@ -58,34 +56,10 @@ public class TrainerDetailsModel : PageModel
             FirstName = firstLine.FirstName,
             LastName = firstLine.LastName,
             Title = firstLine.Title,
-            ProfileImagePath = firstLine.ProfileImagePath
+            //ProfileImagePath = firstLine.ProfileImagePath,
+            SocialNetworks = trainerDetails.ToTrainerSocialNetworks(),
+            Trainings = trainerTrainingList.ToTrainingListViewModels()
         };
-
-        //Add trainer's social networks
-        foreach (var detail in trainerDetails.Where(detail => detail.SocialNetwork is not null)
-                     .OrderByDescending(s => s.SocialNetwork))
-        {
-            var SocialNetworkName = SocialNetwork.FromValue<SocialNetwork>((int) detail.SocialNetwork);
-            trainer.SocialNetworks.Add(new TrainerSocialNetwork()
-            {
-                SocialNetwork = SocialNetworkName,
-                SocialNetworkUrl = detail.UrlToProfile,
-                IconPathFileName = $"/icons/{SocialNetworkName}.svg"
-            });
-        }
-
-        //Add trainer's trainings
-        var trainerTrainingsByIds = trainerTrainingList.ToLookup(t => t.TrainingId);
-        foreach (var trainerTraining in trainerTrainingsByIds)
-        {
-            trainer.Trainings.Add(new TrainingListViewModel()
-            {
-                TrainingId = trainerTraining.FirstOrDefault().TrainingId,
-                Title = trainerTraining.FirstOrDefault().Title,
-                Topics = trainerTraining.Select(x => TrainingTopic.FromValue<TrainingTopic>(x.Topic)).ToList()
-            });
-        }
-
         return trainer;
     }
 }
