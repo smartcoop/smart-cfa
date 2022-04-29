@@ -12,8 +12,7 @@ public class TrainerDetailsViewModel
     public string Biography { get; set; }
     public string ProfileImagePath { get; set; }
     public List<TrainerSocialNetwork> SocialNetworks { get; set; } = new ();
-    public List<TrainingListViewModel> Trainings { get; set; } = new ();
-
+    public List<TrainingListViewModel> Trainings { get; set; } = new ();    
 }
 
 public class TrainerSocialNetwork
