@@ -22,6 +22,17 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.Authorization.SuperUser", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("SuperUser", "Cfa");
+                });
+
             modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.PersonalSocialNetwork", b =>
                 {
                     b.Property<int>("TrainerId")
@@ -68,10 +79,11 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("DefaultLanguage")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nchar(2)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(254)
+                        .HasColumnType("nvarchar(254)");
 
                     b.Property<DateTime>("LastModifiedAt")
                         .HasColumnType("datetime2");
@@ -88,6 +100,21 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Trainer", (string)null);
+                });
+
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainerApproval", b =>
+                {
+                    b.Property<int>("TrainerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserChartId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TrainerId", "UserChartId");
+
+                    b.HasIndex("UserChartId");
+
+                    b.ToTable("TrainerApproval", (string)null);
                 });
 
             modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainerAssignment", b =>
@@ -211,6 +238,89 @@ namespace Infrastructure.Migrations
                     b.HasKey("TrainingId", "TrainingTargetAudienceId");
 
                     b.ToTable("TrainingTarget", (string)null);
+                });
+
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.UserChartRevision", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("ValidFrom")
+                        .HasColumnType("datetime2(0)");
+
+                    b.Property<DateTime?>("ValidUntil")
+                        .HasColumnType("datetime2(0)");
+
+                    b.Property<string>("Version")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserChartRevision", (string)null);
+                });
+
+            modelBuilder.Entity("Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer.SocialNetwork", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("SocialNetwork");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Twitter"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Instagram"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Facebook"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Github"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "LinkedIn"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Personal website"
+                        });
                 });
 
             modelBuilder.Entity("Smart.FA.Catalog.Shared.Domain.Enumerations.Training.TrainingSlotNumberType", b =>
@@ -487,6 +597,25 @@ namespace Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainerApproval", b =>
+                {
+                    b.HasOne("Smart.FA.Catalog.Core.Domain.Trainer", "Trainer")
+                        .WithMany("Approvals")
+                        .HasForeignKey("TrainerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Smart.FA.Catalog.Core.Domain.UserChartRevision", "UserChartRevision")
+                        .WithMany("TrainerApprovals")
+                        .HasForeignKey("UserChartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Trainer");
+
+                    b.Navigation("UserChartRevision");
+                });
+
             modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.TrainerAssignment", b =>
                 {
                     b.HasOne("Smart.FA.Catalog.Core.Domain.Trainer", "Trainer")
@@ -563,6 +692,8 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.Trainer", b =>
                 {
+                    b.Navigation("Approvals");
+
                     b.Navigation("Assignments");
 
                     b.Navigation("PersonalSocialNetworks");
@@ -581,6 +712,11 @@ namespace Infrastructure.Migrations
                     b.Navigation("Topics");
 
                     b.Navigation("TrainerAssignments");
+                });
+
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.UserChartRevision", b =>
+                {
+                    b.Navigation("TrainerApprovals");
                 });
 #pragma warning restore 612, 618
         }

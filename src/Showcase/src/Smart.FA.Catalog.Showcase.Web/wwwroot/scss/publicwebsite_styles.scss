@@ -65,15 +65,18 @@
 .main {
     padding: 5rem 10%;
     text-align: center;
+
     .main-title {
         font-size: 3.2rem;
         font-weight: 700;
         line-height: 3.8rem;
     }
+
     .main-subtitle {
         font-size: 2.4rem;
         line-height: 6.2rem;
     }
+
     .main__presentation {
         .main__presentation-txt {
             padding: 3.6rem 0;
@@ -81,25 +84,34 @@
             line-height: 1.9rem;
             text-align: left;
         }
+
+        .main__paragraph {
+            padding: 0 0 1.6rem 0;
+        }
     }
+
     .main__contact-form {
         width: 100%;
         padding: 2rem 10rem;
         text-align: left;
+
         @media (max-width: $g-bp3) {
             padding: 2rem;
         }
     }
+
     .section__label {
         font-size: 2.4rem;
         line-height: 6.2rem;
     }
+
     .sectors-icon {
         margin-top: 1rem;
         padding-right: 0.4rem;
         vertical-align: bottom;
         color: #ff0000 !important;
     }
+
     .chevron-icon {
         vertical-align: middle;
         margin-bottom: 0.25rem;
@@ -110,49 +122,60 @@
             max-width: 100%;
         }
     }
+
     .search-category__list {
         max-width: 70%;
         margin: 4rem auto;
+
         @media (max-width: $g-bp3) {
             max-width: 100%;
         }
+
         .search-category__list-ul {
             display: flex;
             flex-wrap: wrap;
             flex-direction: row;
             justify-content: center;
+
             @media (max-width: $g-bp2) {
                 flex-wrap: nowrap;
                 flex-direction: column;
                 align-items: center;
             }
         }
+
         .search-category__item {
             margin: 0 1rem 1rem 0;
             border: 0.1rem solid $color-gray-800;
             width: auto;
             text-align: center;
+
             @media (max-width: $g-bp2) {
                 margin: auto auto 1rem auto;
             }
         }
+
         .search-category__item-link {
             padding: 0.5rem 1.6rem 0.5rem 1.2rem;
             font-size: 1.3rem;
             color: $color-gray-800;
         }
     }
+
     .search-category__item:hover {
         background: $color-blue-600;
         color: $color-white;
         border: 0.1rem solid $color-blue-600;
     }
+
     .search-category__item-link:hover {
         color: $color-white;
     }
+
     .search-category__item_end {
         text-align: center;
         margin: 0 1rem 1rem 0;
+
         .search-category__item-all {
             width: 20rem !important;
             margin-left: auto;
@@ -164,11 +187,13 @@
             color: $color-white;
         }
     }
+
     .search-category__item--active {
         background: $color-blue-600;
         color: $color-white;
         border: 0.1rem solid $color-blue-600;
     }
+
     @media (max-width: $g-bp4) {
         padding: 2rem 5%;
     }

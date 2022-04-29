@@ -1,104 +1,201 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
-		Microsoft ResX Schema
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
 
-		Version 1.3
-
-		The primary goals of this format is to allow a simple XML format 
-		that is mostly human readable. The generation and parsing of the 
-		various data types are done through the TypeConverter classes 
-		associated with the data types.
-
-		Example:
-
-		... ado.net/XML headers & schema ...
-		<resheader name="resmimetype">text/microsoft-resx</resheader>
-		<resheader name="version">1.3</resheader>
-		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-		<data name="Name1">this is my long string</data>
-		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-			[base64 mime encoded serialized .NET Framework object]
-		</data>
-		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-			[base64 mime encoded string representing a byte array form of the .NET Framework object]
-		</data>
-
-		There are any number of "resheader" rows that contain simple 
-		name/value pairs.
-
-		Each data row contains a name, and value. The row also contains a 
-		type or mimetype. Type corresponds to a .NET class that support 
-		text/value conversion through the TypeConverter architecture. 
-		Classes that don't support this are serialized and stored with the 
-		mimetype set.
-
-		The mimetype is used for serialized objects, and tells the 
-		ResXResourceReader how to depersist the object. This is currently not 
-		extensible. For a given mimetype the value must be set accordingly:
-
-		Note - application/x-microsoft.net.object.binary.base64 is the format 
-		that the ResXResourceWriter will generate, however the reader can 
-		read any of the formats listed below.
-
-		mimetype: application/x-microsoft.net.object.binary.base64
-		value   : The object must be serialized with 
-			: System.Serialization.Formatters.Binary.BinaryFormatter
-			: and then encoded with base64 encoding.
-
-		mimetype: application/x-microsoft.net.object.soap.base64
-		value   : The object must be serialized with 
-			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-			: and then encoded with base64 encoding.
-
-		mimetype: application/x-microsoft.net.object.bytearray.base64
-		value   : The object must be serialized into a byte array 
-			: using a System.ComponentModel.TypeConverter
-			: and then encoded with base64 encoding.
-	-->
-	
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>1.3</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AllTrainings" xml:space="preserve">
+    <value>Toutes les formations</value>
+  </data>
   <data name="LoremIpsum" xml:space="preserve">
-    <value>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in ullamcorper tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis eget varius nisl, et leifend est. In condimentum, arcu eget ornare aliquam, urna quam luctus quam, ut vestibulum nulla turpis ultricies lectus. Nunc gravida gravida feugiat. Quisque pellentesque libero in massa fringilla, vel gravida ex ultricies. Proin in mi dolor. Fusce mollis neque tellus, vel malesuada nibh malesuada vitae. Curabitur sed ultrices nulla. Donec vulputate quis lorem ut ultricies. Nulla vestibulum suscipit aliquet. Aliquam dictum justo posuere, iaculis orci quis, viverra enim. Vivamus nec leo et est hendrerit tempus. Aliquam viverra dapibus elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse sit amet aliquet ligula, id consequat lectus.</value>
+    <value>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc mauris elit, commodo sed risus commodo, lobortis tempor augue. Praesent fermentum posuere congue. Curabitur sit amet finibus turpis. Suspendisse venenatis, ante ac tempor venenatis, mauris ipsum rutrum lacus, sit amet pellentesque mi ligula imperdiet urna. Maecenas eget purus tempus, fringilla nibh vel, vestibulum est. Phasellus ut diam nec mauris pharetra condimentum non id enim. Pellentesque facilisis libero in pretium vestibulum. Ut sapien neque, bibendum vel lacus sit amet, ultrices gravida tortor. Nulla at velit enim. </value>
+  </data>
+  <data name="Contact_TitlePage" xml:space="preserve">
+    <value>Contacter Formateurs Associés</value>
+  </data>
+  <data name="Contact_Presentation" xml:space="preserve">
+    <value>Vous avez des questions en lien avec la formation chez Smart, n’hésitez pas à nous contacter via le formulaire ci-dessous.</value>
+  </data>
+  <data name="TitteTrainings" xml:space="preserve">
+    <value>Formations</value>
+  </data>
+  <data name="LegalNotice_TitlePage" xml:space="preserve">
+    <value>Mentions Légales</value>
+  </data>
+  <data name="PublicPage_Subtitle" xml:space="preserve">
+    <value>Sous titre</value>
+  </data>
+  <data name="Objectives" xml:space="preserve">
+    <value>Objectifs</value>
+  </data>
+  <data name="PracticalModalities" xml:space="preserve">
+    <value>Modalités pratiques</value>
+  </data>
+  <data name="Presentation" xml:space="preserve">
+    <value>Présentation</value>
+  </data>
+  <data name="Contact_ConfirmationMessage" xml:space="preserve">
+    <value>Votre message a bien été envoyé.</value>
+  </data>
+  <data name="Contact_DefaultEmail" xml:space="preserve">
+    <value>nom@site.com</value>
+  </data>
+  <data name="Contact_DefaultName" xml:space="preserve">
+    <value>Benoit Dupont</value>
+  </data>
+  <data name="Contact_ErrorMessage" xml:space="preserve">
+    <value>Un problème est survenu. L'envoi du message a échoué.</value>
+  </data>
+  <data name="Contact_LabelEmail" xml:space="preserve">
+    <value>Adresse email</value>
+  </data>
+  <data name="Contact_LabelMessage" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Contact_LabelName" xml:space="preserve">
+    <value>Prénom et Nom</value>
+  </data>
+  <data name="Contact_LabelSend" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="Contact_Presentation_Link" xml:space="preserve">
+    <value>https://smartbe.be</value>
+  </data>
+  <data name="Contact_Presentation_SecondPart" xml:space="preserve">
+    <value>Pour toute autre question concernant Smart, rendez-vous sur notre site</value>
+  </data>
+  <data name="Homepage_Title" xml:space="preserve">
+    <value>À propos</value>
+  </data>
+  <data name="Homepage_Subtitle" xml:space="preserve">
+    <value>Aperçu des formations </value>
+  </data>
+  <data name="Homepage_IntroductionPart1" xml:space="preserve">
+    <value>Bienvenue dans le monde de la formation de Smart, </value>
+  </data>
+  <data name="Homepage_TrainingCount" xml:space="preserve">
+    <value>Nombre de formations :</value>
+  </data>
+  <data name="Homepage_TrainersCount" xml:space="preserve">
+    <value>Nombre de formateur·trices :</value>
+  </data>
+  <data name="Homepage_IntroductionPart2" xml:space="preserve">
+    <value>Smart est une coopérative de travailleuses et travailleurs qui utilisent sa structure pour exercer leur métier, par exemple de la formation.</value>
+  </data>
+  <data name="Homepage_IntroductionPart3" xml:space="preserve">
+    <value>Ce catalogue en ligne s’adresse à toute personne en recherche d’une formation. Vous trouverez sur ce site des formations de type scolaire, professionnel  (organisées et produites par Formateurs Associés asbl et Productions Associées asbl, le cas échéant) ou encore récréatif (uniquement dans Producteurs Associés asbl). Vous visualisez aisément la personne qui dispense la formation et pouvez la contacter en direct pour obtenir davantage d’informations. </value>
   </data>
 </root>

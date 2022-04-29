@@ -35,15 +35,23 @@ public class TrainerConfiguration : EntityConfigurationBase<Trainer>
             (
                 language => language.Value,
                 language => Language.Create(language).Value
-            );
+            )
+            .HasColumnType("nchar(2)");
 
         builder.Property(trainer => trainer.Biography).HasMaxLength(1500);
         builder.Property(trainer => trainer.Title).HasMaxLength(150);
         builder.Property(trainer => trainer.ProfileImagePath).HasMaxLength(50);
 
+        // Maximum possible length for an email is 254.
+        builder.Property(trainer => trainer.Email).HasMaxLength(254);
+
         builder.HasMany(trainer => trainer.PersonalSocialNetworks)
             .WithOne(socialNetwork => socialNetwork.Trainer)
             .HasForeignKey(personalSocialNetwork => personalSocialNetwork.TrainerId);
+
+        builder.HasMany(trainer => trainer.Approvals)
+            .WithOne(approval => approval.Trainer)
+            .HasForeignKey(approval => approval.TrainerId);
 
         builder.ToTable("Trainer");
     }

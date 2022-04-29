@@ -16,10 +16,15 @@ public interface IUserIdentity
     /// <summary>
     /// The identity of the connected user.
     /// </summary>
-    public CustomIdentity Identity { get; init; }
+    public CustomIdentity Identity { get; }
 
     /// <summary>
     /// <see cref="Trainer" /> instance of the current connected user.
     /// </summary>
-    public Trainer CurrentTrainer { get; init; }
+    public Trainer CurrentTrainer { get; }
+
+    /// <summary>
+    /// Indicates if the connected user is a super admin.
+    /// </summary>
+    public bool IsSuperUser { get; }
 }
