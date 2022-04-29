@@ -5,7 +5,7 @@ namespace Smart.FA.Catalog.Showcase.Web.Mappers;
 
 public static class TrainingMapper
 {
-    public static List<TrainingListViewModel> ToTrainingListViewModels(this IEnumerable<Domain.Models.TrainingList> trainingList)
+    public static List<TrainingListViewModel>? ToTrainingListViewModels(this IEnumerable<Domain.Models.TrainingList>? trainingList)
     {
         if (trainingList is null)
         {
@@ -33,5 +33,4 @@ public static class TrainingMapper
 
         return trainings;
     }
-
 }
