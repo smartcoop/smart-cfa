@@ -56,7 +56,7 @@ public class TrainingDetailsModel : PageModel
             TrainerFirstName = firstLine.TrainerFirstName,
             TrainerLastName = firstLine.TrainerLastName,
             TrainerId = firstLine.TrainerId,
-            TrainerTitle = firstLine.TrainerTitle,
+            TrainerTitle = firstLine.Title,
             Status = TrainingStatus.FromValue<TrainingStatus>(firstLine.StatusId),
             Topics = trainingDetails.Select(x => TrainingTopic.FromValue<TrainingTopic>(x.TrainingTopicId)).ToList(),
             Languages = trainingDetails.Select(x => x.Language).Distinct().ToList()

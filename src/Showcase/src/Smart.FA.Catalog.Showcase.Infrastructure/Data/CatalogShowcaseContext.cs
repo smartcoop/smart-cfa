@@ -56,6 +56,10 @@ public partial class CatalogShowcaseContext : DbContext
 
             entity.Property(e => e.PracticalModalities).HasMaxLength(1000);
 
+            entity.Property(e => e.Title)
+                .HasMaxLength(150)
+                .HasColumnName("trainerTitle");
+
             entity.Property(e => e.TrainerFirstName)
                 .HasMaxLength(200)
                 .HasColumnName("FirstName");
@@ -63,10 +67,6 @@ public partial class CatalogShowcaseContext : DbContext
             entity.Property(e => e.TrainerLastName)
                 .HasMaxLength(200)
                 .HasColumnName("LastName");
-
-            entity.Property(e => e.TrainerTitle)
-                .HasMaxLength(150)
-                .HasColumnName("trainerTitle");
 
             entity.Property(e => e.TrainingTitle)
                 .HasMaxLength(500)
@@ -96,8 +96,6 @@ public partial class CatalogShowcaseContext : DbContext
             entity.Property(e => e.TrainerLastName)
                 .HasMaxLength(200)
                 .HasColumnName("LastName");
-
-            entity.Property(e => e.TrainingId).HasColumnName("Id");
         });
 
         OnModelCreatingPartial(modelBuilder);
