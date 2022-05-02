@@ -1,5 +1,6 @@
 using FluentValidation;
 using Microsoft.Extensions.Localization;
+using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Web.Pages.Admin.Trainings.Update;
 
 namespace Smart.FA.Catalog.Web.Validators;
@@ -9,7 +10,7 @@ namespace Smart.FA.Catalog.Web.Validators;
 /// </summary>
 public class UpdateTrainingViewModelValidator : AbstractValidator<UpdateTrainingViewModel>
 {
-    public UpdateTrainingViewModelValidator(IStringLocalizer<CatalogResources> localizer)
+    public UpdateTrainingViewModelValidator(IStringLocalizer<CatalogResources> localizer, IUserIdentity userIdentity)
     {
         RuleFor(viewModel => viewModel.Title)
             .NotEmpty()
@@ -26,6 +27,8 @@ public class UpdateTrainingViewModelValidator : AbstractValidator<UpdateTraining
         RuleFor(viewModel => viewModel.PracticalModalities)
             .MaximumLength(1000)
             .WithMessage(CatalogResources.Max1000Characters);
+
+        When(_ => !userIdentity.IsSuperUser, () => RuleFor(viewModel => viewModel.IsGivenBySmart).NotEqual(true).WithMessage(CatalogResources.SuperUserPermissionToSetSmartTrainingType));
 
         // When we register a draft we are very permissive.
         // Only the title is required.

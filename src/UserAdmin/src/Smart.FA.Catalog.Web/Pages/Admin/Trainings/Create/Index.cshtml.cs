@@ -1,19 +1,23 @@
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Smart.FA.Catalog.Core.Domain.Models;
+using Smart.FA.Catalog.Core.Services;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.Create;
 
 public class CreateModel : AdminPage
 {
     private readonly ILogger<CreateModel> _logger;
+
+    public IUserIdentity UserIdentity { get; }
+
     [BindProperty] public CreateTrainingViewModel CreateTrainingViewModel { get; set; } = new();
+
     public List<string> ValidationErrors { get; set; } = new();
 
-    public CreateModel(IMediator mediator, ILogger<CreateModel> logger) : base(mediator)
+    public CreateModel(IMediator mediator, ILogger<CreateModel> logger, IUserIdentity userIdentity) : base(mediator)
     {
         _logger = logger;
+        UserIdentity = userIdentity;
     }
 
     private void Init()
@@ -28,14 +32,13 @@ public class CreateModel : AdminPage
 
     public async Task<IActionResult> OnPostAsync()
     {
-        var user = (HttpContext.User.Identity as CustomIdentity)!;
         if (!ModelState.IsValid)
         {
             Init();
             return Page();
         }
 
-        var request = CreateTrainingViewModel.MapToRequest(user.Trainer.Id, user.Trainer.DefaultLanguage);
+        var request = CreateTrainingViewModel.MapToRequest(UserIdentity.CurrentTrainer.Id, UserIdentity.CurrentTrainer.DefaultLanguage);
         var response = await Mediator.Send(request);
         return RedirectToPage("/Admin/Trainings/List/Index");
     }

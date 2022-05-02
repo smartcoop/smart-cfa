@@ -32,6 +32,7 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingReques
 
         var trainer = await _trainerRepository.FindAsync(request.TrainerId, cancellationToken);
         var training = new Training(trainer, request.DetailsDto, request.VatExemptionTypes, request.AttendanceTypes, request.TargetAudiences, request.Topics);
+        training.MarkAsGivenBySmart(request.IsGivenBySmart);
         if (!request.IsDraft)
         {
             var result = training.Validate();
@@ -56,6 +57,7 @@ public class CreateTrainingRequest : IRequest<CreateTrainingResponse>
 {
     public int TrainerId { get; init; }
     public bool IsDraft { get; set; }
+    public bool IsGivenBySmart { get; set; }
     public TrainingLocalizedDetailsDto DetailsDto { get; init; } = null!;
     public List<TargetAudienceType> TargetAudiences { get; init; } = null!;
     public List<VatExemptionType> VatExemptionTypes { get; init; } = null!;
