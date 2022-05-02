@@ -65,6 +65,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.Showcase.I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.Showcase.Localization", "src\Showcase\src\Smart.FA.Catalog.Showcase.Localization\Smart.FA.Catalog.Showcase.Localization.csproj", "{33E35183-47ED-46FB-BD13-729142E51DBB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nginx", "Nginx", "{7F26E40B-F26A-40FF-9795-F4F3BC1BD1B7}"
+	ProjectSection(SolutionItems) = preProject
+		Nginx.Dockerfile = Nginx.Dockerfile
+		nginx.conf = nginx.conf
+		AccountSim.Dockerfile = AccountSim.Dockerfile
+		docker-compose-nginx.yml = docker-compose-nginx.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.FA.Catalog.AccountSimulation", "src\UserAdmin\src\Smart.FA.Catalog.AccountSimulation\Smart.FA.Catalog.AccountSimulation.csproj", "{A4A24049-500B-4601-8242-29E23FF86C4B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +133,10 @@ Global
 		{33E35183-47ED-46FB-BD13-729142E51DBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33E35183-47ED-46FB-BD13-729142E51DBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33E35183-47ED-46FB-BD13-729142E51DBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4A24049-500B-4601-8242-29E23FF86C4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4A24049-500B-4601-8242-29E23FF86C4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4A24049-500B-4601-8242-29E23FF86C4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4A24049-500B-4601-8242-29E23FF86C4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -146,6 +160,8 @@ Global
 		{21E6B700-9D55-4BCD-B2AF-797881A91782} = {5FB74010-24CB-47D8-8665-CD813A22499B}
 		{FB2BC42C-1D4C-4D4E-ADA2-DC5F8E3D8E13} = {5FB74010-24CB-47D8-8665-CD813A22499B}
 		{33E35183-47ED-46FB-BD13-729142E51DBB} = {5FB74010-24CB-47D8-8665-CD813A22499B}
+		{7F26E40B-F26A-40FF-9795-F4F3BC1BD1B7} = {8A4DEB10-3A8D-4F50-9E5F-A5550B42BBBA}
+		{A4A24049-500B-4601-8242-29E23FF86C4B} = {98D46582-2F64-45BD-A516-E259EE3A78DA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D2F2190D-B4DE-48B8-B87C-7AA80A91538E}

@@ -44,13 +44,7 @@
     <Content Update="wwwroot\default_user_chart.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Update="appsettings.PreProduction.json">
-      <DependentUpon>appsettings.json</DependentUpon>
-    </Content>
     <Content Update="appsettings.Docker.json">
-      <DependentUpon>appsettings.json</DependentUpon>
-    </Content>
-    <Content Update="appsettings.Production.json">
       <DependentUpon>appsettings.json</DependentUpon>
     </Content>
   </ItemGroup>
