@@ -52,14 +52,7 @@
                                     <smart-checkbox label="@_localizer[topic.Name]" asp-for="CreateTrainingViewModel.TopicIds" value="@topic.Id" checked="@(topic.IsContainedIn(Model.CreateTrainingViewModel.TopicIds))"></smart-checkbox>
                                 </smart-grid-column>
                             }
-                            @if (topics.Length > 1)
-                            {
-                                <smart-grid-column width="4"></smart-grid-column>
-                            }
                         }
-                        <smart-grid-column width="8">
-                            <smart-checkbox label="@CatalogResources.Other"></smart-checkbox>
-                        </smart-grid-column>
                     </smart-grid>
                     <smart-validation-message asp-for="CreateTrainingViewModel.TopicIds"></smart-validation-message>
                 </smart-formgroup>
@@ -82,7 +75,6 @@
                     {
                         <smart-checkbox label="@_localizer[targetAudience.Name]" asp-for="CreateTrainingViewModel.TargetAudienceTypeIds" value="@targetAudience.Id" checked="@(targetAudience.IsContainedIn(Model.CreateTrainingViewModel.TargetAudienceTypeIds))"></smart-checkbox>
                     }
-                    <smart-checkbox label="@CatalogResources.Other"></smart-checkbox>
                     <smart-validation-message asp-for="CreateTrainingViewModel.TargetAudienceTypeIds"></smart-validation-message>
                 </smart-formgroup>
 

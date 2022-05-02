@@ -400,5 +400,8 @@
   <data name="YouDontHaveAnyTrainings" xml:space="preserve">
     <value>Vous n'avez aucune formation</value>
   </data>
+  <data name="Training_IsOther" xml:space="preserve">
+    <value>Autre</value>
+  </data>
 </root>
 
