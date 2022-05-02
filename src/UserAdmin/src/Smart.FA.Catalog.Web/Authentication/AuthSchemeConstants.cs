@@ -1,6 +1,6 @@
 ﻿namespace Smart.FA.Catalog.Web.Authentication;
 
-public static class List
+public static class AuthSchemeConstants
 {
-    public const string UserAdminSchemeName = "UserAdmin";
+    public const string UserAdmin = "UserAdmin";
 }

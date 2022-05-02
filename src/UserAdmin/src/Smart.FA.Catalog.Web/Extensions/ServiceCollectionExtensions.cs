@@ -3,6 +3,7 @@ using Smart.FA.Catalog.Application.Models.Options;
 using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Web.Identity;
 using Smart.FA.Catalog.Web.Options;
+using Smart.FA.Catalog.Web.Policies;
 using Smart.FA.Catalog.Web.Policies.Requirements;
 
 namespace Smart.FA.Catalog.Web.Extensions;
@@ -21,7 +22,7 @@ public static class ServiceCollectionExtensions
         services.Configure<AdminOptions>(configuration.GetSection(AdminOptions.SectionName));
         services.Configure<MediatROptions>(configuration.GetSection(MediatROptions.SectionName));
         services.AddScoped<IAuthorizationHandler, UserChartRevisionApprovalHandler>();
-
+        services.AddSingleton<IAuthorizationMiddlewareResultHandler, UserAdminAuthorizationResultHandler>();
         return services;
     }
 }
