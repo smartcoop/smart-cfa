@@ -16,26 +16,26 @@ sudo chmod 777 $(pwd)/ktutil/files/$DB_USER.keytab
 
 sed -e "s/{minio_access-key}/$MINIO_ACCESS_KEY/" \
     -e "s/{minio_secret-key}/$MINIO_SECRET_KEY/" \
-    ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Prod.json > ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Prod.tmp.json
+    ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Production.json > ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Production.tmp.json
 
-mv ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Prod.tmp.json ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Prod.json
+mv ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Production.tmp.json ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Production.json
 
 docker build \
-  --build-arg Environment="Prod" \
+  --build-arg Environment="Production" \
   -f "Web.krb5.Dockerfile" \
-  -t "cfa-prod-api" \
+  -t "cfa-production-api" \
   .
 
-docker stop cfa_prod_api || true
-docker rm cfa_prod_api || true
+docker stop cfa_production_api || true
+docker rm cfa_production_api || true
 
 
 echo "RUN DOCKER"
 docker run -d \
-  --name cfa_prod_api \
-  --env Environment="Prod" \
+  --name cfa_production_api \
+  --env Environment="Production" \
   --env-file ./.env \
   --volume $(pwd)/ktutil/files/krb5.conf:/etc/krb5.conf \
   --volume $(pwd)/ktutil/files/${DB_USER}.keytab:/app/${DB_USER}.keytab \
   -p "6000:80" \
-  cfa-prod-api
+  cfa-production-api

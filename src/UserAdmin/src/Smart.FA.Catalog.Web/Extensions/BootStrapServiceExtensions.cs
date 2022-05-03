@@ -15,8 +15,11 @@ public static class BootStrapServiceExtensions
         var bootstrapService = migrationScope.ServiceProvider.GetRequiredService<IBootStrapService>();
         var environment = builder.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
         await bootstrapService.AddDefaultTrainerProfilePictureImage(environment.WebRootPath);
-        await bootstrapService.ApplyMigrationsAndSeedAsync();
-        await bootstrapService.AddDefaultTrainerProfilePictureImage(environment.WebRootPath);
+        if (!(environment.IsEnvironment("PreProduction") || environment.IsProduction()))
+        {
+            await bootstrapService.ApplyMigrationsAndSeedAsync();
+        }
+
         await bootstrapService.AddDefaultUserChart(environment.WebRootPath);
     }
 }
