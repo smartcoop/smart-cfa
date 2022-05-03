@@ -754,6 +754,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Training_IsOther {
+            get {
+                return ResourceManager.GetString("Training_IsOther", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to entre dans le cadre de l&apos;Education permanente.
         /// </summary>
         public static string Training_IsPermanentEducation {

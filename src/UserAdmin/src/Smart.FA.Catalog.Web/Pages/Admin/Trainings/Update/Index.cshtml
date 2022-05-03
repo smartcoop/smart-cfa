@@ -54,14 +54,7 @@
                                     <smart-checkbox label="@_localizer[topic.Name]" asp-for="UpdateTrainingViewModel.TopicIds" value="@topic.Id" checked="@topic.IsContainedIn(Model.UpdateTrainingViewModel.TopicIds)"></smart-checkbox>
                                 </smart-grid-column>
                             }
-                            @if (topics.Length > 1)
-                            {
-                                <smart-grid-column width="4"></smart-grid-column>
-                            }
                         }
-                        <smart-grid-column width="8">
-                            <smart-checkbox label="@CatalogResources.Other"></smart-checkbox>
-                        </smart-grid-column>
                     </smart-grid>
                     <smart-validation-message asp-for="UpdateTrainingViewModel.TopicIds"></smart-validation-message>
                 </smart-formgroup>
@@ -75,7 +68,6 @@
                     {
                         <smart-checkbox label="@_localizer["Training_Is" + vatExemptionType.Name]" asp-for="UpdateTrainingViewModel.VatExemptionClaimIds" value="@vatExemptionType.Id" checked="@vatExemptionType.IsContainedIn(Model.UpdateTrainingViewModel.VatExemptionClaimIds)"></smart-checkbox>
                     }
-                    <smart-checkbox label="@CatalogResources.Other"></smart-checkbox>
                     <smart-validation-message asp-for="UpdateTrainingViewModel.VatExemptionClaimIds"></smart-validation-message>
                 </smart-formgroup>
 
@@ -84,7 +76,6 @@
                     {
                         <smart-checkbox label="@_localizer[targetAudience.Name]" asp-for="UpdateTrainingViewModel.TargetAudienceTypeIds" value="@targetAudience.Id" checked="@targetAudience.IsContainedIn(Model.UpdateTrainingViewModel.TargetAudienceTypeIds)"></smart-checkbox>
                     }
-                    <smart-checkbox label="@CatalogResources.Other"></smart-checkbox>
                     <smart-validation-message asp-for="UpdateTrainingViewModel.TargetAudienceTypeIds"></smart-validation-message>
                 </smart-formgroup>
 

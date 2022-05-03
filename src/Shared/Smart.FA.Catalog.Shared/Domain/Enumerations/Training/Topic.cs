@@ -11,6 +11,7 @@ public class Topic : Enumeration
     public static readonly Topic Communication         = new(6, nameof(Communication));
     public static readonly Topic Culture               = new(7, nameof(Culture));
     public static readonly Topic Sport                 = new(9, nameof(Sport));
+    public static readonly Topic Other                 = new(10, nameof(Other));
 
     protected Topic(int id, string name) : base(id, name)
     {
