@@ -18,4 +18,5 @@ public class TrainerSocialNetwork
 {
     public SocialNetwork SocialNetwork { get; set; }
     public string SocialNetworkUrl { get; set; }
+    public string IconPathFileName { get; set; }
 }
