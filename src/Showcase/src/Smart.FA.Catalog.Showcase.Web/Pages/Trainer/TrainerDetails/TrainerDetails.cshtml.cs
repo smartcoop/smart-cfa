@@ -10,6 +10,7 @@ namespace Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerDetails;
 public class TrainerDetailsModel : PageModel
 {
     private readonly CatalogShowcaseContext _context;
+
     public TrainerDetailsViewModel Trainer { get; set; } = null!;
 
     public TrainerDetailsModel(CatalogShowcaseContext context)
@@ -60,7 +61,7 @@ public class TrainerDetailsModel : PageModel
             SocialNetworks = trainerDetails.ToTrainerSocialNetworks(),
             Trainings = trainerTrainingList.ToTrainingListViewModels()
         };
-        
+
         return trainer;
     }
 }

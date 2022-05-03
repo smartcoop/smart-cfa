@@ -9,6 +9,7 @@ namespace Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingDetails;
 public class TrainingDetailsModel : PageModel
 {
     private readonly Infrastructure.Data.CatalogShowcaseContext _context;
+
     public TrainingDetailsViewModel Training { get; set; }
 
     public TrainingDetailsModel(Infrastructure.Data.CatalogShowcaseContext context)
