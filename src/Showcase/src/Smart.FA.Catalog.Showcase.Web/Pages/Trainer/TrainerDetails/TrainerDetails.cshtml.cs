@@ -60,6 +60,7 @@ public class TrainerDetailsModel : PageModel
             SocialNetworks = trainerDetails.ToTrainerSocialNetworks(),
             Trainings = trainerTrainingList.ToTrainingListViewModels()
         };
+        
         return trainer;
     }
 }
