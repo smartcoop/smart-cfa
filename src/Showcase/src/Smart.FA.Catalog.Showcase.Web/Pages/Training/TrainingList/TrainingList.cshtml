@@ -25,7 +25,7 @@
             <div class="training-list__container">
                 <div class="training-list__container-left">
                     <div class="training-list__title">
-                        <a class="training-list__training-link" asp-page="@Routes.TrainingDetails" asp-route-id="@training.TrainingId">@training.TrainingTitle</a>
+                        <a class="training-list__training-link" asp-page="@Routes.TrainingDetails" asp-route-id="@training.TrainingId">@training.Title</a>
                     </div>
                     <div class="training-list__trainer">
                         @Html.DisplayFor(modelItem => training.TrainerFirstName) @Html.DisplayFor(modelItem => training.TrainerLastName)

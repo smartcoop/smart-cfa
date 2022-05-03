@@ -9,15 +9,14 @@ namespace Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingDetails;
 public class TrainingDetailsModel : PageModel
 {
     private readonly Infrastructure.Data.CatalogShowcaseContext _context;
+    public TrainingDetailsViewModel Training { get; set; }
 
     public TrainingDetailsModel(Infrastructure.Data.CatalogShowcaseContext context)
     {
         _context = context;
     }
 
-    public TrainingDetailsViewModel Training { get; set; }
-
-    public async Task<IActionResult> OnGetAsync(int? id)
+    public async Task<ActionResult> OnGetAsync(int? id)
     {
         if (id == null)
         {
@@ -26,7 +25,7 @@ public class TrainingDetailsModel : PageModel
             return RedirectToPage("/404");
         }
 
-        var trainingDetails = await _context.TrainingDetails.Where(m => m.TrainingId == id).ToListAsync();
+        var trainingDetails = await _context.TrainingDetails.Where(training => training.Id == id).ToListAsync();
 
         if (!trainingDetails.Any())
         {
@@ -49,17 +48,18 @@ public class TrainingDetailsModel : PageModel
         var firstLine = trainingDetails.FirstOrDefault();
         return new TrainingDetailsViewModel
         {
-            TrainingId = firstLine.TrainingId,
+            Id = firstLine.Id,
             TrainingTitle = firstLine.TrainingTitle,
-            TrainingGoal = firstLine.TrainingGoal,
-            TrainingMethodology = firstLine.TrainingMethodology,
-            TrainingPracticalModalities = firstLine.TrainingPracticalModalities,
+            Goal = firstLine.Goal,
+            Methodology = firstLine.Methodology,
+            PracticalModalities = firstLine.PracticalModalities,
             TrainerFirstName = firstLine.TrainerFirstName,
             TrainerLastName = firstLine.TrainerLastName,
+            TrainerId = firstLine.TrainerId,
             TrainerTitle = firstLine.TrainerTitle,
-            TrainingStatus = TrainingStatus.FromValue<TrainingStatus>(firstLine.TrainingStatusId),
+            Status = TrainingStatus.FromValue<TrainingStatus>(firstLine.StatusId),
             Topics = trainingDetails.Select(x => TrainingTopic.FromValue<TrainingTopic>(x.TrainingTopicId)).ToList(),
-            TrainingLanguages = trainingDetails.Select(x => x.TrainingLanguage).Distinct().ToList()
+            Languages = trainingDetails.Select(x => x.Language).Distinct().ToList()
         };
     }
 }

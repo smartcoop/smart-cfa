@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AllTrainers" xml:space="preserve">
+    <value>Tous les formateur·trices</value>
+  </data>
   <data name="AllTrainings" xml:space="preserve">
     <value>Toutes les formations</value>
   </data>
@@ -197,5 +200,8 @@
   </data>
   <data name="Homepage_IntroductionPart3" xml:space="preserve">
     <value>Ce catalogue en ligne s’adresse à toute personne en recherche d’une formation. Vous trouverez sur ce site des formations de type scolaire, professionnel  (organisées et produites par Formateurs Associés asbl et Productions Associées asbl, le cas échéant) ou encore récréatif (uniquement dans Producteurs Associés asbl). Vous visualisez aisément la personne qui dispense la formation et pouvez la contacter en direct pour obtenir davantage d’informations. </value>
+  </data>
+  <data name="TrainingsToFollow" xml:space="preserve">
+    <value>Formations à suivre</value>
   </data>
 </root>

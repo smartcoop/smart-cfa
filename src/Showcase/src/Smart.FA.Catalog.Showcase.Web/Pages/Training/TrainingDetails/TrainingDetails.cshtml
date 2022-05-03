@@ -27,24 +27,24 @@
                 <div class="training-card__details-label">
                     @ShowcaseResources.Presentation
                 </div>
-                @Model.Training.TrainingMethodology
+                @Model.Training.Methodology
             </div>
             <div class="training-card__details-section">
                 <div class="training-card__details-label">
                     @ShowcaseResources.Objectives
                 </div>
-                @Model.Training.TrainingGoal
+                @Model.Training.Goal
             </div>
             <div class="training-card__details-section">
                 <div class="training-card__details-label">
                     @ShowcaseResources.PracticalModalities
                 </div>
-                @Model.Training.TrainingPracticalModalities
+                @Model.Training.PracticalModalities
             </div>
         </div>
         <div class="training-card__trainer">
             <div class="training-card__trainer-name">
-                <a class="training-card__trainer-link" asp-page="Trainer/trainerDetails/TrainerDetail" asp-route-id="@Model.Training.TrainingId">
+                <a class="training-card__trainer-link" asp-page="Trainer/trainerDetails/TrainerDetail" asp-route-id="@Model.Training.Id">
                      @Model.Training.TrainerFirstName @Model.Training.TrainerLastName
                 </a>
             </div>
@@ -55,7 +55,7 @@
     </div>
     <div class="training-card__footer">
         <div class="training-card__back">
-            <a class="training-card__back-link" asp-page="/Training/TrainingList/TrainingList">
+            <a class="training-card__back-link" asp-page="@Routes.TrainingList">
                 <img src="~/icons/chevron-left--blue.svg" class="o-svg-icon--small chevron-icon" alt=""/>@ShowcaseResources.AllTrainings
             </a>
         </div>
