@@ -8,11 +8,11 @@ namespace Smart.FA.Catalog.Application.UseCases.Queries.Authorization;
 
 public class IsSuperUserQuery : IRequest<bool>
 {
-    public string UserId { get; }
+    public int TrainerId { get; }
 
-    public IsSuperUserQuery(string userId)
+    public IsSuperUserQuery(int trainerId)
     {
-        UserId = userId;
+        TrainerId = trainerId;
     }
 }
 
@@ -34,7 +34,7 @@ public class IsSuperUserQueryHandler : IRequestHandler<IsSuperUserQuery, bool>
             return await _catalogContext
                 .SuperUsers
                 .AsNoTracking()
-                .AnyAsync(superUser => superUser.UserId == query.UserId, cancellationToken: cancellationToken);
+                .AnyAsync(superUser => superUser.TrainerId == query.TrainerId, cancellationToken);
         }
         catch (Exception exception)
         {

@@ -46,7 +46,7 @@ else
     <div class="o-card-grid small-up-1 u-spacer-xl">
         @foreach (var training in Model.Trainings!)
         {
-            @await Component.InvokeAsync("AdminTrainingTile", new { model = training })
+            @await Component.InvokeAsync("AdminTrainingTile", new { trainingDto = training, showDeleteButton = true })
         }
     </div>
 

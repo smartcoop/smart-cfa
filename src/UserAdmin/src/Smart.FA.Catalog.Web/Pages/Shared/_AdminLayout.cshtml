@@ -2,8 +2,11 @@
 @using Smart.FA.Catalog.Web.Pages.Admin
 @using Microsoft.AspNetCore.Localization
 @using Microsoft.Extensions.Options
+@using Smart.FA.Catalog.Core.Services
 @using Smart.FA.Catalog.Shared.Domain.Enumerations
+@using Smart.FA.Catalog.Web.Pages.SuperUser
 @inject IOptions<RequestLocalizationOptions> _requestLocalizationOptions;
+@inject IUserIdentity UserIdentity;
 @{
     var requestCulture = Context.Features.Get<IRequestCultureFeature>() ?? throw new InvalidOperationException($"Couldn't get {nameof(IRequestCultureFeature)}");
     var supportedUiCultures = _requestLocalizationOptions
@@ -79,6 +82,18 @@
                         </li>
                     }
                 </ul>
+
+                @if (UserIdentity.IsSuperUser)
+                {
+                    <ul class="c-side-menu">
+                        @foreach (var sideMenuItem in Enumeration.GetAll<SuperUserSideMenuItem>())
+                        {
+                            <li class="c-side-menu__item @((SuperUserSideMenuItem) ViewData[nameof(SuperUserSideMenuItem)]! == sideMenuItem ? "c-side-menu__item--active" : "")">
+                                <a class="c-side-menu__link" href="@sideMenuItem.Href">@sideMenuItem.DisplayName()</a>
+                            </li>
+                        }
+                    </ul>
+                }
             </div>
             <div class="c-app-layout-inner__content">
                 <div class="u-scroll-wrapper">

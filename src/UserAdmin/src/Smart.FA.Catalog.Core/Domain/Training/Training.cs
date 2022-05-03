@@ -33,7 +33,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
 
     public int TrainerCreatorId { get; }
     public TrainingStatusType StatusType { get; private set; } = TrainingStatusType.Draft;
-     
+
     #endregion
 
     #region Constructors

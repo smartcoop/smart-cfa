@@ -5,9 +5,9 @@ using NLog.Web;
 using Smart.FA.Catalog.Application.Extensions;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Infrastructure.Extensions;
+using Smart.FA.Catalog.Web;
 using Smart.FA.Catalog.Web.Extensions;
 using Smart.FA.Catalog.Web.Extensions.Middlewares;
-using Smart.FA.Catalog.Web.Policies.Requirements;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,11 +22,12 @@ builder.Services
 builder.Services
     .AddApplication();
 builder.Services
-    .AddApi(builder.Configuration);
+    .AddCatalogDependencies(builder.Configuration);
 builder.Services
     .AddSmartDesign();
 builder.Services
-    .AddRazorPages(options => { options.Conventions.AuthorizeFolder("/Admin", Smart.FA.Catalog.Web.Policies.List.AtLeastOneValidUserChartRevisionApproval); })
+    .AddRazorPages()
+    .ConfigureRazorPagesOptions()
     .AddFluentValidation(configuration =>
     {
         configuration.RegisterValidatorsFromAssemblyContaining<Program>();
@@ -47,14 +48,7 @@ builder.Services
         builder.Configuration.GetSection("EFCore"),
         builder.Configuration.GetSection("S3Storage"));
 
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy(Smart.FA.Catalog.Web.Policies.List.AtLeastOneValidUserChartRevisionApproval,
-        policy => { policy.Requirements.Add(new AtLeastOneValidUserChartRevisionApprovalRequirement()); });
-});
-
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options => { options.AccessDeniedPath = new PathString("/UserChart"); });
+builder.Services.AddCatalogAuthentication().AddCatalogAuthorization();
 
 var app = builder.Build();
 

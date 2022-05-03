@@ -4,9 +4,11 @@
     Layout = "Shared/_AdminLayout";
 }
 
-<h2 class="c-h2">@CatalogResources.Hello @Model.UserIdentity.CurrentTrainer.Name.ToString()</h2>
-<smart-panel header="@CatalogResources.AdminHomepage_WhatIsFormateurAssocieTitle">
-    <p>@CatalogResources.LoremIpsum</p>
-</smart-panel>
+<smart-spacer all="ExtraLarge">
+    <h2 class="c-h2">@CatalogResources.Hello @Model.UserIdentity.CurrentTrainer.Name.ToString()</h2>
+    <smart-panel header="@CatalogResources.AdminHomepage_WhatIsFormateurAssocieTitle">
+        <p>@CatalogResources.LoremIpsum</p>
+    </smart-panel>
 
-<smart-spacer bottom="ExtraLarge" top="ExtraLarge"></smart-spacer>
+    <smart-spacer bottom="ExtraLarge" top="ExtraLarge"></smart-spacer>
+</smart-spacer>

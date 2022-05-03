@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Services;
-using Smart.FA.Catalog.Infrastructure.Persistence;
 
 namespace Smart.FA.Catalog.Web.Policies.Requirements;
 
@@ -14,34 +14,29 @@ public class AtLeastOneValidUserChartRevisionApprovalRequirement : IAuthorizatio
 
 public class UserChartRevisionApprovalHandler : AuthorizationHandler<AtLeastOneValidUserChartRevisionApprovalRequirement>
 {
-    private readonly CatalogContext _catalogContext;
-    private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly IMediator _mediator;
     private readonly IUserIdentity _userIdentity;
     private readonly IWebHostEnvironment _webHostEnvironment;
 
-    public UserChartRevisionApprovalHandler(CatalogContext catalogContext, IHttpContextAccessor httpContextAccessor, IUserIdentity userIdentity, IWebHostEnvironment webHostEnvironment)
+    public UserChartRevisionApprovalHandler(IMediator mediator, IUserIdentity userIdentity, IWebHostEnvironment webHostEnvironment)
     {
-        _catalogContext = catalogContext;
-        _httpContextAccessor = httpContextAccessor;
+        _mediator = mediator;
         _userIdentity = userIdentity;
         _webHostEnvironment = webHostEnvironment;
     }
 
     protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, AtLeastOneValidUserChartRevisionApprovalRequirement requirement)
     {
-        var currentDate = DateTime.UtcNow.Date;
-
-        var hasTrainerValidUserChartApprovals = await _catalogContext.Trainers
-            .Where(trainer => trainer.Id == _userIdentity.Id)
-            .Where(trainer => trainer.Approvals.Any(approval =>
-                currentDate >= approval.UserChartRevision.ValidFrom.Date &&
-                (approval.UserChartRevision.ValidUntil == null || currentDate <= approval.UserChartRevision.ValidUntil!.Value.Date)))
-            .AnyAsync();
+        // No need for that if the connected user is an super admin.
+        if (_userIdentity.IsSuperUser)
+        {
+            context.Succeed(requirement);
+            return;
+        }
 
         // If we are in staging we don't need to check for any approval of user charts
-        if (_webHostEnvironment.IsStaging() || hasTrainerValidUserChartApprovals)
+        if (_webHostEnvironment.IsStaging() || await _mediator.Send(new CanTrainerAccessCatalogServicesQuery(_userIdentity.Id)))
         {
-            _httpContextAccessor.HttpContext!.Response.Cookies.Append("HasAcceptedUserChartRevision", "true", new CookieOptions {MaxAge = TimeSpan.FromMinutes(1)});
             context.Succeed(requirement);
         }
     }

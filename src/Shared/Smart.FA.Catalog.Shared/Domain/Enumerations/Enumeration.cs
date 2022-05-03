@@ -119,5 +119,10 @@ public abstract class Enumeration : IComparable
         return !(a == b);
     }
 
+    public static implicit operator int(Enumeration enumeration)
+    {
+        return enumeration.Id;
+    }
+
     #endregion
 }
