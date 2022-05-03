@@ -2,6 +2,7 @@
 #nullable enable
 
 namespace Smart.FA.Catalog.Showcase.Domain.Models;
+
 public partial class TrainerDetails
 {
     public int Id { get; set; }
@@ -9,7 +10,7 @@ public partial class TrainerDetails
     public string LastName { get; set; } = null!;
     public string Biography { get; set; } = null!;
     public string Title { get; set; } = null!;
+    public string? ProfileImagePath { get; set; }
     public int? SocialNetwork { get; set; }
     public string? UrlToProfile { get; set; }
-    public string? ProfileImagePath { get; set; }
 }

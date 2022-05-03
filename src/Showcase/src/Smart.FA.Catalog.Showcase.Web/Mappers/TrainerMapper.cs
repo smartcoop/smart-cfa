@@ -8,7 +8,7 @@ public static class TrainerMapper
     public static List<TrainerSocialNetwork> ToTrainerSocialNetworks(this List<Domain.Models.TrainerDetails> trainerDetails)
     {
         var socialNetworks = new List<TrainerSocialNetwork>();
-        foreach (var detail in trainerDetails.Where(detail => detail.SocialNetwork is not null)
+        foreach (var detail in trainerDetails.Where(details => !string.IsNullOrWhiteSpace(details.UrlToProfile))
                      .OrderByDescending(s => s.SocialNetwork))
         {
             var socialNetworkName = SocialNetwork.FromValue<SocialNetwork>((int)detail.SocialNetwork);

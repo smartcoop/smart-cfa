@@ -9,9 +9,9 @@ public class Trainer : Entity, IAggregateRoot
 {
     #region Private fields
 
-    private readonly List<TrainerAssignment> _assignments = new();
     private readonly List<TrainerApproval> _approvals = new();
-    private readonly List<PersonalSocialNetwork> _personalSocialNetworks = new();
+    private readonly List<TrainerAssignment> _assignments = new();
+    private readonly List<TrainerSocialNetwork> _socialNetworks = new();
 
     #endregion
 
@@ -31,12 +31,11 @@ public class Trainer : Entity, IAggregateRoot
 
     public TrainerIdentity Identity { get; } = null!;
 
-    public virtual IReadOnlyCollection<TrainerAssignment> Assignments => _assignments.AsReadOnly();
-
     public virtual IReadOnlyCollection<TrainerApproval> Approvals => _approvals.AsReadOnly();
 
-    public virtual IReadOnlyCollection<PersonalSocialNetwork> PersonalSocialNetworks =>
-        _personalSocialNetworks.AsReadOnly();
+    public virtual IReadOnlyCollection<TrainerAssignment> Assignments => _assignments.AsReadOnly();
+
+    public virtual IReadOnlyCollection<TrainerSocialNetwork> SocialNetworks => _socialNetworks.AsReadOnly();
 
     #endregion
 
@@ -103,28 +102,28 @@ public class Trainer : Entity, IAggregateRoot
     public void ChangeDefaultLanguage(Language language) => DefaultLanguage = language;
 
     /// <summary>
-    /// Adds or updates an <see cref="PersonalSocialNetwork"/> to/of the underlying <see cref="Trainer"/>.
+    /// Adds or updates an <see cref="TrainerSocialNetwork"/> to/of the underlying <see cref="Trainer"/>.
     /// </summary>
     /// <param name="socialNetwork">The type of social network to be updated.</param>
     /// <param name="urlToProfile">The URL to profile of the trainer <paramref name="socialNetwork"/>.</param>
     public void SetSocialNetwork(SocialNetwork socialNetwork, string? urlToProfile)
     {
-        var existing = _personalSocialNetworks.FirstOrDefault(p => p.SocialNetwork == socialNetwork);
+        var existing = _socialNetworks.FirstOrDefault(p => p.SocialNetwork == socialNetwork);
 
         if (existing is not null)
         {
-            // There is no point to keep in the database a PersonalSocialNetwork if the url is empty.
+            // There is no point to keep in the database a SocialNetwork if the url is empty.
             if (string.IsNullOrWhiteSpace(urlToProfile))
             {
-                _personalSocialNetworks.Remove(existing);
+                _socialNetworks.Remove(existing);
                 return;
             }
 
-            existing.SetPersonalSocialNetworkInfo(Id, socialNetwork, urlToProfile);
+            existing.SetSocialNetworkInfo(Id, socialNetwork, urlToProfile);
         }
         else
         {
-            _personalSocialNetworks.Add(new PersonalSocialNetwork(Id, socialNetwork, urlToProfile));
+            _socialNetworks.Add(new TrainerSocialNetwork(Id, socialNetwork, urlToProfile));
         }
     }
 

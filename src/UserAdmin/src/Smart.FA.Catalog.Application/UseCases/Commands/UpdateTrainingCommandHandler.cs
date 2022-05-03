@@ -48,10 +48,10 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
 
             if (training is null) throw new TrainingException(Errors.Training.NotFound(request.TrainingId));
 
-            training.UpdateDetails(request.Detail.Title!, request.Detail.Goal!, request.Detail.Methodology!, request.Detail.PracticalModalities, Language.Create(request.Detail.Language).Value);
-            training.SwitchTrainingTypes(request.Types);
-            training.SwitchTargetAudience(request.TargetAudiences);
-            training.SwitchSlotNumberType(request.SlotNumberTypes);
+            training.UpdateDetails(request.DetailsDto.Title!, request.DetailsDto.Goal!, request.DetailsDto.Methodology!, request.DetailsDto.PracticalModalities, Language.Create(request.DetailsDto.Language).Value);
+            training.SwitchVatExemptionTypes(request.VatExemptionTypes);
+            training.SwitchTargetAudience(request.TargetAudienceTypes);
+            training.SwitchAttendanceTypes(request.AttendanceTypes);
             training.SwitchTopics(request.Topics);
             var trainers = await _trainerRepository.GetListAsync(request.TrainingId, cancellationToken);
             training.AssignTrainers(trainers);
@@ -82,11 +82,11 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
 public class UpdateTrainingRequest : IRequest<UpdateTrainingResponse>
 {
     public int TrainingId { get; init; }
-    public TrainingDetailDto Detail { get; init; } = null!;
-    public List<TrainingTargetAudience>? TargetAudiences { get; init; }
-    public List<TrainingType> Types { get; init; } = null!;
-    public List<TrainingSlotNumberType> SlotNumberTypes { get; init; } = null!;
-    public List<TrainingTopic> Topics { get; init; } = null!;
+    public TrainingLocalizedDetailsDto DetailsDto { get; init; } = null!;
+    public List<TargetAudienceType>? TargetAudienceTypes { get; init; }
+    public List<VatExemptionType> VatExemptionTypes { get; init; } = null!;
+    public List<AttendanceType> AttendanceTypes { get; init; } = null!;
+    public List<Topic> Topics { get; init; } = null!;
     public List<int> TrainerIds { get; init; } = null!;
     public bool IsDraft { get; set; }
 }

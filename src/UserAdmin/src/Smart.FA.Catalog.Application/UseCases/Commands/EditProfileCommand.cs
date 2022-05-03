@@ -88,12 +88,12 @@ public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, Pro
     private Task<Trainer?> GetTrainerWithSocialNetworksByIdAsync(int trainerId, CancellationToken cancellationToken)
     {
         return _catalogContext.Trainers
-            .Include(trainer => trainer.PersonalSocialNetworks)
+            .Include(trainer => trainer.SocialNetworks)
             .FirstOrDefaultAsync(trainer => trainer.Id == trainerId, cancellationToken);
     }
 
     /// <summary>
-    /// Updates a given <see cref="Trainer" />'s <see cref="Trainer.Biography" />, <see cref="Trainer.Title" /> and <see cref="PersonalSocialNetwork"/>'s.
+    /// Updates a given <see cref="Trainer" />'s <see cref="Trainer.Biography" />, <see cref="Trainer.Title" /> and <see cref="TrainerSocialNetwork"/>'s.
     /// </summary>
     /// <param name="trainer">The trainer to update.</param>
     /// <param name="command">The command related to the operation.</param>

@@ -1,4 +1,5 @@
 ﻿@page 
+@using Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer
 @model Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerDetails.TrainerDetailsModel
 @{
     ViewData["Title"] = Model.Trainer.Title;
@@ -14,7 +15,7 @@
     </div>
     <div class="trainer-card__details">
         <div class="trainer-card__image">
-            <img src="" class="trainer-image" alt="trainer-image" />
+            <img src="~/images/photo-avatar-profil.png" class="trainer-image" alt="trainer-image" />
         </div>
         <div class="trainer-card__details-txts">
             @Model.Trainer.Biography
@@ -24,16 +25,15 @@
                 @foreach (var socialNetwork in Model.Trainer.SocialNetworks)
                 {
                     <li class="trainer-card__trainer-links">
-                        <a href="@socialNetwork.SocialNetworkUrl" target="_blank" class="trainer-card__trainer-link">
-                            @{
-                                // No icon to personnel web site
-                                if (socialNetwork.SocialNetwork.Id != 6)
-                                {
-                                    var path = "/icons/" + socialNetwork.SocialNetwork.Name + ".svg";
-                                    <img src="@path" class="o-svg-icon--small contact-icon" alt="Icon" />
-                                }
-                                @socialNetwork.SocialNetwork.Name
+                        @{
+                            // No icon to personnel web site
+                            if (socialNetwork.SocialNetwork.Id != SocialNetwork.PersonalWebsite.Id)
+                            {
+                                <img src="@socialNetwork.IconPathFileName" class="o-svg-icon--small contact-icon" alt=""/>
                             }
+                        }
+                        <a href="@socialNetwork.SocialNetworkUrl" target="_blank" class="trainer-card__trainer-link">
+                            @socialNetwork.SocialNetwork.Name
                         </a>
                     </li>
                 }

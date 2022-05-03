@@ -2,6 +2,7 @@
 #nullable enable
 
 namespace Smart.FA.Catalog.Showcase.Domain.Models;
+
 public partial class TrainingList
 {
     public int Id { get; set; }
@@ -10,6 +11,6 @@ public partial class TrainingList
     public string TrainerFirstName { get; set; } = null!;
     public string TrainerLastName { get; set; } = null!;
     public int Topic { get; set; }
-    public short Status { get; set; }
+    public int Status { get; set; }
     public int TrainerId { get; set; }
 }

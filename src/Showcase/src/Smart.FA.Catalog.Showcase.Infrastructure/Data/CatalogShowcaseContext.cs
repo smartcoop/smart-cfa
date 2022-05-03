@@ -25,7 +25,7 @@ public partial class CatalogShowcaseContext : DbContext
         {
             entity.HasNoKey();
 
-            entity.ToView("v_TrainerDetails");
+            entity.ToView("v_TrainerDetails", "Cfa");
 
             entity.Property(e => e.Biography).HasMaxLength(1500);
 
@@ -34,6 +34,8 @@ public partial class CatalogShowcaseContext : DbContext
             entity.Property(e => e.LastName).HasMaxLength(200);
 
             entity.Property(e => e.ProfileImagePath).HasMaxLength(50);
+
+            entity.Property(e => e.SocialNetwork).HasColumnName("SocialNetworkId");
 
             entity.Property(e => e.Title).HasMaxLength(150);
 
@@ -44,7 +46,7 @@ public partial class CatalogShowcaseContext : DbContext
         {
             entity.HasNoKey();
 
-            entity.ToView("v_TrainingDetails");
+            entity.ToView("v_TrainingDetails", "Cfa");
 
             entity.Property(e => e.Goal).HasMaxLength(1000);
 
@@ -55,6 +57,8 @@ public partial class CatalogShowcaseContext : DbContext
             entity.Property(e => e.Methodology).HasMaxLength(1000);
 
             entity.Property(e => e.PracticalModalities).HasMaxLength(1000);
+
+            entity.Property(e => e.StatusId).HasColumnName("TrainingStatusTypeId");
 
             entity.Property(e => e.TrainerFirstName)
                 .HasMaxLength(200)
@@ -71,23 +75,25 @@ public partial class CatalogShowcaseContext : DbContext
             entity.Property(e => e.TrainingTitle)
                 .HasMaxLength(500)
                 .HasColumnName("Title");
+
+            entity.Property(e => e.TrainingTopicId).HasColumnName("TopicId");
         });
 
         modelBuilder.Entity<TrainingList>(entity =>
         {
             entity.HasNoKey();
 
-            entity.ToView("v_TrainingList");
+            entity.ToView("v_TrainingList", "Cfa");
 
             entity.Property(e => e.Language)
                 .HasMaxLength(2)
                 .IsFixedLength();
 
-            entity.Property(e => e.Status).HasColumnName("StatusId");
+            entity.Property(e => e.Status).HasColumnName("TrainingStatusTypeId");
 
             entity.Property(e => e.Title).HasMaxLength(500);
 
-            entity.Property(e => e.Topic).HasColumnName("TrainingTopicId");
+            entity.Property(e => e.Topic).HasColumnName("TopicId");
 
             entity.Property(e => e.TrainerFirstName)
                 .HasMaxLength(200)

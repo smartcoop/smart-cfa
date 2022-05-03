@@ -20,12 +20,12 @@ public class TrainingQueries : ITrainingQueries
     {
         var sql = @"SELECT
 	                    T.Id 'TrainingId',
-	                    T.StatusId,
+	                    T.TrainingStatusTypeId,
 	                    TD.Title,
 	                    TD.Goal,
                         TD.Language
-                    FROM dbo.Training T
-                    INNER JOIN dbo.TrainingDetail TD ON T.Id = TD.TrainingId
+                    FROM Cfa.Training T
+                    INNER JOIN Cfa.TrainingLocalizedDetails TD ON T.Id = TD.TrainingId
                     WHERE TD.TrainingId = @TrainingId AND TD.Language = @Language";
         await using var connection = new SqlConnection(_connectionString);
         return await connection.QuerySingleAsync<TrainingDto>(sql, new {trainingId, language});
@@ -40,15 +40,15 @@ public class TrainingQueries : ITrainingQueries
     {
         var sql = @"SELECT
 	                    T.Id 'TrainingId',
-	                    T.StatusId,
+	                    T.TrainingStatusTypeId,
 	                    TD.Title,
 	                    TD.Goal,
                         TD.Language,
-                        TC.TrainingTopicId 'TopicId'
-                    FROM dbo.Training T
-                    INNER JOIN dbo.TrainerAssignment TE ON T.Id = TE.TrainingId
-                    LEFT JOIN dbo.TrainingCategory TC ON T.Id = TC.TrainingId
-                    INNER JOIN dbo.TrainingDetail TD ON T.Id = TD.TrainingId
+                        TC.TopicId
+                    FROM Cfa.Training T
+                    INNER JOIN Cfa.TrainerAssignment TE ON T.Id = TE.TrainingId
+                    LEFT JOIN Cfa.TrainingTopic TC ON T.Id = TC.TrainingId
+                    INNER JOIN Cfa.TrainingLocalizedDetails TD ON T.Id = TD.TrainingId
                     WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language ";
         await using var connection = new SqlConnection(_connectionString);
         return await connection.QueryAsync<TrainingDto, int?, TrainingDto>(sql, (dto, topicId) =>
@@ -69,24 +69,24 @@ public class TrainingQueries : ITrainingQueries
     {
         var sql = @"SELECT
 	                    T.Id 'TrainingId',
-	                    T.StatusId,
+	                    T.TrainingStatusTypeId,
 	                    TD.Title,
 	                    TD.Goal,
                         TD.Language,
-                        TC.TrainingTopicId 'TopicId'
-                    FROM (SELECT * FROM dbo.Training T ORDER BY T.Id
+                        TC.TopicId
+                    FROM (SELECT * FROM Cfa.Training T ORDER BY T.Id
                     OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY) T
-                    INNER JOIN dbo.TrainerAssignment TE ON T.Id = TE.TrainingId
-                    LEFT JOIN dbo.TrainingCategory TC ON T.Id = TC.TrainingId
-                    INNER JOIN dbo.TrainingDetail TD ON T.Id = TD.TrainingId
+                    INNER JOIN Cfa.TrainerAssignment TE ON T.Id = TE.TrainingId
+                    LEFT JOIN Cfa.TrainingTopic TC ON T.Id = TC.TrainingId
+                    INNER JOIN Cfa.TrainingLocalizedDetails TD ON T.Id = TD.TrainingId
                     WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language";
 
         var countsql = @"SELECT
 	                        COUNT(*)
-                        FROM (SELECT T.Id FROM dbo.Training T
-                        INNER JOIN dbo.TrainerAssignment TE ON T.Id = TE.TrainingId
-                        LEFT JOIN dbo.TrainingCategory TC ON T.Id = TC.TrainingId
-                        INNER JOIN dbo.TrainingDetail TD ON T.Id = TD.TrainingId
+                        FROM (SELECT T.Id FROM Cfa.Training T
+                        INNER JOIN Cfa.TrainerAssignment TE ON T.Id = TE.TrainingId
+                        LEFT JOIN Cfa.TrainingTopic TC ON T.Id = TC.TrainingId
+                        INNER JOIN Cfa.TrainingLocalizedDetails TD ON T.Id = TD.TrainingId
                         WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language
                         GROUP BY T.Id) A";
 
@@ -112,7 +112,7 @@ public class TrainingQueries : ITrainingQueries
         //Regroup all training records by id
         var result = list.GroupBy(dto => dto.TrainingId).Select(trainingGroup =>
             new TrainingDto(trainingGroup.Key,
-                trainingGroup.First().StatusId,
+                trainingGroup.First().TrainingStatusTypeId,
                 trainingGroup.First().Title,
                 trainingGroup.First().Goal,
                 trainingGroup.First().Language,

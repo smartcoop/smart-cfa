@@ -1,11 +1,12 @@
-CREATE VIEW [dbo].[v_TrainerDetails]
+CREATE VIEW [Cfa].[v_TrainerDetails]
 	AS
-SELECT dbo.Trainer.Id
-      ,dbo.Trainer.FirstName
-      ,dbo.Trainer.LastName
-      ,dbo.Trainer.Biography
-      ,dbo.Trainer.Title
-      ,dbo.TrainerPersonalNetwork.SocialNetwork
-      ,dbo.TrainerPersonalNetwork.UrlToProfile
-FROM dbo.Trainer
-LEFT OUTER JOIN dbo.TrainerPersonalNetwork ON dbo.Trainer.Id = dbo.TrainerPersonalNetwork.TrainerId
+SELECT Cfa.Trainer.Id
+      ,Cfa.Trainer.FirstName
+      ,Cfa.Trainer.LastName
+      ,Cfa.Trainer.Biography
+      ,Cfa.Trainer.Title
+      ,Cfa.Trainer.ProfileImagePath
+      ,Cfa.TrainerSocialNetwork.SocialNetworkId
+      ,Cfa.TrainerSocialNetwork.UrlToProfile
+FROM [Cfa].Trainer
+LEFT OUTER JOIN Cfa.TrainerSocialNetwork ON Cfa.Trainer.Id = Cfa.TrainerSocialNetwork.TrainerId

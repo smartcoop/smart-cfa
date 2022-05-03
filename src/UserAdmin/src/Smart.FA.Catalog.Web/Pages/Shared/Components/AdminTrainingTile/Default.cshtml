@@ -8,11 +8,11 @@
 <smart-card>
     <smart-card-body>
         <smart-card-title text="@Model.Title"></smart-card-title>
-        <smart-muted-text text="@string.Join(", ", Model.TopicIds!.Select(topic => _localizer[Enumeration.FromValue<TrainingTopic>(topic).Name])) "></smart-muted-text>
+        <smart-muted-text text="@string.Join(", ", Model.TopicIds!.Select(topic => _localizer[Enumeration.FromValue<Topic>(topic).Name])) "></smart-muted-text>
     </smart-card-body>
     <smart-card-actions>
         <div class="o-flex o-flex--vertical-center o-flex--justify-between o-flex--spaced-wide">
-            <smart-pill label="@(_localizer[Enumeration.FromValue<TrainingStatus>(Model!.StatusId).Name])"></smart-pill>
+            <smart-pill label="@(_localizer[Enumeration.FromValue<TrainingStatusType>(Model!.TrainingStatusTypeId).Name])"></smart-pill>
             <div class="c-button-toolbar">
                 <a href="/admin/trainings/update/@Model!.TrainingId">
                     <smart-button leading-icon="EditAlt" button-style="Borderless"></smart-button>

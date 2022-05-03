@@ -150,6 +150,9 @@
   <data name="Presentation" xml:space="preserve">
     <value>Présentation</value>
   </data>
+  <data name="TrainingsToFollow" xml:space="preserve">
+    <value>Formations à suivre</value>
+  </data>
   <data name="Contact_ConfirmationMessage" xml:space="preserve">
     <value>Votre message a bien été envoyé.</value>
   </data>
@@ -200,8 +203,5 @@
   </data>
   <data name="Homepage_IntroductionPart3" xml:space="preserve">
     <value>Ce catalogue en ligne s’adresse à toute personne en recherche d’une formation. Vous trouverez sur ce site des formations de type scolaire, professionnel  (organisées et produites par Formateurs Associés asbl et Productions Associées asbl, le cas échéant) ou encore récréatif (uniquement dans Producteurs Associés asbl). Vous visualisez aisément la personne qui dispense la formation et pouvez la contacter en direct pour obtenir davantage d’informations. </value>
-  </data>
-  <data name="TrainingsToFollow" xml:space="preserve">
-    <value>Formations à suivre</value>
   </data>
 </root>
