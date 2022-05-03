@@ -12,7 +12,7 @@ using Smart.FA.Catalog.Infrastructure.Persistence;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    [Migration("20220503141052_Add_Other_To_VatExemption_And_Topic_An_TargetAudienceType")]
+    [Migration("20220502125659_Add_Other_To_VatExemption_And_Topic_An_TargetAudienceType")]
     partial class Add_Other_To_VatExemption_And_Topic_An_TargetAudienceType
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
