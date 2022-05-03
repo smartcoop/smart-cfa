@@ -1,0 +1,84 @@
+﻿@page 
+@model Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerDetails.TrainerDetailsModel
+@{
+    ViewData["Title"] = Model.Trainer.Title;
+    Layout = Routes.Layout;
+}
+
+<section class="trainer-card">
+    <div class="trainer-card__title">
+        @Model.Trainer.FirstName @Model.Trainer.LastName
+    </div>
+    <div class="trainer-card__fonction">
+        @Model.Trainer.Title
+    </div>
+    <div class="trainer-card__details">
+        <div class="trainer-card__image">
+            <img src="" class="trainer-image" alt="trainer-image" />
+        </div>
+        <div class="trainer-card__details-txts">
+            @Model.Trainer.Biography
+        </div>
+        <div class="trainer-card__contacts">
+            <ul>
+                @foreach (var socialNetwork in Model.Trainer.SocialNetworks)
+                {
+                    <li class="trainer-card__trainer-links">
+                        <a href="@socialNetwork.SocialNetworkUrl" target="_blank" class="trainer-card__trainer-link">
+                            @{
+                                // No icon to personnel web site
+                                if (socialNetwork.SocialNetwork.Id != 6)
+                                {
+                                    var path = "/icons/" + socialNetwork.SocialNetwork.Name + ".svg";
+                                    <img src="@path" class="o-svg-icon--small contact-icon" alt="Icon" />
+                                }
+                                @socialNetwork.SocialNetwork.Name
+                            }
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="trainer-card__trainings">
+        <div class="trainer-card__trainings-label">
+            @ShowcaseResources.TrainingsToFollow
+        </div>
+        @foreach (var training in Model.Trainer.Trainings)
+        {
+            <div class="training-list__container">
+                <div class="training-list__container-left">
+                    <div class="training-list__title">
+                        <a class="training-list__training-link" asp-page="@Routes.TrainingDetails" asp-route-id="@training.TrainingId">@training.Title</a>
+                    </div>
+                    <div class="training-list__category">
+                        <img src="~/icons/tag--blue.svg" class="o-svg-icon--small sectors-icon" alt="" />
+                        @foreach (var topic in training.Topics)
+                        {
+                            <a class="training-list__category-link" asp-page="TrainingsList" asp-route-cat="TopicName">@topic.Name</a>
+                            if (topic != training.Topics.Last())
+                            {
+                                <span>, </span>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="training-list__container-right">
+                    <div class="training-list__more">
+                        <a class="training-list__more-link" asp-page="@Routes.TrainingDetails" asp-route-id="@training.TrainingId">
+                            <img src="~/icons/chevron-right--blue.svg" class="o-svg-icon--large chevron-icon"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="trainer-card__footer">
+        <div class="trainer-card__back">
+            <a class="trainer-card__back-link" asp-page="@Routes.TrainerList">
+                <img src="~/icons/chevron-left--blue.svg" class="o-svg-icon--small chevron-icon" alt=""/>@ShowcaseResources.AllTrainers
+            </a>
+        </div>
+    </div>
+</section>
+

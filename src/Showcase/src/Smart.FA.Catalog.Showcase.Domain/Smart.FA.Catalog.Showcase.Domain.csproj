@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Smart.FA.Catalog.Shared\Smart.FA.Catalog.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -61,6 +61,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tous les formateur·trices.
+        /// </summary>
+        public static string AllTrainers {
+            get {
+                return ResourceManager.GetString("AllTrainers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Toutes les formations.
         /// </summary>
         public static string AllTrainings {
@@ -300,6 +309,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         public static string TitteTrainings {
             get {
                 return ResourceManager.GetString("TitteTrainings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formations à suivre.
+        /// </summary>
+        public static string TrainingsToFollow {
+            get {
+                return ResourceManager.GetString("TrainingsToFollow", resourceCulture);
             }
         }
     }

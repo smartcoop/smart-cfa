@@ -1,12 +1,13 @@
 CREATE VIEW [dbo].[v_TrainingList]
 	AS
 	SELECT training.Id
-            ,detail.Title
-            ,detail.Language
-            ,trainer.FirstName
-            ,trainer.LastName
-            ,category.TrainingTopicId
-            ,training.StatusId 
+          ,detail.Title
+          ,detail.Language
+          ,trainer.FirstName
+          ,trainer.LastName
+          ,category.TrainingTopicId
+          ,training.StatusId
+	      ,trainer.Id AS TrainerId
 	FROM [Catalog].[dbo].[Training] AS training
 	JOIN [Catalog].[dbo].[TrainingDetail] AS detail ON training.Id = detail.TrainingId
 	JOIN [Catalog].[dbo].[TrainingCategory] category ON training.Id = category.TrainingId
