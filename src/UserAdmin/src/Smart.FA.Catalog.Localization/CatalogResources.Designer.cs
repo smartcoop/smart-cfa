@@ -115,7 +115,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Une erreur s&apos;esst déroule durant la recherche. Veuillez essayer à nouveau.
+        ///   Looks up a localized string similar to Une erreur s&apos;est déroulée durant la recherche. Veuillez essayer à nouveau.
         /// </summary>
         public static string AnErrorOccurredWhileSearching {
             get {
@@ -790,7 +790,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Autre.
         /// </summary>
         public static string Training_IsOther {
             get {

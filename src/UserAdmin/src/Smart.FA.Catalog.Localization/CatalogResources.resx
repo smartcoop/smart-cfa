@@ -401,7 +401,7 @@
     <value>Vous n'avez aucune formation</value>
   </data>
   <data name="AnErrorOccurredWhileSearching" xml:space="preserve">
-    <value>Une erreur s'esst déroule durant la recherche. Veuillez essayer à nouveau</value>
+    <value>Une erreur s'est déroulée durant la recherche. Veuillez essayer à nouveau</value>
   </data>
   <data name="NoTrainingFound" xml:space="preserve">
     <value>Aucune formation trouvée</value>
