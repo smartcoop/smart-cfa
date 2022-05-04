@@ -37,20 +37,21 @@ public static class EntryEntityAuditableDateUpdate
         var now = DateTime.UtcNow;
 
         // Sets creation, modification dates and creator and last updater.
-        entityEntry.Property<DateTime>(nameof(Entity.CreatedAt)).CurrentValue      = now;
+        entityEntry.Property<DateTime>(nameof(Entity.CreatedAt)).CurrentValue = now;
         entityEntry.Property<DateTime>(nameof(Entity.LastModifiedAt)).CurrentValue = now;
-        entityEntry.Property<int>(nameof(Entity.CreatedBy)).CurrentValue           = userId;
-        entityEntry.Property<int>(nameof(Entity.LastModifiedBy)).CurrentValue      = userId;
+
+        entityEntry.Property<int>(nameof(Entity.CreatedBy)).CurrentValue = userId;
+        entityEntry.Property<int>(nameof(Entity.LastModifiedBy)).CurrentValue = userId;
     }
 
     private static void SetModifiedEntitiesData(this EntityEntry<Entity> entityEntry, int userId)
     {
         // Sets modification data (i.e. modification date and creator id).
         entityEntry.Property<DateTime>(nameof(Entity.LastModifiedAt)).CurrentValue = DateTime.UtcNow;
-        entityEntry.Property<int>(nameof(Entity.LastModifiedBy)).CurrentValue      = userId;
+        entityEntry.Property<int>(nameof(Entity.LastModifiedBy)).CurrentValue = userId;
 
         // This prevents that someone overrides creation date and creator id when modifying an entity.
         entityEntry.Property<DateTime>(nameof(Entity.CreatedAt)).IsModified = false;
-        entityEntry.Property<int>(nameof(Entity.CreatedBy)).IsModified      = false;
+        entityEntry.Property<int>(nameof(Entity.CreatedBy)).IsModified = false;
     }
 }
