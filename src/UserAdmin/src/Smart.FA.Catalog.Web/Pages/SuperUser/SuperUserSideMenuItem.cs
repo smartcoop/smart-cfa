@@ -13,7 +13,7 @@ public class SuperUserSideMenuItem : Enumeration
         Href = href;
     }
 
-    public string? DisplayName()
+    public string DisplayName()
     {
         return Id switch
         {
