@@ -38,7 +38,7 @@ public class CreateTrainingRequestValidator : AbstractValidator<CreateTrainingVi
             .WithMessage(CatalogResources.Max1000Characters);
 
         RuleFor(viewModel => viewModel.IsGivenBySmart)
-            .Must(_ => BeSuperUser())
+            .Must(BeSuperUser)
             .When(IsMarkedAsGivenBySmart)
             .WithMessage(CatalogResources.SuperUserPermissionToSetSmartTrainingType);
 
@@ -93,7 +93,7 @@ public class CreateTrainingRequestValidator : AbstractValidator<CreateTrainingVi
         return !viewModel.IsDraft;
     }
 
-    private bool BeSuperUser() => _userIdentity.IsSuperUser;
+    private bool BeSuperUser(bool _) => _userIdentity.IsSuperUser;
 
     private bool IsMarkedAsGivenBySmart(CreateTrainingViewModel viewModel) => viewModel.IsGivenBySmart;
 

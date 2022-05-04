@@ -32,7 +32,7 @@ public class UpdateTrainingViewModelValidator : AbstractValidator<UpdateTraining
             .WithMessage(CatalogResources.Max1000Characters);
 
         RuleFor(viewModel => viewModel.IsGivenBySmart)
-            .Must(_ => BeSuperUser())
+            .Must(BeSuperUser)
             .When(IsMarkedAsGivenBySmart)
             .WithMessage(CatalogResources.SuperUserPermissionToSetSmartTrainingType);
 
@@ -84,7 +84,7 @@ public class UpdateTrainingViewModelValidator : AbstractValidator<UpdateTraining
         return !viewModel.IsDraft;
     }
 
-    private bool BeSuperUser() => _userIdentity.IsSuperUser;
+    private bool BeSuperUser(bool _) => _userIdentity.IsSuperUser;
 
     private bool IsMarkedAsGivenBySmart(UpdateTrainingViewModel viewModel) => viewModel.IsGivenBySmart;
 }
