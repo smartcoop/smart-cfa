@@ -11,8 +11,11 @@ namespace Smart.FA.Catalog.Web.Validators;
 /// </summary>
 public class CreateTrainingRequestValidator : AbstractValidator<CreateTrainingViewModel>
 {
+    private readonly IUserIdentity _userIdentity;
+
     public CreateTrainingRequestValidator(IStringLocalizer<CatalogResources> localizer, IUserIdentity userIdentity)
     {
+        _userIdentity = userIdentity;
         RuleFor(viewModel => viewModel.Title)
             .NotEmpty()
             .MaximumLength(500)
@@ -34,7 +37,10 @@ public class CreateTrainingRequestValidator : AbstractValidator<CreateTrainingVi
             .MaximumLength(1000)
             .WithMessage(CatalogResources.Max1000Characters);
 
-        When(_ => !userIdentity.IsSuperUser, () => RuleFor(viewModel => viewModel.IsGivenBySmart).NotEqual(true).WithMessage(CatalogResources.SuperUserPermissionToSetSmartTrainingType));
+        RuleFor(viewModel => viewModel.IsGivenBySmart)
+            .Must(_ => BeSuperUser())
+            .When(IsMarkedAsGivenBySmart)
+            .WithMessage(CatalogResources.SuperUserPermissionToSetSmartTrainingType);
 
         // When we register a draft we are very permissive.
         // Only the title is required.
@@ -86,4 +92,9 @@ public class CreateTrainingRequestValidator : AbstractValidator<CreateTrainingVi
     {
         return !viewModel.IsDraft;
     }
+
+    private bool BeSuperUser() => _userIdentity.IsSuperUser;
+
+    private bool IsMarkedAsGivenBySmart(CreateTrainingViewModel viewModel) => viewModel.IsGivenBySmart;
+
 }
