@@ -1,3 +1,4 @@
+using System.Globalization;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Smart.FA.Catalog.Core.Domain;
@@ -68,7 +69,9 @@ public class GetTrainingsByCriteriaQueryHandler : IRequestHandler<GetTrainingsBy
         return trainings.Select(training =>
         {
             // We don't know if there is a details for the underlying selected locale, so we return the existing one if not.
-            var detail = training.Details.FirstOrDefault(detail => detail.Language.Value == "FR") ?? training.Details.First();
+            var eurrentCultureAlpha2Code = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+            var detail = training.Details.FirstOrDefault(detail => string.Equals(detail.Language.Value, eurrentCultureAlpha2Code, StringComparison.OrdinalIgnoreCase))
+                         ?? training.Details.First();
 
             return new TrainingDto(training.Id,
                 training.StatusType.Id,
