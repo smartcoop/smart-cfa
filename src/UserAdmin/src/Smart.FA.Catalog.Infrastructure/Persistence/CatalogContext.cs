@@ -66,7 +66,7 @@ public class CatalogContext : DbContext
             .Entries<Entity>()
             .Where(entry => entry.State is EntityState.Added or EntityState.Modified);
 
-        entries.UpdateAutitableEntitiesData(_userIdentity.Id);
+        entries.UpdateAuditableEntitiesData(_userIdentity.Id);
     }
 
     private Task PublishEntityDomainEventsAsync()

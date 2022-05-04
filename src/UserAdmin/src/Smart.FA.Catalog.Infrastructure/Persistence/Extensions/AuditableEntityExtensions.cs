@@ -11,7 +11,7 @@ public static class EntryEntityAuditableDateUpdate
     /// </summary>
     /// <param name="entityEntries">A collection of <see cref="EntityEntry{TEntity}"/>.</param>
     /// <param name="userId">The id of the user doing the current operation.</param>
-    public static void UpdateAutitableEntitiesData(this IEnumerable<EntityEntry<Entity>> entityEntries, int userId)
+    public static void UpdateAuditableEntitiesData(this IEnumerable<EntityEntry<Entity>> entityEntries, int userId)
     {
         foreach (var entityEntry in entityEntries)
         {
