@@ -204,4 +204,13 @@
   <data name="Homepage_IntroductionPart3" xml:space="preserve">
     <value>Ce catalogue en ligne s’adresse à toute personne en recherche d’une formation. Vous trouverez sur ce site des formations de type scolaire, professionnel  (organisées et produites par Formateurs Associés asbl et Productions Associées asbl, le cas échéant) ou encore récréatif (uniquement dans Producteurs Associés asbl). Vous visualisez aisément la personne qui dispense la formation et pouvez la contacter en direct pour obtenir davantage d’informations. </value>
   </data>
+  <data name="ToTrainingHomePage" xml:space="preserve">
+    <value>Retour vers les formations</value>
+  </data>
+  <data name="GenericNotFoundPageTitle" xml:space="preserve">
+    <value>Désolé</value>
+  </data>
+  <data name="GenericNotFoundPageMessage" xml:space="preserve">
+    <value>Cette page n'existe pas</value>
+  </data>
 </root>
