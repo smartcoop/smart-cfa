@@ -109,7 +109,7 @@ public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, Pro
         trainer.ChangeEmail(command.Email);
         foreach (var commandSocial in command.Socials!)
         {
-            var socialNetwork = Enumeration.FromValue<SocialNetwork>(int.Parse(commandSocial.Key));
+            var socialNetwork = SocialNetwork.FromValue(int.Parse(commandSocial.Key));
             var url = commandSocial.Value;
             trainer.SetSocialNetwork(socialNetwork, url);
         }

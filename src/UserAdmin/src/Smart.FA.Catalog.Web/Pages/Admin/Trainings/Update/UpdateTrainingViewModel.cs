@@ -35,10 +35,10 @@ public static class EditTrainingViewModelMapping
                     , model.PracticalModalities
                 ),
             TrainingId = trainingId
-            , VatExemptionTypes = Enumeration.FromValues<VatExemptionType>(model.VatExemptionClaimIds ?? new())
-            , TargetAudienceTypes = Enumeration.FromValues<TargetAudienceType>(model.TargetAudienceTypeIds ?? new())
-            , AttendanceTypes = Enumeration.FromValues<AttendanceType>(model.AttendanceTypeIds ?? new())
-            , Topics = Enumeration.FromValues<Topic>(model.TopicIds ?? new())
+            , VatExemptionTypes = VatExemptionType.FromValues(model.VatExemptionClaimIds ?? new())
+            , TargetAudienceTypes = TargetAudienceType.FromValues(model.TargetAudienceTypeIds ?? new())
+            , AttendanceTypes = AttendanceType.FromValues(model.AttendanceTypeIds ?? new())
+            , Topics = Topic.FromValues(model.TopicIds ?? new())
             , TrainerIds = new List<int>{trainerId},
         };
 
@@ -52,9 +52,9 @@ public static class EditTrainingViewModelMapping
             Title = details?.Title,
             Methodology = details?.Methodology,
             PracticalModalities = details?.PracticalModalities,
-            TargetAudienceTypeIds = model.Training.Targets.Select(target => target.TargetAudienceTypeId).ToList(),
-            VatExemptionClaimIds = model.Training.VatExemptionClaims.Select(vatExemptionClaim => vatExemptionClaim.VatExemptionTypeId).ToList(),
-            AttendanceTypeIds = model.Training.Attendances.Select(attendance => attendance.AttendanceTypeId).ToList(),
+            TargetAudienceTypeIds = model.Training.Targets.Select(target => target.TargetAudienceType.Id).ToList(),
+            VatExemptionClaimIds = model.Training.VatExemptionClaims.Select(vatExemptionClaim => vatExemptionClaim.VatExemptionType.Id).ToList(),
+            AttendanceTypeIds = model.Training.Attendances.Select(attendance => attendance.AttendanceType.Id).ToList(),
             TopicIds = model.Training.Topics.Select(topic => topic.TopicId).ToList()
         };
 
@@ -70,9 +70,9 @@ public static class EditTrainingViewModelMapping
             Title = detail?.Title,
             Methodology = detail?.Methodology,
             PracticalModalities = detail?.PracticalModalities,
-            TargetAudienceTypeIds = model.Training.Targets.Select(target => target.TargetAudienceTypeId).ToList(),
-            VatExemptionClaimIds = model.Training.VatExemptionClaims.Select(vatExemptionClaim => vatExemptionClaim.VatExemptionTypeId).ToList(),
-            AttendanceTypeIds = model.Training.Attendances.Select(attendance => attendance.AttendanceTypeId).ToList()
+            TargetAudienceTypeIds = model.Training.Targets.Select(target => target.TargetAudienceType.Id).ToList(),
+            VatExemptionClaimIds = model.Training.VatExemptionClaims.Select(vatExemptionClaim => vatExemptionClaim.VatExemptionType.Id).ToList(),
+            AttendanceTypeIds = model.Training.Attendances.Select(attendance => attendance.AttendanceType.Id).ToList()
         };
 
         return response;

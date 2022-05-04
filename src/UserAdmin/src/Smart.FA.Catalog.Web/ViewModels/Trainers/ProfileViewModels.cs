@@ -42,7 +42,7 @@ public static class Mappers
     public static ICollection<SocialNetworkViewModel> ToSocialViewModels(this IEnumerable<TrainerProfile.Social> trainerSocials)
     {
         // Retrieve enumeration of all social networks in our system.
-        IDictionary<int, SocialNetworkViewModel> socials = Enumeration.GetAll<SocialNetwork>()
+        IDictionary<int, SocialNetworkViewModel> socials = SocialNetwork.List
             .Select(socialNetwork => socialNetwork.ToViewModel())
             .ToDictionary(socialVm => socialVm.SocialNetworkId, value => value);
 

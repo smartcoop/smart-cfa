@@ -4,6 +4,7 @@ using Smart.FA.Catalog.Core.Domain.Enumerations;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
 using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Shared.Domain.Enumerations;
+using Smart.FA.Catalog.Shared.Domain.Enumerations.Common;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.Create;
@@ -36,11 +37,11 @@ public static class CreateTrainingViewModelMapping
                     , model.Methodology
                     , model.PracticalModalities
                 ),
-            TrainerId = trainerId,
-            VatExemptionTypes = Enumeration.FromValues<VatExemptionType>(model.VatExemptionTypeIds ?? new()),
-            TargetAudiences = Enumeration.FromValues<TargetAudienceType>(model.TargetAudienceTypeIds ?? new()),
-            AttendanceTypes = Enumeration.FromValues<AttendanceType>(model.AttendanceTypeIds ?? new()),
-            Topics = Enumeration.FromValues<Topic>(model.TopicIds ?? new()),
-            IsDraft = model.IsDraft
+            TrainerId         = trainerId,
+            VatExemptionTypes = VatExemptionType.FromValues(model.VatExemptionTypeIds ?? new()),
+            TargetAudiences   = TargetAudienceType.FromValues(model.TargetAudienceTypeIds ?? new()),
+            AttendanceTypes   = AttendanceType.FromValues(model.AttendanceTypeIds ?? new()),
+            Topics            = Topic.FromValues(model.TopicIds ?? new()),
+            IsDraft           = model.IsDraft
         };
 }

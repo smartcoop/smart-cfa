@@ -8,7 +8,6 @@ public class VatExemptionClaim
     #region Properties
 
     public int TrainingId { get; set; }
-    public int VatExemptionTypeId { get; set; }
     public virtual VatExemptionType VatExemptionType { get; } = null!;
     public virtual Training Training { get; } = null!;
 
@@ -26,7 +25,6 @@ public class VatExemptionClaim
         Training = training;
         VatExemptionType = vatExemptionType;
         TrainingId = training.Id;
-        VatExemptionTypeId = vatExemptionType.Id;
     }
 
     #endregion

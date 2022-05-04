@@ -5,6 +5,7 @@ using Smart.FA.Catalog.Core.Domain.Authorization;
 using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Infrastructure.Extensions;
 using Smart.FA.Catalog.Shared.Domain.Enumerations;
+using Smart.FA.Catalog.Shared.Domain.Enumerations.Common;
 
 namespace Smart.FA.Catalog.Infrastructure.Persistence;
 
@@ -51,7 +52,7 @@ public class CatalogContext : DbContext
     private void RemoveEnumerationsFromTracker()
     {
         ChangeTracker
-            .Entries<Enumeration>()
+            .Entries<IEnumeration>()
             .ToList()
             .ForEach(ee => ee.State = EntityState.Detached);
     }

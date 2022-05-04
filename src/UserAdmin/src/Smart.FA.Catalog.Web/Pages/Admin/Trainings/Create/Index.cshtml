@@ -1,6 +1,6 @@
 ﻿@page
 @using Microsoft.Extensions.Localization
-@using Smart.FA.Catalog.Shared.Domain.Enumerations
+@using Smart.FA.Catalog.Shared.Domain.Enumerations.Common
 @using Smart.FA.Catalog.Shared.Domain.Enumerations.Training
 @inject IStringLocalizer<CatalogResources> _localizer
 @model Smart.FA.Catalog.Web.Pages.Admin.Trainings.Create.CreateModel
@@ -44,7 +44,7 @@
                 <smart-form-group-textarea rows="5" label="@CatalogResources.PracticalModalities *" asp-for="CreateTrainingViewModel.PracticalModalities" helper-text="@CatalogResources.Min30CharMax1000Char"></smart-form-group-textarea>
                 <smart-formgroup label="@CatalogResources.Topics *">
                     <smart-grid>
-                        @foreach (var topics in Enumeration.GetAll<Topic>().Chunk(2))
+                        @foreach (var topics in Topic.List.Chunk(2))
                         {
                             @foreach (var topic in topics)
                             {
@@ -62,7 +62,7 @@
 
             <smart-panel header="@CatalogResources.TrainingVatJustification">
                 <smart-formgroup label="@CatalogResources.TheTraining *">
-                    @foreach (var vatExemptionType in Enumeration.GetAll<VatExemptionType>())
+                    @foreach (var vatExemptionType in VatExemptionType.List)
                     {
                         <smart-checkbox label="@_localizer["Training_Is" + vatExemptionType.Name]" asp-for="CreateTrainingViewModel.VatExemptionTypeIds" value="@vatExemptionType.Id" checked="@(vatExemptionType.IsContainedIn(Model.CreateTrainingViewModel.VatExemptionTypeIds))"></smart-checkbox>
                     }
@@ -70,7 +70,7 @@
                 </smart-formgroup>
 
                 <smart-formgroup label="@CatalogResources.TrainingTarget *">
-                    @foreach (var targetAudience in Enumeration.GetAll<TargetAudienceType>())
+                    @foreach (var targetAudience in TargetAudienceType.List)
                     {
                         <smart-checkbox label="@_localizer[targetAudience.Name]" asp-for="CreateTrainingViewModel.TargetAudienceTypeIds" value="@targetAudience.Id" checked="@(targetAudience.IsContainedIn(Model.CreateTrainingViewModel.TargetAudienceTypeIds))"></smart-checkbox>
                     }
@@ -78,7 +78,7 @@
                 </smart-formgroup>
 
                 <smart-formgroup label="@CatalogResources.Training_IsItATrainingThat *">
-                    @foreach (var attendanceType in Enumeration.GetAll<AttendanceType>())
+                    @foreach (var attendanceType in AttendanceType.List)
                     {
                         <smart-checkbox asp-for="CreateTrainingViewModel.AttendanceTypeIds" value="@attendanceType.Id" label="@_localizer["Training_" + attendanceType.Name]" checked="@(attendanceType.IsContainedIn(Model.CreateTrainingViewModel.AttendanceTypeIds))"></smart-checkbox>
                     }
