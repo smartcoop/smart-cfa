@@ -12,6 +12,6 @@ public class SuperUserConfiguration : IEntityTypeConfiguration<SuperUser>
 
         builder.HasKey(superUser => superUser.TrainerId);
 
-        builder.Property(superUser => superUser.TrainerId).HasMaxLength(50);
+        builder.Property(superUser => superUser.TrainerId);
     }
 }
