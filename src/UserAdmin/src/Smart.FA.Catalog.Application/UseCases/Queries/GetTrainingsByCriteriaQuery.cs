@@ -83,6 +83,8 @@ public class GetTrainingsByCriteriaQueryHandler : IRequestHandler<GetTrainingsBy
     }
 }
 
+//TODO this has to either be removed to use or moved at a central place for re-usablity
+// There is wip right now that will produce an overlap regarding paginated lists.
 public class PaginatedList<T> : List<T>
 {
     public int PageIndex { get; }
