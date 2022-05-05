@@ -2,7 +2,6 @@ using Smart.FA.Catalog.Application.UseCases.Commands;
 using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Domain.Dto;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
-using Smart.FA.Catalog.Shared.Domain.Enumerations;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.Update;
@@ -10,14 +9,24 @@ namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.Update;
 public class UpdateTrainingViewModel
 {
     public string? Title { get; init; }
+
     public List<int>? AttendanceTypeIds { get; init; }
+
     public List<int>? VatExemptionClaimIds { get; init; }
+
     public List<int>? TargetAudienceTypeIds { get; init; }
+
     public List<int>? TopicIds { get; init; }
+
     public string? Goal { get; init; }
+
     public string? Methodology { get; init; }
+
     public bool IsDraft { get; set; }
+
     public string? PracticalModalities { get; set; }
+
+    public bool IsGivenBySmart { get; set; }
 }
 
 public static class EditTrainingViewModelMapping
@@ -39,7 +48,8 @@ public static class EditTrainingViewModelMapping
             , TargetAudienceTypes = TargetAudienceType.FromValues(model.TargetAudienceTypeIds ?? new())
             , AttendanceTypes = AttendanceType.FromValues(model.AttendanceTypeIds ?? new())
             , Topics = Topic.FromValues(model.TopicIds ?? new())
-            , TrainerIds = new List<int>{trainerId},
+            , TrainerIds = new List<int>{trainerId}
+            , IsGivenBySmart = model.IsGivenBySmart
         };
 
 
@@ -55,7 +65,8 @@ public static class EditTrainingViewModelMapping
             TargetAudienceTypeIds = model.Training.Targets.Select(target => target.TargetAudienceType.Id).ToList(),
             VatExemptionClaimIds = model.Training.VatExemptionClaims.Select(vatExemptionClaim => vatExemptionClaim.VatExemptionType.Id).ToList(),
             AttendanceTypeIds = model.Training.Attendances.Select(attendance => attendance.AttendanceType.Id).ToList(),
-            TopicIds = model.Training.Topics.Select(topic => topic.TopicId).ToList()
+            TopicIds = model.Training.Topics.Select(topic => topic.TopicId).ToList(),
+            IsGivenBySmart = model.Training.IsGivenBySmart
         };
 
         return response;
@@ -72,7 +83,8 @@ public static class EditTrainingViewModelMapping
             PracticalModalities = detail?.PracticalModalities,
             TargetAudienceTypeIds = model.Training.Targets.Select(target => target.TargetAudienceType.Id).ToList(),
             VatExemptionClaimIds = model.Training.VatExemptionClaims.Select(vatExemptionClaim => vatExemptionClaim.VatExemptionType.Id).ToList(),
-            AttendanceTypeIds = model.Training.Attendances.Select(attendance => attendance.AttendanceType.Id).ToList()
+            AttendanceTypeIds = model.Training.Attendances.Select(attendance => attendance.AttendanceType.Id).ToList(),
+            IsGivenBySmart = model.Training.IsGivenBySmart
         };
 
         return response;

@@ -17,6 +17,8 @@ builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
+app.UseStatusCodePagesWithReExecute("/{0}");
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
