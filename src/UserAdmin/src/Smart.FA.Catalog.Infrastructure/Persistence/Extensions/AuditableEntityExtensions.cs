@@ -15,11 +15,11 @@ public static class EntryEntityAuditableDateUpdate
     {
         foreach (var entityEntry in entityEntries)
         {
-            entityEntry.UpdateEntityAuditableData(userId);
+            entityEntry.UpdateAuditableEntityData(userId);
         }
     }
 
-    private static void UpdateEntityAuditableData(this EntityEntry<Entity> entityEntry, int userId)
+    private static void UpdateAuditableEntityData(this EntityEntry<Entity> entityEntry, int userId)
     {
         if (entityEntry.State == EntityState.Added)
         {
