@@ -1,19 +1,24 @@
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Domain.Models;
+using Smart.FA.Catalog.Core.Services;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.Update;
 
 public class UpdateModel : AdminPage
 {
     private int TrainingId { get; set; }
+
     public List<string> ValidationErrors { get; private set; } = new();
+
+    public IUserIdentity UserIdentity { get; }
+
     [BindProperty] public UpdateTrainingViewModel UpdateTrainingViewModel { get; set; } = null!;
 
-    public UpdateModel(IMediator mediator) : base(mediator)
+    public UpdateModel(IMediator mediator, IUserIdentity userIdentity) : base(mediator)
     {
+        UserIdentity = userIdentity;
     }
 
     private void Init()
@@ -41,16 +46,15 @@ public class UpdateModel : AdminPage
 
     public async Task<IActionResult> OnPostUpdateAsync(int id)
     {
-        var user = (HttpContext.User.Identity as CustomIdentity)!;
         if (!ModelState.IsValid)
         {
             Init();
             return Page();
         }
 
-        var request = UpdateTrainingViewModel.MapToUpdateRequest(user.Trainer.DefaultLanguage.Value, id, user.Trainer.Id);
+        var request = UpdateTrainingViewModel.MapToUpdateRequest(UserIdentity.Identity.Trainer.DefaultLanguage.Value, id, UserIdentity.Identity.Trainer.Id);
         var response = await Mediator.Send(request);
-        UpdateTrainingViewModel = response.MapUpdateToResponse(user.Trainer.DefaultLanguage);
+        UpdateTrainingViewModel = response.MapUpdateToResponse(UserIdentity.Identity.Trainer.DefaultLanguage);
 
         return RedirectToPage("/Admin/Trainings/List/Index");
     }

@@ -313,6 +313,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to La formation est-elle fournie par Smart ?.
+        /// </summary>
+        public static string IsTrainingGivenBySmart {
+            get {
+                return ResourceManager.GetString("IsTrainingGivenBySmart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cours de langue.
         /// </summary>
         public static string LanguageCourse {
@@ -493,7 +502,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Précédant.
+        ///   Looks up a localized string similar to Précédent.
         /// </summary>
         public static string Previous {
             get {
@@ -655,6 +664,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Seul un super-utilisateur est autorisé à marquer une formation comme étant dispensée par Smart .
+        /// </summary>
+        public static string SuperUserPermissionToSetSmartTrainingType {
+            get {
+                return ResourceManager.GetString("SuperUserPermissionToSetSmartTrainingType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to La formation.
         /// </summary>
         public static string TheTraining {
@@ -754,7 +772,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Autre.
         /// </summary>
         public static string Training_IsOther {
             get {

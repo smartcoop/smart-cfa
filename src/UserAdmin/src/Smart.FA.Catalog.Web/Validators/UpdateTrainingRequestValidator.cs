@@ -1,5 +1,6 @@
 using FluentValidation;
 using Microsoft.Extensions.Localization;
+using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Web.Pages.Admin.Trainings.Update;
 
 namespace Smart.FA.Catalog.Web.Validators;
@@ -9,8 +10,11 @@ namespace Smart.FA.Catalog.Web.Validators;
 /// </summary>
 public class UpdateTrainingViewModelValidator : AbstractValidator<UpdateTrainingViewModel>
 {
-    public UpdateTrainingViewModelValidator(IStringLocalizer<CatalogResources> localizer)
+    private readonly IUserIdentity _userIdentity;
+
+    public UpdateTrainingViewModelValidator(IStringLocalizer<CatalogResources> localizer, IUserIdentity userIdentity)
     {
+        _userIdentity = userIdentity;
         RuleFor(viewModel => viewModel.Title)
             .NotEmpty()
             .WithMessage(CatalogResources.TrainingTitleIsRequired);
@@ -26,6 +30,11 @@ public class UpdateTrainingViewModelValidator : AbstractValidator<UpdateTraining
         RuleFor(viewModel => viewModel.PracticalModalities)
             .MaximumLength(1000)
             .WithMessage(CatalogResources.Max1000Characters);
+
+        RuleFor(viewModel => viewModel.IsGivenBySmart)
+            .Must(BeSuperUser)
+            .When(IsMarkedAsGivenBySmart)
+            .WithMessage(CatalogResources.SuperUserPermissionToSetSmartTrainingType);
 
         // When we register a draft we are very permissive.
         // Only the title is required.
@@ -74,4 +83,8 @@ public class UpdateTrainingViewModelValidator : AbstractValidator<UpdateTraining
     {
         return !viewModel.IsDraft;
     }
+
+    private bool BeSuperUser(bool _) => _userIdentity.IsSuperUser;
+
+    private bool IsMarkedAsGivenBySmart(UpdateTrainingViewModel viewModel) => viewModel.IsGivenBySmart;
 }

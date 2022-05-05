@@ -39,6 +39,7 @@ internal class TrainingConfiguration : EntityConfigurationBase<Training>
             status => Enumeration.FromValue<TrainingStatusType>(status))
             .HasColumnName("TrainingStatusTypeId")
             .HasDefaultValue(TrainingStatusType.Draft);
+        builder.Property(training => training.IsGivenBySmart);
 
         builder.ToTable("Training");
     }
