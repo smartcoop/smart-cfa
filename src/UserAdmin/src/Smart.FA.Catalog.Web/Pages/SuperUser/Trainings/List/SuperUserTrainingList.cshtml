@@ -107,7 +107,7 @@
             <div class="c-toolbar__right">
                 @if (Model.Trainings.HasNextPage)
                 {
-                    <a id="next" href="@Routes.SuperUserTrainingList?@Model.SerializeHtmlForm()&@(nameof(Model.GetTrainingsRequest.PageNumber))=@(Model.GetTrainingsRequest!.PageNumber + 1)">
+                    <a id="next" href="@Routes.SuperUserTrainingList?@Model.SerializeHtmlForm()&@(nameof(Model.GetTrainingsRequest.PageNumber))=@(Model.GetTrainingsRequest.PageNumber + 1)">
                         <div class="o-flex">
                             @CatalogResources.Next <smart-icon icon="ChevronRight"></smart-icon>
                         </div>
