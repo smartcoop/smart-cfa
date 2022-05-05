@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
-using Smart.FA.Catalog.AccountSimulation.Options;
+using Smart.FA.Catalog.AccountSimulator.Options;
 
-namespace Smart.FA.Catalog.AccountSimulation.Pages;
+namespace Smart.FA.Catalog.AccountSimulator.Pages;
 
 public class IndexModel : PageModel
 {

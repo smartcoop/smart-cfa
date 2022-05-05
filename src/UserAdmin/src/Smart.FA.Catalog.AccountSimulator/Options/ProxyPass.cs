@@ -1,4 +1,4 @@
-namespace Smart.FA.Catalog.AccountSimulation.Options;
+namespace Smart.FA.Catalog.AccountSimulator.Options;
 
 public class ProxyPass
 {

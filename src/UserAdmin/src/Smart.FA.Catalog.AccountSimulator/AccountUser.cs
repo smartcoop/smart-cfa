@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Smart.FA.Catalog.AccountSimulation;
+namespace Smart.FA.Catalog.AccountSimulator;
 
 public static class AccountUsers
 {
-    public static List<SelectListItem> List => new()
+    public static List<SelectListItem> SelectListItems => new()
     {
 
         new SelectListItem {Value = "1", Text = "Victor"},

@@ -1,10 +1,6 @@
-using System.Globalization;
-using System.Security.Principal;
 using Microsoft.AspNetCore.Http.Extensions;
-using Microsoft.Extensions.Primitives;
-using Smart.FA.Catalog.AccountSimulation.Pages;
 
-namespace Smart.FA.Catalog.AccountSimulation;
+namespace Smart.FA.Catalog.AccountSimulator;
 
 public class ProxyHeaderMiddleware
 {

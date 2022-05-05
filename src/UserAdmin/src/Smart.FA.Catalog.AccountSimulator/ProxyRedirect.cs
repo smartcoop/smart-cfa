@@ -1,4 +1,4 @@
-namespace Smart.FA.Catalog.AccountSimulation;
+namespace Smart.FA.Catalog.AccountSimulator;
 
 public static class ProxyExtensions
 {

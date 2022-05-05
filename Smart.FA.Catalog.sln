@@ -23,12 +23,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D485BE00-A082-47D7-827D-0FD646807006}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reverse-Proxy", "Reverse-Proxy", "{4962514A-455F-4866-ACD4-51A26609E064}"
-	ProjectSection(SolutionItems) = preProject
-		src\Reverse-Proxy\nginx.conf = src\Reverse-Proxy\nginx.conf
-		src\Reverse-Proxy\Nginx.Dockerfile = src\Reverse-Proxy\Nginx.Dockerfile
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserAdmin", "UserAdmin", "{6569875B-B7BA-47DC-8A69-57604FBBFF3B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShowCase", "ShowCase", "{B5CA3163-3FD1-41C4-AD61-62A793C16960}"
@@ -73,7 +67,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nginx", "Nginx", "{7F26E40B
 		docker-compose-nginx.yml = docker-compose-nginx.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.FA.Catalog.AccountSimulation", "src\UserAdmin\src\Smart.FA.Catalog.AccountSimulation\Smart.FA.Catalog.AccountSimulation.csproj", "{A4A24049-500B-4601-8242-29E23FF86C4B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.FA.Catalog.AccountSimulator", "src\UserAdmin\src\Smart.FA.Catalog.AccountSimulator\Smart.FA.Catalog.AccountSimulator.csproj", "{A4A24049-500B-4601-8242-29E23FF86C4B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -144,7 +138,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{98D46582-2F64-45BD-A516-E259EE3A78DA} = {6569875B-B7BA-47DC-8A69-57604FBBFF3B}
 		{D485BE00-A082-47D7-827D-0FD646807006} = {6569875B-B7BA-47DC-8A69-57604FBBFF3B}
-		{4962514A-455F-4866-ACD4-51A26609E064} = {98D46582-2F64-45BD-A516-E259EE3A78DA}
 		{5FB74010-24CB-47D8-8665-CD813A22499B} = {B5CA3163-3FD1-41C4-AD61-62A793C16960}
 		{AA37D759-F348-4337-92CB-6515A1049B20} = {B5CA3163-3FD1-41C4-AD61-62A793C16960}
 		{3E6BEC3A-03F2-45E8-B0A8-6AA295C4160B} = {98D46582-2F64-45BD-A516-E259EE3A78DA}

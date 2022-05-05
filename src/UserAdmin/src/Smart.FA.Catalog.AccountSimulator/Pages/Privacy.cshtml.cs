@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Smart.FA.Catalog.AccountSimulation.Pages;
+namespace Smart.FA.Catalog.AccountSimulator.Pages;
 
 public class PrivacyModel : PageModel
 {

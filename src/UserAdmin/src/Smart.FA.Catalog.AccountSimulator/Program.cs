@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.HttpLogging;
 using Smart.Design.Razor.Extensions;
-using Smart.FA.Catalog.AccountSimulation;
-using Smart.FA.Catalog.AccountSimulation.Options;
+using Smart.FA.Catalog.AccountSimulator;
+using Smart.FA.Catalog.AccountSimulator.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.ConfigureLogging(logBuilder =>
