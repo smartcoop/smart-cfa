@@ -94,7 +94,7 @@
             <div class="c-toolbar__left">
                 @if (Model.Trainings.HasPreviousPage)
                 {
-                    <a id="previous" href="@Routes.SuperUserTrainingList?@Model.SerializeHtmlForm()&@(nameof(Model.GetTrainingsRequest.PageNumber))=@(Model.GetTrainingsRequest!.PageNumber - 1)">
+                    <a id="previous" href="@Routes.SuperUserTrainingList?@Model.SerializeHtmlForm()&@(nameof(Model.GetTrainingsRequest.PageNumber))=@(Model.GetTrainingsRequest.PageNumber - 1)">
                         <div class="o-flex">
                             <smart-icon icon="ChevronLeft"></smart-icon>@CatalogResources.Previous
                         </div>
