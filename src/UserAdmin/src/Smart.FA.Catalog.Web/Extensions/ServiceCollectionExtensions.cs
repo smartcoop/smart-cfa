@@ -11,7 +11,7 @@ namespace Smart.FA.Catalog.Web.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddCatalogDependencies(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddWebDependencies(this IServiceCollection services, IConfiguration configuration)
     {
         return services
             .AddScoped<IUserIdentity, UserIdentity>()

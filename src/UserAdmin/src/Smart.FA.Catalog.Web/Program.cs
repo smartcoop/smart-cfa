@@ -22,7 +22,7 @@ builder.Services
 builder.Services
     .AddApplication();
 builder.Services
-    .AddCatalogDependencies(builder.Configuration);
+    .AddWebDependencies(builder.Configuration);
 builder.Services
     .AddSmartDesign();
 builder.Services
