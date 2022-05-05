@@ -51,7 +51,6 @@ else
     </div>
 
     <div class="u-spacer-xl right">
-
         <div class="c-toolbar">
             <div class="c-toolbar__left">
                 @if (Model?.Trainings?.HasPreviousPage ?? false)
@@ -68,38 +67,38 @@ else
                 }
             </div>
         </div>
+    </div>
 
-        <div id="delete-training-dialog-confirmation" class="c-dialog-context o-flex--center">
-            <div class="c-dialog c-dialog--small" role="dialog">
-                <div class="c-dialog__push"></div>
-                <div class="c-dialog__body">
-                    <div class="c-dialog__content">
-                        <h3 class="c-h3">@CatalogResources.YouAreAboutToDeleteTraining</h3>
-                    </div>
+    <div id="delete-training-dialog-confirmation" class="c-dialog-context o-flex--center">
+        <div class="c-dialog c-dialog--small" role="dialog">
+            <div class="c-dialog__push"></div>
+            <div class="c-dialog__body">
+                <div class="c-dialog__content">
+                    <h3 class="c-h3">@CatalogResources.YouAreAboutToDeleteTraining</h3>
                 </div>
-                <div class="c-dialog__footer">
-                    <div class="c-toolbar c-toolbar--spaced">
-                        <div class="c-toolbar__right">
-                            <div class="c-toolbar__item">
-                                <div class="c-button-toolbar">
-                                    <button class="c-button c-button--secondary" data-dialog-close="data-dialog-close">
-                                        <div class="c-button__content">
-                                            <div class="c-button__label">@CatalogResources.Cancel</div>
-                                        </div>
-                                    </button>
-                                    <button id="delete-training-button" class="c-button c-button--primary" data-dialog-close="data-dialog-close" onclick="deleteTraining(this)">
-                                        <div class="c-button__content">
-                                            <smart-icon icon="Delete"></smart-icon>
-                                            <div class="c-button__label">@CatalogResources.Delete</div>
-                                        </div>
-                                    </button>
-                                </div>
+            </div>
+            <div class="c-dialog__footer">
+                <div class="c-toolbar c-toolbar--spaced">
+                    <div class="c-toolbar__right">
+                        <div class="c-toolbar__item">
+                            <div class="c-button-toolbar">
+                                <button class="c-button c-button--secondary" data-dialog-close="data-dialog-close">
+                                    <div class="c-button__content">
+                                        <div class="c-button__label">@CatalogResources.Cancel</div>
+                                    </div>
+                                </button>
+                                <button id="delete-training-button" class="c-button c-button--primary" data-dialog-close="data-dialog-close" onclick="deleteTraining(this)">
+                                    <div class="c-button__content">
+                                        <smart-icon icon="Delete"></smart-icon>
+                                        <div class="c-button__label">@CatalogResources.Delete</div>
+                                    </div>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="c-dialog__push"></div>
             </div>
+            <div class="c-dialog__push"></div>
         </div>
     </div>
 
