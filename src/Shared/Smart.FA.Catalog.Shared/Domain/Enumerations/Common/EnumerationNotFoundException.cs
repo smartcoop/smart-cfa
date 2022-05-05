@@ -46,5 +46,4 @@ public class EnumerationNotFoundException : Exception
         : base(message, innerException)
     {
     }
-
 }

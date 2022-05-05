@@ -8,7 +8,7 @@ internal static class TypeExtensions
     {
         return type.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)
             .Where(p => type.IsAssignableFrom(p.FieldType))
-            .Select(pi => (TFieldType) pi.GetValue(null)!)
+            .Select(pi => (TFieldType)pi.GetValue(null)!)
             .ToList();
     }
 }

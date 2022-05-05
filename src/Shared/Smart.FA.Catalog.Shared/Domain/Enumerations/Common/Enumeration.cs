@@ -141,6 +141,7 @@ public abstract class Enumeration<TEnum, TValue> :
             {
                 throw new EnumerationNotFoundException($"No {typeof(TEnum).Name} with Name \"{name}\" found.");
             }
+
             return result!;
         }
     }
@@ -185,9 +186,13 @@ public abstract class Enumeration<TEnum, TValue> :
         }
 
         if (ignoreCase)
+        {
             return _fromNameIgnoreCase.Value.TryGetValue(name, out result);
+        }
         else
+        {
             return _fromName.Value.TryGetValue(name, out result);
+        }
     }
 
     /// <summary>
@@ -210,6 +215,7 @@ public abstract class Enumeration<TEnum, TValue> :
         {
             throw new EnumerationNotFoundException($"No {typeof(TEnum).Name} with Value {value} found.");
         }
+
         return result;
     }
 
@@ -287,7 +293,9 @@ public abstract class Enumeration<TEnum, TValue> :
     {
         // check if same instance
         if (ReferenceEquals(this, other))
+        {
             return true;
+        }
 
         // it's not same instance so
         // check if it's not null and is same value
