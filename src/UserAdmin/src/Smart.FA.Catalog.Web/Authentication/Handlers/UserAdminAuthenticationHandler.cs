@@ -61,8 +61,8 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
 
     private async Task<GetTrainerFromUserAppResponse> GetTrainerBySmartUserIdAndApplicationTypeAsync(HttpContext context)
     {
-        var userId = (string.IsNullOrEmpty(context.Request.Headers["user_id"].ToString()) ? "1" : context.Request.Headers["user_id"].ToString())!;
-        var appName = string.IsNullOrEmpty(context.Request.Headers["app_name"].ToString()) ? ApplicationType.Account.Name : context.Request.Headers["app_name"].ToString();
+        var userId = (string.IsNullOrEmpty(context.Request.Headers["userid"].ToString()) ? "1" : context.Request.Headers["userid"].ToString())!;
+        var appName = string.IsNullOrEmpty(context.Request.Headers["smartApplication"].ToString()) ? ApplicationType.Account.Name : context.Request.Headers["smartApplication"].ToString();
         var applicationType = Enumeration.FromDisplayName<ApplicationType>(appName);
 
         var response = await _mediator.Send(new GetTrainerFromUserAppRequest { UserId = userId, ApplicationType = applicationType });
