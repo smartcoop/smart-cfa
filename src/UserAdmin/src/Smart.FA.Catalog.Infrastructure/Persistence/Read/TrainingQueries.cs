@@ -68,18 +68,22 @@ public class TrainingQueries : ITrainingQueries
         CancellationToken cancellationToken)
     {
         var sql = @"SELECT
-	                    T.Id 'TrainingId',
-	                    T.TrainingStatusTypeId,
-	                    TD.Title,
-	                    TD.Goal,
-                        TD.Language,
+                        TA.Id 'TrainingId',
+                        TA.TrainingStatusTypeId,
+                        TA.Title,
+                        TA.Goal,
+                        TA.Language,
                         TC.TopicId
-                    FROM (SELECT * FROM Cfa.Training T ORDER BY T.Id
-                    OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY) T
-                    INNER JOIN Cfa.TrainerAssignment TE ON T.Id = TE.TrainingId
-                    LEFT JOIN Cfa.TrainingTopic TC ON T.Id = TC.TrainingId
-                    INNER JOIN Cfa.TrainingLocalizedDetails TD ON T.Id = TD.TrainingId
-                    WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language";
+                        FROM (SELECT * FROM (SELECT T.Id, T.TrainingStatusTypeId,TD.Title,TD.Goal,TD.Language FROM Cfa.Training T
+                        INNER JOIN Cfa.TrainerAssignment TE ON T.Id = TE.TrainingId
+                        INNER JOIN Cfa.TrainingLocalizedDetails TD ON T.Id = TD.TrainingId
+                        WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language
+                        ) TA
+                        ORDER BY TA.Id
+                        OFFSET  @Offset ROWS FETCH NEXT @PageSize ROWS ONLY
+                        ) TA
+                        LEFT JOIN Cfa.TrainingTopic TC ON TA.Id = TC.TrainingId
+                   ";
 
         var countsql = @"SELECT
 	                        COUNT(*)
