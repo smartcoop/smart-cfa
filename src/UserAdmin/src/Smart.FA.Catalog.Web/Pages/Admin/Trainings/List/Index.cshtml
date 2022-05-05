@@ -43,7 +43,7 @@
 }
 else
 {
-    <div class="o-card-grid small-up-1 u-spacer-xl">
+    <div class="o-card-grid small-up-1 u-spacer-xl right">
         @foreach (var training in Model.Trainings!)
         {
             @await Component.InvokeAsync("AdminTrainingTile", new { model = training })
@@ -102,18 +102,18 @@ else
         </div>
     </div>
 
-@section Scripts
-{
-    <script>
-            // Submits the form surrounding the delete button of a training.
-            function deleteTraining(elem) {
-                document.getElementById('delete-training-form-' + elem.dataset.trainingid).submit();
-            }
+    @section Scripts
+    {
+        <script>
+                // Submits the form surrounding the delete button of a training.
+                function deleteTraining(elem) {
+                    document.getElementById('delete-training-form-' + elem.dataset.trainingid).submit();
+                }
 
-            // Used in the AdminTrainingTile HTML.
-            function setTrainingId(trainingId) {
-                document.getElementById('delete-training-button').dataset.trainingid = trainingId;
-            }
-        </script>
-}
+                // Used in the AdminTrainingTile HTML.
+                function setTrainingId(trainingId) {
+                    document.getElementById('delete-training-button').dataset.trainingid = trainingId;
+                }
+            </script>
+    }
 }
