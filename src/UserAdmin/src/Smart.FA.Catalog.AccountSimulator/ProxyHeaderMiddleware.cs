@@ -14,11 +14,12 @@ public class ProxyHeaderMiddleware
     public async Task InvokeAsync(HttpContext context)
     {
         var request = context.Request.GetEncodedUrl();
-        if (context.Request.Cookies.TryGetValue("user-id", out var userId))
+        if (context.Request.Cookies.TryGetValue("userid", out var userId))
         {
             var urlPathList = context.Request.Path.ToString().Split("cfa");
             var urlPath = urlPathList.Length > 1 ? urlPathList[1] : urlPathList[0];
             var cfaPath = string.IsNullOrEmpty(urlPath) ? "/" : urlPath;
+            cfaPath += context.Request.QueryString.Value;
             context.ProxyRedirect(cfaPath, userId);
         }
 
