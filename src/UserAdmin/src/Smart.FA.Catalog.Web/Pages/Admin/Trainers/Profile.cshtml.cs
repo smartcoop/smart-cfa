@@ -52,7 +52,7 @@ public class ProfileModel : AdminPage
             var editionResponse = await Mediator.Send(EditProfileCommand);
             if (EditProfileCommand.ProfilePicture is not null)
             {
-                var imageUploadRequest = new UploadImageToStorageCommandRequest {Trainer = UserIdentity.CurrentTrainer, ProfilePicture = EditProfileCommand.ProfilePicture};
+                var imageUploadRequest = new UploadImageToStorageCommandRequest { Trainer = UserIdentity.CurrentTrainer, ProfilePicture = EditProfileCommand.ProfilePicture };
                 var profileResult      = await Mediator.Send(imageUploadRequest);
                 ProfilePicture = profileResult.ProfilePictureStream;
             }
@@ -89,13 +89,13 @@ public class ProfileModel : AdminPage
         // The request gives us a collection of the following key par values for social networks.:
         // "social-" + [SocialId] + [url value of the profile]
         EditProfileCommand.Socials = Request.Form
-            .Where(formElement => formElement.Key.StartsWith("social-", StringComparison.OrdinalIgnoreCase))
-            .ToDictionary(key => key.Key.Split("-")[1], value => value.Value.ToString());
+                                            .Where(formElement => formElement.Key.StartsWith("social-", StringComparison.OrdinalIgnoreCase))
+                                            .ToDictionary(key => key.Key.Split("-")[1], value => value.Value.ToString());
     }
 
     public async Task<FileResult?> OnGetLoadImageAsync()
     {
-        var profilePicture = await Mediator.Send(new GetTrainerProfileImageRequest {Trainer = UserIdentity.CurrentTrainer});
+        var profilePicture = await Mediator.Send(new GetTrainerProfileImageRequest { Trainer = UserIdentity.CurrentTrainer });
         var response       = profilePicture.ImageStream is null ? null : new FileStreamResult(profilePicture.ImageStream, "image/jpeg");
         return response;
     }
@@ -104,7 +104,7 @@ public class ProfileModel : AdminPage
     {
         if (EditProfileCommand?.ProfilePicture is not null)
         {
-            await Mediator.Send(new DeleteTrainerProfileImageRequest {Trainer = UserIdentity.CurrentTrainer});
+            await Mediator.Send(new DeleteTrainerProfileImageRequest { Trainer = UserIdentity.CurrentTrainer });
         }
 
         await LoadDataAsync();
