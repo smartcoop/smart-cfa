@@ -1,11 +1,11 @@
-using Smart.FA.Catalog.Localization;
+using Smart.FA.Catalog.Shared.Domain.Enumerations.Common;
 
 namespace Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer;
 
 /// <summary>
 /// Enumerates the list of Social Networks supported by the system.
 /// </summary>
-public class SocialNetwork : Enumeration
+public class SocialNetwork : Enumeration<SocialNetwork>
 {
     public static readonly SocialNetwork Twitter         = new(1, nameof(Twitter));
 

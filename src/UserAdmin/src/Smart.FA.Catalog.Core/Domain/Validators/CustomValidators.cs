@@ -3,6 +3,7 @@ using FluentValidation;
 using Smart.FA.Catalog.Core.Exceptions;
 using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Shared.Domain.Enumerations;
+using Smart.FA.Catalog.Shared.Domain.Enumerations.Common;
 using Entity = CSharpFunctionalExtensions.Entity;
 using ValueObject = CSharpFunctionalExtensions.ValueObject;
 
@@ -58,7 +59,7 @@ public static class CustomValidators
         public static IRuleBuilderOptions<T, int> MustBeEnumeration<T, TEnumerationObject>(
             this IRuleBuilder<T, int> ruleBuilder,
             Func<int, TEnumerationObject> factoryMethod)
-            where TEnumerationObject : Enumeration
+            where TEnumerationObject : IEnumeration
         {
             return (IRuleBuilderOptions<T, int>)ruleBuilder.Custom((value, context) =>
             {

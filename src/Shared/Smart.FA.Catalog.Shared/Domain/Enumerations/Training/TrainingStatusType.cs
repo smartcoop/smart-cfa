@@ -1,6 +1,8 @@
+using Smart.FA.Catalog.Shared.Domain.Enumerations.Common;
+
 namespace Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
-public class TrainingStatusType : Enumeration
+public class TrainingStatusType : Enumeration<TrainingStatusType>
 {
     public static readonly TrainingStatusType Draft = new(1, "Draft");
     public static readonly TrainingStatusType WaitingForValidation = new(2, "PendingValidation");

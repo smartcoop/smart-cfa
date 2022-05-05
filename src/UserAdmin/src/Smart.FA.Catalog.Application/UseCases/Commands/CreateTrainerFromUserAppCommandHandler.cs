@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.Extensions.Logging;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Core.Domain;
@@ -44,7 +44,7 @@ public class
             , TrainerIdentity.Create
             (
                 command.User.UserId
-                , Enumeration.FromDisplayName<ApplicationType>(command.User.ApplicationType)
+                , ApplicationType.FromName(command.User.ApplicationType)
             ).Value
             , string.Empty
             , string.Empty

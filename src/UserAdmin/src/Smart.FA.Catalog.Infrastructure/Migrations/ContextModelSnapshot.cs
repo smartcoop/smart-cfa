@@ -160,10 +160,11 @@ namespace Infrastructure.Migrations
                     b.Property<int>("TrainingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("AttendanceTypeId")
-                        .HasColumnType("int");
+                    b.Property<int>("AttendanceType")
+                        .HasColumnType("int")
+                        .HasColumnName("AttendanceTypeId");
 
-                    b.HasKey("TrainingId", "AttendanceTypeId");
+                    b.HasKey("TrainingId", "AttendanceType");
 
                     b.ToTable("TrainingAttendance", "Cfa");
                 });
@@ -204,10 +205,11 @@ namespace Infrastructure.Migrations
                     b.Property<int>("TrainingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TargetAudienceTypeId")
-                        .HasColumnType("int");
+                    b.Property<int>("TargetAudienceType")
+                        .HasColumnType("int")
+                        .HasColumnName("TargetAudienceTypeId");
 
-                    b.HasKey("TrainingId", "TargetAudienceTypeId");
+                    b.HasKey("TrainingId", "TargetAudienceType");
 
                     b.ToTable("TrainingTargetAudience", "Cfa");
                 });
@@ -264,10 +266,11 @@ namespace Infrastructure.Migrations
                     b.Property<int>("TrainingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("VatExemptionTypeId")
-                        .HasColumnType("int");
+                    b.Property<int>("VatExemptionType")
+                        .HasColumnType("int")
+                        .HasColumnName("VatExemptionTypeId");
 
-                    b.HasKey("TrainingId", "VatExemptionTypeId");
+                    b.HasKey("TrainingId", "VatExemptionType");
 
                     b.ToTable("VatExemptionClaim", "Cfa");
                 });
@@ -437,11 +440,6 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = 8,
-                            Name = "EconomyMarketing"
-                        },
-                        new
-                        {
                             Id = 6,
                             Name = "Communication"
                         },
@@ -449,6 +447,11 @@ namespace Infrastructure.Migrations
                         {
                             Id = 7,
                             Name = "Culture"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "EconomyMarketing"
                         },
                         new
                         {
