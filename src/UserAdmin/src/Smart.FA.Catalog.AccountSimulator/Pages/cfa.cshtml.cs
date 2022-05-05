@@ -4,9 +4,9 @@ namespace Smart.FA.Catalog.AccountSimulator.Pages;
 
 public class cfa : PageModel
 {
-    public void OnGet(int? id)
+    public void OnGet(string? id)
     {
-        Response.Cookies.Append("user-id", id.ToString());
-        HttpContext.ProxyRedirect("/", id.ToString());
+        Response.Cookies.Append("userid", id);
+        HttpContext.ProxyRedirect("/", id);
     }
 }

@@ -1,7 +1,5 @@
-using Microsoft.AspNetCore.HttpLogging;
 using Smart.Design.Razor.Extensions;
 using Smart.FA.Catalog.AccountSimulator;
-using Smart.FA.Catalog.AccountSimulator.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.ConfigureLogging(logBuilder =>
@@ -17,8 +15,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddSmartDesign();
 builder.Services.AddDataProtection();
 
-builder.Services.Configure<ProxyPass>(builder.Configuration.GetSection("ProxyPass"));
-    var app = builder.Build();
+var app = builder.Build();
 
 app.UseProxyHeaders();
 
