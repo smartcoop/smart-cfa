@@ -36,6 +36,6 @@ public class DesignTimeContextFactory : IDesignTimeDbContextFactory<CatalogConte
         optionsBuilder.UseSqlServer(connectionString);
         Console.WriteLine($"\nDesignTimeContextFactory.Create(string):\n\tConnection string: {connectionString}\n");
         var options = optionsBuilder.Options;
-        return new CatalogContext(options, default);
+        return new CatalogContext(options, default, default);
     }
 }

@@ -3,7 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.Authorization;
 using Smart.FA.Catalog.Core.SeedWork;
+using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Infrastructure.Extensions;
+using Smart.FA.Catalog.Infrastructure.Persistence.Extensions;
 using Smart.FA.Catalog.Shared.Domain.Enumerations;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Common;
 
@@ -12,10 +14,12 @@ namespace Smart.FA.Catalog.Infrastructure.Persistence;
 public class CatalogContext : DbContext
 {
     private readonly IDomainEventPublisher _eventPublisher;
+    private readonly IUserIdentity _userIdentity;
 
-    public CatalogContext(DbContextOptions<CatalogContext> contextOptions, IDomainEventPublisher eventPublisher) : base(contextOptions)
+    public CatalogContext(DbContextOptions<CatalogContext> contextOptions, IDomainEventPublisher eventPublisher, IUserIdentity userIdentity) : base(contextOptions)
     {
         _eventPublisher = eventPublisher;
+        _userIdentity = userIdentity;
     }
 
     public DbSet<TrainerAssignment> TrainerAssignments { get; set; } = null!;
@@ -42,36 +46,28 @@ public class CatalogContext : DbContext
 
     public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
     {
-        AddDateTimeToEntities();
-        RemoveEnumerationsFromTracker();
+        UpdateAuditableEntitiesData();
+        DetachEnumerations();
         var numberOfEntitiesWritten = await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         await PublishEntityDomainEventsAsync();
         return numberOfEntitiesWritten;
     }
 
-    private void RemoveEnumerationsFromTracker()
+    private void DetachEnumerations()
     {
         ChangeTracker
             .Entries<IEnumeration>()
             .ToList()
-            .ForEach(ee => ee.State = EntityState.Detached);
+            .ForEach(enumEntry => enumEntry.State = EntityState.Detached);
     }
 
-    private void AddDateTimeToEntities()
+    private void UpdateAuditableEntitiesData()
     {
         var entries = ChangeTracker
             .Entries<Entity>()
             .Where(entry => entry.State is EntityState.Added or EntityState.Modified);
 
-        foreach (var entityEntry in entries)
-        {
-            entityEntry.Entity.LastModifiedAt = DateTime.UtcNow;
-
-            if (entityEntry.State == EntityState.Added)
-            {
-                entityEntry.Entity.CreatedAt = DateTime.UtcNow;
-            }
-        }
+        entries.UpdateAuditableEntitiesData(_userIdentity.Id);
     }
 
     private Task PublishEntityDomainEventsAsync()

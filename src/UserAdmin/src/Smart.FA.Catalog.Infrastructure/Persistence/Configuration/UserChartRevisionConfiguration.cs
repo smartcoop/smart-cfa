@@ -19,7 +19,6 @@ public class UserChartConfiguration: EntityConfigurationBase<UserChartRevision>
             .WithOne(approval => approval.UserChartRevision)
             .HasForeignKey(approval => approval.UserChartId);
 
-        builder.ToTable("UserChartRevision");
-
+        builder.ToTable("UserChartRevision", "Cfa");
     }
 }

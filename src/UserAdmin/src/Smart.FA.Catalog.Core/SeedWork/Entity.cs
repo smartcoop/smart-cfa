@@ -13,9 +13,17 @@ public abstract class Entity
     #region Properties
 
     public virtual int Id { get; set; }
+
     public virtual bool IsTransient => Id == default;
+
     public DateTime CreatedAt { get; set; }
+
     public DateTime LastModifiedAt { get; set; }
+
+    public int CreatedBy { get; set; }
+
+    public int LastModifiedBy { get; set; }
+
     public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
     #endregion
