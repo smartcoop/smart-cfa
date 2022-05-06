@@ -129,7 +129,7 @@
 </smart-spacer>
 @section Scripts {
     <script>
-        var expand = @(Model!.GetTrainingsRequest?.Topics?.Any() == true ? "true" : "false");
+        var expand = @(Model.GetTrainingsRequest.Topics?.Any() == true ? "true" : "false");
         if (expand) {
             var article = document.getElementById("topics");
             article.style.maxHeight = article.scrollHeight + 'px';
