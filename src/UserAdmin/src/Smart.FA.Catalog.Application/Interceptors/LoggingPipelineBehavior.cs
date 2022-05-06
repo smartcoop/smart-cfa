@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Smart.FA.Catalog.Application.Models.Options;
 using Smart.FA.Catalog.Application.SeedWork;
+using Smart.FA.Catalog.Application.SeedWork.Json.Converters;
 using Smart.FA.Catalog.Core.Exceptions;
 using Smart.FA.Catalog.Core.Extensions;
 using Smart.FA.Catalog.Core.LogEvents;
@@ -65,8 +66,16 @@ public class LoggingPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TR
         // Ses https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-preserve-references?pivots=dotnet-6-0.
         var jsonSerializerOptions = new JsonSerializerOptions()
         {
-            WriteIndented = true,
-            ReferenceHandler = ReferenceHandler.Preserve
+            WriteIndented    = true,
+            ReferenceHandler = ReferenceHandler.Preserve,
+            Converters =
+            {
+                new TrainerJsonConverter(),
+                new TrainingJsonConverter(),
+                new UserChartRevisionJsonConverter(),
+                new SuperUserJsonConverter(),
+                new TrainerAssignmentJsonConverter()
+            }
         };
 
         return request.ToJson(jsonSerializerOptions);
