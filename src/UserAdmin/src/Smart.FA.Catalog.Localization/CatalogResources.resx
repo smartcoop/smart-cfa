@@ -59,47 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-              xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -113,17 +112,13 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
-      PublicKeyToken=b77a5c561934e089
-    </value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
-      PublicKeyToken=b77a5c561934e089
-    </value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ProfileEdition" xml:space="preserve">
-    <value>Edition de profil</value>
+    <value>Édition de votre profil</value>
   </data>
   <data name="ProfileUpdatedWithSuccess" xml:space="preserve">
     <value>Profil mis à jour</value>
@@ -186,7 +181,7 @@
     <value>La formation</value>
   </data>
   <data name="Training_IsPermanentEducation" xml:space="preserve">
-    <value>entre dans le cadre de l'Education permanente</value>
+    <value>entre dans le cadre de l'Éducation permanente</value>
   </data>
   <data name="Training_IsScholarTraining" xml:space="preserve">
     <value>est un enseignement de matières scolaires / assimilées</value>
@@ -222,7 +217,7 @@
     <value>Méthodologie</value>
   </data>
   <data name="TrainingGoal" xml:space="preserve">
-    <value>Objectif de la formation</value>
+    <value>Objectif et contenu de la formation</value>
   </data>
   <data name="PracticalModalities" xml:space="preserve">
     <value>Modalités pratiques de la formation</value>
@@ -309,7 +304,7 @@
     <value>S'agit-il d'une formation</value>
   </data>
   <data name="FieldsThatWillAppearInThePublicCatalog" xml:space="preserve">
-    <value>Champs qui apparaîtront dans le catalog public</value>
+    <value>Champs qui apparaîtront dans le catalogue public</value>
   </data>
   <data name="EconomyMarketing" xml:space="preserve">
     <value>Économie / Marketing</value>
@@ -327,7 +322,7 @@
     <value>Photo de profil</value>
   </data>
   <data name="Min30Characters" xml:space="preserve">
-    <value/>
+    <value>Minimum 30 caractères</value>
   </data>
   <data name="BioMustBe30Chars" xml:space="preserve">
     <value>La biographie doit être constituée d'au moins 30 charactères</value>
@@ -351,7 +346,7 @@
     <value>Un titre de formation est requis</value>
   </data>
   <data name="AdminHomepage_WhatIsFormateurAssocieTitle" xml:space="preserve">
-    <value>Formateurs Associés: quoi ? Pourquoi ? Commment ?</value>
+    <value>Interface d'encodage de formations</value>
   </data>
   <data name="AdminHomepage_AcceptCharter" xml:space="preserve">
     <value>Accepter la Charte d'utilisation de Formateurs Associés</value>
@@ -361,7 +356,7 @@
 </value>
   </data>
   <data name="AdminHomepage_IAcceptCharter" xml:space="preserve">
-    <value>Je m'engage à respecter la Charter d'utilisation de Formateur Associé</value>
+    <value>Je m'engage à respecter la Charter d'utilisation de Formateurs Associés</value>
   </data>
   <data name="Hello" xml:space="preserve">
     <value>Bonjour</value>
@@ -382,7 +377,7 @@
     <value>Le fichier est du mauvais type</value>
   </data>
   <data name="AdminHomePage_HasNotAcceptedUserChart" xml:space="preserve">
-    <value>La charte d'utilisateur de formateurs associés n'a pas été accepté</value>
+    <value>La charte d'utilisateur de formateurs associés n'a pas été acceptée</value>
   </data>
   <data name="AdminHomePage_UserChart" xml:space="preserve">
     <value>Lire la charte utilisateur</value>
@@ -431,5 +426,26 @@
   </data>
   <data name="SuperUserPermissionToSetSmartTrainingType" xml:space="preserve">
     <value>Seul un super-utilisateur est autorisé à marquer une formation comme étant dispensée par Smart </value>
+  </data>
+  <data name="AdminHomepage_IntroductionPart1" xml:space="preserve">
+    <value>Bienvenue dans le monde de la formation de Smart, </value>
+  </data>
+  <data name="AdminHomepage_IntroductionPart2" xml:space="preserve">
+    <value>Smart est une coopérative de travailleuses et travailleurs qui utilisent sa structure pour exercer leur métier, par exemple de la formation.</value>
+  </data>
+  <data name="AdminHomepage_IntroductionPart3" xml:space="preserve">
+    <value>Ce catalogue en ligne s’adresse à toute personne en recherche d’une formation. Vous trouverez sur ce site des formations de type scolaire, professionnel  (organisées et produites par Formateurs Associés asbl et Productions Associées asbl, le cas échéant) ou encore récréatif (uniquement dans Producteurs Associés asbl). Vous visualisez aisément la personne qui dispense la formation et pouvez la contacter en direct pour obtenir davantage d’informations. </value>
+  </data>
+  <data name="Profile_UploadPicture" xml:space="preserve">
+    <value>Sélectionner une photo</value>
+  </data>
+  <data name="Profile_DragDropPicture" xml:space="preserve">
+    <value>Déposer votre photo pour la téléverser</value>
+  </data>
+  <data name="Profile_ImageTitle" xml:space="preserve">
+    <value>Votre photo de profil</value>
+  </data>
+  <data name="Profile_bioLabel" xml:space="preserve">
+    <value>Biographie</value>
   </data>
 </root>
