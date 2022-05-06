@@ -67,7 +67,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nginx", "Nginx", "{7F26E40B
 		docker-compose-nginx.yml = docker-compose-nginx.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.FA.Catalog.AccountSimulator", "src\UserAdmin\src\Smart.FA.Catalog.AccountSimulator\Smart.FA.Catalog.AccountSimulator.csproj", "{A4A24049-500B-4601-8242-29E23FF86C4B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AccountSimulator", "AccountSimulator", "{A441F317-9D9D-4EAC-80C1-4D6305500316}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E2FBEF8F-B9A8-4780-A69B-D98E84801BA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.FA.Catalog.AccountSimulator", "src\AccountSimulator\src\Smart.FA.Catalog.AccountSimulator\Smart.FA.Catalog.AccountSimulator.csproj", "{4065AEFA-A48E-44BD-ADB4-5279CBFADA0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -127,10 +131,10 @@ Global
 		{33E35183-47ED-46FB-BD13-729142E51DBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33E35183-47ED-46FB-BD13-729142E51DBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33E35183-47ED-46FB-BD13-729142E51DBB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4A24049-500B-4601-8242-29E23FF86C4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4A24049-500B-4601-8242-29E23FF86C4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4A24049-500B-4601-8242-29E23FF86C4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4A24049-500B-4601-8242-29E23FF86C4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4065AEFA-A48E-44BD-ADB4-5279CBFADA0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4065AEFA-A48E-44BD-ADB4-5279CBFADA0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4065AEFA-A48E-44BD-ADB4-5279CBFADA0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4065AEFA-A48E-44BD-ADB4-5279CBFADA0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -154,7 +158,8 @@ Global
 		{FB2BC42C-1D4C-4D4E-ADA2-DC5F8E3D8E13} = {5FB74010-24CB-47D8-8665-CD813A22499B}
 		{33E35183-47ED-46FB-BD13-729142E51DBB} = {5FB74010-24CB-47D8-8665-CD813A22499B}
 		{7F26E40B-F26A-40FF-9795-F4F3BC1BD1B7} = {8A4DEB10-3A8D-4F50-9E5F-A5550B42BBBA}
-		{A4A24049-500B-4601-8242-29E23FF86C4B} = {98D46582-2F64-45BD-A516-E259EE3A78DA}
+		{E2FBEF8F-B9A8-4780-A69B-D98E84801BA6} = {A441F317-9D9D-4EAC-80C1-4D6305500316}
+		{4065AEFA-A48E-44BD-ADB4-5279CBFADA0B} = {E2FBEF8F-B9A8-4780-A69B-D98E84801BA6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D2F2190D-B4DE-48B8-B87C-7AA80A91538E}
