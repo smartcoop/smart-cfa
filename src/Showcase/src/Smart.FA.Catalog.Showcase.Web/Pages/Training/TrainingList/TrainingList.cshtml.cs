@@ -23,8 +23,13 @@ public class TrainingListModel : PageModel
         _context = context;
     }
 
-    public async Task<PageResult> OnGetAsync()
+    public async Task<ActionResult> OnGetAsync()
     {
+        if (CurrentPage <= 0)
+        {
+            TempData["errorMessage"] = "The page you have requested does not exist.";
+            return RedirectToPage("/404");
+        }
         var offset = (CurrentPage - 1) * ItemsPerPage;
 
         var trainingIdQuery = _context.TrainingList
