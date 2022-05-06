@@ -26,21 +26,20 @@ public class TrainingListModel : PageModel
     public async Task<PageResult> OnGetAsync()
     {
         var offset = (CurrentPage - 1) * ItemsPerPage;
-        var count = await _context.TrainingList.AsAsyncEnumerable().GroupBy(training => training.Id).CountAsync();
-        var trainingList = await _context.TrainingList
-                                         .Where(training => training.Status == TrainingStatusType.Validated.Id)
-                                         .AsAsyncEnumerable()
-                                         .GroupBy(training => training.Id)
-                                         .Skip(offset)
-                                         .Take(ItemsPerPage)
-                                         .SelectMany(trainingList => trainingList)
-                                         .ToListAsync();
+
+        var trainingIdQuery = _context.TrainingList
+            .Where(training => training.Status == TrainingStatusType.Validated.Id)
+            .Select(training => training.Id)
+            .Distinct();
+        var totalTrainerTrainings = await trainingIdQuery.CountAsync();
+
+        var paginatedIds = trainingIdQuery.OrderBy(trainingId => trainingId).Skip(offset).Take(ItemsPerPage);
+        var trainingList = await _context.TrainingList.Where(training => paginatedIds.Contains(training.Id)).ToListAsync();
 
         var trainingListViewModel = trainingList.ToTrainingListViewModels();
 
         var pageItem = new PageItem(CurrentPage, ItemsPerPage);
-
-        Trainings = new PagedList<TrainingListViewModel>(trainingListViewModel, pageItem, count);
+        Trainings = new PagedList<TrainingListViewModel>(trainingListViewModel, pageItem, totalTrainerTrainings);
 
         return Page();
     }

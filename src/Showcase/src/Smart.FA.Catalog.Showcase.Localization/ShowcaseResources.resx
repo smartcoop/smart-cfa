@@ -213,4 +213,10 @@
   <data name="GenericNotFoundPageMessage" xml:space="preserve">
     <value>Cette page n'existe pas</value>
   </data>
+  <data name="Next" xml:space="preserve">
+    <value>Suivant</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Précédant</value>
+  </data>
 </root>

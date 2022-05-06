@@ -42,23 +42,16 @@ public class TrainerDetailsModel : PageModel
         }
 
         var offset = (CurrentPage - 1) * ItemsPerPage;
-        var count = await _context.TrainingList
-            .AsAsyncEnumerable()
-            .Where(trainerTraining => trainerTraining.TrainerId == id)
-            .GroupBy(trainerTraining => trainerTraining.Id)
-            .CountAsync();
+        var trainingIdQuery = _context.TrainingList
+            .Where(training => training.TrainerId == id && training.Status == TrainingStatusType.Validated.Id)
+            .Select(training => training.Id)
+            .Distinct();
+        var totalTrainerTrainings = await trainingIdQuery.CountAsync();
 
-        var trainerTrainingList = await _context.TrainingList
-            .Where(trainerTraining => trainerTraining.Status == TrainingStatusType.Validated.Id && trainerTraining.TrainerId == id)
-            .AsAsyncEnumerable()
-            .GroupBy(t => t.Id)
-            .Skip(offset)
-            .Take(ItemsPerPage)
-            .SelectMany(t => t)
-            .ToListAsync();
+        var paginatedIds = trainingIdQuery.OrderBy(trainingId => trainingId).Skip(offset).Take(ItemsPerPage);
+        var trainerTrainingList = await _context.TrainingList.Where(training => paginatedIds.Contains(training.Id)).ToListAsync();
 
-
-        Trainer = MapTrainerDetails(trainerDetails, trainerTrainingList, count);
+        Trainer = MapTrainerDetails(trainerDetails, trainerTrainingList, totalTrainerTrainings);
         return Page();
     }
 

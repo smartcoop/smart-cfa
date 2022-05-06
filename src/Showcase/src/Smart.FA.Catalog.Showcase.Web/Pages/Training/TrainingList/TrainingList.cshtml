@@ -47,7 +47,7 @@
                 <div class="training-list__container-right">
                     <div class="training-list__more">
                         <!--Link for training details-->
-                    <a class="training-list__more-link" asp-page="@Routes.TrainingDetails" asp-route-id=@training.TrainingId>
+                        <a class="training-list__more-link" asp-page="@Routes.TrainingDetails" asp-route-id=@training.TrainingId>
                             <img src="~/icons/chevron-right--blue.svg" class="o-svg-icon--large chevron-icon" />
                         </a>
                     </div>
@@ -60,7 +60,7 @@
             <div class="c-toolbar__left">
                 @if (Model?.Trainings?.HasPreviousPage ?? false)
                 {
-                    <a asp-page="@Routes.TrainingList" asp-route-CurrentPage="@(Model.CurrentPage - 1)">Previous</a>
+                    <a asp-page="@Routes.TrainingList" asp-route-CurrentPage="@(Model.CurrentPage - 1)">@ShowcaseResources.Previous</a>
                 }
             </div>
 
@@ -68,7 +68,7 @@
             <div class="c-toolbar__right">
                 @if (Model?.Trainings?.HasNextPage ?? false)
                 {
-                    <a asp-page="@Routes.TrainingList" asp-route-CurrentPage="@(Model.CurrentPage + 1)">Next</a>
+                    <a asp-page="@Routes.TrainingList" asp-route-CurrentPage="@(Model.CurrentPage + 1)">@ShowcaseResources.Next</a>
                 }
             </div>
         </div>

@@ -79,7 +79,7 @@
             <div class="c-toolbar__left">
                 @if (Model?.Trainer.Trainings?.HasPreviousPage ?? false)
                 {
-                    <a asp-page="@Routes.TrainerDetails" asp-route-CurrentPage="@(Model.CurrentPage - 1)" asp-route-id="@Model.Trainer.Id">Previous</a>
+                    <a asp-page="@Routes.TrainerDetails" asp-route-CurrentPage="@(Model.CurrentPage - 1)" asp-route-id="@Model.Trainer.Id">@ShowcaseResources.Previous</a>
                 }
             </div>
 
@@ -87,7 +87,7 @@
             <div class="c-toolbar__right">
                 @if (Model?.Trainer.Trainings?.HasNextPage ?? false)
                 {
-                    <a asp-page="@Routes.TrainerDetails" asp-route-CurrentPage="@(Model.CurrentPage + 1)" asp-route-id="@Model.Trainer.Id">Next</a>
+                    <a asp-page="@Routes.TrainerDetails" asp-route-CurrentPage="@(Model.CurrentPage + 1)" asp-route-id="@Model.Trainer.Id">@ShowcaseResources.Next</a>
                 }
             </div>
         </div>
