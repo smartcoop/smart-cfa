@@ -10,7 +10,7 @@
         .Value?
         .SupportedUICultures?
         .Select(supportedCulture => new SelectListItem(supportedCulture.DisplayName, supportedCulture.TwoLetterISOLanguageName)) ??
-                              throw new InvalidOperationException("Supported culture not defined");
+        throw new InvalidOperationException("Supported culture not defined");
 }
 <!DOCTYPE html>
 <html class="u-maximize-height" dir="ltr" lang="en">

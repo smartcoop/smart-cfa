@@ -1,5 +1,4 @@
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Smart.FA.Catalog.Application.UseCases.Commands;
 using Smart.FA.Catalog.Application.UseCases.Queries;
@@ -53,7 +52,7 @@ public class ProfileModel : AdminPage
             if (EditProfileCommand.ProfilePicture is not null)
             {
                 var imageUploadRequest = new UploadImageToStorageCommandRequest { Trainer = UserIdentity.CurrentTrainer, ProfilePicture = EditProfileCommand.ProfilePicture };
-                var profileResult      = await Mediator.Send(imageUploadRequest);
+                var profileResult = await Mediator.Send(imageUploadRequest);
                 ProfilePicture = profileResult.ProfilePictureStream;
             }
 
@@ -73,7 +72,7 @@ public class ProfileModel : AdminPage
         var trainerProfile = await Mediator.Send(new GetTrainerProfileQuery(UserIdentity.CurrentTrainer.Id));
         if (trainerProfile.TrainerId is not null)
         {
-            EditProfileCommand      = trainerProfile.ToCommand();
+            EditProfileCommand = trainerProfile.ToCommand();
             SocialNetworkViewModels = trainerProfile.Socials.ToSocialViewModels();
         }
     }
@@ -89,14 +88,14 @@ public class ProfileModel : AdminPage
         // The request gives us a collection of the following key par values for social networks.:
         // "social-" + [SocialId] + [url value of the profile]
         EditProfileCommand.Socials = Request.Form
-                                            .Where(formElement => formElement.Key.StartsWith("social-", StringComparison.OrdinalIgnoreCase))
-                                            .ToDictionary(key => key.Key.Split("-")[1], value => value.Value.ToString());
+            .Where(formElement => formElement.Key.StartsWith("social-", StringComparison.OrdinalIgnoreCase))
+            .ToDictionary(key => key.Key.Split("-")[1], value => value.Value.ToString());
     }
 
     public async Task<FileResult?> OnGetLoadImageAsync()
     {
         var profilePicture = await Mediator.Send(new GetTrainerProfileImageRequest { Trainer = UserIdentity.CurrentTrainer });
-        var response       = profilePicture.ImageStream is null ? null : new FileStreamResult(profilePicture.ImageStream, "image/jpeg");
+        var response = profilePicture.ImageStream is null ? null : new FileStreamResult(profilePicture.ImageStream, "image/jpeg");
         return response;
     }
 

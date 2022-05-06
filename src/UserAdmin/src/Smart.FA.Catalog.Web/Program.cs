@@ -55,7 +55,7 @@ builder.Services.AddAuthorization(options =>
 });
 
 builder.Services.AddAuthentication(options => options.DefaultScheme = AuthSchemes.UserAdmin)
-                .AddScheme<CfaAuthenticationOptions, FAUserAdminAuthenticationHandler>(AuthSchemes.UserAdmin, _ => { });
+    .AddScheme<CfaAuthenticationOptions, FAUserAdminAuthenticationHandler>(AuthSchemes.UserAdmin, _ => { });
 
 
 var app = builder.Build();
@@ -77,7 +77,10 @@ else
 
 app.UseRequestLocalization();
 
-app.UseHttpsRedirection();
+if (app.Configuration.GetValue("ForceHttpRedirection", true))
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseStaticFiles();
 

@@ -14,17 +14,17 @@ public class AtLeastOneValidUserChartRevisionApprovalRequirement : IAuthorizatio
 
 public class UserChartRevisionApprovalHandler : AuthorizationHandler<AtLeastOneValidUserChartRevisionApprovalRequirement>
 {
-    private readonly CatalogContext       _catalogContext;
+    private readonly CatalogContext _catalogContext;
     private readonly IHttpContextAccessor _httpContextAccessor;
-    private readonly IUserIdentity        _userIdentity;
-    private readonly IWebHostEnvironment  _webHostEnvironment;
+    private readonly IUserIdentity _userIdentity;
+    private readonly IWebHostEnvironment _webHostEnvironment;
 
     public UserChartRevisionApprovalHandler(CatalogContext catalogContext, IHttpContextAccessor httpContextAccessor, IUserIdentity userIdentity, IWebHostEnvironment webHostEnvironment)
     {
-        _catalogContext      = catalogContext;
+        _catalogContext = catalogContext;
         _httpContextAccessor = httpContextAccessor;
-        _userIdentity        = userIdentity;
-        _webHostEnvironment  = webHostEnvironment;
+        _userIdentity = userIdentity;
+        _webHostEnvironment = webHostEnvironment;
     }
 
     protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, AtLeastOneValidUserChartRevisionApprovalRequirement requirement)
@@ -35,11 +35,11 @@ public class UserChartRevisionApprovalHandler : AuthorizationHandler<AtLeastOneV
             var currentDate = DateTime.UtcNow.Date;
 
             var hasTrainerValidUserChartApprovals = await _catalogContext.Trainers
-                                                                         .Where(trainer => trainer.Id == _userIdentity.Id)
-                                                                         .Where(trainer => trainer.Approvals.Any(approval =>
-                                                                              currentDate >= approval.UserChartRevision.ValidFrom.Date &&
-                                                                              (approval.UserChartRevision.ValidUntil == null || currentDate <= approval.UserChartRevision.ValidUntil!.Value.Date)))
-                                                                         .AnyAsync();
+                .Where(trainer => trainer.Id == _userIdentity.Id)
+                .Where(trainer => trainer.Approvals.Any(approval =>
+                    currentDate >= approval.UserChartRevision.ValidFrom.Date &&
+                    (approval.UserChartRevision.ValidUntil == null || currentDate <= approval.UserChartRevision.ValidUntil!.Value.Date)))
+                .AnyAsync();
 
             if (hasTrainerValidUserChartApprovals)
             {
