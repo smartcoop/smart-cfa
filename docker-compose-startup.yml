@@ -17,7 +17,14 @@ services:
       - "MINIO_ROOT_USER=newadmin"
       - "MINIO_ROOT_PASSWORD=newadmin123!"
     command: server /data --console-address ":9001"
-
+  proxy:
+    build:
+      context: .
+      dockerfile: Nginx.Dockerfile
+    ports:
+      - "7001:80"
+    networks:
+      - "local-cfa"
   minioclient:
     image: minio/mc
     container_name: minio_client-local

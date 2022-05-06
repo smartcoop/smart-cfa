@@ -1,13 +1,14 @@
 using Smart.Design.Razor.Extensions;
 using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using NLog.Web;
 using Smart.FA.Catalog.Application.Extensions;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Infrastructure.Extensions;
+using Smart.FA.Catalog.Web.Authentication;
+using Smart.FA.Catalog.Web.Authentication.Handlers;
+using Smart.FA.Catalog.Web.Authorization.Policy;
+using Smart.FA.Catalog.Web.Authorization.Policy.Requirements;
 using Smart.FA.Catalog.Web.Extensions;
-using Smart.FA.Catalog.Web.Extensions.Middlewares;
-using Smart.FA.Catalog.Web.Policies.Requirements;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +27,7 @@ builder.Services
 builder.Services
     .AddSmartDesign();
 builder.Services
-    .AddRazorPages(options => { options.Conventions.AuthorizeFolder("/Admin", Smart.FA.Catalog.Web.Policies.List.AtLeastOneValidUserChartRevisionApproval); })
+    .AddRazorPages(options => { options.Conventions.AuthorizeFolder("/Admin", Policies.AtLeastOneValidUserChartRevisionApproval); })
     .AddFluentValidation(configuration =>
     {
         configuration.RegisterValidatorsFromAssemblyContaining<Program>();
@@ -49,18 +50,19 @@ builder.Services
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy(Smart.FA.Catalog.Web.Policies.List.AtLeastOneValidUserChartRevisionApproval,
+    options.AddPolicy(Policies.AtLeastOneValidUserChartRevisionApproval,
         policy => { policy.Requirements.Add(new AtLeastOneValidUserChartRevisionApprovalRequirement()); });
 });
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options => { options.AccessDeniedPath = new PathString("/UserChart"); });
+builder.Services.AddAuthentication(options => options.DefaultScheme = AuthSchemes.UserAdmin)
+    .AddScheme<CfaAuthenticationOptions, UserAdminAuthenticationHandler>(AuthSchemes.UserAdmin, _ => { });
+
 
 var app = builder.Build();
 
 app.UseForwardedHeaders();
 
-app.UseProxyHeaders();
+app.UseAuthentication();
 
 if (app.Environment.IsProduction())
 {
@@ -73,10 +75,12 @@ else
     app.UseStatusCodePagesWithReExecute("/{0}");
 }
 
-
 app.UseRequestLocalization();
 
-app.UseHttpsRedirection();
+if (app.Configuration.GetValue("ForceHttpRedirection", true))
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseStaticFiles();
 

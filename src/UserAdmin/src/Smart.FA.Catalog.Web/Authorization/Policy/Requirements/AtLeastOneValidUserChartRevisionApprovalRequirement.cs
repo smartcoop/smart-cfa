@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 
-namespace Smart.FA.Catalog.Web.Policies.Requirements;
+namespace Smart.FA.Catalog.Web.Authorization.Policy.Requirements;
 
 /// <summary>
 /// Require that the user have already accepted at least one valid user chart
@@ -29,20 +29,27 @@ public class UserChartRevisionApprovalHandler : AuthorizationHandler<AtLeastOneV
 
     protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, AtLeastOneValidUserChartRevisionApprovalRequirement requirement)
     {
-        var currentDate = DateTime.UtcNow.Date;
-
-        var hasTrainerValidUserChartApprovals = await _catalogContext.Trainers
-            .Where(trainer => trainer.Id == _userIdentity.Id)
-            .Where(trainer => trainer.Approvals.Any(approval =>
-                currentDate >= approval.UserChartRevision.ValidFrom.Date &&
-                (approval.UserChartRevision.ValidUntil == null || currentDate <= approval.UserChartRevision.ValidUntil!.Value.Date)))
-            .AnyAsync();
-
         // If we are in staging we don't need to check for any approval of user charts
-        if (_webHostEnvironment.IsStaging() || hasTrainerValidUserChartApprovals)
+        if (!_webHostEnvironment.IsStaging())
         {
-            _httpContextAccessor.HttpContext!.Response.Cookies.Append("HasAcceptedUserChartRevision", "true", new CookieOptions {MaxAge = TimeSpan.FromMinutes(1)});
-            context.Succeed(requirement);
+            var currentDate = DateTime.UtcNow.Date;
+
+            var hasTrainerValidUserChartApprovals = await _catalogContext.Trainers
+                .Where(trainer => trainer.Id == _userIdentity.Id)
+                .Where(trainer => trainer.Approvals.Any(approval =>
+                    currentDate >= approval.UserChartRevision.ValidFrom.Date &&
+                    (approval.UserChartRevision.ValidUntil == null || currentDate <= approval.UserChartRevision.ValidUntil!.Value.Date)))
+                .AnyAsync();
+
+            if (hasTrainerValidUserChartApprovals)
+            {
+                _httpContextAccessor.HttpContext!.Response.Cookies.Append("HasAcceptedUserChartRevision", "true", new CookieOptions { MaxAge = TimeSpan.FromMinutes(1) });
+                context.Succeed(requirement);
+            }
+
+            return;
         }
+
+        context.Succeed(requirement);
     }
 }

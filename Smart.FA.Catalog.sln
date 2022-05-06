@@ -23,12 +23,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D485BE00-A082-47D7-827D-0FD646807006}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reverse-Proxy", "Reverse-Proxy", "{4962514A-455F-4866-ACD4-51A26609E064}"
-	ProjectSection(SolutionItems) = preProject
-		src\Reverse-Proxy\nginx.conf = src\Reverse-Proxy\nginx.conf
-		src\Reverse-Proxy\Nginx.Dockerfile = src\Reverse-Proxy\Nginx.Dockerfile
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserAdmin", "UserAdmin", "{6569875B-B7BA-47DC-8A69-57604FBBFF3B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShowCase", "ShowCase", "{B5CA3163-3FD1-41C4-AD61-62A793C16960}"
@@ -64,6 +58,16 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.Showcase.Infrastructure", "src\Showcase\src\Smart.FA.Catalog.Showcase.Infrastructure\Smart.FA.Catalog.Showcase.Infrastructure.csproj", "{FB2BC42C-1D4C-4D4E-ADA2-DC5F8E3D8E13}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.Showcase.Localization", "src\Showcase\src\Smart.FA.Catalog.Showcase.Localization\Smart.FA.Catalog.Showcase.Localization.csproj", "{33E35183-47ED-46FB-BD13-729142E51DBB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nginx", "Nginx", "{7F26E40B-F26A-40FF-9795-F4F3BC1BD1B7}"
+	ProjectSection(SolutionItems) = preProject
+		Nginx.Dockerfile = Nginx.Dockerfile
+		nginx.conf = nginx.conf
+		AccountSim.Dockerfile = AccountSim.Dockerfile
+		docker-compose-nginx.yml = docker-compose-nginx.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.FA.Catalog.AccountSimulator", "src\UserAdmin\src\Smart.FA.Catalog.AccountSimulator\Smart.FA.Catalog.AccountSimulator.csproj", "{A4A24049-500B-4601-8242-29E23FF86C4B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,6 +127,10 @@ Global
 		{33E35183-47ED-46FB-BD13-729142E51DBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33E35183-47ED-46FB-BD13-729142E51DBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33E35183-47ED-46FB-BD13-729142E51DBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4A24049-500B-4601-8242-29E23FF86C4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4A24049-500B-4601-8242-29E23FF86C4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4A24049-500B-4601-8242-29E23FF86C4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4A24049-500B-4601-8242-29E23FF86C4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,7 +138,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{98D46582-2F64-45BD-A516-E259EE3A78DA} = {6569875B-B7BA-47DC-8A69-57604FBBFF3B}
 		{D485BE00-A082-47D7-827D-0FD646807006} = {6569875B-B7BA-47DC-8A69-57604FBBFF3B}
-		{4962514A-455F-4866-ACD4-51A26609E064} = {98D46582-2F64-45BD-A516-E259EE3A78DA}
 		{5FB74010-24CB-47D8-8665-CD813A22499B} = {B5CA3163-3FD1-41C4-AD61-62A793C16960}
 		{AA37D759-F348-4337-92CB-6515A1049B20} = {B5CA3163-3FD1-41C4-AD61-62A793C16960}
 		{3E6BEC3A-03F2-45E8-B0A8-6AA295C4160B} = {98D46582-2F64-45BD-A516-E259EE3A78DA}
@@ -146,6 +153,8 @@ Global
 		{21E6B700-9D55-4BCD-B2AF-797881A91782} = {5FB74010-24CB-47D8-8665-CD813A22499B}
 		{FB2BC42C-1D4C-4D4E-ADA2-DC5F8E3D8E13} = {5FB74010-24CB-47D8-8665-CD813A22499B}
 		{33E35183-47ED-46FB-BD13-729142E51DBB} = {5FB74010-24CB-47D8-8665-CD813A22499B}
+		{7F26E40B-F26A-40FF-9795-F4F3BC1BD1B7} = {8A4DEB10-3A8D-4F50-9E5F-A5550B42BBBA}
+		{A4A24049-500B-4601-8242-29E23FF86C4B} = {98D46582-2F64-45BD-A516-E259EE3A78DA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D2F2190D-B4DE-48B8-B87C-7AA80A91538E}
