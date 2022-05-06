@@ -4,7 +4,7 @@ using Smart.FA.Catalog.Web.Authorization.Policy.Requirements;
 
 namespace Smart.FA.Catalog.Web.Authorization.Handlers;
 
-public class UserAdminAuthorizationResultHandler: IAuthorizationMiddlewareResultHandler
+public class FAUserAdminAuthorizationResultHandler : IAuthorizationMiddlewareResultHandler
 {
     private readonly AuthorizationMiddlewareResultHandler _defaultHandler = new();
 
@@ -21,8 +21,10 @@ public class UserAdminAuthorizationResultHandler: IAuthorizationMiddlewareResult
             {
                 context.Response.Redirect("/UserChart");
             }
+
             return;
         }
+
         // Fall back to the default implementation.
         await _defaultHandler.HandleAsync(next, context, policy, authorizeResult);
     }
