@@ -26,9 +26,17 @@ docker build \
   -t "cfa-staging-api" \
   .
 
+docker build \
+  --build-arg Environment="PreProduction" \
+  -f "Showcase.krb5.Dockerfile" \
+  -t "cfa-staging-public" \
+  .
+
 docker stop cfa_staging_api || true
 docker rm cfa_staging_api || true
 
+docker stop cfa_staging_public || true
+docker rm cfa_staging_public || true
 
 docker run -d \
   --name cfa_staging_api \
@@ -38,3 +46,12 @@ docker run -d \
   --volume $(pwd)/ktutil/files/${DB_USER}.keytab:/app/${DB_USER}.keytab \
   -p "6000:80" \
   cfa-staging-api
+
+docker run -d \
+  --name cfa_staging_public \
+  --env Environment="PreProduction" \
+  --env-file ./.env \
+  --volume $(pwd)/ktutil/files/krb5.conf:/etc/krb5.conf \
+  --volume $(pwd)/ktutil/files/${DB_USER}.keytab:/app/${DB_USER}.keytab \
+  -p "6001:80" \
+  cfa-staging-public

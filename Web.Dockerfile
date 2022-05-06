@@ -8,6 +8,7 @@ COPY ["src/UserAdmin/src/Smart.FA.Catalog.Web/Smart.FA.Catalog.Web.csproj", "src
 COPY ["src/UserAdmin/src/Smart.FA.Catalog.Application/Smart.FA.Catalog.Application.csproj", "src/UserAdmin/src/Smart.FA.Catalog.Application/"]
 COPY ["src/UserAdmin/src/Smart.FA.Catalog.Core/Smart.FA.Catalog.Core.csproj", "src/UserAdmin/src/Smart.FA.Catalog.Core/"]
 COPY ["src/UserAdmin/src/Smart.FA.Catalog.Infrastructure/Smart.FA.Catalog.Infrastructure.csproj", "src/UserAdmin/src/Smart.FA.Catalog.Infrastructure/"]
+COPY ["src/Shared/Smart.FA.Catalog.Shared/Smart.FA.Catalog.Shared.csproj", "src/Shared/Smart.FA.Catalog.Shared/"]
 
 RUN dotnet restore "src/UserAdmin/src/Smart.FA.Catalog.Web/Smart.FA.Catalog.Web.csproj"
 COPY . .

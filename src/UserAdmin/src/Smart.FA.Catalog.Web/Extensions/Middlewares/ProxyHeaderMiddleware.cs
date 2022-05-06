@@ -1,4 +1,3 @@
-using System.Security.Claims;
 using System.Security.Principal;
 using MediatR;
 using Smart.FA.Catalog.Application.UseCases.Commands;
@@ -6,7 +5,6 @@ using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Application.UseCases.Queries.Authorization;
 using Smart.FA.Catalog.Core.Domain.Models;
 using Smart.FA.Catalog.Core.Domain.User.Enumerations;
-using Smart.FA.Catalog.Shared.Domain.Enumerations;
 
 namespace Smart.FA.Catalog.Web.Extensions.Middlewares;
 
