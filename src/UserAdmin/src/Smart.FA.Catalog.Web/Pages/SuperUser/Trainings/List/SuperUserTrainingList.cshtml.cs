@@ -65,7 +65,7 @@ public class SuperUserTrainingListPageModel : PageModel
         }
         catch (Exception exception)
         {
-            _logger.LogError(exception, $"An error occurred while retrieving training for request {SerializeHtmlForm()?.ToJson()}");
+            _logger.LogError(exception, $"An error occurred while retrieving training for request {SerializeHtmlForm().ToJson()}");
             ErrorMessage = CatalogResources.AnErrorOccurredWhileSearching;
         }
     }
@@ -73,7 +73,7 @@ public class SuperUserTrainingListPageModel : PageModel
     private void LoadData()
     {
         Statuses = TrainingStatusType.List
-            .Select(statusType => new SelectListItem(_localizer[statusType.Name], statusType.Id.ToString(), GetTrainingsRequest?.Status == statusType.Id));
+            .Select(statusType => new SelectListItem(_localizer[statusType.Name], statusType.Id.ToString(), GetTrainingsRequest.Status == statusType.Id));
     }
 
     public string SerializeHtmlForm()

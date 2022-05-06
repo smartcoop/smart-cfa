@@ -10,12 +10,11 @@
 @using Smart.Design.Razor.TagHelpers.Icon
 @using Smart.Design.Razor.TagHelpers.InputGroup
 @using Smart.Design.Razor.TagHelpers.Spacer
-@using Smart.FA.Catalog.Shared.Domain.Enumerations
 @using Smart.FA.Catalog.Shared.Domain.Enumerations.Common
 @using Smart.FA.Catalog.Shared.Domain.Enumerations.Training
 @model SuperUserTrainingListPageModel
 
-@inject IStringLocalizer<CatalogResources> _localizer
+@inject IStringLocalizer<CatalogResources> Localizer
 @{
     Layout = "Shared/_AdminLayout";
 }
@@ -55,7 +54,7 @@
                     </smart-formgroup>
 
                     <div class="c-accordion u-spacer-bottom">
-                        <div class="c-accordion__item @(Model.GetTrainingsRequest?.Topics?.Any() == true ? "js-active" : string.Empty)">
+                        <div class="c-accordion__item @(Model.GetTrainingsRequest.Topics?.Any() == true ? "js-active" : string.Empty)">
                             <div class="c-accordion__item-header">
                                 <div class="c-toolbar">
                                     <div class="c-toolbar__left">
@@ -72,7 +71,7 @@
                                         @foreach (var topic in Topic.List)
                                         {
                                             <smart-grid-column width="3">
-                                                <smart-checkbox label="@_localizer[topic.Name]" asp-for="GetTrainingsRequest.Topics" value="@topic.Id" checked="@(topic.IsContainedIn(Model.GetTrainingsRequest?.Topics))"></smart-checkbox>
+                                                <smart-checkbox label="@Localizer[topic.Name]" asp-for="GetTrainingsRequest.Topics" value="@topic.Id" checked="@(topic.IsContainedIn(Model.GetTrainingsRequest?.Topics))"></smart-checkbox>
                                             </smart-grid-column>
                                         }
                                     </smart-grid>
@@ -91,7 +90,7 @@
         <p class="c-blank-slate" style="font-size: 2.6rem;">@CatalogResources.NoTrainingFound</p>
     }
 
-    @if (Model.Trainings?.Count() > 0)
+    @if (Model.Trainings?.Count > 0)
     {
         <div class="o-card-grid small-up-1">
             @foreach (var trainingDto in Model.Trainings)
@@ -129,7 +128,7 @@
 </smart-spacer>
 @section Scripts {
     <script>
-        var expand = @(Model!.GetTrainingsRequest?.Topics?.Any() == true ? "true" : "false");
+        var expand = @(Model!.GetTrainingsRequest.Topics?.Any() == true ? "true" : "false");
         if (expand) {
             var article = document.getElementById("topics");
             article.style.maxHeight = article.scrollHeight + 'px';
