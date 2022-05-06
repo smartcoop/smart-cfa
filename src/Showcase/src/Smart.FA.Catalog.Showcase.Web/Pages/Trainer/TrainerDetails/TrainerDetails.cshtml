@@ -1,4 +1,4 @@
-﻿@page 
+﻿@page
 @using Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer
 @model Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerDetails.TrainerDetailsModel
 @{
@@ -29,7 +29,7 @@
                             // No icon to personnel web site
                             if (socialNetwork.SocialNetwork.Id != SocialNetwork.PersonalWebsite.Id)
                             {
-                                <img src="@socialNetwork.IconPathFileName" class="o-svg-icon--small contact-icon" alt=""/>
+                                <img src="@socialNetwork.IconPathFileName" class="o-svg-icon--small contact-icon" alt="" />
                             }
                         }
                         <a href="@socialNetwork.SocialNetworkUrl" target="_blank" class="trainer-card__trainer-link">
@@ -66,17 +66,37 @@
                 <div class="training-list__container-right">
                     <div class="training-list__more">
                         <a class="training-list__more-link" asp-page="@Routes.TrainingDetails" asp-route-id="@training.TrainingId">
-                            <img src="~/icons/chevron-right--blue.svg" class="o-svg-icon--large chevron-icon"/>
+                            <img src="~/icons/chevron-right--blue.svg" class="o-svg-icon--large chevron-icon" />
                         </a>
                     </div>
                 </div>
             </div>
         }
     </div>
+
+    <div class="u-spacer-xl right">
+        <div class="c-toolbar">
+            <div class="c-toolbar__left">
+                @if (Model?.Trainer.Trainings?.HasPreviousPage ?? false)
+                {
+                    <a asp-page="@Routes.TrainerDetails" asp-route-CurrentPage="@(Model.CurrentPage - 1)" asp-route-id="@Model.Trainer.Id">Previous</a>
+                }
+            </div>
+
+            <div>Page @(Model.CurrentPage)/@(Model?.Trainer.Trainings?.TotalPages ?? 0)</div>
+            <div class="c-toolbar__right">
+                @if (Model?.Trainer.Trainings?.HasNextPage ?? false)
+                {
+                    <a asp-page="@Routes.TrainerDetails" asp-route-CurrentPage="@(Model.CurrentPage + 1)" asp-route-id="@Model.Trainer.Id">Next</a>
+                }
+            </div>
+        </div>
+    </div>
+
     <div class="trainer-card__footer">
         <div class="trainer-card__back">
             <a class="trainer-card__back-link" asp-page="@Routes.TrainerList">
-                <img src="~/icons/chevron-left--blue.svg" class="o-svg-icon--small chevron-icon" alt=""/>@ShowcaseResources.AllTrainers
+                <img src="~/icons/chevron-left--blue.svg" class="o-svg-icon--small chevron-icon" alt="" />@ShowcaseResources.AllTrainers
             </a>
         </div>
     </div>

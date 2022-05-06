@@ -15,10 +15,7 @@ public static class TrainingMapper
         var trainings = new List<TrainingListViewModel>(trainingList.Count());
         var trainingsByIds = trainingList.ToLookup(t => t.Id);
 
-        //We only want to map the trainings we'll display in the page and get rid of the others.
-        var trainingsRanged = trainingsByIds;
-
-        foreach (var groupedTraining in trainingsRanged)
+        foreach (var groupedTraining in trainingsByIds)
         {
             // Since we grouped we are sure we have one record at least.
             var firstLine = groupedTraining.First();

@@ -1,3 +1,4 @@
+using Smart.FA.Catalog.Shared.Collections;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer;
 using Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingList;
 
@@ -12,7 +13,7 @@ public class TrainerDetailsViewModel
     public string Biography { get; set; }
     public string ProfileImagePath { get; set; }
     public List<TrainerSocialNetwork> SocialNetworks { get; set; } = new ();
-    public List<TrainingListViewModel> Trainings { get; set; } = new ();    
+    public PagedList<TrainingListViewModel> Trainings { get; set; }
 }
 
 public class TrainerSocialNetwork
