@@ -322,7 +322,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Précédant.
+        ///   Looks up a localized string similar to Précédent.
         /// </summary>
         public static string Previous {
             get {
