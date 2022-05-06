@@ -16,7 +16,7 @@ public class TrainingListModel : PageModel
 
     [BindProperty(SupportsGet = true)] public int CurrentPage { get; set; } = 1;
 
-    const int ItemsPerPage = 2;
+    const int ItemsPerPage = 5;
 
     public TrainingListModel(Infrastructure.Data.CatalogShowcaseContext context)
     {
@@ -26,17 +26,15 @@ public class TrainingListModel : PageModel
     public async Task<PageResult> OnGetAsync()
     {
         var offset = (CurrentPage - 1) * ItemsPerPage;
-
-        var count = await _context.TrainingList.AsAsyncEnumerable().GroupBy(t => t.Id).CountAsync();
+        var count = await _context.TrainingList.AsAsyncEnumerable().GroupBy(training => training.Id).CountAsync();
         var trainingList = await _context.TrainingList
                                          .Where(training => training.Status == TrainingStatusType.Validated.Id)
                                          .AsAsyncEnumerable()
-                                         .GroupBy(t => t.Id)
+                                         .GroupBy(training => training.Id)
                                          .Skip(offset)
                                          .Take(ItemsPerPage)
-                                         .SelectMany(t => t)
+                                         .SelectMany(trainingList => trainingList)
                                          .ToListAsync();
-
 
         var trainingListViewModel = trainingList.ToTrainingListViewModels();
 
