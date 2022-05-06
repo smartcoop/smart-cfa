@@ -5,7 +5,7 @@ namespace Smart.FA.Catalog.Showcase.Web.Mappers;
 
 public static class TrainingMapper
 {
-    public static List<TrainingListViewModel> ToTrainingListViewModels(this IEnumerable<Domain.Models.TrainingList> trainingList, int offset, int itemsPerPage)
+    public static List<TrainingListViewModel> ToTrainingListViewModels(this IEnumerable<Domain.Models.TrainingList> trainingList)
     {
         if (trainingList is null)
         {
@@ -16,7 +16,7 @@ public static class TrainingMapper
         var trainingsByIds = trainingList.ToLookup(t => t.Id);
 
         //We only want to map the trainings we'll display in the page and get rid of the others.
-        var trainingsRanged = trainingsByIds.Skip(offset).Take(itemsPerPage);
+        var trainingsRanged = trainingsByIds;
 
         foreach (var groupedTraining in trainingsRanged)
         {

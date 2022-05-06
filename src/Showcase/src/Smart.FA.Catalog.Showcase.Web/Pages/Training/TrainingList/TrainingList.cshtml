@@ -62,7 +62,7 @@
         }
     </div>
 
-    <div>Page @(1)/@(Model?.Trainings?.TotalPages ?? 0)</div>
+    <div>Page @(Model.CurrentPage)/@(Model?.Trainings?.TotalPages ?? 0)</div>
     <div class="c-toolbar__right">
         @if (Model?.Trainings?.HasNextPage ?? false)
         {
