@@ -52,7 +52,7 @@ public class FAUserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthent
         }
         catch
         {
-            return AuthenticateResult.Fail(new Exception("An issue occured during authentication"));
+            return AuthenticateResult.Fail(new Exception("An issue occurred during authentication"));
         }
     }
 
