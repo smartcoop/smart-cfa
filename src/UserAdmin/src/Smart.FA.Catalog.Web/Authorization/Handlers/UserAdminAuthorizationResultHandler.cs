@@ -1,3 +1,4 @@
+using System.Collections;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Authorization.Policy;
@@ -11,10 +12,6 @@ public class UserAdminAuthorizationResultHandler : IAuthorizationMiddlewareResul
     private IUserIdentity _userIdentity;
     private readonly AuthorizationMiddlewareResultHandler _defaultHandler = new();
 
-    public UserAdminAuthorizationResultHandler()
-    {
-    }
-
     public async Task HandleAsync(
         RequestDelegate next,
         HttpContext context,
@@ -23,17 +20,17 @@ public class UserAdminAuthorizationResultHandler : IAuthorizationMiddlewareResul
     {
         _userIdentity = context.RequestServices.GetRequiredService<IUserIdentity>();
 
-        if (_userIdentity.IsSuperUser && authorizeResult.Forbidden)
+        if (!_userIdentity.IsSuperUser && authorizeResult.Forbidden)
         {
-            var authFailures = authorizeResult.AuthorizationFailure!;
+            var authorizationFailure = authorizeResult.AuthorizationFailure!;
 
             // In the case of a failed requirement to have approved at least one valid user chart, the user will be redirected to the user chart approval page
-            if (authFailures.FailedRequirements.OfType<AtLeastOneActiveUserChartRevisionApprovalRequirement>().Any())
+            if (authorizationFailure.FailedRequirements.AnyOfType<AtLeastOneActiveUserChartRevisionApprovalRequirement>())
             {
                 context.Response.Redirect("/UserChart");
             }
 
-            if (authFailures.FailedRequirements.Any(failedRequirement =>
+            if (authorizationFailure.FailedRequirements.Any(failedRequirement =>
                     failedRequirement is RolesAuthorizationRequirement rolesAuthorizationRequirement && rolesAuthorizationRequirement.AllowedRoles.Contains("SuperUser")))
             {
                 context.Response.Redirect("/Admin");

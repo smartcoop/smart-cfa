@@ -29,9 +29,5 @@ public class UserChartRevisionApprovalHandler : AuthorizationHandler<AtLeastOneA
         {
             context.Succeed(requirement);
         }
-        else
-        {
-            context.Fail();
-        }
     }
 }
