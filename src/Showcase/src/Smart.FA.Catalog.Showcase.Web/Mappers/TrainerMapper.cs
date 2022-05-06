@@ -11,7 +11,7 @@ public static class TrainerMapper
         foreach (var detail in trainerDetails.Where(details => !string.IsNullOrWhiteSpace(details.UrlToProfile))
                      .OrderByDescending(s => s.SocialNetwork))
         {
-            var socialNetworkName = SocialNetwork.FromValue<SocialNetwork>((int)detail.SocialNetwork);
+            var socialNetworkName = SocialNetwork.FromValue((int)detail.SocialNetwork);
             socialNetworks.Add(new TrainerSocialNetwork()
             {
                 SocialNetwork = socialNetworkName,

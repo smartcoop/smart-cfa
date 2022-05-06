@@ -7,26 +7,22 @@ namespace Smart.FA.Catalog.Web.Identity;
 /// <inheritdoc />
 public class UserIdentity : IUserIdentity
 {
-    /// <inheritdoc />
-    public int Id => Identity.Id;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
     /// <inheritdoc />
-    public CustomIdentity Identity { get; }
+    public int Id => Identity?.Id ?? 0;
 
     /// <inheritdoc />
-    public Trainer CurrentTrainer { get; }
+    public CustomIdentity Identity => (_httpContextAccessor.HttpContext?.User.Identity as CustomIdentity)!;
 
     /// <inheritdoc />
-    public bool IsSuperUser { get; }
+    public Trainer CurrentTrainer => Identity?.Trainer!;
+
+    /// <inheritdoc />
+    public bool IsSuperUser => _httpContextAccessor.HttpContext!.User.IsInRole("SuperUser");
 
     public UserIdentity(IHttpContextAccessor httpContextAccessor)
     {
-        var identity = httpContextAccessor.HttpContext?.User.Identity as CustomIdentity ??
-                       throw new InvalidOperationException("Cannot retrieve identity of current user.");
-
-        Identity       = identity;
-        CurrentTrainer = identity.Trainer;
-
-        IsSuperUser = httpContextAccessor.HttpContext!.User.IsInRole("SuperUser");
+        _httpContextAccessor = httpContextAccessor;
     }
 }

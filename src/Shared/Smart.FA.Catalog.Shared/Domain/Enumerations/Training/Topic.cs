@@ -1,6 +1,8 @@
+using Smart.FA.Catalog.Shared.Domain.Enumerations.Common;
+
 namespace Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
-public class Topic : Enumeration
+public class Topic : Enumeration<Topic>
 {
     public static readonly Topic LanguageCourse        = new(1, nameof(LanguageCourse));
     public static readonly Topic InformationTechnology = new(2, nameof(InformationTechnology));

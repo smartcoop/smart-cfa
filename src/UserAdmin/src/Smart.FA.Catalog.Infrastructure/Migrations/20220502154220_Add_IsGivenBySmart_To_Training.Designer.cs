@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 
@@ -11,9 +12,10 @@ using Smart.FA.Catalog.Infrastructure.Persistence;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220502154220_Add_IsGivenBySmart_To_Training")]
+    partial class Add_IsGivenBySmart_To_Training
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,9 +52,6 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<string>("DefaultLanguage")
                         .IsRequired()
                         .HasColumnType("nchar(2)");
@@ -63,9 +62,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<DateTime>("LastModifiedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("LastModifiedBy")
-                        .HasColumnType("int");
 
                     b.Property<string>("ProfileImagePath")
                         .HasMaxLength(50)
@@ -144,17 +140,11 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-                        
                     b.Property<bool>("IsGivenBySmart")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("LastModifiedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("LastModifiedBy")
-                        .HasColumnType("int");
 
                     b.Property<int>("StatusType")
                         .ValueGeneratedOnAdd()
@@ -172,11 +162,10 @@ namespace Infrastructure.Migrations
                     b.Property<int>("TrainingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("AttendanceType")
-                        .HasColumnType("int")
-                        .HasColumnName("AttendanceTypeId");
+                    b.Property<int>("AttendanceTypeId")
+                        .HasColumnType("int");
 
-                    b.HasKey("TrainingId", "AttendanceType");
+                    b.HasKey("TrainingId", "AttendanceTypeId");
 
                     b.ToTable("TrainingAttendance", "Cfa");
                 });
@@ -217,11 +206,10 @@ namespace Infrastructure.Migrations
                     b.Property<int>("TrainingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TargetAudienceType")
-                        .HasColumnType("int")
-                        .HasColumnName("TargetAudienceTypeId");
+                    b.Property<int>("TargetAudienceTypeId")
+                        .HasColumnType("int");
 
-                    b.HasKey("TrainingId", "TargetAudienceType");
+                    b.HasKey("TrainingId", "TargetAudienceTypeId");
 
                     b.ToTable("TrainingTargetAudience", "Cfa");
                 });
@@ -251,14 +239,8 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("LastModifiedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("LastModifiedBy")
-                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -284,11 +266,10 @@ namespace Infrastructure.Migrations
                     b.Property<int>("TrainingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("VatExemptionType")
-                        .HasColumnType("int")
-                        .HasColumnName("VatExemptionTypeId");
+                    b.Property<int>("VatExemptionTypeId")
+                        .HasColumnType("int");
 
-                    b.HasKey("TrainingId", "VatExemptionType");
+                    b.HasKey("TrainingId", "VatExemptionTypeId");
 
                     b.ToTable("VatExemptionClaim", "Cfa");
                 });
@@ -405,11 +386,6 @@ namespace Infrastructure.Migrations
                         {
                             Id = 3,
                             Name = "Unemployed"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Other"
                         });
                 });
 
@@ -458,6 +434,11 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
+                            Id = 8,
+                            Name = "EconomyMarketing"
+                        },
+                        new
+                        {
                             Id = 6,
                             Name = "Communication"
                         },
@@ -468,18 +449,8 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = 8,
-                            Name = "EconomyMarketing"
-                        },
-                        new
-                        {
                             Id = 9,
                             Name = "Sport"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Name = "Other"
                         });
                 });
 
@@ -555,11 +526,6 @@ namespace Infrastructure.Migrations
                         {
                             Id = 3,
                             Name = "ScholarTraining"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Other"
                         });
                 });
 

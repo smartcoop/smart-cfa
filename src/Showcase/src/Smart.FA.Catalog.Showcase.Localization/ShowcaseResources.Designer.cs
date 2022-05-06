@@ -187,6 +187,24 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cette page n&apos;existe pas.
+        /// </summary>
+        public static string GenericNotFoundPageMessage {
+            get {
+                return ResourceManager.GetString("GenericNotFoundPageMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Désolé.
+        /// </summary>
+        public static string GenericNotFoundPageTitle {
+            get {
+                return ResourceManager.GetString("GenericNotFoundPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bienvenue dans le monde de la formation de Smart, .
         /// </summary>
         public static string Homepage_IntroductionPart1 {
@@ -309,6 +327,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         public static string TitteTrainings {
             get {
                 return ResourceManager.GetString("TitteTrainings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retour vers les formations.
+        /// </summary>
+        public static string ToTrainingHomePage {
+            get {
+                return ResourceManager.GetString("ToTrainingHomePage", resourceCulture);
             }
         }
         

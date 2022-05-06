@@ -28,7 +28,7 @@ public class TrainingQueries : ITrainingQueries
                     INNER JOIN Cfa.TrainingLocalizedDetails TD ON T.Id = TD.TrainingId
                     WHERE TD.TrainingId = @TrainingId AND TD.Language = @Language";
         await using var connection = new SqlConnection(_connectionString);
-        return await connection.QuerySingleAsync<TrainingDto>(sql, new {trainingId, language});
+        return await connection.QuerySingleAsync<TrainingDto>(sql, new { trainingId, language });
     }
 
     public async Task<IEnumerable<TrainingDto>> GetListAsync
@@ -55,12 +55,13 @@ public class TrainingQueries : ITrainingQueries
             {
                 if (topicId is not null)
                 {
-                    dto.TopicIds?.Add((int) topicId);
+                    dto.TopicIds?.Add((int)topicId);
                 }
+
                 return dto;
             },
             splitOn: "TopicId",
-            param: new {trainerId, language});
+            param: new { trainerId, language });
     }
 
     //TODO: it's a bit heavy for a simple paging system (though it works), we might want to look to refactor that at some point
@@ -68,18 +69,28 @@ public class TrainingQueries : ITrainingQueries
         CancellationToken cancellationToken)
     {
         var sql = @"SELECT
-	                    T.Id 'TrainingId',
-	                    T.TrainingStatusTypeId,
-	                    TD.Title,
-	                    TD.Goal,
-                        TD.Language,
+                        TA.Id 'TrainingId',
+                        TA.TrainingStatusTypeId,
+                        TA.Title,
+                        TA.Goal,
+                        TA.Language,
                         TC.TopicId
-                    FROM (SELECT * FROM Cfa.Training T ORDER BY T.Id
-                    OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY) T
-                    INNER JOIN Cfa.TrainerAssignment TE ON T.Id = TE.TrainingId
-                    LEFT JOIN Cfa.TrainingTopic TC ON T.Id = TC.TrainingId
-                    INNER JOIN Cfa.TrainingLocalizedDetails TD ON T.Id = TD.TrainingId
-                    WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language";
+                        FROM
+                            (SELECT
+                                 *
+                             FROM
+                                (SELECT
+                                     T.Id,
+                                     T.TrainingStatusTypeId,
+                                     TD.Title,
+                                     TD.Goal,
+                                     TD.Language FROM Cfa.Training T
+                                INNER JOIN Cfa.TrainerAssignment TE ON T.Id = TE.TrainingId
+                                INNER JOIN Cfa.TrainingLocalizedDetails TD ON T.Id = TD.TrainingId
+                                WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language) TA
+                                ORDER BY TA.Id
+                                OFFSET  @Offset ROWS FETCH NEXT @PageSize ROWS ONLY) TA
+                        LEFT JOIN Cfa.TrainingTopic TC ON TA.Id = TC.TrainingId";
 
         var countsql = @"SELECT
 	                        COUNT(*)
@@ -95,19 +106,19 @@ public class TrainingQueries : ITrainingQueries
         await using var transaction = connection.BeginTransaction();
 
         //Fetch the count of distinct trainings
-        var count = await transaction.QuerySingleAsync<int>(countsql, new {trainerId, language});
+        var count = await transaction.QuerySingleAsync<int>(countsql, new { trainerId, language });
         //Get a list of training and splits field on the training topic id
         var list = await transaction.QueryAsync<TrainingDto, int?, TrainingDto>(sql, (dto, topicId) =>
             {
                 if (topicId is not null)
                 {
-                    dto.TopicIds?.Add((int) topicId);
+                    dto.TopicIds?.Add((int)topicId);
                 }
 
                 return dto;
             },
             splitOn: "TopicId",
-            param: new {trainerId, language, pageItem.Offset, pageItem.PageSize});
+            param: new { trainerId, language, pageItem.Offset, pageItem.PageSize });
         transaction.Commit();
         //Regroup all training records by id
         var result = list.GroupBy(dto => dto.TrainingId).Select(trainingGroup =>
