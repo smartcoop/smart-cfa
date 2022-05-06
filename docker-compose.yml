@@ -18,8 +18,8 @@ services:
     build:
       context: .
       dockerfile: Web.Dockerfile
-    hostname: ${DOCKER_NAME}-useradmin
-    container_name: ${DOCKER_NAME}-useradmin
+    hostname: ${DOCKER_NAME}-api
+    container_name: ${DOCKER_NAME}-api
     restart: always
     networks:
       - "cfa"
