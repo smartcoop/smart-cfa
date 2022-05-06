@@ -55,7 +55,7 @@ builder.Services.AddAuthorization(options =>
 });
 
 builder.Services.AddAuthentication(options => options.DefaultScheme = AuthSchemes.UserAdmin)
-    .AddScheme<CfaAuthenticationOptions, FAUserAdminAuthenticationHandler>(AuthSchemes.UserAdmin, _ => { });
+    .AddScheme<CfaAuthenticationOptions, UserAdminAuthenticationHandler>(AuthSchemes.UserAdmin, _ => { });
 
 
 var app = builder.Build();

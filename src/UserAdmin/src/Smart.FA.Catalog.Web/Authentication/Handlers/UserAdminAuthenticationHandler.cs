@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using System.Security.Principal;
+﻿using System.Security.Principal;
 using System.Text.Encodings.Web;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
@@ -9,7 +8,6 @@ using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Application.UseCases.Queries.Authorization;
 using Smart.FA.Catalog.Core.Domain.Models;
 using Smart.FA.Catalog.Core.Domain.User.Enumerations;
-using Smart.FA.Catalog.Shared.Domain.Enumerations;
 
 namespace Smart.FA.Catalog.Web.Authentication.Handlers;
 
@@ -18,11 +16,11 @@ namespace Smart.FA.Catalog.Web.Authentication.Handlers;
 /// The proxy header middleware parse incoming request from nginx to fetch a user and the name of the application the call originated.
 /// It will then proceed to log the user as a trainer for the rest of the request lifetime.
 /// </summary>
-public class FAUserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthenticationOptions>
+public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthenticationOptions>
 {
     private readonly IMediator _mediator;
 
-    public FAUserAdminAuthenticationHandler(
+    public UserAdminAuthenticationHandler(
         IMediator mediator,
         IOptionsMonitor<CfaAuthenticationOptions> options,
         ILoggerFactory logger,
@@ -58,9 +56,9 @@ public class FAUserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthent
 
     private async Task<GetTrainerFromUserAppResponse> GetTrainerBySmartUserIdAndApplicationTypeAsync()
     {
-        var userId          = string.IsNullOrEmpty(Context.Request.Headers["userid"].ToString()) ? "1" : Context.Request.Headers["userid"].ToString();
-        var appName         = string.IsNullOrEmpty(Context.Request.Headers["smartApplication"].ToString()) ? ApplicationType.Account.Name : Context.Request.Headers["smartApplication"].ToString();
-        var applicationType = Enumeration.FromDisplayName<ApplicationType>(appName);
+        var userId = string.IsNullOrEmpty(Context.Request.Headers["userid"].ToString()) ? "1" : Context.Request.Headers["userid"].ToString();
+        var appName = string.IsNullOrEmpty(Context.Request.Headers["smartApplication"].ToString()) ? ApplicationType.Account.Name : Context.Request.Headers["smartApplication"].ToString();
+        var applicationType = ApplicationType.FromName(appName);
 
         var response = await _mediator.Send(new GetTrainerFromUserAppRequest { UserId = userId, ApplicationType = applicationType });
         return response;

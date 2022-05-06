@@ -22,7 +22,7 @@ public static class ServiceCollectionExtensions
         services.Configure<AdminOptions>(configuration.GetSection(AdminOptions.SectionName));
         services.Configure<MediatROptions>(configuration.GetSection(MediatROptions.SectionName));
         services.AddScoped<IAuthorizationHandler, UserChartRevisionApprovalHandler>();
-        services.AddSingleton<IAuthorizationMiddlewareResultHandler, FAUserAdminAuthorizationResultHandler>();
+        services.AddSingleton<IAuthorizationMiddlewareResultHandler, UserAdminAuthorizationResultHandler>();
         return services;
     }
 }

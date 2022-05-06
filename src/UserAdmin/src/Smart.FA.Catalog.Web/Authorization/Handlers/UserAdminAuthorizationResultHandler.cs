@@ -4,7 +4,7 @@ using Smart.FA.Catalog.Web.Authorization.Policy.Requirements;
 
 namespace Smart.FA.Catalog.Web.Authorization.Handlers;
 
-public class FAUserAdminAuthorizationResultHandler : IAuthorizationMiddlewareResultHandler
+public class UserAdminAuthorizationResultHandler : IAuthorizationMiddlewareResultHandler
 {
     private readonly AuthorizationMiddlewareResultHandler _defaultHandler = new();
 
