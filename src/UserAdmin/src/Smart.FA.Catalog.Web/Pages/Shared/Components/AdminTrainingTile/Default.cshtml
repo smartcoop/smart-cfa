@@ -12,11 +12,11 @@
 <smart-card>
     <smart-card-body>
         <smart-card-title text="@trainingDto.Title"></smart-card-title>
-        <smart-muted-text text="@string.Join(", ", trainingDto.TopicIds!.Select(topic => _localizer[Enumeration.FromValue<Topic>(topic).Name])) "></smart-muted-text>
+        <smart-muted-text text="@string.Join(", ", trainingDto.TopicIds!.Select(topic => _localizer[Topic.FromValue(topic).Name])) "></smart-muted-text>
     </smart-card-body>
     <smart-card-actions>
         <div class="o-flex o-flex--vertical-center o-flex--justify-between o-flex--spaced-wide">
-            <smart-pill label="@(_localizer[Enumeration.FromValue<TrainingStatusType>(trainingDto!.TrainingStatusTypeId).Name])"></smart-pill>
+            <smart-pill label="@(_localizer[TrainingStatusType.FromValue(trainingDto.TrainingStatusTypeId).Name])"></smart-pill>
             <div class="c-button-toolbar">
                 <a href="/admin/trainings/update/@trainingDto!.TrainingId">
                     <smart-button leading-icon="EditAlt" button-style="Borderless"></smart-button>

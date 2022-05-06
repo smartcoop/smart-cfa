@@ -55,7 +55,7 @@ public static class TrainerFactory
             , TrainerIdentity.Create
             (
                 user.UserId
-                , Enumeration.FromDisplayName<ApplicationType>(user.ApplicationType)
+                , ApplicationType.FromName(user.ApplicationType)
             ).Value
             , fixture.Create<string>()
             , fixture.Create<string>()

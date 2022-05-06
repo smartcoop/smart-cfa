@@ -1,8 +1,8 @@
-using Smart.FA.Catalog.Shared.Domain.Enumerations;
+using Smart.FA.Catalog.Shared.Domain.Enumerations.Common;
 
 namespace Smart.FA.Catalog.Web.Pages.SuperUser;
 
-public class SuperUserSideMenuItem : Enumeration
+public class SuperUserSideMenuItem : Enumeration<SuperUserSideMenuItem>
 {
     public string Href { get; }
 

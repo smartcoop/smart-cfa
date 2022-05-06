@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using Smart.FA.Catalog.Web.Authorization.Policy;
 
 namespace Smart.FA.Catalog.Web;
 public static class MvcBuilderExtensions
@@ -15,7 +16,7 @@ public static class MvcBuilderExtensions
 
     private static void AddPageConventionsAuthorization(this PageConventionCollection conventions)
     {
-        conventions.AuthorizeFolder("/Admin", Policies.List.AtLeastOneValidUserChartRevisionApproval);
-        conventions.AuthorizeFolder("/SuperUser", Policies.List.MustBeSuperUser);
+        conventions.AuthorizeFolder("/Admin", Policies.AtLeastOneValidUserChartRevisionApproval);
+        conventions.AuthorizeFolder("/SuperUser", Policies.MustBeSuperUser);
     }
 }

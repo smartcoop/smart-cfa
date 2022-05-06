@@ -1,7 +1,17 @@
 ﻿@page "/superuser/trainings"
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Microsoft.Extensions.Localization
+@using Smart.Design.Razor.TagHelpers.Alert
+@using Smart.Design.Razor.TagHelpers.Card
+@using Smart.Design.Razor.TagHelpers.Elements.Button
+@using Smart.Design.Razor.TagHelpers.Elements.Checkbox
+@using Smart.Design.Razor.TagHelpers.FormGroup
+@using Smart.Design.Razor.TagHelpers.Grid
+@using Smart.Design.Razor.TagHelpers.Icon
+@using Smart.Design.Razor.TagHelpers.InputGroup
+@using Smart.Design.Razor.TagHelpers.Spacer
 @using Smart.FA.Catalog.Shared.Domain.Enumerations
+@using Smart.FA.Catalog.Shared.Domain.Enumerations.Common
 @using Smart.FA.Catalog.Shared.Domain.Enumerations.Training
 @model SuperUserTrainingListPageModel
 
@@ -59,7 +69,7 @@
                             <div id="topics" class="c-accordion__item-content">
                                 <smart-formgroup>
                                     <smart-grid>
-                                        @foreach (var topic in Enumeration.GetAll<Topic>())
+                                        @foreach (var topic in Topic.List)
                                         {
                                             <smart-grid-column width="3">
                                                 <smart-checkbox label="@_localizer[topic.Name]" asp-for="GetTrainingsRequest.Topics" value="@topic.Id" checked="@(topic.IsContainedIn(Model.GetTrainingsRequest?.Topics))"></smart-checkbox>

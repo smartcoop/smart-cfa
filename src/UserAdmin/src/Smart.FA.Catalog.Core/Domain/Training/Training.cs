@@ -30,9 +30,9 @@ public class Training : SeedWork.Entity, IAggregateRoot
     public virtual IReadOnlyCollection<TrainingLocalizedDetails> Details => _details.AsReadOnly();
     public virtual IReadOnlyCollection<TrainingAttendance> Attendances => _attendances.AsReadOnly();
     public virtual IReadOnlyCollection<TrainingTopic> Topics => _topics.AsReadOnly();
-
     public int TrainerCreatorId { get; }
     public TrainingStatusType StatusType { get; private set; } = TrainingStatusType.Draft;
+    public bool IsGivenBySmart { get; private set; }
 
     #endregion
 
@@ -64,6 +64,11 @@ public class Training : SeedWork.Entity, IAggregateRoot
     #endregion
 
     #region Public methods
+
+    public void MarkAsGivenBySmart(bool isFromSmart = true )
+    {
+        IsGivenBySmart = isFromSmart;
+    }
 
     public void SwitchVatExemptionTypes(IEnumerable<VatExemptionType>? vatExemptionTypes)
     {

@@ -1,8 +1,8 @@
-using Smart.FA.Catalog.Shared.Domain.Enumerations;
+using Smart.FA.Catalog.Shared.Domain.Enumerations.Common;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin;
 
-public class SideMenuItem : Enumeration
+public class SideMenuItem : Enumeration<SideMenuItem>
 {
     public string Href { get; }
 

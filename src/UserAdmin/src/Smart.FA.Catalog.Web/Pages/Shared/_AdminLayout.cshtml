@@ -10,9 +10,9 @@
 @{
     var requestCulture = Context.Features.Get<IRequestCultureFeature>() ?? throw new InvalidOperationException($"Couldn't get {nameof(IRequestCultureFeature)}");
     var supportedUiCultures = _requestLocalizationOptions
-            .Value?
-            .SupportedUICultures?
-            .Select(supportedCulture => new SelectListItem(supportedCulture.DisplayName, supportedCulture.TwoLetterISOLanguageName)) ??
+        .Value?
+        .SupportedUICultures?
+        .Select(supportedCulture => new SelectListItem(supportedCulture.DisplayName, supportedCulture.TwoLetterISOLanguageName)) ??
         throw new InvalidOperationException("Supported culture not defined");
 }
 <!DOCTYPE html>
@@ -22,7 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/_content/Smart.Design.Razor/css/main.css"/>
-    <link rel="stylesheet" href="~/Smart.FA.Catalog.Web.styles.css" />
+    <link rel="stylesheet" href="~/Smart.FA.Catalog.Web.styles.css"/>
 
 </head>
 <body class="u-maximize-height u-overflow-hidden">
@@ -53,7 +53,7 @@
                     <div class="c-toolbar__item">
                         <a class="c-user-navigation" href="#" data-menu="userMenu">
                             <div class="c-avatar c-avatar--img">
-                                <img src="https://i1.sndcdn.com/avatars-000304411295-zx2krs-t200x200.jpg" alt="avatar">
+                                <img src="/admin/myprofile?handler=LoadImage" alt="avatar">
 
                             </div>
                         </a>
@@ -75,10 +75,10 @@
         <div class="c-app-layout-inner">
             <div class="c-app-layout-inner__sidebar">
                 <ul class="c-side-menu">
-                    @foreach (var sideMenuItem in Enumeration.GetAll<SideMenuItem>())
+                    @foreach (var sideMenuItem in SideMenuItem.List)
                     {
-                        <li class="c-side-menu__item @((SideMenuItem) ViewData[nameof(SideMenuItem)]! == sideMenuItem ? "c-side-menu__item--active" : "")">
-                            <a class="c-side-menu__link " href="@sideMenuItem.Href" >@sideMenuItem.DisplayName()</a>
+                        <li class="c-side-menu__item @((SideMenuItem)ViewData[nameof(SideMenuItem)]! == sideMenuItem ? "c-side-menu__item--active" : "")">
+                            <a class="c-side-menu__link " href="@sideMenuItem.Href">@sideMenuItem.DisplayName()</a>
                         </li>
                     }
                 </ul>
@@ -86,7 +86,7 @@
                 @if (UserIdentity.IsSuperUser)
                 {
                     <ul class="c-side-menu">
-                        @foreach (var sideMenuItem in Enumeration.GetAll<SuperUserSideMenuItem>())
+                        @foreach (var sideMenuItem in SuperUserSideMenuItem.List)
                         {
                             <li class="c-side-menu__item @((SuperUserSideMenuItem) ViewData[nameof(SuperUserSideMenuItem)]! == sideMenuItem ? "c-side-menu__item--active" : "")">
                                 <a class="c-side-menu__link" href="@sideMenuItem.Href">@sideMenuItem.DisplayName()</a>
@@ -104,7 +104,7 @@
                         </div>
                     }
                     <div class="u-scroll-wrapper-body">
-                            @RenderBody()
+                        @RenderBody()
                     </div>
                 </div>
             </div>

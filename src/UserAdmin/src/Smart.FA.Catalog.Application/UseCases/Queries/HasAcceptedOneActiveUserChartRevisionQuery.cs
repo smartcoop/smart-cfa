@@ -8,9 +8,9 @@ namespace Smart.FA.Catalog.Application.UseCases.Queries;
 /// <summary>
 /// Determines if a trainer can access the services of catalog.
 /// </summary>
-public class CanTrainerAccessCatalogServicesQuery : IRequest<bool>
+public class HasAcceptedOneActiveUserChartRevisionQuery : IRequest<bool>
 {
-    public CanTrainerAccessCatalogServicesQuery(int trainerId)
+    public HasAcceptedOneActiveUserChartRevisionQuery(int trainerId)
     {
         TrainerId = trainerId;
     }
@@ -19,20 +19,20 @@ public class CanTrainerAccessCatalogServicesQuery : IRequest<bool>
 }
 
 /// <summary>
-/// Handles <see cref="CanTrainerAccessCatalogServicesQuery" />.
+/// Handles <see cref="HasAcceptedOneActiveUserChartRevisionQuery" />.
 /// </summary>
-public class CanTrainerAccessCatalogServicesQueryHandler : IRequestHandler<CanTrainerAccessCatalogServicesQuery, bool>
+public class HasAcceptedOneActiveUserChartRevisionQueryHandler : IRequestHandler<HasAcceptedOneActiveUserChartRevisionQuery, bool>
 {
     private readonly CatalogContext _catalogContext;
-    private readonly ILogger<CanTrainerAccessCatalogServicesQueryHandler> _logger;
+    private readonly ILogger<HasAcceptedOneActiveUserChartRevisionQueryHandler> _logger;
 
-    public CanTrainerAccessCatalogServicesQueryHandler(ILogger<CanTrainerAccessCatalogServicesQueryHandler> logger, CatalogContext catalogContext)
+    public HasAcceptedOneActiveUserChartRevisionQueryHandler(ILogger<HasAcceptedOneActiveUserChartRevisionQueryHandler> logger, CatalogContext catalogContext)
     {
         _logger = logger;
         _catalogContext = catalogContext;
     }
 
-    public async Task<bool> Handle(CanTrainerAccessCatalogServicesQuery query, CancellationToken cancellationToken)
+    public async Task<bool> Handle(HasAcceptedOneActiveUserChartRevisionQuery query, CancellationToken cancellationToken)
     {
         try
         {

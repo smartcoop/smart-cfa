@@ -15,7 +15,7 @@ public class TrainingTopicConfiguration : IEntityTypeConfiguration<TrainingTopic
             .HasForeignKey(trainingTopic => trainingTopic.TrainingId);
 
         builder.Property(trainingTopic => trainingTopic.Topic)
-            .HasConversion(topic => topic.Id, id => Topic.FromValue<Topic>(id))
+            .HasConversion(topic => topic.Id, id => Topic.FromValue(id))
             .HasColumnName("TopicId");
 
         builder.ToTable("TrainingTopic");

@@ -1,13 +1,10 @@
 using Smart.Design.Razor.Extensions;
 using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using NLog.Web;
 using Smart.FA.Catalog.Application.Extensions;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Infrastructure.Extensions;
-using Smart.FA.Catalog.Web;
 using Smart.FA.Catalog.Web.Extensions;
-using Smart.FA.Catalog.Web.Extensions.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,13 +45,12 @@ builder.Services
         builder.Configuration.GetSection("EFCore"),
         builder.Configuration.GetSection("S3Storage"));
 
-builder.Services.AddCatalogAuthentication().AddCatalogAuthorization();
+builder.Services.AddWebAuthentication().AddWebAuthorization();
 
 var app = builder.Build();
 
 app.UseForwardedHeaders();
 
-app.UseProxyHeaders();
 
 if (app.Environment.IsProduction())
 {
@@ -67,14 +63,19 @@ else
     app.UseStatusCodePagesWithReExecute("/{0}");
 }
 
-
 app.UseRequestLocalization();
 
-app.UseHttpsRedirection();
+// By Default this value is set to false only on Development environments.
+if (app.Configuration.GetValue("ForceHttpRedirection", true))
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

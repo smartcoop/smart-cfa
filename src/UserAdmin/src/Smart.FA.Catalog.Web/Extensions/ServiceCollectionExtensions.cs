@@ -1,11 +1,13 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Smart.FA.Catalog.Application.Models.Options;
 using Smart.FA.Catalog.Core.Services;
+using Smart.FA.Catalog.Web.Authentication;
+using Smart.FA.Catalog.Web.Authentication.Handlers;
+using Smart.FA.Catalog.Web.Authorization.Handlers;
+using Smart.FA.Catalog.Web.Authorization.Policy;
+using Smart.FA.Catalog.Web.Authorization.Policy.Requirements;
 using Smart.FA.Catalog.Web.Identity;
 using Smart.FA.Catalog.Web.Options;
-using Smart.FA.Catalog.Web.Policies;
-using Smart.FA.Catalog.Web.Policies.Requirements;
 
 namespace Smart.FA.Catalog.Web.Extensions;
 
@@ -15,42 +17,42 @@ public static class ServiceCollectionExtensions
     {
         return services
             .AddScoped<IUserIdentity, UserIdentity>()
-            .AddOptions(configuration)
-            .AddAuthorizationHandlers();
+            .AddOptions(configuration);
     }
 
     private static IServiceCollection AddOptions(this IServiceCollection services, IConfiguration configuration)
     {
-        return services
-            .Configure<AdminOptions>(configuration.GetSection(AdminOptions.SectionName))
-            .Configure<MediatROptions>(configuration.GetSection(MediatROptions.SectionName))
-            .Configure<SuperUserOptions>(configuration.GetSection(SuperUserOptions.SectionName));
-    }
-
-    private static IServiceCollection AddAuthorizationHandlers(this IServiceCollection services)
-    {
-        return services
-            .AddScoped<IAuthorizationHandler, UserChartRevisionApprovalHandler>();
-    }
-
-    public static IServiceCollection AddCatalogAuthentication(this IServiceCollection services)
-    {
-        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie(options =>
-            {
-                options.AccessDeniedPath = new PathString("/UserChart");
-            });
+        services.Configure<AdminOptions>(configuration.GetSection(AdminOptions.SectionName));
+        services.Configure<MediatROptions>(configuration.GetSection(MediatROptions.SectionName));;
         return services;
     }
 
-    public static IServiceCollection AddCatalogAuthorization(this IServiceCollection services)
+    public static IServiceCollection AddWebAuthentication(this IServiceCollection services)
     {
-        return services.AddAuthorization(options =>
-        {
-            options.AddPolicy(List.AtLeastOneValidUserChartRevisionApproval,
-                policy => policy.Requirements.Add(new AtLeastOneValidUserChartRevisionApprovalRequirement()));
+        services.AddAuthentication(options => options.DefaultScheme = AuthSchemes.UserAdmin)
+            .AddScheme<CfaAuthenticationOptions, UserAdminAuthenticationHandler>(AuthSchemes.UserAdmin, null);
 
-            options.AddPolicy(List.MustBeSuperUser, policy => policy.RequireRole("SuperUser"));
-        });
+        return services;
+    }
+
+    public static IServiceCollection AddWebAuthorization(this IServiceCollection services)
+    {
+        return services
+            .AddAuthorization(ConfigureAuthorizationOptions)
+            .AddAuthorizationHandlers();
+    }
+
+    public static IServiceCollection AddAuthorizationHandlers(this IServiceCollection services)
+    {
+        return services.AddSingleton<IAuthorizationMiddlewareResultHandler, UserAdminAuthorizationResultHandler>()
+            .AddScoped<IAuthorizationHandler, UserChartRevisionApprovalHandler>();
+    }
+
+    private static void ConfigureAuthorizationOptions(this AuthorizationOptions options)
+    {
+        options.AddPolicy(Policies.AtLeastOneValidUserChartRevisionApproval,
+            policy => policy.Requirements.Add(new AtLeastOneActiveUserChartRevisionApprovalRequirement()));
+
+        options.AddPolicy(Policies.MustBeSuperUser, policy => policy.RequireRole("SuperUser"));
     }
 }

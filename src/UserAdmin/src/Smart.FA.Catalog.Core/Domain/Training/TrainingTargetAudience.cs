@@ -7,7 +7,6 @@ public class TrainingTargetAudience
     #region Properties
 
     public int TrainingId { get; }
-    public int TargetAudienceTypeId { get; }
     public virtual Training Training { get; } = null!;
     public virtual TargetAudienceType TargetAudienceType { get; } = null!;
 
@@ -25,7 +24,6 @@ public class TrainingTargetAudience
         Training = training;
         TargetAudienceType = targetAudienceType;
         TrainingId = training.Id;
-        TargetAudienceTypeId = targetAudienceType.Id;
     }
 
     #endregion

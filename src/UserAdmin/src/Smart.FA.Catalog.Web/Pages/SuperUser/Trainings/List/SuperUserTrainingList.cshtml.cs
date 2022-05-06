@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Domain.Dto;
 using Smart.FA.Catalog.Core.Extensions;
-using Smart.FA.Catalog.Shared.Domain.Enumerations;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 using Smart.FA.Catalog.Web.Options;
 
@@ -44,6 +43,7 @@ public class SuperUserTrainingListPageModel : PageModel
     public async Task<PageResult> OnGetAsync()
     {
         ViewData[nameof(SuperUserSideMenuItem)] = SuperUserSideMenuItem.SuperUserTrainingList;
+        LoadData();
 
         // The forms has an input hidden with search as name.
         // This allows us to differentiate a call that comes from the form or the [previous] [next] buttons.
@@ -65,14 +65,14 @@ public class SuperUserTrainingListPageModel : PageModel
         }
         catch (Exception exception)
         {
-            _logger.LogError(exception, $"An error occurred while retrieving training for request {SerializeHtmlForm()?ToJson()}");
+            _logger.LogError(exception, $"An error occurred while retrieving training for request {SerializeHtmlForm()?.ToJson()}");
             ErrorMessage = CatalogResources.AnErrorOccurredWhileSearching;
         }
     }
 
     private void LoadData()
     {
-        Statuses = Enumeration.GetAll<TrainingStatusType>()
+        Statuses = TrainingStatusType.List
             .Select(statusType => new SelectListItem(_localizer[statusType.Name], statusType.Id.ToString(), GetTrainingsRequest?.Status == statusType.Id));
     }
 

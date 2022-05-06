@@ -1,6 +1,8 @@
+using Smart.FA.Catalog.Shared.Domain.Enumerations.Common;
+
 namespace Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
-public class VatExemptionType : Enumeration
+public class VatExemptionType : Enumeration<VatExemptionType>
 {
     public static readonly VatExemptionType LanguageCourse  = new(1, nameof(LanguageCourse));
     public static readonly VatExemptionType Professional    = new(2, nameof(Professional));

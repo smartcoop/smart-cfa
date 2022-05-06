@@ -1,12 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Smart.FA.Catalog.Core.SeedWork;
-using Smart.FA.Catalog.Shared.Domain.Enumerations;
+using Smart.FA.Catalog.Shared.Domain.Enumerations.Common;
 
 namespace Smart.FA.Catalog.Infrastructure.Persistence.Configuration.EntityConfigurations;
 
 public class EnumerationConfigurationBase<T> : IEntityTypeConfiguration<T>
-    where T : Enumeration
+    where T : Enumeration<T>
 {
     public virtual void Configure(EntityTypeBuilder<T> builder)
     {
@@ -43,6 +42,6 @@ public class EnumerationConfigurationBase<T> : IEntityTypeConfiguration<T>
 
     protected virtual void Seed(EntityTypeBuilder<T> builder)
     {
-        builder.HasData(Enumeration.GetAll<T>());
+        builder.HasData(Enumeration<T>.List);
     }
 }

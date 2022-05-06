@@ -27,7 +27,7 @@ public class TrainerSocialNetworkConfiguration : IEntityTypeConfiguration<Traine
             .HasConversion
             (
                 socialNetwork => socialNetwork.Id,
-                socialNetworkId => Enumeration.FromValue<SocialNetwork>(socialNetworkId)
+                socialNetworkId => SocialNetwork.FromValue(socialNetworkId)
             ).HasColumnName($"{nameof(SocialNetwork)}Id");
 
         builder.Property(trainerSocialNetwork => trainerSocialNetwork.UrlToProfile)
