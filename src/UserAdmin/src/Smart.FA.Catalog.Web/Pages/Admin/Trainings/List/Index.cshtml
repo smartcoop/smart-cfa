@@ -30,7 +30,7 @@
 
 @if (Model.Trainings is not null && !Model.Trainings.Any())
 {
-    <div class="c-error-page">
+    <div class="c-error-page" style="height: 50%">
         <h4 class="c-error-page__title" style="font-size: 3.0rem;">@CatalogResources.YouDontHaveAnyTrainings</h4>
         <p class="c-error-page__desc" style="font-size: 2.4rem;">@CatalogResources.ClickHereToAddANewTraining</p>
         <a class="c-button c-button--secondary" href="/admin/Trainings/Create">
