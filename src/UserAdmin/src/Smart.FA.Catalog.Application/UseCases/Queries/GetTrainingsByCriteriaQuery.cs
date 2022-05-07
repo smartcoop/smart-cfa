@@ -69,8 +69,8 @@ public class GetTrainingsByCriteriaQueryHandler : IRequestHandler<GetTrainingsBy
         return trainings.Select(training =>
         {
             // We don't know if there is a details for the underlying selected locale, so we return the existing one if not.
-            var eurrentCultureAlpha2Code = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
-            var detail = training.Details.FirstOrDefault(detail => string.Equals(detail.Language.Value, eurrentCultureAlpha2Code, StringComparison.OrdinalIgnoreCase))
+            var currentCultureAlpha2Code = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+            var detail = training.Details.FirstOrDefault(detail => string.Equals(detail.Language.Value, currentCultureAlpha2Code, StringComparison.OrdinalIgnoreCase))
                          ?? training.Details.First();
 
             return new TrainingDto(training.Id,
