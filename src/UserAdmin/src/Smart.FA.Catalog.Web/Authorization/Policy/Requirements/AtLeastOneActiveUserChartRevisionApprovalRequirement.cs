@@ -6,7 +6,7 @@ using Smart.FA.Catalog.Core.Services;
 namespace Smart.FA.Catalog.Web.Authorization.Policy.Requirements;
 
 /// <summary>
-/// Requires that the user have already accepted at least one valid user chart
+/// Requires that the user has accepted at least one active user chart revision.
 /// </summary>
 public class AtLeastOneActiveUserChartRevisionApprovalRequirement : IAuthorizationRequirement
 {

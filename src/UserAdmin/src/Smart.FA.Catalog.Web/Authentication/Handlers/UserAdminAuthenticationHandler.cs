@@ -71,7 +71,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
     /// <summary>
     /// Checks if the required headers that should be set by Account are actually set.
     /// </summary>
-    /// <exception cref="InvalidOperationException">Occurs when there is one or more required headers missing.</exception>
+    /// <exception cref="AccountHeadersMissingException">Occurs when there is one or more required headers missing.</exception>
     private void EnsureHeaders()
     {
         SetFakeHeaderValueIfDevelopmentEnvironmentAndMissing();
