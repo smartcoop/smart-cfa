@@ -13,14 +13,21 @@
     </div>
 </section>
 
+@if (Model.TrainingsCount > 0)
+{
+    <section class="section__training-list">
+        <div class="section__label">
+            <h5>@ShowcaseResources.Homepage_TrainingCount @Model.TrainingsCount | @ShowcaseResources.Homepage_TrainersCount @Model.TrainersCount</h5>
+        </div>
 
-<section class="section__training-list">
-    <div class="section__label">
-        @* Ajouter le nombre de formateurs et de formations en lieu et place des xxx *@
-        <h5>@ShowcaseResources.Homepage_TrainingCount xxx | @ShowcaseResources.Homepage_TrainersCount xxx</h5>
-    </div>
-    <div class="section__label">
-        <h2>@ShowcaseResources.Homepage_Subtitle</h2>
-    </div>
-    @* Boucle sur 10 formations order by random *@
-</section>
+        <div class="section__label">
+            <h2>@ShowcaseResources.Homepage_Subtitle</h2>
+        </div>
+
+        @foreach (var training in Model.Trainings)
+        {
+            @await Html.PartialAsync("_TrainingTitle", training)
+        }
+
+    </section>
+}
