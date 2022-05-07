@@ -1,9 +1,8 @@
 using MediatR;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin;
 
-public abstract class AdminPage : PageModel
+public abstract class AdminPage : PageModelBase
 {
     protected IMediator Mediator { get; }
 
