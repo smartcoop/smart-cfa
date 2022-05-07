@@ -1,4 +1,6 @@
+using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Core.Domain;
@@ -9,6 +11,7 @@ using Smart.FA.Catalog.Core.Exceptions;
 using Smart.FA.Catalog.Core.LogEvents;
 using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Core.Services;
+using Smart.FA.Catalog.Infrastructure.Persistence;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
 namespace Smart.FA.Catalog.Application.UseCases.Commands;
@@ -17,44 +20,52 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
 {
     private readonly ILogger<UpdateTrainingCommandHandler> _logger;
     private readonly ITrainingRepository _trainingRepository;
-    private readonly ITrainerRepository _trainerRepository;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IMailService _mailService;
+    private readonly IValidator<UpdateTrainingRequest> _validator;
 
-    public UpdateTrainingCommandHandler
-    (
-        ILogger<UpdateTrainingCommandHandler> logger
-        , ITrainingRepository trainingRepository
-        , ITrainerRepository trainerRepository
-        , IUnitOfWork unitOfWork
-        , IMailService mailService
-    )
+    public UpdateTrainingCommandHandler(
+        ILogger<UpdateTrainingCommandHandler> logger,
+        ITrainingRepository trainingRepository,
+        IUnitOfWork unitOfWork, IValidator<UpdateTrainingRequest> validator)
     {
         _logger = logger;
         _trainingRepository = trainingRepository;
-        _trainerRepository = trainerRepository;
         _unitOfWork = unitOfWork;
-        _mailService = mailService;
+        _validator = validator;
     }
 
     public async Task<UpdateTrainingResponse> Handle(UpdateTrainingRequest request, CancellationToken cancellationToken)
     {
+        //TODO The validator should not be called inside the handler, actually we should not even be in the Handler's Handle method if the state is invalid.
+        // Checks if the trainer that made the edition is actually the creator and can therefore edit this.
+        var results = await _validator.ValidateAsync(request, cancellationToken);
+        if (!results.IsValid)
+        {
+            throw new InvalidOperationException(CatalogResources.UpdateTraining_YouCantEditATrainingYouDidntCreate);
+        }
+
         UpdateTrainingResponse resp = new();
 
         try
         {
             var training = await _trainingRepository.GetFullAsync(request.TrainingId, cancellationToken);
 
-            if (training is null) throw new TrainingException(Errors.Training.NotFound(request.TrainingId));
+            if (training is null)
+            {
+                throw new TrainingException(Errors.Training.NotFound(request.TrainingId));
+            }
 
-            training.UpdateDetails(request.DetailsDto.Title!, request.DetailsDto.Goal!, request.DetailsDto.Methodology!, request.DetailsDto.PracticalModalities, Language.Create(request.DetailsDto.Language).Value);
+            training.UpdateDetails(request.DetailsDto.Title!,
+                request.DetailsDto.Goal!,
+                request.DetailsDto.Methodology!,
+                request.DetailsDto.PracticalModalities,
+                Language.Create(request.DetailsDto.Language).Value);
+
             training.MarkAsGivenBySmart(request.IsGivenBySmart);
             training.SwitchVatExemptionTypes(request.VatExemptionTypes);
             training.SwitchTargetAudience(request.TargetAudienceTypes);
             training.SwitchAttendanceTypes(request.AttendanceTypes);
             training.SwitchTopics(request.Topics);
-            var trainers = await _trainerRepository.GetListAsync(request.TrainingId, cancellationToken);
-            training.AssignTrainers(trainers);
 
             var statusToChangeTo = request.IsDraft ? TrainingStatusType.Draft : TrainingStatusType.Validated;
 
@@ -66,6 +77,8 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
                 return resp;
             }
 
+            training.ChangeStatus(request.IsDraft ? TrainingStatusType.Draft : TrainingStatusType.Validated);
+
             _unitOfWork.RegisterDirty(training);
             _unitOfWork.Commit();
 
@@ -74,9 +87,9 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
             resp.Training = training;
             resp.SetSuccess();
         }
-        catch (Exception e)
+        catch (Exception exception)
         {
-            _logger.LogError("{Exception}", e.ToString());
+            _logger.LogError(exception, "Editing training {trainingId} resulted into an error", request.TrainingId);
             throw;
         }
 
@@ -100,4 +113,38 @@ public class UpdateTrainingRequest : IRequest<UpdateTrainingResponse>
 public class UpdateTrainingResponse : ResponseBase
 {
     public Training Training { get; set; } = null!;
+}
+
+/// <summary>
+/// Validates a <see cref="UpdateTrainingRequest" />.
+/// </summary>
+public class UpdateTrainingRequestValidator : AbstractValidator<UpdateTrainingRequest>
+{
+    private readonly CatalogContext _catalogContext;
+    private readonly IUserIdentity _userIdentity;
+
+    public UpdateTrainingRequestValidator(CatalogContext catalogContext, IUserIdentity userIdentity)
+    {
+        _catalogContext = catalogContext;
+        _userIdentity = userIdentity;
+
+        // Rule that checks if the trainer editing a training is actually the creator or an admin.
+        RuleFor(request => request)
+            .MustAsync(BeTheTrainingCreatorOrAdminAsync)
+            .WithMessage(CatalogResources.UpdateTraining_YouCantEditATrainingYouDidntCreate);
+    }
+
+    public async Task<bool> BeTheTrainingCreatorOrAdminAsync(UpdateTrainingRequest request, CancellationToken cancellationToken)
+    {
+        // SuperUser are free to do whatever they want :).
+        if (_userIdentity.IsSuperUser)
+        {
+            return true;
+        }
+
+        // At this point the training is already cached in the CatalogContext,  no need to select just the id.
+        var training = await _catalogContext.Trainings.FirstAsync(training => training.Id == request.TrainingId, cancellationToken);
+
+        return request.TrainerIds.Contains(training.CreatedBy);
+    }
 }
