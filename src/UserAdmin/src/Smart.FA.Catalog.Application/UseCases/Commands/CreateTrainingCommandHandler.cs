@@ -33,14 +33,13 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingReques
         var trainer = await _trainerRepository.FindAsync(request.TrainerId, cancellationToken);
         var training = new Training(trainer, request.DetailsDto, request.VatExemptionTypes, request.AttendanceTypes, request.TargetAudiences, request.Topics);
         training.MarkAsGivenBySmart(request.IsGivenBySmart);
-        if (!request.IsDraft)
+
+        var statusToChangeTo = request.IsDraft ? TrainingStatusType.Draft : TrainingStatusType.Validated;
+        var result = training.ChangeStatus(statusToChangeTo);
+        if (result.IsFailure)
         {
-            var result = training.Validate();
-            if (result.IsFailure)
-            {
-                resp.AddErrors(result.Error);
-                return resp;
-            }
+            resp.AddErrors(result.Error);
+            return resp;
         }
 
         _unitOfWork.RegisterNew(training);

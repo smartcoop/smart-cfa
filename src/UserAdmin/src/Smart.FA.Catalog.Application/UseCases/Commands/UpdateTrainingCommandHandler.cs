@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.Dto;
-using Smart.FA.Catalog.Core.Domain.Enumerations;
 using Smart.FA.Catalog.Core.Domain.Interfaces;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
 using Smart.FA.Catalog.Core.Exceptions;
@@ -57,9 +56,14 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
             var trainers = await _trainerRepository.GetListAsync(request.TrainingId, cancellationToken);
             training.AssignTrainers(trainers);
 
-            if (request.IsDraft is not true)
+            var statusToChangeTo = request.IsDraft ? TrainingStatusType.Draft : TrainingStatusType.Validated;
+
+            var result = training.ChangeStatus(statusToChangeTo);
+
+            if (result.IsFailure)
             {
-                training.Validate();
+                resp.AddErrors(result.Error);
+                return resp;
             }
 
             _unitOfWork.RegisterDirty(training);
