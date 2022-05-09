@@ -23,7 +23,7 @@ public class TrainingDetailsModel : PageModel
         {
             //TO DO: add translated custom messages
             TempData["errorMessage"] = "There is no record for this request. Please try again.";
-            return RedirectToPage("/404");
+            return Redirect("/cfa/404");
         }
 
         var trainingDetails = await _context.TrainingDetails.Where(training => training.Id == id).ToListAsync();
@@ -32,7 +32,7 @@ public class TrainingDetailsModel : PageModel
         {
             //TO DO: add translated custom messages
             TempData["errorMessage"] = "This training does not exist! Please try again.";
-            return RedirectToPage("/404");
+            return Redirect("/cfa/404");
         }
 
         Training = MapTrainingDetails(trainingDetails);

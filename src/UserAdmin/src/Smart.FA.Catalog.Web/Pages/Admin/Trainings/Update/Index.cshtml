@@ -1,4 +1,4 @@
-﻿@page "{id:int}"
+﻿@page "/cfa/admin/trainings/update/{id:int}"
 @using Microsoft.Extensions.Localization
 @using Smart.FA.Catalog.Shared.Domain.Enumerations.Common
 @using Smart.FA.Catalog.Shared.Domain.Enumerations.Training
@@ -21,7 +21,7 @@
                     @if (Request.Query.ContainsKey("fromlist"))
                     {
                         <div class="c-toolbar__item">
-                            <a class="c-button c-button--icon c-button--borderless" href="/Admin/Trainings/List/Index">
+                            <a class="c-button c-button--icon c-button--borderless" href="/cfa/admin/trainings/list">
                                 <div class="c-button__content">
                                     <smart-icon icon="ArrowLeft"></smart-icon>
                                     <div class="u-sr-accessible">@CatalogResources.Back</div>

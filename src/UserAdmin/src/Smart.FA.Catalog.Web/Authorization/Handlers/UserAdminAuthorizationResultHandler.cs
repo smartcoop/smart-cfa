@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Authorization.Policy;
@@ -27,13 +27,13 @@ public class UserAdminAuthorizationResultHandler : IAuthorizationMiddlewareResul
             // In the case of a failed requirement to have approved at least one valid user chart, the user will be redirected to the user chart approval page
             if (authorizationFailure.FailedRequirements.AnyOfType<AtLeastOneActiveUserChartRevisionApprovalRequirement>())
             {
-                context.Response.Redirect("/UserChart");
+                context.Response.Redirect("/cfa/userChart");
             }
 
             if (authorizationFailure.FailedRequirements.Any(failedRequirement =>
                     failedRequirement is RolesAuthorizationRequirement rolesAuthorizationRequirement && rolesAuthorizationRequirement.AllowedRoles.Contains("SuperUser")))
             {
-                context.Response.Redirect("/Admin");
+                context.Response.Redirect("/cfa/admin");
             }
 
             return;

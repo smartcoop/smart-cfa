@@ -36,7 +36,7 @@ public class ProfileModel : AdminPage
         // Trainer was not found.
         if (EditProfileCommand is null)
         {
-            return RedirectToPage("/404");
+            return Redirect("/cfa/404");
         }
 
         return Page();

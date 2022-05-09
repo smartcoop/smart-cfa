@@ -18,7 +18,7 @@
         <div class="o-flex o-flex--vertical-center o-flex--justify-between o-flex--spaced-wide">
             <smart-pill label="@(_localizer[TrainingStatusType.FromValue(training.StatusType).Name])"></smart-pill>
             <div class="c-button-toolbar">
-                <a href="/admin/trainings/update/@training!.Id">
+                <a href="/cfa/admin/trainings/update/@training!.Id">
                     <smart-button leading-icon="EditAlt" button-style="Borderless"></smart-button>
                 </a>
                 @if (Model.ShowDeleteButton)

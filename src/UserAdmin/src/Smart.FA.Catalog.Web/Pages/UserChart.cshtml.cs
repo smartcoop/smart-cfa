@@ -35,7 +35,7 @@ public class UserChartModel : PageModel
         }
 
         await Mediator.Send(new SetTrainerHasAcceptedLatestUserChartRequest { TrainerId = UserIdentity.Id });
-        return RedirectToPage("/Admin/Index");
+        return Redirect("/cfa/admin");
     }
 
     public async Task<string> GetLastChartUrl()

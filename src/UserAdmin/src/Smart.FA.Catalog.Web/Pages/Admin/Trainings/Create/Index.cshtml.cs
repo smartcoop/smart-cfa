@@ -40,7 +40,7 @@ public class CreateModel : AdminPage
 
         var request = CreateTrainingViewModel.MapToRequest(UserIdentity.CurrentTrainer.Id, UserIdentity.CurrentTrainer.DefaultLanguage);
         var response = await Mediator.Send(request);
-        return RedirectToPage("/Admin/Trainings/List/Index");
+        return Redirect("/cfa/admin/trainings/list");
     }
 
     protected override SideMenuItem GetSideMenuItem()

@@ -76,7 +76,7 @@ public class UpdateModel : AdminPage
         }
 
         // By Default we return to the user's training list.
-        return RedirectToPage("/Admin/Trainings/List/Index");
+        return Redirect("/cfa/admin/trainings/list");
     }
 
     protected override SideMenuItem GetSideMenuItem()
