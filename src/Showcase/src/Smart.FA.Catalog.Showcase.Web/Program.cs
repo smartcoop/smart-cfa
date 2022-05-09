@@ -26,7 +26,6 @@ var app = builder.Build();
 // A fix which allows SQL domain authentication with Kerberos
 NetSecurityNativeFix.Initialize(app.Services.GetRequiredService<ILogger<Program>>());
 
-
 app.UseStatusCodePagesWithReExecute("/{0}");
 
 // Configure the HTTP request pipeline.

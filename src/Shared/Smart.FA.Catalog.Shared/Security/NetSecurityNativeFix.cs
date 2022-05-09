@@ -7,10 +7,9 @@ public static class NetSecurityNativeFix
 {
     public static void Initialize(ILogger logger)
     {
-        var result = -1;
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
-            result = NetSecurityNative_EnsureGssInitialized();
+            var result = NetSecurityNative_EnsureGssInitialized();
             if (result is 0)
             {
                 logger.LogInformation("{ServiceName}::{MethodName} EnsureGssInitialized workaround succeeded", nameof(NetSecurityNativeFix), nameof(Initialize));
