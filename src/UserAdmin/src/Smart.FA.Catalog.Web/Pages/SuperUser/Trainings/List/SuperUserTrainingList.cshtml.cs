@@ -81,7 +81,7 @@ public class SuperUserTrainingListPageModel : PageModel
         var request = GetTrainingsRequest;
         var queryString = "";
 
-        if (GetTrainingsRequest.Status is not null)
+        if (request.Status is not null)
         {
             queryString += $"{nameof(request.Status)}={HttpUtility.UrlEncode(request.Status.ToString())}&";
         }
