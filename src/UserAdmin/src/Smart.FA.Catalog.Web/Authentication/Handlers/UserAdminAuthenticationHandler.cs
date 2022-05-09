@@ -48,7 +48,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
 
             if (response.Trainer is null)
             {
-                Logger.LogInformation($"User `{_userId}` connected from `{_appName}` for the first in FA. Creating a trainer for the user.");
+                Logger.LogInformation($"User `{_userId}` connected from `{_appName}` for the first time in FA. Creating a trainer for the user.");
                 await CreateTrainerAsync(response);
             }
 
