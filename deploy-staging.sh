@@ -38,13 +38,16 @@ docker rm cfa_staging_api || true
 docker stop cfa_staging_public || true
 docker rm cfa_staging_public || true
 
+docker network create --driver bridge --subnet 172.22.100.0/24 --attachable cfa || true
+
 docker run -d \
   --name cfa_staging_api \
   --env Environment="PreProduction" \
   --env-file ./.env \
   --volume $(pwd)/ktutil/files/krb5.conf:/etc/krb5.conf \
   --volume $(pwd)/ktutil/files/${DB_USER}.keytab:/app/${DB_USER}.keytab \
-  -p "6000:80" \
+  --network=cfa \
+  -p "8087:80" \
   cfa-staging-api
 
 docker run -d \
@@ -53,5 +56,6 @@ docker run -d \
   --env-file ./.env \
   --volume $(pwd)/ktutil/files/krb5.conf:/etc/krb5.conf \
   --volume $(pwd)/ktutil/files/${DB_USER}.keytab:/app/${DB_USER}.keytab \
-  -p "6001:80" \
+  --network=cfa \
+  -p "8086:80" \
   cfa-staging-public
