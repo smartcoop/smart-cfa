@@ -400,6 +400,24 @@
   <data name="YouDontHaveAnyTrainings" xml:space="preserve">
     <value>Vous n'avez aucune formation</value>
   </data>
+  <data name="AnErrorOccurredWhileSearching" xml:space="preserve">
+    <value>Une erreur s'est déroulée durant la recherche. Veuillez essayer à nouveau</value>
+  </data>
+  <data name="NoTrainingFound" xml:space="preserve">
+    <value>Aucune formation trouvée</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Rechercher</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Trainings" xml:space="preserve">
+    <value>Formations</value>
+  </data>
+  <data name="TrainingSearchTitle" xml:space="preserve">
+    <value>Édition de formations</value>
+  </data>
   <data name="Training_IsOther" xml:space="preserve">
     <value>Autre</value>
   </data>

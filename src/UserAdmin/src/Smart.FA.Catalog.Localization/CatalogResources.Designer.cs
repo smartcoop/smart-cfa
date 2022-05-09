@@ -142,6 +142,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Une erreur s&apos;est déroulée durant la recherche. Veuillez essayer à nouveau.
+        /// </summary>
+        public static string AnErrorOccurredWhileSearching {
+            get {
+                return ResourceManager.GetString("AnErrorOccurredWhileSearching", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Êtes vous sûr-e ?.
         /// </summary>
         public static string AreYouSure {
@@ -484,6 +493,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Aucune formation trouvée.
+        /// </summary>
+        public static string NoTrainingFound {
+            get {
+                return ResourceManager.GetString("NoTrainingFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Autre.
         /// </summary>
         public static string Other {
@@ -655,6 +673,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rechercher.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Secteurs.
         /// </summary>
         public static string Sectors {
@@ -714,6 +741,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string Sport {
             get {
                 return ResourceManager.GetString("Sport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string Status {
+            get {
+                return ResourceManager.GetString("Status", resourceCulture);
             }
         }
         
@@ -894,6 +930,24 @@ namespace Smart.FA.Catalog.Localization {
         public static string TrainingPresentation {
             get {
                 return ResourceManager.GetString("TrainingPresentation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formations.
+        /// </summary>
+        public static string Trainings {
+            get {
+                return ResourceManager.GetString("Trainings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Édition de formations.
+        /// </summary>
+        public static string TrainingSearchTitle {
+            get {
+                return ResourceManager.GetString("TrainingSearchTitle", resourceCulture);
             }
         }
         
