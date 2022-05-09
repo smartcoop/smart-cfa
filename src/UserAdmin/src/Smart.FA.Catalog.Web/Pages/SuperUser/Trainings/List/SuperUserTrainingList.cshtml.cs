@@ -65,7 +65,7 @@ public class SuperUserTrainingListPageModel : PageModel
         }
         catch (Exception exception)
         {
-            _logger.LogError(exception, $"An error occurred while retrieving training for request {SerializeHtmlForm().ToJson()}");
+            _logger.LogError(exception, $"An error occurred while retrieving training for request {GetTrainingsRequest.ToJson()}");
             ErrorMessage = CatalogResources.AnErrorOccurredWhileSearching;
         }
     }
