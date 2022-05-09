@@ -30,6 +30,7 @@ docker build \
   --build-arg Environment="Production" \
   -f "Showcase.krb5.Dockerfile" \
   -t "cfa-production-public" \
+  .
 
 docker stop cfa_production_api || true
 docker rm cfa_production_api || true
