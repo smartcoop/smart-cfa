@@ -7,6 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Smart.Design.Razor" Version="1.0.19-alpha" />
+    <PackageReference Include="Smart.Design.Razor" Version="1.0.20-alpha" />
   </ItemGroup>
 </Project>
