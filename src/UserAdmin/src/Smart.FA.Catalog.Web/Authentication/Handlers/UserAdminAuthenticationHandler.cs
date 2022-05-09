@@ -48,7 +48,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
 
             if (response.Trainer is null)
             {
-                Logger.LogInformation($"User `{_userId}` connected from `{_appName}` for the first in FA. Creating a trainer for the user.");
+                Logger.LogInformation($"User `{_userId}` connected from `{_appName}` for the first time in FA. Creating a trainer for the user.");
                 await CreateTrainerAsync(response);
             }
 
@@ -124,7 +124,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
 
     private void SetFakeHeaderValueIfDevelopmentEnvironmentAndMissing()
     {
-        // During local development the developper may not pass through ngnix redirection therefore, default value are set form him/her.
+        // During local development the developer may not pass through ngnix redirection therefore, default values are set for him/her.
         if (_webHostEnvironment.IsDevelopment() || _webHostEnvironment.IsLocalEnvironment())
         {
             Context.Request.Headers.Add("userid", "1");
