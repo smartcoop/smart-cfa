@@ -8,6 +8,7 @@ using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Application.UseCases.Queries.Authorization;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.Models;
+using Smart.FA.Catalog.Core.Domain.User.Dto;
 using Smart.FA.Catalog.Core.Domain.User.Enumerations;
 
 namespace Smart.FA.Catalog.Web.Authentication.Handlers;
@@ -19,10 +20,15 @@ namespace Smart.FA.Catalog.Web.Authentication.Handlers;
 /// </summary>
 public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthenticationOptions>
 {
+    private readonly AccountHeadersValidator _accountHeadersValidator;
     private readonly IMediator _mediator;
     private readonly IWebHostEnvironment _webHostEnvironment;
-    private string? _userId;
-    private string? _appName;
+
+    private string _userId;
+    private string _appName;
+    private string _firstName;
+    private string _lastName;
+    private string _email;
 
     public UserAdminAuthenticationHandler(
         IMediator mediator,
@@ -32,6 +38,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
         UrlEncoder encoder,
         ISystemClock clock) : base(options, logger, encoder, clock)
     {
+        _accountHeadersValidator = new AccountHeadersValidator();
         _mediator = mediator;
         _webHostEnvironment = webHostEnvironment;
     }
@@ -40,19 +47,22 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
     {
         try
         {
-            // Let's check if the header contains the expected headers set during Account redirection.
-            // An exception will be thrown if the headers are invalid.
+            // Checks if the headers contain the expected values set during Account redirection.
+            // An exception will be thrown if any of the headers are invalid.
             EnsureHeaders();
 
-            var response = await GetTrainerBySmartUserIdAndApplicationTypeAsync();
+            // Retrieves the trainer profile by its smart id.
+            var currentTrainer = await GetTrainerBySmartUserIdAndApplicationTypeAsync();
 
-            if (response.Trainer is null)
+            // First time a Smart user connects in FA.
+            if (currentTrainer is null)
             {
                 Logger.LogInformation($"User `{_userId}` connected from `{_appName}` for the first time in FA. Creating a trainer for the user.");
-                await CreateTrainerAsync(response);
+                currentTrainer = await CreateTrainerAsync();
             }
 
-            await SetUserIdentityAsync(response.Trainer!);
+            // Set up trainer's identity that will be used across the application.
+            await SetUserIdentityAsync(currentTrainer);
 
             var ticket = new AuthenticationTicket(Context.User, Scheme.Name);
             return AuthenticateResult.Success(ticket);
@@ -80,46 +90,9 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
 
         _userId = Context.Request.Headers["userid"].ToString();
         _appName = Context.Request.Headers["smartApplication"].ToString();
-    }
-
-    private void ThrowIfHeadersInvalid()
-    {
-        var errorMessage = new List<string>();
-
-        if (!Context.Request.Headers.ContainsKey("userid"))
-        {
-            errorMessage.Add($"No userid header not found");
-        }
-
-        if (!Context.Request.Headers.ContainsKey("smartApplication"))
-        {
-            errorMessage.Add("smartApplication header not found");
-        }
-
-        // We log as critical is any header is missing.
-        if (errorMessage.Any())
-        {
-            Logger.LogCritical(string.Join(", ", errorMessage));
-            throw new AccountHeadersMissingException("One more required header was not set by Account during the redirection");
-        }
-    }
-
-    private async Task<GetTrainerFromUserAppResponse> GetTrainerBySmartUserIdAndApplicationTypeAsync()
-    {
-        return await _mediator.Send(new GetTrainerFromUserAppRequest { UserId = _userId!, ApplicationType = ApplicationType.FromName(_appName!) });
-    }
-
-    private async Task CreateTrainerAsync(GetTrainerFromUserAppResponse response)
-    {
-        var newTrainerResponse = await _mediator.Send(new CreateTrainerFromUserAppRequest { User = response.User });
-        response.Trainer = newTrainerResponse.Trainer ??
-                           throw new InvalidOperationException($"{nameof(CreateTrainerAsync)} no trainer was returned from the creation");
-    }
-
-    private async Task SetUserIdentityAsync(Trainer trainer)
-    {
-        var isAdmin = await _mediator.Send(new IsSuperUserQuery(trainer.Id));
-        Context.User = new GenericPrincipal(new CustomIdentity(trainer), roles: isAdmin ? new[] { "SuperUser" } : null);
+        _firstName = Context.Request.Headers["FirstName"].ToString();
+        _lastName = Context.Request.Headers["LastName"].ToString();
+        _email = Context.Request.Headers["Email"].ToString();
     }
 
     private void SetFakeHeaderValueIfDevelopmentEnvironmentAndMissing()
@@ -129,7 +102,90 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
         {
             Context.Request.Headers.Add("userid", "1");
             Context.Request.Headers.Add("smartApplication", ApplicationType.Account.Name);
+            Context.Request.Headers.Add("FirstName", "John");
+            Context.Request.Headers.Add("LastName", "Doe");
+            Context.Request.Headers.Add("Email", "john.doe@doedoe.com");
         }
+    }
+
+    private void ThrowIfHeadersInvalid()
+    {
+        var validationFailures = _accountHeadersValidator.Validate(Context.Request.Headers);
+
+        // We log as critical is any header is missing.
+        if (validationFailures.Any())
+        {
+            Logger.LogCritical(string.Join(", ", validationFailures));
+            throw new AccountHeadersMissingException("One more required header was not set by Account during the redirection");
+        }
+    }
+
+    private async Task<Trainer?> GetTrainerBySmartUserIdAndApplicationTypeAsync()
+    {
+        return (await _mediator.Send(new GetTrainerFromUserAppRequest(applicationType: ApplicationType.FromName(_appName), userId: _userId))).Trainer;
+    }
+
+    private async Task<Trainer> CreateTrainerAsync()
+    {
+        var createTrainerRequest = new CreateTrainerFromUserAppRequest()
+        {
+            User = new UserDto(_userId, _firstName, _lastName, _appName, _email)
+        };
+        var createdTrainerResponse = await _mediator.Send(createTrainerRequest);
+
+        return createdTrainerResponse.Trainer;
+    }
+
+    private async Task SetUserIdentityAsync(Trainer trainer)
+    {
+        // Sets the data for the IUserIdentity service.
+        var isAdmin = await _mediator.Send(new IsSuperUserQuery(trainer.Id));
+        Context.User = new GenericPrincipal(new CustomIdentity(trainer), roles: isAdmin ? new[] { "SuperUser" } : null);
+
+        // Updates the first name, last name and email address of the current trainer if they changed for any reason.
+        // If anything goes wrong an exception will be thrown and stops execution of the HTTP request.
+        await _mediator.Send(new UpdateTrainerIdentityCommand(trainer.Id, _firstName, _lastName, _email));
+    }
+}
+
+internal class AccountHeadersValidator
+{
+    public List<string> Validate(IHeaderDictionary headerDictionary)
+    {
+        var validationFailures = new List<string>();
+
+        // TODO is it worth making that check ?
+        //if (!headerDictionary.ContainsKey("X-Accel-Redirect") || !headerDictionary.ContainsKey("X-Real-Location"))
+        //{
+        //    validationFailures.Add($"Missing X-Accel headers");
+        //}
+
+        if (!headerDictionary.ContainsKey("userid"))
+        {
+            validationFailures.Add($"No userid header not found");
+        }
+
+        if (!headerDictionary.ContainsKey("smartApplication"))
+        {
+            validationFailures.Add("smartApplication header not found");
+        }
+
+        if (!headerDictionary.ContainsKey("FirstName"))
+        {
+            validationFailures.Add("FirstName header not found");
+        }
+
+        if (!headerDictionary.ContainsKey("LastName"))
+        {
+            validationFailures.Add("LastName header not found");
+        }
+
+        if (!headerDictionary.ContainsKey("Email"))
+        {
+            validationFailures.Add("Email header not found");
+        }
+
+        return validationFailures;
     }
 }
 

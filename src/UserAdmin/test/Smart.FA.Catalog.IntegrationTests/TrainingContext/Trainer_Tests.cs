@@ -79,7 +79,7 @@ public class TrainerTests : IntegrationTestBase
         var action = async () =>
         {
             string? applicationName = applicationTypeId is null ? null : ApplicationType.FromValue((int)applicationTypeId).Name;
-            var user = new UserDto(userId!, _fixture.Create<string>(), _fixture.Create<string>(), applicationName);
+            var user = new UserDto(userId!, _fixture.Create<string>(), _fixture.Create<string>(), applicationName, "victor@victor.com");
             var trainer = TrainerFactory.CreateFromUser(user);
             context.Trainers.Add(trainer);
             await context.SaveChangesAsync();

@@ -7,5 +7,5 @@ namespace Smart.FA.Catalog.Infrastructure.Services;
 public class FakeAccountUserStrategy : IUserStrategy
 {
     public Task<UserDto> GetAsync(string userId)
-        => Task.FromResult(new UserDto(userId, "Victor", "van Duynen", ApplicationType.Account.Name));
+        => Task.FromResult(new UserDto(userId, "Victor", "van Duynen", ApplicationType.Account.Name, "victor@victor.com"));
 }
