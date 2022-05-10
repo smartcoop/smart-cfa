@@ -23,7 +23,9 @@ public static class ServiceCollectionExtensions
     private static IServiceCollection AddOptions(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<AdminOptions>(configuration.GetSection(AdminOptions.SectionName));
-        services.Configure<MediatROptions>(configuration.GetSection(MediatROptions.SectionName));;
+        services.Configure<MediatROptions>(configuration.GetSection(MediatROptions.SectionName));
+        services.Configure<SuperUserOptions>(configuration.GetSection(SuperUserOptions.SectionName));;
+
         return services;
     }
 
