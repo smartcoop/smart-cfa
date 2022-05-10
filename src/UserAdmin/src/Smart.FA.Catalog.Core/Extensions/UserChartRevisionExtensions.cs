@@ -1,7 +1,8 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.Factories;
 using Smart.FA.Catalog.Core.SeedWork;
+using Smart.FA.Catalog.Shared.Collections;
 
 namespace Smart.FA.Catalog.Core.Extensions;
 

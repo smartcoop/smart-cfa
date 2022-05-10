@@ -4,7 +4,7 @@ using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Core.Domain.Dto;
 using Smart.FA.Catalog.Core.Domain.Interfaces;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
-using Smart.FA.Catalog.Core.SeedWork;
+using Smart.FA.Catalog.Shared.Collections;
 
 namespace Smart.FA.Catalog.Application.UseCases.Queries;
 
