@@ -30,7 +30,7 @@ builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
-// A fix which allows SQL domain authentication with Kerberos
+// A fix which allows SQL domain authentication with Kerberos on linux host
 NetSecurityNativeFix.Initialize(app.Services.GetRequiredService<ILogger<Program>>());
 
 app.UseStatusCodePagesWithReExecute("/{0}");

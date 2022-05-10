@@ -9,7 +9,7 @@ public static class BootStrapServiceExtensions
     public static async Task ExecuteBootStrapService(this IApplicationBuilder builder)
     {
         var migrationScope = builder.ApplicationServices.CreateScope();
-        // A fix which allows SQL domain authentication with Kerberos
+        // A fix which allows SQL domain authentication with Kerberos on linux host
         NetSecurityNativeFix.Initialize(migrationScope.ServiceProvider.GetRequiredService<ILogger<BootStrapService>>());
         var bootstrapService = migrationScope.ServiceProvider.GetRequiredService<IBootStrapService>();
         var environment = builder.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
