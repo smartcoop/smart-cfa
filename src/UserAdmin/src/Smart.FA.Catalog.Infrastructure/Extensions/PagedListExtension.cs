@@ -5,7 +5,7 @@ namespace Smart.FA.Catalog.Infrastructure.Extensions;
 
 public static class PagedListExtension
 {
-    public static async Task<PagedList<T>> PaginateAsync<T>(this IQueryable<T> source, PageItem pageItem)
+    public static async Task<PagedList<T>> PaginateAsync<T>(this IQueryable<T> source, PageItem pageItem, CancellationToken cancellationToken)
     {
         var count = await source.CountAsync();
         var items = await source.Skip(pageItem.Offset).Take(pageItem.PageSize).ToListAsync();
