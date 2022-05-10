@@ -1,13 +1,13 @@
 ﻿@page
 @model Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerList.TrainerListModel
 @{
-    ViewData["Title"] = "Formateurs Associés";
+    ViewData["Title"] = ShowcaseResources.AssociateTrainers;
     Layout = Routes.Layout;
 }
 
 <main class="main c-content">
     <section class="main__presentation">
-        <div class="main-title">Les formateur·trices de Formateurs Associés</div>
+        <div class="main-title">@ShowcaseResources.TrainersOfAssociateTrainers</div>
 
         <div class="main__presentation-txt">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in ullamcorper tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis eget varius nisl, et eleifend est. In condimentum, arcu eget ornare aliquam,
@@ -31,10 +31,10 @@
 
     <section class="section__trainer-list">
         <div class="section__label">
-            <h2>Tous les formateurs</h2>
+            <h2>@ShowcaseResources.AllTrainers</h2>
         </div>
         <div class="trainer-list">
-           @foreach (var trainer in Model.Trainers)
+            @foreach (var trainer in Model.Trainers)
             {
                 <div class="trainer-list__item">
                     <div class="trainer-list__item-picture">
