@@ -12,7 +12,7 @@ public static class PaginationExtensions
     /// <param name="query"><see cref="IQueryable{T}" /> on which the operation will be performed.</param>
     /// <param name="pageNumber">Current's page number.</param>
     /// <param name="pageSize">Number of item per page.</param>
-    /// <param name="randomIds">a boolea,=n that indicated is the result queried from the data source should be randomly picked.</param>
+    /// <param name="randomIds">a boolean that indicates if the result queried from the data source should be randomly picked.</param>
     /// <returns>The paginated items and the total count.</returns>
     public static async Task<(List<T> PaginatedItems, int TotalCount)> PaginateAsync<T>(this IQueryable<T> query,
         int pageNumber,
