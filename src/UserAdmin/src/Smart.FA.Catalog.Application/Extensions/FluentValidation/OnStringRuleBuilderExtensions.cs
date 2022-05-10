@@ -1,5 +1,5 @@
 using FluentValidation;
-using Smart.FA.Catalog.Core.Helpers;
+using Smart.FA.Catalog.Shared.Collections;
 
 namespace Smart.FA.Catalog.Application.Extensions.FluentValidation;
 

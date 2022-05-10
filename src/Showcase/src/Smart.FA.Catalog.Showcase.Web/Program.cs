@@ -3,6 +3,8 @@ using NLog.Web;
 using Smart.FA.Catalog.Shared.Security;
 using Smart.FA.Catalog.Showcase.Infrastructure.Data;
 using Smart.FA.Catalog.Showcase.Web.Extensions;
+using Smart.FA.Catalog.Showcase.Web.Services.Trainer;
+using Smart.FA.Catalog.Showcase.Web.Services.Training;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,11 +15,16 @@ builder.Host.UseNLog();
 builder.Services.AddRazorPages();
 
 // Add localization.
-builder.Services.AddShowcaseLocalization();
+builder.Services
+    .AddShowcaseLocalization()
+    .AddTransient<ITrainingService, TrainingService>()
+    .AddTransient<ITrainerService, TrainerService>();
+
 builder.Services.AddDbContext<CatalogShowcaseContext>((_, efOptions) =>
 {
     efOptions.UseSqlServer(builder.Configuration.GetConnectionString("Catalog"));
 });
+
 builder.Services.AddHttpContextAccessor();
 
 

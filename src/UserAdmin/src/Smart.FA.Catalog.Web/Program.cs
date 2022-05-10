@@ -4,10 +4,6 @@ using NLog.Web;
 using Smart.FA.Catalog.Application.Extensions;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Infrastructure.Extensions;
-using Smart.FA.Catalog.Web.Authentication;
-using Smart.FA.Catalog.Web.Authentication.Handlers;
-using Smart.FA.Catalog.Web.Authorization.Policy;
-using Smart.FA.Catalog.Web.Authorization.Policy.Requirements;
 using Smart.FA.Catalog.Web.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,11 +19,12 @@ builder.Services
 builder.Services
     .AddApplication();
 builder.Services
-    .AddApi(builder.Configuration);
+    .AddWebDependencies(builder.Configuration);
 builder.Services
     .AddSmartDesign();
 builder.Services
-    .AddRazorPages(options => { options.Conventions.AuthorizeFolder("/Admin", Policies.AtLeastOneValidUserChartRevisionApproval); })
+    .AddRazorPages()
+    .ConfigureRazorPagesOptions()
     .AddFluentValidation(configuration =>
     {
         configuration.RegisterValidatorsFromAssemblyContaining<Program>();
@@ -48,21 +45,12 @@ builder.Services
         builder.Configuration.GetSection("EFCore"),
         builder.Configuration.GetSection("S3Storage"));
 
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy(Policies.AtLeastOneValidUserChartRevisionApproval,
-        policy => { policy.Requirements.Add(new AtLeastOneValidUserChartRevisionApprovalRequirement()); });
-});
-
-builder.Services.AddAuthentication(options => options.DefaultScheme = AuthSchemes.UserAdmin)
-    .AddScheme<CfaAuthenticationOptions, UserAdminAuthenticationHandler>(AuthSchemes.UserAdmin, _ => { });
-
+builder.Services.AddWebAuthentication().AddWebAuthorization();
 
 var app = builder.Build();
 
 app.UseForwardedHeaders();
 
-app.UseAuthentication();
 
 if (app.Environment.IsProduction())
 {
@@ -77,6 +65,7 @@ else
 
 app.UseRequestLocalization();
 
+// By Default this value is set to false only on Development environments.
 if (app.Configuration.GetValue("ForceHttpRedirection", true))
 {
     app.UseHttpsRedirection();
@@ -85,6 +74,8 @@ if (app.Configuration.GetValue("ForceHttpRedirection", true))
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

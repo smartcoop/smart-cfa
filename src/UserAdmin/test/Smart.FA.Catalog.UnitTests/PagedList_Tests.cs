@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using FluentAssertions;
 using Smart.FA.Catalog.Core.Exceptions;
-using Smart.FA.Catalog.Core.SeedWork;
+using Smart.FA.Catalog.Shared.Collections;
 using Xunit;
 
 namespace Smart.FA.Catalog.UnitTests;

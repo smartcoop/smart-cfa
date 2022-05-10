@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.Dto;
-using Smart.FA.Catalog.Core.Domain.Enumerations;
 using Smart.FA.Catalog.Core.Domain.Interfaces;
 using Smart.FA.Catalog.Core.LogEvents;
 using Smart.FA.Catalog.Core.SeedWork;
@@ -33,14 +32,13 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingReques
         var trainer = await _trainerRepository.FindAsync(request.TrainerId, cancellationToken);
         var training = new Training(trainer, request.DetailsDto, request.VatExemptionTypes, request.AttendanceTypes, request.TargetAudiences, request.Topics);
         training.MarkAsGivenBySmart(request.IsGivenBySmart);
-        if (!request.IsDraft)
+
+        var newStatus = request.IsDraft ? TrainingStatusType.Draft : TrainingStatusType.Validated;
+        var result = training.ChangeStatus(newStatus);
+        if (result.IsFailure)
         {
-            var result = training.Validate();
-            if (result.IsFailure)
-            {
-                resp.AddErrors(result.Error);
-                return resp;
-            }
+            resp.AddErrors(result.Error);
+            return resp;
         }
 
         _unitOfWork.RegisterNew(training);
