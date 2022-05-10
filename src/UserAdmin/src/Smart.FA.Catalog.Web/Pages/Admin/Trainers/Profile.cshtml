@@ -15,6 +15,13 @@
                 <h2 class="c-toolbar__title">@CatalogResources.ProfileEdition</h2>
             </div>
         </div>
+        <div class="c-toolbar__right">
+            <div class="c-toolbar__item">
+                <smart-button-toolbar>
+                    <smart-button form="profile-form" button-type="Submit" label="@CatalogResources.Save"></smart-button>
+                </smart-button-toolbar>
+            </div>
+        </div>
     </div>
 }
 
@@ -26,7 +33,7 @@
         </smart-spacer>
     }
 
-    <smart-form enctype="multipart/form-data">
+    <smart-form id="profile-form" enctype="multipart/form-data">
         <smart-grid>
             <smart-grid-column width="7">
                 <smart-panel header="@Model.UserIdentity.Identity.Name">
@@ -87,9 +94,5 @@
                 </smart-spacer>
             }
         </smart-panel>
-
-        <smart-spacer Top="Large">
-            <smart-button button-type="Submit" label="@CatalogResources.Save" is-block="true"></smart-button>
-        </smart-spacer>
     </smart-form>
 </div>

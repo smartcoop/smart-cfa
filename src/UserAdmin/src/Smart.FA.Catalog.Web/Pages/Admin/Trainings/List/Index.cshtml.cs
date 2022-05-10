@@ -5,8 +5,8 @@ using Smart.FA.Catalog.Application.UseCases.Commands;
 using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.Models;
-using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Infrastructure.Persistence;
+using Smart.FA.Catalog.Shared.Collections;
 using Smart.FA.Catalog.Web.Options;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.List;
