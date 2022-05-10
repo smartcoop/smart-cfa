@@ -68,7 +68,16 @@ public class TrainingQueries : ITrainingQueries
     public async Task<PagedList<TrainingDto>> GetPagedListAsync(int trainerId, string language, PageItem pageItem,
         CancellationToken cancellationToken)
     {
-        var sql = @"SELECT
+        var sql = @"
+                ;WITH TrainingRecords AS (
+                                    SELECT
+                                        T.Id,
+                                        RowNumber = ROW_NUMBER() OVER (ORDER BY T.Id)
+                                    FROM  Cfa.Training T
+                                    INNER JOIN Cfa.TrainerAssignment TE ON T.Id = TE.TrainingId
+                                    INNER JOIN Cfa.TrainingLocalizedDetails TD ON T.Id = TD.TrainingId
+                                    WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language)
+                SELECT
                         TA.Id 'TrainingId',
                         TA.TrainingStatusTypeId,
                         TA.Title,
@@ -84,12 +93,15 @@ public class TrainingQueries : ITrainingQueries
                                      T.TrainingStatusTypeId,
                                      TD.Title,
                                      TD.Goal,
-                                     TD.Language FROM Cfa.Training T
+                                     TD.Language
+                                FROM Cfa.Training T
+								INNER JOIN TrainingRecords ON T.Id = TrainingRecords.Id
                                 INNER JOIN Cfa.TrainerAssignment TE ON T.Id = TE.TrainingId
                                 INNER JOIN Cfa.TrainingLocalizedDetails TD ON T.Id = TD.TrainingId
-                                WHERE TE.TrainerId = @TrainerId AND TD.Language = @Language) TA
-                                ORDER BY TA.Id
-                                OFFSET  @Offset ROWS FETCH NEXT @PageSize ROWS ONLY) TA
+                                WHERE TE.TrainerId = 1 AND TD.Language = 'EN'
+								AND TrainingRecords.RowNumber BETWEEN (@Offset + 1) AND  (@Offset + @PageSize)
+								) TA
+                       ) TA
                         LEFT JOIN Cfa.TrainingTopic TC ON TA.Id = TC.TrainingId";
 
         var countsql = @"SELECT
