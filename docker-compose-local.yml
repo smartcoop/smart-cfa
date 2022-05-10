@@ -17,7 +17,7 @@ services:
   api:
     depends_on:
       - datasource
-      - minio_client
+      - minioclient
     build:
       context: .
       dockerfile: Web.Dockerfile
