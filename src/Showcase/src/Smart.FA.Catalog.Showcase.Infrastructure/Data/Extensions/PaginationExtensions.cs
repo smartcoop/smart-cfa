@@ -20,20 +20,18 @@ public static class PaginationExtensions
         bool randomIds = false)
         where T : IHasId
     {
-        var totalCount = await query.Select(item => item.Id).Distinct().CountAsync();
+        var idsQuery = query.Select(item => item.Id).Distinct();
+
+        var totalCount = await idsQuery.CountAsync();
 
         var skip = Math.Max((pageNumber - 1) * pageSize, 0);
         var take = Math.Max(pageSize, 0);
 
-        var filteredIdsQuery = query.Select(id => id.Id);
+        var filteredIdsQuery = idsQuery.Skip(skip).Take(take).OrderBy(id => id).AsQueryable();
 
         if (randomIds)
         {
-            filteredIdsQuery = filteredIdsQuery.OrderBy(id => Guid.NewGuid()).Take(take);
-        }
-        else
-        {
-            filteredIdsQuery = filteredIdsQuery.OrderBy(id => id).Skip(skip).Take(take);
+            filteredIdsQuery = filteredIdsQuery.Randomize();
         }
 
         var paginatedItems = await query.Where(item => filteredIdsQuery.Contains(item.Id)).ToListAsync();
