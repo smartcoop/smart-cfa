@@ -31,8 +31,8 @@ public class UpdateTrainingViewModel
 
 public static class EditTrainingViewModelMapping
 {
-    public static UpdateTrainingRequest MapToUpdateRequest(this UpdateTrainingViewModel model, string language, int trainingId, int trainerId)
-        => new()
+    public static UpdateTrainingRequest MapToUpdateRequest(this UpdateTrainingViewModel model, string language, int trainingId, int trainerId) =>
+        new()
         {
             DetailsDto =
                 new TrainingLocalizedDetailsDto
@@ -43,13 +43,14 @@ public static class EditTrainingViewModelMapping
                     , model.Methodology
                     , model.PracticalModalities
                 ),
-            TrainingId = trainingId
-            , VatExemptionTypes = VatExemptionType.FromValues(model.VatExemptionClaimIds ?? new())
-            , TargetAudienceTypes = TargetAudienceType.FromValues(model.TargetAudienceTypeIds ?? new())
-            , AttendanceTypes = AttendanceType.FromValues(model.AttendanceTypeIds ?? new())
-            , Topics = Topic.FromValues(model.TopicIds ?? new())
-            , TrainerIds = new List<int>{trainerId}
-            , IsGivenBySmart = model.IsGivenBySmart
+            TrainingId = trainingId,
+            VatExemptionTypes = VatExemptionType.FromValues(model.VatExemptionClaimIds ?? new()),
+            TargetAudienceTypes = TargetAudienceType.FromValues(model.TargetAudienceTypeIds ?? new()),
+            AttendanceTypes = AttendanceType.FromValues(model.AttendanceTypeIds ?? new()),
+            Topics = Topic.FromValues(model.TopicIds ?? new()),
+            TrainerIds = new List<int> { trainerId },
+            IsGivenBySmart = model.IsGivenBySmart,
+            IsDraft = model.IsDraft
         };
 
 

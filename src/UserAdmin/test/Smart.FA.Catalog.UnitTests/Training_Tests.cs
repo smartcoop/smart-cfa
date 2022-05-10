@@ -135,7 +135,7 @@ public class TrainingTests
         var training = TrainingFactory.CreateWithAutoValidation(trainer);
 
         training.UpdateDetails("Hello", "My Goal", "A methodology", "practical modalities",Language.Create("FR").Value);
-        var result = training.Validate();
+        var result = training.ChangeStatus(TrainingStatusType.Validated);
 
         result.IsSuccess.Should().BeTrue();
         training.StatusType.Should().Be(TrainingStatusType.Validated);
@@ -148,7 +148,7 @@ public class TrainingTests
         var training = TrainingFactory.CreateWithManualValidation(trainer);
         training.UpdateDetails("Hello", "My Goal", "A methodology", "practical modalities", Language.Create("FR").Value);
 
-        var result = training.Validate();
+        var result = training.ChangeStatus(TrainingStatusType.Validated);
 
         result.IsSuccess.Should().BeTrue();
         training.StatusType.Should().Be(TrainingStatusType.WaitingForValidation);
