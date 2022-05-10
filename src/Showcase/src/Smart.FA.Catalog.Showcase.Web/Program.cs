@@ -1,10 +1,15 @@
 using Microsoft.EntityFrameworkCore;
+using NLog.Web;
+using Smart.FA.Catalog.Shared.Security;
 using Smart.FA.Catalog.Showcase.Infrastructure.Data;
 using Smart.FA.Catalog.Showcase.Web.Extensions;
 using Smart.FA.Catalog.Showcase.Web.Services.Trainer;
 using Smart.FA.Catalog.Showcase.Web.Services.Training;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Use NLog as logging provider
+builder.Host.UseNLog();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -22,7 +27,11 @@ builder.Services.AddDbContext<CatalogShowcaseContext>((_, efOptions) =>
 
 builder.Services.AddHttpContextAccessor();
 
+
 var app = builder.Build();
+
+// A fix which allows SQL domain authentication with Kerberos on linux host
+NetSecurityNativeFix.Initialize(app.Services.GetRequiredService<ILogger<Program>>());
 
 app.UseStatusCodePagesWithReExecute("/{0}");
 

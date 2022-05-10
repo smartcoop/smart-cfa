@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Smart.FA.Catalog.Application\Smart.FA.Catalog.Application.csproj" />
-    <ProjectReference Include="..\Smart.FA.Catalog.Infrastructure\Smart.FA.Catalog.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,6 +47,9 @@
       <DependentUpon>appsettings.json</DependentUpon>
     </Content>
     <Content Update="appsettings.PreProduction.json">
+      <DependentUpon>appsettings.json</DependentUpon>
+    </Content>
+    <Content Update="appsettings.Production.json">
       <DependentUpon>appsettings.json</DependentUpon>
     </Content>
   </ItemGroup>

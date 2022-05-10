@@ -33,6 +33,24 @@ services:
       /opt/mssql/bin/sqlservr --accept-eula & sleep 70 \
       && /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'localStoragePassword!' \
       && pkill sqlservr "
+  public:
+    depends_on:
+      - datasource
+    build:
+      context: .
+      dockerfile: Showcase.Dockerfile
+    hostname: ${DOCKER_NAME}-public
+    container_name: ${DOCKER_NAME}-public
+    ports:
+      - "5005:80"
+    networks:
+      - "cfa"
+    environment:
+      - "ASPNETCORE_ENVIRONMENT=${DOCKER_ENVIRONMENT}"
+    command:
+      /opt/mssql/bin/sqlservr --accept-eula & sleep 70 \
+      && /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'localStoragePassword!' \
+      && pkill sqlservr "
   minio:
     image: quay.io/minio/minio
     hostname: minio
