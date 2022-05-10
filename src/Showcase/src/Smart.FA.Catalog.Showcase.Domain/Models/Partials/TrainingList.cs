@@ -6,5 +6,4 @@ namespace Smart.FA.Catalog.Showcase.Domain.Models;
 
 public partial class TrainingList : IHasId
 {
-
 }
