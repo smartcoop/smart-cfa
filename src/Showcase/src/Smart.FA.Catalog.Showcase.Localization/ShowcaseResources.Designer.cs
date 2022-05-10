@@ -196,7 +196,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Suivre.
         /// </summary>
         public static string Footer_LabelFollow {
             get {
@@ -214,7 +214,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Nos sites.
         /// </summary>
         public static string Footer_LabelOurWebsites {
             get {
@@ -223,7 +223,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Accès rapides.
         /// </summary>
         public static string Footer_LabelQuickLinks {
             get {
@@ -376,6 +376,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Next {
+            get {
+                return ResourceManager.GetString("Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Objectifs.
         /// </summary>
         public static string Objectives {
@@ -399,6 +408,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         public static string Presentation {
             get {
                 return ResourceManager.GetString("Presentation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Previous {
+            get {
+                return ResourceManager.GetString("Previous", resourceCulture);
             }
         }
         
