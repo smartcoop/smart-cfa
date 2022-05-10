@@ -61,3 +61,27 @@ function RegisterCultureChange() {
             ChangeCulture(event.target.value);
         });
 }
+
+function disableEnterKeyUpKeyPressOnForm() {
+    var forms = document.getElementsByTagName('form');
+    for (var i = 0; i < forms.length; i++) {
+        forms[i].addEventListener('keydown', ignoreEnterKeyEventHandler, true);
+        forms[i].addEventListener('keyup', ignoreEnterKeyEventHandler, true);
+    }
+
+    function disableEnterKeyEvent(e) {
+        if (e.keyIdentifier === 'U+000A' || e.keyIdentifier === 'Enter' || e.keyCode === 13) {
+            e.preventDefault();
+            return false;
+        }
+        return true;
+    }
+}
+
+function ignoreEnterKeyEventHandler(e) {
+    if (e.keyIdentifier === 'U+000A' || e.keyIdentifier === 'Enter' || e.keyCode === 13) {
+        e.preventDefault();
+        return false;
+    }
+    return true;
+}
