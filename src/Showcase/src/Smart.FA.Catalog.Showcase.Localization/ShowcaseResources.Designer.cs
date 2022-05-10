@@ -377,6 +377,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         
         /// <summary>
         ///   Looks up a localized string similar to .
+
         /// </summary>
         public static string Next {
             get {
@@ -413,6 +414,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         
         /// <summary>
         ///   Looks up a localized string similar to .
+
         /// </summary>
         public static string Previous {
             get {

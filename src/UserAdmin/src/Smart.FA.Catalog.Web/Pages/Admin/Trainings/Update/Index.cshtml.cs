@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Domain.Models;
 using Smart.FA.Catalog.Core.Services;
@@ -41,6 +42,9 @@ public class UpdateModel : AdminPage
         UpdateTrainingViewModel = response.MapGetToResponse(user.Trainer.DefaultLanguage);
         Init();
 
+        // Used for returning to previous page after save.
+        TempData[HeaderNames.Referer] = Request.Headers["Referer"].ToString();
+
         return Page();
     }
 
@@ -56,6 +60,22 @@ public class UpdateModel : AdminPage
         var response = await Mediator.Send(request);
         UpdateTrainingViewModel = response.MapUpdateToResponse(UserIdentity.Identity.Trainer.DefaultLanguage);
 
+        return RedirectAfterSuccessfulUpdate();
+    }
+
+    private IActionResult RedirectAfterSuccessfulUpdate()
+    {
+        // If the referer is another URL than the request we an redirect to that page.
+        // This allows super users to be redirected to their training list and regular user to the training list.
+        var returnUrl = TempData[HeaderNames.Referer]?.ToString();
+
+        if (!string.IsNullOrWhiteSpace(returnUrl) &&
+            !returnUrl.Contains(Request.Path.Value!, StringComparison.OrdinalIgnoreCase))
+        {
+            return Redirect(returnUrl);
+        }
+
+        // By Default we return to the user's training list.
         return RedirectToPage("/Admin/Trainings/List/Index");
     }
 

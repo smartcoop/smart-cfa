@@ -1,10 +1,10 @@
 using CSharpFunctionalExtensions;
-using Smart.FA.Catalog.Core.Domain.Dto;
 using Smart.FA.Catalog.Core.Domain.Enumerations;
 using Smart.FA.Catalog.Core.Domain.Validators;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
 using Smart.FA.Catalog.Core.Exceptions;
 using Smart.FA.Catalog.Core.SeedWork;
+using Smart.FA.Catalog.Shared.Collections;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
 namespace Smart.FA.Catalog.Core.Domain;
@@ -122,16 +122,49 @@ public class Training : SeedWork.Entity, IAggregateRoot
     public void UnAssignAll()
         => _trainerAssignments.RemoveAll(assignment => assignment.TrainerId != TrainerCreatorId);
 
-    public Result<Training, IEnumerable<Error>> Validate()
+    /// <summary>
+    /// Changes the status of a <see cref="Training" /> either to <see cref="TrainingStatusType.Draft" /> or <see cref="TrainingStatusType.Validated" />.
+    /// If requested new status is <see cref="TrainingStatusType.Validated" /> it will be validated.
+    /// </summary>
+    /// <param name="statusType">The <see cref="TrainingStatusType" /> to wichita the training should be changed to.</param>
+    /// <returns>A <see cref="Result{T,E}" /> representing the result of the operation.</returns>
+    public Result<Training, IEnumerable<Error>> ChangeStatus(TrainingStatusType statusType)
+    {
+        Guard.AgainstNull(statusType, nameof(statusType));
+
+        // There is no particular business rules when it comes to being a draft of a training.
+        if (statusType == TrainingStatusType.Draft)
+        {
+            StatusType = TrainingStatusType.Draft;
+        }
+        else
+        {
+            var result = ValidateTraining();
+            if (result.IsFailure)
+            {
+                return Result.Failure<Training, IEnumerable<Error>>(result.Error);
+            }
+        }
+
+        return Result.Success<Training, IEnumerable<Error>>(this);
+    }
+
+    /// <summary>
+    /// Set status of the Training to Validated is condition are met.
+    /// </summary>
+    /// <returns></returns>
+    private Result<Training, IEnumerable<Error>> ValidateTraining()
     {
         var validator = new TrainingValidator();
         var validationResult = validator.Validate(this);
 
-        if (validationResult.IsValid is false)
+        if (!validationResult.IsValid)
         {
             var errors = validationResult.Errors.Select(validationError =>
                 Errors.Training.ValidationError(validationError.ErrorMessage));
-            return Result.Failure<Training, IEnumerable<Error>>(errors);
+            {
+                return Result.Failure<Training, IEnumerable<Error>>(errors);
+            }
         }
 
         StatusType = StatusType.Validate(_vatExemptionClaims);
@@ -139,7 +172,6 @@ public class Training : SeedWork.Entity, IAggregateRoot
         var details = Details.FirstOrDefault(training => training.Language == Language.Create("EN").Value) ??
                              Details.First();
         AddDomainEvent(new ValidateTrainingEvent(details.Title!, Id, TrainerAssignments.Select(assignment => assignment.TrainerId)));
-
         return Result.Success<Training, IEnumerable<Error>>(this);
     }
 

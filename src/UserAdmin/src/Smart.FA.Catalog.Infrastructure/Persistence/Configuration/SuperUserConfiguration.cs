@@ -10,8 +10,8 @@ public class SuperUserConfiguration : IEntityTypeConfiguration<SuperUser>
     {
         builder.ToTable("SuperUser", "Cfa");
 
-        builder.HasKey(superUser => superUser.UserId);
+        builder.HasKey(superUser => superUser.TrainerId);
 
-        builder.Property(superUser => superUser.UserId).HasMaxLength(50);
+        builder.Property(superUser => superUser.TrainerId);
     }
 }

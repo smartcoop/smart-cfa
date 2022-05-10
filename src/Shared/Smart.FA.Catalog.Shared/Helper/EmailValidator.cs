@@ -1,10 +1,6 @@
-using System.Globalization;
-using System.Text.RegularExpressions;
-using FluentValidation.Validators;
+namespace Smart.FA.Catalog.Shared.Collections;
 
-namespace Smart.FA.Catalog.Core.Helpers;
 
-//
 // EmailValidator.cs
 //
 // Author: Jeffrey Stedfast <jestedfa@microsoft.com>
