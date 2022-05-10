@@ -36,15 +36,15 @@ public class GetPagedTrainingListFromTrainerQueryHandler : IRequestHandler<GetPa
         {
             var trainingsFromTrainerQueryable = _context
                 .TrainerAssignments
+                .AsNoTracking()
                 .Include(assignment => assignment.Training.Details)
                 .Include(assignment => assignment.Training.Topics)
                 .Where(assignment => assignment.Trainer.Id == request.TrainerId)
                 .Select(assignment => assignment.Training)
-                .Where(training => training.Details.Any(detail => detail.Language == request.Language))
-                .OrderBy(training => training.Id)
-                .AsNoTracking();
+                .Where(training => training.Details.Any(details => details.Language == request.Language))
+                .OrderBy(training => training.Id);
 
-            var trainings = await trainingsFromTrainerQueryable.PageListAsync(request.PageItem);
+            var trainings = await trainingsFromTrainerQueryable.PaginateAsync(request.PageItem);
 
             resp.Trainings = trainings;
             resp.SetSuccess();
