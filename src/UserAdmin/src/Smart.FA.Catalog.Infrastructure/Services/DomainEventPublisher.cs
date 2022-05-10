@@ -26,9 +26,9 @@ public class DomainEventPublisher : IDomainEventPublisher
             {
                 _logger.LogInformation(LogEventIds.DomainEventDispatch, $"Publishing Domain Event {domainEvent.GetType().Name} {domainEvent.ToJson()} of entity {entity.GetType().Name} `{entity.Id}`.");
                 await _publisher.Publish(domainEvent);
-                entity.RemoveDomainEvent(domainEvent);
             }
 
+            entity.ClearDomainEvents();
             _logger.LogInformation(LogEventIds.DomainEventDispatch, $"Domain events publishing of entity {entity.GetType().Name} `{entity.Id}` completed with success.");
         }
     }
