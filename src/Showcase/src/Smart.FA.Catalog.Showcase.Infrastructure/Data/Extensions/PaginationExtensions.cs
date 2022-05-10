@@ -31,7 +31,7 @@ public static class PaginationExtensions
 
         if (randomIds)
         {
-            filteredIdsQuery = filteredIdsQuery.Randomize();
+            filteredIdsQuery = filteredIdsQuery.RandomizeOrder();
         }
 
         var paginatedItems = await query.Where(item => filteredIdsQuery.Contains(item.Id)).ToListAsync();
