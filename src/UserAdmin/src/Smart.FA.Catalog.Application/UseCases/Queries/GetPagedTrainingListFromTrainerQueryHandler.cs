@@ -21,7 +21,6 @@ public class GetPagedTrainingListFromTrainerQueryHandler : IRequestHandler<GetPa
         _context = context;
     }
 
-
     public async Task<GetPagedTrainingListFromTrainerResponse> Handle(GetPagedTrainingListFromTrainerRequest request,
         CancellationToken cancellationToken)
     {
