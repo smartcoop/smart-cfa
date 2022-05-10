@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Smart.FA.Catalog.Application\Smart.FA.Catalog.Application.csproj" />
-    <ProjectReference Include="..\Smart.FA.Catalog.Infrastructure\Smart.FA.Catalog.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

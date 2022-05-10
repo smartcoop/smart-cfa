@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Smart.FA.Catalog.Shared\Smart.FA.Catalog.Shared.csproj" />
-    <ProjectReference Include="..\..\..\UserAdmin\src\Smart.FA.Catalog.Infrastructure\Smart.FA.Catalog.Infrastructure.csproj" />
     <ProjectReference Include="..\Smart.FA.Catalog.Showcase.Domain\Smart.FA.Catalog.Showcase.Domain.csproj" />
     <ProjectReference Include="..\Smart.FA.Catalog.Showcase.Infrastructure\Smart.FA.Catalog.Showcase.Infrastructure.csproj" />
     <ProjectReference Include="..\Smart.FA.Catalog.Showcase.Localization\Smart.FA.Catalog.Showcase.Localization.csproj" />
