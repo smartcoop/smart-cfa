@@ -111,7 +111,7 @@
                 }
             </div>
 
-            <div>Page @(Model.Trainings.PageIndex.ToString())/@(Model.Trainings.TotalPages.ToString())</div>
+            <div>Page @(Model.Trainings.PageIndex + 1)/@(Model.Trainings.TotalPages.ToString())</div>
 
             <div class="c-toolbar__right">
                 @if (Model.Trainings.HasNextPage)
