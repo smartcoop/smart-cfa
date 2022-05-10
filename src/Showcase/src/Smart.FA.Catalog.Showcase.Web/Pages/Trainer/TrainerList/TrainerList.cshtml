@@ -53,8 +53,28 @@
                 </div>
             }
         </div>
-        @*TO DO Pagination*@
     </section>
+    @if (Model.Trainers.Any())
+    {
+        <div class="u-spacer-xl">
+            <div class="c-toolbar">
+                <div class="c-toolbar__left">
+                    @if (Model?.Trainers.HasPreviousPage ?? false)
+                    {
+                        <a asp-page="@Routes.TrainingList" asp-route-CurrentPage="@(Model.CurrentPage - 1)">@ShowcaseResources.Previous</a>
+                    }
+                </div>
+
+                <div>Page @(Model?.CurrentPage)/@(Model?.Trainers.TotalPages ?? 0)</div>
+                <div class="c-toolbar__right">
+                    @if (Model?.Trainers.HasNextPage ?? false)
+                    {
+                        <a asp-page="@Routes.TrainingList" asp-route-CurrentPage="@(Model.CurrentPage + 1)">@ShowcaseResources.Next</a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
 </main>
 
 

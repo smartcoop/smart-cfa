@@ -7,5 +7,4 @@ public class TrainerListViewModel
     public string LastName { get; set; } = null!;
     public string Title { get; set; } = null!;
     public string? ProfileImagePath { get; set; }
-    public int TrainingStatusTypeId { get; set; }
 }
