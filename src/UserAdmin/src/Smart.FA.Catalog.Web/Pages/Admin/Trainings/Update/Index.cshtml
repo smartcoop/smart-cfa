@@ -16,22 +16,30 @@
 
         @section HeaderToolbar
         {
-            <div class="c-navbar c-navbar--bordered-bottom">
-                <div class="c-toolbar">
-                    <div class="c-toolbar__left">
+            <div class="c-toolbar">
+                <div class="c-toolbar__left">
+                    @if (Request.Query.ContainsKey("fromlist"))
+                    {
                         <div class="c-toolbar__item">
-                            @if (Request.Query.ContainsKey("fromlist"))
-                            {
-                                <a class="c-button c-button--icon c-button--borderless" href="/Admin/Trainings/List/Index">
-                                    <div class="c-button__content">
-                                        <smart-icon icon="ArrowLeft"></smart-icon>
-                                        <div class="u-sr-accessible">@CatalogResources.Back</div>
-                                    </div>
-                                </a>
-                            }
+                            <a class="c-button c-button--icon c-button--borderless" href="/Admin/Trainings/List/Index">
+                                <div class="c-button__content">
+                                    <smart-icon icon="ArrowLeft"></smart-icon>
+                                    <div class="u-sr-accessible">@CatalogResources.Back</div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                    <div class="c-toolbar__item">
+                        <h2 class="c-toolbar__title">@CatalogResources.EditTraining @Model.UpdateTrainingViewModel.Title</h2>
+                    </div>
+                </div>
+                <div class="c-toolbar__right">
+                    <div class="c-button-toolbar">
+                        <div class="c-toolbar__item">
+                            <smart-button id="Save" form="form" label="@CatalogResources.Draft" button-style="Secondary" leading-icon="Save" button-type="Submit" asp-page-handler="Update"> </smart-button>
                         </div>
                         <div class="c-toolbar__item">
-                            <h2 class="c-toolbar__title">@CatalogResources.EditTraining @Model.UpdateTrainingViewModel.Title</h2>
+                            <smart-button id="Publish" form="form" label="@CatalogResources.Publish" button-style="Primary" leading-icon="Send" button-type="Submit" asp-page-handler="Update"> </smart-button>
                         </div>
                     </div>
                 </div>
@@ -95,14 +103,6 @@
             <input type="hidden" id="isDraft" value="false" asp-for="UpdateTrainingViewModel.IsDraft"/>
 
             <div class="u-spacer"></div>
-        </div>
-        <div class="c-toolbar__right">
-            <div class="c-toolbar__item">
-                <smart-button id="Save" label="@CatalogResources.Draft" button-style="Secondary" leading-icon="Save" button-type="Submit" asp-page-handler="Update"> </smart-button>
-            </div>
-            <div class="c-toolbar__item">
-                <smart-button id="Publish" label="@CatalogResources.Publish" button-style="Primary" leading-icon="Send" button-type="Submit" asp-page-handler="Update"> </smart-button>
-            </div>
         </div>
     </form>
 </smart-container>
