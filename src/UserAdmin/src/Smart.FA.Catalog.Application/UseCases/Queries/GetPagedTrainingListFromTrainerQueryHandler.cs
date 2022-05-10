@@ -10,17 +10,12 @@ using Smart.FA.Catalog.Infrastructure.Extensions;
 
 namespace Smart.FA.Catalog.Application.UseCases.Queries;
 
-public class GetPagedTrainingListFromTrainerQueryHandler : IRequestHandler<GetPagedTrainingListFromTrainerRequest,
-    GetPagedTrainingListFromTrainerResponse>
+public class GetPagedTrainingListFromTrainerQueryHandler : IRequestHandler<GetPagedTrainingListFromTrainerRequest, GetPagedTrainingListFromTrainerResponse>
 {
     private readonly ILogger<GetPagedTrainingListFromTrainerQueryHandler> _logger;
     private readonly CatalogContext _context;
 
-    public GetPagedTrainingListFromTrainerQueryHandler
-    (
-        ILogger<GetPagedTrainingListFromTrainerQueryHandler> logger,
-        CatalogContext context
-    )
+    public GetPagedTrainingListFromTrainerQueryHandler(ILogger<GetPagedTrainingListFromTrainerQueryHandler> logger, CatalogContext context)
     {
         _logger = logger;
         _context = context;
@@ -32,28 +27,20 @@ public class GetPagedTrainingListFromTrainerQueryHandler : IRequestHandler<GetPa
     {
         GetPagedTrainingListFromTrainerResponse resp = new();
 
-        try
-        {
-            var trainingsFromTrainerQueryable = _context
-                .TrainerAssignments
-                .AsNoTracking()
-                .Include(assignment => assignment.Training.Details)
-                .Include(assignment => assignment.Training.Topics)
-                .Where(assignment => assignment.Trainer.Id == request.TrainerId)
-                .Select(assignment => assignment.Training)
-                .Where(training => training.Details.Any(details => details.Language == request.Language))
-                .OrderBy(training => training.Id);
+        var trainingsFromTrainerQueryable = _context
+            .TrainerAssignments
+            .AsNoTracking()
+            .Include(assignment => assignment.Training.Details)
+            .Include(assignment => assignment.Training.Topics)
+            .Where(assignment => assignment.Trainer.Id == request.TrainerId)
+            .Select(assignment => assignment.Training)
+            .Where(training => training.Details.Any(details => details.Language == request.Language))
+            .OrderBy(training => training.Id);
 
-            var trainings = await trainingsFromTrainerQueryable.PaginateAsync(request.PageItem);
+        var trainings = await trainingsFromTrainerQueryable.PaginateAsync(request.PageItem);
 
-            resp.Trainings = trainings;
-            resp.SetSuccess();
-        }
-        catch (Exception e)
-        {
-            _logger.LogError("{Exception}", e.ToString());
-            throw;
-        }
+        resp.Trainings = trainings;
+        resp.SetSuccess();
 
         return resp;
     }

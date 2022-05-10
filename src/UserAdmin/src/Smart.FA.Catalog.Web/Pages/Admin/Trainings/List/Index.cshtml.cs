@@ -29,7 +29,11 @@ public class ListModel : AdminPage
         SetSideMenuItem();
         var response = await Mediator.Send(new GetPagedTrainingListFromTrainerRequest
         {
-            TrainerId = user.Trainer.Id, Language = user.Trainer.DefaultLanguage, PageItem = new PageItem(CurrentPage, _adminOptions.Training!.NumberOfTrainingsDisplayed)
+            TrainerId = user.Trainer.Id,
+
+            Language = user.Trainer.DefaultLanguage,
+
+            PageItem = new PageItem(CurrentPage, _adminOptions.Training!.NumberOfTrainingsDisplayed)
         });
         Trainings = response.Trainings;
         return Page();
