@@ -4,6 +4,7 @@ using Smart.FA.Catalog.Core.Domain.Validators;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
 using Smart.FA.Catalog.Core.Exceptions;
 using Smart.FA.Catalog.Core.SeedWork;
+using Smart.FA.Catalog.Shared.Collections;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
 namespace Smart.FA.Catalog.Core.Domain;

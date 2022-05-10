@@ -9,20 +9,18 @@
 }
 
 @section HeaderToolbar {
-    <div class="c-navbar c-navbar--bordered-bottom">
-        <div class="c-toolbar">
-            <div class="c-toolbar__left">
-                <div class="c-toolbar__item">
-                    <h2 class="c-toolbar__title">@CatalogResources.MyTrainings</h2>
-                </div>
+    <div class="c-toolbar">
+        <div class="c-toolbar__left">
+            <div class="c-toolbar__item">
+                <h2 class="c-toolbar__title">@CatalogResources.MyTrainings</h2>
             </div>
+        </div>
 
+        <div class="c-toolbar__right">
             <smart-button-toolbar>
-                <div class="c-toolbar__right">
-                    <a href="/admin/trainings/create?fromlist=">
-                        <smart-button label="@CatalogResources.AddNewTraining" leading-icon="Add"></smart-button>
-                    </a>
-                </div>
+                <a href="/admin/trainings/create?fromlist=">
+                    <smart-button label="@CatalogResources.AddNewTraining" leading-icon="Add"></smart-button>
+                </a>
             </smart-button-toolbar>
         </div>
     </div>
@@ -30,7 +28,7 @@
 
 @if (Model.Trainings is not null && !Model.Trainings.Any())
 {
-    <div class="c-error-page">
+    <div class="c-error-page" style="height: 50%">
         <h4 class="c-error-page__title" style="font-size: 3.0rem;">@CatalogResources.YouDontHaveAnyTrainings</h4>
         <p class="c-error-page__desc" style="font-size: 2.4rem;">@CatalogResources.ClickHereToAddANewTraining</p>
         <a class="c-button c-button--secondary" href="/admin/Trainings/Create">

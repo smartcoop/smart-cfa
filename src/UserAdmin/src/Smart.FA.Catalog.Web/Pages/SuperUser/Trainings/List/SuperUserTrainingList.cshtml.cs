@@ -65,7 +65,7 @@ public class SuperUserTrainingListPageModel : PageModel
         }
         catch (Exception exception)
         {
-            _logger.LogError(exception, $"An error occurred while retrieving training for request {SerializeHtmlForm().ToJson()}");
+            _logger.LogError(exception, $"An error occurred while retrieving training for request {GetTrainingsRequest.ToJson()}");
             ErrorMessage = CatalogResources.AnErrorOccurredWhileSearching;
         }
     }
@@ -81,7 +81,7 @@ public class SuperUserTrainingListPageModel : PageModel
         var request = GetTrainingsRequest;
         var queryString = "";
 
-        if (GetTrainingsRequest.Status is not null)
+        if (request.Status is not null)
         {
             queryString += $"{nameof(request.Status)}={HttpUtility.UrlEncode(request.Status.ToString())}&";
         }
