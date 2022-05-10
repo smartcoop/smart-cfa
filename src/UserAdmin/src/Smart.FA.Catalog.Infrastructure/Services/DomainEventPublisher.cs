@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Smart.FA.Catalog.Core.Extensions;
 using Smart.FA.Catalog.Core.LogEvents;
 using Smart.FA.Catalog.Core.SeedWork;
 
@@ -23,7 +24,7 @@ public class DomainEventPublisher : IDomainEventPublisher
         {
             foreach (var domainEvent in entity.DomainEvents)
             {
-                _logger.LogInformation(LogEventIds.DomainEventDispatch, $"Publishing domain event {domainEvent.GetType().Name} of entity {entity.GetType().Name} `{entity.Id}`.");
+                _logger.LogInformation(LogEventIds.DomainEventDispatch, $"Publishing Domain Event {domainEvent.GetType().Name} {domainEvent.ToJson()} of entity {entity.GetType().Name} `{entity.Id}`.");
                 await _publisher.Publish(domainEvent);
                 entity.RemoveDomainEvent(domainEvent);
             }
