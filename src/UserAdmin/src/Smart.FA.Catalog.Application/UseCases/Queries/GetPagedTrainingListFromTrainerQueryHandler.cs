@@ -7,6 +7,7 @@ using Smart.FA.Catalog.Core.Domain.ValueObjects;
 using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 using Smart.FA.Catalog.Infrastructure.Extensions;
+using Smart.FA.Catalog.Shared.Collections;
 
 namespace Smart.FA.Catalog.Application.UseCases.Queries;
 

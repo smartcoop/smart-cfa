@@ -3,8 +3,8 @@ version: "3.9"
 services:
   minio:
     image: quay.io/minio/minio
-    hostname: minio-local
-    container_name: minio-local
+    hostname: minio
+    container_name: minio
     restart: always
     networks:
       - "local-cfa"
@@ -29,7 +29,7 @@ services:
     image: minio/mc
     container_name: minio_client-local
     depends_on:
-      - minio-local
+      - minio
     entrypoint: >
       bash -c
            "/usr/bin/mc alias set myminio http://host.docker.internal:9000 newadmin newadmin123!;

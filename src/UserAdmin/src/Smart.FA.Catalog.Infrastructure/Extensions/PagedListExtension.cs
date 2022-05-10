@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Smart.FA.Catalog.Core.SeedWork;
+using Smart.FA.Catalog.Shared.Collections;
 
 namespace Smart.FA.Catalog.Infrastructure.Extensions;
 
