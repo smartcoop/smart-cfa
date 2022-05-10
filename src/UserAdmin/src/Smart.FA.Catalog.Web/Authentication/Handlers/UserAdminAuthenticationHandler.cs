@@ -124,11 +124,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
 
     private void SetFakeHeaderValueIfDevelopmentEnvironmentAndMissing()
     {
-<<<<<<< HEAD
-        // During local development the developper may not pass through ngnix redirection therefore, default value are set form him/her.
-=======
         // During local development the developer may not pass through ngnix redirection therefore, default values are set for him/her.
->>>>>>> origin/main
         if (_webHostEnvironment.IsDevelopment() || _webHostEnvironment.IsLocalEnvironment())
         {
             Context.Request.Headers.Add("userid", "1");
