@@ -6,8 +6,19 @@ namespace Smart.FA.Catalog.Web.Pages.Shared.Components.AdminTrainingTile;
 [ViewComponent(Name = "AdminTrainingTile")]
 public class AdminTrainingCardViewComponent : ViewComponent
 {
-    public IViewComponentResult Invoke(TrainingDto model)
+    public IViewComponentResult Invoke(TrainingDto trainingDto, bool showDeleteButton = false)
     {
-        return View(model ?? throw new ArgumentNullException(nameof(model)));
+        return View(new AdminTrainingCardViewComponentModel()
+        {
+            TrainingDto      = trainingDto ?? throw new ArgumentNullException(nameof(trainingDto)),
+            ShowDeleteButton = showDeleteButton
+        });
     }
+}
+
+public class AdminTrainingCardViewComponentModel
+{
+    public TrainingDto? TrainingDto { get; init; }
+
+    public bool ShowDeleteButton { get; init; }
 }

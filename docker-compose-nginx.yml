@@ -1,0 +1,88 @@
+version: "3.9"
+
+services:
+  datasource:
+    build:
+      context: .
+      dockerfile: DB.Dockerfile
+    hostname: "${DOCKER_NAME}-datasource"
+    container_name: "${DOCKER_NAME}-datasource"
+    restart: always
+    ports:
+      - "1433:1433"
+    environment:
+      - "SA_PASSWORD=localStoragePassword!"
+    networks:
+      - "cfa"
+  api:
+    depends_on:
+      - datasource
+    build:
+      context: .
+      dockerfile: Web.Dockerfile
+    ports:
+      - "5091:80"
+    hostname: ${DOCKER_NAME}-api
+    container_name: ${DOCKER_NAME}-api
+    restart: always
+    networks:
+      - "cfa"
+    environment:
+      - "ASPNETCORE_ENVIRONMENT=Docker"
+  front:
+    build:
+      context: .
+      dockerfile: AccountSim.Dockerfile
+    ports:
+      - "5259:80"
+    hostname: account-sim
+    networks:
+      - "cfa"
+  proxy:
+    build:
+      context: .
+      dockerfile: Nginx.Dockerfile
+    ports:
+      - "7002:80"
+    networks:
+      - "cfa"
+  minio:
+    image: quay.io/minio/minio
+    hostname: minio
+    container_name: minio
+    restart: always
+    networks:
+      - "cfa"
+    volumes:
+      - /minio/data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      - "MINIO_ROOT_USER=admin"
+      - "MINIO_ROOT_PASSWORD=adminpassword!"
+    command: server /data --console-address ":9001"
+
+  minioclient:
+    image: minio/mc
+    container_name: minio_client
+    depends_on:
+      - minio
+    entrypoint: >
+      bash -c
+           "/usr/bin/mc alias set myminio http://host.docker.internal:9000 admin adminpassword!;
+            /usr/bin/mc mb myminio/cfa;
+            /usr/bin/mc policy set public myminio/cfa;
+            /usr/bin/mc admin user add myminio newuser newuser123;
+            /usr/bin/mc admin policy set myminio readwrite user=newuser
+            /usr/bin/mc admin group add newgroup newuser;
+      exit 0;"
+    networks:
+      - "cfa"
+networks:
+  cfa:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.22.1.0/24
+          gateway: 172.22.1.1

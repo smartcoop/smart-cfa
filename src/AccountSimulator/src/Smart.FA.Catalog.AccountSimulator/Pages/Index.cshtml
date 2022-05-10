@@ -1,0 +1,17 @@
+﻿@page "{id:int?}"
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Smart.FA.Catalog.AccountSimulator
+@model Smart.FA.Catalog.AccountSimulator.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">Chose a user to connect with</a>.</p>
+   @using (Html.BeginForm())
+   {
+       <select asp-for="SelectedUser" asp-items="AccountUsers.SelectListItems"></select>
+       <button type="submit" asp-page-handler="Redirect">OK</button>
+   }
+</div>

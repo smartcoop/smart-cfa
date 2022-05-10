@@ -8,7 +8,6 @@ public class TrainingTopic
     #region Properties
 
     public int TrainingId { get; private set; }
-    public int TopicId { get; private set; }
     public virtual Topic Topic { get; } = null!;
     public virtual Training Training { get; } = null!;
 
@@ -26,7 +25,6 @@ public class TrainingTopic
         Training = training;
         Topic = topic;
         TrainingId = training.Id;
-        TopicId = topic.Id;
     }
 
     #endregion

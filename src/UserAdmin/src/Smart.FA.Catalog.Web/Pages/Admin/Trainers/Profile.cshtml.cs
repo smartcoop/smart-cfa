@@ -1,5 +1,4 @@
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Smart.FA.Catalog.Application.UseCases.Commands;
 using Smart.FA.Catalog.Application.UseCases.Queries;
@@ -52,8 +51,8 @@ public class ProfileModel : AdminPage
             var editionResponse = await Mediator.Send(EditProfileCommand);
             if (EditProfileCommand.ProfilePicture is not null)
             {
-                var imageUploadRequest = new UploadImageToStorageCommandRequest {Trainer = UserIdentity.CurrentTrainer, ProfilePicture = EditProfileCommand.ProfilePicture};
-                var profileResult      = await Mediator.Send(imageUploadRequest);
+                var imageUploadRequest = new UploadImageToStorageCommandRequest { Trainer = UserIdentity.CurrentTrainer, ProfilePicture = EditProfileCommand.ProfilePicture };
+                var profileResult = await Mediator.Send(imageUploadRequest);
                 ProfilePicture = profileResult.ProfilePictureStream;
             }
 
@@ -73,7 +72,7 @@ public class ProfileModel : AdminPage
         var trainerProfile = await Mediator.Send(new GetTrainerProfileQuery(UserIdentity.CurrentTrainer.Id));
         if (trainerProfile.TrainerId is not null)
         {
-            EditProfileCommand      = trainerProfile.ToCommand();
+            EditProfileCommand = trainerProfile.ToCommand();
             SocialNetworkViewModels = trainerProfile.Socials.ToSocialViewModels();
         }
     }
@@ -95,8 +94,8 @@ public class ProfileModel : AdminPage
 
     public async Task<FileResult?> OnGetLoadImageAsync()
     {
-        var profilePicture = await Mediator.Send(new GetTrainerProfileImageRequest {Trainer = UserIdentity.CurrentTrainer});
-        var response       = profilePicture.ImageStream is null ? null : new FileStreamResult(profilePicture.ImageStream, "image/jpeg");
+        var profilePicture = await Mediator.Send(new GetTrainerProfileImageRequest { Trainer = UserIdentity.CurrentTrainer });
+        var response = profilePicture.ImageStream is null ? null : new FileStreamResult(profilePicture.ImageStream, "image/jpeg");
         return response;
     }
 
@@ -104,7 +103,7 @@ public class ProfileModel : AdminPage
     {
         if (EditProfileCommand?.ProfilePicture is not null)
         {
-            await Mediator.Send(new DeleteTrainerProfileImageRequest {Trainer = UserIdentity.CurrentTrainer});
+            await Mediator.Send(new DeleteTrainerProfileImageRequest { Trainer = UserIdentity.CurrentTrainer });
         }
 
         await LoadDataAsync();

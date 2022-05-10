@@ -65,7 +65,7 @@ public static class EditTrainingViewModelMapping
             TargetAudienceTypeIds = model.Training.Targets.Select(target => target.TargetAudienceType.Id).ToList(),
             VatExemptionClaimIds = model.Training.VatExemptionClaims.Select(vatExemptionClaim => vatExemptionClaim.VatExemptionType.Id).ToList(),
             AttendanceTypeIds = model.Training.Attendances.Select(attendance => attendance.AttendanceType.Id).ToList(),
-            TopicIds = model.Training.Topics.Select(topic => topic.TopicId).ToList(),
+            TopicIds = model.Training.Topics.Select(topic => topic.Topic.Id).ToList(),
             IsGivenBySmart = model.Training.IsGivenBySmart
         };
 

@@ -1,6 +1,5 @@
 #nullable disable
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Smart.FA.Catalog.Shared.Collections;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
@@ -10,7 +9,7 @@ using Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingList;
 
 namespace Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerDetails;
 
-public class TrainerDetailsModel : PageModel
+public class TrainerDetailsModel : PageModelBase
 {
     private readonly CatalogShowcaseContext _context;
 
@@ -29,16 +28,19 @@ public class TrainerDetailsModel : PageModel
     {
         if (id is null)
         {
-            TempData["errorMessage"] = "There is no record for this request.";
-            return RedirectToPage("/404");
+            return RedirectToNotFound("Page not found", "There is no record for this request.");
         }
 
         var trainerDetails = await _context.TrainerDetails.Where(trainer => trainer.Id == id).ToListAsync();
 
         if (!trainerDetails.Any())
         {
-            TempData["errorMessage"] = "This trainer does not exist.";
-            return RedirectToPage("/404");
+            return RedirectToNotFound("Page not found", "This trainer does not exist.");
+        }
+
+        if (CurrentPage <= 0)
+        { 
+            return RedirectToNotFound("Page not found", "The page you have requested does not exist.");
         }
 
         var offset = (CurrentPage - 1) * ItemsPerPage;

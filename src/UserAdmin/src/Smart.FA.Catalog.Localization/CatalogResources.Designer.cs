@@ -79,7 +79,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to La charte d&apos;utilisateur de formateurs associés n&apos;a pas été accepté.
+        ///   Looks up a localized string similar to La charte d&apos;utilisateur de formateurs associés n&apos;a pas été acceptée.
         /// </summary>
         public static string AdminHomePage_HasNotAcceptedUserChart {
             get {
@@ -88,11 +88,38 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Je m&apos;engage à respecter la Charter d&apos;utilisation de Formateur Associé.
+        ///   Looks up a localized string similar to Je m&apos;engage à respecter la Charter d&apos;utilisation de Formateurs Associés.
         /// </summary>
         public static string AdminHomepage_IAcceptCharter {
             get {
                 return ResourceManager.GetString("AdminHomepage_IAcceptCharter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bienvenue dans le monde de la formation de Smart, .
+        /// </summary>
+        public static string AdminHomepage_IntroductionPart1 {
+            get {
+                return ResourceManager.GetString("AdminHomepage_IntroductionPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smart est une coopérative de travailleuses et travailleurs qui utilisent sa structure pour exercer leur métier, par exemple de la formation..
+        /// </summary>
+        public static string AdminHomepage_IntroductionPart2 {
+            get {
+                return ResourceManager.GetString("AdminHomepage_IntroductionPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ce catalogue en ligne s’adresse à toute personne en recherche d’une formation. Vous trouverez sur ce site des formations de type scolaire, professionnel  (organisées et produites par Formateurs Associés asbl et Productions Associées asbl, le cas échéant) ou encore récréatif (uniquement dans Producteurs Associés asbl). Vous visualisez aisément la personne qui dispense la formation et pouvez la contacter en direct pour obtenir davantage d’informations. .
+        /// </summary>
+        public static string AdminHomepage_IntroductionPart3 {
+            get {
+                return ResourceManager.GetString("AdminHomepage_IntroductionPart3", resourceCulture);
             }
         }
         
@@ -106,11 +133,20 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Formateurs Associés: quoi ? Pourquoi ? Commment ?.
+        ///   Looks up a localized string similar to Interface d&apos;encodage de formations.
         /// </summary>
         public static string AdminHomepage_WhatIsFormateurAssocieTitle {
             get {
                 return ResourceManager.GetString("AdminHomepage_WhatIsFormateurAssocieTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Une erreur s&apos;est déroulée durant la recherche. Veuillez essayer à nouveau.
+        /// </summary>
+        public static string AnErrorOccurredWhileSearching {
+            get {
+                return ResourceManager.GetString("AnErrorOccurredWhileSearching", resourceCulture);
             }
         }
         
@@ -259,7 +295,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Champs qui apparaîtront dans le catalog public.
+        ///   Looks up a localized string similar to Champs qui apparaîtront dans le catalogue public.
         /// </summary>
         public static string FieldsThatWillAppearInThePublicCatalog {
             get {
@@ -394,7 +430,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Minimum 30 caractères.
         /// </summary>
         public static string Min30Characters {
             get {
@@ -457,6 +493,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Aucune formation trouvée.
+        /// </summary>
+        public static string NoTrainingFound {
+            get {
+                return ResourceManager.GetString("NoTrainingFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Autre.
         /// </summary>
         public static string Other {
@@ -511,7 +556,43 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edition de profil.
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Profile_bioLabel {
+            get {
+                return ResourceManager.GetString("Profile_bioLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Déposer votre photo pour la téléverser.
+        /// </summary>
+        public static string Profile_DragDropPicture {
+            get {
+                return ResourceManager.GetString("Profile_DragDropPicture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Votre photo de profil.
+        /// </summary>
+        public static string Profile_ImageTitle {
+            get {
+                return ResourceManager.GetString("Profile_ImageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sélectionner une photo.
+        /// </summary>
+        public static string Profile_UploadPicture {
+            get {
+                return ResourceManager.GetString("Profile_UploadPicture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Édition de profil.
         /// </summary>
         public static string ProfileEdition {
             get {
@@ -592,6 +673,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rechercher.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Secteurs.
         /// </summary>
         public static string Sectors {
@@ -651,6 +741,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string Sport {
             get {
                 return ResourceManager.GetString("Sport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string Status {
+            get {
+                return ResourceManager.GetString("Status", resourceCulture);
             }
         }
         
@@ -781,7 +880,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to entre dans le cadre de l&apos;Education permanente.
+        ///   Looks up a localized string similar to entre dans le cadre de l&apos;Éducation permanente.
         /// </summary>
         public static string Training_IsPermanentEducation {
             get {
@@ -831,6 +930,24 @@ namespace Smart.FA.Catalog.Localization {
         public static string TrainingPresentation {
             get {
                 return ResourceManager.GetString("TrainingPresentation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formations.
+        /// </summary>
+        public static string Trainings {
+            get {
+                return ResourceManager.GetString("Trainings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Édition de formations.
+        /// </summary>
+        public static string TrainingSearchTitle {
+            get {
+                return ResourceManager.GetString("TrainingSearchTitle", resourceCulture);
             }
         }
         
