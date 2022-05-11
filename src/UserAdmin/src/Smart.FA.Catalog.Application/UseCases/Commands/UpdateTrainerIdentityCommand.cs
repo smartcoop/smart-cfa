@@ -7,7 +7,7 @@ using Smart.FA.Catalog.Infrastructure.Persistence;
 namespace Smart.FA.Catalog.Application.UseCases.Commands;
 
 /// <summary>
-/// Updates the first name, last name and email of a <see cref="Trainer" />
+/// Updates the first name, last name and email of a <see cref="Trainer" />.
 /// </summary>
 /// <param name="TrainerId">The id of the training to update.</param>
 /// <param name="FirstName">The trainer's first name.</param>
