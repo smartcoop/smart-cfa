@@ -9,6 +9,7 @@ using Smart.FA.Catalog.Application.UseCases.Queries.Authorization;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.Models;
 using Smart.FA.Catalog.Core.Domain.User.Enumerations;
+using Smart.FA.Catalog.Web.Options;
 
 namespace Smart.FA.Catalog.Web.Authentication.Handlers;
 
@@ -23,17 +24,20 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
     private readonly IWebHostEnvironment _webHostEnvironment;
     private string? _userId;
     private string? _appName;
+    private readonly SpecialAuthenticationOptions _authenticationOptions;
 
     public UserAdminAuthenticationHandler(
         IMediator mediator,
         IWebHostEnvironment webHostEnvironment,
         IOptionsMonitor<CfaAuthenticationOptions> options,
+        IOptionsMonitor<SpecialAuthenticationOptions> authenticationOptions,
         ILoggerFactory logger,
         UrlEncoder encoder,
         ISystemClock clock) : base(options, logger, encoder, clock)
     {
         _mediator = mediator;
         _webHostEnvironment = webHostEnvironment;
+        _authenticationOptions = authenticationOptions.CurrentValue;
     }
 
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
@@ -125,7 +129,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
     private void SetFakeHeaderValueIfDevelopmentEnvironmentAndMissing()
     {
         // During local development the developer may not pass through ngnix redirection therefore, default values are set for him/her.
-        if (_webHostEnvironment.IsDevelopment() || _webHostEnvironment.IsLocalEnvironment())
+        if (_authenticationOptions.UseFakeHeaders)
         {
             Context.Request.Headers.Add("userid", "1");
             Context.Request.Headers.Add("smartApplication", ApplicationType.Account.Name);
