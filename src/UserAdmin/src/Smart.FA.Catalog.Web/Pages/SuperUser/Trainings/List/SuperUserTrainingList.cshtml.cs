@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Smart.FA.Catalog.Application.UseCases.Queries;
+using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.Dto;
 using Smart.FA.Catalog.Core.Extensions;
+using Smart.FA.Catalog.Shared.Collections;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 using Smart.FA.Catalog.Web.Options;
 
@@ -25,7 +27,7 @@ public class SuperUserTrainingListPageModel : PageModel
 
     public string? ErrorMessage { get; set; }
 
-    public PaginatedList<TrainingDto>? Trainings { get; set; }
+    public PagedList<Training>? Trainings { get; set; }
 
     public IEnumerable<SelectListItem>? Statuses { get; set; }
 

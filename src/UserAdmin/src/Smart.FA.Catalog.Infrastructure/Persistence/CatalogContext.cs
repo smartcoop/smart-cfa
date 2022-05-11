@@ -75,7 +75,7 @@ public class CatalogContext : DbContext
         var entitiesWithEvents = ChangeTracker
             .Entries<Entity>()
             .Select(entry => entry.Entity)
-            .Where(entity => entity.DomainEvents.Count == 0);
+            .Where(entity => entity.DomainEvents.Any());
 
         return _eventPublisher.PublishEntitiesEventsAsync(entitiesWithEvents);
     }
