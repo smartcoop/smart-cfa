@@ -79,6 +79,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Formateurs Associés.
+        /// </summary>
+        public static string AssociateTrainers {
+            get {
+                return ResourceManager.GetString("AssociateTrainers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Votre message a bien été envoyé..
         /// </summary>
         public static string Contact_ConfirmationMessage {
@@ -187,6 +196,60 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contact.
+        /// </summary>
+        public static string Footer_LabelContact {
+            get {
+                return ResourceManager.GetString("Footer_LabelContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Suivre.
+        /// </summary>
+        public static string Footer_LabelFollow {
+            get {
+                return ResourceManager.GetString("Footer_LabelFollow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mentions Légales.
+        /// </summary>
+        public static string Footer_LabelLegalNotice {
+            get {
+                return ResourceManager.GetString("Footer_LabelLegalNotice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nos sites.
+        /// </summary>
+        public static string Footer_LabelOurWebsites {
+            get {
+                return ResourceManager.GetString("Footer_LabelOurWebsites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accès rapides.
+        /// </summary>
+        public static string Footer_LabelQuickLinks {
+            get {
+                return ResourceManager.GetString("Footer_LabelQuickLinks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RGPD / Confidentialité.
+        /// </summary>
+        public static string Footer_LabelRGPD {
+            get {
+                return ResourceManager.GetString("Footer_LabelRGPD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cette page n&apos;existe pas.
         /// </summary>
         public static string GenericNotFoundPageMessage {
@@ -201,6 +264,42 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         public static string GenericNotFoundPageTitle {
             get {
                 return ResourceManager.GetString("GenericNotFoundPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formateurs Associés.
+        /// </summary>
+        public static string Header_LabelFA {
+            get {
+                return ResourceManager.GetString("Header_LabelFA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &gt;&gt; Accès membre &lt;&lt;.
+        /// </summary>
+        public static string Header_LabelMemberAccess {
+            get {
+                return ResourceManager.GetString("Header_LabelMemberAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formateurs.
+        /// </summary>
+        public static string Header_LabelTrainers {
+            get {
+                return ResourceManager.GetString("Header_LabelTrainers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formations.
+        /// </summary>
+        public static string Header_LabelTrainings {
+            get {
+                return ResourceManager.GetString("Header_LabelTrainings", resourceCulture);
             }
         }
         
@@ -286,7 +385,8 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Suivant.
+        ///   Looks up a localized string similar to .
+
         /// </summary>
         public static string Next {
             get {
@@ -322,7 +422,8 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Précédent.
+        ///   Looks up a localized string similar to .
+
         /// </summary>
         public static string Previous {
             get {
@@ -354,6 +455,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         public static string ToTrainingHomePage {
             get {
                 return ResourceManager.GetString("ToTrainingHomePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Les formateur·trices de Formateurs Associés.
+        /// </summary>
+        public static string TrainersOfAssociateTrainers {
+            get {
+                return ResourceManager.GetString("TrainersOfAssociateTrainers", resourceCulture);
             }
         }
         

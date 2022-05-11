@@ -67,13 +67,10 @@ public static class Mappers
     public static Image ToImage(this SocialNetwork socialNetwork)
     {
         var icon = Image.None;
-        try
+        var existingImages = Enum.GetNames<Image>();
+        if (existingImages.Any(image => image.Equals(socialNetwork.Name, StringComparison.OrdinalIgnoreCase)))
         {
             icon = Enum.Parse<Image>(socialNetwork.Name, ignoreCase: true);
-        }
-        catch
-        {
-            // ignored
         }
 
         return icon;

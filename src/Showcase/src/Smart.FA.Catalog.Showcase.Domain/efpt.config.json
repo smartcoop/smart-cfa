@@ -18,6 +18,10 @@
          "ObjectType": 3
       },
       {
+         "Name": "[Cfa].[v_TrainerList]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[Cfa].[v_TrainingDetails]",
          "ObjectType": 3
       },

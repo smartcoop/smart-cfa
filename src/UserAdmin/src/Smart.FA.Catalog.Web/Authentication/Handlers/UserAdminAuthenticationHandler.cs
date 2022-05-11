@@ -10,6 +10,7 @@ using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.Models;
 using Smart.FA.Catalog.Core.Domain.User.Dto;
 using Smart.FA.Catalog.Core.Domain.User.Enumerations;
+using Smart.FA.Catalog.Web.Options;
 using Smart.FA.Catalog.Web.Authentication.Header;
 
 namespace Smart.FA.Catalog.Web.Authentication.Handlers;
@@ -24,18 +25,17 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
     private readonly AccountHeadersValidator _accountHeadersValidator;
     private readonly CustomDataFieldsValidator _customDataFieldsDataValidator;
     private readonly IMediator _mediator;
-    private readonly IWebHostEnvironment _webHostEnvironment;
-
-    private string _userId;
-    private string _appName;
-    private string _firstName;
-    private string _lastName;
-    private string _email;
+    private string? _userId;
+    private string? _appName;
+    private string? _firstName;
+    private string? _lastName;
+    private string? _email;
+    private readonly SpecialAuthenticationOptions _authenticationOptions;
 
     public UserAdminAuthenticationHandler(
         IMediator mediator,
-        IWebHostEnvironment webHostEnvironment,
         IOptionsMonitor<CfaAuthenticationOptions> options,
+        IOptionsMonitor<SpecialAuthenticationOptions> authenticationOptions,
         ILoggerFactory logger,
         UrlEncoder encoder,
         ISystemClock clock) : base(options, logger, encoder, clock)
@@ -43,7 +43,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
         _accountHeadersValidator = new AccountHeadersValidator();
         _customDataFieldsDataValidator = new CustomDataFieldsValidator();
         _mediator = mediator;
-        _webHostEnvironment = webHostEnvironment;
+        _authenticationOptions = authenticationOptions.CurrentValue;
     }
 
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
@@ -106,9 +106,8 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
 
     private void SetFakeHeaderValueIfDevelopmentEnvironmentAndMissing()
     {
-        return;
-        // During local development the developer may not pass through ngnix redirection therefore, default values are set for him/her.
-        if (_webHostEnvironment.IsDevelopment() || _webHostEnvironment.IsLocalEnvironment())
+        // If the UserFakeHeaders option is set to true, the developer may not pass through ngnix redirection therefore, default values are set for him/her.
+        if (_authenticationOptions.UseFakeHeaders)
         {
             Context.Request.Headers.Add(Headers.UserId, "1");
             Context.Request.Headers.Add(Headers.ApplicationName, ApplicationType.Account.Name);

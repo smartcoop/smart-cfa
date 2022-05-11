@@ -21,39 +21,7 @@
 <section class="section__training-list">
     @foreach (var training in Model.Trainings)
     {
-        @*TO DO: create ViewComponent for the trainings list items*@
-        <div class="training-list">
-            <div class="training-list__container">
-                <div class="training-list__container-left">
-                    <div class="training-list__title">
-                        <a class="training-list__training-link" asp-page="@Routes.TrainingDetails" asp-route-id="@training.TrainingId">@training.Title</a>
-                    </div>
-                    <div class="training-list__trainer">
-                        @Html.DisplayFor(modelItem => training.TrainerFirstName) @Html.DisplayFor(modelItem => training.TrainerLastName)
-                    </div>
-                    <div class="training-list__sectors ">
-                        <img src="~/icons/tag--blue.svg" class="o-svg-icon--small sectors-icon" />
-                        <!-- Show all training topics -->
-                        @foreach (var topic in training.Topics)
-                        {
-                            <a class="training-list__category-link" asp-page="TrainingListViewModel/TrainingListViewModelList" asp-route-cat="TopicName">@topic.Name</a>
-                            if (!Equals(topic, training.Topics.Last()))
-                            {
-                                <span>, </span>
-                            }
-                        }
-                    </div>
-                </div>
-                <div class="training-list__container-right">
-                    <div class="training-list__more">
-                        <!--Link for training details-->
-                    <a class="training-list__more-link" asp-page="@Routes.TrainingDetails" asp-route-id=@training.TrainingId>
-                            <img src="~/icons/chevron-right--blue.svg" class="o-svg-icon--large chevron-icon" />
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+       @await Html.PartialAsync("Shared/_TrainingTitle", training)
     }
 
     @if (Model.Trainings is not null && Model.Trainings.Any())

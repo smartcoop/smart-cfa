@@ -213,10 +213,46 @@
   <data name="GenericNotFoundPageMessage" xml:space="preserve">
     <value>Cette page n'existe pas</value>
   </data>
+  <data name="Header_LabelMemberAccess" xml:space="preserve">
+    <value>&gt;&gt; Accès membre &lt;&lt;</value>
+  </data>
+  <data name="Header_LabelFA" xml:space="preserve">
+    <value>Formateurs Associés</value>
+  </data>
+  <data name="Header_LabelTrainings" xml:space="preserve">
+    <value>Formations</value>
+  </data>
+  <data name="Header_LabelTrainers" xml:space="preserve">
+    <value>Formateurs</value>
+  </data>
+  <data name="Footer_LabelLegalNotice" xml:space="preserve">
+    <value>Mentions Légales</value>
+  </data>
+  <data name="Footer_LabelContact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Footer_LabelRGPD" xml:space="preserve">
+    <value>RGPD / Confidentialité</value>
+  </data>
+  <data name="Footer_LabelQuickLinks" xml:space="preserve">
+    <value>Accès rapides</value>
+  </data>
+  <data name="Footer_LabelOurWebsites" xml:space="preserve">
+    <value>Nos sites</value>
+  </data>
+  <data name="Footer_LabelFollow" xml:space="preserve">
+    <value>Suivre</value>
+  </data>
   <data name="Next" xml:space="preserve">
     <value>Suivant</value>
   </data>
   <data name="Previous" xml:space="preserve">
     <value>Précédent</value>
+  </data>
+  <data name="AssociateTrainers" xml:space="preserve">
+    <value>Formateurs Associés</value>
+  </data>
+  <data name="TrainersOfAssociateTrainers" xml:space="preserve">
+    <value>Les formateur·trices de Formateurs Associés</value>
   </data>
 </root>
