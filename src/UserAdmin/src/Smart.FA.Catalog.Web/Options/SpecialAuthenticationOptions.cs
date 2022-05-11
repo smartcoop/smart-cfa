@@ -2,7 +2,7 @@
 
 public class SpecialAuthenticationOptions
 {
-    public const string SectionName = "AuthenticationOptions";
+    public const string SectionName = "Authentication";
 
     public bool UseFakeHeaders { get; set; }
 }
