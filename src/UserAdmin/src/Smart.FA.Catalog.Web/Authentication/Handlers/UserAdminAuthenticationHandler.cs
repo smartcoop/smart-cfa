@@ -10,6 +10,7 @@ using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.Models;
 using Smart.FA.Catalog.Core.Domain.User.Dto;
 using Smart.FA.Catalog.Core.Domain.User.Enumerations;
+using Smart.FA.Catalog.Web.Authentication.Header;
 
 namespace Smart.FA.Catalog.Web.Authentication.Handlers;
 
@@ -21,6 +22,7 @@ namespace Smart.FA.Catalog.Web.Authentication.Handlers;
 public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthenticationOptions>
 {
     private readonly AccountHeadersValidator _accountHeadersValidator;
+    private readonly CustomDataFieldsValidator _customDataFieldsDataValidator;
     private readonly IMediator _mediator;
     private readonly IWebHostEnvironment _webHostEnvironment;
 
@@ -39,6 +41,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
         ISystemClock clock) : base(options, logger, encoder, clock)
     {
         _accountHeadersValidator = new AccountHeadersValidator();
+        _customDataFieldsDataValidator = new CustomDataFieldsValidator();
         _mediator = mediator;
         _webHostEnvironment = webHostEnvironment;
     }
@@ -67,7 +70,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
             var ticket = new AuthenticationTicket(Context.User, Scheme.Name);
             return AuthenticateResult.Success(ticket);
         }
-        catch(Exception exception)
+        catch (Exception exception)
         {
             if (exception is not AccountHeadersMissingException)
             {
@@ -88,35 +91,52 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
 
         ThrowIfHeadersInvalid();
 
-        _userId = Context.Request.Headers["userid"].ToString();
-        _appName = Context.Request.Headers["smartApplication"].ToString();
-        _firstName = Context.Request.Headers["FirstName"].ToString();
-        _lastName = Context.Request.Headers["LastName"].ToString();
-        _email = Context.Request.Headers["Email"].ToString();
+        _userId = Context.Request.Headers[Headers.UserId].ToString();
+        _appName = Context.Request.Headers[Headers.ApplicationName].ToString();
+
+        var customDataString = Context.Request.Headers[Headers.CustomData];
+        var customData = CustomDataFactory.Deserialize(customDataString);
+
+        ThrowIfCustomDataInvalid(customData);
+
+        _firstName = customData.FirstName!;
+        _lastName = customData.LastName!;
+        _email = customData.Email!;
     }
 
     private void SetFakeHeaderValueIfDevelopmentEnvironmentAndMissing()
     {
+        return;
         // During local development the developer may not pass through ngnix redirection therefore, default values are set for him/her.
         if (_webHostEnvironment.IsDevelopment() || _webHostEnvironment.IsLocalEnvironment())
         {
-            Context.Request.Headers.Add("userid", "1");
-            Context.Request.Headers.Add("smartApplication", ApplicationType.Account.Name);
-            Context.Request.Headers.Add("FirstName", "John");
-            Context.Request.Headers.Add("LastName", "Doe");
-            Context.Request.Headers.Add("Email", "john.doe@doedoe.com");
+            Context.Request.Headers.Add(Headers.UserId, "1");
+            Context.Request.Headers.Add(Headers.ApplicationName, ApplicationType.Account.Name);
+            Context.Request.Headers.Add(Headers.CustomData, CustomDataFactory.CreateSerializedMock());
         }
     }
 
     private void ThrowIfHeadersInvalid()
     {
-        var validationFailures = _accountHeadersValidator.Validate(Context.Request.Headers);
+        var accountValidationFailures = _accountHeadersValidator.Validate(Context.Request.Headers);
 
         // We log as critical is any header is missing.
-        if (validationFailures.Any())
+        if (accountValidationFailures.Any())
         {
-            Logger.LogCritical(string.Join(", ", validationFailures));
+            Logger.LogCritical(string.Join(", ", accountValidationFailures));
             throw new AccountHeadersMissingException("One more required header was not set by Account during the redirection");
+        }
+    }
+
+    private void ThrowIfCustomDataInvalid(CustomData customData)
+    {
+        var accountCustomDataValidationFailures = _customDataFieldsDataValidator.Validate(customData);
+
+        // We log as critical is any data field in the customData header is missing.
+        if (accountCustomDataValidationFailures.Any())
+        {
+            Logger.LogCritical(string.Join(", ", accountCustomDataValidationFailures));
+            throw new AccountHeadersMissingException("One more required fields in the customData header was not set by Account during the redirection");
         }
     }
 
@@ -127,10 +147,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
 
     private async Task<Trainer> CreateTrainerAsync()
     {
-        var createTrainerRequest = new CreateTrainerFromUserAppRequest()
-        {
-            User = new UserDto(_userId, _firstName, _lastName, _appName, _email)
-        };
+        var createTrainerRequest = new CreateTrainerFromUserAppRequest() { User = new UserDto(_userId, _firstName, _lastName, _appName, _email) };
         var createdTrainerResponse = await _mediator.Send(createTrainerRequest);
 
         return createdTrainerResponse.Trainer;
@@ -145,41 +162,6 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
         // Updates the first name, last name and email address of the current trainer if they changed for any reason.
         // If anything goes wrong an exception will be thrown and stops execution of the HTTP request.
         await _mediator.Send(new UpdateTrainerIdentityCommand(trainer.Id, _firstName, _lastName, _email));
-    }
-}
-
-internal class AccountHeadersValidator
-{
-    public List<string> Validate(IHeaderDictionary headerDictionary)
-    {
-        var validationFailures = new List<string>();
-
-        if (!headerDictionary.ContainsKey("userid"))
-        {
-            validationFailures.Add($"No userid header not found");
-        }
-
-        if (!headerDictionary.ContainsKey("smartApplication"))
-        {
-            validationFailures.Add("smartApplication header not found");
-        }
-
-        if (!headerDictionary.ContainsKey("FirstName"))
-        {
-            validationFailures.Add("FirstName header not found");
-        }
-
-        if (!headerDictionary.ContainsKey("LastName"))
-        {
-            validationFailures.Add("LastName header not found");
-        }
-
-        if (!headerDictionary.ContainsKey("Email"))
-        {
-            validationFailures.Add("Email header not found");
-        }
-
-        return validationFailures;
     }
 }
 
