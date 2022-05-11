@@ -79,6 +79,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Formateurs Associés.
+        /// </summary>
+        public static string AssociateTrainers {
+            get {
+                return ResourceManager.GetString("AssociateTrainers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Votre message a bien été envoyé..
         /// </summary>
         public static string Contact_ConfirmationMessage {
@@ -446,6 +455,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         public static string ToTrainingHomePage {
             get {
                 return ResourceManager.GetString("ToTrainingHomePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Les formateur·trices de Formateurs Associés.
+        /// </summary>
+        public static string TrainersOfAssociateTrainers {
+            get {
+                return ResourceManager.GetString("TrainersOfAssociateTrainers", resourceCulture);
             }
         }
         

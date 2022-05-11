@@ -13,6 +13,11 @@
             "NewName": "TrainerDetails"
          },
          {
+            "Columns": [ ],
+            "Name": "v_TrainerList",
+            "NewName": "TrainerList"
+         },
+         {
             "Columns": [
                {
                   "Name": "Title",

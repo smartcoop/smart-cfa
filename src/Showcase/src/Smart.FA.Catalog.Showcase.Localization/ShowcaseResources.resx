@@ -249,4 +249,10 @@
   <data name="Previous" xml:space="preserve">
     <value>Précédent</value>
   </data>
+  <data name="AssociateTrainers" xml:space="preserve">
+    <value>Formateurs Associés</value>
+  </data>
+  <data name="TrainersOfAssociateTrainers" xml:space="preserve">
+    <value>Les formateur·trices de Formateurs Associés</value>
+  </data>
 </root>
