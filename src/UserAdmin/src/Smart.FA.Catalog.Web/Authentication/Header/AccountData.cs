@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using Smart.FA.Catalog.Core.Extensions;
 
 namespace Smart.FA.Catalog.Web.Authentication.Header;
 
@@ -20,12 +21,12 @@ public static class AccountDataFactory
     public static string CreateSerializedMock()
     {
         var customData = CreateMock();
-        var serializedCustomData = JsonSerializer.Serialize(customData);
+        var serializedCustomData = customData.ToJson();
         return System.Web.HttpUtility.UrlDecode(serializedCustomData);
     }
 
     public static AccountData? Deserialize(string serializedCustomData)
     {
-        return JsonSerializer.Deserialize<AccountData?>(serializedCustomData);
+        return serializedCustomData.FromJson<AccountData>();
     }
 }

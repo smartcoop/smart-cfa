@@ -99,7 +99,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
 
         ThrowIfCustomDataInvalid(accountData);
 
-        _firstName = accountData.FirstName!;
+        _firstName = accountData!.FirstName!;
         _lastName = accountData.LastName!;
         _email = accountData.Email!;
     }
@@ -127,7 +127,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
         }
     }
 
-    private void ThrowIfCustomDataInvalid(AccountData accountData)
+    private void ThrowIfCustomDataInvalid(AccountData? accountData)
     {
         var accountCustomDataValidationFailures = _customDataFieldsDataValidator.Validate(accountData);
 

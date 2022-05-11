@@ -27,9 +27,14 @@ internal class AccountHeadersValidator
 
 internal class CustomDataFieldsValidator
 {
-    public List<string> Validate(AccountData accountData)
+    public List<string> Validate(AccountData? accountData)
     {
         var validationFailures = new List<string>();
+
+        if (accountData is null)
+        {
+            validationFailures.Add($"{nameof(AccountData)} not found in {Headers.AccountData} header");
+        }
 
         if (accountData.FirstName is null)
         {
