@@ -36,6 +36,10 @@ public class GetTrainerFromUserAppResponse : ResponseBase
 
 public class GetTrainerFromUserAppRequest : IRequest<GetTrainerFromUserAppResponse>
 {
+    public ApplicationType ApplicationType { get; init; } = null!;
+    
+    public string UserId { get; init; } = null!;
+    
     public GetTrainerFromUserAppRequest()
     {
     }
@@ -45,8 +49,4 @@ public class GetTrainerFromUserAppRequest : IRequest<GetTrainerFromUserAppRespon
         ApplicationType = applicationType;
         UserId = userId;
     }
-
-    public string UserId { get; init; } = null!;
-
-    public ApplicationType ApplicationType { get; init; } = null!;
 }
