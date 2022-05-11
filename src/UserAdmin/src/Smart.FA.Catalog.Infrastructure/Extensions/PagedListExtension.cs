@@ -5,10 +5,10 @@ namespace Smart.FA.Catalog.Infrastructure.Extensions;
 
 public static class PagedListExtension
 {
-    public static async Task<PagedList<T>> PaginateAsync<T>(this IQueryable<T> source, PageItem pageItem, CancellationToken cancellationToken)
+    public static async Task<PagedList<T>> PaginateAsync<T>(this IQueryable<T> source, PageItem pageItem, CancellationToken cancellationToken = default)
     {
-        var count = await source.CountAsync();
-        var items = await source.Skip(pageItem.Offset).Take(pageItem.PageSize).ToListAsync();
+        var count = await source.CountAsync(cancellationToken);
+        var items = await source.Skip(pageItem.Offset).Take(pageItem.PageSize).ToListAsync(cancellationToken);
         return new PagedList<T>(items, pageItem, count);
     }
 }
