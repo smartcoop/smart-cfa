@@ -11,7 +11,7 @@ namespace Smart.FA.Catalog.Application.UseCases.Commands;
 /// </summary>
 /// <param name="TrainerId">The id of the training to update.</param>
 /// <param name="FirstName">The trainer's first name.</param>
-/// <param name="LastName">The last name of the trainer.</param>
+/// <param name="LastName">The trainer's last name.</param>
 /// <param name="Email">The email address of the trainer.</param>
 public record UpdateTrainerIdentityCommand(int TrainerId, string FirstName, string LastName, string Email) : IRequest<Unit>;
 
