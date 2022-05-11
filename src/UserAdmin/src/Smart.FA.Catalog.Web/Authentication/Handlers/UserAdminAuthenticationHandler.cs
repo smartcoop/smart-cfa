@@ -154,12 +154,6 @@ internal class AccountHeadersValidator
     {
         var validationFailures = new List<string>();
 
-        // TODO is it worth making that check ?
-        //if (!headerDictionary.ContainsKey("X-Accel-Redirect") || !headerDictionary.ContainsKey("X-Real-Location"))
-        //{
-        //    validationFailures.Add($"Missing X-Accel headers");
-        //}
-
         if (!headerDictionary.ContainsKey("userid"))
         {
             validationFailures.Add($"No userid header not found");
