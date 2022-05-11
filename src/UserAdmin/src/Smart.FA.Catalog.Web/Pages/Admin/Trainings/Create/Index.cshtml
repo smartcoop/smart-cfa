@@ -14,21 +14,30 @@
 {
     <div class="c-toolbar">
         <div class="c-toolbar__left">
-            <div class="c-toolbar__item">
-                @if (Request.Query.ContainsKey("fromlist"))
-                {
+            @if (Request.Query.ContainsKey("fromlist"))
+            {
+                <div class="c-toolbar__item">
                     <a class="c-button c-button--icon c-button--borderless" href="/admin/trainings/list/index">
                         <div class="c-button__content">
                             <smart-icon icon="ArrowLeft"></smart-icon>
                             <div class="u-sr-accessible">@CatalogResources.Back</div>
                         </div>
                     </a>
-                }
-            </div>
+                </div>
+            }
             <div class="c-toolbar__item">
                 <h2 class="c-toolbar__title">@CatalogResources.AddNewTraining</h2>
             </div>
-
+        </div>
+        <div class="c-toolbar__right">
+            <div class="c-button-toolbar">
+                <div class="c-toolbar__item">
+                    <smart-button id="Save" form="form" label="@CatalogResources.Draft" button-style="Secondary" leading-icon="Save" button-type="Submit"></smart-button>
+                </div>
+                <div class="c-toolbar__item">
+                    <smart-button id="Publish"  form="form" label="@CatalogResources.Publish" button-style="Primary" leading-icon="Send" button-type="Submit"> </smart-button>
+                </div>
+            </div>
         </div>
     </div>
 }
@@ -94,13 +103,12 @@
             <input type="hidden" id="isDraft" value="false" asp-for="CreateTrainingViewModel.IsDraft"/>
 
         </div>
-        <div class="u-spacer-top-xl c-toolbar__right">
-            <div class="c-toolbar__item">
-                <smart-button id="Save" label="@CatalogResources.Draft" button-style="Secondary" leading-icon="Save" button-type="Submit"></smart-button>
-            </div>
-            <div class="c-toolbar__item">
-                <smart-button id="Publish" label="@CatalogResources.Publish" button-style="Primary" leading-icon="Send" button-type="Submit"> </smart-button>
-            </div>
-        </div>
     </form>
 </smart-container>
+
+@section Scripts
+{
+    <script>
+        disableEnterKeyUpKeyPressOnForm();
+    </script>
+}

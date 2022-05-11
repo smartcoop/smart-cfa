@@ -25,36 +25,46 @@
     .header-band {
         background: $color-semantic-error;
         padding: 0.3rem;
+
         a {
             color: $color-white;
         }
     }
+
     .header-nav {
         display: flex;
         background: $color-semantic-link;
         text-align: left;
         padding-left: 0.5rem;
+
         .header-nav__logo {
-            max-width: 15rem;
             height: auto;
+            padding-top: 10px;
+            width:28rem;
+            height:auto;
         }
+
         .header-nav__ul {
             padding-top: 2.6rem;
             padding-left: 6rem;
         }
+
         .header-nav__item {
             display: inline;
             padding-right: 3rem;
             text-transform: uppercase;
             font-size: 1.4rem;
+
             .header-nav__link {
                 color: $color-white;
                 display: inline-block;
                 width: auto;
+
                 @media (max-width: $g-bp2) {
                     display: block;
                 }
             }
+
             .header-nav__link:hover {
                 border-bottom: 2px solid $color-white;
             }
