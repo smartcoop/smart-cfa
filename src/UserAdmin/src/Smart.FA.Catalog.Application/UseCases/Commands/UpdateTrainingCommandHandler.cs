@@ -130,11 +130,11 @@ public class UpdateTrainingRequestValidator : AbstractValidator<UpdateTrainingRe
 
         // Rule that checks if the trainer editing a training is actually the creator or an admin.
         RuleFor(request => request)
-            .MustAsync(BeTheTrainingCreatorOrAdminAsync)
+            .MustAsync(BeTrainingCreatorOrSuperUserAsync)
             .WithMessage(CatalogResources.UpdateTraining_YouCantEditATrainingYouDidntCreate);
     }
 
-    public async Task<bool> BeTheTrainingCreatorOrAdminAsync(UpdateTrainingRequest request, CancellationToken cancellationToken)
+    public async Task<bool> BeTrainingCreatorOrSuperUserAsync(UpdateTrainingRequest request, CancellationToken cancellationToken)
     {
         // SuperUser are free to do whatever they want :).
         if (_userIdentity.IsSuperUser)
