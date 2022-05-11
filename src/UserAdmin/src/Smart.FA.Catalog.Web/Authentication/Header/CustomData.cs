@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Nodes;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Smart.FA.Catalog.Web.Authentication.Header;
 
@@ -14,7 +13,7 @@ public static class CustomDataFactory
 {
     private static CustomData CreateMock()
     {
-        return new CustomData { FirstName = "Maximé", LastName = "P.", Email = "maxime@maxime.com" };
+        return new CustomData { FirstName = "Maxime", LastName = "P.", Email = "maxime@maxime.com" };
     }
 
     public static string CreateSerializedMock()

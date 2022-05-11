@@ -87,7 +87,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
     /// <exception cref="AccountHeadersMissingException">Occurs when there is one or more required headers missing.</exception>
     private void EnsureHeaders()
     {
-        SetFakeHeaderValueIfDevelopmentEnvironmentAndMissing();
+        SetFakeHeaderValueIfOptionSetToTrue();
 
         ThrowIfHeadersInvalid();
 
@@ -104,7 +104,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
         _email = customData.Email!;
     }
 
-    private void SetFakeHeaderValueIfDevelopmentEnvironmentAndMissing()
+    private void SetFakeHeaderValueIfOptionSetToTrue()
     {
         // If the UserFakeHeaders option is set to true, the developer may not pass through ngnix redirection therefore, default values are set for him/her.
         if (_authenticationOptions.UseFakeHeaders)
