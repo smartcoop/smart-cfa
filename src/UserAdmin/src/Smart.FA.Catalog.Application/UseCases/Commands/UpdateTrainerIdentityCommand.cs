@@ -30,7 +30,7 @@ public class UpdateTrainerCommandHandler : IRequestHandler<UpdateTrainerIdentity
     public async Task<Unit> Handle(UpdateTrainerIdentityCommand command, CancellationToken cancellationToken)
     {
         var trainer = await _catalogContext.Trainers
-            .FirstAsync(trainer => trainer.Id == command.TrainerId, cancellationToken: cancellationToken);
+            .FirstAsync(trainer => trainer.Id == command.TrainerId, cancellationToken);
 
         trainer.Rename(Name.Create(command.FirstName, command.LastName).Value);
         trainer.ChangeEmail(command.Email);
