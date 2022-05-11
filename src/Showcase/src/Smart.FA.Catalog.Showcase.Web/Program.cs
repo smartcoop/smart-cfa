@@ -1,3 +1,4 @@
+using EntityFrameworkCore.UseRowNumberForPaging;
 using Microsoft.EntityFrameworkCore;
 using NLog.Web;
 using Smart.FA.Catalog.Shared.Security;
@@ -22,7 +23,7 @@ builder.Services
 
 builder.Services.AddDbContext<CatalogShowcaseContext>((_, efOptions) =>
 {
-    efOptions.UseSqlServer(builder.Configuration.GetConnectionString("Catalog"));
+    efOptions.UseSqlServer(builder.Configuration.GetConnectionString("Catalog"), options => options.UseRowNumberForPaging());
 });
 
 builder.Services.AddHttpContextAccessor();
