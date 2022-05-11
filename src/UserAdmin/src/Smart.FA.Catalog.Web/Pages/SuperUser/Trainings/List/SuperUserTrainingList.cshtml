@@ -93,9 +93,9 @@
     @if (Model.Trainings?.Count > 0)
     {
         <div class="o-card-grid small-up-1">
-            @foreach (var trainingDto in Model.Trainings)
+            @foreach (var training in Model.Trainings)
             {
-                @await Component.InvokeAsync("AdminTrainingTile", new { trainingDto = trainingDto, showDeleteButton = false })
+                @await Component.InvokeAsync("AdminTrainingTile", new { training = training, showDeleteButton = false })
             }
         </div>
 
@@ -111,7 +111,7 @@
                 }
             </div>
 
-            <div>Page @(Model.Trainings.PageIndex.ToString())/@(Model.Trainings.TotalPages.ToString())</div>
+            <div>Page @(Model.Trainings.CurrentPage)/@(Model.Trainings.TotalPages.ToString())</div>
 
             <div class="c-toolbar__right">
                 @if (Model.Trainings.HasNextPage)
