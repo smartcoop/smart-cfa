@@ -94,14 +94,14 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
         _userId = Context.Request.Headers[Headers.UserId].ToString();
         _appName = Context.Request.Headers[Headers.ApplicationName].ToString();
 
-        var customDataString = Context.Request.Headers[Headers.CustomData];
-        var customData = CustomDataFactory.Deserialize(customDataString);
+        var accountDataString = Context.Request.Headers[Headers.AccountData];
+        var accountData = AccountDataFactory.Deserialize(accountDataString);
 
-        ThrowIfCustomDataInvalid(customData);
+        ThrowIfCustomDataInvalid(accountData);
 
-        _firstName = customData.FirstName!;
-        _lastName = customData.LastName!;
-        _email = customData.Email!;
+        _firstName = accountData.FirstName!;
+        _lastName = accountData.LastName!;
+        _email = accountData.Email!;
     }
 
     private void SetFakeHeaderValueIfOptionSetToTrue()
@@ -111,7 +111,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
         {
             Context.Request.Headers.Add(Headers.UserId, "1");
             Context.Request.Headers.Add(Headers.ApplicationName, ApplicationType.Account.Name);
-            Context.Request.Headers.Add(Headers.CustomData, CustomDataFactory.CreateSerializedMock());
+            Context.Request.Headers.Add(Headers.AccountData, AccountDataFactory.CreateSerializedMock());
         }
     }
 
@@ -127,9 +127,9 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
         }
     }
 
-    private void ThrowIfCustomDataInvalid(CustomData customData)
+    private void ThrowIfCustomDataInvalid(AccountData accountData)
     {
-        var accountCustomDataValidationFailures = _customDataFieldsDataValidator.Validate(customData);
+        var accountCustomDataValidationFailures = _customDataFieldsDataValidator.Validate(accountData);
 
         // We log as critical is any data field in the customData header is missing.
         if (accountCustomDataValidationFailures.Any())

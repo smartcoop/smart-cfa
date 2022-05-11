@@ -19,8 +19,7 @@ public class
 
     public CreateTrainerFromUserAppCommandHandler(
         ILogger<CreateTrainerFromUserAppCommandHandler> logger,
-        CatalogContext context
-    )
+        CatalogContext context)
     {
         _logger = logger;
         _context = context;

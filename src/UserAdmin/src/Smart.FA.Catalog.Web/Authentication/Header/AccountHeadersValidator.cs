@@ -16,9 +16,9 @@ internal class AccountHeadersValidator
             validationFailures.Add($"{Headers.ApplicationName} header not found");
         }
 
-        if (!headerDictionary.ContainsKey(Headers.CustomData))
+        if (!headerDictionary.ContainsKey(Headers.AccountData))
         {
-            validationFailures.Add($"{Headers.CustomData} header not found");
+            validationFailures.Add($"{Headers.AccountData} header not found");
         }
 
         return validationFailures;
@@ -27,23 +27,23 @@ internal class AccountHeadersValidator
 
 internal class CustomDataFieldsValidator
 {
-    public List<string> Validate(CustomData customData)
+    public List<string> Validate(AccountData accountData)
     {
         var validationFailures = new List<string>();
 
-        if (customData.FirstName is null)
+        if (accountData.FirstName is null)
         {
-            validationFailures.Add($"{nameof(customData.FirstName)} field not found in {Headers.CustomData} header");
+            validationFailures.Add($"{nameof(accountData.FirstName)} field not found in {Headers.AccountData} header");
         }
 
-        if (customData.LastName is null)
+        if (accountData.LastName is null)
         {
-            validationFailures.Add($"{nameof(customData.LastName)} field not found in {Headers.CustomData} header");
+            validationFailures.Add($"{nameof(accountData.LastName)} field not found in {Headers.AccountData} header");
         }
 
-        if (customData.Email is null)
+        if (accountData.Email is null)
         {
-            validationFailures.Add($"{nameof(customData.Email)} field not found in {Headers.CustomData} header");
+            validationFailures.Add($"{nameof(accountData.Email)} field not found in {Headers.AccountData} header");
         }
 
         return validationFailures;
