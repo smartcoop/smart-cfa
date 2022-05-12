@@ -1,5 +1,7 @@
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer;
+using Smart.FA.Catalog.Showcase.Domain.Models;
 using Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerDetails;
+using Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerList;
 
 namespace Smart.FA.Catalog.Showcase.Web.Mappers;
 
@@ -19,6 +21,19 @@ public static class TrainerMapper
                 IconPathFileName = $"/icons/{socialNetworkName}.svg"
             });
         }
+        
         return socialNetworks;
+    }
+
+    public static List<TrainerListViewModel> ToTrainerListViewModels(this ICollection<TrainerList> trainerList)
+    {
+        return trainerList.Select(trainer => new TrainerListViewModel
+        {
+            Id = trainer.Id,
+            FirstName = trainer.FirstName,
+            LastName = trainer.LastName,
+            Title = trainer.Title,
+            ProfileImagePath = trainer.ProfileImagePath,
+            }).ToList();
     }
 }
