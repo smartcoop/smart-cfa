@@ -21,6 +21,7 @@ public static class TrainerMapper
                 IconPathFileName = $"/icons/{socialNetworkName}.svg"
             });
         }
+        
         return socialNetworks;
     }
 
