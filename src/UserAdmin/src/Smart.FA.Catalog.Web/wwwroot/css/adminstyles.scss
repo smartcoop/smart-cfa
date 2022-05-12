@@ -21,6 +21,9 @@
         background-color: #ccc;
     }
 }
+.c-toolbar__left{
+    max-width:60%;
+}
 
 @media (max-width: 380px) {
     .section-header .c-toolbar, .section-header .c-toolbar__right {
