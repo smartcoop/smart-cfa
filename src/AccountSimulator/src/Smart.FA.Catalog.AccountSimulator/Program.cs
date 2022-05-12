@@ -14,6 +14,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddHttpClient();
 builder.Services.AddSmartDesign();
 builder.Services.AddDataProtection();
+builder.Services.AddScoped<IAccountDataHeaderSerializer, AccountDataHeaderSerializer>();
 
 var app = builder.Build();
 

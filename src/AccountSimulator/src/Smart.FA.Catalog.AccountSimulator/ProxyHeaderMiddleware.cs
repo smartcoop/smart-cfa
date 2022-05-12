@@ -5,10 +5,12 @@ namespace Smart.FA.Catalog.AccountSimulator;
 public class ProxyHeaderMiddleware
 {
     private readonly RequestDelegate _next;
+    private readonly IAccountDataHeaderSerializer _accountDataHeaderSerializer;
 
-    public ProxyHeaderMiddleware(RequestDelegate next)
+    public ProxyHeaderMiddleware(RequestDelegate next, IAccountDataHeaderSerializer accountDataHeaderSerializer)
     {
         _next = next;
+        _accountDataHeaderSerializer = accountDataHeaderSerializer;
     }
 
     public async Task InvokeAsync(HttpContext context)
@@ -20,7 +22,7 @@ public class ProxyHeaderMiddleware
             var urlPath = urlPathList.Length > 1 ? urlPathList[1] : urlPathList[0];
             var cfaPath = string.IsNullOrEmpty(urlPath) ? "/" : urlPath;
             cfaPath += context.Request.QueryString.Value;
-            var serializedAccountData = AccountDataFactory.GetByUserId(userId!).Serialize();
+            var serializedAccountData = _accountDataHeaderSerializer.Serialize(_accountDataHeaderSerializer.GetByUserId(userId!));
             context.ProxyRedirect(cfaPath, userId, serializedAccountData);
         }
 

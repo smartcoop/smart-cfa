@@ -25,6 +25,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
     private readonly AccountHeadersValidator _accountHeadersValidator;
     private readonly CustomDataFieldsValidator _customDataFieldsDataValidator;
     private readonly IMediator _mediator;
+    private readonly IAccountDataHeaderSerializer _accountDataHeaderSerializer;
     private string? _userId;
     private string? _appName;
     private string? _firstName;
@@ -38,11 +39,13 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
         IOptionsMonitor<SpecialAuthenticationOptions> authenticationOptions,
         ILoggerFactory logger,
         UrlEncoder encoder,
+        IAccountDataHeaderSerializer accountDataHeaderSerializer,
         ISystemClock clock) : base(options, logger, encoder, clock)
     {
         _accountHeadersValidator = new AccountHeadersValidator();
         _customDataFieldsDataValidator = new CustomDataFieldsValidator();
         _mediator = mediator;
+        _accountDataHeaderSerializer = accountDataHeaderSerializer;
         _authenticationOptions = authenticationOptions.CurrentValue;
     }
 
@@ -95,7 +98,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
         _appName = Context.Request.Headers[Headers.ApplicationName].ToString();
 
         var accountDataString = Context.Request.Headers[Headers.AccountData];
-        var accountData = AccountDataFactory.Deserialize(accountDataString);
+        var accountData = _accountDataHeaderSerializer.Deserialize(accountDataString);
 
         ThrowIfCustomDataInvalid(accountData);
 
@@ -111,7 +114,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
         {
             Context.Request.Headers.Add(Headers.UserId, "1");
             Context.Request.Headers.Add(Headers.ApplicationName, ApplicationType.Account.Name);
-            Context.Request.Headers.Add(Headers.AccountData, AccountDataFactory.CreateSerializedMock());
+            Context.Request.Headers.Add(Headers.AccountData, _accountDataHeaderSerializer.CreateSerializedMock());
         }
     }
 
