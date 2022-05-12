@@ -30,7 +30,8 @@ public class BootStrapService : IBootStrapService
         using var serviceScope = _factory.CreateScope();
         var s3StorageOptions = serviceScope.ServiceProvider.GetRequiredService<IOptions<S3StorageOptions>>();
         var minIoLinkGenerator = serviceScope.ServiceProvider.GetRequiredService<IMinIoLinkGenerator>();
-        var fileName = minIoLinkGenerator.GetDefaultFullProfilePictureImageUrl();        var filePath = Path.Combine(webRootPath, "default_image.jpg");
+        var fileName = minIoLinkGenerator.GetDefaultFullProfilePictureImageUrl();
+        var filePath = Path.Combine(webRootPath, "default_image.jpg");
 
         _logger.LogInformation("Seeding storage service with default image for trainer profile under the name {FileName} with url {ServiceUrl} ", fileName, s3StorageOptions.Value.AWS.ServiceUrl);
 
@@ -96,7 +97,7 @@ public class BootStrapService : IBootStrapService
     /// <returns>A task representing the asynchronous operation. The task's result is a boolean whose value tells if the operation was successful.</returns>
     private async Task<bool> SafeApplyMigrationsAndSeedWithRetriesAsync(CatalogContext catalogContext, IDbConnection currentConnection)
     {
-        int DelayToWaitBetweenRetriesInMilliseconds(int retryAttempt) => (int) (Math.Max(5 - retryAttempt, 0) + Math.Pow(2, Math.Min(retryAttempt, 5))) * 1_000;
+        int DelayToWaitBetweenRetriesInMilliseconds(int retryAttempt) => (int)(Math.Max(5 - retryAttempt, 0) + Math.Pow(2, Math.Min(retryAttempt, 5))) * 1_000;
         for (var retryAttempt = 0; retryAttempt < 6; retryAttempt++)
         {
             if (await SafeApplyMigrationsAndSeedAsync(catalogContext))
