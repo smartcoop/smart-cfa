@@ -1,17 +1,17 @@
 CREATE VIEW [Cfa].[v_TrainerList]
-	AS
-SELECT Cfa.Trainer.Id,
-       Cfa.Trainer.FirstName,
-       Cfa.Trainer.LastName,
-       Cfa.Trainer.Title,
-       Cfa.Trainer.ProfileImagePath
-FROM Cfa.Trainer
-WHERE
-	(
-		SELECT
-			COUNT(*)
-		FROM Cfa.TrainerAssignment assignment
-		INNER JOIN Cfa.Training ON assignment.TrainingId = Cfa.Training.Id
-		WHERE Cfa.Training.TrainingStatusTypeId = 3
-			AND assignment.TrainerId = Trainer.Id
-	) > 1
+AS
+SELECT
+    trainer.Id
+    ,trainer.FirstName
+    ,trainer.LastName
+    ,trainer.Title
+    ,trainer.PofileImagePath
+	,count(assignment.TrainingId) As TrainingCount
+FROM Cfa.Trainer trainer
+    INNER JOIN Cfa.TrainerAssignment assignment
+    ON assignment.TrainerId = trainer.Id
+    INNER JOIN Cfa.Training training ON
+    assignment.TrainingId = training.Id
+WHERE training.TrainingStatusTypeId = 3
+GROUP BY trainer.Id, trainer.FirstName, trainer.LastName, trainer.Title, trainer.ProfileImagePath
+HAVING count(assignment.TrainingId) > 1
