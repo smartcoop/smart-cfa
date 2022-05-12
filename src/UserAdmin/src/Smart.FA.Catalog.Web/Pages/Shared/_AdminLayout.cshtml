@@ -56,7 +56,7 @@
                     <div class="c-toolbar__item">
                         <a class="c-user-navigation" href="#" data-menu="userMenu">
                             <div class="c-avatar c-avatar--img">
-                                <img src="@(UserIdentity.CurrentTrainer.ProfileImagePath is null ? MinIoLinkGenerator.GetFullTrainerProfilePictureUrl(MinIoLinkGenerator.GetDefaultFullProfilePictureImageUrl()) : MinIoLinkGenerator.GetFullTrainerProfilePictureUrl(UserIdentity.CurrentTrainer.ProfileImagePath))" alt="avatar">
+                                <img src="@(MinIoLinkGenerator.GetAbsoluteTrainerProfilePictureUrl(UserIdentity.CurrentTrainer.ProfileImagePath))" alt="avatar">
                             </div>
                         </a>
                         <ul class="c-menu c-menu--large" id="userMenu">

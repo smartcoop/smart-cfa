@@ -29,9 +29,7 @@ public class ProfileModel : AdminPage
         base(mediator)
     {
         UserIdentity = userIdentity;
-        ProfilePictureAbsoluteUrl = userIdentity.CurrentTrainer.ProfileImagePath is null
-            ? minIoLinkGenerator.GetFullTrainerProfilePictureUrl(minIoLinkGenerator.GetDefaultFullProfilePictureImageUrl())
-            : minIoLinkGenerator.GetFullTrainerProfilePictureUrl(userIdentity.CurrentTrainer.ProfileImagePath);
+        ProfilePictureAbsoluteUrl = minIoLinkGenerator.GetAbsoluteTrainerProfilePictureUrl(userIdentity.CurrentTrainer.ProfileImagePath);
     }
 
     public async Task<ActionResult> OnGetAsync()

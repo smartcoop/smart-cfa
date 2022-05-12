@@ -26,7 +26,7 @@ public class DeleteTrainerProfileImageCommand : IRequestHandler<DeleteTrainerPro
 
         if (command.RelativeProfilePictureUrl is not null)
         {
-            await _storageService.DeleteAsync(_minIoLinkGenerator.GetFullTrainerProfilePictureUrl(command.RelativeProfilePictureUrl), cancellationToken);
+            await _storageService.DeleteAsync(_minIoLinkGenerator.GetAbsoluteTrainerProfilePictureUrl(command.RelativeProfilePictureUrl), cancellationToken);
         }
         response.SetSuccess();
         return response;

@@ -6,6 +6,9 @@ namespace Smart.FA.Catalog.Infrastructure.Helpers;
 
 public class MinIoLinkGenerator : IMinIoLinkGenerator
 {
+    private const string TrainerRelativeFolder = "trainers/profile-image/";
+    private const string UserChartRelativeFolder = "usercharts/";
+
     private readonly S3StorageOptions _storageOptions;
 
     public MinIoLinkGenerator(IOptions<S3StorageOptions> storageOptions)
@@ -14,35 +17,37 @@ public class MinIoLinkGenerator : IMinIoLinkGenerator
     }
 
     /// <inheritdoc />
-    public string CreateTrainerProfilePictureUrl(int trainerId, string imageFormat)
+    public string GenerateTrainerProfilePictureUrl(int trainerId, string imageFormat)
     {
         // Generate unique salt value to avoid decoding
         var hashIds = new Hashids(MinioLinkDefaultSaltValues.TrainerProfilePicture, 8);
-        return Path.Combine("trainers/", "profile-image/", $"{hashIds.Encode(trainerId)}{imageFormat}");
+        return Path.Combine(TrainerRelativeFolder, $"{hashIds.Encode(trainerId)}{imageFormat}");
     }
 
     /// <inheritdoc />
-    public string GetFullTrainerProfilePictureUrl(string relativeTrainerProfilePictureUrl) =>
-        Path.Combine($"{_storageOptions.AWS.ServiceUrl}/", $"{_storageOptions.ImageBucketName}/", relativeTrainerProfilePictureUrl);
+    public string GetAbsoluteTrainerProfilePictureUrl(string? relativeTrainerProfilePictureUrl)
+    {
+        return Path.Combine($"{_storageOptions.AWS.ServiceUrl}/", $"{_storageOptions.ImageBucketName}/", relativeTrainerProfilePictureUrl ?? GetDefaultRelativeProfilePictureImageUrl());
+    }
 
     /// <inheritdoc />
-    public string GetDefaultFullProfilePictureImageUrl()
+    public string GetDefaultRelativeProfilePictureImageUrl()
     {
         // Generate unique salt value to avoid decoding
         var hashIds = new Hashids(MinioLinkDefaultSaltValues.TrainerProfilePicture, 8);
-        return Path.Combine("trainers/", "profile-image/",$"{hashIds.Encode(0)}.png");
+        return Path.Combine(TrainerRelativeFolder, $"{hashIds.Encode(0)}.png");
     }
 
     /// <inheritdoc />
-    public string CreateUserChartRevisionUrl(int userChartRevisionId)
+    public string GenerateUserChartRevisionUrl(int userChartRevisionId)
     {
         // No salt because we should be able to decode a string
         var hashIds = new Hashids(MinioLinkDefaultSaltValues.UserChartRevision, 8);
-        return Path.Combine("usercharts/", $"{hashIds.Encode(userChartRevisionId)}.pdf");
+        return Path.Combine(UserChartRelativeFolder, $"{hashIds.Encode(userChartRevisionId)}.pdf");
     }
 
     /// <inheritdoc />
-    public string GetFullUserChartUrl(int userChartId) => Path.Combine($"{_storageOptions.AWS.ServiceUrl}/", $"{_storageOptions.ImageBucketName}/", CreateUserChartRevisionUrl(userChartId));
+    public string GetAbsoluteUserChartUrl(int userChartId) => Path.Combine($"{_storageOptions.AWS.ServiceUrl}/", $"{_storageOptions.ImageBucketName}/", GenerateUserChartRevisionUrl(userChartId));
 }
 
 public static class MinioLinkDefaultSaltValues

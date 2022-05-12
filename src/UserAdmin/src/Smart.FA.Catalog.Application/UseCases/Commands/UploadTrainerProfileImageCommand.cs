@@ -39,11 +39,11 @@ public class UploadTrainerProfileImageCommand : IRequestHandler<UploadImageToSto
             await _storageService.DeleteAsync(command.Trainer.ProfileImagePath, cancellationToken);
         }
 
-        var fileName = new FileInfo(command.ProfilePicture.FileName);
-        var newFileName = _minIoLinkGenerator.CreateTrainerProfilePictureUrl(command.Trainer.Id, fileName.Extension);
-        var fileStream = command.ProfilePicture.OpenReadStream();
-        await _storageService.UploadAsync(fileStream, newFileName, cancellationToken);
-        resp.ProfilePictureStream = fileStream;
+        var profilePictureName = new FileInfo(command.ProfilePicture.FileName);
+        var profilePictureUrl = _minIoLinkGenerator.GenerateTrainerProfilePictureUrl(command.Trainer.Id, profilePictureName.Extension);
+        var profilePictureStream = command.ProfilePicture.OpenReadStream();
+        await _storageService.UploadAsync(profilePictureStream, profilePictureUrl, cancellationToken);
+        resp.ProfilePictureStream = profilePictureStream;
         resp.SetSuccess();
 
         return resp;

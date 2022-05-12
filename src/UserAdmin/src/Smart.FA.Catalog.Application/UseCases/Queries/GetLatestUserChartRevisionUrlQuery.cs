@@ -31,7 +31,7 @@ public class GetLatestUserChartRevisionUrlQuery : IRequestHandler<GetLatestUserC
             throw new UserChartRevisionException(Errors.UserChartRevision.DontExist);
         }
 
-        response.LatestUserChartRevisionUrl = _minIoLinkGenerator.GetFullUserChartUrl(userChart.Id);
+        response.LatestUserChartRevisionUrl = _minIoLinkGenerator.GetAbsoluteUserChartUrl(userChart.Id);
         response.SetSuccess();
         return response;
     }

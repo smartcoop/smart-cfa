@@ -30,7 +30,7 @@ public class BootStrapService : IBootStrapService
         using var serviceScope = _factory.CreateScope();
         var s3StorageOptions = serviceScope.ServiceProvider.GetRequiredService<IOptions<S3StorageOptions>>();
         var minIoLinkGenerator = serviceScope.ServiceProvider.GetRequiredService<IMinIoLinkGenerator>();
-        var fileName = minIoLinkGenerator.GetDefaultFullProfilePictureImageUrl();
+        var fileName = minIoLinkGenerator.GetDefaultRelativeProfilePictureImageUrl();
         var filePath = Path.Combine(webRootPath, "default_image.jpg");
 
         _logger.LogInformation("Seeding storage service with default image for trainer profile under the name {FileName} with url {ServiceUrl} ", fileName, s3StorageOptions.Value.AWS.ServiceUrl);
@@ -51,7 +51,7 @@ public class BootStrapService : IBootStrapService
         }
 
         var filePath = Path.Combine(webRootPath, "default_user_chart.pdf");
-        var userChartName = minIoLinkGenerator.CreateUserChartRevisionUrl(userChart.Id);
+        var userChartName = minIoLinkGenerator.GenerateUserChartRevisionUrl(userChart.Id);
 
         _logger.LogInformation("Seeding storage service with default image for user chart under the name {FileName}", userChartName);
 

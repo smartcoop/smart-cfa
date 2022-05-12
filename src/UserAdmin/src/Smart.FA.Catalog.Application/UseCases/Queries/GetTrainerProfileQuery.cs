@@ -86,7 +86,7 @@ public class GetTrainerProfileQueryHandler : IRequestHandler<GetTrainerProfileQu
         }
 
 
-        var profileImageAbsoluteUrl = trainer.ProfileImagePath is null? _minIoLinkGenerator.GetDefaultFullProfilePictureImageUrl() : _minIoLinkGenerator.GetFullTrainerProfilePictureUrl(trainer.ProfileImagePath);
+        var profileImageAbsoluteUrl = _minIoLinkGenerator.GetAbsoluteTrainerProfilePictureUrl(trainer.ProfileImagePath);
 
         return new TrainerProfile
         {
