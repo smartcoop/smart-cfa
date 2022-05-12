@@ -3,7 +3,10 @@ using Smart.FA.Catalog.Core.Extensions;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-public static class TempDataDictionaryExtensions
+/// <summary>
+/// Provides extension methods on <see cref="ITempDataDictionary" /> to transit messages between HTTP requests that should be rendered in a <see cref="AlertTagHelper" />.
+/// </summary>
+public static class GlobalBannerMessageTempDataDictionaryExtensions
 {
     private const string GlobalMessageKey = nameof(GlobalBannerMessage);
 
