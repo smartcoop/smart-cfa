@@ -16,8 +16,10 @@ public class CreateTrainingRequestValidator : AbstractValidator<CreateTrainingVi
     public CreateTrainingRequestValidator(IStringLocalizer<CatalogResources> localizer, IUserIdentity userIdentity)
     {
         _userIdentity = userIdentity;
+
         RuleFor(viewModel => viewModel.Title)
             .NotEmpty()
+            .WithMessage(CatalogResources.TrainingTitleIsRequired)
             .MaximumLength(500)
             .WithMessage(CatalogResources.TrainingTitleIsRequired);
 
