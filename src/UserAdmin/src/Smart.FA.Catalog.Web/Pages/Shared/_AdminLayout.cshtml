@@ -23,12 +23,12 @@
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/_content/Smart.Design.Razor/css/main.css"/>
     <link rel="stylesheet" href="~/Smart.FA.Catalog.Web.styles.css"/>
-
+    <link rel="stylesheet" href="~/css/adminstyles.css"/>
 </head>
 <body class="u-maximize-height u-overflow-hidden">
 <div class="c-app-layout">
     <header class="u-position-relative">
-        <div class="c-navbar c-navbar--scrollable c-navbar--bordered-bottom">
+        <div class="c-navbar c-navbar--scrollable c-navbar--bordered-bottom section-header">
             <div class="c-toolbar">
                 <div class="c-toolbar__left">
                     <div class="c-toolbar__item">
@@ -99,7 +99,7 @@
                 <div class="u-scroll-wrapper">
                     @if (IsSectionDefined("HeaderToolbar"))
                     {
-                        <div class="c-navbar c-navbar--bordered-bottom">
+                        <div class="c-navbar c-navbar--bordered-bottom section-header">
                             @await RenderSectionAsync("HeaderToolbar", false)
                         </div>
                     }
