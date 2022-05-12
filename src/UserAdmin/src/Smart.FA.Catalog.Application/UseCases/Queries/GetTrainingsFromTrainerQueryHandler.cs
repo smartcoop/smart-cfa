@@ -8,8 +8,7 @@ using Smart.FA.Catalog.Core.Domain.ValueObjects;
 namespace Smart.FA.Catalog.Application.UseCases.Queries;
 
 public class
-    GetTrainingsFromTrainerQueryHandler : IRequestHandler<GetTrainingsFromTrainerRequest,
-        GetTrainingsFromTrainerResponse>
+    GetTrainingsFromTrainerQueryHandler : IRequestHandler<GetTrainingsFromTrainerRequest, GetTrainingsFromTrainerResponse>
 {
     private readonly ILogger<GetTrainingsFromTrainerQueryHandler> _logger;
     private readonly ITrainingQueries _trainingQueries;
@@ -21,22 +20,11 @@ public class
         _trainingQueries = trainingQueries;
     }
 
-    public async Task<GetTrainingsFromTrainerResponse> Handle(GetTrainingsFromTrainerRequest request,
-        CancellationToken cancellationToken)
+    public async Task<GetTrainingsFromTrainerResponse> Handle(GetTrainingsFromTrainerRequest request, CancellationToken cancellationToken)
     {
         GetTrainingsFromTrainerResponse resp = new();
-
-        try
-        {
-            resp.Trainings = await _trainingQueries.GetListAsync(request.TrainerId, request.Language.Value, cancellationToken);
-            resp.SetSuccess();
-        }
-        catch (Exception e)
-        {
-             _logger.LogError("{Exception}", e.ToString());
-            throw;
-        }
-
+        resp.Trainings = await _trainingQueries.GetListAsync(request.TrainerId, request.Language.Value, cancellationToken);
+        resp.SetSuccess();
         return resp;
     }
 }

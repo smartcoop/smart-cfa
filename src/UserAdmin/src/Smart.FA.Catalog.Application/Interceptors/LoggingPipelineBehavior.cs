@@ -30,16 +30,10 @@ public class LoggingPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TR
         IOptions<MediatROptions> mediatROptions)
     {
         _logger = logger;
-        _mediatROptions = mediatROptions.Value ??
-                          throw new ArgumentException($"{nameof(LoggingPipelineBehavior<TRequest, TResponse>)}: {nameof(mediatROptions)} not found", nameof(mediatROptions));
+        _mediatROptions = mediatROptions.Value ?? throw new ArgumentException($"{nameof(mediatROptions)} couldn't be bound");
     }
 
-    public async Task<TResponse> Handle
-    (
-        TRequest request,
-        CancellationToken cancellationToken,
-        RequestHandlerDelegate<TResponse> next
-    )
+    public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
     {
         if (_mediatROptions.LogRequests)
         {
@@ -59,21 +53,27 @@ public class LoggingPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TR
         catch (Exception exception)
         {
             response.AddError(Errors.General.UnexpectedHandlerError());
-            _logger.LogError(LogEventIds.ErrorEventId, exception.ToString());
+            _logger.LogError(LogEventIds.ErrorEventId, exception, $"An exception occurred while handling `{SerializeRequest(request)}`");
         }
 
         return response;
     }
 
-    private void LogMediatRRequest(TRequest request)
+    private string SerializeRequest(TRequest request)
     {
         // ReferenceHandler.Preserve prevents circular references when serializing.
         // Ses https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-preserve-references?pivots=dotnet-6-0.
         var jsonSerializerOptions = new JsonSerializerOptions()
         {
-            WriteIndented    = true,
+            WriteIndented = true,
             ReferenceHandler = ReferenceHandler.Preserve
         };
-        _logger.LogInformation("Incoming request: {requestName} - {request}", request.GetType().Name, request.ToJson(jsonSerializerOptions));
+
+        return request.ToJson(jsonSerializerOptions);
+    }
+
+    private void LogMediatRRequest(TRequest request)
+    {
+        _logger.LogInformation("MediatR request: {requestName} - `{request}`", request.GetType().Name, SerializeRequest(request));
     }
 }
