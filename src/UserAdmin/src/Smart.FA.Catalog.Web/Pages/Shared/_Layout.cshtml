@@ -1,13 +1,18 @@
 ﻿@using Microsoft.AspNetCore.Builder
 @using Microsoft.AspNetCore.Localization
 @using Microsoft.Extensions.Options
+@using Smart.FA.Catalog.Core.Services
+@using Smart.FA.Catalog.Infrastructure.Helpers
 @inject IOptions<RequestLocalizationOptions> _requestLocalizationOptions;
+@inject IUserIdentity UserIdentity;
+@inject IMinIoLinkGenerator MinIoLinkGenerator;
+
 @{
     var requestCulture = Context.Features.Get<IRequestCultureFeature>() ?? throw new InvalidOperationException($"Couldn't get {nameof(IRequestCultureFeature)}");
     var supportedLanguages = _requestLocalizationOptions
-            .Value?
-            .SupportedUICultures?
-            .Select(supportedCulture => new SelectListItem(supportedCulture.DisplayName, supportedCulture.TwoLetterISOLanguageName)) ??
+        .Value?
+        .SupportedUICultures?
+        .Select(supportedCulture => new SelectListItem(supportedCulture.DisplayName, supportedCulture.TwoLetterISOLanguageName)) ??
         throw new InvalidOperationException("Supported culture not defined");
 }
 <!DOCTYPE html>
@@ -17,7 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/_content/Smart.Design.Razor/css/main.css"/>
-    <link rel="stylesheet" href="~/Smart.FA.Catalog.Web.styles.css" />
+    <link rel="stylesheet" href="~/Smart.FA.Catalog.Web.styles.css"/>
 </head>
 <body class="u-maximize-height u-overflow-hidden">
 <div class="c-app-layout">
@@ -47,7 +52,7 @@
                     <div class="c-toolbar__item">
                         <a class="c-user-navigation" href="#" data-menu="userMenu">
                             <div class="c-avatar c-avatar--img">
-                                <img src="/admin/myprofile?handler=LoadImage" alt="avatar">
+                                <img src="@(UserIdentity.CurrentTrainer.ProfileImagePath is null ? MinIoLinkGenerator.GetFullTrainerProfilePictureUrl(MinIoLinkGenerator.GetDefaultFullProfilePictureImageUrl()) : MinIoLinkGenerator.GetFullTrainerProfilePictureUrl(UserIdentity.CurrentTrainer.ProfileImagePath))" alt="avatar">
                             </div>
                         </a>
                         <ul class="c-menu c-menu--large" id="userMenu">
@@ -65,7 +70,7 @@
         </div>
     </header>
     <main class="u-maximize-width u-scroll-wrapper">
-            @RenderBody()
+        @RenderBody()
     </main>
 </div>
 @await RenderSectionAsync("Scripts", required: false)

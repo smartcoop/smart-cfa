@@ -11,6 +11,7 @@ using Smart.FA.Catalog.Application.Extensions.FluentValidation;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Extensions;
+using Smart.FA.Catalog.Infrastructure.Helpers;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 using Smart.FA.Catalog.Infrastructure.Services.Options;
 using Smart.FA.Catalog.Shared.Domain.Enumerations;
@@ -40,11 +41,13 @@ public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, Pro
 {
     private readonly ILogger<EditProfileCommandHandler> _logger;
     private readonly CatalogContext _catalogContext;
+    private readonly IMinIoLinkGenerator _minIoLinkGenerator;
 
-    public EditProfileCommandHandler(ILogger<EditProfileCommandHandler> logger, CatalogContext catalogContext)
+    public EditProfileCommandHandler(ILogger<EditProfileCommandHandler> logger, CatalogContext catalogContext, IMinIoLinkGenerator minIoLinkGenerator)
     {
         _logger         = logger;
         _catalogContext = catalogContext;
+        _minIoLinkGenerator = minIoLinkGenerator;
     }
 
     public async Task<ProfileEditionResponse> Handle(EditProfileCommand command, CancellationToken cancellationToken)
@@ -103,7 +106,7 @@ public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, Pro
         trainer.UpdateTitle(command.Title ?? string.Empty);
         if (command.ProfilePicture is not null)
         {
-            trainer.UpdateProfileImagePath(trainer.GenerateTrainerProfilePictureName());
+            trainer.UpdateProfileImagePath(_minIoLinkGenerator.CreateTrainerProfilePictureUrl(trainer.Id));
         }
 
         trainer.ChangeEmail(command.Email);

@@ -5,8 +5,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Smart.FA.Catalog.Core.Domain.Factories;
 using Smart.FA.Catalog.Core.Exceptions;
-using Smart.FA.Catalog.Core.Extensions;
 using Smart.FA.Catalog.Core.Services;
+using Smart.FA.Catalog.Infrastructure.Helpers;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 using Smart.FA.Catalog.Infrastructure.Services.Options;
 
@@ -29,8 +29,8 @@ public class BootStrapService : IBootStrapService
     {
         using var serviceScope = _factory.CreateScope();
         var s3StorageOptions = serviceScope.ServiceProvider.GetRequiredService<IOptions<S3StorageOptions>>();
-        var fileName = s3StorageOptions.Value.DefaultTrainerProfilePictureName;
-        var filePath = Path.Combine(webRootPath, "default_image.jpg");
+        var minIoLinkGenerator = serviceScope.ServiceProvider.GetRequiredService<IMinIoLinkGenerator>();
+        var fileName = minIoLinkGenerator.GetDefaultFullProfilePictureImageUrl();        var filePath = Path.Combine(webRootPath, "default_image.jpg");
 
         _logger.LogInformation("Seeding storage service with default image for trainer profile under the name {FileName} with url {ServiceUrl} ", fileName, s3StorageOptions.Value.AWS.ServiceUrl);
 
@@ -41,6 +41,7 @@ public class BootStrapService : IBootStrapService
     public async Task AddDefaultUserChart(string webRootPath)
     {
         using var serviceScope = _factory.CreateScope();
+        var minIoLinkGenerator = serviceScope.ServiceProvider.GetRequiredService<IMinIoLinkGenerator>();
         var catalogContext = serviceScope.ServiceProvider.GetRequiredService<CatalogContext>();
         var userChart = await catalogContext.UserChartRevisions.OrderByDescending(userChart => userChart.CreatedAt).FirstOrDefaultAsync();
         if (userChart is null)
@@ -49,11 +50,11 @@ public class BootStrapService : IBootStrapService
         }
 
         var filePath = Path.Combine(webRootPath, "default_user_chart.pdf");
-        var userChartName = userChart.GenerateUserChartName();
+        var userChartName = minIoLinkGenerator.CreateUserChartRevisionUrl(userChart.Id);
 
         _logger.LogInformation("Seeding storage service with default image for user chart under the name {FileName}", userChartName);
 
-        await UploadDefaultDocumentToS3Storage(filePath, userChart.GenerateUserChartName());
+        await UploadDefaultDocumentToS3Storage(filePath, userChartName);
     }
 
     private async Task UploadDefaultDocumentToS3Storage(string filePath, string fileName)

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Extensions;
 using Smart.FA.Catalog.Core.Services;
+using Smart.FA.Catalog.Infrastructure.Helpers;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 
 namespace Smart.FA.Catalog.Application.UseCases.Queries;
@@ -24,8 +25,9 @@ public class GetTrainerProfileQuery : IRequest<TrainerProfile>
 public class GetTrainerProfileQueryHandler : IRequestHandler<GetTrainerProfileQuery, TrainerProfile>
 {
     private readonly ILogger<GetTrainerProfileQueryHandler> _logger;
-    private readonly CatalogContext                         _catalogContext;
-    private readonly IS3StorageService                      _storageService;
+    private readonly CatalogContext _catalogContext;
+    private readonly IS3StorageService _storageService;
+    private readonly IMinIoLinkGenerator _minIoLinkGenerator;
 
     /// <summary>
     /// Represents the response of the query when the trainer was not found.
@@ -36,13 +38,14 @@ public class GetTrainerProfileQueryHandler : IRequestHandler<GetTrainerProfileQu
     public GetTrainerProfileQueryHandler
     (
         ILogger<GetTrainerProfileQueryHandler> logger,
-        CatalogContext                         catalogContext,
-        IS3StorageService                      storageService
-    )
+        CatalogContext catalogContext,
+        IS3StorageService storageService,
+        IMinIoLinkGenerator minIoLinkGenerator)
     {
-        _logger         = logger;
+        _logger = logger;
         _catalogContext = catalogContext;
         _storageService = storageService;
+        _minIoLinkGenerator = minIoLinkGenerator;
     }
 
     public async Task<TrainerProfile> Handle(GetTrainerProfileQuery query, CancellationToken cancellationToken)
@@ -66,13 +69,13 @@ public class GetTrainerProfileQueryHandler : IRequestHandler<GetTrainerProfileQu
             .Include(trainer => trainer.SocialNetworks)
             .Select(trainer => new
             {
-                TrainerId        = trainer.Id,
-                Bio              = trainer.Biography,
-                Name             = trainer.Name.FirstName + " " + trainer.Name.LastName,
-                Title            = trainer.Title,
-                Socials          = trainer.SocialNetworks,
+                TrainerId = trainer.Id,
+                Bio = trainer.Biography,
+                Name = trainer.Name.FirstName + " " + trainer.Name.LastName,
+                Title = trainer.Title,
+                Socials = trainer.SocialNetworks,
                 ProfileImagePath = trainer.ProfileImagePath,
-                Email            = trainer.Email
+                Email = trainer.Email
             })
             .FirstOrDefaultAsync(trainer => trainer.TrainerId == query.TrainerId, cancellationToken);
 
@@ -82,21 +85,18 @@ public class GetTrainerProfileQueryHandler : IRequestHandler<GetTrainerProfileQu
             return null;
         }
 
-        Stream? profileImage = null;
-        if (trainer.ProfileImagePath is not null)
-        {
-            profileImage = await _storageService.GetAsync(trainer.ProfileImagePath, cancellationToken);
-        }
+
+        var profileImageAbsoluteUrl = trainer.ProfileImagePath is null? _minIoLinkGenerator.GetDefaultFullProfilePictureImageUrl() : _minIoLinkGenerator.GetFullTrainerProfilePictureUrl(trainer.ProfileImagePath);
 
         return new TrainerProfile
         {
-            TrainerId    = trainer.TrainerId,
-            Bio          = trainer.Bio,
-            Name         = trainer.Name,
-            Title        = trainer.Title,
-            Socials      = trainer.Socials.ToTrainerProfileSocials(),
-            ProfileImage = profileImage,
-            Email        = trainer.Email
+            TrainerId = trainer.TrainerId,
+            Bio = trainer.Bio,
+            Name = trainer.Name,
+            Title = trainer.Title,
+            Socials = trainer.Socials.ToTrainerProfileSocials(),
+            ProfileImageAbsoluteUrl = profileImageAbsoluteUrl,
+            Email = trainer.Email
         };
     }
 }
@@ -122,7 +122,7 @@ public class TrainerProfile
         public string? Url { get; set; }
     }
 
-    public Stream? ProfileImage { get; set; }
+    public string ProfileImageAbsoluteUrl { get; set; }
 }
 
 public static class Mappers
