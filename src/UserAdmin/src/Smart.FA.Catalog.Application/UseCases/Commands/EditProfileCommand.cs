@@ -106,7 +106,8 @@ public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, Pro
         trainer.UpdateTitle(command.Title ?? string.Empty);
         if (command.ProfilePicture is not null)
         {
-            trainer.UpdateProfileImagePath(_minIoLinkGenerator.CreateTrainerProfilePictureUrl(trainer.Id));
+            var fileName = new FileInfo(command.ProfilePicture.FileName);
+            trainer.UpdateProfileImagePath(_minIoLinkGenerator.CreateTrainerProfilePictureUrl(trainer.Id, fileName.Extension));
         }
 
         trainer.ChangeEmail(command.Email);

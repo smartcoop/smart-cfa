@@ -7,7 +7,7 @@ public interface IMinIoLinkGenerator
     /// </summary>
     /// <param name="trainerId">The id of the trainer</param>
     /// <returns>The relative url to the profile picture of the trainer</returns>
-    string CreateTrainerProfilePictureUrl(int trainerId);
+    string CreateTrainerProfilePictureUrl(int trainerId, string imageFormat);
 
     /// <summary>
     /// Fetch the absolute URL of the profile picture image of the trainer

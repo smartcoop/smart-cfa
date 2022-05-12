@@ -14,11 +14,11 @@ public class MinIoLinkGenerator : IMinIoLinkGenerator
     }
 
     /// <inheritdoc />
-    public string CreateTrainerProfilePictureUrl(int trainerId)
+    public string CreateTrainerProfilePictureUrl(int trainerId, string imageFormat)
     {
         // Generate unique salt value to avoid decoding
         var hashIds = new Hashids(MinioLinkDefaultSaltValues.TrainerProfilePicture, 8);
-        return Path.Combine("trainers/", "profile-image/", $"{hashIds.Encode(trainerId)}.jpg");
+        return Path.Combine("trainers/", "profile-image/", $"{hashIds.Encode(trainerId)}{imageFormat}");
     }
 
     /// <inheritdoc />
@@ -30,7 +30,7 @@ public class MinIoLinkGenerator : IMinIoLinkGenerator
     {
         // Generate unique salt value to avoid decoding
         var hashIds = new Hashids(MinioLinkDefaultSaltValues.TrainerProfilePicture, 8);
-        return Path.Combine("trainers/", "profile-image/",$"{hashIds.Encode(0)}.jpg");
+        return Path.Combine("trainers/", "profile-image/",$"{hashIds.Encode(0)}.png");
     }
 
     /// <inheritdoc />
