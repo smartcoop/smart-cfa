@@ -9,7 +9,7 @@ public class AccountData
     public string? Email { get; set; }
 }
 
-public static class AccountataFactory
+public static class AccountDataFactory
 {
     private static AccountData CreateMock(string firstName, string lastName, string email)
     {

@@ -20,7 +20,7 @@ public class ProxyHeaderMiddleware
             var urlPath = urlPathList.Length > 1 ? urlPathList[1] : urlPathList[0];
             var cfaPath = string.IsNullOrEmpty(urlPath) ? "/" : urlPath;
             cfaPath += context.Request.QueryString.Value;
-            var serializedAccountData = AccountataFactory.GetByUserId(userId!).Serialize();
+            var serializedAccountData = AccountDataFactory.GetByUserId(userId!).Serialize();
             context.ProxyRedirect(cfaPath, userId, serializedAccountData);
         }
 

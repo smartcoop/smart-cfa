@@ -7,6 +7,6 @@ public class cfa : PageModel
     public void OnGet(string? id)
     {
         Response.Cookies.Append("userid", id);
-        HttpContext.ProxyRedirect("/", id, AccountataFactory.GetByUserId(id).Serialize());
+        HttpContext.ProxyRedirect("/", id, AccountDataFactory.GetByUserId(id).Serialize());
     }
 }
