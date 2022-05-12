@@ -14,7 +14,7 @@ public abstract class PageModelBase : PageModel
     /// <returns>The created <see cref="NotFoundResult"/> for the response.</returns>
     public NotFoundResult RedirectToNotFound(string? title = null, string? message = null)
     {
-        TempData["ErrorTitle"]   = title;
+        TempData["ErrorTitle"] = title;
         TempData["ErrorMessage"] = message;
 
         return NotFound();
