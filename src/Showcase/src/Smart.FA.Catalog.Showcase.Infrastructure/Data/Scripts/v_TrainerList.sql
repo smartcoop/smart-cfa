@@ -14,4 +14,4 @@ FROM Cfa.Trainer trainer
     assignment.TrainingId = training.Id
 WHERE training.TrainingStatusTypeId = 3
 GROUP BY trainer.Id, trainer.FirstName, trainer.LastName, trainer.Title, trainer.ProfileImagePath
-HAVING count(assignment.TrainingId) > 1
+HAVING count(assignment.TrainingId) >= 1
