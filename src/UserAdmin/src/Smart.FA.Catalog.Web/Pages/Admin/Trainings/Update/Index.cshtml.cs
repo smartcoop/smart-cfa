@@ -1,6 +1,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Net.Http.Headers;
+using Smart.Design.Razor.TagHelpers.Alert;
 using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Domain.Models;
 using Smart.FA.Catalog.Core.Services;
@@ -59,6 +61,8 @@ public class UpdateModel : AdminPage
         var request = UpdateTrainingViewModel.MapToUpdateRequest(UserIdentity.Identity.Trainer.DefaultLanguage.Value, id, UserIdentity.Identity.Trainer.Id);
         var response = await Mediator.Send(request);
         UpdateTrainingViewModel = response.MapUpdateToResponse(UserIdentity.Identity.Trainer.DefaultLanguage);
+
+        TempData.AddGlobalBannerMessage(CatalogResources.TrainingEditedWithSuccess, AlertStyle.Success);
 
         return RedirectAfterSuccessfulUpdate();
     }

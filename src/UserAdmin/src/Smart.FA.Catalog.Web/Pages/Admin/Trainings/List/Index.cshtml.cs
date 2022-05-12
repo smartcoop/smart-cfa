@@ -1,6 +1,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Options;
+using Smart.Design.Razor.TagHelpers.Alert;
 using Smart.FA.Catalog.Application.UseCases.Commands;
 using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Domain;
@@ -42,6 +44,7 @@ public class ListModel : AdminPage
     public async Task<IActionResult> OnPostDeleteAsync(int id)
     {
         await Mediator.Send(new DeleteTrainingRequest { TrainingId = id });
+        TempData.AddGlobalBannerMessage(CatalogResources.TrainingDeletedWithSuccess, AlertStyle.Success);
         return RedirectToPage();
     }
 

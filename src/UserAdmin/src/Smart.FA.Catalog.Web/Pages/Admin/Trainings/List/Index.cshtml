@@ -26,6 +26,13 @@
     </div>
 }
 
+@if (TempData.HasGlobalBannerMessage())
+{
+    <smart-spacer left="ExtraLarge" right="ExtraLarge" top="Small">
+        <smart-alert style="@TempData.GetGlobalBannerMessage().Style" message="@TempData.GetGlobalBannerMessage().Message" is-closable="true"></smart-alert>
+    </smart-spacer>
+}
+
 @if (Model.Trainings is not null && !Model.Trainings.Any())
 {
     <div class="c-error-page" style="height: 50%">

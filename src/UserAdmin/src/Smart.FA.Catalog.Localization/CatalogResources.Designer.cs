@@ -556,7 +556,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Biographie.
         /// </summary>
         public static string Profile_bioLabel {
             get {
@@ -592,7 +592,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Édition de profil.
+        ///   Looks up a localized string similar to Édition de votre profil.
         /// </summary>
         public static string ProfileEdition {
             get {
@@ -916,7 +916,34 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Objectif de la formation.
+        ///   Looks up a localized string similar to Formation créée avec succès.
+        /// </summary>
+        public static string TrainingCreatedWithSuccess {
+            get {
+                return ResourceManager.GetString("TrainingCreatedWithSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formation supprimée avec succès.
+        /// </summary>
+        public static string TrainingDeletedWithSuccess {
+            get {
+                return ResourceManager.GetString("TrainingDeletedWithSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formation éditée avec succès.
+        /// </summary>
+        public static string TrainingEditedWithSuccess {
+            get {
+                return ResourceManager.GetString("TrainingEditedWithSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Objectif et contenu de la formation.
         /// </summary>
         public static string TrainingGoal {
             get {
