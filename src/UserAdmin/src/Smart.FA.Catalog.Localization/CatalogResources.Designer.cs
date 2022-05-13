@@ -142,7 +142,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Vous ne disposez que d’une seule fiche profil par titulaire..
         /// </summary>
         public static string AdminHomepageProfil_IntroductionPart1 {
             get {
@@ -151,7 +151,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Les champs nom et prénom sont obligatoires (et identiques à votre fiche d’inscription Smart). Le champ biographie ainsi que les champs « réseaux sociaux » ne sont pas obligatoires. Un formulaire de contact est par ailleurs mis en place pour permettre aux internautes de vous contacter directement. Ce formulaire est lié à l’adresse mail renseignée dans la fiche d’inscription, l’adresse mail n’apparaît jamais directement. .
         /// </summary>
         public static string AdminHomepageProfil_IntroductionPart2 {
             get {
@@ -160,7 +160,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Profil  .
         /// </summary>
         public static string AdminHomepageProfil_Title {
             get {
@@ -169,7 +169,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Vous pouvez encoder autant de formations que vous le souhaitez.  .
         /// </summary>
         public static string AdminHomepageTraining_IntroductionPart1 {
             get {
@@ -178,7 +178,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Vous pouvez sauvegarder une fiche formation en cours de rédaction pour y revenir plus tard avant de la publier. Vous pouvez également dépublier une fiche ou la supprimer.  .
         /// </summary>
         public static string AdminHomepageTraining_IntroductionPart2 {
             get {
@@ -187,7 +187,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Nous vous invitons à veiller régulièrement à la mise à jour de vos contenus. .
         /// </summary>
         public static string AdminHomepageTraining_IntroductionPart3 {
             get {

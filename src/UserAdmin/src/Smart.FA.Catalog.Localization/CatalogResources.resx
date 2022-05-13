@@ -466,8 +466,14 @@
   <data name="UrlSitePublic" xml:space="preserve">
     <value>learning.smart.coop</value>
   </data>
+  <data name="AdminHomepageProfil_Title" xml:space="preserve">
+    <value>Profil  </value>
+  </data>
+  <data name="AdminHomepageTraining_Title" xml:space="preserve">
+    <value>Formation</value>
+  </data>
   <data name="AdminHomepageProfil_IntroductionPart1" xml:space="preserve">
-    <value>Vous ne disposez que d’une seule fiche profil par titulaire.  </value>
+    <value>Vous ne disposez que d’une seule fiche profil par titulaire.</value>
   </data>
   <data name="AdminHomepageProfil_IntroductionPart2" xml:space="preserve">
     <value>Les champs nom et prénom sont obligatoires (et identiques à votre fiche d’inscription Smart). Le champ biographie ainsi que les champs « réseaux sociaux » ne sont pas obligatoires. Un formulaire de contact est par ailleurs mis en place pour permettre aux internautes de vous contacter directement. Ce formulaire est lié à l’adresse mail renseignée dans la fiche d’inscription, l’adresse mail n’apparaît jamais directement. </value>
@@ -480,32 +486,5 @@
   </data>
   <data name="AdminHomepageTraining_IntroductionPart3" xml:space="preserve">
     <value>Nous vous invitons à veiller régulièrement à la mise à jour de vos contenus. </value>
-  </data>
-  <data name="AdminHomepageProfil_Title" xml:space="preserve">
-    <value>Profil  </value>
-  </data>
-  <data name="AdminHomepageTraining_Title" xml:space="preserve">
-    <value>Formation</value>
-  </data>
-  <data name="AdminHomepageProfil_Title" xml:space="preserve">
-    <value />
-  </data>
-  <data name="AdminHomepageProfil_IntroductionPart2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="AdminHomepageProfil_IntroductionPart1" xml:space="preserve">
-    <value />
-  </data>
-  <data name="AdminHomepageTraining_IntroductionPart1" xml:space="preserve">
-    <value />
-  </data>
-  <data name="AdminHomepageTraining_IntroductionPart2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="AdminHomepageTraining_IntroductionPart3" xml:space="preserve">
-    <value />
-  </data>
-  <data name="AdminHomepageTraining_IntroductionPart2" xml:space="preserve">
-    <value />
   </data>
 </root>
