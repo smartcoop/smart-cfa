@@ -6,9 +6,10 @@
 
 <form method="post" id="form" class="o-container u-spacer-top-xl">
     <smart-panel header="@CatalogResources.AdminHomepage_AcceptCharter">
+        <p class="intro__paragraph">@CatalogResources.AdminUserChart_IntroductionPart1</p>
         <a href="@Model.LastChartUrl" target="_blank">@CatalogResources.AdminHomePage_UserChart</a>
         <smart-spacer top="Large">
-            <smart-checkbox label="@CatalogResources.AdminHomepage_AcceptCharter" asp-for="@Model.HasAcceptedUserChart"></smart-checkbox>
+            <smart-checkbox label="@CatalogResources.AdminHomepage_IAcceptCharter" asp-for="@Model.HasAcceptedUserChart"></smart-checkbox>
             <smart-validation-message asp-for="@Model"></smart-validation-message>
         </smart-spacer>
         <smart-spacer top="Large">
