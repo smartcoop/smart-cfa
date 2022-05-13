@@ -236,26 +236,33 @@
     padding: 2.4rem 0;
     border-bottom: 1px solid $color-gray-100;
     max-width: 100%;
+
     .training-list__container-left {
         width: 90%;
         text-align: left;
+
         .training-list__title {
             font-size: 2rem;
             font-weight: 700;
             line-height: 2.2rem;
+            overflow-wrap: break-word;
         }
+
         .training-list__training-link {
             color: $color-gray-800;
         }
+
         .training-list__trainer {
             padding: 1rem 0;
             font-size: 1.6rem;
             line-height: 1.8rem;
         }
+
         .training-list__category-link {
             line-height: 0.2rem;
         }
     }
+
     .training-list__container-right {
         width: 10%;
         min-width: 10%;
@@ -268,28 +275,37 @@
 
 .training-card {
     text-align: left;
+
     .training-card__title {
         font-size: 2.8rem;
         font-weight: 700;
         line-height: 3rem;
+        overflow-wrap: break-word;
     }
+
     .training-card__sectors {
         padding-top: 1rem;
     }
+
     .training-card__details {
         padding-top: 3rem;
         display: flex;
         flex-wrap: wrap;
+
         @media (max-width: $g-bp3) {
             flex-direction: column;
         }
+
         .training-card__details-txts {
             width: 70%;
+
             @media (max-width: $g-bp3) {
                 width: 100%;
             }
+
             .training-card__details-section {
                 padding-bottom: 3rem;
+
                 .training-card__details-label {
                     font-size: 1.8rem;
                     font-weight: 700;
@@ -298,14 +314,17 @@
                 }
             }
         }
+
         .training-card__trainer {
             width: 30%;
             min-width: 25rem;
             padding: 0 0 3rem 10rem;
+
             @media (max-width: $g-bp3) {
                 width: 100%;
                 padding: 0 0 3rem 0;
             }
+
             .training-card__trainer-name {
                 font-size: 2rem;
                 font-weight: 700;
@@ -313,6 +332,7 @@
             }
         }
     }
+
     .training-card__footer {
         padding-top: 4rem;
     }
