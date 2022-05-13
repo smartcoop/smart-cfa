@@ -385,8 +385,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-
+        ///   Looks up a localized string similar to Suivant.
         /// </summary>
         public static string Next {
             get {
@@ -422,8 +421,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-
+        ///   Looks up a localized string similar to Précédent.
         /// </summary>
         public static string Previous {
             get {
@@ -446,6 +444,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         public static string TitteTrainings {
             get {
                 return ResourceManager.GetString("TitteTrainings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Marketing.
+        /// </summary>
+        public static string TopicName_Marketing {
+            get {
+                return ResourceManager.GetString("TopicName_Marketing", resourceCulture);
             }
         }
         

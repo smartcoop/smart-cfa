@@ -1,4 +1,7 @@
-﻿@model Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingList.TrainingListViewModel
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.Extensions.Localization
+@model Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingList.TrainingListViewModel
+@inject IStringLocalizer<ShowcaseResources> Localizer
 
 <div class="training-list">
     <div class="training-list__container">
@@ -14,7 +17,7 @@
                 <!-- Show all training topics -->
                 @foreach (var topic in Model.Topics)
                 {
-                    <a class="training-list__category-link" asp-page="TrainingListViewModel/TrainingListViewModelList" asp-route-cat="TopicName">@topic.Name</a>
+                    <a class="training-list__category-link" asp-page="TrainingListViewModel/TrainingListViewModelList" asp-route-cat="TopicName"> @(Localizer[$"TopicName_{topic.Name}"])</a>
                     if (!Equals(topic, Model.Topics.Last()))
                     {
                         <span>, </span>

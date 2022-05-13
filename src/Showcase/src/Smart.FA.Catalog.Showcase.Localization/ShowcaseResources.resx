@@ -255,4 +255,7 @@
   <data name="TrainersOfAssociateTrainers" xml:space="preserve">
     <value>Les formateur·trices de Formateurs Associés</value>
   </data>
+  <data name="TopicName_Marketing" xml:space="preserve">
+    <value>Marketing</value>
+  </data>
 </root>
