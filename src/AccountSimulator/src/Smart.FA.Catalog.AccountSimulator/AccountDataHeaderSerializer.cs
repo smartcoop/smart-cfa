@@ -27,12 +27,11 @@ public class AccountDataHeaderSerializer : IAccountDataHeaderSerializer
 
     public AccountData GetByUserId(string userId)
     {
-        switch (userId)
+        return userId switch
         {
-            case "1": return CreateMock("Victor", "vD", "victor@victor.com");
-            case "2":
-            default:
-                return CreateMock("Maxime", "P.", "maxime@maxime.com");
-        }
+            "1" => CreateMock("Victor", "vD", "victor@victor.com"),
+            "2" => CreateMock("Maxime", "P.", "maxime@maxime.com"),
+            _ => throw new InvalidDataException("User id is invalid")
+        };
     }
 }
