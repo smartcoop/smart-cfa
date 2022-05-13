@@ -29,7 +29,9 @@ public class SetTrainerHasAcceptedLatestUserChartRevisionCommand : IRequestHandl
             throw new UserChartRevisionException(Errors.UserChartRevision.DontExist);
         }
 
-        var trainer = await _context.Trainers.FirstOrDefaultAsync(trainer => trainer.Id == request.TrainerId, cancellationToken);
+        var trainer = await _context.Trainers
+            .Include(trainer => trainer.Approvals)
+            .FirstOrDefaultAsync(trainer => trainer.Id == request.TrainerId, cancellationToken);
 
         if (trainer is null)
         {
@@ -38,9 +40,10 @@ public class SetTrainerHasAcceptedLatestUserChartRevisionCommand : IRequestHandl
 
         trainer.ApproveUserChart(latestUserChartRevision);
 
-        _logger.LogInformation("trainer {Name} has accepted user chart version {Version}", trainer.ToString(), latestUserChartRevision.Version);
-
         await _context.SaveChangesAsync(cancellationToken);
+
+        _logger.LogInformation("trainer {Id} has accepted user chart version {Version}", trainer.Id, latestUserChartRevision.Version);
+
         response.UserChartRevisionId = latestUserChartRevision.Id;
         response.SetSuccess();
 
