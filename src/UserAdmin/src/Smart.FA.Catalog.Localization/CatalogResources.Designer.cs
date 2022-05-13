@@ -304,6 +304,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Retour à l&apos;accueil.
+        /// </summary>
+        public static string GoBackHome {
+            get {
+                return ResourceManager.GetString("GoBackHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Soin aux personnes.
         /// </summary>
         public static string HealthCare {

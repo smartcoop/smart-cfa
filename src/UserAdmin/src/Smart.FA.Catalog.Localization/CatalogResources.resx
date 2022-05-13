@@ -460,4 +460,7 @@
   <data name="Sorry" xml:space="preserve">
     <value>Désolé</value>
   </data>
+  <data name="GoBackHome" xml:space="preserve">
+    <value>Retour à l'accueil</value>
+  </data>
 </root>
