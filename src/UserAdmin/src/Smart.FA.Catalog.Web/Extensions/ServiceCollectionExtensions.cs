@@ -3,6 +3,7 @@ using Smart.FA.Catalog.Application.Models.Options;
 using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Web.Authentication;
 using Smart.FA.Catalog.Web.Authentication.Handlers;
+using Smart.FA.Catalog.Web.Authentication.Header;
 using Smart.FA.Catalog.Web.Authorization.Handlers;
 using Smart.FA.Catalog.Web.Authorization.Policy;
 using Smart.FA.Catalog.Web.Authorization.Policy.Requirements;
@@ -34,6 +35,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddAuthentication(options => options.DefaultScheme = AuthSchemes.UserAdmin)
             .AddScheme<CfaAuthenticationOptions, UserAdminAuthenticationHandler>(AuthSchemes.UserAdmin, null);
+        services.AddScoped<IAccountDataHeaderSerializer, AccountDataHeaderHeaderSerializer>();
 
         return services;
     }

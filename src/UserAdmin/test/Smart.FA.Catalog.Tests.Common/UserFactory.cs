@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using AutoFixture;
 using Smart.FA.Catalog.Core.Domain.User.Dto;
 using Smart.FA.Catalog.Core.Domain.User.Enumerations;
@@ -17,7 +17,6 @@ public static class UserFactory
                 .ToString(CultureInfo.CurrentCulture)
             , fixture.Create<string>(),
             fixture.Create<string>()
-            , ApplicationType.Account.Name
-        );
+            , ApplicationType.Account.Name, "victor@victor.com");
     }
 }
