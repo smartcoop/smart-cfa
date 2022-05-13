@@ -34,7 +34,6 @@
         <div class="section__label">
             <h2>@ShowcaseResources.AllTrainers</h2>
         </div>
-
         <form>
             <div class="trainer-list">
                 @foreach (var trainer in Model.Trainers)
@@ -42,7 +41,7 @@
                     <div class="trainer-list__item">
                         <div class="trainer-list__item-picture">
                             <a asp-page="@Routes.TrainerDetails" asp-route-id="@trainer.Id">
-                                <img src="~/images/photo-avatar-profil.png" class="trainer-image"/>
+                                <img src="@trainer.ProfileImagePath" class="trainer-image"/>
                             </a>
                         </div>
                         <div class="trainer-list__item-info">

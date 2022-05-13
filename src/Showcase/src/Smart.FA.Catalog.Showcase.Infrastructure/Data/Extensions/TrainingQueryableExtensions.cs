@@ -24,4 +24,16 @@ public static class TrainingQueryableExtensions
         var result = await query.PaginateAsync(pageNumber, pageSize, randomIds);
         return new PagedList<TrainingList>(result.PaginatedItems, new PageItem(pageNumber, pageSize), result.TotalCount);
     }
+
+    public static async Task<PagedList<TrainingList>> GetPaginatedTrainingListsByTrainerIdAsync(this IQueryable<TrainingList> query,
+        int trainerId,
+        int pageNumber,
+        int pageSize,
+        bool randomIds = false)
+    {
+        // We need only published trainings.
+        query = query.Where(training => training.Status == TrainingStatusType.Published.Id && training.TrainerId == trainerId);
+        var result = await query.PaginateAsync(pageNumber, pageSize, randomIds);
+        return new PagedList<TrainingList>(result.PaginatedItems, new PageItem(pageNumber, pageSize), result.TotalCount);
+    }
 }

@@ -4,6 +4,7 @@ using NLog.Web;
 using Smart.FA.Catalog.Shared.Security;
 using Smart.FA.Catalog.Showcase.Infrastructure.Data;
 using Smart.FA.Catalog.Showcase.Web.Extensions;
+using Smart.FA.Catalog.Showcase.Web.Options;
 using Smart.FA.Catalog.Showcase.Web.Services.Trainer;
 using Smart.FA.Catalog.Showcase.Web.Services.Training;
 
@@ -20,6 +21,8 @@ builder.Services
     .AddShowcaseLocalization()
     .AddTransient<ITrainingService, TrainingService>()
     .AddTransient<ITrainerService, TrainerService>();
+
+builder.Services.Configure<MinIOOptions>(builder.Configuration.GetSection(MinIOOptions.SectionName));
 
 builder.Services.AddDbContext<CatalogShowcaseContext>((_, efOptions) =>
 {

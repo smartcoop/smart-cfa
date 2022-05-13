@@ -18,7 +18,7 @@ public interface ITrainerService
     /// <param name="trainerId">The id of the trainer to look for.</param>
     /// <param name="pageNumber">Index of the current page.</param>
     /// <param name="pageSize">The maximum number of the trainer's trainings to be fetched.</param>
-    /// <returns></returns>
+    /// <returns>The details of the trainer or null if the trainer doesn't exist.</returns>
     public Task<TrainerDetailsViewModel?> GetTrainerDetailsViewModelsByIdAsync(int trainerId, int pageNumber, int pageSize);
 
     /// <summary>
