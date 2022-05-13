@@ -12,6 +12,8 @@ public class ProfileModel : AdminPage
 {
     public IUserIdentity UserIdentity { get; }
 
+    public string Email => UserIdentity.CurrentTrainer.Email!;
+
     [BindProperty] public EditProfileCommand? EditProfileCommand { get; set; }
 
     /// <summary>

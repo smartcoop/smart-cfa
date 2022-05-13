@@ -1,7 +1,6 @@
 using Smart.Design.Razor.TagHelpers.Icon;
 using Smart.FA.Catalog.Application.UseCases.Commands;
 using Smart.FA.Catalog.Application.UseCases.Queries;
-using Smart.FA.Catalog.Shared.Domain.Enumerations;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer;
 
 namespace Smart.FA.Catalog.Web.ViewModels.Trainers;
@@ -26,7 +25,6 @@ public static class Mappers
             TrainerId = trainerProfile.TrainerId!.Value,
             Bio       = trainerProfile.Bio,
             Title     = trainerProfile.Title,
-            Email     = trainerProfile.Email,
             ProfilePicture = null
         };
     }

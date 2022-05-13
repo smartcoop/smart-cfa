@@ -14,7 +14,6 @@ using Smart.FA.Catalog.Core.Extensions;
 using Smart.FA.Catalog.Infrastructure.Helpers;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 using Smart.FA.Catalog.Infrastructure.Services.Options;
-using Smart.FA.Catalog.Shared.Domain.Enumerations;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer;
 
 namespace Smart.FA.Catalog.Application.UseCases.Commands;
@@ -33,8 +32,6 @@ public class EditProfileCommand : IRequest<ProfileEditionResponse>
     public Dictionary<string, string>? Socials { get; set; }
 
     public IFormFile? ProfilePicture { get; set; }
-
-    public string? Email { get; set; }
 }
 
 public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, ProfileEditionResponse>
@@ -110,7 +107,6 @@ public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, Pro
             trainer.UpdateProfileImagePath(_minIoLinkGenerator.GenerateTrainerProfilePictureUrl(trainer.Id, fileName.Extension));
         }
 
-        trainer.ChangeEmail(command.Email);
         foreach (var commandSocial in command.Socials!)
         {
             var socialNetwork = SocialNetwork.FromValue(int.Parse(commandSocial.Key));
@@ -172,12 +168,6 @@ public class EditProfileCommandValidator : AbstractValidator<EditProfileCommand>
             .WithMessage(CatalogResources.BioMustBe30Chars)
             .MaximumLength(500)
             .WithMessage(CatalogResources.BioCannotExceed500Chars);
-
-        RuleFor(command => command.Email)
-            .Cascade(CascadeMode.Stop)
-            .NotEmpty()
-            .WithMessage(CatalogResources.EmailIsRequired)
-            .ValidEmail();
 
         When(request => request.ProfilePicture is not null,
             () => RuleFor(request => request.ProfilePicture!)
