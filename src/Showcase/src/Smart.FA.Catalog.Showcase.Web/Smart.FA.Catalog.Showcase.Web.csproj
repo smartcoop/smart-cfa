@@ -7,21 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="wwwroot\NewFolder1\**" />
-    <Compile Remove="wwwroot\NewFolder2\**" />
-    <Compile Remove="wwwroot\NewFolder\**" />
-    <Content Remove="wwwroot\NewFolder1\**" />
-    <Content Remove="wwwroot\NewFolder2\**" />
-    <Content Remove="wwwroot\NewFolder\**" />
-    <EmbeddedResource Remove="wwwroot\NewFolder1\**" />
-    <EmbeddedResource Remove="wwwroot\NewFolder2\**" />
-    <EmbeddedResource Remove="wwwroot\NewFolder\**" />
-    <None Remove="wwwroot\NewFolder1\**" />
-    <None Remove="wwwroot\NewFolder2\**" />
-    <None Remove="wwwroot\NewFolder\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Smart.FA.Catalog.Shared\Smart.FA.Catalog.Shared.csproj" />
     <ProjectReference Include="..\Smart.FA.Catalog.Showcase.Domain\Smart.FA.Catalog.Showcase.Domain.csproj" />
     <ProjectReference Include="..\Smart.FA.Catalog.Showcase.Infrastructure\Smart.FA.Catalog.Showcase.Infrastructure.csproj" />
@@ -46,10 +31,6 @@
     <Content Update="appsettings.PreProduction.json">
       <DependentUpon>appsettings.json</DependentUpon>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\NewFolder3\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties sassconfig_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
