@@ -20,21 +20,11 @@ public class GetTrainingFromIdQueryHandler: IRequestHandler<GetTrainingFromIdReq
     public async Task<GetTrainingFromIdResponse> Handle(GetTrainingFromIdRequest request, CancellationToken cancellationToken)
     {
         GetTrainingFromIdResponse resp = new();
-
-        try
-        {
-            var training = await _catalogContext.Trainings.FindAsync(new object?[] { request.TrainingId }, cancellationToken: cancellationToken);
-            resp.Training = training!;
-            resp.SetSuccess();
-        }
-        catch (Exception e)
-        {
-             _logger.LogError("{Exception}", e.ToString());
-            throw;
-        }
+        var training = await _catalogContext.Trainings.FindAsync(new object?[] { request.TrainingId }, cancellationToken: cancellationToken);
+        resp.Training = training!;
+        resp.SetSuccess();
 
         return resp;
-
     }
 }
 
