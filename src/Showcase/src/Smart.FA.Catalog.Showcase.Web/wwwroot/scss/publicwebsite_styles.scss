@@ -33,15 +33,20 @@
 
     .header-nav {
         display: flex;
+        flex-wrap: wrap;
         background: $color-semantic-link;
         text-align: left;
         padding-left: 0.5rem;
 
-        .header-nav__logo {
-            height: auto;
-            padding-top: 10px;
-            width:28rem;
-            height:auto;
+        .header-nav__logo_container {
+            min-width: 30rem;
+
+            .header-nav__logo {
+                height: auto;
+                padding-top: 10px;
+                width: 28rem;
+                height: auto;
+            }
         }
 
         .header-nav__ul {
