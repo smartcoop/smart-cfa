@@ -51,7 +51,6 @@ var app = builder.Build();
 
 app.UseForwardedHeaders();
 
-
 if (app.Environment.IsProduction())
 {
     app.UseExceptionHandler("/Error");
@@ -71,9 +70,10 @@ if (app.Configuration.GetValue("ForceHttpRedirection", true))
     app.UseHttpsRedirection();
 }
 
-app.UseStaticFiles();
-
+app.UsePathBase(new PathString("/cfa"));
 app.UseRouting();
+
+app.UseStaticFiles();
 
 app.UseAuthentication();
 

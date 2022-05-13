@@ -4,7 +4,6 @@
 @using Microsoft.Extensions.Options
 @using Smart.FA.Catalog.Core.Services
 @using Smart.FA.Catalog.Infrastructure.Helpers
-@using Smart.FA.Catalog.Shared.Domain.Enumerations
 @using Smart.FA.Catalog.Web.Pages.SuperUser
 @inject IOptions<RequestLocalizationOptions> _requestLocalizationOptions;
 @inject IUserIdentity UserIdentity;
@@ -36,7 +35,7 @@
                 <div class="c-toolbar__left">
                     <div class="c-toolbar__item">
                         <div class="c-brand c-brand--xsmall">
-                            <a href="/">
+                            <a href="https://account.ubik.be/cfa.aspx">
                                 <img src="https://design.smart.coop/images/logo.svg" alt="Smart">
                             </a>
                         </div>
@@ -61,11 +60,11 @@
                         </a>
                         <ul class="c-menu c-menu--large" id="userMenu">
                             <li class="c-menu__item">
-                                <a class="c-menu__label" href="/admin">@CatalogResources.MyUserSpace</a>
+                                <a class="c-menu__label" href="/cfa/admin">@CatalogResources.MyUserSpace</a>
                             </li>
                             <li class="c-menu__divider" role="presentational"></li>
                             <li class="c-menu__item">
-                                <a class="c-menu__label" href="#">@CatalogResources.SignOut</a>
+                                <a class="c-menu__label" href="https://account.ubik.be/logout.aspx ">@CatalogResources.SignOut</a>
                             </li>
                         </ul>
                     </div>
