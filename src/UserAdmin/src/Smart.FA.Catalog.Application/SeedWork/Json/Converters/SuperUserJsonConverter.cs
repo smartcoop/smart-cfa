@@ -13,6 +13,6 @@ public class SuperUserJsonConverter : JsonConverter<SuperUser>
 
     public override void Write(Utf8JsonWriter writer, SuperUser superUser, JsonSerializerOptions options)
     {
-        writer.WriteStringValue(superUser.UserId);
+        writer.WriteNumberValue(superUser.TrainerId);
     }
 }

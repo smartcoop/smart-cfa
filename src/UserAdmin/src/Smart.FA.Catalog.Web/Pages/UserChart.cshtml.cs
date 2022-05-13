@@ -54,8 +54,6 @@ public class UserChartModel : PageModel
 
     // There is no point to go any further if the user is either a Super User or if he has accepted already an active chart.
     private async Task<bool> ShouldReturnToHomePageAsync() => _userIdentity.IsSuperUser || await _mediator.Send(new HasAcceptedOneActiveUserChartRevisionQuery(_userIdentity.Id));
-    
-    
 
     public async Task<string> GetLastChartUrlAsync()
     {
