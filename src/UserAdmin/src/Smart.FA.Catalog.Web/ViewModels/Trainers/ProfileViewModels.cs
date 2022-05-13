@@ -25,10 +25,7 @@ public static class Mappers
             TrainerId = trainerProfile.TrainerId!.Value,
             Bio       = trainerProfile.Bio,
             Title     = trainerProfile.Title,
-            ProfilePicture = trainerProfile.ProfileImage is null
-                ? null
-                : new FormFile(trainerProfile.ProfileImage, 0, trainerProfile.ProfileImage.Length,
-                    Guid.NewGuid().ToString(), Guid.NewGuid().ToString())
+            ProfilePicture = null
         };
     }
 

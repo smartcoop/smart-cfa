@@ -42,8 +42,6 @@ public class UserChartModel : PageModel
     {
         var response = await Mediator.Send(new GetLatestUserChartRevisionUrlRequest());
 
-        // If we ever find ourselves in a case where no user chart can't be retrieved from storage, we should display the base user chart in wwwroot (to avoid any legal conflict)
-        // However it also means it should be updated regularly
-        return response.LatestUserChartUrl?.ToString() ?? "/default_user_chart.pdf";
+        return response.LatestUserChartRevisionUrl;
     }
 }
