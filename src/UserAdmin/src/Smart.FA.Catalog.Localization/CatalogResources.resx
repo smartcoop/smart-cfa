@@ -247,7 +247,7 @@
     <value>Publier</value>
   </data>
   <data name="UserChartAccept" xml:space="preserve">
-    <value>Accepter</value>
+    <value>J'accepte</value>
   </data>
   <data name="SignOut" xml:space="preserve">
     <value>Se déconnecter</value>
@@ -349,7 +349,7 @@
     <value>Interface d'encodage de formations</value>
   </data>
   <data name="AdminHomepage_AcceptCharter" xml:space="preserve">
-    <value>Accepter la Charte d'utilisation de Formateurs Associés</value>
+    <value>Charte d'utilisation</value>
   </data>
   <data name="LoremIpsum" xml:space="preserve">
     <value>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ullamcorper odio id iaculis lacinia. Aenean iaculis sit amet dolor non interdum. Ut odio odio, vulputate non urna a, consequat facilisis arcu. Pellentesque venenatis ex varius blandit vulputate. Donec maximus commodo mi, at convallis metus tempus vitae. Phasellus malesuada, massa sed dictum tristique, odio tellus blandit ante, eget efficitur diam massa sed dolor. Sed rutrum magna ut urna maximus, vel consectetur urna tempus. Integer tellus ipsum, dictum ullamcorper gravida eget, pharetra id elit. Nam vestibulum tincidunt ex at auctor. Nam ultrices tortor eu nunc sodales lacinia. Sed laoreet blandit lorem, et tempor est tempor et
@@ -428,13 +428,13 @@
     <value>Seul un super-utilisateur est autorisé à marquer une formation comme étant dispensée par Smart </value>
   </data>
   <data name="AdminHomepage_IntroductionPart1" xml:space="preserve">
-    <value>Bienvenue dans le monde de la formation de Smart, </value>
+    <value> est un catalogue des formations organisées et produites par Smart au travers des entités Formateurs Associés asbl et accessoirement Productions Associées asbl. C'est un outil en ligne mis à votre disposition gratuitement et sans publicité.</value>
   </data>
   <data name="AdminHomepage_IntroductionPart2" xml:space="preserve">
-    <value>Smart est une coopérative de travailleuses et travailleurs qui utilisent sa structure pour exercer leur métier, par exemple de la formation.</value>
+    <value>Vous êtes invité·es à y compléter  votre fiche de profil, puis à y encoder les formations que vous proposez.</value>
   </data>
   <data name="AdminHomepage_IntroductionPart3" xml:space="preserve">
-    <value>Ce catalogue en ligne s’adresse à toute personne en recherche d’une formation. Vous trouverez sur ce site des formations de type scolaire, professionnel  (organisées et produites par Formateurs Associés asbl et Productions Associées asbl, le cas échéant) ou encore récréatif (uniquement dans Producteurs Associés asbl). Vous visualisez aisément la personne qui dispense la formation et pouvez la contacter en direct pour obtenir davantage d’informations. </value>
+    <value>Les informations ainsi encodées seront visibles publiquement sur le site vitrine </value>
   </data>
   <data name="Profile_UploadPicture" xml:space="preserve">
     <value>Sélectionner une photo</value>
@@ -459,5 +459,11 @@
   </data>
   <data name="Sorry" xml:space="preserve">
     <value>Désolé</value>
+  </data>
+  <data name="AdminUserChart_IntroductionPart1" xml:space="preserve">
+    <value>Avant d’encoder des formations, vous devez confirmer avoir lu et accepté les conditions énoncées dans la charte d’utilisation du site learning.smart.coop. Cette charte est également disponible à la consultation dans votre Espace Activité.   </value>
+  </data>
+  <data name="UrlSitePublic" xml:space="preserve">
+    <value>learning.smart.coop</value>
   </data>
 </root>

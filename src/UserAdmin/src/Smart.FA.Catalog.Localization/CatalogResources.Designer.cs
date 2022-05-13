@@ -70,7 +70,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Accepter la Charte d&apos;utilisation de Formateurs Associés.
+        ///   Looks up a localized string similar to Charte d&apos;utilisation.
         /// </summary>
         public static string AdminHomepage_AcceptCharter {
             get {
@@ -97,7 +97,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bienvenue dans le monde de la formation de Smart, .
+        ///   Looks up a localized string similar to learning.smart.coop est un catalogue des formations organisées et produites par Smart au travers des entités Formateurs Associés asbl et accessoirement Productions Associées asbl. C&apos;est un outil en ligne mis à votre disposition gratuitement et sans publicité..
         /// </summary>
         public static string AdminHomepage_IntroductionPart1 {
             get {
@@ -106,7 +106,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Smart est une coopérative de travailleuses et travailleurs qui utilisent sa structure pour exercer leur métier, par exemple de la formation..
+        ///   Looks up a localized string similar to Vous êtes invité·es à y compléter  votre fiche de profil, puis à y encoder les formations que vous proposez..
         /// </summary>
         public static string AdminHomepage_IntroductionPart2 {
             get {
@@ -115,7 +115,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ce catalogue en ligne s’adresse à toute personne en recherche d’une formation. Vous trouverez sur ce site des formations de type scolaire, professionnel  (organisées et produites par Formateurs Associés asbl et Productions Associées asbl, le cas échéant) ou encore récréatif (uniquement dans Producteurs Associés asbl). Vous visualisez aisément la personne qui dispense la formation et pouvez la contacter en direct pour obtenir davantage d’informations. .
+        ///   Looks up a localized string similar to Les informations ainsi encodées seront visibles publiquement sur le site vitrine learning.smart.coop. .
         /// </summary>
         public static string AdminHomepage_IntroductionPart3 {
             get {
@@ -138,6 +138,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string AdminHomepage_WhatIsFormateurAssocieTitle {
             get {
                 return ResourceManager.GetString("AdminHomepage_WhatIsFormateurAssocieTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avant d’encoder des formations, vous devez confirmer avoir lu et accepté les conditions énoncées dans la charte d’utilisation du site learning.smart.coop. Cette charte est également disponible à la consultation dans votre Espace Activité.   .
+        /// </summary>
+        public static string AdminUserChart_IntroductionPart1 {
+            get {
+                return ResourceManager.GetString("AdminUserChart_IntroductionPart1", resourceCulture);
             }
         }
         
@@ -1042,7 +1051,16 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Accepter.
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string UrlSitePublic {
+            get {
+                return ResourceManager.GetString("UrlSitePublic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to J&apos;accepte.
         /// </summary>
         public static string UserChartAccept {
             get {
