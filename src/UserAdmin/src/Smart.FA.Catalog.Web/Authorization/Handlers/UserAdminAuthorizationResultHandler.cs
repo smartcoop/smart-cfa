@@ -36,6 +36,11 @@ public class UserAdminAuthorizationResultHandler : IAuthorizationMiddlewareResul
                 context.Response.Redirect("/Admin");
             }
 
+            if (authorizationFailure.FailedRequirements.AnyOfType<MustBeSuperUserOrTrainingCreator>())
+            {
+                context.Response.StatusCode = 404;
+            }
+
             return;
         }
 

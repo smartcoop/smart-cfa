@@ -1,9 +1,9 @@
 ﻿@page
+@model NotFoundPageModel
 
-<div class="c-error-page">
-    <span class="c-error-page__code">404</span>
-    <h4 class="c-error-page__title">Page not found</h4>
-    <p class="c-error-page__desc">Sorry, we couldn’t find the page you are looking for.</p>
+<div class="c-error-page c-error-page--margin">
+    <h4 class="c-error-page__title c_title--size">@Model.ErrorTitle</h4>
+    <p class="c-error-page__desc c-desc--size">@Model.ErrorMessage</p>
     <a class="c-button c-button--secondary" href="/">
         <span class="c-button__content">
             <div class="o-svg-icon o-svg-icon-arrow-left  ">

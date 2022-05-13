@@ -17,6 +17,10 @@ public static class MvcBuilderExtensions
 
     private static void AddPageConventionsAuthorization(this PageConventionCollection conventions)
     {
+        // Single pages
+        conventions.AuthorizePage("/Admin/Trainings/Update/Index", Policies.MustBeSuperUserOrTrainingCreator);
+
+        // Folders
         conventions.AuthorizeFolder("/Admin", Policies.AtLeastOneValidUserChartRevisionApproval);
         conventions.AuthorizeFolder("/SuperUser", Policies.MustBeSuperUser);
     }
