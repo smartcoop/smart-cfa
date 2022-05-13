@@ -31,7 +31,7 @@ public class TrainingListModel : PageModelBase
         var offset = (CurrentPage - 1) * ItemsPerPage;
 
         var trainingIdQuery = _context.TrainingList
-            .Where(training => training.Status == TrainingStatusType.Validated.Id)
+            .Where(training => training.Status == TrainingStatusType.Published.Id)
             .Select(training => training.Id)
             .Distinct();
         var totalTrainerTrainings = await trainingIdQuery.CountAsync();

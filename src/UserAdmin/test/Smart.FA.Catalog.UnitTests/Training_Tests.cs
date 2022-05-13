@@ -135,10 +135,10 @@ public class TrainingTests
         var training = TrainingFactory.CreateWithAutoValidation(trainer);
 
         training.UpdateDetails("Hello", "My Goal", "A methodology", "practical modalities",Language.Create("FR").Value);
-        var result = training.ChangeStatus(TrainingStatusType.Validated);
+        var result = training.ChangeStatus(TrainingStatusType.Published);
 
         result.IsSuccess.Should().BeTrue();
-        training.StatusType.Should().Be(TrainingStatusType.Validated);
+        training.StatusType.Should().Be(TrainingStatusType.Published);
     }
 
     [Fact]
@@ -148,7 +148,7 @@ public class TrainingTests
         var training = TrainingFactory.CreateWithManualValidation(trainer);
         training.UpdateDetails("Hello", "My Goal", "A methodology", "practical modalities", Language.Create("FR").Value);
 
-        var result = training.ChangeStatus(TrainingStatusType.Validated);
+        var result = training.ChangeStatus(TrainingStatusType.Published);
 
         result.IsSuccess.Should().BeTrue();
         training.StatusType.Should().Be(TrainingStatusType.WaitingForValidation);
