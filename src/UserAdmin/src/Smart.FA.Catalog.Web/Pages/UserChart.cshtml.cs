@@ -52,16 +52,10 @@ public class UserChartModel : PageModel
         return RedirectToPage("/Admin/Index");
     }
 
-    private async Task<bool> ShouldReturnToHomePageAsync()
-    {
-        // There is no point to go any further if the user is either a Super User or if he has accepted already an active chart.
-        if (_userIdentity.IsSuperUser || await _mediator.Send(new HasAcceptedOneActiveUserChartRevisionQuery(_userIdentity.Id)))
-        {
-            return true;
-        }
-
-        return false;
-    }
+    // There is no point to go any further if the user is either a Super User or if he has accepted already an active chart.
+    private async Task<bool> ShouldReturnToHomePageAsync() => _userIdentity.IsSuperUser || await _mediator.Send(new HasAcceptedOneActiveUserChartRevisionQuery(_userIdentity.Id));
+    
+    
 
     public async Task<string> GetLastChartUrlAsync()
     {
