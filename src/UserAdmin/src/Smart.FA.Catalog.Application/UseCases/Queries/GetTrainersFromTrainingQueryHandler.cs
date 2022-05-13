@@ -19,17 +19,9 @@ public class GetTrainersFromTrainingQueryHandler : IRequestHandler<GetTrainersFr
     public async Task<GetTrainersFromTrainingResponse> Handle(GetTrainersFromTrainingRequest request, CancellationToken cancellationToken)
     {
         GetTrainersFromTrainingResponse response = new();
-        try
-        {
-            var training = await _catalogContext.Trainings.FindAsync(new object?[] { request.TrainingId }, cancellationToken: cancellationToken);
-            response.Trainers = training?.TrainerAssignments.Select(ttt => ttt.Trainer).ToList();
-            response.SetSuccess();
-        }
-        catch (Exception e)
-        {
-             _logger.LogError("{Exception}", e.ToString());
-            throw;
-        }
+        var training = await _catalogContext.Trainings.FindAsync(new object?[] { request.TrainingId }, cancellationToken: cancellationToken);
+        response.Trainers = training?.TrainerAssignments.Select(trainerAssignment => trainerAssignment.Trainer).ToList();
+        response.SetSuccess();
 
         return response;
     }

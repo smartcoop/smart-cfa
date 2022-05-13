@@ -39,8 +39,8 @@ RUN chmod +x /etc/cron.d/refresh.sh
 RUN crontab /etc/cron.d/cfa-cron
 
 # ENTRYPOINT ["dotnet", "Smart.FA.Catalog.Web.dll"]
-COPY ./launch.sh /app/launch.sh
+COPY ./launch_useradmin.sh /app/launch_useradmin.sh
 RUN sed  -i "s/CipherString = DEFAULT@SECLEVEL=2/CipherString = DEFAULT@SECLEVEL=1/" /etc/ssl/openssl.cnf
 
-RUN chmod +x /app/launch.sh
-CMD /app/launch.sh
+RUN chmod +x /app/launch_useradmin.sh
+CMD /app/launch_useradmin.sh

@@ -23,6 +23,17 @@ services:
     restart: always
     networks:
       - "cfa"
+  public:
+    depends_on:
+      - datasource
+    build:
+      context: .
+      dockerfile: Showcase.Dockerfile
+    hostname: ${DOCKER_NAME}-public
+    container_name: ${DOCKER_NAME}-public
+    restart: always
+    networks:
+      - "cfa"
   minio:
     image: quay.io/minio/minio
     hostname: ${DOCKER_NAME}-minio

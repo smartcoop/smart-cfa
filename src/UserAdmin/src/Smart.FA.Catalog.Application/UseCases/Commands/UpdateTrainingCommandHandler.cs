@@ -45,53 +45,39 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
         }
 
         UpdateTrainingResponse resp = new();
+        var training = await _trainingRepository.GetFullAsync(request.TrainingId, cancellationToken);
 
-        try
+        if (training is null) throw new TrainingException(Errors.Training.NotFound(request.TrainingId));
+
+        training.UpdateDetails(request.DetailsDto.Title!,
+            request.DetailsDto.Goal!,
+            request.DetailsDto.Methodology!,
+            request.DetailsDto.PracticalModalities,
+            Language.Create(request.DetailsDto.Language).Value);
+
+        training.MarkAsGivenBySmart(request.IsGivenBySmart);
+        training.SwitchVatExemptionTypes(request.VatExemptionTypes);
+        training.SwitchTargetAudience(request.TargetAudienceTypes);
+        training.SwitchAttendanceTypes(request.AttendanceTypes);
+        training.SwitchTopics(request.Topics);
+
+        var newStatus = request.IsDraft ? TrainingStatusType.Draft : TrainingStatusType.Published;
+
+        var result = training.ChangeStatus(newStatus);
+
+        if (result.IsFailure)
         {
-            var training = await _trainingRepository.GetFullAsync(request.TrainingId, cancellationToken);
-
-            if (training is null)
-            {
-                throw new TrainingException(Errors.Training.NotFound(request.TrainingId));
-            }
-
-            training.UpdateDetails(request.DetailsDto.Title!,
-                request.DetailsDto.Goal!,
-                request.DetailsDto.Methodology!,
-                request.DetailsDto.PracticalModalities,
-                Language.Create(request.DetailsDto.Language).Value);
-
-            training.MarkAsGivenBySmart(request.IsGivenBySmart);
-            training.SwitchVatExemptionTypes(request.VatExemptionTypes);
-            training.SwitchTargetAudience(request.TargetAudienceTypes);
-            training.SwitchAttendanceTypes(request.AttendanceTypes);
-            training.SwitchTopics(request.Topics);
-
-            var newStatus = request.IsDraft ? TrainingStatusType.Draft : TrainingStatusType.Validated;
-
-            var result = training.ChangeStatus(newStatus);
-
-            if (result.IsFailure)
-            {
-                resp.AddErrors(result.Error);
-                return resp;
-            }
-
-            training.ChangeStatus(request.IsDraft ? TrainingStatusType.Draft : TrainingStatusType.Validated);
-
-            _unitOfWork.RegisterDirty(training);
-            _unitOfWork.Commit();
-
-            _logger.LogInformation(LogEventIds.TrainingUpdated, "Training with id {Id} has been updated", training.Id);
-
-            resp.Training = training;
-            resp.SetSuccess();
+            resp.AddErrors(result.Error);
+            return resp;
         }
-        catch (Exception exception)
-        {
-            _logger.LogError(exception, "Editing training {trainingId} resulted into an error", request.TrainingId);
-            throw;
-        }
+
+        _unitOfWork.RegisterDirty(training);
+        _unitOfWork.Commit();
+
+        _logger.LogInformation(LogEventIds.TrainingUpdated, "Training with id {Id} has been updated", training.Id);
+
+        resp.Training = training;
+        resp.SetSuccess();
 
         return resp;
     }

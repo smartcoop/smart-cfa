@@ -3,10 +3,13 @@
 @using Microsoft.AspNetCore.Localization
 @using Microsoft.Extensions.Options
 @using Smart.FA.Catalog.Core.Services
+@using Smart.FA.Catalog.Infrastructure.Helpers
 @using Smart.FA.Catalog.Shared.Domain.Enumerations
 @using Smart.FA.Catalog.Web.Pages.SuperUser
 @inject IOptions<RequestLocalizationOptions> _requestLocalizationOptions;
 @inject IUserIdentity UserIdentity;
+@inject IMinIoLinkGenerator MinIoLinkGenerator;
+
 @{
     var requestCulture = Context.Features.Get<IRequestCultureFeature>() ?? throw new InvalidOperationException($"Couldn't get {nameof(IRequestCultureFeature)}");
     var supportedUiCultures = _requestLocalizationOptions
@@ -23,12 +26,12 @@
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/_content/Smart.Design.Razor/css/main.css"/>
     <link rel="stylesheet" href="~/Smart.FA.Catalog.Web.styles.css"/>
-
+    <link rel="stylesheet" href="~/css/adminstyles.css"/>
 </head>
 <body class="u-maximize-height u-overflow-hidden">
 <div class="c-app-layout">
     <header class="u-position-relative">
-        <div class="c-navbar c-navbar--scrollable c-navbar--bordered-bottom">
+        <div class="c-navbar c-navbar--scrollable c-navbar--bordered-bottom section-header">
             <div class="c-toolbar">
                 <div class="c-toolbar__left">
                     <div class="c-toolbar__item">
@@ -53,8 +56,7 @@
                     <div class="c-toolbar__item">
                         <a class="c-user-navigation" href="#" data-menu="userMenu">
                             <div class="c-avatar c-avatar--img">
-                                <img src="/admin/myprofile?handler=LoadImage" alt="avatar">
-
+                                <img src="@(MinIoLinkGenerator.GetAbsoluteTrainerProfilePictureUrl(UserIdentity.CurrentTrainer.ProfileImagePath))" alt="avatar">
                             </div>
                         </a>
                         <ul class="c-menu c-menu--large" id="userMenu">
@@ -88,7 +90,7 @@
                     <ul class="c-side-menu">
                         @foreach (var sideMenuItem in SuperUserSideMenuItem.List)
                         {
-                            <li class="c-side-menu__item @((SuperUserSideMenuItem) ViewData[nameof(SuperUserSideMenuItem)]! == sideMenuItem ? "c-side-menu__item--active" : "")">
+                            <li class="c-side-menu__item @((SuperUserSideMenuItem)ViewData[nameof(SuperUserSideMenuItem)]! == sideMenuItem ? "c-side-menu__item--active" : "")">
                                 <a class="c-side-menu__link" href="@sideMenuItem.Href">@sideMenuItem.DisplayName()</a>
                             </li>
                         }
@@ -99,7 +101,7 @@
                 <div class="u-scroll-wrapper">
                     @if (IsSectionDefined("HeaderToolbar"))
                     {
-                        <div class="c-navbar c-navbar--bordered-bottom">
+                        <div class="c-navbar c-navbar--bordered-bottom section-header">
                             @await RenderSectionAsync("HeaderToolbar", false)
                         </div>
                     }

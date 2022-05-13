@@ -6,25 +6,25 @@
 @model AdminTrainingCardViewComponentModel
 
 @{
-    var trainingDto = Model.TrainingDto;
+    var training = Model.Training;
 }
 
 <smart-card>
     <smart-card-body>
-        <smart-card-title text="@trainingDto.Title"></smart-card-title>
-        <smart-muted-text text="@string.Join(", ", trainingDto.TopicIds!.Select(topic => _localizer[Topic.FromValue(topic).Name])) "></smart-muted-text>
+        <smart-card-title text="@training.Details.First().Title"></smart-card-title>
+        <smart-muted-text text="@string.Join(", ", training.Topics.Select(trainingTopic => _localizer[trainingTopic.Topic.Name]))"></smart-muted-text>
     </smart-card-body>
     <smart-card-actions>
         <div class="o-flex o-flex--vertical-center o-flex--justify-between o-flex--spaced-wide">
-            <smart-pill label="@(_localizer[TrainingStatusType.FromValue(trainingDto.TrainingStatusTypeId).Name])"></smart-pill>
+            <smart-pill label="@(_localizer[TrainingStatusType.FromValue(training.StatusType).Name])" status="@Model.PillStatus"></smart-pill>
             <div class="c-button-toolbar">
-                <a href="/admin/trainings/update/@trainingDto!.TrainingId">
+                <a href="/admin/trainings/update/@training!.Id">
                     <smart-button leading-icon="EditAlt" button-style="Borderless"></smart-button>
                 </a>
                 @if (Model.ShowDeleteButton)
                 {
-                    <form id="delete-training-form-@trainingDto.TrainingId" method="post" asp-page-handler="Delete" asp-route-id="@trainingDto!.TrainingId">
-                        <button class="c-button c-button--borderless c-button--icon" type="button" data-trainingid="@trainingDto.TrainingId" data-dialog="delete-training-dialog-confirmation" onclick="setTrainingId(@trainingDto.TrainingId)">
+                    <form id="delete-training-form-@training.Id" method="post" asp-page-handler="Delete" asp-route-id="@training!.Id">
+                        <button class="c-button c-button--borderless c-button--icon" type="button" data-trainingid="@training.Id" data-dialog="delete-training-dialog-confirmation" onclick="setTrainingId(@training.Id)">
                             <span class="c-button__content">
                                 <smart-icon icon="Delete"></smart-icon>
                             </span>

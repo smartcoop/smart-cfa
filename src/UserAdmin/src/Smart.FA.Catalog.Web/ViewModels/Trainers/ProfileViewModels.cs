@@ -1,7 +1,6 @@
 using Smart.Design.Razor.TagHelpers.Icon;
 using Smart.FA.Catalog.Application.UseCases.Commands;
 using Smart.FA.Catalog.Application.UseCases.Queries;
-using Smart.FA.Catalog.Shared.Domain.Enumerations;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer;
 
 namespace Smart.FA.Catalog.Web.ViewModels.Trainers;
@@ -26,11 +25,7 @@ public static class Mappers
             TrainerId = trainerProfile.TrainerId!.Value,
             Bio       = trainerProfile.Bio,
             Title     = trainerProfile.Title,
-            Email     = trainerProfile.Email,
-            ProfilePicture = trainerProfile.ProfileImage is null
-                ? null
-                : new FormFile(trainerProfile.ProfileImage, 0, trainerProfile.ProfileImage.Length,
-                    Guid.NewGuid().ToString(), Guid.NewGuid().ToString())
+            ProfilePicture = null
         };
     }
 
@@ -69,13 +64,10 @@ public static class Mappers
     public static Image ToImage(this SocialNetwork socialNetwork)
     {
         var icon = Image.None;
-        try
+        var existingImages = Enum.GetNames<Image>();
+        if (existingImages.Any(image => image.Equals(socialNetwork.Name, StringComparison.OrdinalIgnoreCase)))
         {
             icon = Enum.Parse<Image>(socialNetwork.Name, ignoreCase: true);
-        }
-        catch
-        {
-            // ignored
         }
 
         return icon;

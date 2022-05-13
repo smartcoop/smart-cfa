@@ -3,12 +3,21 @@
 @{
     Layout = "Shared/_AdminLayout";
 }
-
-<h2 class="c-h2">@CatalogResources.Hello @Model.UserIdentity.CurrentTrainer.Name.ToString()</h2>
-<smart-panel header="@CatalogResources.AdminHomepage_WhatIsFormateurAssocieTitle">
-    <p class="intro__paragraph">@CatalogResources.AdminHomepage_IntroductionPart1</p>
-    <p class="intro__paragraph">@CatalogResources.AdminHomepage_IntroductionPart2</p>
-    <p class="intro__paragraph">@CatalogResources.AdminHomepage_IntroductionPart3</p>
-</smart-panel>
+@section HeaderToolbar {
+    <div class="c-toolbar">
+        <div class="c-toolbar__left">
+            <div class="c-toolbar__item">
+                <h2 class="c-toolbar__title">@CatalogResources.Hello @Model.UserIdentity.CurrentTrainer.Name.ToString()</h2>
+            </div>
+        </div>
+    </div>
+}
+<div class="o-container">
+    <smart-panel header="@CatalogResources.AdminHomepage_WhatIsFormateurAssocieTitle">
+        <p class="intro__paragraph">@CatalogResources.AdminHomepage_IntroductionPart1</p>
+        <p class="intro__paragraph">@CatalogResources.AdminHomepage_IntroductionPart2</p>
+        <p class="intro__paragraph">@CatalogResources.AdminHomepage_IntroductionPart3</p>
+    </smart-panel>
 
     <smart-spacer bottom="ExtraLarge" top="ExtraLarge"></smart-spacer>
+</div>

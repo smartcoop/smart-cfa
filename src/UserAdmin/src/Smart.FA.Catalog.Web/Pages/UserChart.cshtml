@@ -4,15 +4,15 @@
     Layout = "Shared/_Layout";
 }
 
-<form method="post" id="form">
+<form method="post" id="form" class="o-container u-spacer-top-xl">
     <smart-panel header="@CatalogResources.AdminHomepage_AcceptCharter">
-        <a href="@Model.GetLastChartUrl().Result" target="_blank">@CatalogResources.AdminHomePage_UserChart</a>
+        <a href="@Model.LastChartUrl" target="_blank">@CatalogResources.AdminHomePage_UserChart</a>
         <smart-spacer top="Large">
             <smart-checkbox label="@CatalogResources.AdminHomepage_AcceptCharter" asp-for="@Model.HasAcceptedUserChart"></smart-checkbox>
             <smart-validation-message asp-for="@Model"></smart-validation-message>
         </smart-spacer>
         <smart-spacer top="Large">
-            <smart-button id="Accept" label="@CatalogResources.UserChartAccept" button-style="Primary" leading-icon="Send" button-type="Submit" disabled=@(HttpContext.Request.Cookies.TryGetValue("HasAcceptedUserChart", out _))> </smart-button>
+            <smart-button id="Accept" label="@CatalogResources.UserChartAccept" button-style="Primary" leading-icon="Send" button-type="Submit"> </smart-button>
         </smart-spacer>
     </smart-panel>
 </form>

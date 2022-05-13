@@ -11,15 +11,21 @@ namespace Smart.FA.Catalog.Shared.Collections;
 public class PagedList<T> : List<T>
 {
     public int PageIndex { get; }
+
     public int PageSize { get; }
+
     public int TotalCount { get; }
+
     public int TotalPages { get; }
+
+    public int CurrentPage { get; set; }
 
     public PagedList(IEnumerable<T> source, PageItem pageItem, int count)
     {
         PageIndex = pageItem.PageIndex;
         PageSize = pageItem.PageSize;
         TotalCount = count;
+        CurrentPage = pageItem.CurrentPage;
         TotalPages = (int)Math.Ceiling(TotalCount / (double)PageSize);
         this.AddRange(source);
     }

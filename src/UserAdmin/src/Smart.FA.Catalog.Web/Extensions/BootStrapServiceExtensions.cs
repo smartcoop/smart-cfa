@@ -1,7 +1,6 @@
-using Smart.FA.Catalog.Application.Extensions;
 using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Infrastructure.Services;
-using Smart.FA.Catalog.Web.Security;
+using Smart.FA.Catalog.Shared.Security;
 
 namespace Smart.FA.Catalog.Web.Extensions;
 
@@ -10,7 +9,7 @@ public static class BootStrapServiceExtensions
     public static async Task ExecuteBootStrapService(this IApplicationBuilder builder)
     {
         var migrationScope = builder.ApplicationServices.CreateScope();
-        // Fix an issue with kerberos authentication on a linux server
+        // A fix which allows SQL domain authentication with Kerberos on linux host
         NetSecurityNativeFix.Initialize(migrationScope.ServiceProvider.GetRequiredService<ILogger<BootStrapService>>());
         var bootstrapService = migrationScope.ServiceProvider.GetRequiredService<IBootStrapService>();
         var environment = builder.ApplicationServices.GetRequiredService<IWebHostEnvironment>();

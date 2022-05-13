@@ -142,7 +142,7 @@
     <value>Site personnel</value>
   </data>
   <data name="BioCannotExceed500Chars" xml:space="preserve">
-    <value>La biographie ne peut excéder 500 charactères</value>
+    <value>La biographie ne peut excéder 500 caractères</value>
   </data>
   <data name="TrainerNotFound_TrainerId" xml:space="preserve">
     <value>Le formateur n'a pas été trouvé</value>
@@ -168,8 +168,8 @@
   <data name="PendingValidation" xml:space="preserve">
     <value>En attente de validation</value>
   </data>
-  <data name="Validated" xml:space="preserve">
-    <value>Validé</value>
+  <data name="Published" xml:space="preserve">
+    <value>Publié</value>
   </data>
   <data name="Back" xml:space="preserve">
     <value>Retour</value>
@@ -325,7 +325,7 @@
     <value>Minimum 30 caractères</value>
   </data>
   <data name="BioMustBe30Chars" xml:space="preserve">
-    <value>La biographie doit être constituée d'au moins 30 charactères</value>
+    <value>La biographie doit être constituée d'au moins 30 caractères</value>
   </data>
   <data name="TrainingPresentation" xml:space="preserve">
     <value>Présentation de la formation</value>
@@ -377,7 +377,7 @@
     <value>Le fichier est du mauvais type</value>
   </data>
   <data name="AdminHomePage_HasNotAcceptedUserChart" xml:space="preserve">
-    <value>La charte d'utilisateur de formateurs associés n'a pas été acceptée</value>
+    <value>La charte d'utilisateur de Formateurs Associés n'a pas été acceptée</value>
   </data>
   <data name="AdminHomePage_UserChart" xml:space="preserve">
     <value>Lire la charte utilisateur</value>

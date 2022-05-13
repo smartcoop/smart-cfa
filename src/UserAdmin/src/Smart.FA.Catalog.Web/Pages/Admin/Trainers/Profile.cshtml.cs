@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Smart.FA.Catalog.Application.UseCases.Commands;
 using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Services;
+using Smart.FA.Catalog.Infrastructure.Helpers;
 using Smart.FA.Catalog.Web.ViewModels.Trainers;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin.Trainers;
@@ -10,6 +11,8 @@ namespace Smart.FA.Catalog.Web.Pages.Admin.Trainers;
 public class ProfileModel : AdminPage
 {
     public IUserIdentity UserIdentity { get; }
+
+    public string Email => UserIdentity.CurrentTrainer.Email!;
 
     [BindProperty] public EditProfileCommand? EditProfileCommand { get; set; }
 
@@ -20,12 +23,15 @@ public class ProfileModel : AdminPage
 
     public Stream? ProfilePicture { get; set; }
 
+    public string ProfilePictureAbsoluteUrl { get; set; }
+
     protected internal ICollection<SocialNetworkViewModel> SocialNetworkViewModels { get; set; } = null!;
 
-    public ProfileModel(IMediator mediator, IUserIdentity userIdentity, IS3StorageService storageService) :
+    public ProfileModel(IMediator mediator, IUserIdentity userIdentity, IS3StorageService storageService, IMinIoLinkGenerator minIoLinkGenerator) :
         base(mediator)
     {
         UserIdentity = userIdentity;
+        ProfilePictureAbsoluteUrl = minIoLinkGenerator.GetAbsoluteTrainerProfilePictureUrl(userIdentity.CurrentTrainer.ProfileImagePath);
     }
 
     public async Task<ActionResult> OnGetAsync()
@@ -103,7 +109,7 @@ public class ProfileModel : AdminPage
     {
         if (EditProfileCommand?.ProfilePicture is not null)
         {
-            await Mediator.Send(new DeleteTrainerProfileImageRequest { Trainer = UserIdentity.CurrentTrainer });
+            await Mediator.Send(new DeleteTrainerProfileImageRequest { RelativeProfilePictureUrl = UserIdentity.CurrentTrainer.ProfileImagePath });
         }
 
         await LoadDataAsync();

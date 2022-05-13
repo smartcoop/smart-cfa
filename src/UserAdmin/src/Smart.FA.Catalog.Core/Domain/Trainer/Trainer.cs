@@ -145,11 +145,11 @@ public class Trainer : Entity, IAggregateRoot
     public void ApproveUserChart(UserChartRevision? userChart)
     {
         Guard.AgainstNull(userChart, nameof(userChart));
-        if (_approvals.Select(approval => approval.UserChartId).Contains(userChart!.Id))
+        if (Approvals.Any(approval => approval.UserChartId == userChart!.Id))
         {
             return;
         }
-        _approvals.Add(new TrainerApproval(this, userChart));
+        _approvals.Add(new TrainerApproval(this, userChart!));
     }
 
     #endregion

@@ -1,5 +1,6 @@
 using Amazon;
 using Amazon.S3;
+using EntityFrameworkCore.UseRowNumberForPaging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +10,7 @@ using NLog.Extensions.Logging;
 using Smart.FA.Catalog.Core.Domain.Interfaces;
 using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Core.Services;
+using Smart.FA.Catalog.Infrastructure.Helpers;
 using Smart.FA.Catalog.Infrastructure.Options;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 using Smart.FA.Catalog.Infrastructure.Persistence.Database;
@@ -90,7 +92,7 @@ public static class ServiceCollectionExtensions
             });
 
             options
-                .UseSqlServer(connectionString)
+                .UseSqlServer(connectionString, options => options.UseRowNumberForPaging())
                 .UseLazyLoadingProxies();
             if (efCoreOptions.Value.UseConsoleLogger)
             {
@@ -119,6 +121,7 @@ public static class ServiceCollectionExtensions
                 });
         });
         services.AddScoped<IS3StorageService, S3StorageService>();
+        services.AddScoped<IMinIoLinkGenerator, MinIoLinkGenerator>();
 
         return services;
     }

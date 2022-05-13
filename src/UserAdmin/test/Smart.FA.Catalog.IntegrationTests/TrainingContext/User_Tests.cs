@@ -1,4 +1,4 @@
-﻿using System.Threading;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture;
 using FluentAssertions;
@@ -23,7 +23,7 @@ public class UserTests: IntegrationTestBase
         await using var context = GivenCatalogContext();
         var userStrategyResolver = Substitute.For<UserStrategyResolver>("");
         var handler = Substitute.For<GetTrainerFromUserAppQueryHandler>(logger, context, userStrategyResolver );
-        var request = new GetTrainerFromUserAppRequest {ApplicationType = ApplicationType.Account, UserId = _fixture.Create<string>()};
+        var request = new GetTrainerFromUserAppRequest(applicationType: ApplicationType.Account, userId: _fixture.Create<string>());
 
         var trainer = await handler.Handle(request, CancellationToken.None);
 
