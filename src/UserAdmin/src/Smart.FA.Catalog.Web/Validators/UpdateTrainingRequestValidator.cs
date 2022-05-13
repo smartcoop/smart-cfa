@@ -12,9 +12,10 @@ public class UpdateTrainingViewModelValidator : AbstractValidator<UpdateTraining
 {
     private readonly IUserIdentity _userIdentity;
 
-    public UpdateTrainingViewModelValidator(IStringLocalizer<CatalogResources> localizer, IUserIdentity userIdentity)
+    public UpdateTrainingViewModelValidator(IUserIdentity userIdentity)
     {
         _userIdentity = userIdentity;
+
         RuleFor(viewModel => viewModel.Title)
             .NotEmpty()
             .WithMessage(CatalogResources.TrainingTitleIsRequired);

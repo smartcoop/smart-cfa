@@ -50,6 +50,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddAuthorizationHandlers(this IServiceCollection services)
     {
         return services.AddSingleton<IAuthorizationMiddlewareResultHandler, UserAdminAuthorizationResultHandler>()
+            .AddScoped<IAuthorizationHandler, MustBeSuperUserOrTrainingCreatorHandler>()
             .AddScoped<IAuthorizationHandler, UserChartRevisionApprovalHandler>();
     }
 
@@ -59,5 +60,8 @@ public static class ServiceCollectionExtensions
             policy => policy.Requirements.Add(new AtLeastOneActiveUserChartRevisionApprovalRequirement()));
 
         options.AddPolicy(Policies.MustBeSuperUser, policy => policy.RequireRole("SuperUser"));
+
+        options.AddPolicy(Policies.MustBeSuperUserOrTrainingCreator,
+            policy => policy.Requirements.Add(new MustBeSuperUserOrTrainingCreator()));
     }
 }

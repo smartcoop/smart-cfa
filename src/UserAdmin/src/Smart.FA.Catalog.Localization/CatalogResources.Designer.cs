@@ -511,6 +511,15 @@ namespace Smart.FA.Catalog.Localization {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to Cette page n&apos;existe pas.
+        /// </summary>
+        public static string PageNotFound {
+            get {
+                return ResourceManager.GetString("PageNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to En attente de validation.
         /// </summary>
         public static string PendingValidation {
@@ -556,7 +565,7 @@ namespace Smart.FA.Catalog.Localization {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Biographie.
         /// </summary>
         public static string Profile_bioLabel {
             get {
@@ -592,7 +601,7 @@ namespace Smart.FA.Catalog.Localization {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to Édition de profil.
+        ///   Looks up a localized string similar to Édition de votre profil.
         /// </summary>
         public static string ProfileEdition {
             get {
@@ -726,6 +735,15 @@ namespace Smart.FA.Catalog.Localization {
             }
         }
 
+        /// <summary>
+        ///   Looks up a localized string similar to Désolé.
+        /// </summary>
+        public static string Sorry {
+            get {
+                return ResourceManager.GetString("Sorry", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Spécifiez.
         /// </summary>
@@ -916,7 +934,16 @@ namespace Smart.FA.Catalog.Localization {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to Objectif de la formation.
+        ///   Looks up a localized string similar to La formation n&apos;existe pas.
+        /// </summary>
+        public static string TrainingDoesNotExist {
+            get {
+                return ResourceManager.GetString("TrainingDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Objectif et contenu de la formation.
         /// </summary>
         public static string TrainingGoal {
             get {
@@ -996,6 +1023,15 @@ namespace Smart.FA.Catalog.Localization {
             }
         }
 
+        /// <summary>
+        ///   Looks up a localized string similar to Vous ne pouvez pas éditer une formation dont vous n&apos;êtes pas l&apos;auteur..
+        /// </summary>
+        public static string UpdateTraining_YouCantEditATrainingYouDidntCreate {
+            get {
+                return ResourceManager.GetString("UpdateTraining_YouCantEditATrainingYouDidntCreate", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Accepter.
         /// </summary>

@@ -448,4 +448,16 @@
   <data name="Profile_bioLabel" xml:space="preserve">
     <value>Biographie</value>
   </data>
+  <data name="UpdateTraining_YouCantEditATrainingYouDidntCreate" xml:space="preserve">
+    <value>Vous ne pouvez pas éditer une formation dont vous n'êtes pas l'auteur.</value>
+  </data>
+  <data name="TrainingDoesNotExist" xml:space="preserve">
+    <value>La formation n'existe pas</value>
+  </data>
+  <data name="PageNotFound" xml:space="preserve">
+    <value>Cette page n'existe pas</value>
+  </data>
+  <data name="Sorry" xml:space="preserve">
+    <value>Désolé</value>
+  </data>
 </root>
