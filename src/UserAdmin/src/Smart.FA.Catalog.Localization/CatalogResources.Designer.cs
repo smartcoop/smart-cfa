@@ -142,11 +142,73 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+<<<<<<< Updated upstream
         ///   Looks up a localized string similar to Avant d’encoder des formations, vous devez confirmer avoir lu et accepté les conditions énoncées dans la charte d’utilisation du site learning.smart.coop. Cette charte est également disponible à la consultation dans votre Espace Activité.   .
         /// </summary>
         public static string AdminUserChart_IntroductionPart1 {
             get {
                 return ResourceManager.GetString("AdminUserChart_IntroductionPart1", resourceCulture);
+=======
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string AdminHomepageProfil_IntroductionPart1 {
+            get {
+                return ResourceManager.GetString("AdminHomepageProfil_IntroductionPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string AdminHomepageProfil_IntroductionPart2 {
+            get {
+                return ResourceManager.GetString("AdminHomepageProfil_IntroductionPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string AdminHomepageProfil_Title {
+            get {
+                return ResourceManager.GetString("AdminHomepageProfil_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string AdminHomepageTraining_IntroductionPart1 {
+            get {
+                return ResourceManager.GetString("AdminHomepageTraining_IntroductionPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string AdminHomepageTraining_IntroductionPart2 {
+            get {
+                return ResourceManager.GetString("AdminHomepageTraining_IntroductionPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string AdminHomepageTraining_IntroductionPart3 {
+            get {
+                return ResourceManager.GetString("AdminHomepageTraining_IntroductionPart3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string AdminHomepageTraining_Title {
+            get {
+                return ResourceManager.GetString("AdminHomepageTraining_Title", resourceCulture);
+>>>>>>> Stashed changes
             }
         }
         

@@ -148,7 +148,7 @@
     <value>Le formateur n'a pas été trouvé</value>
   </data>
   <data name="MyTrainerProfile" xml:space="preserve">
-    <value>Mon profil formateur</value>
+    <value>Mon profil </value>
   </data>
   <data name="MyTrainings" xml:space="preserve">
     <value>Mes formations</value>
@@ -460,10 +460,60 @@
   <data name="Sorry" xml:space="preserve">
     <value>Désolé</value>
   </data>
+<<<<<<< Updated upstream
   <data name="AdminUserChart_IntroductionPart1" xml:space="preserve">
     <value>Avant d’encoder des formations, vous devez confirmer avoir lu et accepté les conditions énoncées dans la charte d’utilisation du site learning.smart.coop. Cette charte est également disponible à la consultation dans votre Espace Activité.   </value>
   </data>
   <data name="UrlSitePublic" xml:space="preserve">
     <value>learning.smart.coop</value>
+=======
+  <data name="AdminHomepageProfil_IntroductionPart1" xml:space="preserve">
+    <value>Vous ne disposez que d’une seule fiche profil par titulaire.  </value>
+  </data>
+  <data name="AdminHomepageProfil_IntroductionPart2" xml:space="preserve">
+    <value>Les champs nom et prénom sont obligatoires (et identiques à votre fiche d’inscription Smart). Le champ biographie ainsi que les champs « réseaux sociaux » ne sont pas obligatoires. Un formulaire de contact est par ailleurs mis en place pour permettre aux internautes de vous contacter directement. Ce formulaire est lié à l’adresse mail renseignée dans la fiche d’inscription, l’adresse mail n’apparaît jamais directement. </value>
+  </data>
+  <data name="AdminHomepageTraining_IntroductionPart1" xml:space="preserve">
+    <value>Vous pouvez encoder autant de formations que vous le souhaitez.  </value>
+  </data>
+  <data name="AdminHomepageTraining_IntroductionPart2" xml:space="preserve">
+    <value>Vous pouvez sauvegarder une fiche formation en cours de rédaction pour y revenir plus tard avant de la publier. Vous pouvez également dépublier une fiche ou la supprimer.  </value>
+  </data>
+  <data name="AdminHomepageTraining_IntroductionPart3" xml:space="preserve">
+    <value>Nous vous invitons à veiller régulièrement à la mise à jour de vos contenus. </value>
+  </data>
+  <data name="AdminHomepageProfil_Title" xml:space="preserve">
+    <value>Profil  </value>
+  </data>
+  <data name="AdminHomepageTraining_Title" xml:space="preserve">
+    <value>Formation</value>
+>>>>>>> Stashed changes
+  </data>
+  <data name="AdminHomepageProfil_Title" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AdminHomepageTraining_Title" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AdminHomepageProfil_IntroductionPart1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AdminHomepageProfil_IntroductionPart2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AdminHomepageProfil_IntroductionPart1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AdminHomepageTraining_IntroductionPart1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AdminHomepageTraining_IntroductionPart2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AdminHomepageTraining_IntroductionPart3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AdminHomepageTraining_IntroductionPart2" xml:space="preserve">
+    <value />
   </data>
 </root>
