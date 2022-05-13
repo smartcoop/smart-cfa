@@ -385,8 +385,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-
+        ///   Looks up a localized string similar to Suivant.
         /// </summary>
         public static string Next {
             get {
@@ -422,8 +421,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-
+        ///   Looks up a localized string similar to Précédent.
         /// </summary>
         public static string Previous {
             get {
@@ -446,6 +444,105 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         public static string TitteTrainings {
             get {
                 return ResourceManager.GetString("TitteTrainings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Communication.
+        /// </summary>
+        public static string TopicName_Communication {
+            get {
+                return ResourceManager.GetString("TopicName_Communication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Art / Culture.
+        /// </summary>
+        public static string TopicName_Culture {
+            get {
+                return ResourceManager.GetString("TopicName_Culture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Économie / Marketing.
+        /// </summary>
+        public static string TopicName_EconomyMarketing {
+            get {
+                return ResourceManager.GetString("TopicName_EconomyMarketing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Soin aux personnes.
+        /// </summary>
+        public static string TopicName_HealthCare {
+            get {
+                return ResourceManager.GetString("TopicName_HealthCare", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Technologie de l&apos;information.
+        /// </summary>
+        public static string TopicName_InformationTechnology {
+            get {
+                return ResourceManager.GetString("TopicName_InformationTechnology", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cours de langue.
+        /// </summary>
+        public static string TopicName_LanguageCourse {
+            get {
+                return ResourceManager.GetString("TopicName_LanguageCourse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Marketing.
+        /// </summary>
+        public static string TopicName_Marketing {
+            get {
+                return ResourceManager.GetString("TopicName_Marketing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Autre.
+        /// </summary>
+        public static string TopicName_Other {
+            get {
+                return ResourceManager.GetString("TopicName_Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Matière scolaire / universitaire.
+        /// </summary>
+        public static string TopicName_School {
+            get {
+                return ResourceManager.GetString("TopicName_School", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sciences humaines et sociales.
+        /// </summary>
+        public static string TopicName_SocialScience {
+            get {
+                return ResourceManager.GetString("TopicName_SocialScience", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string TopicName_Sport {
+            get {
+                return ResourceManager.GetString("TopicName_Sport", resourceCulture);
             }
         }
         

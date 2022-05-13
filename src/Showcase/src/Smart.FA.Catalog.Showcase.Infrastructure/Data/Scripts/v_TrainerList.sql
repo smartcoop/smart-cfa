@@ -5,7 +5,7 @@ SELECT
     ,trainer.FirstName
     ,trainer.LastName
     ,trainer.Title
-    ,trainer.PofileImagePath
+    ,trainer.ProfileImagePath
 	,count(assignment.TrainingId) As TrainingCount
 FROM Cfa.Trainer trainer
     INNER JOIN Cfa.TrainerAssignment assignment

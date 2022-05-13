@@ -24,15 +24,23 @@
 .c-toolbar__left{
     max-width:60%;
 }
+.c-card__title {
+    overflow-wrap: anywhere;
+}
+.c-toolbar__title {
+    overflow-wrap: anywhere;
+}
 
 @media (max-width: 380px) {
     .section-header .c-toolbar, .section-header .c-toolbar__right {
         display: block;
         max-width: 21rem;
     }
-    .c-brand{
+
+    .c-brand {
         margin: 1rem;
     }
+
     .c-navbar {
         min-height: 12rem;
     }
