@@ -262,7 +262,7 @@
     <value>Refusé</value>
   </data>
   <data name="EditTraining" xml:space="preserve">
-    <value>Édition de la formation</value>
+    <value>Édition de la formation : </value>
   </data>
   <data name="FieldRequired" xml:space="preserve">
     <value>Ce champs est requis</value>
@@ -486,5 +486,11 @@
   </data>
   <data name="AdminHomepageTraining_IntroductionPart3" xml:space="preserve">
     <value>Nous vous invitons à veiller régulièrement à la mise à jour de vos contenus. </value>
+  </data>
+  <data name="AdminHomepageProfil_Button" xml:space="preserve">
+    <value>Compléter votre profil</value>
+  </data>
+  <data name="AdminHomepageTraining_Button" xml:space="preserve">
+    <value>Encoder une formation</value>
   </data>
 </root>

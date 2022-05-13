@@ -142,6 +142,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string AdminHomepageProfil_Button {
+            get {
+                return ResourceManager.GetString("AdminHomepageProfil_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vous ne disposez que d’une seule fiche profil par titulaire..
         /// </summary>
         public static string AdminHomepageProfil_IntroductionPart1 {
@@ -165,6 +174,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string AdminHomepageProfil_Title {
             get {
                 return ResourceManager.GetString("AdminHomepageProfil_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string AdminHomepageTraining_Button {
+            get {
+                return ResourceManager.GetString("AdminHomepageTraining_Button", resourceCulture);
             }
         }
         
