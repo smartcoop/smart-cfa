@@ -54,9 +54,9 @@
                     <smart-checkbox label="@CatalogResources.IsTrainingGivenBySmart" asp-for="UpdateTrainingViewModel.IsGivenBySmart"></smart-checkbox>
                     <smart-validation-message asp-for="UpdateTrainingViewModel.IsGivenBySmart"></smart-validation-message>
                 }
-                <smart-form-group-textarea label="@CatalogResources.TrainingPresentation *" asp-for="UpdateTrainingViewModel.Methodology" helper-text="@CatalogResources.Min30CharMax500Char"></smart-form-group-textarea>
-                <smart-form-group-textarea label="@CatalogResources.TrainingGoal *" asp-for="UpdateTrainingViewModel.Goal" helper-text="@CatalogResources.Min30CharMax500Char"></smart-form-group-textarea>
-                <smart-form-group-textarea label="@CatalogResources.PracticalModalities *" asp-for="UpdateTrainingViewModel.PracticalModalities" helper-text="@CatalogResources.Min30CharMax1000Char"></smart-form-group-textarea>
+                <smart-form-group-textarea rows="5" label="@CatalogResources.TrainingPresentation *" asp-for="UpdateTrainingViewModel.Methodology" helper-text="@CatalogResources.Min30CharMax1000Char"></smart-form-group-textarea>
+                <smart-form-group-textarea rows="5" label="@CatalogResources.TrainingGoal *" asp-for="UpdateTrainingViewModel.Goal" helper-text="@CatalogResources.Min30CharMax1000Char"></smart-form-group-textarea>
+                <smart-form-group-textarea rows="5"label="@CatalogResources.PracticalModalities *" asp-for="UpdateTrainingViewModel.PracticalModalities" helper-text="@CatalogResources.Min30CharMax1000Char"></smart-form-group-textarea>
                 <smart-formgroup label="@CatalogResources.Topics *">
                     <smart-grid>
                         @foreach (var topics in Topic.List.Chunk(2))
