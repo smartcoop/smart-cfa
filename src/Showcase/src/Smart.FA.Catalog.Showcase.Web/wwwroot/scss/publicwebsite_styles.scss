@@ -466,30 +466,38 @@
 
 .footer {
     padding-top: 2rem;
+    padding-bottom: 2rem;
     background: $color-gray-100;
+
     .footer-section__title {
         font-weight: bold;
     }
+
     .footer-section {
         display: flex;
         flex-wrap: wrap;
+
         .footer-section__item {
             width: 33%;
             min-width: 25rem;
             text-align: left;
             padding-left: 10%;
             padding-top: 2rem;
+
             @media (max-width: $g-bp2) {
                 text-align: center;
                 padding: 2rem;
                 margin: auto;
             }
+
             .footer-section__title {
                 padding-bottom: 1rem;
             }
         }
+
         .footer_icons__item {
             padding-bottom: 1rem;
+
             @media (max-width: $g-bp2) {
                 text-align: center;
                 width: fit-content;
@@ -497,11 +505,13 @@
             }
         }
     }
+
     .footer-attribution {
         font-size: 1.1rem;
         text-align: left;
         padding: 2rem 1rem 0.5rem;
         font-weight: normal;
+
         @media (max-width: $g-bp2) {
             text-align: center;
         }
