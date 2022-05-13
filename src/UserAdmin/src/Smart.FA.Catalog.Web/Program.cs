@@ -60,7 +60,7 @@ if (app.Environment.IsProduction())
 else
 {
     app.UseDeveloperExceptionPage();
-    app.UseStatusCodePagesWithReExecute("/{0}");
+    app.UseStatusCodePagesWithReExecute("/cfa/{0}");
 }
 
 app.UseRequestLocalization();
