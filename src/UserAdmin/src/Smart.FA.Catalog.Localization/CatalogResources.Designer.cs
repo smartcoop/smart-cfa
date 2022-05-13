@@ -97,7 +97,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to learning.smart.coop est un catalogue des formations organisées et produites par Smart au travers des entités Formateurs Associés asbl et accessoirement Productions Associées asbl. C&apos;est un outil en ligne mis à votre disposition gratuitement et sans publicité..
+        ///   Looks up a localized string similar to  est un catalogue des formations organisées et produites par Smart au travers des entités Formateurs Associés asbl et accessoirement Productions Associées asbl. C&apos;est un outil en ligne mis à votre disposition gratuitement et sans publicité..
         /// </summary>
         public static string AdminHomepage_IntroductionPart1 {
             get {
@@ -115,7 +115,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Les informations ainsi encodées seront visibles publiquement sur le site vitrine learning.smart.coop. .
+        ///   Looks up a localized string similar to Les informations ainsi encodées seront visibles publiquement sur le site vitrine .
         /// </summary>
         public static string AdminHomepage_IntroductionPart3 {
             get {
@@ -142,13 +142,6 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-<<<<<<< Updated upstream
-        ///   Looks up a localized string similar to Avant d’encoder des formations, vous devez confirmer avoir lu et accepté les conditions énoncées dans la charte d’utilisation du site learning.smart.coop. Cette charte est également disponible à la consultation dans votre Espace Activité.   .
-        /// </summary>
-        public static string AdminUserChart_IntroductionPart1 {
-            get {
-                return ResourceManager.GetString("AdminUserChart_IntroductionPart1", resourceCulture);
-=======
         ///   Looks up a localized string similar to .
         /// </summary>
         public static string AdminHomepageProfil_IntroductionPart1 {
@@ -203,12 +196,20 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Formation.
         /// </summary>
         public static string AdminHomepageTraining_Title {
             get {
                 return ResourceManager.GetString("AdminHomepageTraining_Title", resourceCulture);
->>>>>>> Stashed changes
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avant d’encoder des formations, vous devez confirmer avoir lu et accepté les conditions énoncées dans la charte d’utilisation du site learning.smart.coop. Cette charte est également disponible à la consultation dans votre Espace Activité.   .
+        /// </summary>
+        public static string AdminUserChart_IntroductionPart1 {
+            get {
+                return ResourceManager.GetString("AdminUserChart_IntroductionPart1", resourceCulture);
             }
         }
         
@@ -528,7 +529,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mon profil formateur.
+        ///   Looks up a localized string similar to Mon profil .
         /// </summary>
         public static string MyTrainerProfile {
             get {
@@ -1113,7 +1114,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to learning.smart.coop.
         /// </summary>
         public static string UrlSitePublic {
             get {
