@@ -54,7 +54,7 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingReques
         var trainers = await _trainerRepository.GetListAsync(request.TrainingId, cancellationToken);
         training.AssignTrainers(trainers);
 
-        var newStatus = request.IsDraft ? TrainingStatusType.Draft : TrainingStatusType.Validated;
+        var newStatus = request.IsDraft ? TrainingStatusType.Draft : TrainingStatusType.Published;
 
         var result = training.ChangeStatus(newStatus);
 

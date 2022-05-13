@@ -10,8 +10,8 @@
 
 namespace Smart.FA.Catalog.Localization {
     using System;
-    
-    
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -23,15 +23,15 @@ namespace Smart.FA.Catalog.Localization {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class CatalogResources {
-        
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal CatalogResources() {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -45,7 +45,7 @@ namespace Smart.FA.Catalog.Localization {
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
@@ -59,7 +59,7 @@ namespace Smart.FA.Catalog.Localization {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Encoder une formation.
         /// </summary>
@@ -68,7 +68,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("AddNewTraining", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Accepter la Charte d&apos;utilisation de Formateurs Associés.
         /// </summary>
@@ -77,7 +77,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("AdminHomepage_AcceptCharter", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to La charte d&apos;utilisateur de formateurs associés n&apos;a pas été acceptée.
         /// </summary>
@@ -86,7 +86,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("AdminHomePage_HasNotAcceptedUserChart", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Je m&apos;engage à respecter la Charter d&apos;utilisation de Formateurs Associés.
         /// </summary>
@@ -95,7 +95,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("AdminHomepage_IAcceptCharter", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Bienvenue dans le monde de la formation de Smart, .
         /// </summary>
@@ -104,7 +104,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("AdminHomepage_IntroductionPart1", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Smart est une coopérative de travailleuses et travailleurs qui utilisent sa structure pour exercer leur métier, par exemple de la formation..
         /// </summary>
@@ -113,7 +113,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("AdminHomepage_IntroductionPart2", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Ce catalogue en ligne s’adresse à toute personne en recherche d’une formation. Vous trouverez sur ce site des formations de type scolaire, professionnel  (organisées et produites par Formateurs Associés asbl et Productions Associées asbl, le cas échéant) ou encore récréatif (uniquement dans Producteurs Associés asbl). Vous visualisez aisément la personne qui dispense la formation et pouvez la contacter en direct pour obtenir davantage d’informations. .
         /// </summary>
@@ -122,7 +122,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("AdminHomepage_IntroductionPart3", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Lire la charte utilisateur.
         /// </summary>
@@ -131,7 +131,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("AdminHomePage_UserChart", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Interface d&apos;encodage de formations.
         /// </summary>
@@ -140,7 +140,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("AdminHomepage_WhatIsFormateurAssocieTitle", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Une erreur s&apos;est déroulée durant la recherche. Veuillez essayer à nouveau.
         /// </summary>
@@ -149,7 +149,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("AnErrorOccurredWhileSearching", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Êtes vous sûr-e ?.
         /// </summary>
@@ -158,7 +158,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("AreYouSure", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Retour.
         /// </summary>
@@ -167,7 +167,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Back", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to La biographie ne peut excéder 500 charactères.
         /// </summary>
@@ -176,7 +176,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("BioCannotExceed500Chars", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to La biographie doit être constituée d&apos;au moins 30 charactères.
         /// </summary>
@@ -185,7 +185,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("BioMustBe30Chars", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Annuler.
         /// </summary>
@@ -194,7 +194,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Cancel", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Annulé.
         /// </summary>
@@ -203,7 +203,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Cancelled", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Charte d&apos;utilisation.
         /// </summary>
@@ -212,7 +212,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("CharterUse", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Cliquez ici pour ajouter une formation.
         /// </summary>
@@ -221,7 +221,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("ClickHereToAddANewTraining", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Communication.
         /// </summary>
@@ -230,7 +230,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Communication", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Supprimer.
         /// </summary>
@@ -239,7 +239,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Delete", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Brouillon.
         /// </summary>
@@ -248,7 +248,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Draft", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Économie / Marketing.
         /// </summary>
@@ -257,7 +257,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("EconomyMarketing", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Édition de la formation.
         /// </summary>
@@ -266,7 +266,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("EditTraining", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Un email est requis.
         /// </summary>
@@ -275,7 +275,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("EmailIsRequired", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Salarié-es en entreprise et / ou indépendant-es.
         /// </summary>
@@ -284,7 +284,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Employee", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Ce champs est requis.
         /// </summary>
@@ -293,7 +293,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("FieldRequired", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Champs qui apparaîtront dans le catalogue public.
         /// </summary>
@@ -302,7 +302,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("FieldsThatWillAppearInThePublicCatalog", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Soin aux personnes.
         /// </summary>
@@ -311,7 +311,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("HealthCare", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Bonjour.
         /// </summary>
@@ -320,7 +320,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Hello", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Technologie de l&apos;information.
         /// </summary>
@@ -329,7 +329,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("InformationTechnology", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Email invalide.
         /// </summary>
@@ -338,7 +338,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("InvalidEmail", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to S&apos;agit-il d&apos;une formation.
         /// </summary>
@@ -347,7 +347,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("IsItATraining", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to La formation est-elle fournie par Smart ?.
         /// </summary>
@@ -356,7 +356,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("IsTrainingGivenBySmart", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Cours de langue.
         /// </summary>
@@ -365,7 +365,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("LanguageCourse", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ullamcorper odio id iaculis lacinia. Aenean iaculis sit amet dolor non interdum. Ut odio odio, vulputate non urna a, consequat facilisis arcu. Pellentesque venenatis ex varius blandit vulputate. Donec maximus commodo mi, at convallis metus tempus vitae. Phasellus malesuada, massa sed dictum tristique, odio tellus blandit ante, eget efficitur diam massa sed dolor. Sed rutrum magna ut urna maximus, vel consectetur urna tempus. Integer tellus ipsum [rest of string was truncated]&quot;;.
         /// </summary>
@@ -374,7 +374,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("LoremIpsum", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Marketing.
         /// </summary>
@@ -383,7 +383,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Marketing", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Maximum 1000 caractères.
         /// </summary>
@@ -392,7 +392,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Max1000Characters", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Maximum 500 caractères.
         /// </summary>
@@ -401,7 +401,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Max500Characters", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Deux choix maximum possibles.
         /// </summary>
@@ -410,7 +410,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("MaximumTwoChoices", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Méthodologie.
         /// </summary>
@@ -419,7 +419,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Methodology", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Minimum 30 caractères.
         /// </summary>
@@ -428,7 +428,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Min30Char", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Minimum 30 caractères.
         /// </summary>
@@ -437,7 +437,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Min30Characters", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to min 30 caractères / max 1000 caractères.
         /// </summary>
@@ -446,7 +446,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Min30CharMax1000Char", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to min 30 caractères / max 500 caractères.
         /// </summary>
@@ -455,7 +455,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Min30CharMax500Char", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Mon profil formateur.
         /// </summary>
@@ -464,7 +464,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("MyTrainerProfile", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Mes formations.
         /// </summary>
@@ -473,7 +473,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("MyTrainings", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Mon espace utilisateur.
         /// </summary>
@@ -482,7 +482,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("MyUserSpace", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Suivant.
         /// </summary>
@@ -491,7 +491,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Next", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Aucune formation trouvée.
         /// </summary>
@@ -500,7 +500,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("NoTrainingFound", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Autre.
         /// </summary>
@@ -509,7 +509,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Other", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to En attente de validation.
         /// </summary>
@@ -518,7 +518,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("PendingValidation", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Site personnel.
         /// </summary>
@@ -527,7 +527,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("PersonalWebsite", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Veuillez sélectionner au moins une option.
         /// </summary>
@@ -536,7 +536,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("PleaseSelectOneOption", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Modalités pratiques de la formation.
         /// </summary>
@@ -545,7 +545,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("PracticalModalities", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Précédent.
         /// </summary>
@@ -554,7 +554,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Previous", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
@@ -563,7 +563,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Profile_bioLabel", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Déposer votre photo pour la téléverser.
         /// </summary>
@@ -572,7 +572,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Profile_DragDropPicture", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Votre photo de profil.
         /// </summary>
@@ -581,7 +581,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Profile_ImageTitle", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Sélectionner une photo.
         /// </summary>
@@ -590,7 +590,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Profile_UploadPicture", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Édition de profil.
         /// </summary>
@@ -599,7 +599,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("ProfileEdition", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Le fichier est trop volumineux.
         /// </summary>
@@ -608,7 +608,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("ProfilePage_Image_FileTooBig", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Le fichier est du mauvais type.
         /// </summary>
@@ -617,7 +617,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("ProfilePage_Image_WrongFileType", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Profil mis à jour.
         /// </summary>
@@ -626,7 +626,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("ProfileUpdatedWithSuccess", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Publier.
         /// </summary>
@@ -635,7 +635,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Publish", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Refusé.
         /// </summary>
@@ -644,7 +644,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Refused", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Sauvegarder.
         /// </summary>
@@ -653,7 +653,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Save", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Matière scolaire / universitaire.
         /// </summary>
@@ -662,7 +662,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("School", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to est un enseignement de matières scolaires / assimilées.
         /// </summary>
@@ -671,7 +671,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("SchoolCourse", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Rechercher.
         /// </summary>
@@ -680,7 +680,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Search", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Secteurs.
         /// </summary>
@@ -689,7 +689,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Sectors", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Veuillez selectionner au moins un public cible.
         /// </summary>
@@ -698,7 +698,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("SelectOneTrainingTargetAudience", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Se déconnecter.
         /// </summary>
@@ -707,7 +707,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("SignOut", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Réseaux sociaux.
         /// </summary>
@@ -716,7 +716,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("SocialNetworks", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Sciences humaines et sociales.
         /// </summary>
@@ -725,7 +725,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("SocialScience", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Spécifiez.
         /// </summary>
@@ -734,7 +734,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Specify", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Sport.
         /// </summary>
@@ -743,7 +743,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Sport", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Status.
         /// </summary>
@@ -752,7 +752,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Status", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Étudiant-es / Élève(s).
         /// </summary>
@@ -761,7 +761,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Student", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Seul un super-utilisateur est autorisé à marquer une formation comme étant dispensée par Smart .
         /// </summary>
@@ -770,7 +770,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("SuperUserPermissionToSetSmartTrainingType", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to La formation.
         /// </summary>
@@ -779,7 +779,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("TheTraining", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Matière(s).
         /// </summary>
@@ -788,7 +788,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Topics", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Le formateur n&apos;a pas été trouvé.
         /// </summary>
@@ -797,7 +797,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("TrainerNotFound_TrainerId", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Photo de profil.
         /// </summary>
@@ -806,7 +806,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("TrainerPicture", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Fonction.
         /// </summary>
@@ -815,7 +815,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("TrainerTitle", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Collective.
         /// </summary>
@@ -824,7 +824,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Training_Collective", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Présentation de la formation.
         /// </summary>
@@ -833,7 +833,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Training_DescriptionLabel", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Collective.
         /// </summary>
@@ -842,7 +842,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Training_Group", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to en groupe.
         /// </summary>
@@ -851,7 +851,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Training_InGroup", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to S&apos;agit-il d&apos;une formation ?.
         /// </summary>
@@ -860,7 +860,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Training_IsItATrainingThat", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to est un cours de langue.
         /// </summary>
@@ -869,7 +869,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Training_IsLanguageCourse", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Autre.
         /// </summary>
@@ -878,7 +878,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Training_IsOther", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to entre dans le cadre de l&apos;Éducation permanente.
         /// </summary>
@@ -887,7 +887,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Training_IsPermanentEducation", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to est professionelle / professionalisante.
         /// </summary>
@@ -896,7 +896,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Training_IsProfessional", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to est un enseignement de matières scolaires / assimilées.
         /// </summary>
@@ -905,7 +905,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Training_IsScholarTraining", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Individuelle.
         /// </summary>
@@ -914,7 +914,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Training_Single", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Objectif de la formation.
         /// </summary>
@@ -923,7 +923,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("TrainingGoal", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Présentation de la formation.
         /// </summary>
@@ -932,7 +932,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("TrainingPresentation", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Formations.
         /// </summary>
@@ -941,7 +941,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Trainings", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Édition de formations.
         /// </summary>
@@ -950,7 +950,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("TrainingSearchTitle", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Public cible.
         /// </summary>
@@ -959,7 +959,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("TrainingTarget", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Titre de la formation.
         /// </summary>
@@ -968,7 +968,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("TrainingTitleCreationLabel", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Un titre de formation est requis.
         /// </summary>
@@ -977,7 +977,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("TrainingTitleIsRequired", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Justification de la réduction de la TVA.
         /// </summary>
@@ -986,7 +986,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("TrainingVatJustification", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Demandeur-euse d&apos;emploi.
         /// </summary>
@@ -995,7 +995,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("Unemployed", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Accepter.
         /// </summary>
@@ -1004,16 +1004,16 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("UserChartAccept", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Validé.
         /// </summary>
-        public static string Validated {
+        public static string Published {
             get {
-                return ResourceManager.GetString("Validated", resourceCulture);
+                return ResourceManager.GetString("Published", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Vous êtes sur le point de supprimer la formation.
         /// </summary>
@@ -1022,7 +1022,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("YouAreAboutToDeleteTraining", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Vous n&apos;avez aucune formation.
         /// </summary>
@@ -1031,7 +1031,7 @@ namespace Smart.FA.Catalog.Localization {
                 return ResourceManager.GetString("YouDontHaveAnyTrainings", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Vous devez selectionner au moins une matière.
         /// </summary>

@@ -7,9 +7,9 @@ namespace Smart.FA.Catalog.Showcase.Web.Services.Trainer;
 public interface ITrainerService
 {
     /// <summary>
-    /// Gets the amount of validated trainings.
+    /// Gets the amount of published trainings.
     /// </summary>
-    /// <returns>The number of validated trainings.</returns>
+    /// <returns>The number of published trainings.</returns>
     public Task<int> TotalCountAsync();
 
     /// <summary>

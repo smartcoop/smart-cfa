@@ -20,7 +20,7 @@ public static class TrainingQueryableExtensions
         bool randomIds = false)
     {
         // We need only published trainings.
-        query = query.Where(training => training.Status == TrainingStatusType.Validated.Id);
+        query = query.Where(training => training.Status == TrainingStatusType.Published.Id);
         var result = await query.PaginateAsync(pageNumber, pageSize, randomIds);
         return new PagedList<TrainingList>(result.PaginatedItems, new PageItem(pageNumber, pageSize), result.TotalCount);
     }
