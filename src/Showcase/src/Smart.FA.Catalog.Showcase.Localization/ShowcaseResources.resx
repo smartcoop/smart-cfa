@@ -258,4 +258,34 @@
   <data name="TopicName_Marketing" xml:space="preserve">
     <value>Marketing</value>
   </data>
+  <data name="TopicName_School" xml:space="preserve">
+    <value>Matière scolaire / universitaire</value>
+  </data>
+  <data name="TopicName_LanguageCourse" xml:space="preserve">
+    <value>Cours de langue</value>
+  </data>
+  <data name="TopicName_InformationTechnology" xml:space="preserve">
+    <value>Technologie de l'information</value>
+  </data>
+  <data name="TopicName_Culture" xml:space="preserve">
+    <value>Art / Culture</value>
+  </data>
+  <data name="TopicName_Other" xml:space="preserve">
+    <value>Autre</value>
+  </data>
+  <data name="TopicName_HealthCare" xml:space="preserve">
+    <value>Soin aux personnes</value>
+  </data>
+  <data name="TopicName_SocialScience" xml:space="preserve">
+    <value>Sciences humaines et sociales</value>
+  </data>
+  <data name="TopicName_EconomyMarketing" xml:space="preserve">
+    <value>Économie / Marketing</value>
+  </data>
+  <data name="TopicName_Communication" xml:space="preserve">
+    <value>Communication</value>
+  </data>
+  <data name="TopicName_Sport" xml:space="preserve">
+    <value>Sport</value>
+  </data>
 </root>
