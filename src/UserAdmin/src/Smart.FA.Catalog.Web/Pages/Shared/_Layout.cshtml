@@ -3,9 +3,11 @@
 @using Microsoft.Extensions.Options
 @using Smart.FA.Catalog.Core.Services
 @using Smart.FA.Catalog.Infrastructure.Helpers
+@using Smart.FA.Catalog.Web.Options
 @inject IOptions<RequestLocalizationOptions> _requestLocalizationOptions;
 @inject IUserIdentity UserIdentity;
 @inject IMinIoLinkGenerator MinIoLinkGenerator;
+@inject IOptions<AccountOptions> AccountOptions;
 
 @{
     var requestCulture = Context.Features.Get<IRequestCultureFeature>() ?? throw new InvalidOperationException($"Couldn't get {nameof(IRequestCultureFeature)}");
@@ -32,7 +34,7 @@
                 <div class="c-toolbar__left">
                     <div class="c-toolbar__item">
                         <div class="c-brand c-brand--xsmall">
-                            <a href="https://account.ubik.be/cfa.aspx">
+                            <a href="@AccountOptions.Value.HomePageAbsoluteUrl">
                                 <img src="https://design.smart.coop/images/logo.svg" alt="Smart">
                             </a>
                         </div>
@@ -61,7 +63,7 @@
                             </li>
                             <li class="c-menu__divider" role="presentational"></li>
                             <li class="c-menu__item">
-                                <a class="c-menu__label" href="https://account.ubik.be/logout.aspx">@CatalogResources.SignOut</a>
+                                <a class="c-menu__label" href="@AccountOptions.Value.LogoutPageAbsoluteUrl">@CatalogResources.SignOut</a>
                             </li>
                         </ul>
                     </div>
