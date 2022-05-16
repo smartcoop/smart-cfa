@@ -7,6 +7,13 @@ public static class MvcBuilderExtensions
 {
     public static IMvcBuilder ConfigureRazorPagesOptions(this IMvcBuilder mvcBuilder)
     {
+        // Sets all routes and query strings in lowercase
+        mvcBuilder.Services.Configure<RouteOptions>(options =>
+        {
+            options.LowercaseUrls = true;
+            options.LowercaseQueryStrings = true;
+        });
+
         mvcBuilder.AddRazorPagesOptions(options =>
         {
             options.Conventions.AddPageConventionsAuthorization();
