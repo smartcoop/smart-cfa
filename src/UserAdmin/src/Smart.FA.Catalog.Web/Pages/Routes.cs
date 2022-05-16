@@ -6,7 +6,7 @@ public static class Routes
 
     public const string HomePage = "/cfa/Admin/Index";
 
-    public const string ErrorPage = "/cfa/Error";
+    public const string ErrorPage = "/cfa/500";
 
     public const string UserChartApproval = "/cfa/UserChart";
 

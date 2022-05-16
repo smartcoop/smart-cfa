@@ -1159,6 +1159,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Une erreur innattendue s&apos;est produite.
+        /// </summary>
+        public static string UnExpectedError {
+            get {
+                return ResourceManager.GetString("UnExpectedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vous ne pouvez pas éditer une formation dont vous n&apos;êtes pas l&apos;auteur..
         /// </summary>
         public static string UpdateTraining_YouCantEditATrainingYouDidntCreate {
