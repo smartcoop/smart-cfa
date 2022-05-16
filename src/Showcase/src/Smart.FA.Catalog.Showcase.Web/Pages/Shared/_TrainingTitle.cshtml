@@ -17,7 +17,7 @@
                 <!-- Show all training topics -->
                 @foreach (var topic in Model.Topics)
                 {
-                    <a class="training-list__category-link" asp-page="TrainingListViewModel/TrainingListViewModelList" asp-route-cat="TopicName"> @(Localizer[$"TopicName_{topic.Name}"])</a>
+                    <a class="training-list__category-link" href="#"> @(Localizer[$"TopicName_{topic.Name}"])</a>
                     if (!Equals(topic, Model.Topics.Last()))
                     {
                         <span>, </span>

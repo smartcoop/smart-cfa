@@ -35,7 +35,7 @@
                 <div class="trainer-list__item">
                     <div class="trainer-list__item-picture">
                         <a asp-page="@Routes.TrainerDetails" asp-route-id="@trainer.Id" class="trainer-link-image">
-                            <img src="~/images/photo-avatar-profil.png" class="trainer-image"/>
+                            <img src="@trainer.ProfileImagePath" class="trainer-image"/>
                         </a>
                     </div>
                     <div class="trainer-list__item-info">

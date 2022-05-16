@@ -20,22 +20,29 @@ public static class PaginationExtensions
         bool randomIds = false)
         where T : IHasId
     {
+        // Build a query that returns every entity ids.
         var idsQuery = query.Select(item => item.Id).Distinct();
 
+        // Proceed to compute the total.
         var totalCount = await idsQuery.CountAsync();
 
+        // Make sure to have the skip and take greater or equal to zero.
+        // Negative values produce an exception
         var skip = Math.Max((pageNumber - 1) * pageSize, 0);
         var take = Math.Max(pageSize, 0);
 
-        var filteredIdsQuery = idsQuery.Skip(skip).Take(take).OrderBy(id => id).AsQueryable();
-
         if (randomIds)
         {
-            filteredIdsQuery = filteredIdsQuery.RandomizeOrder();
+            idsQuery = idsQuery.RandomizeOrder();
         }
 
-        var paginatedItems = await query.Where(item => filteredIdsQuery.Contains(item.Id)).ToListAsync();
+        var filteredIdsQuery = idsQuery.Skip(skip).Take(take);
 
-        return (paginatedItems, totalCount);
+        query = query.Where(item => filteredIdsQuery.Contains(item.Id));
+
+        // Make sure to keep consistent ordering.
+        var orderedList = await query.OrderBy(item => item.Id).ToListAsync();
+        
+        return (orderedList, totalCount);
     }
 }
