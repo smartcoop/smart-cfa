@@ -44,6 +44,7 @@ public class CreateModel : AdminPage
         await Mediator.Send(request);
 
         TempData.AddGlobalBannerMessage(CatalogResources.TrainingCreatedWithSuccess, AlertStyle.Success);
+        
         return RedirectToPage("/Admin/Trainings/List/Index");
     }
 
