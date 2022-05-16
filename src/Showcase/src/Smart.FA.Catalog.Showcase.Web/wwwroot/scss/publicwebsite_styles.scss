@@ -362,6 +362,7 @@
         }    
         .trainer-card__image {
             width: 25%;
+            height:auto;
             margin-right: 2.5rem;
             min-width: 23rem;
             margin-top: 3rem;
@@ -450,13 +451,16 @@
     .trainer-list__item {
         width: 23%;
         min-width: 20rem;
-        margin-bottom: 3%;
+        height:auto;
         border: 1px solid $color-gray-100;
 
         .trainer-list__item-picture {
             background: $color-gray-100;
             width: 100%;
+<<<<<<< Updated upstream
             min-height: 21rem;
+=======
+>>>>>>> Stashed changes
             overflow: hidden;
         }
 
