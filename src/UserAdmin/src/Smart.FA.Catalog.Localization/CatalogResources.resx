@@ -457,6 +457,9 @@
   <data name="PageNotFound" xml:space="preserve">
     <value>Cette page n'existe pas</value>
   </data>
+  <data name="UnExpectedError" xml:space="preserve">
+    <value>Une erreur innattendue s'est produite</value>
+  </data>
   <data name="Sorry" xml:space="preserve">
     <value>Désolé</value>
   </data>
