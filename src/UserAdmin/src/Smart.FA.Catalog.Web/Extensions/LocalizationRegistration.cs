@@ -15,10 +15,11 @@ public static class LocalizationRegistration
             .Configure<RequestLocalizationOptions>(
                 options =>
                 {
+                    //TODO uncomment specific language once their localization becomes available
                     var supportedCultures = new List<CultureInfo>
                     {
-                        new("en"),
-                        new("nl"),
+                        // new("en"),
+                        // new("nl"),
                         new("fr")
                     };
 
