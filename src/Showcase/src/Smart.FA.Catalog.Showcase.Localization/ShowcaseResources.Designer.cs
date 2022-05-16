@@ -394,6 +394,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Aucun formateur n&apos;a été trouvé.
+        /// </summary>
+        public static string NoTrainersWereFound {
+            get {
+                return ResourceManager.GetString("NoTrainersWereFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Objectifs.
         /// </summary>
         public static string Objectives {
@@ -439,7 +448,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Rechercher.
         /// </summary>
         public static string SearchLabel {
             get {
@@ -565,7 +574,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Les formateur·rices.
+        ///   Looks up a localized string similar to Liste des formateur·rices.
         /// </summary>
         public static string TrainerList_Title {
             get {
@@ -610,7 +619,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Formations.
+        ///   Looks up a localized string similar to Ses formations.
         /// </summary>
         public static string TrainingsToFollow {
             get {

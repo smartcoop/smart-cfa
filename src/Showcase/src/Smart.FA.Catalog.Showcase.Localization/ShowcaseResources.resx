@@ -303,4 +303,7 @@
   <data name="SearchLabel" xml:space="preserve">
     <value>Rechercher</value>
   </data>
+  <data name="NoTrainersWereFound" xml:space="preserve">
+    <value>Aucun formateur n'a été trouvé</value>
+  </data>
 </root>
