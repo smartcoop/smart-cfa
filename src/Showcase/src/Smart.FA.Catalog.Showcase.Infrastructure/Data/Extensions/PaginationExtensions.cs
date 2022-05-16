@@ -27,6 +27,7 @@ public static class PaginationExtensions
         var totalCount = await idsQuery.CountAsync();
 
         // Make sure to have the skip and take greater or equal to zero.
+        // Negative values produce an exception
         var skip = Math.Max((pageNumber - 1) * pageSize, 0);
         var take = Math.Max(pageSize, 0);
 
@@ -40,6 +41,8 @@ public static class PaginationExtensions
         query = query.Where(item => filteredIdsQuery.Contains(item.Id));
 
         // Make sure to keep consistent ordering.
-        return (await query.OrderBy(item => item.Id).ToListAsync(), totalCount);
+        var orderedList = await query.OrderBy(item => item.Id).ToListAsync();
+        
+        return (orderedList, totalCount);
     }
 }
