@@ -26,7 +26,8 @@ public static class ServiceCollectionExtensions
         services.Configure<AdminOptions>(configuration.GetSection(AdminOptions.SectionName));
         services.Configure<MediatROptions>(configuration.GetSection(MediatROptions.SectionName));
         services.Configure<SuperUserOptions>(configuration.GetSection(SuperUserOptions.SectionName));;
-        services.Configure<SpecialAuthenticationOptions>(configuration.GetSection(SpecialAuthenticationOptions.SectionName));;
+        services.Configure<SpecialAuthenticationOptions>(configuration.GetSection(SpecialAuthenticationOptions.SectionName));
+        services.Configure<UrlOptions>(configuration.GetSection(UrlOptions.UrlSectionName));
 
         return services;
     }

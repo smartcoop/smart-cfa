@@ -51,17 +51,17 @@ var app = builder.Build();
 
 app.UseForwardedHeaders();
 
-
 if (app.Environment.IsProduction())
 {
-    app.UseExceptionHandler("/Error");
+    app.UseExceptionHandler("/cfa/Error");
     app.UseHsts();
 }
 else
 {
     app.UseDeveloperExceptionPage();
-    app.UseStatusCodePagesWithReExecute("/cfa/{0}");
 }
+
+app.UseStatusCodePagesWithReExecute("/cfa/{0}");
 
 app.UseRequestLocalization();
 
@@ -71,9 +71,11 @@ if (app.Configuration.GetValue("ForceHttpRedirection", true))
     app.UseHttpsRedirection();
 }
 
-app.UseStaticFiles();
+app.UsePathBase(new PathString("/cfa"));
 
 app.UseRouting();
+
+app.UseStaticFiles();
 
 app.UseAuthentication();
 

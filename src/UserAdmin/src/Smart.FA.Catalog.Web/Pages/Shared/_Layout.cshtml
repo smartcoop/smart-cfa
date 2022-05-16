@@ -3,13 +3,15 @@
 @using Microsoft.Extensions.Options
 @using Smart.FA.Catalog.Core.Services
 @using Smart.FA.Catalog.Infrastructure.Helpers
-@inject IOptions<RequestLocalizationOptions> _requestLocalizationOptions;
+@using Smart.FA.Catalog.Web.Options
+@inject IOptions<RequestLocalizationOptions> RequestLocalizationOptions;
 @inject IUserIdentity UserIdentity;
 @inject IMinIoLinkGenerator MinIoLinkGenerator;
+@inject IOptions<UrlOptions> UrlOptions
 
 @{
     var requestCulture = Context.Features.Get<IRequestCultureFeature>() ?? throw new InvalidOperationException($"Couldn't get {nameof(IRequestCultureFeature)}");
-    var supportedLanguages = _requestLocalizationOptions
+    var supportedLanguages = RequestLocalizationOptions
         .Value?
         .SupportedUICultures?
         .Select(supportedCulture => new SelectListItem(supportedCulture.DisplayName, supportedCulture.TwoLetterISOLanguageName)) ??
@@ -22,7 +24,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/_content/Smart.Design.Razor/css/main.css"/>
-    <link rel="stylesheet" href="~/Smart.FA.Catalog.Web.styles.css"/>
+    <link rel="stylesheet" href="~/Smart.FA.Catalog.Web.styles.css" />
 </head>
 <body class="u-maximize-height u-overflow-hidden">
 <div class="c-app-layout">
@@ -32,7 +34,7 @@
                 <div class="c-toolbar__left">
                     <div class="c-toolbar__item">
                         <div class="c-brand c-brand--xsmall">
-                            <a href="/">
+                            <a href="@UrlOptions.Value.HomePage">
                                 <img src="https://design.smart.coop/images/logo.svg" alt="Smart">
                             </a>
                         </div>
@@ -57,11 +59,11 @@
                         </a>
                         <ul class="c-menu c-menu--large" id="userMenu">
                             <li class="c-menu__item">
-                                <a class="c-menu__label" href="#">My profile</a>
+                                <a class="c-menu__label" href="#">@CatalogResources.MyUserSpace</a>
                             </li>
                             <li class="c-menu__divider" role="presentational"></li>
                             <li class="c-menu__item">
-                                <a class="c-menu__label" href="#">Sign out</a>
+                                <a class="c-menu__label" href="@UrlOptions.Value.SignOut">@CatalogResources.SignOut</a>
                             </li>
                         </ul>
                     </div>

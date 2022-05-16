@@ -9,7 +9,6 @@ namespace Smart.FA.Catalog.Web.Pages;
 public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
-    public CustomIdentity? Identity { get; set; }
     public IndexModel(ILogger<IndexModel> logger)
     {
         _logger = logger;
@@ -17,8 +16,6 @@ public class IndexModel : PageModel
 
     public IActionResult OnGet()
     {
-        Identity = HttpContext.User.Identity as CustomIdentity;
-
-        return Page();
+        return RedirectToPage("/Admin/Index");
     }
 }
