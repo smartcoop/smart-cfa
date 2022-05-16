@@ -4,11 +4,21 @@
     ViewData["Title"] = @ShowcaseResources.Contact_TitlePage;
 }
 
+<!-- Temporary Contact page content-->
+<section class="main__presentation">
+    <div class="main-title">@ShowcaseResources.Contact_TitlePage</div>
+    <div class="main__presentation-txt">
+        <p>Vous avez des questions sur Formateurs Associés ? Vous souhaitez en savoir davantage ?</p>
+        <p><br/>N'hésitez pas à nous contacter via : <a href="mailto:learning@smart.coop">learning@smart.coop</a></p>
+    </div>
+</section>
+
+<!-- All this section is commented : waiting to have sens email process
 <section class="main__presentation">
     <div class="main-title">@ShowcaseResources.Contact_TitlePage</div>
     <div class="main__presentation-txt">
         <p>@ShowcaseResources.Contact_Presentation</p>
-        <p><br/>@ShowcaseResources.Contact_Presentation_SecondPart <a href="@ShowcaseResources.Contact_Presentation_Link">@ShowcaseResources.Contact_Presentation_Link</a></p>
+        <p><br />@ShowcaseResources.Contact_Presentation_SecondPart <a href="@ShowcaseResources.Contact_Presentation_Link">@ShowcaseResources.Contact_Presentation_Link</a></p>
     </div>
     <div id="sendmailConfirmation">
         <div class="c-alert c-alert--success">
@@ -43,7 +53,7 @@
         </div>
     </div>
     <div class="main__contact-form">
-        <form  class="o-form-group-layout o-form-group-layout--standard" method="post" onsubmit="SubmitContactForm();return false;"> 
+        <form class="o-form-group-layout o-form-group-layout--standard" method="post" onsubmit="SubmitContactForm();return false;">
             <div class="o-form-group">
                 <label class="o-form-group__label" for="formValidationnameId">@ShowcaseResources.Contact_LabelName</label>
                 <div class="o-form-group__controls">
@@ -65,8 +75,9 @@
                 <div class="contact-form__error"></div>
             </div>
             <div class="o-form-group">
-                <input class="c-button c-button--primary" type="submit" value="@ShowcaseResources.Contact_LabelSend"/>
+                <input class="c-button c-button--primary" type="submit" value="@ShowcaseResources.Contact_LabelSend" />
             </div>
         </form>
     </div>
 </section>
+-->

@@ -5,6 +5,7 @@ using Smart.FA.Catalog.Application.Extensions;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Services;
+using Smart.FA.Catalog.Infrastructure.Helpers;
 
 namespace Smart.FA.Catalog.Application.UseCases.Commands;
 
@@ -12,11 +13,13 @@ public class UploadTrainerProfileImageCommand : IRequestHandler<UploadImageToSto
 {
     private readonly ILogger<UploadTrainerProfileImageCommand> _logger;
     private readonly IS3StorageService _storageService;
+    private readonly IMinIoLinkGenerator _minIoLinkGenerator;
 
-    public UploadTrainerProfileImageCommand(ILogger<UploadTrainerProfileImageCommand> logger, IS3StorageService storageService)
+    public UploadTrainerProfileImageCommand(ILogger<UploadTrainerProfileImageCommand> logger, IS3StorageService storageService, IMinIoLinkGenerator minIoLinkGenerator)
     {
         _logger = logger;
         _storageService = storageService;
+        _minIoLinkGenerator = minIoLinkGenerator;
     }
 
     /// <summary>
@@ -36,10 +39,11 @@ public class UploadTrainerProfileImageCommand : IRequestHandler<UploadImageToSto
             await _storageService.DeleteAsync(command.Trainer.ProfileImagePath, cancellationToken);
         }
 
-        var newFileName = command.Trainer.GenerateTrainerProfilePictureName();
-        var fileStream = command.ProfilePicture.OpenReadStream();
-        await _storageService.UploadAsync(fileStream, newFileName, cancellationToken);
-        resp.ProfilePictureStream = fileStream;
+        var profilePictureName = new FileInfo(command.ProfilePicture.FileName);
+        var profilePictureUrl = _minIoLinkGenerator.GenerateTrainerProfilePictureUrl(command.Trainer.Id, profilePictureName.Extension);
+        var profilePictureStream = command.ProfilePicture.OpenReadStream();
+        await _storageService.UploadAsync(profilePictureStream, profilePictureUrl, cancellationToken);
+        resp.ProfilePictureStream = profilePictureStream;
         resp.SetSuccess();
 
         return resp;

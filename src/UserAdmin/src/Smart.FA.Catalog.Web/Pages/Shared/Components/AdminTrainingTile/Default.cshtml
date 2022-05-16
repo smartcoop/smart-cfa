@@ -12,13 +12,13 @@
 <smart-card>
     <smart-card-body>
         <smart-card-title text="@training.Details.First().Title"></smart-card-title>
-        <smart-muted-text text="@string.Join(", ", training.Topics.Select(trainingTopic => _localizer[trainingTopic.Topic.Name])) "></smart-muted-text>
+        <smart-muted-text text="@string.Join(", ", training.Topics.Select(trainingTopic => _localizer[trainingTopic.Topic.Name]))"></smart-muted-text>
     </smart-card-body>
     <smart-card-actions>
         <div class="o-flex o-flex--vertical-center o-flex--justify-between o-flex--spaced-wide">
-            <smart-pill label="@(_localizer[TrainingStatusType.FromValue(training.StatusType).Name])"></smart-pill>
+            <smart-pill label="@(_localizer[TrainingStatusType.FromValue(training.StatusType).Name])" status="@Model.PillStatus"></smart-pill>
             <div class="c-button-toolbar">
-                <a href="/admin/trainings/update/@training!.Id">
+                <a href="/cfa/admin/trainings/update/@training!.Id">
                     <smart-button leading-icon="EditAlt" button-style="Borderless"></smart-button>
                 </a>
                 @if (Model.ShowDeleteButton)

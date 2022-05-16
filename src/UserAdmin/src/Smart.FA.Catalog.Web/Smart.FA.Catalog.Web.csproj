@@ -55,6 +55,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="sassconfig.json" />
     <Content Remove="wwwroot\icons\link.svg" />
     <Content Remove="wwwroot\favicon.ico" />
     <EmbeddedResource Include="wwwroot\favicon.ico">
@@ -64,5 +65,9 @@
 
   <ItemGroup>
     <Compile Include="../Smart.FA.Catalog.Core/GlobalUsing.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="sassconfig.json" />
   </ItemGroup>
 </Project>

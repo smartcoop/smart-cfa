@@ -6,9 +6,7 @@ using Smart.FA.Catalog.Core.Domain.User.Dto;
 using Smart.FA.Catalog.Core.Domain.User.Enumerations;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
 using Smart.FA.Catalog.Core.LogEvents;
-using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Infrastructure.Persistence;
-using Smart.FA.Catalog.Shared.Domain.Enumerations;
 
 namespace Smart.FA.Catalog.Application.UseCases.Commands;
 
@@ -19,11 +17,9 @@ public class
     private readonly ILogger<CreateTrainerFromUserAppCommandHandler> _logger;
     private readonly CatalogContext _context;
 
-    public CreateTrainerFromUserAppCommandHandler
-    (
-        ILogger<CreateTrainerFromUserAppCommandHandler> logger
-        , CatalogContext context
-    )
+    public CreateTrainerFromUserAppCommandHandler(
+        ILogger<CreateTrainerFromUserAppCommandHandler> logger,
+        CatalogContext context)
     {
         _logger = logger;
         _context = context;

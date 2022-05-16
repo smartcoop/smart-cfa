@@ -123,8 +123,8 @@ public class Training : SeedWork.Entity, IAggregateRoot
         => _trainerAssignments.RemoveAll(assignment => assignment.TrainerId != TrainerCreatorId);
 
     /// <summary>
-    /// Changes the status of a <see cref="Training" /> either to <see cref="TrainingStatusType.Draft" /> or <see cref="TrainingStatusType.Validated" />.
-    /// If requested new status is <see cref="TrainingStatusType.Validated" /> it will be validated.
+    /// Changes the status of a <see cref="Training" /> either to <see cref="TrainingStatusType.Draft" /> or <see cref="TrainingStatusType.Published" />.
+    /// If requested new status is <see cref="TrainingStatusType.Published" /> it will be published.
     /// </summary>
     /// <param name="statusType">The <see cref="TrainingStatusType" /> to wichita the training should be changed to.</param>
     /// <returns>A <see cref="Result{T,E}" /> representing the result of the operation.</returns>

@@ -38,7 +38,7 @@ public class UpdateModel : AdminPage
         // We need to check if Training is not null otherwise MapToGetResponse will throw an exception.
         if (response.Training is null)
         {
-            return NotFound();
+            return RedirectToNotFound(CatalogResources.TrainingDoesNotExist);
         }
 
         UpdateTrainingViewModel = response.MapGetToResponse(user.Trainer.DefaultLanguage);

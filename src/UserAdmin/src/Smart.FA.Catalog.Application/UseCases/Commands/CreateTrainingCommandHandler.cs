@@ -33,7 +33,7 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingReques
         var training = new Training(trainer, request.DetailsDto, request.VatExemptionTypes, request.AttendanceTypes, request.TargetAudiences, request.Topics);
         training.MarkAsGivenBySmart(request.IsGivenBySmart);
 
-        var newStatus = request.IsDraft ? TrainingStatusType.Draft : TrainingStatusType.Validated;
+        var newStatus = request.IsDraft ? TrainingStatusType.Draft : TrainingStatusType.Published;
         var result = training.ChangeStatus(newStatus);
         if (result.IsFailure)
         {

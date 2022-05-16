@@ -11,9 +11,9 @@ using Smart.FA.Catalog.Application.Extensions.FluentValidation;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Extensions;
+using Smart.FA.Catalog.Infrastructure.Helpers;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 using Smart.FA.Catalog.Infrastructure.Services.Options;
-using Smart.FA.Catalog.Shared.Domain.Enumerations;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer;
 
 namespace Smart.FA.Catalog.Application.UseCases.Commands;
@@ -32,19 +32,19 @@ public class EditProfileCommand : IRequest<ProfileEditionResponse>
     public Dictionary<string, string>? Socials { get; set; }
 
     public IFormFile? ProfilePicture { get; set; }
-
-    public string? Email { get; set; }
 }
 
 public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, ProfileEditionResponse>
 {
     private readonly ILogger<EditProfileCommandHandler> _logger;
     private readonly CatalogContext _catalogContext;
+    private readonly IMinIoLinkGenerator _minIoLinkGenerator;
 
-    public EditProfileCommandHandler(ILogger<EditProfileCommandHandler> logger, CatalogContext catalogContext)
+    public EditProfileCommandHandler(ILogger<EditProfileCommandHandler> logger, CatalogContext catalogContext, IMinIoLinkGenerator minIoLinkGenerator)
     {
         _logger         = logger;
         _catalogContext = catalogContext;
+        _minIoLinkGenerator = minIoLinkGenerator;
     }
 
     public async Task<ProfileEditionResponse> Handle(EditProfileCommand command, CancellationToken cancellationToken)
@@ -103,10 +103,10 @@ public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, Pro
         trainer.UpdateTitle(command.Title ?? string.Empty);
         if (command.ProfilePicture is not null)
         {
-            trainer.UpdateProfileImagePath(trainer.GenerateTrainerProfilePictureName());
+            var fileName = new FileInfo(command.ProfilePicture.FileName);
+            trainer.UpdateProfileImagePath(_minIoLinkGenerator.GenerateTrainerProfilePictureUrl(trainer.Id, fileName.Extension));
         }
 
-        trainer.ChangeEmail(command.Email);
         foreach (var commandSocial in command.Socials!)
         {
             var socialNetwork = SocialNetwork.FromValue(int.Parse(commandSocial.Key));
@@ -168,12 +168,6 @@ public class EditProfileCommandValidator : AbstractValidator<EditProfileCommand>
             .WithMessage(CatalogResources.BioMustBe30Chars)
             .MaximumLength(500)
             .WithMessage(CatalogResources.BioCannotExceed500Chars);
-
-        RuleFor(command => command.Email)
-            .Cascade(CascadeMode.Stop)
-            .NotEmpty()
-            .WithMessage(CatalogResources.EmailIsRequired)
-            .ValidEmail();
 
         When(request => request.ProfilePicture is not null,
             () => RuleFor(request => request.ProfilePicture!)

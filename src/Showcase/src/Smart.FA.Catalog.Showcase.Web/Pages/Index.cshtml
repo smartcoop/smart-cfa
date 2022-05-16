@@ -16,8 +16,9 @@
 @if (Model.TrainingsCount > 0)
 {
     <section class="section__training-list">
-        <div class="section__label">
-            <h5>@ShowcaseResources.Homepage_TrainingCount @Model.TrainingsCount | @ShowcaseResources.Homepage_TrainersCount @Model.TrainersCount</h5>
+        <div class="section__labels">
+            <div class="section-label__text">@ShowcaseResources.Homepage_TrainingCount <span class="section-label__nb">@Model.TrainingsCount</span></div>
+            <div class="section-label__text">@ShowcaseResources.Homepage_TrainersCount <span class="section-label__nb">@Model.TrainersCount</span></div>
         </div>
 
         <div class="section__label">

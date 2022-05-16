@@ -27,8 +27,8 @@ public static class StatusExtension
         if (Equals(trainingStatusType, TrainingStatusType.WaitingForValidation))
             return CatalogResources.PendingValidation;
 
-        if (Equals(trainingStatusType, TrainingStatusType.Validated))
-            return CatalogResources.Validated;
+        if (Equals(trainingStatusType, TrainingStatusType.Published))
+            return CatalogResources.Published;
 
         return string.Empty;
     }

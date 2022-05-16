@@ -4,6 +4,7 @@ using Smart.FA.Catalog.Showcase.Infrastructure.Data;
 using Smart.FA.Catalog.Showcase.Infrastructure.Data.Extensions;
 using Smart.FA.Catalog.Showcase.Web.Mappers;
 using Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerDetails;
+using Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerList;
 using Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingList;
 
 namespace Smart.FA.Catalog.Showcase.Web.Services.Trainer;
@@ -46,6 +47,13 @@ public class TrainerService : ITrainerService
             Trainings = new PagedList<TrainingListViewModel>(trainingViewModels, new(pageNumber, pageSize), trainerPaginatedTrainingLists.TotalCount),
             SocialNetworks = trainerDetailsWithTopics.ToTrainerSocialNetworks()
         };
+    }
+
+    public async Task<PagedList<TrainerListViewModel>> SearchTrainerDetailsViewModelsAsync(string? searchKeyword, int currentPage, int pageSize)
+    {
+        var trainers = await _catalogShowcaseContext.TrainerList.SearchPaginatedTrainersAsync(searchKeyword, currentPage, pageSize);
+
+        return new PagedList<TrainerListViewModel>(trainers.ToTrainerListViewModels(), new PageItem(currentPage, pageSize), trainers.TotalCount);
     }
 
     /// <inheritdoc />

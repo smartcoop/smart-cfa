@@ -151,7 +151,7 @@
     <value>Présentation</value>
   </data>
   <data name="TrainingsToFollow" xml:space="preserve">
-    <value>Formations à suivre</value>
+    <value>Ses formations</value>
   </data>
   <data name="Contact_ConfirmationMessage" xml:space="preserve">
     <value>Votre message a bien été envoyé.</value>
@@ -196,7 +196,7 @@
     <value>Nombre de formations :</value>
   </data>
   <data name="Homepage_TrainersCount" xml:space="preserve">
-    <value>Nombre de formateur·trices :</value>
+    <value>Nombre de formateur·rices :</value>
   </data>
   <data name="Homepage_IntroductionPart2" xml:space="preserve">
     <value>Smart est une coopérative de travailleuses et travailleurs qui utilisent sa structure pour exercer leur métier, par exemple de la formation.</value>
@@ -253,6 +253,57 @@
     <value>Formateurs Associés</value>
   </data>
   <data name="TrainersOfAssociateTrainers" xml:space="preserve">
-    <value>Les formateur·trices de Formateurs Associés</value>
+    <value>Les formateur·rices de Formateurs Associés</value>
+  </data>
+  <data name="TopicName_Marketing" xml:space="preserve">
+    <value>Marketing</value>
+  </data>
+  <data name="TopicName_School" xml:space="preserve">
+    <value>Matière scolaire / universitaire</value>
+  </data>
+  <data name="TopicName_LanguageCourse" xml:space="preserve">
+    <value>Cours de langue</value>
+  </data>
+  <data name="TopicName_InformationTechnology" xml:space="preserve">
+    <value>Technologie de l'information</value>
+  </data>
+  <data name="TopicName_Culture" xml:space="preserve">
+    <value>Art / Culture</value>
+  </data>
+  <data name="TopicName_Other" xml:space="preserve">
+    <value>Autre</value>
+  </data>
+  <data name="TopicName_HealthCare" xml:space="preserve">
+    <value>Soin aux personnes</value>
+  </data>
+  <data name="TopicName_SocialScience" xml:space="preserve">
+    <value>Sciences humaines et sociales</value>
+  </data>
+  <data name="TopicName_EconomyMarketing" xml:space="preserve">
+    <value>Économie / Marketing</value>
+  </data>
+  <data name="TopicName_Communication" xml:space="preserve">
+    <value>Communication</value>
+  </data>
+  <data name="TopicName_Sport" xml:space="preserve">
+    <value>Sport</value>
+  </data>
+  <data name="TrainerList_Title" xml:space="preserve">
+    <value>Liste des formateur·rices</value>
+  </data>
+  <data name="TrainerListe_Presentation" xml:space="preserve">
+    <value>Retrouvez ici la liste des formateur·rices qui proposent une ou plusieurs formations sur ce site. Vous pouvez effectuer une recherche sur base de mots-clés. La liste des formateur·rices est proposée de manière aléatoire. </value>
+  </data>
+  <data name="TrainingList_Title" xml:space="preserve">
+    <value>Liste des formations </value>
+  </data>
+  <data name="TrainingList_presentation" xml:space="preserve">
+    <value>Retrouvez ici les formations proposées par Smart, à l’initiative de ses sociétaires [et celles proposée directement à l’initiative de Smart elle-même]. Les formations apparaissent dans un ordre aléatoire. </value>
+  </data>
+  <data name="SearchLabel" xml:space="preserve">
+    <value>Rechercher</value>
+  </data>
+  <data name="NoTrainersWereFound" xml:space="preserve">
+    <value>Aucun formateur n'a été trouvé</value>
   </data>
 </root>

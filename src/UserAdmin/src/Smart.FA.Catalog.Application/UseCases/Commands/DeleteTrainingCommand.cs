@@ -19,26 +19,19 @@ public class DeleteTrainingCommand: IRequestHandler<DeleteTrainingRequest, Delet
         _unitOfWork = unitOfWork;
         _catalogContext = catalogContext;
     }
+
     public async Task<DeleteTrainingResponse> Handle(DeleteTrainingRequest request, CancellationToken cancellationToken)
     {
         DeleteTrainingResponse resp = new();
+        var training = await _catalogContext.Trainings.FindAsync(new object?[] { request.TrainingId }, cancellationToken: cancellationToken);
+        _unitOfWork.RegisterDeleted(training!);
+        _unitOfWork.Commit();
 
-        try
-        {
-            var training = await _catalogContext.Trainings.FindAsync(new object?[] { request.TrainingId }, cancellationToken: cancellationToken);
-            _unitOfWork.RegisterDeleted(training!);
-            _unitOfWork.Commit();
+        _logger.LogInformation(LogEventIds.TrainingDeleted, "Training with id {Id} has been deleted", training!.Id);
 
-            _logger.LogInformation(LogEventIds.TrainingDeleted, "Training with id {Id} has been deleted", training!.Id);
+        resp.SetSuccess();
 
-            resp.SetSuccess();
-        }
-        catch (Exception e)
-        {
-             _logger.LogError("{Exception}", e.ToString());
-            throw;
-        }
-       return resp;
+        return resp;
     }
 }
 

@@ -349,7 +349,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nombre de formateur·trices :.
+        ///   Looks up a localized string similar to Nombre de formateur·rices :.
         /// </summary>
         public static string Homepage_TrainersCount {
             get {
@@ -385,12 +385,20 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-
+        ///   Looks up a localized string similar to Suivant.
         /// </summary>
         public static string Next {
             get {
                 return ResourceManager.GetString("Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aucun formateur n&apos;a été trouvé.
+        /// </summary>
+        public static string NoTrainersWereFound {
+            get {
+                return ResourceManager.GetString("NoTrainersWereFound", resourceCulture);
             }
         }
         
@@ -422,8 +430,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-
+        ///   Looks up a localized string similar to Précédent.
         /// </summary>
         public static string Previous {
             get {
@@ -441,11 +448,119 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rechercher.
+        /// </summary>
+        public static string SearchLabel {
+            get {
+                return ResourceManager.GetString("SearchLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Formations.
         /// </summary>
         public static string TitteTrainings {
             get {
                 return ResourceManager.GetString("TitteTrainings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Communication.
+        /// </summary>
+        public static string TopicName_Communication {
+            get {
+                return ResourceManager.GetString("TopicName_Communication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Art / Culture.
+        /// </summary>
+        public static string TopicName_Culture {
+            get {
+                return ResourceManager.GetString("TopicName_Culture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Économie / Marketing.
+        /// </summary>
+        public static string TopicName_EconomyMarketing {
+            get {
+                return ResourceManager.GetString("TopicName_EconomyMarketing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Soin aux personnes.
+        /// </summary>
+        public static string TopicName_HealthCare {
+            get {
+                return ResourceManager.GetString("TopicName_HealthCare", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Technologie de l&apos;information.
+        /// </summary>
+        public static string TopicName_InformationTechnology {
+            get {
+                return ResourceManager.GetString("TopicName_InformationTechnology", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cours de langue.
+        /// </summary>
+        public static string TopicName_LanguageCourse {
+            get {
+                return ResourceManager.GetString("TopicName_LanguageCourse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Marketing.
+        /// </summary>
+        public static string TopicName_Marketing {
+            get {
+                return ResourceManager.GetString("TopicName_Marketing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Autre.
+        /// </summary>
+        public static string TopicName_Other {
+            get {
+                return ResourceManager.GetString("TopicName_Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Matière scolaire / universitaire.
+        /// </summary>
+        public static string TopicName_School {
+            get {
+                return ResourceManager.GetString("TopicName_School", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sciences humaines et sociales.
+        /// </summary>
+        public static string TopicName_SocialScience {
+            get {
+                return ResourceManager.GetString("TopicName_SocialScience", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sport.
+        /// </summary>
+        public static string TopicName_Sport {
+            get {
+                return ResourceManager.GetString("TopicName_Sport", resourceCulture);
             }
         }
         
@@ -459,7 +574,25 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Les formateur·trices de Formateurs Associés.
+        ///   Looks up a localized string similar to Liste des formateur·rices.
+        /// </summary>
+        public static string TrainerList_Title {
+            get {
+                return ResourceManager.GetString("TrainerList_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retrouvez ici la liste des formateur·rices qui proposent une ou plusieurs formations sur ce site. Vous pouvez effectuer une recherche sur base de mots-clés. La liste des formateur·rices est proposée de manière aléatoire. .
+        /// </summary>
+        public static string TrainerListe_Presentation {
+            get {
+                return ResourceManager.GetString("TrainerListe_Presentation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Les formateur·rices de Formateurs Associés.
         /// </summary>
         public static string TrainersOfAssociateTrainers {
             get {
@@ -468,7 +601,25 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Formations à suivre.
+        ///   Looks up a localized string similar to Retrouvez ici les formations proposées par Smart, à l’initiative de ses sociétaires [et celles proposée directement à l’initiative de Smart elle-même]. Les formations apparaissent dans un ordre aléatoire. .
+        /// </summary>
+        public static string TrainingList_presentation {
+            get {
+                return ResourceManager.GetString("TrainingList_presentation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Liste des formations .
+        /// </summary>
+        public static string TrainingList_Title {
+            get {
+                return ResourceManager.GetString("TrainingList_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ses formations.
         /// </summary>
         public static string TrainingsToFollow {
             get {

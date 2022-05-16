@@ -70,7 +70,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Accepter la Charte d&apos;utilisation de Formateurs Associés.
+        ///   Looks up a localized string similar to Charte d&apos;utilisation.
         /// </summary>
         public static string AdminHomepage_AcceptCharter {
             get {
@@ -79,7 +79,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to La charte d&apos;utilisateur de formateurs associés n&apos;a pas été acceptée.
+        ///   Looks up a localized string similar to La charte d&apos;utilisateur de Formateurs Associés n&apos;a pas été acceptée.
         /// </summary>
         public static string AdminHomePage_HasNotAcceptedUserChart {
             get {
@@ -97,7 +97,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bienvenue dans le monde de la formation de Smart, .
+        ///   Looks up a localized string similar to  est un catalogue des formations organisées et produites par Smart au travers des entités Formateurs Associés asbl et accessoirement Productions Associées asbl. C&apos;est un outil en ligne mis à votre disposition gratuitement et sans publicité..
         /// </summary>
         public static string AdminHomepage_IntroductionPart1 {
             get {
@@ -106,7 +106,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Smart est une coopérative de travailleuses et travailleurs qui utilisent sa structure pour exercer leur métier, par exemple de la formation..
+        ///   Looks up a localized string similar to Vous êtes invité·es à y compléter  votre fiche de profil, puis à y encoder les formations que vous proposez..
         /// </summary>
         public static string AdminHomepage_IntroductionPart2 {
             get {
@@ -115,7 +115,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ce catalogue en ligne s’adresse à toute personne en recherche d’une formation. Vous trouverez sur ce site des formations de type scolaire, professionnel  (organisées et produites par Formateurs Associés asbl et Productions Associées asbl, le cas échéant) ou encore récréatif (uniquement dans Producteurs Associés asbl). Vous visualisez aisément la personne qui dispense la formation et pouvez la contacter en direct pour obtenir davantage d’informations. .
+        ///   Looks up a localized string similar to Les informations ainsi encodées seront visibles publiquement sur le site vitrine .
         /// </summary>
         public static string AdminHomepage_IntroductionPart3 {
             get {
@@ -138,6 +138,96 @@ namespace Smart.FA.Catalog.Localization {
         public static string AdminHomepage_WhatIsFormateurAssocieTitle {
             get {
                 return ResourceManager.GetString("AdminHomepage_WhatIsFormateurAssocieTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compléter votre profil.
+        /// </summary>
+        public static string AdminHomepageProfil_Button {
+            get {
+                return ResourceManager.GetString("AdminHomepageProfil_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vous ne disposez que d’une seule fiche profil par titulaire..
+        /// </summary>
+        public static string AdminHomepageProfil_IntroductionPart1 {
+            get {
+                return ResourceManager.GetString("AdminHomepageProfil_IntroductionPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Les champs nom et prénom sont obligatoires (et identiques à votre fiche d’inscription Smart). Le champ biographie ainsi que les champs « réseaux sociaux » ne sont pas obligatoires. Un formulaire de contact est par ailleurs mis en place pour permettre aux internautes de vous contacter directement. Ce formulaire est lié à l’adresse mail renseignée dans la fiche d’inscription, l’adresse mail n’apparaît jamais directement. .
+        /// </summary>
+        public static string AdminHomepageProfil_IntroductionPart2 {
+            get {
+                return ResourceManager.GetString("AdminHomepageProfil_IntroductionPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profil  .
+        /// </summary>
+        public static string AdminHomepageProfil_Title {
+            get {
+                return ResourceManager.GetString("AdminHomepageProfil_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encoder une formation.
+        /// </summary>
+        public static string AdminHomepageTraining_Button {
+            get {
+                return ResourceManager.GetString("AdminHomepageTraining_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vous pouvez encoder autant de formations que vous le souhaitez.  .
+        /// </summary>
+        public static string AdminHomepageTraining_IntroductionPart1 {
+            get {
+                return ResourceManager.GetString("AdminHomepageTraining_IntroductionPart1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vous pouvez sauvegarder une fiche formation en cours de rédaction pour y revenir plus tard avant de la publier. Vous pouvez également dépublier une fiche ou la supprimer.  .
+        /// </summary>
+        public static string AdminHomepageTraining_IntroductionPart2 {
+            get {
+                return ResourceManager.GetString("AdminHomepageTraining_IntroductionPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nous vous invitons à veiller régulièrement à la mise à jour de vos contenus. .
+        /// </summary>
+        public static string AdminHomepageTraining_IntroductionPart3 {
+            get {
+                return ResourceManager.GetString("AdminHomepageTraining_IntroductionPart3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formation.
+        /// </summary>
+        public static string AdminHomepageTraining_Title {
+            get {
+                return ResourceManager.GetString("AdminHomepageTraining_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avant d’encoder des formations, vous devez confirmer avoir lu et accepté les conditions énoncées dans la charte d’utilisation du site learning.smart.coop. Cette charte est également disponible à la consultation dans votre Espace Activité.   .
+        /// </summary>
+        public static string AdminUserChart_IntroductionPart1 {
+            get {
+                return ResourceManager.GetString("AdminUserChart_IntroductionPart1", resourceCulture);
             }
         }
         
@@ -169,7 +259,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to La biographie ne peut excéder 500 charactères.
+        ///   Looks up a localized string similar to La biographie ne peut excéder 500 caractères.
         /// </summary>
         public static string BioCannotExceed500Chars {
             get {
@@ -178,7 +268,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to La biographie doit être constituée d&apos;au moins 30 charactères.
+        ///   Looks up a localized string similar to La biographie doit être constituée d&apos;au moins 30 caractères.
         /// </summary>
         public static string BioMustBe30Chars {
             get {
@@ -259,7 +349,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Édition de la formation.
+        ///   Looks up a localized string similar to Édition de la formation : .
         /// </summary>
         public static string EditTraining {
             get {
@@ -300,6 +390,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string FieldsThatWillAppearInThePublicCatalog {
             get {
                 return ResourceManager.GetString("FieldsThatWillAppearInThePublicCatalog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retour à l&apos;accueil.
+        /// </summary>
+        public static string GoBackHome {
+            get {
+                return ResourceManager.GetString("GoBackHome", resourceCulture);
             }
         }
         
@@ -457,7 +556,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mon profil formateur.
+        ///   Looks up a localized string similar to Mon profil .
         /// </summary>
         public static string MyTrainerProfile {
             get {
@@ -507,6 +606,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string Other {
             get {
                 return ResourceManager.GetString("Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cette page n&apos;existe pas.
+        /// </summary>
+        public static string PageNotFound {
+            get {
+                return ResourceManager.GetString("PageNotFound", resourceCulture);
             }
         }
         
@@ -637,6 +745,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Publié.
+        /// </summary>
+        public static string Published {
+            get {
+                return ResourceManager.GetString("Published", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Refusé.
         /// </summary>
         public static string Refused {
@@ -723,6 +840,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string SocialScience {
             get {
                 return ResourceManager.GetString("SocialScience", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Désolé.
+        /// </summary>
+        public static string Sorry {
+            get {
+                return ResourceManager.GetString("Sorry", resourceCulture);
             }
         }
         
@@ -934,6 +1060,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to La formation n&apos;existe pas.
+        /// </summary>
+        public static string TrainingDoesNotExist {
+            get {
+                return ResourceManager.GetString("TrainingDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Formation éditée avec succès.
         /// </summary>
         public static string TrainingEditedWithSuccess {
@@ -1024,20 +1159,29 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Accepter.
+        ///   Looks up a localized string similar to Vous ne pouvez pas éditer une formation dont vous n&apos;êtes pas l&apos;auteur..
         /// </summary>
-        public static string UserChartAccept {
+        public static string UpdateTraining_YouCantEditATrainingYouDidntCreate {
             get {
-                return ResourceManager.GetString("UserChartAccept", resourceCulture);
+                return ResourceManager.GetString("UpdateTraining_YouCantEditATrainingYouDidntCreate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Validé.
+        ///   Looks up a localized string similar to learning.smart.coop.
         /// </summary>
-        public static string Validated {
+        public static string UrlSitePublic {
             get {
-                return ResourceManager.GetString("Validated", resourceCulture);
+                return ResourceManager.GetString("UrlSitePublic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to J&apos;accepte.
+        /// </summary>
+        public static string UserChartAccept {
+            get {
+                return ResourceManager.GetString("UserChartAccept", resourceCulture);
             }
         }
         
