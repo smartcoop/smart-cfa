@@ -5,6 +5,7 @@ using Smart.FA.Catalog.Application.Extensions;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Infrastructure.Extensions;
 using Smart.FA.Catalog.Web.Extensions;
+using Smart.FA.Catalog.Web.Extensions.Middlewares;
 using Smart.FA.Catalog.Web.Pages;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -71,6 +72,8 @@ if (app.Configuration.GetValue("ForceHttpRedirection", true))
 {
     app.UseHttpsRedirection();
 }
+
+app.UseDefaultCulture();
 
 app.UsePathBase(new PathString("/cfa"));
 

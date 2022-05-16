@@ -1,5 +1,4 @@
 ﻿@using Microsoft.AspNetCore.Builder
-@using Microsoft.AspNetCore.Localization
 @using Microsoft.Extensions.Options
 @using Smart.FA.Catalog.Core.Services
 @using Smart.FA.Catalog.Infrastructure.Helpers
@@ -10,12 +9,12 @@
 @inject IOptions<UrlOptions> UrlOptions
 
 @{
-    var requestCulture = Context.Features.Get<IRequestCultureFeature>() ?? throw new InvalidOperationException($"Couldn't get {nameof(IRequestCultureFeature)}");
-    var supportedLanguages = RequestLocalizationOptions
-        .Value?
-        .SupportedUICultures?
-        .Select(supportedCulture => new SelectListItem(supportedCulture.DisplayName, supportedCulture.TwoLetterISOLanguageName)) ??
-        throw new InvalidOperationException("Supported culture not defined");
+    // var requestCulture = Context.Features.Get<IRequestCultureFeature>() ?? throw new InvalidOperationException($"Couldn't get {nameof(IRequestCultureFeature)}");
+    // var supportedLanguages = RequestLocalizationOptions
+    //     .Value?
+    //     .SupportedUICultures?
+    //     .Select(supportedCulture => new SelectListItem(supportedCulture.DisplayName, supportedCulture.TwoLetterISOLanguageName)) ??
+    //     throw new InvalidOperationException("Supported culture not defined");
 }
 <!DOCTYPE html>
 <html lang="en" class="u-maximize-height" dir="ltr">
@@ -40,17 +39,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="c-toolbar__right">
-                    <div class="c-toolbar__item">
-                        <div class="c-select-holder">
-                            <select id="culture"
-                                    name="culture"
-                                    class="c-select"
-                                    asp-items="supportedLanguages"
-                                    asp-for="@requestCulture.RequestCulture.UICulture.Name">
-                            </select>
-                        </div>
-                    </div>
+                @* <div class="c-toolbar__right"> *@
+                @*     <div class="c-toolbar__item"> *@
+                @*         <div class="c-select-holder"> *@
+                @*             <select id="culture" *@
+                @*                     name="culture" *@
+                @*                     class="c-select" *@
+                @*                     asp-items="supportedLanguages" *@
+                @*                     asp-for="@requestCulture.RequestCulture.UICulture.Name"> *@
+                @*             </select> *@
+                @*         </div> *@
+                @*     </div> *@
                     <div class="c-toolbar__item">
                         <a class="c-user-navigation" href="#" data-menu="userMenu">
                             <div class="c-avatar c-avatar--img">
