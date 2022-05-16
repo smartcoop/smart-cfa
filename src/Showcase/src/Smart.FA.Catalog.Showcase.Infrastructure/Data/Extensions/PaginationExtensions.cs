@@ -40,6 +40,8 @@ public static class PaginationExtensions
         query = query.Where(item => filteredIdsQuery.Contains(item.Id));
 
         // Make sure to keep consistent ordering.
-        return (await query.OrderBy(item => item.Id).ToListAsync(), totalCount);
+        var orderedList = await query.OrderBy(item => item.Id).ToListAsync();
+        
+        return (orderedList, totalCount);
     }
 }
