@@ -5,6 +5,7 @@ using Smart.FA.Catalog.Application.Extensions;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Infrastructure.Extensions;
 using Smart.FA.Catalog.Web.Extensions;
+using Smart.FA.Catalog.Web.Pages;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,7 +54,7 @@ app.UseForwardedHeaders();
 
 if (app.Environment.IsProduction())
 {
-    app.UseExceptionHandler("/cfa/Error");
+    app.UseExceptionHandler(Routes.ErrorPage);
     app.UseHsts();
 }
 else
@@ -61,7 +62,7 @@ else
     app.UseDeveloperExceptionPage();
 }
 
-app.UseStatusCodePagesWithReExecute("/cfa/{0}");
+app.UseStatusCodePagesWithReExecute($"{Routes.BasePath}/{{0}}");
 
 app.UseRequestLocalization();
 
