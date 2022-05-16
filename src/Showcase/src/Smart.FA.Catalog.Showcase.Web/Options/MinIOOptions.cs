@@ -8,6 +8,7 @@ public class MinIOOptions
 
     public string BucketName { get; set; } = null!;
 
+    //TODO having a bit of logic is not the best to have, even tho it is acceptable. Moving the MinIO link generator would be better tho.
     public string GenerateMinIoTrainerProfileUrl(string? trainerDetailsProfileImagePath)
     {
         return !string.IsNullOrEmpty(trainerDetailsProfileImagePath)
