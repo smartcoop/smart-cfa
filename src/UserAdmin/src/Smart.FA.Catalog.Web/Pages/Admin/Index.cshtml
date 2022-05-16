@@ -1,4 +1,9 @@
 ﻿@page
+@using Microsoft.Extensions.Options
+@using Smart.FA.Catalog.Web.Options
+
+@inject IOptions<UrlOptions> UrlOptions
+
 @model Smart.FA.Catalog.Web.Pages.Admin.IndexModel
 @{
     Layout = "Shared/_AdminLayout";
@@ -17,9 +22,9 @@
 }
 <div class="o-container">
     <smart-panel header="@CatalogResources.AdminHomepage_WhatIsFormateurAssocieTitle">
-        <p class="intro__paragraph"><a href="https://@CatalogResources.UrlSitePublic">@CatalogResources.UrlSitePublic</a> @CatalogResources.AdminHomepage_IntroductionPart1</p>
+        <p class="intro__paragraph"><a href="@UrlOptions.Value.Showcase">@CatalogResources.UrlSitePublic</a> @CatalogResources.AdminHomepage_IntroductionPart1</p>
         <p class="intro__paragraph">@CatalogResources.AdminHomepage_IntroductionPart2</p>
-        <p class="intro__paragraph">@CatalogResources.AdminHomepage_IntroductionPart3 <a href="https://@CatalogResources.UrlSitePublic">@CatalogResources.UrlSitePublic</a>.</p>
+        <p class="intro__paragraph">@CatalogResources.AdminHomepage_IntroductionPart3 <a href="@UrlOptions.Value.Showcase">@CatalogResources.UrlSitePublic</a>.</p>
     </smart-panel>
 
     <smart-spacer bottom="ExtraLarge" top="ExtraLarge"></smart-spacer>
