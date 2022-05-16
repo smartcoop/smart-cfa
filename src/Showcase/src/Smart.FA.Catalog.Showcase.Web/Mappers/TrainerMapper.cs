@@ -18,7 +18,7 @@ public static class TrainerMapper
             {
                 SocialNetwork = socialNetworkName,
                 SocialNetworkUrl = detail.UrlToProfile,
-                IconPathFileName = $"/icons/{socialNetworkName}.svg"
+                IconPathFileName = $"/icons/{socialNetworkName.ToString().ToLower()}.svg"
             });
         }
         
