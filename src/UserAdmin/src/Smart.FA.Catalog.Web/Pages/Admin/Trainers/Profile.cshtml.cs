@@ -14,12 +14,14 @@ public class ProfileModel : AdminPage
 
     public string Email => UserIdentity.CurrentTrainer.Email!;
 
-    [BindProperty] public EditProfileCommand? EditProfileCommand { get; set; }
+    [BindProperty]
+    public EditProfileCommand? EditProfileCommand { get; set; }
 
     /// <summary>
     /// State boolean that indicates if the current page results from a successful profile edition.
     /// </summary>
-    internal bool EditionSucceeded { get; set; }
+    [TempData]
+    public bool EditionSucceeded { get; set; }
 
     public Stream? ProfilePicture { get; set; }
 
@@ -69,7 +71,7 @@ public class ProfileModel : AdminPage
 
         // Page reload from a post, whether the underlying operation was successful or not, requires the social networks list to load again.
         await LoadSocialsAsync();
-        return Page();
+        return EditionSucceeded ? RedirectToPage() : Page();
     }
 
     private async Task LoadDataAsync()

@@ -35,7 +35,7 @@ public class GetPagedTrainingListFromTrainerQueryHandler : IRequestHandler<GetPa
             .Where(assignment => assignment.Trainer.Id == request.TrainerId)
             .Select(assignment => assignment.Training)
             .Where(training => training.Details.Any(details => details.Language == request.Language))
-            .OrderBy(training => training.Id);
+            .OrderByDescending(training => training.LastModifiedAt);
 
         var trainings = await trainingsFromTrainerQueryable.PaginateAsync(request.PageItem, cancellationToken);
 

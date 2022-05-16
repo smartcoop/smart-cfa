@@ -12,7 +12,7 @@ public static class TrainerMapper
     {
         var socialNetworks = new List<TrainerSocialNetwork>();
         foreach (var detail in trainerDetails.Where(details => !string.IsNullOrWhiteSpace(details.UrlToProfile))
-                     .OrderByDescending(s => s.SocialNetwork))
+                     .OrderByDescending(details => details.SocialNetwork))
         {
             socialNetworks.Add(detail.ToTrainerSocialNetwork());
         }
@@ -28,7 +28,7 @@ public static class TrainerMapper
         {
             SocialNetwork = socialNetworkName,
             SocialNetworkUrl = details.UrlToProfile,
-            IconPathFileName = $"/icons/{socialNetworkName}.svg"
+            IconPathFileName = $"/icons/{socialNetworkName.ToString().ToLowerInvariant()}.svg"
         };
     }
 

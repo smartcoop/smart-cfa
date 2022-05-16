@@ -349,7 +349,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nombre de formateur·trices :.
+        ///   Looks up a localized string similar to Nombre de formateur·rices :.
         /// </summary>
         public static string Homepage_TrainersCount {
             get {
@@ -390,6 +390,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         public static string Next {
             get {
                 return ResourceManager.GetString("Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aucun formateur n&apos;a été trouvé.
+        /// </summary>
+        public static string NoTrainersWereFound {
+            get {
+                return ResourceManager.GetString("NoTrainersWereFound", resourceCulture);
             }
         }
         
@@ -435,6 +444,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         public static string PublicPage_Subtitle {
             get {
                 return ResourceManager.GetString("PublicPage_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rechercher.
+        /// </summary>
+        public static string SearchLabel {
+            get {
+                return ResourceManager.GetString("SearchLabel", resourceCulture);
             }
         }
         
@@ -538,7 +556,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Sport.
         /// </summary>
         public static string TopicName_Sport {
             get {
@@ -556,7 +574,25 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Les formateur·trices de Formateurs Associés.
+        ///   Looks up a localized string similar to Liste des formateur·rices.
+        /// </summary>
+        public static string TrainerList_Title {
+            get {
+                return ResourceManager.GetString("TrainerList_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retrouvez ici la liste des formateur·rices qui proposent une ou plusieurs formations sur ce site. Vous pouvez effectuer une recherche sur base de mots-clés. La liste des formateur·rices est proposée de manière aléatoire. .
+        /// </summary>
+        public static string TrainerListe_Presentation {
+            get {
+                return ResourceManager.GetString("TrainerListe_Presentation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Les formateur·rices de Formateurs Associés.
         /// </summary>
         public static string TrainersOfAssociateTrainers {
             get {
@@ -565,7 +601,25 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Formations à suivre.
+        ///   Looks up a localized string similar to Retrouvez ici les formations proposées par Smart, à l’initiative de ses sociétaires [et celles proposée directement à l’initiative de Smart elle-même]. Les formations apparaissent dans un ordre aléatoire. .
+        /// </summary>
+        public static string TrainingList_presentation {
+            get {
+                return ResourceManager.GetString("TrainingList_presentation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Liste des formations .
+        /// </summary>
+        public static string TrainingList_Title {
+            get {
+                return ResourceManager.GetString("TrainingList_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ses formations.
         /// </summary>
         public static string TrainingsToFollow {
             get {

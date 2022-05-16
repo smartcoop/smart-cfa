@@ -10,14 +10,45 @@
                 <h2 class="c-toolbar__title">@CatalogResources.Hello @Model.UserIdentity.CurrentTrainer.Name.ToString()</h2>
             </div>
         </div>
+        <div class="c-toolbar__right">
+            <div class="c-toolbar__item"></div>
+        </div>
     </div>
 }
 <div class="o-container">
     <smart-panel header="@CatalogResources.AdminHomepage_WhatIsFormateurAssocieTitle">
-        <p class="intro__paragraph">@CatalogResources.AdminHomepage_IntroductionPart1</p>
+        <p class="intro__paragraph"><a href="https://@CatalogResources.UrlSitePublic">@CatalogResources.UrlSitePublic</a> @CatalogResources.AdminHomepage_IntroductionPart1</p>
         <p class="intro__paragraph">@CatalogResources.AdminHomepage_IntroductionPart2</p>
-        <p class="intro__paragraph">@CatalogResources.AdminHomepage_IntroductionPart3</p>
+        <p class="intro__paragraph">@CatalogResources.AdminHomepage_IntroductionPart3 <a href="https://@CatalogResources.UrlSitePublic">@CatalogResources.UrlSitePublic</a>.</p>
     </smart-panel>
 
     <smart-spacer bottom="ExtraLarge" top="ExtraLarge"></smart-spacer>
+
+    <smart-panel header="@CatalogResources.AdminHomepageProfil_Title">
+        <p class="intro__paragraph">@CatalogResources.AdminHomepageProfil_IntroductionPart1</p>
+        <p class="intro__paragraph">@CatalogResources.AdminHomepageProfil_IntroductionPart2</p>
+        <a href="/cfa/admin/myprofile">
+            <button class="c-button c-button--primary" type="button">
+                <span class="c-button__content">
+                    <span class="c-button__label">@CatalogResources.AdminHomepageProfil_Button</span>
+                </span>
+            </button>
+        </a>
+    </smart-panel>
+
+    <smart-spacer bottom="ExtraLarge" top="ExtraLarge"></smart-spacer>
+
+    <smart-panel header="@CatalogResources.AdminHomepageTraining_Title">
+        <p class="intro__paragraph">@CatalogResources.AdminHomepageTraining_IntroductionPart1</p>
+        <p class="intro__paragraph">@CatalogResources.AdminHomepageTraining_IntroductionPart2</p>
+        <p class="intro__paragraph">@CatalogResources.AdminHomepageTraining_IntroductionPart3</p>
+        <a href="/cfa/admin/Trainings/Create">
+            <button class="c-button c-button--primary" type="button">
+                <span class="c-button__content">
+                    <span class="c-button__label">@CatalogResources.AdminHomepageTraining_Button</span>
+                </span>
+            </button>
+        </a>
+    </smart-panel>
+
 </div>

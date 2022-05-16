@@ -1,6 +1,9 @@
 ﻿@page
+@using Microsoft.Extensions.Localization
 @using Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer
 @model Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerDetails.TrainerDetailsModel
+@inject IStringLocalizer<ShowcaseResources> StringLocalizer
+
 @{
     ViewData["Title"] = Model.Trainer.Title;
     Layout = Routes.Layout;
@@ -55,7 +58,7 @@
                         <img src="~/icons/tag--blue.svg" class="o-svg-icon--small sectors-icon" alt="" />
                         @foreach (var topic in training.Topics)
                         {
-                            <a class="training-list__category-link" asp-page="TrainingsList" asp-route-cat="TopicName">@topic.Name</a>
+                            <a class="training-list__category-link" href="#">@StringLocalizer[$"TopicName_{topic.Name}"]</a>
                             if (topic != training.Topics.Last())
                             {
                                 <span>, </span>
