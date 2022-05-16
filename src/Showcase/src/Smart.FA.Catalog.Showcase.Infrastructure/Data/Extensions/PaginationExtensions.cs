@@ -27,6 +27,7 @@ public static class PaginationExtensions
         var totalCount = await idsQuery.CountAsync();
 
         // Make sure to have the skip and take greater or equal to zero.
+        // Negative values produce an exception
         var skip = Math.Max((pageNumber - 1) * pageSize, 0);
         var take = Math.Max(pageSize, 0);
 
