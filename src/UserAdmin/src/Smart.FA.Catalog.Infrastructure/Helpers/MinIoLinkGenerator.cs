@@ -20,7 +20,7 @@ public class MinIoLinkGenerator : IMinIoLinkGenerator
     public string GenerateTrainerProfilePictureUrl(int trainerId, string imageFormat)
     {
         // Generate unique salt value to avoid decoding
-        var hashIds = new Hashids(MinioLinkDefaultSaltValues.TrainerProfilePicture, 8);
+        var hashIds = new Hashids(Guid.NewGuid().ToString(), 8);
         return Path.Combine(TrainerRelativeFolder, $"{hashIds.Encode(trainerId)}{imageFormat}");
     }
 
@@ -33,7 +33,7 @@ public class MinIoLinkGenerator : IMinIoLinkGenerator
     /// <inheritdoc />
     public string GetDefaultRelativeProfilePictureImageUrl()
     {
-        // Generate unique salt value to avoid decoding
+        // No unique salt because we should be able to decode a string
         var hashIds = new Hashids(MinioLinkDefaultSaltValues.TrainerProfilePicture, 8);
         return Path.Combine(TrainerRelativeFolder, $"{hashIds.Encode(0)}.png");
     }
@@ -41,7 +41,7 @@ public class MinIoLinkGenerator : IMinIoLinkGenerator
     /// <inheritdoc />
     public string GenerateUserChartRevisionUrl(int userChartRevisionId)
     {
-        // No salt because we should be able to decode a string
+        // No unique salt because we should be able to decode a string
         var hashIds = new Hashids(MinioLinkDefaultSaltValues.UserChartRevision, 8);
         return Path.Combine(UserChartRelativeFolder, $"{hashIds.Encode(userChartRevisionId)}.pdf");
     }
