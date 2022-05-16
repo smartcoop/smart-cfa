@@ -5,6 +5,7 @@ using Smart.FA.Catalog.Application.Extensions;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Infrastructure.Extensions;
 using Smart.FA.Catalog.Web.Extensions;
+using Smart.FA.Catalog.Web.Pages;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,17 +52,17 @@ var app = builder.Build();
 
 app.UseForwardedHeaders();
 
-
 if (app.Environment.IsProduction())
 {
-    app.UseExceptionHandler("/Error");
+    app.UseExceptionHandler(Routes.ErrorPage);
     app.UseHsts();
 }
 else
 {
     app.UseDeveloperExceptionPage();
-    app.UseStatusCodePagesWithReExecute("/cfa/{0}");
 }
+
+app.UseStatusCodePagesWithReExecute($"{Routes.BasePath}/{{0}}");
 
 app.UseRequestLocalization();
 
@@ -71,9 +72,11 @@ if (app.Configuration.GetValue("ForceHttpRedirection", true))
     app.UseHttpsRedirection();
 }
 
-app.UseStaticFiles();
+app.UsePathBase(new PathString("/cfa"));
 
 app.UseRouting();
+
+app.UseStaticFiles();
 
 app.UseAuthentication();
 
