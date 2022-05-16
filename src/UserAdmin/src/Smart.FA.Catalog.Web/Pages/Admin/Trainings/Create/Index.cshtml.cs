@@ -1,5 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Smart.Design.Razor.TagHelpers.Alert;
 using Smart.FA.Catalog.Core.Services;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.Create;
@@ -39,7 +41,10 @@ public class CreateModel : AdminPage
         }
 
         var request = CreateTrainingViewModel.MapToRequest(UserIdentity.CurrentTrainer.Id, UserIdentity.CurrentTrainer.DefaultLanguage);
-        var response = await Mediator.Send(request);
+        await Mediator.Send(request);
+
+        TempData.AddGlobalBannerMessage(CatalogResources.TrainingCreatedWithSuccess, AlertStyle.Success);
+        
         return RedirectToPage("/Admin/Trainings/List/Index");
     }
 

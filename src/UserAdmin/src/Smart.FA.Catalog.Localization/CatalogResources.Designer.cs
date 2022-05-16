@@ -142,7 +142,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Compléter votre profil.
         /// </summary>
         public static string AdminHomepageProfil_Button {
             get {
@@ -178,7 +178,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Encoder une formation.
         /// </summary>
         public static string AdminHomepageTraining_Button {
             get {
@@ -349,7 +349,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Édition de la formation.
+        ///   Looks up a localized string similar to Édition de la formation : .
         /// </summary>
         public static string EditTraining {
             get {
@@ -1042,11 +1042,38 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Formation créée avec succès.
+        /// </summary>
+        public static string TrainingCreatedWithSuccess {
+            get {
+                return ResourceManager.GetString("TrainingCreatedWithSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formation supprimée avec succès.
+        /// </summary>
+        public static string TrainingDeletedWithSuccess {
+            get {
+                return ResourceManager.GetString("TrainingDeletedWithSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to La formation n&apos;existe pas.
         /// </summary>
         public static string TrainingDoesNotExist {
             get {
                 return ResourceManager.GetString("TrainingDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formation éditée avec succès.
+        /// </summary>
+        public static string TrainingEditedWithSuccess {
+            get {
+                return ResourceManager.GetString("TrainingEditedWithSuccess", resourceCulture);
             }
         }
         
