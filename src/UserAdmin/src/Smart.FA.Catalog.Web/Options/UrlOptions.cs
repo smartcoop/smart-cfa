@@ -7,4 +7,6 @@ public class UrlOptions
     public string Home { get; set; }
 
     public string SignOut {get; set;}
+
+    public string Showcase { get; set; }
 }
