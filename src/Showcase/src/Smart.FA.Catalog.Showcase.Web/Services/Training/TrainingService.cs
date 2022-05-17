@@ -29,4 +29,10 @@ public class TrainingService : ITrainingService
 
         return new PagedList<TrainingListViewModel>(trainingListViewModels, new PageItem(pageNumber, pageSize), result.TotalCount);
     }
+    public async Task<PagedList<TrainingListViewModel>> SearchTrainingViewModelsAsync(string? searchKeyword, int currentPage, int pageSize)
+    {
+        var trainings = await _catalogShowcaseContext.TrainingList.SearchPaginatedTrainingsAsync(searchKeyword, currentPage, pageSize);
+
+        return new PagedList<TrainingListViewModel>(trainings.ToTrainingListViewModels(), new PageItem(currentPage, pageSize), trainings.TotalCount);
+    }
 }
