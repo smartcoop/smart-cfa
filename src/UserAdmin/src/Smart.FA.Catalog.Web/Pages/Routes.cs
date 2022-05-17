@@ -8,7 +8,7 @@ public static class Routes
 
     public const string ErrorPage = "/cfa/500";
 
-    public const string UserChartApproval = "/cfa/userChart";
+    public const string UserChartApproval = "/cfa/userchart";
 
     public const string SuperUserTrainingList = "/cfa/superuser/trainings";
 }
