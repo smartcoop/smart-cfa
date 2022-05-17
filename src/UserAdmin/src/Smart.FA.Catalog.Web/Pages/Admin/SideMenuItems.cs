@@ -7,7 +7,7 @@ public class SideMenuItem : Enumeration<SideMenuItem>
     public string Href { get; }
 
     public static readonly SideMenuItem MyProfile   = new(CatalogResources.MyTrainerProfile, 1, "/cfa/admin/myprofile");
-    public static readonly SideMenuItem MyTrainings = new(CatalogResources.MyTrainings, 2, "/cfa/admin/trainings/List");
+    public static readonly SideMenuItem MyTrainings = new(CatalogResources.MyTrainings, 2, "/cfa/admin/trainings/list");
 
     private SideMenuItem(string name, int value, string href) : base(value, name)
     {

@@ -33,6 +33,11 @@ builder.Services
         configuration.DisableDataAnnotationsValidation = true;
     });
 
+//Sets all routes to lower-case
+builder.Services.AddRouting(options => { options.LowercaseUrls = true;
+    options.LowercaseQueryStrings = true;
+});
+
 // Add localization.
 builder.Services.AddCatalogLocalization();
 
