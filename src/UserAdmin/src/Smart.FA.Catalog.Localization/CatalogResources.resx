@@ -265,13 +265,13 @@
     <value>Édition de la formation : </value>
   </data>
   <data name="FieldRequired" xml:space="preserve">
-    <value>Ce champ est requis</value>
+    <value>Ce champs est requis</value>
   </data>
   <data name="Training_InGroup" xml:space="preserve">
     <value>en groupe</value>
   </data>
   <data name="Training_IsProfessional" xml:space="preserve">
-    <value>est professionelle / professionnalisante</value>
+    <value>est professionelle / professionalisante</value>
   </data>
   <data name="Training_IsLanguageCourse" xml:space="preserve">
     <value>est un cours de langue</value>
