@@ -16,10 +16,12 @@ public class EntityConfigurationBase<T> : IEntityTypeConfiguration<T>
 
         builder
            .Property(e => e.CreatedAt)
+           .HasPrecision(3)
            .IsRequired();
 
         builder
            .Property(e => e.LastModifiedAt)
+           .HasPrecision(3)
            .IsRequired();
 
         builder.Ignore(e => e.DomainEvents);
