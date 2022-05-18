@@ -1,8 +1,6 @@
-using System.Globalization;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Smart.FA.Catalog.Core.Domain;
-using Smart.FA.Catalog.Core.Domain.Dto;
 using Smart.FA.Catalog.Infrastructure.Extensions;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 using Smart.FA.Catalog.Shared.Collections;
@@ -14,6 +12,8 @@ namespace Smart.FA.Catalog.Application.UseCases.Queries;
 /// </summary>
 public class GetTrainingsByCriteriaQuery : IRequest<PagedList<Training>>
 {
+    public string? TrainerName { get; set; }
+
     public string? Title { get; init; }
 
     public int? Status { get; set; }
@@ -39,20 +39,22 @@ public class GetTrainingsByCriteriaQueryHandler : IRequestHandler<GetTrainingsBy
 
     public async Task<PagedList<Training>> Handle(GetTrainingsByCriteriaQuery request, CancellationToken cancellationToken)
     {
-        IQueryable<Training> query = _catalogContext.Trainings
-            .Include(training => training.Topics)
-            .Include(training => training.Details);
+        // Includes necessary navigation properties.
+        var query = BaseQuery();
 
+        // Filter by status.
         if (request.Status is not null)
         {
             query = query.Where(training => training.StatusType == request.Status);
         }
 
+        // Filter by title.
         if (!string.IsNullOrWhiteSpace(request.Title))
         {
             query = query.Where(training => training.Details.Any(details => details.Title.Contains(request.Title)));
         }
 
+        // Filter by topics.
         if (request.Topics?.Any() == true)
         {
             foreach (var requestTopic in request.Topics)
@@ -61,8 +63,26 @@ public class GetTrainingsByCriteriaQueryHandler : IRequestHandler<GetTrainingsBy
             }
         }
 
+        // Filter by assigned trainers' names.
+        if (!string.IsNullOrWhiteSpace(request.TrainerName))
+        {
+            query = query.Where(training => training.TrainerAssignments.Any(assignment => assignment.Trainer.Name.FirstName.Contains(request.TrainerName) || assignment.Trainer.Name.LastName.Contains(request.TrainerName)));
+        }
+
+        // Finally apply pagination.
         var trainings = await query.PaginateAsync(new PageItem(request.PageNumber, request.PageSize), cancellationToken);
 
         return trainings;
+    }
+
+    private IQueryable<Training> BaseQuery()
+    {
+        var query = _catalogContext.Trainings
+            .Include(training => training.Topics)
+            .Include(training => training.Details)
+            .Include(training => training.TrainerAssignments)
+            .ThenInclude(assignment => assignment.Trainer);
+
+        return query;
     }
 }
