@@ -37,7 +37,7 @@ public class TrainingListModel : PageModelBase
             return RedirectToNotFound();
         }
 
-        Trainings = await _trainingService.SearchTrainingByTopicViewModelsAsync(id, CurrentPage, ItemsPerPage);
+        Trainings = await _trainingService.SearchTrainingViewModelsByTopicIdAsync(id, CurrentPage, ItemsPerPage);
         return Page();
     }
 }

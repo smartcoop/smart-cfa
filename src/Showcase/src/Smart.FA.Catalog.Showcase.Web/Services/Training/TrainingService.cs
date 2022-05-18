@@ -37,7 +37,7 @@ public class TrainingService : ITrainingService
         return new PagedList<TrainingListViewModel>(trainings.ToTrainingListViewModels(), new PageItem(currentPage, pageSize), trainings.TotalCount);
     }
 
-    public async Task<PagedList<TrainingListViewModel>> SearchTrainingByTopicViewModelsAsync(int? searchTopicId, int currentPage, int pageSize)
+    public async Task<PagedList<TrainingListViewModel>> SearchTrainingViewModelsByTopicIdAsync(int? searchTopicId, int currentPage, int pageSize)
     {
         var trainings = await _catalogShowcaseContext.TrainingList.SearchPaginatedTrainingsByTopicAsync(searchTopicId, currentPage, pageSize);
 
