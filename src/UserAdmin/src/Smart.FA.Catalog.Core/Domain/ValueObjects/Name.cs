@@ -41,4 +41,6 @@ public class Name: ValueObject
     {
         return FirstName + " " + LastName;
     }
+
+    public static implicit operator string(Name name) => name.ToString();
 }
