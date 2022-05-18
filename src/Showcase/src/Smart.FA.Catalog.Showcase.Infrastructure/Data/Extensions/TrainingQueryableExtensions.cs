@@ -44,7 +44,9 @@ public static class TrainingQueryableExtensions
     {
         if (!string.IsNullOrEmpty(searchKeyWord))
         {
-            query = query.Where(trainingList => trainingList.Title.Contains(searchKeyWord));
+            query = query.Where(trainingList => trainingList.Title.Contains(searchKeyWord) ||
+                                                trainingList.Goal.Contains(searchKeyWord) ||
+                                                trainingList.Methodology.Contains(searchKeyWord));
         }
 
         var paginationResult = await query.PaginateAsync(pageNumber, pageSize);
