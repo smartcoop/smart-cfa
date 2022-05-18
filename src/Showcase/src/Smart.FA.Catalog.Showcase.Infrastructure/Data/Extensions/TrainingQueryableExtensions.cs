@@ -49,4 +49,17 @@ public static class TrainingQueryableExtensions
         var paginationResult = await query.PaginateAsync(pageNumber, pageSize);
         return new PagedList<TrainingList>(paginationResult.PaginatedItems, new PageItem(pageNumber, pageSize), paginationResult.TotalCount);
     }
+    public static async Task<PagedList<TrainingList>> SearchPaginatedTrainingsByTopicAsync(this IQueryable<TrainingList> query,
+        int? searchTopic,
+        int pageNumber,
+        int pageSize)
+    {
+        if (searchTopic != null)
+        {
+            query = query.Where(trainingList => trainingList.Topic == searchTopic);
+        }
+
+        var paginationResult = await query.PaginateAsync(pageNumber, pageSize);
+        return new PagedList<TrainingList>(paginationResult.PaginatedItems, new PageItem(pageNumber, pageSize), paginationResult.TotalCount);
+    }
 }

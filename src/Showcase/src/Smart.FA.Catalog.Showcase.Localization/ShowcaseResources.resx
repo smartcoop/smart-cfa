@@ -306,4 +306,7 @@
   <data name="NoTrainersWereFound" xml:space="preserve">
     <value>Aucun formateur n'a été trouvé</value>
   </data>
+  <data name="AllTopics" xml:space="preserve">
+    <value>Dans toutes les matières</value>
+  </data>
 </root>

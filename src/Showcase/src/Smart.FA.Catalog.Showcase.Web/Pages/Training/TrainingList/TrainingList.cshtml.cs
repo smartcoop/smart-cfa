@@ -29,4 +29,15 @@ public class TrainingListModel : PageModelBase
         Trainings = await _trainingService.SearchTrainingViewModelsAsync(searchKeyword, CurrentPage, ItemsPerPage);
         return Page();
     }
+
+    public async Task<ActionResult> OnGetSearchTopicAsync(int? id)
+    {
+        if (CurrentPage <= 0)
+        {
+            return RedirectToNotFound();
+        }
+
+        Trainings = await _trainingService.SearchTrainingByTopicViewModelsAsync(id, CurrentPage, ItemsPerPage);
+        return Page();
+    }
 }

@@ -17,4 +17,13 @@ public interface ITrainingService
     /// <param name="pageSize">The number of item returned by the search.</param>
     /// <returns>A task that represents the asynchronous operation. The task's result is a paginated list of <see cref="TrainingListViewModel"/>.</returns>
     public Task<PagedList<TrainingListViewModel>> SearchTrainingViewModelsAsync(string? searchKeyword, int currentPage, int pageSize);
+
+    /// <summary>
+    /// Searches trainings by a topic.
+    /// </summary>
+    /// <param name="searchTopicId">The topic that will be used for the search.</param>
+    /// <param name="currentPage">The current page for the pagination.</param>
+    /// <param name="pageSize">The number of item returned by the search.</param>
+    /// <returns>A task that represents the asynchronous operation. The task's result is a paginated list of <see cref="TrainingListViewModel"/>.</returns>
+    public Task<PagedList<TrainingListViewModel>> SearchTrainingByTopicViewModelsAsync(int? searchTopicId, int currentPage, int pageSize);
 }

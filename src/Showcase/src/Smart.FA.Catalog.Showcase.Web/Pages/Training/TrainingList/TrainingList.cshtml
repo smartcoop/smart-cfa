@@ -1,5 +1,8 @@
 ﻿@page
 @model Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingList.TrainingListModel
+@using Smart.FA.Catalog.Shared.Domain.Enumerations.Training
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<ShowcaseResources> _localizer
 
 @{
     ViewData["Title"] = "TrainingList";
@@ -27,13 +30,25 @@
         </form>
     </section>
 
-    @*TO DO: include training search filters*@
+    <div class="search-category__list">
+        <ul class="search-category__list-ul">
+            @foreach (var topic in Topic.List)
+            {
+                <li class="search-category__item">
+                    <a asp-page-handler="SearchTopic" asp-route-id="@topic.Id" class="search-category__item-link"> @(_localizer[$"TopicName_{topic.Name}"])</a>
+                </li>
+            }
+        </ul>
+        <div class="search-category__item_end">
+            <a href="@Routes.SearchTopicTrainingList" class="search-category__item-all search-category__item--active">@ShowcaseResources.AllTopics</a>
+        </div>
+    </div>
 </section>
 
 <section class="section__training-list">
     @foreach (var training in Model.Trainings)
     {
-       @await Html.PartialAsync("Shared/_TrainingTitle", training)
+        @await Html.PartialAsync("Shared/_TrainingTitle", training)
     }
 
     @if (Model.Trainings is not null && Model.Trainings.Any())

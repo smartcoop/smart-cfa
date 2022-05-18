@@ -61,6 +61,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dans toutes les matières.
+        /// </summary>
+        public static string AllTopics {
+            get {
+                return ResourceManager.GetString("AllTopics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tous les formateur·trices.
         /// </summary>
         public static string AllTrainers {
