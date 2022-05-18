@@ -250,7 +250,7 @@
     <value>J'accepte</value>
   </data>
   <data name="SignOut" xml:space="preserve">
-    <value>Se déconnecter</value>
+    <value>Déconnexion</value>
   </data>
   <data name="TrainingTarget" xml:space="preserve">
     <value>Public cible</value>

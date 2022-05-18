@@ -66,8 +66,5 @@ public class TrainerService : ITrainerService
     }
 
     /// <inheritdoc />
-    public Task<int> TotalCountAsync()
-    {
-        return _catalogShowcaseContext.TrainerDetails.TrainerCountAsync();
-    }
+    public async Task<int> TotalCountAsync() => await _catalogShowcaseContext.TrainerList.Where(trainer => trainer.TrainingCount >= 1).CountAsync();
 }
