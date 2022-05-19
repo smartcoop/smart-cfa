@@ -15,4 +15,6 @@ public partial class TrainingList
     public int Topic { get; set; }
     public int Status { get; set; }
     public int TrainerId { get; set; }
+    public string? Goal { get; set; }
+    public string? Methodology { get; set; }
 }

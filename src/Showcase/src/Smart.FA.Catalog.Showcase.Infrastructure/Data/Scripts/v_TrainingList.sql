@@ -8,6 +8,8 @@ CREATE VIEW [Cfa].[v_TrainingList]
           ,category.TopicId
           ,training.TrainingStatusTypeId
           ,trainer.Id AS TrainerId
+          ,detail.Goal
+          ,detail.Methodology
 	FROM [Catalog].[Cfa].[Training] AS training
 	JOIN [Catalog].[Cfa].[TrainingLocalizedDetails] AS detail ON training.Id = detail.TrainingId
 	JOIN [Catalog].[Cfa].[TrainingTopic] category ON training.Id = category.TrainingId
