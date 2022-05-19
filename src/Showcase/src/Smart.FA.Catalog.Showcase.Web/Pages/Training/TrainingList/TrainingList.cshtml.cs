@@ -15,7 +15,9 @@ public class TrainingListModel : PageModelBase
 
     const int ItemsPerPage = 5;
 
-   public TrainingListModel(ITrainingService trainingService)
+    public int? TopicId { get; set; }
+
+    public TrainingListModel(ITrainingService trainingService)
     {
         _trainingService = trainingService;
     }
@@ -30,13 +32,14 @@ public class TrainingListModel : PageModelBase
         return Page();
     }
 
-    public async Task<ActionResult> OnGetSearchTopicAsync(int? id)
+    public async Task<ActionResult> OnGetSearchTopicAsync([FromQuery]int? id)
     {
         if (CurrentPage <= 0)
         {
             return RedirectToNotFound();
         }
 
+        TopicId = id;
         Trainings = await _trainingService.SearchTrainingViewModelsByTopicIdAsync(id, CurrentPage, ItemsPerPage);
         return Page();
     }
