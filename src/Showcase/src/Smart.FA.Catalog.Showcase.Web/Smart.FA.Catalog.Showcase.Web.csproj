@@ -1,20 +1,23 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>c5c4f69e-eb0d-4f3f-844f-3303d817a5ee</UserSecretsId>
+    <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Shared\Smart.FA.Catalog.Shared\Smart.FA.Catalog.Shared.csproj" />
     <ProjectReference Include="..\Smart.FA.Catalog.Showcase.Domain\Smart.FA.Catalog.Showcase.Domain.csproj" />
     <ProjectReference Include="..\Smart.FA.Catalog.Showcase.Infrastructure\Smart.FA.Catalog.Showcase.Infrastructure.csproj" />
-    <ProjectReference Include="..\Smart.FA.Catalog.Showcase.Localization\Smart.FA.Catalog.Showcase.Localization.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="EntityFrameworkCore.UseRowNumberForPaging" Version="0.3.0" />
+    <PackageReference Include="FluentEmail.MailKit" Version="3.0.2" />
+    <PackageReference Include="Hangfire" Version="1.7.28" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.4">
       <PrivateAssets>all</PrivateAssets>

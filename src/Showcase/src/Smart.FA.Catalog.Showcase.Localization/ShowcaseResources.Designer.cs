@@ -205,6 +205,24 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Un email est requis.
+        /// </summary>
+        public static string EmailIsRequired {
+            get {
+                return ResourceManager.GetString("EmailIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ce champ est requis.
+        /// </summary>
+        public static string FieldIsRequired {
+            get {
+                return ResourceManager.GetString("FieldIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact.
         /// </summary>
         public static string Footer_LabelContact {
@@ -376,6 +394,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email invalide.
+        /// </summary>
+        public static string InvalidEmail {
+            get {
+                return ResourceManager.GetString("InvalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mentions Légales.
         /// </summary>
         public static string LegalNotice_TitlePage {
@@ -390,6 +417,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         public static string LoremIpsum {
             get {
                 return ResourceManager.GetString("LoremIpsum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum 30 caractères.
+        /// </summary>
+        public static string Min50Chars {
+            get {
+                return ResourceManager.GetString("Min50Chars", resourceCulture);
             }
         }
         
@@ -633,6 +669,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         public static string TrainingsToFollow {
             get {
                 return ResourceManager.GetString("TrainingsToFollow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vous avez atteint la limite de contact.
+        /// </summary>
+        public static string YouReachedRateLimit {
+            get {
+                return ResourceManager.GetString("YouReachedRateLimit", resourceCulture);
             }
         }
     }
