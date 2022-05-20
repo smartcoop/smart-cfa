@@ -12,6 +12,8 @@ FROM Cfa.Trainer trainer
     ON assignment.TrainerId = trainer.Id
     INNER JOIN Cfa.Training training ON
     assignment.TrainingId = training.Id
-WHERE training.TrainingStatusTypeId = 3
+    INNER JOIN Cfa.TrainingStatusType trainingStatusType
+    ON trainingStatusType.Id = training.TrainingStatusTypeId
+WHERE TrainingStatusType.Name = 'Published'
 GROUP BY trainer.Id, trainer.FirstName, trainer.LastName, trainer.Title, trainer.ProfileImagePath
 HAVING count(assignment.TrainingId) >= 1

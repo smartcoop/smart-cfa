@@ -12,8 +12,8 @@ SELECT training.Id
         ,trainer.Id AS TrainerId
         ,trainer.Title AS trainerTitle
         ,training.TrainingStatusTypeId
-FROM [Catalog].[Cfa].[Training] AS training
-JOIN [Catalog].[Cfa].[TrainingLocalizedDetails] AS details ON training.Id = details.TrainingId
-JOIN [Catalog].[Cfa].[TrainerAssignment] trainingTrainer ON training.Id = trainingTrainer.TrainingId
-JOIN [Catalog].[Cfa].[Trainer] trainer ON trainingTrainer.TrainerId = trainer.Id
-JOIN [Catalog].[Cfa].[TrainingTopic] topic ON training.Id = topic.TrainingId
+FROM [Cfa].[Training] AS training
+JOIN [Cfa].[TrainingLocalizedDetails] AS details ON training.Id = details.TrainingId
+JOIN [Cfa].[TrainerAssignment] trainingTrainer ON training.Id = trainingTrainer.TrainingId
+JOIN [Cfa].[Trainer] trainer ON trainingTrainer.TrainerId = trainer.Id
+JOIN [Cfa].[TrainingTopic] topic ON training.Id = topic.TrainingId
