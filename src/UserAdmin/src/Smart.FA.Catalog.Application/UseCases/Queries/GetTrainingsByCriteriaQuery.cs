@@ -75,14 +75,10 @@ public class GetTrainingsByCriteriaQueryHandler : IRequestHandler<GetTrainingsBy
         return trainings;
     }
 
-    private IQueryable<Training> BaseQuery()
-    {
-        var query = _catalogContext.Trainings
+    private IQueryable<Training> BaseQuery =>
+        _catalogContext.Trainings
             .Include(training => training.Topics)
             .Include(training => training.Details)
             .Include(training => training.TrainerAssignments)
             .ThenInclude(assignment => assignment.Trainer);
-
-        return query;
-    }
 }
