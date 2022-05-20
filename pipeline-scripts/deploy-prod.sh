@@ -23,20 +23,20 @@ mv ../../src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Production.tmp.json 
 docker build \
   --build-arg Environment="Production" \
   -f "../docker/kerberos/Web.krb5.Dockerfile" \
-  -t "cfa_production_api" \
+  -t "cfa_production_useradmin" \
   .
 
 docker build \
   --build-arg Environment="Production" \
   -f "../docker/kerberos/Showcase.krb5.Dockerfile" \
-  -t "cfa-production-public" \
+  -t "cfa-production-showcase" \
   .
 
-docker stop cfa_production_api || true
-docker rm cfa_production_api || true
+docker stop cfa_production_useradmin || true
+docker rm cfa_production_useradmin || true
 
-docker stop cfa_production_public || true
-docker rm cfa_production_public || true
+docker stop cfa_production_showcase || true
+docker rm cfa_production_showcase || true
 
 docker network create --driver bridge --subnet 172.22.100.0/24 --attachable cfa || true
 
@@ -49,7 +49,7 @@ docker run -d \
   --volume $(pwd)/ktutil/files/${DB_USER}.keytab:/app/${DB_USER}.keytab \
   --network=cfa \
   -p "8087:80" \
-  cfa_production_api
+  cfa_production_useradmin
 
   docker run -d \
     --name cfa_production_public \
@@ -59,4 +59,4 @@ docker run -d \
     --volume $(pwd)/ktutil/files/${DB_USER}.keytab:/app/${DB_USER}.keytab \
     --network=cfa \
     -p "8086:80" \
-    cfa-production-public
+    cfa-production-showcase

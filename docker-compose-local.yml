@@ -4,7 +4,7 @@ services:
   datasource:
     build:
       context: .
-      dockerfile: DB.Dockerfile
+      dockerfile: docker/DB.Dockerfile
     hostname: "${DOCKER_NAME}-datasource"
     container_name: "${DOCKER_NAME}-datasource"
     restart: always
@@ -14,38 +14,35 @@ services:
       - "SA_PASSWORD=localStoragePassword!"
     networks:
       - "cfa"
-  api:
+  useradmin:
+    depends_on:
+      - datasource
+      - minioclient
+    build:
+      context: .
+      dockerfile: docker/Web.Dockerfile
+    hostname: ${DOCKER_NAME}-useradmin
+    container_name: ${DOCKER_NAME}-useradmin
+    ports:
+      - "5000:80"
+    networks:
+      - "cfa"
+    environment:
+      - "ASPNETCORE_ENVIRONMENT=${DOCKER_ENVIRONMENT}"
+  showcase:
     depends_on:
       - datasource
     build:
       context: .
-      dockerfile: Web.Dockerfile
+      dockerfile: docker/Showcase.Dockerfile
+    hostname: ${DOCKER_NAME}-showcase
+    container_name: ${DOCKER_NAME}-showcase
     ports:
-      - "5091:80"
-    hostname: ${DOCKER_NAME}-api
-    container_name: ${DOCKER_NAME}-api
-    restart: always
+      - "5005:80"
     networks:
       - "cfa"
     environment:
-      - "ASPNETCORE_ENVIRONMENT=Docker"
-  front:
-    build:
-      context: .
-      dockerfile: AccountSim.Dockerfile
-    ports:
-      - "5259:80"
-    hostname: account-sim
-    networks:
-      - "cfa"
-  proxy:
-    build:
-      context: .
-      dockerfile: Nginx.Dockerfile
-    ports:
-      - "7002:80"
-    networks:
-      - "cfa"
+      - "ASPNETCORE_ENVIRONMENT=${DOCKER_ENVIRONMENT}"
   minio:
     image: quay.io/minio/minio
     hostname: minio
@@ -59,8 +56,8 @@ services:
       - "9000:9000"
       - "9001:9001"
     environment:
-      - "MINIO_ROOT_USER=admin"
-      - "MINIO_ROOT_PASSWORD=adminpassword!"
+      - "MINIO_ROOT_USER=${DOCKER_MINIO_USER}"
+      - "MINIO_ROOT_PASSWORD=${DOCKER_MINIO_PASSWORD}"
     command: server /data --console-address ":9001"
 
   minioclient:
@@ -81,8 +78,9 @@ services:
       - "cfa"
 networks:
   cfa:
+    name: cfa
     ipam:
       driver: default
       config:
-        - subnet: 172.22.1.0/24
-          gateway: 172.22.1.1
+        - subnet: 172.21.1.0/24
+          gateway: 172.21.1.1
