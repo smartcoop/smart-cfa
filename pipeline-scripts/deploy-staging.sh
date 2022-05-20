@@ -8,11 +8,11 @@ echo "user=${DB_USER}" >> .env
 
 
 # generate myUserName.keytab
-docker build -t ktuil ./ktutil
-docker run -v $(pwd)/ktutil/files:/files --env-file ./.env  ktuil:latest
+docker build -t ktuil ./pipeline-scripts/ktutil
+docker run -v $(pwd)/pipeline-scripts/ktutil/files:/files --env-file ./.env  ktuil:latest
 
 # change permission myUserName.keytab
-sudo chmod 777 $(pwd)/ktutil/files/$DB_USER.keytab
+sudo chmod 777 $(pwd)/pipeline-scripts/ktutil/files/$DB_USER.keytab
 
 sed -e "s/{minio_access-key}/$MINIO_ACCESS_KEY/" \
     -e "s/{minio_secret-key}/$MINIO_SECRET_KEY/" \
@@ -44,8 +44,8 @@ docker run -d \
   --name cfa_staging_useradmin \
   --env Environment="PreProduction" \
   --env-file ./.env \
-  --volume $(pwd)/ktutil/files/krb5.conf:/etc/krb5.conf \
-  --volume $(pwd)/ktutil/files/${DB_USER}.keytab:/app/${DB_USER}.keytab \
+  --volume $(pwd)/pipeline-scripts/ktutil/files/krb5.conf:/etc/krb5.conf \
+  --volume $(pwd)/pipeline-scripts/ktutil/files/${DB_USER}.keytab:/app/${DB_USER}.keytab \
   --network=cfa \
   -p "8087:80" \
   cfa-staging-useradmin
@@ -54,8 +54,8 @@ docker run -d \
   --name cfa_staging_showcase \
   --env Environment="PreProduction" \
   --env-file ./.env \
-  --volume $(pwd)/ktutil/files/krb5.conf:/etc/krb5.conf \
-  --volume $(pwd)/ktutil/files/${DB_USER}.keytab:/app/${DB_USER}.keytab \
+  --volume $(pwd)/pipeline-scripts/ktutil/files/krb5.conf:/etc/krb5.conf \
+  --volume $(pwd)/pipeline-scripts/ktutil/files/${DB_USER}.keytab:/app/${DB_USER}.keytab \
   --network=cfa \
   -p "8086:80" \
   cfa-staging-showcase
