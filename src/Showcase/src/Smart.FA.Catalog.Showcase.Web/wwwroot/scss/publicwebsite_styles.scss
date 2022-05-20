@@ -443,7 +443,6 @@
 
 .trainer-list {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
     gap: 1rem 2.4rem;
 
@@ -460,10 +459,18 @@
             overflow: hidden;
         }
 
-        
+
         .trainer-icon {
             width: 10rem;
             padding-top: 2rem;
+        }
+
+        .trainer-link-image {
+            line-height: 0;
+            .trainer-image{
+                border:1px solid red;
+
+            }
         }
 
         .trainer-list__item-info {
