@@ -102,9 +102,13 @@ public partial class CatalogShowcaseContext : DbContext
 
             entity.ToView("v_TrainingList", "Cfa");
 
+            entity.Property(e => e.Goal).HasMaxLength(1000);
+
             entity.Property(e => e.Language)
                 .HasMaxLength(2)
                 .IsFixedLength();
+
+            entity.Property(e => e.Methodology).HasMaxLength(1000);
 
             entity.Property(e => e.Status).HasColumnName("TrainingStatusTypeId");
 
