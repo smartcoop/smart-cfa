@@ -16,19 +16,19 @@ sudo chmod 777 $(pwd)/pipeline-scripts/ktutil/files/$DB_USER.keytab
 
 sed -e "s/{minio_access-key}/$MINIO_ACCESS_KEY/" \
     -e "s/{minio_secret-key}/$MINIO_SECRET_KEY/" \
-    ../../src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Production.json > ../../src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Production.tmp.json
+    ./src/UserAdmin/src/Smart.FA.Catalog.UserAdmin.Web/appsettings.Production.json > ./src/UserAdmin/src/Smart.FA.Catalog.UserAdmin.Web/appsettings.Production.tmp.json
 
-mv ../../src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Production.tmp.json ../../src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Production.json
+mv ./src/UserAdmin/src/Smart.FA.Catalog.UserAdmin.Web/appsettings.Production.tmp.json ./src/UserAdmin/src/Smart.FA.Catalog.UserAdmin.Web/appsettings.Production.json
 
 docker build \
   --build-arg Environment="Production" \
-  -f "../docker/kerberos/Web.krb5.Dockerfile" \
+  -f "./docker/kerberos/Web.krb5.Dockerfile" \
   -t "cfa_production_useradmin" \
   .
 
 docker build \
   --build-arg Environment="Production" \
-  -f "../docker/kerberos/Showcase.krb5.Dockerfile" \
+  -f "./docker/kerberos/Showcase.krb5.Dockerfile" \
   -t "cfa-production-showcase" \
   .
 
@@ -42,7 +42,7 @@ docker network create --driver bridge --subnet 172.22.100.0/24 --attachable cfa 
 
 echo "RUN DOCKER"
 docker run -d \
-  --name cfa_production_api \
+  --name cfa_production_useradmin \
   --env Environment="Production" \
   --env-file ./.env \
   --volume $(pwd)/pipeline-scripts/ktutil/files/krb5.conf:/etc/krb5.conf \
@@ -52,7 +52,7 @@ docker run -d \
   cfa_production_useradmin
 
   docker run -d \
-    --name cfa_production_public \
+    --name cfa_production_showcase \
     --env Environment="Production" \
     --env-file ./.env \
     --volume $(pwd)/pipeline-scripts/ktutil/files/krb5.conf:/etc/krb5.conf \
