@@ -2,7 +2,9 @@ using EntityFrameworkCore.UseRowNumberForPaging;
 using Microsoft.EntityFrameworkCore;
 using NLog.Web;
 using Smart.FA.Catalog.Shared.Security;
+using Smart.FA.Catalog.Showcase.Domain.Options;
 using Smart.FA.Catalog.Showcase.Infrastructure.Data;
+using Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Contact;
 using Smart.FA.Catalog.Showcase.Web.Extensions;
 using Smart.FA.Catalog.Showcase.Web.Options;
 using Smart.FA.Catalog.Showcase.Web.Services.Trainer;
@@ -18,11 +20,15 @@ builder.Services.AddRazorPages();
 
 // Add localization.
 builder.Services
+    .AddFluentEmail(builder.Configuration)
     .AddShowcaseLocalization()
     .AddTransient<ITrainingService, TrainingService>()
-    .AddTransient<ITrainerService, TrainerService>();
+    .AddTransient<ITrainerService, TrainerService>()
+    .AddTransient<IInquiryEmailService, InquiryEmailService>();
 
-builder.Services.Configure<MinIOOptions>(builder.Configuration.GetSection(MinIOOptions.SectionName));
+builder.Services.Configure<MinIOOptions>(builder.Configuration.GetSection(MinIOOptions.SectionName))
+    .Configure<FluentEmailOptions>(builder.Configuration.GetSection(FluentEmailOptions.SectionName))
+    .Configure<InquiriesOptions>(builder.Configuration.GetSection(InquiriesOptions.SectionName));
 
 builder.Services.AddDbContext<CatalogShowcaseContext>((_, efOptions) =>
 {

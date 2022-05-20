@@ -4,18 +4,26 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Mailing\Contact\InquiryEmailTemplate.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Mailing\Contact\InquiryEmailTemplate.cshtml" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Smart.FA.Catalog.Showcase.Domain\Smart.FA.Catalog.Showcase.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentEmail.Core" Version="3.0.2" />
+    <PackageReference Include="FluentEmail.Razor" Version="3.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Data\Scripts\" />
+    <PackageReference Include="RazorLight" Version="2.0.0" />
   </ItemGroup>
 
 </Project>

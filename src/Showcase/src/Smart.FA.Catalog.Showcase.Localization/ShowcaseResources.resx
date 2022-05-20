@@ -309,4 +309,16 @@
   <data name="AllTopics" xml:space="preserve">
     <value>Dans toutes les matières</value>
   </data>
+  <data name="EmailIsRequired" xml:space="preserve">
+    <value>Un email est requis</value>
+  </data>
+  <data name="FieldIsRequired" xml:space="preserve">
+    <value>Ce champ est requis</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>Email invalide</value>
+  </data>
+  <data name="Min50Chars" xml:space="preserve">
+    <value>Minimum 30 caractères</value>
+  </data>
 </root>
