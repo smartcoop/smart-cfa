@@ -14,16 +14,15 @@ public class ProfileModel : AdminPage
 
     public string Email => UserIdentity.CurrentTrainer.Email!;
 
-    [BindProperty]
-    public EditProfileCommand? EditProfileCommand { get; set; }
+    [BindProperty] public EditProfileCommand? EditProfileCommand { get; set; }
+
+    [BindProperty] public IFormFile? ProfilePicture { get; set; }
 
     /// <summary>
     /// State boolean that indicates if the current page results from a successful profile edition.
     /// </summary>
     [TempData]
     public bool EditionSucceeded { get; set; }
-
-    public Stream? ProfilePicture { get; set; }
 
     public string ProfilePictureAbsoluteUrl { get; set; }
 
@@ -57,13 +56,6 @@ public class ProfileModel : AdminPage
             ParseSocialMedias();
             EditProfileCommand!.TrainerId = UserIdentity.CurrentTrainer.Id;
             var editionResponse = await Mediator.Send(EditProfileCommand);
-            if (EditProfileCommand.ProfilePicture is not null)
-            {
-                var imageUploadRequest = new UploadImageToStorageCommandRequest { Trainer = UserIdentity.CurrentTrainer, ProfilePicture = EditProfileCommand.ProfilePicture };
-                var profileResult = await Mediator.Send(imageUploadRequest);
-                ProfilePicture = profileResult.ProfilePictureStream;
-            }
-
             EditionSucceeded = !editionResponse.HasErrors();
         }
 
@@ -107,15 +99,28 @@ public class ProfileModel : AdminPage
         return response;
     }
 
+    public async Task<ActionResult> OnPostUploadProfileImageAsync()
+    {
+        var imageUploadRequest = new UploadTrainerProfileImageToStorageCommandRequest { TrainerId = UserIdentity.CurrentTrainer.Id, ProfilePicture = ProfilePicture };
+        var imageUploadResponse = await Mediator.Send(imageUploadRequest);
+        ProfilePictureAbsoluteUrl = imageUploadResponse.ProfilePictureAbsoluteUrl;
+
+        await LoadDataAsync();
+
+        return imageUploadResponse.HasErrors() ? RedirectToPage() : Page();
+    }
+
     public async Task<ActionResult> OnPostDeleteImageAsync()
     {
-        if (EditProfileCommand?.ProfilePicture is not null)
+        var hasErrors = false;
+        if (ProfilePicture is not null)
         {
-            await Mediator.Send(new DeleteTrainerProfileImageRequest { RelativeProfilePictureUrl = UserIdentity.CurrentTrainer.ProfileImagePath });
+            var imageDeletionResponse = await Mediator.Send(new DeleteTrainerProfileImageRequest { RelativeProfilePictureUrl = UserIdentity.CurrentTrainer.ProfileImagePath });
+            hasErrors = imageDeletionResponse.HasErrors();
         }
 
         await LoadDataAsync();
-        return Page();
+        return hasErrors ? RedirectToPage() : Page();
     }
 
     protected override SideMenuItem GetSideMenuItem() => SideMenuItem.MyProfile;

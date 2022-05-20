@@ -19,9 +19,8 @@ public class MinIoLinkGenerator : IMinIoLinkGenerator
     /// <inheritdoc />
     public string GenerateTrainerProfilePictureUrl(int trainerId, string imageFormat)
     {
-        // No unique salt because we should be able to decode a string
-        // TODO: rewrite upload system to allow impossible to decode url
-        var hashIds = new Hashids(MinioLinkDefaultSaltValues.TrainerProfilePicture, 8);
+        // Unique salt to prevent decoding from potential nefarious users
+        var hashIds = new Hashids(Guid.NewGuid().ToString(), 16);
         return Path.Combine(TrainerRelativeFolder, $"{hashIds.Encode(trainerId)}{imageFormat}");
     }
 

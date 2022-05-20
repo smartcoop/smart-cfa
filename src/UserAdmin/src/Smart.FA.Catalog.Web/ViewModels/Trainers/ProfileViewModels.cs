@@ -20,12 +20,11 @@ public static class Mappers
 {
     public static EditProfileCommand ToCommand(this TrainerProfile trainerProfile)
     {
-        return new EditProfileCommand()
+        return new EditProfileCommand
         {
             TrainerId = trainerProfile.TrainerId!.Value,
             Bio       = trainerProfile.Bio,
             Title     = trainerProfile.Title,
-            ProfilePicture = null
         };
     }
 

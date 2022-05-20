@@ -31,7 +31,6 @@ public class EditProfileCommand : IRequest<ProfileEditionResponse>
 
     public Dictionary<string, string>? Socials { get; set; }
 
-    public IFormFile? ProfilePicture { get; set; }
 }
 
 public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, ProfileEditionResponse>
@@ -101,12 +100,6 @@ public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, Pro
     {
         trainer.UpdateBiography(command.Bio ?? string.Empty);
         trainer.UpdateTitle(command.Title ?? string.Empty);
-        if (command.ProfilePicture is not null)
-        {
-            var fileName = new FileInfo(command.ProfilePicture.FileName);
-            trainer.UpdateProfileImagePath(_minIoLinkGenerator.GenerateTrainerProfilePictureUrl(trainer.Id, fileName.Extension));
-        }
-
         foreach (var commandSocial in command.Socials!)
         {
             var socialNetwork = SocialNetwork.FromValue(int.Parse(commandSocial.Key));
@@ -169,26 +162,6 @@ public class EditProfileCommandValidator : AbstractValidator<EditProfileCommand>
             .MaximumLength(500)
             .WithMessage(CatalogResources.BioCannotExceed500Chars);
 
-        When(request => request.ProfilePicture is not null,
-            () => RuleFor(request => request.ProfilePicture!)
-                .Cascade(CascadeMode.Stop)
-                .Must(IsUnderMaxSize).WithMessage(CatalogResources.ProfilePage_Image_FileTooBig)
-                .MustAsync(IsCorrectTypeAsync).WithMessage(CatalogResources.ProfilePage_Image_WrongFileType));
-    }
 
-    private async Task<bool> IsCorrectTypeAsync(IFormFile file, CancellationToken cancellationToken)
-    {
-        var mimeInspector = new ContentInspectorBuilder {Definitions = Default.FileTypes.Images.All()}.Build();
-
-        var fileStream = file.OpenReadStream();
-        MemoryStream memoryStream = new();
-        await fileStream.CopyToAsync(memoryStream, cancellationToken);
-        var result = mimeInspector.Inspect(memoryStream.ToArray());
-        return !result.IsDefaultOrEmpty;
-    }
-
-    private bool IsUnderMaxSize(IFormFile file)
-    {
-        return file.Length < _storageOptions.Value.FileSizeLimit;
     }
 }
