@@ -67,7 +67,7 @@ services:
       - minio
     entrypoint: >
       bash -c
-           "/usr/bin/mc alias set myminio http://host.docker.internal:9000 admin adminpassword!;
+           "/usr/bin/mc alias set myminio http://host.docker.internal:9000 ${DOCKER_MINIO_USER} ${DOCKER_MINIO_PASSWORD};
             /usr/bin/mc mb myminio/cfa;
             /usr/bin/mc policy set public myminio/cfa;
             /usr/bin/mc admin user add myminio newuser newuser123;

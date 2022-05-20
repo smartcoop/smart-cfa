@@ -1,0 +1,114 @@
+﻿@page
+@using Microsoft.Extensions.Localization
+@using Smart.FA.Catalog.Shared.Domain.Enumerations.Common
+@using Smart.FA.Catalog.Shared.Domain.Enumerations.Training
+@inject IStringLocalizer<CatalogResources> _localizer
+@model Smart.FA.Catalog.UserAdmin.Web.Pages.Admin.Trainings.Create.CreateModel
+@{
+    Layout = "_AdminLayout";
+    ViewData["ToolBarTitle"] = CatalogResources.AddNewTraining;
+    ViewData["Title"] = CatalogResources.AddNewTraining;
+}
+
+@section HeaderToolbar
+{
+    <div class="c-toolbar">
+        <div class="c-toolbar__left">
+            @if (Request.Query.ContainsKey("fromlist"))
+            {
+                <div class="c-toolbar__item">
+                    <a class="c-button c-button--icon c-button--borderless" href="/cfa/admin/trainings/list/index">
+                        <div class="c-button__content">
+                            <smart-icon icon="ArrowLeft"></smart-icon>
+                            <div class="u-sr-accessible">@CatalogResources.Back</div>
+                        </div>
+                    </a>
+                </div>
+            }
+            <div class="c-toolbar__item">
+                <h2 class="c-toolbar__title">@CatalogResources.AddNewTraining</h2>
+            </div>
+        </div>
+        <div class="c-toolbar__right">
+            <div class="c-button-toolbar">
+                <div class="c-toolbar__item">
+                    <smart-button id="Save" form="form" label="@CatalogResources.Draft" button-style="Secondary" leading-icon="Save" button-type="Submit"></smart-button>
+                </div>
+                <div class="c-toolbar__item">
+                    <smart-button id="Publish"  form="form" label="@CatalogResources.Publish" button-style="Primary" leading-icon="Send" button-type="Submit"> </smart-button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<smart-container size="Large">
+    <form method="post" id="form" class="u-spacer-xl">
+        <div class="o-form-group-layout o-form-group-layout--standard">
+
+            <smart-panel header="@CatalogResources.FieldsThatWillAppearInThePublicCatalog">
+                <smart-form-group-input-text label="@CatalogResources.TrainingTitleCreationLabel *" asp-for="CreateTrainingViewModel.Title"></smart-form-group-input-text>
+                @if (Model.UserIdentity.IsSuperUser)
+                {
+                    <smart-checkbox label="@CatalogResources.IsTrainingGivenBySmart" asp-for="CreateTrainingViewModel.IsGivenBySmart"></smart-checkbox>
+                    <smart-validation-message asp-for="CreateTrainingViewModel.IsGivenBySmart"></smart-validation-message>
+                }
+                <smart-form-group-textarea rows="5" label="@CatalogResources.TrainingPresentation *" asp-for="CreateTrainingViewModel.Methodology" helper-text="@CatalogResources.Min30CharMax1000Char"></smart-form-group-textarea>
+                <smart-form-group-textarea rows="5" label="@CatalogResources.TrainingGoal *" asp-for="CreateTrainingViewModel.Goal" helper-text="@CatalogResources.Min30CharMax1000Char"></smart-form-group-textarea>
+                <smart-form-group-textarea rows="5" label="@CatalogResources.PracticalModalities *" asp-for="CreateTrainingViewModel.PracticalModalities" helper-text="@CatalogResources.Min30CharMax1000Char"></smart-form-group-textarea>
+                <smart-formgroup label="@CatalogResources.Topics *">
+                    <smart-grid>
+                        @foreach (var topics in Topic.List.Chunk(2))
+                        {
+                            @foreach (var topic in topics)
+                            {
+                                <smart-grid-column width="4">
+                                    <smart-checkbox label="@_localizer[topic.Name]" asp-for="CreateTrainingViewModel.TopicIds" value="@topic.Id" checked="@(topic.IsContainedIn(Model.CreateTrainingViewModel.TopicIds))"></smart-checkbox>
+                                </smart-grid-column>
+                            }
+                        }
+                    </smart-grid>
+                    <smart-validation-message asp-for="CreateTrainingViewModel.TopicIds"></smart-validation-message>
+                </smart-formgroup>
+            </smart-panel>
+
+            <smart-spacer top="ExtraLarge" bottom="ExtraLarge"></smart-spacer>
+
+            <smart-panel header="@CatalogResources.TrainingVatJustification">
+                <smart-formgroup label="@CatalogResources.TheTraining *">
+                    @foreach (var vatExemptionType in VatExemptionType.List)
+                    {
+                        <smart-checkbox label="@_localizer["Training_Is" + vatExemptionType.Name]" asp-for="CreateTrainingViewModel.VatExemptionTypeIds" value="@vatExemptionType.Id" checked="@(vatExemptionType.IsContainedIn(Model.CreateTrainingViewModel.VatExemptionTypeIds))"></smart-checkbox>
+                    }
+                    <smart-validation-message asp-for="CreateTrainingViewModel.VatExemptionTypeIds"></smart-validation-message>
+                </smart-formgroup>
+
+                <smart-formgroup label="@CatalogResources.TrainingTarget *">
+                    @foreach (var targetAudience in TargetAudienceType.List)
+                    {
+                        <smart-checkbox label="@_localizer[targetAudience.Name]" asp-for="CreateTrainingViewModel.TargetAudienceTypeIds" value="@targetAudience.Id" checked="@(targetAudience.IsContainedIn(Model.CreateTrainingViewModel.TargetAudienceTypeIds))"></smart-checkbox>
+                    }
+                    <smart-validation-message asp-for="CreateTrainingViewModel.TargetAudienceTypeIds"></smart-validation-message>
+                </smart-formgroup>
+
+                <smart-formgroup label="@CatalogResources.Training_IsItATrainingThat *">
+                    @foreach (var attendanceType in AttendanceType.List)
+                    {
+                        <smart-checkbox asp-for="CreateTrainingViewModel.AttendanceTypeIds" value="@attendanceType.Id" label="@_localizer["Training_" + attendanceType.Name]" checked="@(attendanceType.IsContainedIn(Model.CreateTrainingViewModel.AttendanceTypeIds))"></smart-checkbox>
+                    }
+                </smart-formgroup>
+                <smart-validation-message asp-for="CreateTrainingViewModel.AttendanceTypeIds"></smart-validation-message>
+            </smart-panel>
+
+            <input type="hidden" id="isDraft" value="false" asp-for="CreateTrainingViewModel.IsDraft"/>
+
+        </div>
+    </form>
+</smart-container>
+
+@section Scripts
+{
+    <script>
+        disableEnterKeyUpKeyPressOnForm();
+    </script>
+}

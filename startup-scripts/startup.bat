@@ -1,3 +1,6 @@
+echo "Deleting cfa network"
+docker network rm local-cfa || true
+
 echo "Stopping docker containers..."
 docker-compose -f ../docker-compose-startup.yml stop
 

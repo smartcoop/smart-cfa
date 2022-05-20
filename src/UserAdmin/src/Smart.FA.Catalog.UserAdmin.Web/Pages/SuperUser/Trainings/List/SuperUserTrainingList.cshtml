@@ -1,0 +1,138 @@
+﻿@page "/superuser/trainings"
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.Extensions.Localization
+@using Smart.Design.Razor.TagHelpers.Alert
+@using Smart.Design.Razor.TagHelpers.Card
+@using Smart.Design.Razor.TagHelpers.Elements.Button
+@using Smart.Design.Razor.TagHelpers.Elements.Checkbox
+@using Smart.Design.Razor.TagHelpers.FormGroup
+@using Smart.Design.Razor.TagHelpers.Grid
+@using Smart.Design.Razor.TagHelpers.Icon
+@using Smart.Design.Razor.TagHelpers.InputGroup
+@using Smart.Design.Razor.TagHelpers.Spacer
+@using Smart.FA.Catalog.Shared.Domain.Enumerations.Common
+@using Smart.FA.Catalog.Shared.Domain.Enumerations.Training
+@using Smart.FA.Catalog.UserAdmin.Web.Pages
+@model Smart.FA.Catalog.UserAdmin.Web.Pages.SuperUser.Trainings.List.SuperUserTrainingListPageModel
+
+@inject IStringLocalizer<CatalogResources> Localizer
+@{
+    Layout = "Shared/_AdminLayout";
+}
+
+@section HeaderToolbar
+{
+<div class="c-toolbar">
+    <div class="c-toolbar__left">
+        <div class="c-toolbar__item">
+            <h2 class="c-toolbar__title">@CatalogResources.TrainingSearchTitle</h2>
+        </div>
+    </div>
+</div>
+}
+
+<smart-spacer all="ExtraLarge">
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    {
+        <smart-spacer bottom="Large">
+            <smart-alert style="Error" message="@Model.ErrorMessage"></smart-alert>
+        </smart-spacer>
+    }
+
+    <form asp-page-handler="Search" id="search-form" method="get">
+        <input type="hidden" name="search" value="1" />
+        <div class="o-form-group-layout o-form-group-layout--standard u-spacer-bottom-l">
+            <smart-card>
+                <smart-card-body>
+                    <smart-formgroup label="@CatalogResources.TrainingTitleCreationLabel">
+                        <smart-input-group asp-for="GetTrainingsRequest.Title" icon="Search" align="Start"></smart-input-group>
+                    </smart-formgroup>
+
+                    <smart-formgroup label="@CatalogResources.Status">
+                        <smart-select asp-items="@Model.Statuses" asp-for="GetTrainingsRequest.Status">
+                            <option></option>
+                        </smart-select>
+                    </smart-formgroup>
+
+                    <div class="c-accordion u-spacer-bottom">
+                        <div class="c-accordion__item @(Model.GetTrainingsRequest.Topics?.Any() == true ? "js-active" : string.Empty)">
+                            <div class="c-accordion__item-header">
+                                <div class="c-toolbar">
+                                    <div class="c-toolbar__left">
+                                        <div class="c-toolbar__item">
+                                            <smart-button button-style="Borderless" icon-only="true" leading-icon="ChevronRight"></smart-button>
+                                            <span class="c-accordion__item-title">@CatalogResources.Topics</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="topics" class="c-accordion__item-content">
+                                <smart-formgroup>
+                                    <smart-grid>
+                                        @foreach (var topic in Topic.List)
+                                        {
+                                            <smart-grid-column width="3">
+                                                <smart-checkbox label="@Localizer[topic.Name]" asp-for="GetTrainingsRequest.Topics" value="@topic.Id" checked="@(topic.IsContainedIn(Model.GetTrainingsRequest?.Topics))"></smart-checkbox>
+                                            </smart-grid-column>
+                                        }
+                                    </smart-grid>
+                                </smart-formgroup>
+                            </div>
+                        </div>
+                    </div>
+                    <smart-button id="submit-btn" label="@CatalogResources.Search" is-block="true" button-style="Primary" button-type="Submit" leading-icon="Search"></smart-button>
+                </smart-card-body>
+            </smart-card>
+        </div>
+    </form>
+
+    @if (Model.Trainings != null && !Model.Trainings.Any())
+    {
+        <p class="c-blank-slate" style="font-size: 2.6rem;">@CatalogResources.NoTrainingFound</p>
+    }
+
+    @if (Model.Trainings?.Count > 0)
+    {
+        <div class="o-card-grid small-up-1">
+            @foreach (var training in Model.Trainings)
+            {
+                @await Component.InvokeAsync("AdminTrainingTile", new { training = training, showDeleteButton = false })
+            }
+        </div>
+
+        <div class="c-toolbar">
+            <div class="c-toolbar__left">
+                @if (Model.Trainings.HasPreviousPage)
+                {
+                    <a id="previous" href="@Routes.SuperUserTrainingList?@Model.SerializeHtmlForm()&@(nameof(Model.GetTrainingsRequest.PageNumber))=@(Model.GetTrainingsRequest.PageNumber - 1)">
+                        <div class="o-flex">
+                            <smart-icon icon="ChevronLeft"></smart-icon>@CatalogResources.Previous
+                        </div>
+                    </a>
+                }
+            </div>
+
+            <div>Page @(Model.Trainings.CurrentPage)/@(Model.Trainings.TotalPages.ToString())</div>
+
+            <div class="c-toolbar__right">
+                @if (Model.Trainings.HasNextPage)
+                {
+                    <a id="next" href="@Routes.SuperUserTrainingList?@Model.SerializeHtmlForm()&@(nameof(Model.GetTrainingsRequest.PageNumber))=@(Model.GetTrainingsRequest.PageNumber + 1)">
+                        <div class="o-flex">
+                            @CatalogResources.Next <smart-icon icon="ChevronRight"></smart-icon>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+    }
+</smart-spacer>
+@section Scripts {
+    <script>
+        var expand = @(Model.GetTrainingsRequest.Topics?.Any() == true ? "true" : "false");
+        if (expand) {
+            var article = document.getElementById("topics");
+            article.style.maxHeight = article.scrollHeight + 'px';
+        }
+    </script>
+}

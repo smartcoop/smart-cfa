@@ -1,0 +1,18 @@
+﻿@page
+@model Smart.FA.Catalog.UserAdmin.Web.Pages.IndexModel
+@{
+    Layout = "Shared/_Layout";
+    ViewData["Title"] = "Index";
+    ViewData["ToolBarTitle"] = "Add a new training";
+}
+
+<div class="c-error-page " style="margin-bottom: 25%">
+    <span class="c-error-page__code"></span>
+    <h4 class="c-error-page__title title-size">Bienvenue</h4>
+    <p class="c-error-page__desc message-size" style="font-size: 3.5rem;">Cliquez ici pour rejoindre votre espace membre</p>
+    <a class="c-button c-button--secondary" href="/cfa/admin/index">
+        <span class="c-button__content">
+            <span class="c-button__label ">Mon espace</span>
+        </span>
+    </a>
+</div>
