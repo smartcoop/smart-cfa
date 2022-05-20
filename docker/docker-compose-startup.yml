@@ -19,7 +19,7 @@ services:
     command: server /data --console-address ":9001"
   proxy:
     build:
-      context: .
+      context: ../docker/nginx
       dockerfile: Nginx.Dockerfile
     ports:
       - "7001:80"

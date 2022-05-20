@@ -6,20 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{98D46582-2F6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8A4DEB10-3A8D-4F50-9E5F-A5550B42BBBA}"
 	ProjectSection(SolutionItems) = preProject
-		.dockerignore = .dockerignore
-		.editorconfig = .editorconfig
-		.env = .env
-		.gitignore = .gitignore
-		DB.Dockerfile = DB.Dockerfile
-		docker-compose-local.yml = docker-compose-local.yml
-		docker-compose.dcproj = docker-compose.dcproj
-		docker-compose.yml = docker-compose.yml
-		Web.Dockerfile = Web.Dockerfile
-		docker-compose-startup.yml = docker-compose-startup.yml
-		startup.bat = startup.bat
-		docker_startup_script.bat = docker_startup_script.bat
 		README.md = README.md
-		Showcase.Dockerfile = Showcase.Dockerfile
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D485BE00-A082-47D7-827D-0FD646807006}"
@@ -60,12 +47,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.Showcase.I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.Showcase.Localization", "src\Showcase\src\Smart.FA.Catalog.Showcase.Localization\Smart.FA.Catalog.Showcase.Localization.csproj", "{33E35183-47ED-46FB-BD13-729142E51DBB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nginx", "Nginx", "{7F26E40B-F26A-40FF-9795-F4F3BC1BD1B7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nginx", "nginx", "{7F26E40B-F26A-40FF-9795-F4F3BC1BD1B7}"
 	ProjectSection(SolutionItems) = preProject
-		Nginx.Dockerfile = Nginx.Dockerfile
-		nginx.conf = nginx.conf
-		AccountSim.Dockerfile = AccountSim.Dockerfile
-		docker-compose-nginx.yml = docker-compose-nginx.yml
+		docker\nginx\AccountSim.Dockerfile = docker\nginx\AccountSim.Dockerfile
+		docker\nginx\docker-compose-nginx.yml = docker\nginx\docker-compose-nginx.yml
+		docker\nginx\nginx.conf = docker\nginx\nginx.conf
+		docker\nginx\Nginx.Dockerfile = docker\nginx\Nginx.Dockerfile
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AccountSimulator", "AccountSimulator", "{A441F317-9D9D-4EAC-80C1-4D6305500316}"
@@ -73,6 +60,52 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E2FBEF8F-B9A8-4780-A69B-D98E84801BA6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.FA.Catalog.AccountSimulator", "src\AccountSimulator\src\Smart.FA.Catalog.AccountSimulator\Smart.FA.Catalog.AccountSimulator.csproj", "{4065AEFA-A48E-44BD-ADB4-5279CBFADA0B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pipeline", "pipeline", "{40517212-5184-45EA-A55F-0BAEF36DE71A}"
+	ProjectSection(SolutionItems) = preProject
+		deploy-prod.sh = deploy-prod.sh
+		deploy-staging.sh = deploy-staging.sh
+		jenkins-deploy.sh = jenkins-deploy.sh
+		Jenkinsfile = Jenkinsfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "startup-scripts", "startup-scripts", "{8082E5D0-6D0E-47CF-96EA-C4B6C6DF0E3D}"
+	ProjectSection(SolutionItems) = preProject
+		startup-scripts\docker_startup_script.bat = startup-scripts\docker_startup_script.bat
+		startup-scripts\startup.bat = startup-scripts\startup.bat
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{AF8FF0D7-F857-4162-832F-EB145EA461DA}"
+	ProjectSection(SolutionItems) = preProject
+		docker\.dockerignore = docker\.dockerignore
+		docker\DB.Dockerfile = docker\DB.Dockerfile
+		docker\docker-compose.dcproj = docker\docker-compose.dcproj
+		docker\docker-compose.yml = docker\docker-compose.yml
+		docker\docker-compose-local.yml = docker\docker-compose-local.yml
+		docker\docker-compose-startup.yml = docker\docker-compose-startup.yml
+		docker\Minio.Dockerfile = docker\Minio.Dockerfile
+		docker\Showcase.Dockerfile = docker\Showcase.Dockerfile
+		docker\Web.Dockerfile = docker\Web.Dockerfile
+		docker\.env = docker\.env
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{49BC8885-96F6-494E-84AB-9CA18C47DAF7}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "kerberos", "kerberos", "{5C8DDEDB-9212-4B54-A111-75254BE1C65F}"
+	ProjectSection(SolutionItems) = preProject
+		Showcase.krb5.Dockerfile = Showcase.krb5.Dockerfile
+		Web.krb5.Dockerfile = Web.krb5.Dockerfile
+		ktutil\cfa-cron = ktutil\cfa-cron
+		ktutil\Dockerfile = ktutil\Dockerfile
+		ktutil\refresh.sh = ktutil\refresh.sh
+		ktutil\run.sh = ktutil\run.sh
+		ktutil\files\krb5.conf = ktutil\files\krb5.conf
+		ktutil\files\smartserver_DEV.keytab = ktutil\files\smartserver_DEV.keytab
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -158,9 +191,14 @@ Global
 		{21E6B700-9D55-4BCD-B2AF-797881A91782} = {5FB74010-24CB-47D8-8665-CD813A22499B}
 		{FB2BC42C-1D4C-4D4E-ADA2-DC5F8E3D8E13} = {5FB74010-24CB-47D8-8665-CD813A22499B}
 		{33E35183-47ED-46FB-BD13-729142E51DBB} = {5FB74010-24CB-47D8-8665-CD813A22499B}
-		{7F26E40B-F26A-40FF-9795-F4F3BC1BD1B7} = {8A4DEB10-3A8D-4F50-9E5F-A5550B42BBBA}
 		{E2FBEF8F-B9A8-4780-A69B-D98E84801BA6} = {A441F317-9D9D-4EAC-80C1-4D6305500316}
 		{4065AEFA-A48E-44BD-ADB4-5279CBFADA0B} = {E2FBEF8F-B9A8-4780-A69B-D98E84801BA6}
+		{40517212-5184-45EA-A55F-0BAEF36DE71A} = {8A4DEB10-3A8D-4F50-9E5F-A5550B42BBBA}
+		{8082E5D0-6D0E-47CF-96EA-C4B6C6DF0E3D} = {8A4DEB10-3A8D-4F50-9E5F-A5550B42BBBA}
+		{AF8FF0D7-F857-4162-832F-EB145EA461DA} = {8A4DEB10-3A8D-4F50-9E5F-A5550B42BBBA}
+		{7F26E40B-F26A-40FF-9795-F4F3BC1BD1B7} = {AF8FF0D7-F857-4162-832F-EB145EA461DA}
+		{49BC8885-96F6-494E-84AB-9CA18C47DAF7} = {8A4DEB10-3A8D-4F50-9E5F-A5550B42BBBA}
+		{5C8DDEDB-9212-4B54-A111-75254BE1C65F} = {40517212-5184-45EA-A55F-0BAEF36DE71A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D2F2190D-B4DE-48B8-B87C-7AA80A91538E}

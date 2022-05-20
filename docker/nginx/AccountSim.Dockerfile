@@ -6,7 +6,7 @@ WORKDIR /app
 ENV ASPNETCORE_ENVIRONMENT Staging
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["src/AccountSimulator/src/Smart.FA.Catalog.AccountSimulator/Smart.FA.Catalog.AccountSimulator.csproj", "src/AccountSimulator/src/Smart.FA.Catalog.AccountSimulator/"]
+COPY ["../../src/AccountSimulator/src/Smart.FA.Catalog.AccountSimulator/Smart.FA.Catalog.AccountSimulator.csproj", "src/AccountSimulator/src/Smart.FA.Catalog.AccountSimulator/"]
 
 RUN dotnet restore "src/AccountSimulator/src/Smart.FA.Catalog.AccountSimulator/Smart.FA.Catalog.AccountSimulator.csproj"
 COPY . .
