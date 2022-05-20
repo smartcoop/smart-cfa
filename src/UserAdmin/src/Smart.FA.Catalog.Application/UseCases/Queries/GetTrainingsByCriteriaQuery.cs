@@ -40,7 +40,7 @@ public class GetTrainingsByCriteriaQueryHandler : IRequestHandler<GetTrainingsBy
     public async Task<PagedList<Training>> Handle(GetTrainingsByCriteriaQuery request, CancellationToken cancellationToken)
     {
         // Includes necessary navigation properties.
-        var query = BaseQuery();
+        var query = BuildBaseQuery();
 
         // Filter by status.
         if (request.Status is not null)
@@ -75,7 +75,7 @@ public class GetTrainingsByCriteriaQueryHandler : IRequestHandler<GetTrainingsBy
         return trainings;
     }
 
-    private IQueryable<Training> BaseQuery =>
+    private IQueryable<Training> BuildBaseQuery() =>
         _catalogContext.Trainings
             .Include(training => training.Topics)
             .Include(training => training.Details)
