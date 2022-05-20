@@ -7,10 +7,10 @@ ENV ASPNETCORE_ENVIRONMENT $Environment
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 
 WORKDIR /src
-COPY ["src/Showcase/src/Smart.FA.Catalog.Showcase.Web/Smart.FA.Catalog.Showcase.Web.csproj", "src/Showcase/src/Smart.FA.Catalog.Showcase.Web/"]
-COPY ["src/Showcase/src/Smart.FA.Catalog.Showcase.Localization/Smart.FA.Catalog.Showcase.Localization.csproj", "src/Showcase/src/Smart.FA.Catalog.Showcase.Localization/"]
-COPY ["src/Showcase/src/Smart.FA.Catalog.Showcase.Domain/Smart.FA.Catalog.Showcase.Domain.csproj", "src/Showcase/src/Smart.FA.Catalog.Showcase.Domain/"]
-COPY ["src/Showcase/src/Smart.FA.Catalog.Showcase.Infrastructure/Smart.FA.Catalog.Showcase.Infrastructure.csproj", "src/Showcase/src/Smart.FA.Catalog.Showcase.Infrastructure/"]
+COPY ["../../src/Showcase/src/Smart.FA.Catalog.Showcase.Web/Smart.FA.Catalog.Showcase.Web.csproj", "src/Showcase/src/Smart.FA.Catalog.Showcase.Web/"]
+COPY ["../../src/Showcase/src/Smart.FA.Catalog.Showcase.Localization/Smart.FA.Catalog.Showcase.Localization.csproj", "src/Showcase/src/Smart.FA.Catalog.Showcase.Localization/"]
+COPY ["../../src/Showcase/src/Smart.FA.Catalog.Showcase.Domain/Smart.FA.Catalog.Showcase.Domain.csproj", "src/Showcase/src/Smart.FA.Catalog.Showcase.Domain/"]
+COPY ["../../src/Showcase/src/Smart.FA.Catalog.Showcase.Infrastructure/Smart.FA.Catalog.Showcase.Infrastructure.csproj", "src/Showcase/src/Smart.FA.Catalog.Showcase.Infrastructure/"]
 
 RUN dotnet restore "src/Showcase/src/Smart.FA.Catalog.Showcase.Web/Smart.FA.Catalog.Showcase.Web.csproj"
 COPY . .

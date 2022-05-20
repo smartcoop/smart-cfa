@@ -63,10 +63,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.FA.Catalog.AccountSim
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pipeline", "pipeline", "{40517212-5184-45EA-A55F-0BAEF36DE71A}"
 	ProjectSection(SolutionItems) = preProject
-		deploy-prod.sh = deploy-prod.sh
-		deploy-staging.sh = deploy-staging.sh
-		jenkins-deploy.sh = jenkins-deploy.sh
-		Jenkinsfile = Jenkinsfile
+		pipeline\deploy-prod.sh = pipeline\deploy-prod.sh
+		pipeline\deploy-staging.sh = pipeline\deploy-staging.sh
+		pipeline\Jenkinsfile = pipeline\Jenkinsfile
+		pipeline\jenkins-deploy.sh = pipeline\jenkins-deploy.sh
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "startup-scripts", "startup-scripts", "{8082E5D0-6D0E-47CF-96EA-C4B6C6DF0E3D}"
@@ -95,16 +95,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{49BC88
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "kerberos", "kerberos", "{5C8DDEDB-9212-4B54-A111-75254BE1C65F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ktutil", "ktutil", "{5C8DDEDB-9212-4B54-A111-75254BE1C65F}"
 	ProjectSection(SolutionItems) = preProject
-		Showcase.krb5.Dockerfile = Showcase.krb5.Dockerfile
-		Web.krb5.Dockerfile = Web.krb5.Dockerfile
-		ktutil\cfa-cron = ktutil\cfa-cron
-		ktutil\Dockerfile = ktutil\Dockerfile
-		ktutil\refresh.sh = ktutil\refresh.sh
-		ktutil\run.sh = ktutil\run.sh
-		ktutil\files\krb5.conf = ktutil\files\krb5.conf
-		ktutil\files\smartserver_DEV.keytab = ktutil\files\smartserver_DEV.keytab
+		pipeline\ktutil\cfa-cron = pipeline\ktutil\cfa-cron
+		pipeline\ktutil\Dockerfile = pipeline\ktutil\Dockerfile
+		pipeline\ktutil\ktutil.sh = pipeline\ktutil\ktutil.sh
+		pipeline\ktutil\refresh.sh = pipeline\ktutil\refresh.sh
+		pipeline\ktutil\run.sh = pipeline\ktutil\run.sh
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "kerberos", "kerberos", "{F482971A-904F-448D-A4A1-02406A12E854}"
+	ProjectSection(SolutionItems) = preProject
+		docker\kerberos\Showcase.krb5.Dockerfile = docker\kerberos\Showcase.krb5.Dockerfile
+		docker\kerberos\Web.krb5.Dockerfile = docker\kerberos\Web.krb5.Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "files", "files", "{5A9FEC67-6FBA-4DB4-96B3-74DD28096403}"
+	ProjectSection(SolutionItems) = preProject
+		pipeline\ktutil\files\krb5.conf = pipeline\ktutil\files\krb5.conf
+		pipeline\ktutil\files\smartserver_DEV.keytab = pipeline\ktutil\files\smartserver_DEV.keytab
 	EndProjectSection
 EndProject
 Global
@@ -199,6 +208,8 @@ Global
 		{7F26E40B-F26A-40FF-9795-F4F3BC1BD1B7} = {AF8FF0D7-F857-4162-832F-EB145EA461DA}
 		{49BC8885-96F6-494E-84AB-9CA18C47DAF7} = {8A4DEB10-3A8D-4F50-9E5F-A5550B42BBBA}
 		{5C8DDEDB-9212-4B54-A111-75254BE1C65F} = {40517212-5184-45EA-A55F-0BAEF36DE71A}
+		{F482971A-904F-448D-A4A1-02406A12E854} = {AF8FF0D7-F857-4162-832F-EB145EA461DA}
+		{5A9FEC67-6FBA-4DB4-96B3-74DD28096403} = {5C8DDEDB-9212-4B54-A111-75254BE1C65F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D2F2190D-B4DE-48B8-B87C-7AA80A91538E}

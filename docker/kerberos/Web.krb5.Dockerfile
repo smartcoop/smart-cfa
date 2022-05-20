@@ -7,10 +7,10 @@ ENV ASPNETCORE_ENVIRONMENT $Environment
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 
 WORKDIR /src
-COPY ["src/UserAdmin/src/Smart.FA.Catalog.Web/Smart.FA.Catalog.Web.csproj", "src/UserAdmin/src/Smart.FA.Catalog.Web/"]
-COPY ["src/UserAdmin/src/Smart.FA.Catalog.Application/Smart.FA.Catalog.Application.csproj", "src/UserAdmin/src/Smart.FA.Catalog.Application/"]
-COPY ["src/UserAdmin/src/Smart.FA.Catalog.Core/Smart.FA.Catalog.Core.csproj", "src/UserAdmin/src/Smart.FA.Catalog.Core/"]
-COPY ["src/UserAdmin/src/Smart.FA.Catalog.Infrastructure/Smart.FA.Catalog.Infrastructure.csproj", "src/UserAdmin/src/Smart.FA.Catalog.Infrastructure/"]
+COPY ["../../src/UserAdmin/src/Smart.FA.Catalog.Web/Smart.FA.Catalog.Web.csproj", "src/UserAdmin/src/Smart.FA.Catalog.Web/"]
+COPY ["../../src/UserAdmin/src/Smart.FA.Catalog.Application/Smart.FA.Catalog.Application.csproj", "src/UserAdmin/src/Smart.FA.Catalog.Application/"]
+COPY ["../../src/UserAdmin/src/Smart.FA.Catalog.Core/Smart.FA.Catalog.Core.csproj", "src/UserAdmin/src/Smart.FA.Catalog.Core/"]
+COPY ["../../src/UserAdmin/src/Smart.FA.Catalog.Infrastructure/Smart.FA.Catalog.Infrastructure.csproj", "src/UserAdmin/src/Smart.FA.Catalog.Infrastructure/"]
 
 RUN dotnet restore "src/UserAdmin/src/Smart.FA.Catalog.Web/Smart.FA.Catalog.Web.csproj"
 COPY . .
