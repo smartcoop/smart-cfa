@@ -10,7 +10,7 @@
         <p>@ShowcaseResources.Contact_Presentation</p>
         <p><br />@ShowcaseResources.Contact_Presentation_SecondPart <a href="@ShowcaseResources.Contact_Presentation_Link">@ShowcaseResources.Contact_Presentation_Link</a></p>
     </div>
-    @if (Model.SendingWasSuccessful is true)
+    @if (Model.ErrorMessage == string.Empty)
     {
         <div id="sendmailConfirmation">
             <div class="c-alert c-alert--success">
@@ -29,7 +29,7 @@
             </div>
         </div>
     }
-    else if (Model.SendingWasSuccessful is false)
+    else if (Model.ErrorMessage is not null)
     {
         <div id="sendmailError">
             <div class="c-alert c-alert--error">
@@ -42,7 +42,7 @@
                 </div>
                 <div class="c-alert__body">
                     <div class="c-alert__text">
-                        <h4 class="c-h4">@ShowcaseResources.Contact_ErrorMessage</h4>
+                        <h4 class="c-h4">@Model.ErrorMessage</h4>
                     </div>
                 </div>
             </div>

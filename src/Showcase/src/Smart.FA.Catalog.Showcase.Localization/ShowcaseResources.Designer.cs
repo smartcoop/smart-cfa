@@ -671,5 +671,14 @@ namespace Smart.FA.Catalog.Showcase.Localization {
                 return ResourceManager.GetString("TrainingsToFollow", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vous avez atteint la limite de contact.
+        /// </summary>
+        public static string YouReachedRateLimit {
+            get {
+                return ResourceManager.GetString("YouReachedRateLimit", resourceCulture);
+            }
+        }
     }
 }
