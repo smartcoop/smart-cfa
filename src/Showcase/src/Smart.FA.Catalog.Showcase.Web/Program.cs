@@ -1,4 +1,5 @@
 using EntityFrameworkCore.UseRowNumberForPaging;
+using Hangfire;
 using Microsoft.EntityFrameworkCore;
 using NLog.Web;
 using Smart.FA.Catalog.Shared.Security;
@@ -24,7 +25,8 @@ builder.Services
     .AddShowcaseLocalization()
     .AddTransient<ITrainingService, TrainingService>()
     .AddTransient<ITrainerService, TrainerService>()
-    .AddTransient<IInquiryEmailService, InquiryEmailService>();
+    .AddTransient<IInquiryEmailService, InquiryEmailService>()
+    .AddHangfire(builder.Configuration);
 
 builder.Services.Configure<MinIOOptions>(builder.Configuration.GetSection(MinIOOptions.SectionName))
     .Configure<FluentEmailOptions>(builder.Configuration.GetSection(FluentEmailOptions.SectionName))
@@ -54,6 +56,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -61,5 +64,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+app.UseHangfireDashboard();
 
 app.Run();

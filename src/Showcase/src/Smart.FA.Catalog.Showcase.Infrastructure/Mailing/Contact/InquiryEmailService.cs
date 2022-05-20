@@ -1,4 +1,5 @@
 using FluentEmail.Core;
+using Hangfire;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Smart.FA.Catalog.Showcase.Domain.Exceptions;
@@ -11,19 +12,32 @@ public class InquiryEmailService : IInquiryEmailService
 {
     private readonly ILogger<InquiryEmailService> _logger;
     private readonly IFluentEmail _fluentEmail;
+    private readonly IBackgroundJobClient _backgroundJobClient;
     private readonly InquiriesOptions _inquiriesSettings;
 
     public string Template => "Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Contact.InquiryEmailTemplate.cshtml";
 
-    public InquiryEmailService(ILogger<InquiryEmailService> logger, IFluentEmail fluentEmail, IOptions<InquiriesOptions> inquiriesOptions)
+    public InquiryEmailService(ILogger<InquiryEmailService> logger, IFluentEmail fluentEmail, IBackgroundJobClient backgroundJobClient,  IOptions<InquiriesOptions> inquiriesOptions)
     {
         _logger = logger;
         _fluentEmail = fluentEmail;
+        _backgroundJobClient = backgroundJobClient;
         _inquiriesSettings = inquiriesOptions.Value;
     }
 
     /// <inheritdoc />
-    public async Task<bool> SendEmailAsync(InquirySendEmailRequest request, CancellationToken cancellationToken = default)
+    public void SendEmail(InquirySendEmailRequest request, CancellationToken cancellationToken = default)
+    {
+        _backgroundJobClient.Enqueue(() => SendEmailAsyncInternal(request, cancellationToken));
+    }
+
+    /// <summary>
+    /// Sends to Smart Learning team an email containing an inquiry of a visitor.
+    /// </summary>
+    /// <param name="request">Content of the inquiry.</param>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
+    /// <exception cref="EmailSendException">If any failure happens.</exception>
+    public async Task<bool> SendEmailAsyncInternal(InquirySendEmailRequest request, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -36,16 +50,18 @@ public class InquiryEmailService : IInquiryEmailService
 
             if (!result.Successful)
             {
-                throw new EmailSendException(string.Join(", ", result.ErrorMessages));
+                throw new Exception(string.Join(", ", result.ErrorMessages));
             }
 
             return true;
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "An error occurred while sending a mail from {email} with message {message}", request.Email, request.Message);
+            var errorMessage = $"An error occurred while sending a mail from {request.Email} with message {request.Message}";
+            _logger.LogError(e, errorMessage);
 
-            return false;
+            // This makes sure that Hangfire will retry upon an occurring error.
+            throw new EmailSendException(errorMessage, e);
         }
     }
 }
@@ -57,9 +73,9 @@ public interface IInquiryEmailService
 {
     /// <summary>
     /// Sends to Smart Learning team an email containing an inquiry of a visitor.
+    /// The execution of the code is handled by Hangfire.
     /// </summary>
     /// <param name="request">Content of the inquiry.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    /// <returns>A task that represents the asynchronous operation. The task's result is a <see cref="bool" /> indicating if the process succeeded or not.</returns>
-    Task<bool> SendEmailAsync(InquirySendEmailRequest request, CancellationToken cancellationToken = default);
+    void SendEmail(InquirySendEmailRequest request, CancellationToken cancellationToken = default);
 }

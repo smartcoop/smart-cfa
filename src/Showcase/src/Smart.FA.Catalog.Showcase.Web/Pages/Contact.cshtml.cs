@@ -24,15 +24,25 @@ public class ContactModel : PageModel
         return Page();
     }
 
-    public async Task<ActionResult> OnPostAsync()
+    public ActionResult OnPost()
     {
         if (!ModelState.IsValid)
         {
             return Page();
         }
 
-        SendingWasSuccessful = await _inquiryEmailService.SendEmailAsync(SendEmailRequest);
+        try
+        {
+            _inquiryEmailService.SendEmail(SendEmailRequest);
+            SendingWasSuccessful = true;
+        }
+        catch (Exception)
+        {
+            // _inquiryEmailService.SendEmail logs any encountered exception.
+            SendingWasSuccessful = false;
+            return Page();
+        }
 
-        return SendingWasSuccessful is true ? RedirectToPage() : Page();
+        return RedirectToPage();
     }
 }
