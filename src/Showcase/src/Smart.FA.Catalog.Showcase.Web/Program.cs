@@ -26,7 +26,6 @@ builder.Services
     .AddTransient<ITrainingService, TrainingService>()
     .AddTransient<ITrainerService, TrainerService>()
     .AddTransient<IInquiryEmailService, InquiryEmailService>()
-    //.AddHangfire(builder.Configuration)
     .AddMemoryCache();
 
 builder.Services.Configure<MinIOOptions>(builder.Configuration.GetSection(MinIOOptions.SectionName))
@@ -65,7 +64,5 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
-
-//app.UseHangfireDashboard();
 
 app.Run();
