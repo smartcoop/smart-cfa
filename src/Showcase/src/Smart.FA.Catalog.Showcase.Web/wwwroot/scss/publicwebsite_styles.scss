@@ -123,7 +123,7 @@
 
         .section-label__text {
             min-width: 30rem;
-            text-align:left;
+            text-align: left;
         }
 
         .section-label__nb {
@@ -178,9 +178,9 @@
 
         .search-category__item {
             margin: 0 1rem 1rem 0;
-            border: 0.1rem solid $color-gray-800;
             width: auto;
             text-align: center;
+
 
             @media (max-width: $g-bp2) {
                 margin: auto auto 1rem auto;
@@ -188,21 +188,24 @@
         }
 
         .search-category__item-link {
-            padding: 0.5rem 1.6rem 0.5rem 1.2rem;
             font-size: 1.3rem;
             color: $color-gray-800;
+            padding: 0.5rem 1.6rem 0.5rem 1.2rem;
+            border: 0.1rem solid $color-gray-800;
+        }
+
+        .search-category__item-link:hover {
+            color: $color-white;
+            background: $color-blue-600;
+        }
+
+        .search-category__item--active {
+            background: $color-blue-600;
+            color: $color-white;
         }
     }
 
-    .search-category__item:hover {
-        background: $color-blue-600;
-        color: $color-white;
-        border: 0.1rem solid $color-blue-600;
-    }
 
-    .search-category__item-link:hover {
-        color: $color-white;
-    }
 
     .search-category__item_end {
         text-align: center;
@@ -213,18 +216,19 @@
             margin-left: auto;
             margin-right: auto;
             margin: 0 1rem 1rem 0;
-            border: 0.1rem solid $color-blue-600;
+            border: 0.1rem solid $color-gray-800;
             padding: 0.5rem 1.6rem 0.5rem 1.2rem;
             font-size: 1.3rem;
+            color: $color-gray-800;
+        }
+
+        .search-category__item--active {
+            background: $color-blue-600;
             color: $color-white;
         }
     }
 
-    .search-category__item--active {
-        background: $color-blue-600;
-        color: $color-white;
-        border: 0.1rem solid $color-blue-600;
-    }
+
 
     @media (max-width: $g-bp4) {
         padding: 2rem 5%;
