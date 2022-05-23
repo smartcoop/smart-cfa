@@ -3,7 +3,7 @@ using Hangfire;
 using Microsoft.EntityFrameworkCore;
 using NLog.Web;
 using Smart.FA.Catalog.Shared.Security;
-using Smart.FA.Catalog.Showcase.Domain.Options;
+using Smart.FA.Catalog.Showcase.Domain.Common.Options;
 using Smart.FA.Catalog.Showcase.Infrastructure.Data;
 using Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Contact;
 using Smart.FA.Catalog.Showcase.Web.Extensions;

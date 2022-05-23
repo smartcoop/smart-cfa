@@ -17,4 +17,6 @@ public class InquirySendEmailRequest
     [MinLength(30, ErrorMessageResourceType = typeof(CatalogResources), ErrorMessageResourceName = "Min30Char")]
     [MaxLength(1000, ErrorMessageResourceType = typeof(CatalogResources), ErrorMessageResourceName = "Min30CharMax1000Char")]
     public string Message { get; set; } = null!;
+
+    public string RemoteIpAddress { get; set; } = null!;
 }

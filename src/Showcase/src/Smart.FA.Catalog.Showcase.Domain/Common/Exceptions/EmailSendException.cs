@@ -1,11 +1,7 @@
-namespace Smart.FA.Catalog.Showcase.Domain.Exceptions;
+namespace Smart.FA.Catalog.Showcase.Domain.Common.Exceptions;
 
 public class EmailSendException : Exception
 {
-    public EmailSendException(string? message) : base(message)
-    {
-    }
-
     public EmailSendException(string errorMessage, Exception innerException) : base(errorMessage, innerException)
     {
     }

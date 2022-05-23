@@ -1,5 +1,5 @@
 using FluentEmail.MailKitSmtp;
-using Smart.FA.Catalog.Showcase.Domain.Options;
+using Smart.FA.Catalog.Showcase.Domain.Common.Options;
 
 namespace Smart.FA.Catalog.Showcase.Web.Extensions;
 

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Smart.FA.Catalog.Showcase.Domain.Common.Enums;
 using Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Contact;
 using Smart.FA.Catalog.Showcase.Web.PageFilters;
 
@@ -28,33 +29,42 @@ public class ContactModel : PageModel
 
     public ActionResult OnPost()
     {
-        if (!ModelState.IsValid)
-        {
-            if (ModelState.ContainsKey(ModelStateErrorKeys.RateLimit))
-            {
-                ErrorMessage = string.Join(". ", ModelState[ModelStateErrorKeys.RateLimit]!.Errors.Select(e => e.ErrorMessage));
-            }
-
-            return Page();
-        }
-
         try
         {
-            _inquiryEmailService.SendEmail(SendEmailRequest);
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
 
-            // There's no errors, we can therefore specify it.
-            ErrorMessage = string.Empty;
+            AddToRequestSenderRemoteIpAddress();
+            var result = _inquiryEmailService.SendEmail(SendEmailRequest);
+            SetErrorMessageBySendEmailResult(result);
         }
         catch (Exception)
         {
-            // _inquiryEmailService.SendEmail logs any encountered exception.
-            // No need to make a log here.
+            // No need to perform any logging here as _inquiryEmailService.SendEmail logs any encountered exception.
+            // The method is supposed to catch any exceptions but better be safe than sorry.
             ErrorMessage = ShowcaseResources.Contact_ErrorMessage;
-
-            // This renders again the Page and therefore will fill in back the form.
-            return Page();
         }
 
-        return RedirectToPage();
+        // If ErrorMessage has a value this means we are in an error/invalid state.
+        // If it is the case, render the Page again with Page() method.
+        return string.IsNullOrEmpty(ErrorMessage) ? RedirectToPage() : Page();
+    }
+
+    private void AddToRequestSenderRemoteIpAddress()
+    {
+        SendEmailRequest.RemoteIpAddress = HttpContext.Connection.RemoteIpAddress!.ToString();
+    }
+
+    private void SetErrorMessageBySendEmailResult(InquirySendEmailResult result)
+    {
+        ErrorMessage = result switch
+        {
+            InquirySendEmailResult.TooManyRequest => ShowcaseResources.YouReachedRateLimit,
+            InquirySendEmailResult.Failure => ShowcaseResources.Contact_ErrorMessage,
+            InquirySendEmailResult.Ok => string.Empty,
+            _ => ShowcaseResources.Contact_ErrorMessage
+        };
     }
 }

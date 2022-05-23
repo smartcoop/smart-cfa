@@ -1,4 +1,4 @@
-namespace Smart.FA.Catalog.Showcase.Domain.Options;
+namespace Smart.FA.Catalog.Showcase.Domain.Common.Options;
 
 public class FluentEmailOptions
 {
@@ -24,4 +24,6 @@ public class InquiriesOptions
     public const string SectionName = "Mailing:Inquiries";
 
     public string DefaultEmail { get; set; } = null!;
+
+    public int RateLimitInSeconds { get; set; }
 }
