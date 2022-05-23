@@ -89,11 +89,11 @@ public class UploadTrainerProfileImageToStorageCommandValidator : AbstractValida
 
         RuleFor(request => request.ProfilePicture)
             .Cascade(CascadeMode.Stop)
-            .Must(IsUnderMaxSize).WithMessage(CatalogResources.ProfilePage_Image_FileTooBig)
-            .MustAsync(IsCorrectTypeAsync).WithMessage(CatalogResources.ProfilePage_Image_WrongFileType);
+            .Must(BeUnderMaxSize).WithMessage(CatalogResources.ProfilePage_Image_FileTooBig)
+            .MustAsync(BeCorrectTypeAsync).WithMessage(CatalogResources.ProfilePage_Image_WrongFileType);
     }
 
-    private async Task<bool> IsCorrectTypeAsync(IFormFile file, CancellationToken cancellationToken)
+    private async Task<bool> BeCorrectTypeAsync(IFormFile file, CancellationToken cancellationToken)
     {
         var mimeInspector = new ContentInspectorBuilder { Definitions = Default.FileTypes.Images.All() }.Build();
 
@@ -104,7 +104,7 @@ public class UploadTrainerProfileImageToStorageCommandValidator : AbstractValida
         return !result.IsDefaultOrEmpty;
     }
 
-    private bool IsUnderMaxSize(IFormFile file)
+    private bool BeUnderMaxSize(IFormFile file)
     {
         return file.Length < _storageOptions.Value.FileSizeLimit;
     }

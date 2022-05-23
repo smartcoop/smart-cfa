@@ -14,9 +14,11 @@ public class ProfileModel : AdminPage
 
     public string Email => UserIdentity.CurrentTrainer.Email!;
 
-    [BindProperty] public EditProfileCommand? EditProfileCommand { get; set; }
+    [BindProperty]
+    public EditProfileCommand? EditProfileCommand { get; set; }
 
-    [BindProperty] public IFormFile? ProfilePicture { get; set; }
+    [BindProperty]
+    public IFormFile? ProfilePicture { get; set; }
 
     /// <summary>
     /// State boolean that indicates if the current page results from a successful profile edition.

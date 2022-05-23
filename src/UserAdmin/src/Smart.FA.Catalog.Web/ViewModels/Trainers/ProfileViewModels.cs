@@ -23,8 +23,8 @@ public static class Mappers
         return new EditProfileCommand
         {
             TrainerId = trainerProfile.TrainerId!.Value,
-            Bio= trainerProfile.Bio,
-            Title= trainerProfile.Title,
+            Bio = trainerProfile.Bio,
+            Title = trainerProfile.Title,
         };
     }
 
