@@ -40,7 +40,7 @@ public class InquiryEmailService : IInquiryEmailService
         try
         {
             EnsureRateLimit(request.RemoteIpAddress);
-            _backgroundJobClient.Enqueue(() => SendEmailInternalAsync(request, cancellationToken));
+            Task.Run(() => SendEmailInternalAsync(request, cancellationToken), cancellationToken);
             return InquirySendEmailResult.Ok;
         }
         catch (RateLimitException)
