@@ -1,4 +1,5 @@
 ﻿@page "/admin/myprofile"
+@using Smart.Design.Razor.TagHelpers.Alert
 @using Smart.FA.Catalog.Web.Extensions
 @model Smart.FA.Catalog.Web.Pages.Admin.Trainers.ProfileModel
 @{
@@ -24,13 +25,12 @@
 }
 
 <div class="o-container">
-    @if (Model.EditionSucceeded)
+    @if (Model.EditionSucceeded is bool editionSucceeded)
     {
         <smart-spacer bottom="Large">
-            <smart-alert message="@CatalogResources.ProfileUpdatedWithSuccess" style="Success" is-closable="true"></smart-alert>
+            <smart-alert message="@(editionSucceeded ? CatalogResources.ProfileUpdatedWithSuccess : CatalogResources.ProfilePageUnexpectedError)" style="@(editionSucceeded ? AlertStyle.Success : AlertStyle.Error)" is-closable="true"></smart-alert>
         </smart-spacer>
     }
-
     <smart-grid>
         <smart-form id="profile-form" class="o-grid-col-7">
             <smart-panel header="@Model.UserIdentity.Identity.Name">

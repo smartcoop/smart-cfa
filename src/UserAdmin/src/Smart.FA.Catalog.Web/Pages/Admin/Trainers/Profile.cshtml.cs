@@ -22,7 +22,7 @@ public class ProfileModel : AdminPage
     /// State boolean that indicates if the current page results from a successful profile edition.
     /// </summary>
     [TempData]
-    public bool EditionSucceeded { get; set; }
+    public bool? EditionSucceeded { get; set; }
 
     public string ProfilePictureAbsoluteUrl { get; set; }
 
@@ -63,7 +63,7 @@ public class ProfileModel : AdminPage
 
         // Page reload from a post, whether the underlying operation was successful or not, requires the social networks list to load again.
         await LoadSocialsAsync();
-        return EditionSucceeded ? RedirectToPage() : Page();
+        return EditionSucceeded ?? false ? RedirectToPage() : Page();
     }
 
     private async Task LoadDataAsync()
@@ -104,23 +104,21 @@ public class ProfileModel : AdminPage
         var imageUploadRequest = new UploadTrainerProfileImageToStorageCommandRequest { TrainerId = UserIdentity.CurrentTrainer.Id, ProfilePicture = ProfilePicture };
         var imageUploadResponse = await Mediator.Send(imageUploadRequest);
         ProfilePictureAbsoluteUrl = imageUploadResponse.ProfilePictureAbsoluteUrl;
-
+        EditionSucceeded = !imageUploadResponse.HasErrors();
         await LoadDataAsync();
-
-        return imageUploadResponse.HasErrors() ? RedirectToPage() : Page();
+        return RedirectToPage();
     }
 
     public async Task<ActionResult> OnPostDeleteImageAsync()
     {
-        var hasErrors = false;
         if (ProfilePicture is not null)
         {
             var imageDeletionResponse = await Mediator.Send(new DeleteTrainerProfileImageRequest { RelativeProfilePictureUrl = UserIdentity.CurrentTrainer.ProfileImagePath });
-            hasErrors = imageDeletionResponse.HasErrors();
+            EditionSucceeded = !imageDeletionResponse.HasErrors();
         }
 
         await LoadDataAsync();
-        return hasErrors ? RedirectToPage() : Page();
+        return RedirectToPage();
     }
 
     protected override SideMenuItem GetSideMenuItem() => SideMenuItem.MyProfile;
