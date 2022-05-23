@@ -77,7 +77,7 @@ public class UploadTrainerProfileImageToStorageCommandResponse : ResponseBase
 }
 
 /// <summary>
-/// Validates a <see cref="EditProfileCommand" />.
+/// Validates a <see cref="UploadTrainerProfileImageCommand" />.
 /// </summary>
 public class UploadTrainerProfileImageToStorageCommandValidator : AbstractValidator<UploadTrainerProfileImageToStorageCommandRequest>
 {

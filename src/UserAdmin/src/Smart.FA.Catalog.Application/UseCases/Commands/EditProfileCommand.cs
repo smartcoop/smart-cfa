@@ -1,13 +1,8 @@
 using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using MimeDetective;
-using MimeDetective.Definitions;
-using Smart.FA.Catalog.Application.Extensions;
-using Smart.FA.Catalog.Application.Extensions.FluentValidation;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Extensions;
@@ -30,7 +25,6 @@ public class EditProfileCommand : IRequest<ProfileEditionResponse>
     public string? Title { get; set; }
 
     public Dictionary<string, string>? Socials { get; set; }
-
 }
 
 public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, ProfileEditionResponse>
@@ -41,7 +35,7 @@ public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, Pro
 
     public EditProfileCommandHandler(ILogger<EditProfileCommandHandler> logger, CatalogContext catalogContext, IMinIoLinkGenerator minIoLinkGenerator)
     {
-        _logger         = logger;
+        _logger = logger;
         _catalogContext = catalogContext;
         _minIoLinkGenerator = minIoLinkGenerator;
     }
@@ -161,7 +155,5 @@ public class EditProfileCommandValidator : AbstractValidator<EditProfileCommand>
             .WithMessage(CatalogResources.BioMustBe30Chars)
             .MaximumLength(500)
             .WithMessage(CatalogResources.BioCannotExceed500Chars);
-
-
     }
 }
