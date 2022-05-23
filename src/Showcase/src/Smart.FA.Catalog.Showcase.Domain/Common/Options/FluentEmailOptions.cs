@@ -19,9 +19,9 @@ public class FluentEmailOptions
     public string DefaultSender { get; set; } = null!;
 }
 
-public class InquiriesOptions
+public class IinquiryOptions
 {
-    public const string SectionName = "Mailing:Inquiries";
+    public const string SectionName = "Mailing:Inquiry";
 
     public string DefaultEmail { get; set; } = null!;
 

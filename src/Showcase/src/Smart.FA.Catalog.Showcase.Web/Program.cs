@@ -31,7 +31,7 @@ builder.Services
 
 builder.Services.Configure<MinIOOptions>(builder.Configuration.GetSection(MinIOOptions.SectionName))
     .Configure<FluentEmailOptions>(builder.Configuration.GetSection(FluentEmailOptions.SectionName))
-    .Configure<InquiriesOptions>(builder.Configuration.GetSection(InquiriesOptions.SectionName));
+    .Configure<IinquiryOptions>(builder.Configuration.GetSection(IinquiryOptions.SectionName));
 
 builder.Services.AddDbContext<CatalogShowcaseContext>((_, efOptions) =>
 {

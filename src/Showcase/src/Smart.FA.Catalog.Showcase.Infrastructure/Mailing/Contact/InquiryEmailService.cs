@@ -17,7 +17,7 @@ public class InquiryEmailService : IInquiryEmailService
     private readonly IFluentEmail _fluentEmail;
     private readonly IMemoryCache _memoryCache;
     private readonly IBackgroundJobClient _backgroundJobClient;
-    private readonly InquiriesOptions _inquiriesSettings;
+    private readonly IinquiryOptions _inquiriesSettings;
 
     public string Template => "Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Contact.InquiryEmailTemplate.cshtml";
 
@@ -25,7 +25,7 @@ public class InquiryEmailService : IInquiryEmailService
         IFluentEmail fluentEmail,
         IMemoryCache memoryCache,
         IBackgroundJobClient backgroundJobClient,
-        IOptions<InquiriesOptions> inquiriesOptions)
+        IOptions<IinquiryOptions> inquiriesOptions)
     {
         _logger = logger;
         _fluentEmail = fluentEmail;
@@ -104,7 +104,7 @@ public class InquiryEmailService : IInquiryEmailService
     }
 
     /// <summary>
-    /// Ensures that <paramref name="remoteIpAddress" /> is not sending a mail within <see cref="InquiriesOptions.RateLimitInSeconds" /> seconds.
+    /// Ensures that <paramref name="remoteIpAddress" /> is not sending a mail within <see cref="IinquiryOptions.RateLimitInSeconds" /> seconds.
     /// </summary>
     /// <param name="remoteIpAddress">The remote IP address of the sender.</param>
     /// <exception cref="RateLimitException">The IP address has already sent a inquiry within the allowed time frame.</exception>
