@@ -9,3 +9,6 @@ import "./modules/navbar-components";
 import "./modules/popper-popover";
 import "./modules/popper-tooltip";
 import "./modules/tabs";
+import "./modules/bundle-client.js";
+import "./modules/bundle-protoype.js";
+import "./modules/customjs.js";
