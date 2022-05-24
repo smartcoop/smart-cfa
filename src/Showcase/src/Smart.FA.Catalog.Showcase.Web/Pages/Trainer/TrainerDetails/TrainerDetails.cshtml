@@ -1,6 +1,7 @@
 ﻿@page
 @using Microsoft.Extensions.Localization
 @using Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer
+@using Smart.FA.Catalog.Showcase.Web.Extensions
 @model Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerDetails.TrainerDetailsModel
 @inject IStringLocalizer<ShowcaseResources> StringLocalizer
 
@@ -14,14 +15,14 @@
         @Model.Trainer.FirstName @Model.Trainer.LastName
     </div>
     <div class="trainer-card__fonction">
-        @Model.Trainer.Title
+         @Html.Raw(Model.Trainer.Title.ConserveLineBreaksInHtml())
     </div>
     <div class="trainer-card__details">
         <div class="trainer-card__image">
             <img src="@Model.Trainer.ProfileImageUrl" class="trainer-image" alt="trainer-image" />
         </div>
         <div class="trainer-card__details-txts">
-            @Model.Trainer.Biography
+            @Html.Raw(Model.Trainer.Biography.ConserveLineBreaksInHtml())
         </div>
         <div class="trainer-card__contacts">
             <ul>

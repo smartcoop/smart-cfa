@@ -1,5 +1,6 @@
 ﻿@page
 @using Microsoft.Extensions.Localization
+@using Smart.FA.Catalog.Showcase.Web.Extensions
 @model Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingDetails.TrainingDetailsModel
 @inject IStringLocalizer<ShowcaseResources> StringLocalizer
 
@@ -29,19 +30,19 @@
                 <div class="training-card__details-label">
                     @ShowcaseResources.Presentation
                 </div>
-                @Model.Training.Methodology
+                @Html.Raw(Model.Training.Methodology.ConserveLineBreaksInHtml())
             </div>
-            <div class="training-card__details-section">
+            <div class="training-card__details-section white-space: pre-line">
                 <div class="training-card__details-label">
-                    @ShowcaseResources.Objectives
+                    @Html.Raw(ShowcaseResources.Objectives.ConserveLineBreaksInHtml())
                 </div>
-                @Model.Training.Goal
+                @Html.Raw(Model.Training.Goal.ConserveLineBreaksInHtml())
             </div>
             <div class="training-card__details-section">
                 <div class="training-card__details-label">
                     @ShowcaseResources.PracticalModalities
                 </div>
-                @Model.Training.PracticalModalities
+                @Html.Raw(Model.Training.PracticalModalities.ConserveLineBreaksInHtml())
             </div>
         </div>
         <div class="training-card__trainer">

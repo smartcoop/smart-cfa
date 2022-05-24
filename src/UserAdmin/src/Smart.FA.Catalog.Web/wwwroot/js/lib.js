@@ -33,7 +33,7 @@ function scrollToFirstErrorElement() {
             behavior: "smooth"
         });
         firstInvalidControl.focus();
-    };
+    }
 }
 
 function RegisterScrollToFirstElementInError() {
@@ -78,10 +78,10 @@ function disableEnterKeyUpKeyPressOnForm() {
     }
 }
 
-function ignoreEnterKeyEventHandler(e) {
-    if (e.keyIdentifier === 'U+000A' || e.keyIdentifier === 'Enter' || e.keyCode === 13) {
-        e.preventDefault();
-        return false;
-    }
-    return true;
-}
+// function ignoreEnterKeyEventHandler(e) {
+//     if (e.keyIdentifier === 'U+000A' || e.keyIdentifier === 'Enter' || e.keyCode === 13) {
+//         e.preventDefault();
+//         return false;
+//     }
+//     return true;
+// }
