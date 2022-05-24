@@ -16,9 +16,9 @@ sudo chmod 777 $(pwd)/pipeline-scripts/ktutil/files/$DB_USER.keytab
 
 sed -e "s/{minio_access-key}/$MINIO_ACCESS_KEY/" \
     -e "s/{minio_secret-key}/$MINIO_SECRET_KEY/" \
-    ./src/UserAdmin/src/Smart.FA.Catalog.UserAdmin.Web/appsettings.Production.json > ./src/UserAdmin/src/Smart.FA.Catalog.UserAdmin.Web/appsettings.Production.tmp.json
+    ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Production.json > ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Production.tmp.json
 
-mv ./src/UserAdmin/src/Smart.FA.Catalog.UserAdmin.Web/appsettings.Production.tmp.json ./src/UserAdmin/src/Smart.FA.Catalog.UserAdmin.Web/appsettings.Production.json
+mv ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Production.tmp.json ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Production.json
 
 docker build \
   --build-arg Environment="Production" \
