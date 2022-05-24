@@ -475,6 +475,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string To {
+            get {
+                return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Communication.
         /// </summary>
         public static string TopicName_Communication {
@@ -583,7 +592,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Envoyer un message.
         /// </summary>
         public static string TrainerCard_Contact {
             get {

@@ -312,4 +312,7 @@
   <data name="TrainerCard_Contact" xml:space="preserve">
     <value>Envoyer un message</value>
   </data>
+  <data name="To" xml:space="preserve">
+    <value>à</value>
+  </data>
 </root>
