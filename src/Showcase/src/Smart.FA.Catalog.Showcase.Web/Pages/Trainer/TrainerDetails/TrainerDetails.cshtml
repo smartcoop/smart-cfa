@@ -40,6 +40,9 @@
                         </a>
                     </li>
                 }
+                <li class="trainer-card__trainer-links">
+                    <img src="/icons/message.svg" class="o-svg-icon--small contact-icon" /><a class="trainer-card__trainer-link trainer-card__contact-link" data-dialog="dialogId">@ShowcaseResources.TrainerCard_Contact</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -105,3 +108,30 @@
     </div>
 </section>
 
+<div class="c-dialog-context o-flex--center" id="dialogId">
+    <div class="c-dialog c-dialog--large" role="dialog" aria-labelledby="dialogTitle-02">
+        <div class="c-dialog__push"></div>
+        <div class="c-dialog__header c-dialog__header--bordered">
+            <div class="c-dialog__close" style="float:right;padding:0.6rem;">
+                <a data-dialog-close >
+                    <img src="/icons/close.svg " class="o-svg-icon--medium" /></a>
+            </div>
+            <div class="c-toolbar c-toolbar--spaced">
+                <div class="c-toolbar__left">
+                    <div class="c-toolbar__item">
+                        <h2 class="c-dialog__title" id="dialogTitle-02">@ShowcaseResources.TrainerCard_Contact @ShowcaseResources.To @Model.Trainer.FirstName @Model.Trainer.LastName</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="c-dialog__body">
+            <div class="u-spacer">
+                <section class="main__presentation">
+
+                    <!-- Ici vient le formulaire de contact (identique au formulaire général) -->
+
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
