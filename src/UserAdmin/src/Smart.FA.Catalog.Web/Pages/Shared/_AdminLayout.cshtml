@@ -1,0 +1,143 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Smart.FA.Catalog.Web.Pages.Admin
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.Extensions.Options
+@using Smart.FA.Catalog.Core.Services
+@using Smart.FA.Catalog.Infrastructure.Helpers
+@using Smart.FA.Catalog.Web.Options
+@using Smart.FA.Catalog.Web.Pages.SuperUser
+@inject IOptions<RequestLocalizationOptions> _requestLocalizationOptions;
+@inject IUserIdentity UserIdentity;
+@inject IMinIoLinkGenerator MinIoLinkGenerator;
+@inject IOptions<UrlOptions> UrlOptions;
+
+@{
+    // var requestCulture = Context.Features.Get<IRequestCultureFeature>() ?? throw new InvalidOperationException($"Couldn't get {nameof(IRequestCultureFeature)}");
+    // var supportedUiCultures = _requestLocalizationOptions
+    //     .Value?
+    //     .SupportedUICultures?
+    //     .Select(supportedCulture => new SelectListItem(supportedCulture.DisplayName, supportedCulture.TwoLetterISOLanguageName)) ??
+    //     throw new InvalidOperationException("Supported culture not defined");
+}
+<!DOCTYPE html>
+<html class="u-maximize-height" dir="ltr" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/_content/Smart.Design.Razor/css/main.css"/>
+    <link rel="stylesheet" href="~/Smart.FA.Catalog.Web.styles.css"/>
+    <link rel="stylesheet" href="~/css/adminstyles.css"/>
+</head>
+<body class="u-maximize-height u-overflow-hidden">
+<div class="c-app-layout">
+    <header class="u-position-relative">
+        <div class="c-navbar c-navbar--scrollable c-navbar--bordered-bottom section-header">
+            <div class="c-toolbar">
+                <div class="c-toolbar__left">
+                    <div class="c-toolbar__item">
+                        <div class="c-brand c-brand--xsmall">
+                            <a href="@UrlOptions.Value.Home">
+                                <img src="https://design.smart.coop/images/logo.svg" alt="Smart">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-toolbar__right">
+                    @* <div class="c-toolbar__item"> *@
+                    @*     <div class="c-select-holder"> *@
+                    @*         <select id="culture" *@
+                    @*                 name="culture" *@
+                    @*                 class="c-select" *@
+                    @*                 asp-items="supportedUiCultures" *@
+                    @*                 asp-for="@requestCulture.RequestCulture.UICulture.Name"> *@
+                    @*         </select> *@
+                    @*     </div> *@
+                    @* </div> *@
+                    <div class="c-toolbar__item">
+                        <a class="c-user-navigation" href="#" data-menu="userMenu">
+                            <div class="c-avatar c-avatar--img">
+                                <img src="@(MinIoLinkGenerator.GetAbsoluteTrainerProfilePictureUrl(UserIdentity.CurrentTrainer.ProfileImagePath))" alt="avatar">
+                            </div>
+                        </a>
+                        <ul class="c-menu c-menu--large" id="userMenu">
+                            <li class="c-menu__info">
+                                <div class="c-avatar-and-text">
+                                    <div class="c-avatar c-avatar--img">
+                                        <img src="@(MinIoLinkGenerator.GetAbsoluteTrainerProfilePictureUrl(UserIdentity.CurrentTrainer.ProfileImagePath))" alt="avatar">
+                                    </div>
+                                    <div class="c-avatar-and-text__text">
+                                        <p>
+                                            <strong>
+                                                @UserIdentity.Identity.Name
+                                            </strong>
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="c-menu__divider" role="presentational"></li>
+                            <li class="c-menu__item">
+                                <a class="c-menu__label" href="/cfa/admin">@CatalogResources.MyUserSpace</a>
+                            </li>
+                            <li class="c-menu__divider" role="presentational"></li>
+                            <li class="c-menu__item">
+                                <a class="c-menu__label" href="@UrlOptions.Value.SignOut">@CatalogResources.SignOut</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="u-maximize-width u-scroll-wrapper">
+        <div class="c-app-layout-inner">
+            <div class="c-app-layout-inner__sidebar">
+                <ul class="c-side-menu">
+                    @foreach (var sideMenuItem in SideMenuItem.List)
+                    {
+                        <li class="c-side-menu__item @((SideMenuItem)ViewData[nameof(SideMenuItem)]! == sideMenuItem ? "c-side-menu__item--active" : "")">
+                            <a class="c-side-menu__link " href="@sideMenuItem.Href">@sideMenuItem.DisplayName()</a>
+                        </li>
+                    }
+                </ul>
+
+                @if (UserIdentity.IsSuperUser)
+                {
+                    <ul class="c-side-menu">
+                        @foreach (var sideMenuItem in SuperUserSideMenuItem.List)
+                        {
+                            <li class="c-side-menu__item @((SuperUserSideMenuItem)ViewData[nameof(SuperUserSideMenuItem)]! == sideMenuItem ? "c-side-menu__item--active" : "")">
+                                <a class="c-side-menu__link" href="@sideMenuItem.Href">@sideMenuItem.DisplayName()</a>
+                            </li>
+                        }
+                    </ul>
+                }
+            </div>
+            <div class="c-app-layout-inner__content">
+                <div class="u-scroll-wrapper">
+                    @if (IsSectionDefined("HeaderToolbar"))
+                    {
+                        <div class="c-navbar c-navbar--bordered-bottom section-header">
+                            @await RenderSectionAsync("HeaderToolbar", false)
+                        </div>
+                    }
+                    <div class="u-scroll-wrapper-body">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="https://design.smart.coop/js/bundle-prototype.js"></script>
+<script src="https://design.smart.coop/js/bundle-client.js"></script>
+<script src="~/js/lib.js"></script>
+
+<script>
+    RegisterScrollToFirstElementInError();
+</script>
+
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
