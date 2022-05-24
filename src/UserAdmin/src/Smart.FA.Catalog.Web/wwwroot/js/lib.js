@@ -2,14 +2,12 @@ $(document).ready(
     // This is used only by the creation and edition page therefore it could be moved somewhere else.
     // If one has the heart to do so he/she is welcome :).
     // Btw try avoiding jQuery please :(.
-    function(event)
-    {
+    function (event) {
         let validateButton = document.getElementById("Save");
         if (!validateButton) {
-           return;
+            return;
         }
-        validateButton.addEventListener("click", function(e)
-        {
+        validateButton.addEventListener("click", function (e) {
             let model = document.getElementById("isDraft");
             model.value = true;
         });
@@ -24,7 +22,7 @@ function scrollToFirstErrorElement() {
 
         // The way to scroll to a div element is a bit different than inputs.
         if (firstInvalidControl.tagName === "div" || firstInvalidControl.tagName === "DIV") {
-            firstInvalidControl.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+            firstInvalidControl.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
             return;
         }
         window.scroll({
@@ -42,7 +40,7 @@ function RegisterScrollToFirstElementInError() {
 
 // Handling of the culture switching.
 document.addEventListener("DOMContentLoaded",
-    function() {
+    function () {
         RegisterCultureChange();
     });
 
@@ -57,7 +55,7 @@ function ChangeCulture(culture) {
 
 function RegisterCultureChange() {
     document.getElementById("culture").addEventListener("change",
-        function(event) {
+        function (event) {
             ChangeCulture(event.target.value);
         });
 }
@@ -78,10 +76,3 @@ function disableEnterKeyUpKeyPressOnForm() {
     }
 }
 
-// function ignoreEnterKeyEventHandler(e) {
-//     if (e.keyIdentifier === 'U+000A' || e.keyIdentifier === 'Enter' || e.keyCode === 13) {
-//         e.preventDefault();
-//         return false;
-//     }
-//     return true;
-// }
