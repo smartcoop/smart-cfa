@@ -583,6 +583,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string TrainerCard_Contact {
+            get {
+                return ResourceManager.GetString("TrainerCard_Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Liste des formateur·rices.
         /// </summary>
         public static string TrainerList_Title {

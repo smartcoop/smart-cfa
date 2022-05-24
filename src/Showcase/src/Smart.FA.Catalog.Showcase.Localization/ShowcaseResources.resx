@@ -309,4 +309,7 @@
   <data name="AllTopics" xml:space="preserve">
     <value>Dans toutes les matières</value>
   </data>
+  <data name="TrainerCard_Contact" xml:space="preserve">
+    <value>Envoyer un message</value>
+  </data>
 </root>
