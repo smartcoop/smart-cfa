@@ -70,42 +70,6 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string AddTrainingTooltip_Modalites {
-            get {
-                return ResourceManager.GetString("AddTrainingTooltip_Modalites", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string AddTrainingTooltip_Objectif {
-            get {
-                return ResourceManager.GetString("AddTrainingTooltip_Objectif", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string AddTrainingTooltip_Presentation {
-            get {
-                return ResourceManager.GetString("AddTrainingTooltip_Presentation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string AddTrainingTooltip_Title {
-            get {
-                return ResourceManager.GetString("AddTrainingTooltip_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Charte d&apos;utilisation.
         /// </summary>
         public static string AdminHomepage_AcceptCharter {

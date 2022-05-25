@@ -511,16 +511,4 @@
   <data name="Trainer" xml:space="preserve">
     <value>Formateur</value>
   </data>
-  <data name="AddTrainingTooltip_Title" xml:space="preserve">
-    <value />
-  </data>
-  <data name="AddTrainingTooltip_Presentation" xml:space="preserve">
-    <value />
-  </data>
-  <data name="AddTrainingTooltip_Objectif" xml:space="preserve">
-    <value />
-  </data>
-  <data name="AddTrainingTooltip_Modalites" xml:space="preserve">
-    <value />
-  </data>
 </root>
