@@ -53,6 +53,16 @@
                     <smart-checkbox label="@CatalogResources.IsTrainingGivenBySmart" asp-for="CreateTrainingViewModel.IsGivenBySmart"></smart-checkbox>
                     <smart-validation-message asp-for="CreateTrainingViewModel.IsGivenBySmart"></smart-validation-message>
                 }
+                <smart-formgroup>
+                    <label class="o-form-group__label">@CatalogResources.TrainingPresentation * <span data-tooltip="tooltip-1" data-tooltip-placement="top" ><smart-icon icon="CircleHelp"></smart-icon></span></label>
+                    <smart-formgroup-controls>
+                        <smart-textarea asp-for="CreateTrainingViewModel.Methodology" rows="5"></smart-textarea>
+                        
+                        <p class="c-form-help-text">@CatalogResources.Min30CharMax1000Char</p>
+                        <smart-validation-message asp-for="CreateTrainingViewModel.Methodology"></smart-validation-message>
+                    </smart-formgroup-controls>
+
+                </smart-formgroup>
                 <smart-form-group-textarea rows="5" label="@CatalogResources.TrainingPresentation *" asp-for="CreateTrainingViewModel.Methodology" helper-text="@CatalogResources.Min30CharMax1000Char"></smart-form-group-textarea>
                 <smart-form-group-textarea rows="5" label="@CatalogResources.TrainingGoal *" asp-for="CreateTrainingViewModel.Goal" helper-text="@CatalogResources.Min30CharMax1000Char"></smart-form-group-textarea>
                 <smart-form-group-textarea rows="5" label="@CatalogResources.PracticalModalities *" asp-for="CreateTrainingViewModel.PracticalModalities" helper-text="@CatalogResources.Min30CharMax1000Char"></smart-form-group-textarea>
@@ -105,7 +115,9 @@
         </div>
     </form>
 </smart-container>
-
+<div class="c-tooltip" id="tooltip-1" role="tooltip">This is a tooltip
+    <div class="c-tooltip__arrow" data-popper-arrow="data-popper-arrow"></div>
+</div>
 @section Scripts
 {
     <script>
