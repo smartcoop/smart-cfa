@@ -5,7 +5,7 @@
 @inject IStringLocalizer<ShowcaseResources> StringLocalizer
 
 @{
-    ViewData["Title"] = Model.Training.TrainingTitle; ;
+    ViewData["Title"] = Model.Training.TrainingTitle;
     Layout = Routes.Layout;
 }
 
@@ -30,25 +30,25 @@
                 <div class="training-card__details-label">
                     @ShowcaseResources.Presentation
                 </div>
-                @Html.Raw(Model.Training.Methodology.ConserveLineBreaksInHtml())
+                @Html.PreserveLineBreaks(Model.Training.Methodology)
             </div>
-            <div class="training-card__details-section white-space: pre-line">
+            <div class="training-card__details-section">
                 <div class="training-card__details-label">
-                    @Html.Raw(ShowcaseResources.Objectives.ConserveLineBreaksInHtml())
+                    @ShowcaseResources.Objectives
                 </div>
-                @Html.Raw(Model.Training.Goal.ConserveLineBreaksInHtml())
+                @Html.PreserveLineBreaks(Model.Training.Goal)
             </div>
             <div class="training-card__details-section">
                 <div class="training-card__details-label">
                     @ShowcaseResources.PracticalModalities
                 </div>
-                @Html.Raw(Model.Training.PracticalModalities.ConserveLineBreaksInHtml())
+                @Html.PreserveLineBreaks(Model.Training.PracticalModalities)
             </div>
         </div>
         <div class="training-card__trainer">
             <div class="training-card__trainer-name">
                 <a class="training-card__trainer-link" asp-page="@Routes.TrainerDetails" asp-route-id="@Model.Training.TrainerId">
-                     @Model.Training.TrainerFirstName @Model.Training.TrainerLastName
+                    @Model.Training.TrainerFirstName @Model.Training.TrainerLastName
                 </a>
             </div>
             <div class="training-card__trainer-fonction">

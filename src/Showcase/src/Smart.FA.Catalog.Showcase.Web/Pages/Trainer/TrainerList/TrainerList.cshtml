@@ -44,7 +44,7 @@
                             <a asp-page="@Routes.TrainerDetails" asp-route-id="@trainer.Id" class="trainer-list__item-link">@trainer.FirstName @trainer.LastName</a>
                         </div>
                         <div class="trainer-list__item-function">
-                            @Html.Raw(trainer.Title.ConserveLineBreaksInHtml())
+                            @Html.PreserveLineBreaks(trainer.Title)
                         </div>
                     </div>
                 </div>
