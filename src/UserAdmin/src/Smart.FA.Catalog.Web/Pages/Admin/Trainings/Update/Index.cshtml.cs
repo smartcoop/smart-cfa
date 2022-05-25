@@ -1,11 +1,13 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 using Smart.Design.Razor.TagHelpers.Alert;
 using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Domain.Models;
 using Smart.FA.Catalog.Core.Services;
+using Smart.FA.Catalog.Web.Options;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.Update;
 
@@ -17,11 +19,14 @@ public class UpdateModel : AdminPage
 
     public IUserIdentity UserIdentity { get; }
 
+    public string ShowcaseUrl { get; set; }
+
     [BindProperty] public UpdateTrainingViewModel UpdateTrainingViewModel { get; set; } = null!;
 
-    public UpdateModel(IMediator mediator, IUserIdentity userIdentity) : base(mediator)
+    public UpdateModel(IMediator mediator, IUserIdentity userIdentity, IOptions<UrlOptions> urlOptions) : base(mediator)
     {
         UserIdentity = userIdentity;
+        ShowcaseUrl = urlOptions.Value.Showcase;
     }
 
     private void Init()
@@ -63,6 +68,11 @@ public class UpdateModel : AdminPage
         UpdateTrainingViewModel = response.MapUpdateToResponse(UserIdentity.Identity.Trainer.DefaultLanguage);
 
         TempData.AddGlobalBannerMessage(CatalogResources.TrainingEditedWithSuccess, AlertStyle.Success);
+
+        if (!UpdateTrainingViewModel.IsDraft)
+        {
+            TempData["Url"] = $"{ShowcaseUrl}/Training/TrainingDetails/TrainingDetails?id={id}";
+        }
 
         return RedirectAfterSuccessfulUpdate();
     }
