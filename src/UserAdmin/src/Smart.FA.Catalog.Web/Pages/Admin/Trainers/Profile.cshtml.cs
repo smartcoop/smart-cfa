@@ -65,7 +65,7 @@ public class ProfileModel : AdminPage
 
         // Page reload from a post, whether the underlying operation was successful or not, requires the social networks list to load again.
         await LoadSocialsAsync();
-        return EditionSucceeded ?? false ? RedirectToPage() : Page();
+        return EditionSucceeded is true ? RedirectToPage() : Page();
     }
 
     private async Task LoadDataAsync()
