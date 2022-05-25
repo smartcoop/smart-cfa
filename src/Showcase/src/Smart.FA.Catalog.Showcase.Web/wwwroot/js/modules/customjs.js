@@ -59,7 +59,7 @@ addEvent(email, "keyup", function() {
 // Ici, on définit ce qui se passe lorsque l'utilisateur
 // tente d'envoyer les données du formulaire
 addEvent(form, "submit", function() {
-    alert("hello");
+    //alert("hello");
     var test = email.value.length === 0 || emailRegExp.test(email.value);
 
     if (!test) {

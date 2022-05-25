@@ -3,12 +3,12 @@ import "./modules/close-alert";
 import "./modules/close-global-banner";
 import "./modules/design-system-website-mobile-menu";
 import "./modules/dialogs";
-import "./modules/input-password.js"
+import "./modules/input-password"
 import "./modules/menu";
 import "./modules/navbar-components";
 import "./modules/popper-popover";
 import "./modules/popper-tooltip";
 import "./modules/tabs";
-import "./modules/bundle-client.js";
-import "./modules/bundle-protoype.js";
-import "./modules/customjs.js";
+import "./modules/bundle-client";
+import "./modules/bundle-protoype";
+import "./modules/customjs";
