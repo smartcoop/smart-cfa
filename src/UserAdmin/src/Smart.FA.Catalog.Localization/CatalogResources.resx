@@ -331,7 +331,7 @@
     <value>Présentation de la formation</value>
   </data>
   <data name="TrainingVatJustification" xml:space="preserve">
-    <value>Justification de la réduction de la TVA</value>
+    <value>Champs non publics</value>
   </data>
   <data name="YouMustSelectedAtLeastOneTopic" xml:space="preserve">
     <value>Vous devez selectionner au moins une matière</value>
@@ -410,7 +410,7 @@
     <value>Rechercher</value>
   </data>
   <data name="Status" xml:space="preserve">
-    <value>Status</value>
+    <value>Statut</value>
   </data>
   <data name="Trainings" xml:space="preserve">
     <value>Formations</value>
@@ -510,5 +510,17 @@
   </data>
   <data name="Trainer" xml:space="preserve">
     <value>Formateur</value>
+  </data>
+  <data name="AddTrainingTooltip_Title" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AddTrainingTooltip_Presentation" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AddTrainingTooltip_Objectif" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AddTrainingTooltip_Modalites" xml:space="preserve">
+    <value />
   </data>
 </root>
