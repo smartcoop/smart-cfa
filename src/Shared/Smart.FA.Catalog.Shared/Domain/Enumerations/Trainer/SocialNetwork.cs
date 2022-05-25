@@ -17,7 +17,7 @@ public class SocialNetwork : Enumeration<SocialNetwork>
 
     public static readonly SocialNetwork LinkedIn        = new(5, nameof(LinkedIn));
 
-    public static readonly SocialNetwork PersonalWebsite = new(6, "Personal website");
+    public static readonly SocialNetwork PersonalWebsite = new(6, nameof(PersonalWebsite));
 
     protected SocialNetwork(int id, string name) : base(id, name)
     {
