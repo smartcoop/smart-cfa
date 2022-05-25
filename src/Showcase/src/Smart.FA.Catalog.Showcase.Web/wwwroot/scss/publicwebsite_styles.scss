@@ -110,6 +110,15 @@
         padding: 2rem 10rem;
         text-align: left;
 
+        .contact-form__error {
+            color: $color-semantic-warning;
+        }
+
+        .c-button--primary{
+            float:right;
+        }
+
+
         @media (max-width: $g-bp3) {
             padding: 2rem;
         }
@@ -123,7 +132,7 @@
 
         .section-label__text {
             min-width: 30rem;
-            text-align:left;
+            text-align: left;
         }
 
         .section-label__nb {
@@ -178,9 +187,9 @@
 
         .search-category__item {
             margin: 0 1rem 1rem 0;
-            border: 0.1rem solid $color-gray-800;
             width: auto;
             text-align: center;
+
 
             @media (max-width: $g-bp2) {
                 margin: auto auto 1rem auto;
@@ -188,21 +197,24 @@
         }
 
         .search-category__item-link {
-            padding: 0.5rem 1.6rem 0.5rem 1.2rem;
             font-size: 1.3rem;
             color: $color-gray-800;
+            padding: 0.5rem 1.6rem 0.5rem 1.2rem;
+            border: 0.1rem solid $color-gray-800;
+        }
+
+        .search-category__item-link:hover {
+            color: $color-white;
+            background: $color-blue-600;
+        }
+
+        .search-category__item--active {
+            background: $color-blue-600;
+            color: $color-white;
         }
     }
 
-    .search-category__item:hover {
-        background: $color-blue-600;
-        color: $color-white;
-        border: 0.1rem solid $color-blue-600;
-    }
 
-    .search-category__item-link:hover {
-        color: $color-white;
-    }
 
     .search-category__item_end {
         text-align: center;
@@ -213,18 +225,19 @@
             margin-left: auto;
             margin-right: auto;
             margin: 0 1rem 1rem 0;
-            border: 0.1rem solid $color-blue-600;
+            border: 0.1rem solid $color-gray-800;
             padding: 0.5rem 1.6rem 0.5rem 1.2rem;
             font-size: 1.3rem;
+            color: $color-gray-800;
+        }
+
+        .search-category__item--active {
+            background: $color-blue-600;
             color: $color-white;
         }
     }
 
-    .search-category__item--active {
-        background: $color-blue-600;
-        color: $color-white;
-        border: 0.1rem solid $color-blue-600;
-    }
+
 
     @media (max-width: $g-bp4) {
         padding: 2rem 5%;
@@ -291,6 +304,7 @@
         padding-top: 3rem;
         display: flex;
         flex-wrap: wrap;
+        overflow-wrap: break-word;
 
         @media (max-width: $g-bp3) {
             flex-direction: column;
@@ -319,6 +333,7 @@
             width: 30%;
             min-width: 25rem;
             padding: 0 0 3rem 10rem;
+            overflow-wrap: break-word;
 
             @media (max-width: $g-bp3) {
                 width: 100%;
@@ -340,92 +355,120 @@
 
 .trainer-card {
     text-align: left;
+
     @media (max-width: $g-bp3) {
         display: flex;
         flex-direction: column;
     }
+
     .trainer-card__title {
         font-size: 2.8rem;
         font-weight: 700;
         line-height: 3rem;
     }
+
     .trainer-card__fonction {
         color: $color-gray-500;
         padding-top: 1rem;
     }
+
     .trainer-card__details {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
+
         @media (max-width: $g-bp3) {
             flex-direction: column;
-        }    
+        }
+
         .trainer-card__image {
             width: 25%;
             margin-right: 2.5rem;
             min-width: 23rem;
             margin-top: 3rem;
+
             @media (max-width: $g-bp3) {
                 width: 100%;
             }
         }
+
         .trainer-card__details-txts {
             width: 40%;
             margin-top: 3rem;
+            overflow-wrap: break-word;
+
             @media (max-width: $g-bp3) {
                 width: 100%;
             }
         }
+
         .trainer-card__contacts {
             min-width: 25rem;
             margin-top: 3rem;
             padding-left: 10rem;
+
             @media (max-width: $g-bp3) {
                 width: 100%;
                 padding: 0;
             }
+
             .trainer-card__contact-label {
                 font-size: 1.6rem;
                 font-weight: 700;
                 line-height: 2rem;
                 color: $color-blue-600;
             }
-            .trainer-card__trainer-link {
+
+            .trainer-card__trainer-links{
+                margin-bottom: 0.8rem;
+
+                .trainer-card__trainer-link {
                 color: $color-gray-500;
                 text-decoration: underline;
-            }
-            .contact-icon {
-                margin-right: 1rem;
-            }
+                padding-bottom: 0.8rem;
+                }
+
+                .contact-icon {
+                    margin-right: 1rem;
+                    vertical-align: bottom;
+                }
+             }
         }
     }
+
     .trainer-card__trainings {
         padding-top: 6rem;
         width: 80%;
-        @media (max-width: $g-bp3){
+
+        @media (max-width: $g-bp3) {
             width: 100%;
         }
+
         .trainer-card__trainings-label {
             font-size: 1.6rem;
             font-weight: 700;
             line-height: 2rem;
             color: $color-blue-600;
         }
+
         .training-list__container {
             display: flex;
             padding: 2rem 0;
             border-bottom: 1px solid $color-gray-100;
+
             .training-list__container-left {
                 width: 90%;
+
                 .training-list__training-link {
                     color: $color-gray-800;
                 }
+
                 .training-list__title {
                     font-size: 1.6rem;
                     font-weight: 700;
-                    line-height: 3rem;
                 }
             }
+
             .training-list__container-right {
                 width: 10%;
                 min-width: 10%;
@@ -436,6 +479,7 @@
             }
         }
     }
+
     .trainer-card__footer {
         padding-top: 4rem;
     }
@@ -443,7 +487,6 @@
 
 .trainer-list {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
     gap: 1rem 2.4rem;
 
@@ -460,7 +503,7 @@
             overflow: hidden;
         }
 
-        
+
         .trainer-icon {
             width: 10rem;
             padding-top: 2rem;
