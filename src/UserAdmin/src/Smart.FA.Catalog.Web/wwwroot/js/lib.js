@@ -2,7 +2,7 @@ $(document).ready(
     // This is used only by the creation and edition page therefore it could be moved somewhere else.
     // If one has the heart to do so he/she is welcome :).
     // Btw try avoiding jQuery please :(.
-    function (event) {
+    function(event) {
         let validateButton = document.getElementById("Save");
         if (!validateButton) {
             return;
@@ -40,7 +40,7 @@ function RegisterScrollToFirstElementInError() {
 
 // Handling of the culture switching.
 document.addEventListener("DOMContentLoaded",
-    function () {
+    function() {
         RegisterCultureChange();
     });
 
@@ -55,7 +55,7 @@ function ChangeCulture(culture) {
 
 function RegisterCultureChange() {
     document.getElementById("culture").addEventListener("change",
-        function (event) {
+        function(event) {
             ChangeCulture(event.target.value);
         });
 }
