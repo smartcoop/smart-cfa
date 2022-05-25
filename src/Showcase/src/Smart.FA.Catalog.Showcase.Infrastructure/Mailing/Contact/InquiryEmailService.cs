@@ -98,7 +98,7 @@ public class InquiryEmailService : IInquiryEmailService
         {
             var errorMessage = LogError(request, e);
 
-            // This makes sure that Hangfire will retry upon an occurring error.
+            // This triggers a retry.
             throw new EmailSendException(errorMessage, e);
         }
         catch (RateLimitException)
@@ -177,7 +177,7 @@ public interface IInquiryEmailService
 {
     /// <summary>
     /// Sends in to Smart Learning team an email containing an inquiry of a visitor.
-    /// The execution of the code is handled by Hangfire.
+    /// The execution of the code retries on failures.
     /// This method is safe, i.e., it captures any encountered exceptions.
     /// </summary>
     /// <param name="request">Content of the inquiry.</param>
