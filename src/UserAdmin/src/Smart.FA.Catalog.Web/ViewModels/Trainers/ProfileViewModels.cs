@@ -20,12 +20,11 @@ public static class Mappers
 {
     public static EditProfileCommand ToCommand(this TrainerProfile trainerProfile)
     {
-        return new EditProfileCommand()
+        return new EditProfileCommand
         {
             TrainerId = trainerProfile.TrainerId!.Value,
-            Bio       = trainerProfile.Bio,
-            Title     = trainerProfile.Title,
-            ProfilePicture = null
+            Bio = trainerProfile.Bio,
+            Title = trainerProfile.Title,
         };
     }
 
@@ -52,7 +51,12 @@ public static class Mappers
 
     public static SocialNetworkViewModel ToViewModel(this SocialNetwork socialNetwork)
     {
-        return new SocialNetworkViewModel() {SocialNetworkId = socialNetwork.Id, Name = socialNetwork.Name, Icon = socialNetwork.ToImage()};
+        return new SocialNetworkViewModel
+        {
+            SocialNetworkId = socialNetwork.Id,
+            Name = socialNetwork.Name,
+            Icon = socialNetwork.ToImage()
+        };
     }
 
     /// <summary>
