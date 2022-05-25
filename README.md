@@ -1,4 +1,4 @@
-﻿# Catalogue Formateurs Associés
+# Catalogue Formateurs Associés
 
 ## Structure of the solution:
 
@@ -58,3 +58,5 @@ The url are generated based on the name of the branch or the pr number with the 
 
 ---
 ## Showcase
+
+
