@@ -416,7 +416,7 @@
     <value>Formations</value>
   </data>
   <data name="TrainingSearchTitle" xml:space="preserve">
-    <value>Édition de formations</value>
+    <value>Recherche de formation</value>
   </data>
   <data name="Training_IsOther" xml:space="preserve">
     <value>Autre</value>
@@ -507,5 +507,8 @@
   </data>
   <data name="AdminHomepageTraining_Button" xml:space="preserve">
     <value>Encoder une formation</value>
+  </data>
+  <data name="Trainer" xml:space="preserve">
+    <value>Formateur</value>
   </data>
 </root>

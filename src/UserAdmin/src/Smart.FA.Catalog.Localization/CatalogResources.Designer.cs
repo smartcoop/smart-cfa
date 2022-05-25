@@ -376,7 +376,7 @@ namespace Smart.FA.Catalog.Localization {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to Ce champs est requis.
+        ///   Looks up a localized string similar to Ce champ est requis.
         /// </summary>
         public static string FieldRequired {
             get {
@@ -916,6 +916,15 @@ namespace Smart.FA.Catalog.Localization {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to Formateur.
+        /// </summary>
+        public static string Trainer {
+            get {
+                return ResourceManager.GetString("Trainer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Le formateur n&apos;a pas été trouvé.
         /// </summary>
         public static string TrainerNotFound_TrainerId {
@@ -1105,7 +1114,7 @@ namespace Smart.FA.Catalog.Localization {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to Édition de formations.
+        ///   Looks up a localized string similar to Recherche de formation.
         /// </summary>
         public static string TrainingSearchTitle {
             get {
