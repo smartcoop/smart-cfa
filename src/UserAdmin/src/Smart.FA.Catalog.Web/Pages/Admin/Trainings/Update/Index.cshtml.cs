@@ -67,7 +67,7 @@ public class UpdateModel : AdminPage
         var response = await Mediator.Send(request);
         UpdateTrainingViewModel = response.MapUpdateToResponse(UserIdentity.Identity.Trainer.DefaultLanguage);
 
-        TempData.AddGlobalBannerMessage(CatalogResources.TrainingEditedWithSuccess, AlertStyle.Success);
+        TempData.AddGlobalAlertMessage(CatalogResources.TrainingEditedWithSuccess, AlertStyle.Success);
 
         if (!UpdateTrainingViewModel.IsDraft)
         {

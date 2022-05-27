@@ -43,7 +43,7 @@ public class CreateModel : AdminPage
         var request = CreateTrainingViewModel.MapToRequest(UserIdentity.CurrentTrainer.Id, UserIdentity.CurrentTrainer.DefaultLanguage);
         await Mediator.Send(request);
 
-        TempData.AddGlobalBannerMessage(CatalogResources.TrainingCreatedWithSuccess, AlertStyle.Success);
+        TempData.AddGlobalAlertMessage(CatalogResources.TrainingCreatedWithSuccess, AlertStyle.Success);
         
         return RedirectToPage("/Admin/Trainings/List/Index");
     }
