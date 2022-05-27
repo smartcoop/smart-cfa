@@ -1,6 +1,6 @@
 import "./modules/accordion";
 import "./modules/close-alert";
-import "./modules/close-global-banner";
+import "./modules/close-global-alert";
 import "./modules/design-system-website-mobile-menu";
 import "./modules/dialogs";
 import "./modules/input-password.js"
