@@ -130,50 +130,8 @@
         <div class="c-dialog__body">
             <div class="u-spacer">
                 <section class="main__presentation">
-                    @if (Model.EmailSendingResult == InquirySendEmailResult.Ok)
-                    {
-                        <div id="sendmailConfirmation">
-                            <smart-alert style="Success" message="@ShowcaseResources.Contact_ConfirmationMessage"></smart-alert>
-                        </div>
-                    }
-                    else if (Model.EmailSendingResult == InquirySendEmailResult.Failure)
-                    {
-                        <div id="sendmailError">
-                            <smart-alert style="Error" message="@ShowcaseResources.Contact_ErrorMessage" is-closable="false"></smart-alert>
-                        </div>
-                    }
-                    else if (Model.EmailSendingResult == InquirySendEmailResult.TooManyRequests)
-                    {
-                        <div id="sendmailError">
-                            <smart-alert style="Error" message="@ShowcaseResources.YouReachedRateLimit" is-closable="false"></smart-alert>
-                        </div>
-                    }
-                    <form class="o-form-group-layout o-form-group-layout--standard" method="post">
-                        <div class="o-form-group">
-                            <label class="o-form-group__label" for="formValidationnameId">@ShowcaseResources.Contact_LabelName</label>
-                            <div class="o-form-group__controls">
-                                <input asp-for="TrainerInquiryEmailRequest.Name" class="c-input" type="text" placeholder="@ShowcaseResources.Contact_DefaultName" id="formValidationnameId"/>
-                                <span asp-validation-for="TrainerInquiryEmailRequest.Name" class="contact-form__error"></span>
-                            </div>
-                        </div>
-                        <div class="o-form-group">
-                            <label class="o-form-group__label" for="formValidationEmailId">@ShowcaseResources.Contact_LabelEmail</label>
-                            <div class="o-form-group__controls">
-                                <input asp-for="TrainerInquiryEmailRequest.Email" class="c-input" type="text" placeholder="@ShowcaseResources.Contact_DefaultEmail" id="formValidationEmailId"/>
-                                <span asp-validation-for="TrainerInquiryEmailRequest.Email" class="contact-form__error"></span>
-                            </div>
-                        </div>
-
-                        <div class="o-form-group">
-                            <label class="o-form-group__label" for="textareaId">@ShowcaseResources.Contact_LabelMessage</label>
-                            <textarea asp-for="TrainerInquiryEmailRequest.Message" class="c-textarea" rows="5" id="textareaId" maxlength="1000"></textarea>
-                            <span asp-validation-for="TrainerInquiryEmailRequest.Message" class="contact-form__error"></span>
-                        </div>
-                        <div class="o-form-group">
-                            <input class="c-button c-button--primary" type="submit" value="@ShowcaseResources.Contact_LabelSend"/>
-                        </div>
-                    </form>
-
+                    @await Html.PartialAsync("Partials/Inquiry/_FormSendingMailResultAlerts", Model.EmailSendingResult)
+                    @await Html.PartialAsync("Partials/Inquiry/_InquiryForm", Model.TrainerInquiryEmailRequest)
                 </section>
             </div>
         </div>
