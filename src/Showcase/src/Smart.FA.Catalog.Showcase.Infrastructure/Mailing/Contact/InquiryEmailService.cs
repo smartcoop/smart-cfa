@@ -49,11 +49,6 @@ public class InquiryEmailService : IInquiryEmailService
         {
             return InquirySendEmailResult.TooManyRequests;
         }
-        catch (Exception ex)
-        {
-            LogError(request, ex);
-            return InquirySendEmailResult.Failure;
-        }
     }
 
     private async Task SendWithRetriesAsync(InquirySendEmailRequest request, CancellationToken cancellationToken = default)
@@ -94,16 +89,16 @@ public class InquiryEmailService : IInquiryEmailService
             EnsureEmailSendingResponse(response);
             RegisterSendTimeForRateLimit(request.RemoteIpAddress);
         }
-        catch (Exception e) when (e is not RateLimitException)
+        catch (RateLimitException)
+        {
+            // Ignored, no point to flood ourselves.
+        }
+        catch (Exception e)
         {
             var errorMessage = LogError(request, e);
 
             // This triggers a retry.
             throw new EmailSendException(errorMessage, e);
-        }
-        catch (RateLimitException)
-        {
-            // Ignored, no point to flood ourselves.
         }
     }
 
