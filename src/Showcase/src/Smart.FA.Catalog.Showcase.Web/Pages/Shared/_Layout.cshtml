@@ -17,75 +17,76 @@
     <meta name="theme-color" content="#ffffff">
 </head>
 <body class="body-page">
-    <div class="page">
-        <header class="header">
-            <div class="header-band">
-                <a href="/admin" class="header-band__link">@ShowcaseResources.Header_LabelMemberAccess</a>
+<div class="page">
+    <header class="header">
+        <div class="header-band">
+            <a href="/admin" class="header-band__link">@ShowcaseResources.Header_LabelMemberAccess</a>
+        </div>
+        <nav class="header-nav">
+            <div class="header-nav__logo_container"  >
+                <a class="header-nav__logo-link" asp-area="" asp-page="/Index">
+                    <img src="~/images/logo_smart_learning_white.svg" alt="Smart logo" class="header-nav__logo"/>
+                </a>
             </div>
-            <nav class="header-nav">
-                <div class="header-nav__logo_container"  >
-                    <a class="header-nav__logo-link" asp-area="" asp-page="/Index">
-                        <img src="~/images/logo_smart_learning_white.svg" alt="Smart logo" class="header-nav__logo"/>
-                    </a>
-                </div>
-                <ul class="header-nav__ul">
-                    <li class="header-nav__item">
-                        <a class="header-nav__link" asp-area="" asp-page="/Index">@ShowcaseResources.Header_LabelFA</a>
+            <ul class="header-nav__ul">
+                <li class="header-nav__item">
+                    <a class="header-nav__link" asp-area="" asp-page="/Index">@ShowcaseResources.Header_LabelFA</a>
+                </li>
+                <li class="header-nav__item">
+                    <a class="header-nav__link" asp-area="" asp-page="@Routes.TrainingList">@ShowcaseResources.Header_LabelTrainings</a>
+                </li>
+                <li class="header-nav__item">
+                    <a class="header-nav__link" asp-area="" asp-page="@Routes.TrainerList">@ShowcaseResources.Header_LabelTrainers</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main role="main" class="main">
+        @RenderBody()
+    </main>
+
+
+    <footer class="footer">
+        <div class="footer-section">
+            <div class="footer-section__item">
+                <h2 class="footer-section__title">@ShowcaseResources.Footer_LabelQuickLinks</h2>
+                <ul class="footer__links">
+                    <li><a class="footer__link" asp-area="" asp-page="/LegalNotice">@ShowcaseResources.Footer_LabelLegalNotice</a></li>
+                    <li><a class="footer__link" asp-area="" asp-page="/Contact">@ShowcaseResources.Footer_LabelContact</a></li>
+                    <li><a class="footer__link" asp-area="" asp-page="/Rgpd">@ShowcaseResources.Footer_LabelRGPD</a></li>
+                </ul>
+            </div>
+            <div class="footer-section__item">
+                <h2 class="footer-section__title">@ShowcaseResources.Footer_LabelOurWebsites</h2>
+                <ul class="footer__links">
+                    <li><a href="https://kronik.smart.coop" class="footer__link"><span class="label">Kronik, le blog</span></a></li>
+                    <li><a href="https://smartbe.be" class="footer__link"><span class="label">Smartbe.be</span></a></li>
+                </ul>
+            </div>
+            <div class="footer-section__item">
+                <h2 class="footer-section__title">@ShowcaseResources.Footer_LabelFollow</h2>
+                <ul class="footer_icons">
+                    <li class="footer_icons__item">
+                        <a href="https://twitter.com/SMartBe_FR" class="footer_icons__link"><img src="~/icons/twitter.svg" class="o-svg-icon" /></a>
                     </li>
-                    <li class="header-nav__item">
-                        <a class="header-nav__link" asp-area="" asp-page="@Routes.TrainingList">@ShowcaseResources.Header_LabelTrainings</a>
+                    <li class="footer_icons__item">
+                        <a href="https://www.facebook.com/SMartBeFR/" class="footer_icons__link"><img src="~/icons/facebook.svg" class="o-svg-icon s" /></a>
                     </li>
-                    <li class="header-nav__item">
-                        <a class="header-nav__link" asp-area="" asp-page="@Routes.TrainerList">@ShowcaseResources.Header_LabelTrainers</a>
+                    <li class="footer_icons__item">
+                        <a href="https://www.linkedin.com/company/smartbefr/" class="footer_icons__link"><img src="~/icons/linkedin.svg" class="o-svg-icon" /></a>
+                    </li>
+                    <li class="footer_icons__item">
+                        <a href="https://www.youtube.com/channel/UCWfo_GiuDq6qNiW2IT5JOJg" class="footer_icons__link"><img src="~/icons/youtube.svg" class="o-svg-icon" /></a>
+
                     </li>
                 </ul>
-            </nav>
-        </header>
-
-        <main role="main" class="main">
-            @RenderBody()
-        </main>
-
-
-        <footer class="footer">
-            <div class="footer-section">
-                <div class="footer-section__item">
-                    <h2 class="footer-section__title">@ShowcaseResources.Footer_LabelQuickLinks</h2>
-                    <ul class="footer__links">
-                        <li><a class="footer__link" asp-area="" asp-page="/LegalNotice">@ShowcaseResources.Footer_LabelLegalNotice</a></li>
-                        <li><a class="footer__link" asp-area="" asp-page="/Contact">@ShowcaseResources.Footer_LabelContact</a></li>
-                        <li><a class="footer__link" asp-area="" asp-page="/Rgpd">@ShowcaseResources.Footer_LabelRGPD</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section__item">
-                    <h2 class="footer-section__title">@ShowcaseResources.Footer_LabelOurWebsites</h2>
-                    <ul class="footer__links">
-                        <li><a href="https://kronik.smart.coop" class="footer__link"><span class="label">Kronik, le blog</span></a></li>
-                        <li><a href="https://smartbe.be" class="footer__link"><span class="label">Smartbe.be</span></a></li>
-                    </ul>
-                </div>
-                <div class="footer-section__item">
-                    <h2 class="footer-section__title">@ShowcaseResources.Footer_LabelFollow</h2>
-                    <ul class="footer_icons">
-                        <li class="footer_icons__item">
-                            <a href="https://twitter.com/SMartBe_FR" class="footer_icons__link"><img src="~/icons/twitter.svg" class="o-svg-icon" /></a>
-                        </li>
-                        <li class="footer_icons__item">
-                            <a href="https://www.facebook.com/SMartBeFR/" class="footer_icons__link"><img src="~/icons/facebook.svg" class="o-svg-icon s" /></a>
-                        </li>
-                        <li class="footer_icons__item">
-                            <a href="https://www.linkedin.com/company/smartbefr/" class="footer_icons__link"><img src="~/icons/linkedin.svg" class="o-svg-icon" /></a>
-                        </li>
-                        <li class="footer_icons__item">
-                            <a href="https://www.youtube.com/channel/UCWfo_GiuDq6qNiW2IT5JOJg" class="footer_icons__link"><img src="~/icons/youtube.svg" class="o-svg-icon" /></a>
-
-                        </li>
-                    </ul>
-                </div>
             </div>
+        </div>
 
-        </footer>
-    </div>
+    </footer>
+</div>
+    <script src="https://design.smart.coop/js/bundle-client.js"></script>
     <script src="~/js/index.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
