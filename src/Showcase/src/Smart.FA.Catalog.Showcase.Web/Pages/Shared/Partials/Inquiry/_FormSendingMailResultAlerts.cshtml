@@ -1,0 +1,22 @@
+﻿@using Smart.Design.Razor.TagHelpers.Alert
+@using Smart.FA.Catalog.Showcase.Domain.Common.Enums
+@model Smart.FA.Catalog.Showcase.Domain.Common.Enums.InquirySendEmailResult?
+
+@if (Model == InquirySendEmailResult.Ok)
+{
+    <div id="sendmailConfirmation">
+        <smart-alert style="Success" message="@ShowcaseResources.Contact_ConfirmationMessage"></smart-alert>
+    </div>
+}
+else if (Model == InquirySendEmailResult.Failure)
+{
+    <div id="sendmailError">
+        <smart-alert style="Error" message="@ShowcaseResources.Contact_ErrorMessage" is-closable="false"></smart-alert>
+    </div>
+}
+else if (Model == InquirySendEmailResult.TooManyRequests)
+{
+    <div id="sendmailError">
+        <smart-alert style="Error" message="@ShowcaseResources.YouReachedRateLimit" is-closable="false"></smart-alert>
+    </div>
+}
