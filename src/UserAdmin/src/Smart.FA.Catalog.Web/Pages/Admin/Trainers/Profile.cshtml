@@ -1,7 +1,9 @@
 ﻿@page "/admin/myprofile"
+@using Microsoft.Extensions.Localization
 @using Smart.Design.Razor.TagHelpers.Alert
 @using Smart.FA.Catalog.Web.Extensions
 @model Smart.FA.Catalog.Web.Pages.Admin.Trainers.ProfileModel
+@inject IStringLocalizer<CatalogResources> StringLocalizer
 @{
     Layout = "Shared/_AdminLayout";
     ViewData.SetTitle(CatalogResources.MyTrainerProfile);
@@ -49,7 +51,7 @@
                 @foreach (var socialVm in Model.SocialNetworkViewModels)
                 {
                     <smart-spacer bottom="Large">
-                        <smart-formgroup label="@socialVm.Name">
+                        <smart-formgroup label="@StringLocalizer[socialVm.Name!]">
                             <smart-input-group icon="@socialVm.Icon" name="@("social" + "-" + socialVm.SocialNetworkId)" value="@socialVm.Url"></smart-input-group>
                         </smart-formgroup>
                     </smart-spacer>

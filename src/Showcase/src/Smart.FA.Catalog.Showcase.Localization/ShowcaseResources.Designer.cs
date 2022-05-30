@@ -457,6 +457,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Site personel.
+        /// </summary>
+        public static string PersonalWebsite {
+            get {
+                return ResourceManager.GetString("PersonalWebsite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modalités pratiques.
         /// </summary>
         public static string PracticalModalities {
