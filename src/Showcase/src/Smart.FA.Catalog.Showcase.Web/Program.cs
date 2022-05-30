@@ -2,6 +2,7 @@ using EntityFrameworkCore.UseRowNumberForPaging;
 using Hangfire;
 using Microsoft.EntityFrameworkCore;
 using NLog.Web;
+using Smart.Design.Razor.Extensions;
 using Smart.FA.Catalog.Shared.Security;
 using Smart.FA.Catalog.Showcase.Domain.Common.Options;
 using Smart.FA.Catalog.Showcase.Infrastructure.Data;
@@ -27,7 +28,8 @@ builder.Services
     .AddTransient<ITrainerService, TrainerService>()
     .AddTransient<IInquiryEmailService, InquiryEmailService>()
     //.AddHangfire(builder.Configuration)
-    .AddMemoryCache();
+    .AddMemoryCache()
+    .AddSmartDesign();
 
 builder.Services.Configure<MinIOOptions>(builder.Configuration.GetSection(MinIOOptions.SectionName))
     .Configure<FluentEmailOptions>(builder.Configuration.GetSection(FluentEmailOptions.SectionName))
