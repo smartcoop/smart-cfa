@@ -1,5 +1,7 @@
 #nullable disable
 using Microsoft.AspNetCore.Mvc;
+using Smart.FA.Catalog.Showcase.Domain.Common.Enums;
+using Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Contact;
 using Smart.FA.Catalog.Showcase.Web.Services.Trainer;
 
 namespace Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerDetails;
@@ -11,6 +13,10 @@ public class TrainerDetailsModel : PageModelBase
     public TrainerDetailsViewModel Trainer { get; set; } = null!;
 
     [BindProperty(SupportsGet = true)] public int CurrentPage { get; set; } = 1;
+
+    [BindProperty(SupportsGet = false)] public InquirySendEmailRequest TrainerInquiryEmailRequest { get; set; } = null!;
+
+    public InquirySendEmailResult? EmailSendingResult { get; set; }
 
     const int ItemsPerPage = 5;
 
