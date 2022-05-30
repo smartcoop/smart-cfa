@@ -8,14 +8,14 @@ namespace Smart.FA.Catalog.Showcase.Web.Pages;
 
 public class ContactModel : PageModel
 {
-    private readonly IInquiryEmailService _inquiryEmailService;
+    private readonly ISmartLearningInquiryEmailService _inquiryEmailService;
 
     [BindProperty]
     public InquirySendEmailRequest SendEmailRequest { get; set; } = null!;
 
     public InquirySendEmailResult? SendEmailResult { get; set; }
 
-    public ContactModel(IInquiryEmailService inquiryEmailService)
+    public ContactModel(ISmartLearningInquiryEmailService inquiryEmailService)
     {
         _inquiryEmailService = inquiryEmailService;
     }
@@ -25,7 +25,7 @@ public class ContactModel : PageModel
         return Page();
     }
 
-    public ActionResult OnPost()
+    public async Task<ActionResult> OnPostAsync()
     {
         try
         {
@@ -35,7 +35,7 @@ public class ContactModel : PageModel
             }
 
             AddToRequestSenderRemoteIpAddress();
-            SendEmailResult = _inquiryEmailService.SendEmail(SendEmailRequest);
+            SendEmailResult = await _inquiryEmailService.SendEmailAsync(SendEmailRequest);
         }
         catch (Exception)
         {

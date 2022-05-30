@@ -26,7 +26,7 @@ builder.Services
     .AddShowcaseLocalization()
     .AddTransient<ITrainingService, TrainingService>()
     .AddTransient<ITrainerService, TrainerService>()
-    .AddTransient<IInquiryEmailService, InquiryEmailService>()
+    .AddTransient<ISmartLearningInquiryEmailService, SmartLearningTeamInquiryEmailService>()
     //.AddHangfire(builder.Configuration)
     .AddMemoryCache()
     .AddSmartDesign();

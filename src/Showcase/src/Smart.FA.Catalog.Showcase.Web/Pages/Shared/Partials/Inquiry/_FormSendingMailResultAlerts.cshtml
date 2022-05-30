@@ -2,7 +2,7 @@
 @using Smart.FA.Catalog.Showcase.Domain.Common.Enums
 @model Smart.FA.Catalog.Showcase.Domain.Common.Enums.InquirySendEmailResult?
 
-@if (Model == InquirySendEmailResult.Ok)
+@if (Model == InquirySendEmailResult.Success)
 {
     <div id="sendmailConfirmation">
         <smart-alert style="Success" message="@ShowcaseResources.Contact_ConfirmationMessage"></smart-alert>
