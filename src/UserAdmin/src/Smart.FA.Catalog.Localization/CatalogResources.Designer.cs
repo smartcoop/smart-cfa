@@ -826,6 +826,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Voir en ligne.
+        /// </summary>
+        public static string ShowTrainingInShowcase {
+            get {
+                return ResourceManager.GetString("ShowTrainingInShowcase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Déconnexion.
         /// </summary>
         public static string SignOut {
