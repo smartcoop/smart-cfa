@@ -28,7 +28,7 @@ public class TrainingListModel : PageModelBase
             return RedirectToNotFound();
         }
 
-        Trainings = await _trainingService.SearchTrainingViewModelsAsync(searchKeyword, CurrentPage, ItemsPerPage);
+        Trainings = await _trainingService.SearchPublishedTrainingViewModelsAsync(searchKeyword, CurrentPage, ItemsPerPage);
         return Page();
     }
 
@@ -40,7 +40,7 @@ public class TrainingListModel : PageModelBase
         }
 
         TopicId = id;
-        Trainings = await _trainingService.SearchTrainingViewModelsByTopicIdAsync(id, CurrentPage, ItemsPerPage);
+        Trainings = await _trainingService.SearchPublishedTrainingViewModelsByTopicIdAsync(id, CurrentPage, ItemsPerPage);
         return Page();
     }
 }

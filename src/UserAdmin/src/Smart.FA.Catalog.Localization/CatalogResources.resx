@@ -123,6 +123,9 @@
   <data name="ProfileUpdatedWithSuccess" xml:space="preserve">
     <value>Profil mis à jour</value>
   </data>
+  <data name="ProfilePageUnexpectedError" xml:space="preserve">
+    <value>Une erreur innatendue s'est produite lors de la mise-à-jour de votre profil</value>
+  </data>
   <data name="TrainerTitle" xml:space="preserve">
     <value>Fonction</value>
   </data>
@@ -416,7 +419,7 @@
     <value>Formations</value>
   </data>
   <data name="TrainingSearchTitle" xml:space="preserve">
-    <value>Édition de formations</value>
+    <value>Recherche de formation</value>
   </data>
   <data name="Training_IsOther" xml:space="preserve">
     <value>Autre</value>
@@ -507,5 +510,8 @@
   </data>
   <data name="AdminHomepageTraining_Button" xml:space="preserve">
     <value>Encoder une formation</value>
+  </data>
+  <data name="Trainer" xml:space="preserve">
+    <value>Formateur</value>
   </data>
 </root>

@@ -53,6 +53,8 @@
                         </smart-select>
                     </smart-formgroup>
 
+                    <smart-form-group-input-text label="@CatalogResources.Trainer" asp-for="GetTrainingsRequest.TrainerName"></smart-form-group-input-text>
+
                     <div class="c-accordion u-spacer-bottom">
                         <div class="c-accordion__item @(Model.GetTrainingsRequest.Topics?.Any() == true ? "js-active" : string.Empty)">
                             <div class="c-accordion__item-header">
@@ -95,7 +97,7 @@
         <div class="o-card-grid small-up-1">
             @foreach (var training in Model.Trainings)
             {
-                @await Component.InvokeAsync("AdminTrainingTile", new { training = training, showDeleteButton = false })
+                @await Component.InvokeAsync("AdminTrainingTile", new { training = training, showDeleteButton = false, showTrainerName = true })
             }
         </div>
 

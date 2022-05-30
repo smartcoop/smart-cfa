@@ -1,5 +1,4 @@
 ﻿@using Microsoft.Extensions.Localization
-@using Smart.FA.Catalog.Shared.Domain.Enumerations
 @using Smart.FA.Catalog.Shared.Domain.Enumerations.Training
 
 @inject IStringLocalizer<CatalogResources> _localizer
@@ -7,11 +6,13 @@
 
 @{
     var training = Model.Training;
+    var trainerName = !string.IsNullOrWhiteSpace(Model.TrainerName) ? $" - {Model.TrainerName}" : "";
+    var title = $"{training.Details.First().Title} {trainerName}";
 }
 
 <smart-card>
     <smart-card-body>
-        <smart-card-title text="@training.Details.First().Title"></smart-card-title>
+        <smart-card-title text="@(title)"></smart-card-title>
         <smart-muted-text text="@string.Join(", ", training.Topics.Select(trainingTopic => _localizer[trainingTopic.Topic.Name]))"></smart-muted-text>
     </smart-card-body>
     <smart-card-actions>
