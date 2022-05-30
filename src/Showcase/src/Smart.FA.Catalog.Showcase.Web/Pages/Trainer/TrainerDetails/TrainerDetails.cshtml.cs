@@ -1,7 +1,7 @@
 #nullable disable
 using Microsoft.AspNetCore.Mvc;
 using Smart.FA.Catalog.Showcase.Domain.Common.Enums;
-using Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Contact;
+using Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry;
 using Smart.FA.Catalog.Showcase.Web.Services.Trainer;
 
 namespace Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerDetails;

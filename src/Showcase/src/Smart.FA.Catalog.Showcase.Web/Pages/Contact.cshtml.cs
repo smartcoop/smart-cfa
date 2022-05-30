@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Smart.FA.Catalog.Showcase.Domain.Common.Enums;
-using Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Contact;
+using Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry;
+using Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry.SmartLearningTeam;
 
 namespace Smart.FA.Catalog.Showcase.Web.Pages;
 

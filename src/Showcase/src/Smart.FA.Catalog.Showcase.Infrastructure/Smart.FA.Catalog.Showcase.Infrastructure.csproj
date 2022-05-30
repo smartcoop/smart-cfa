@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Mailing\Contact\InquiryEmailTemplate.cshtml" />
+    <None Remove="Mailing\Inquiry\SmartLearningTeam\InquiryEmailTemplate.cshtmll" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Mailing\Contact\InquiryEmailTemplate.cshtml" />
+    <EmbeddedResource Include="Mailing\Inquiry\SmartLearningTeam\InquiryEmailTemplate.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

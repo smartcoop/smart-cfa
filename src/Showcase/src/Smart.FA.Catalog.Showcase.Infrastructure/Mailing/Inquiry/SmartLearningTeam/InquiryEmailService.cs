@@ -7,7 +7,7 @@ using Smart.FA.Catalog.Showcase.Domain.Common.Enums;
 using Smart.FA.Catalog.Showcase.Domain.Common.Exceptions;
 using Smart.FA.Catalog.Showcase.Domain.Common.Options;
 
-namespace Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Contact;
+namespace Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry.SmartLearningTeam;
 
 /// <inheritdoc />
 public class InquiryEmailService : IInquiryEmailService
@@ -19,7 +19,7 @@ public class InquiryEmailService : IInquiryEmailService
     private readonly FluentEmailOptions _fluentEmailSettings;
     private readonly InquiryOptions _inquiriesSettings;
 
-    public string Template => "Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Contact.InquiryEmailTemplate.cshtml";
+    public string Template => "Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry.SmartLearningTeam.InquiryEmailTemplate.cshtml";
 
     public InquiryEmailService(ILogger<InquiryEmailService> logger,
         IFluentEmail fluentEmail,
