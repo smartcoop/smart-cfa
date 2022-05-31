@@ -31,7 +31,7 @@ public class TrainerInquirySendEmailService : InquiryEmailServiceBase<TrainerInq
         _inquirySettings = inquiryOptions.Value;
     }
 
-    protected override string Template => "Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry.Trainer.TrainerInquiryTemplate.cshtml";
+    protected internal override string Template => "Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry.Trainer.TrainerInquiryTemplate.cshtml";
 
     protected override async Task LoadDataAsync(TrainerInquirySendEmailRequest request, CancellationToken cancellationToken)
     {

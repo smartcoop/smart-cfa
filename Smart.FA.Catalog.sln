@@ -1,4 +1,5 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -12,14 +13,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		DB.Dockerfile = DB.Dockerfile
 		docker-compose-local.yml = docker-compose-local.yml
+		docker-compose-startup.yml = docker-compose-startup.yml
 		docker-compose.dcproj = docker-compose.dcproj
 		docker-compose.yml = docker-compose.yml
-		Web.Dockerfile = Web.Dockerfile
-		docker-compose-startup.yml = docker-compose-startup.yml
-		startup.bat = startup.bat
 		docker_startup_script.bat = docker_startup_script.bat
 		README.md = README.md
 		Showcase.Dockerfile = Showcase.Dockerfile
+		startup.bat = startup.bat
+		Web.Dockerfile = Web.Dockerfile
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D485BE00-A082-47D7-827D-0FD646807006}"
@@ -62,17 +63,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.Showcase.L
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nginx", "Nginx", "{7F26E40B-F26A-40FF-9795-F4F3BC1BD1B7}"
 	ProjectSection(SolutionItems) = preProject
-		Nginx.Dockerfile = Nginx.Dockerfile
-		nginx.conf = nginx.conf
 		AccountSim.Dockerfile = AccountSim.Dockerfile
 		docker-compose-nginx.yml = docker-compose-nginx.yml
+		nginx.conf = nginx.conf
+		Nginx.Dockerfile = Nginx.Dockerfile
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AccountSimulator", "AccountSimulator", "{A441F317-9D9D-4EAC-80C1-4D6305500316}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E2FBEF8F-B9A8-4780-A69B-D98E84801BA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.FA.Catalog.AccountSimulator", "src\AccountSimulator\src\Smart.FA.Catalog.AccountSimulator\Smart.FA.Catalog.AccountSimulator.csproj", "{4065AEFA-A48E-44BD-ADB4-5279CBFADA0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.AccountSimulator", "src\AccountSimulator\src\Smart.FA.Catalog.AccountSimulator\Smart.FA.Catalog.AccountSimulator.csproj", "{4065AEFA-A48E-44BD-ADB4-5279CBFADA0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.FA.Catalog.Showcase.Infrastructure.Tests", "src\Showcase\test\Smart.FA.Catalog.Showcase.Infrastructure.Tests\Smart.FA.Catalog.Showcase.Infrastructure.Tests.csproj", "{D0BE7F6D-F766-4782-AA2A-07E4197B5BFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -136,6 +139,10 @@ Global
 		{4065AEFA-A48E-44BD-ADB4-5279CBFADA0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4065AEFA-A48E-44BD-ADB4-5279CBFADA0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4065AEFA-A48E-44BD-ADB4-5279CBFADA0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0BE7F6D-F766-4782-AA2A-07E4197B5BFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0BE7F6D-F766-4782-AA2A-07E4197B5BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0BE7F6D-F766-4782-AA2A-07E4197B5BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0BE7F6D-F766-4782-AA2A-07E4197B5BFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -161,6 +168,7 @@ Global
 		{7F26E40B-F26A-40FF-9795-F4F3BC1BD1B7} = {8A4DEB10-3A8D-4F50-9E5F-A5550B42BBBA}
 		{E2FBEF8F-B9A8-4780-A69B-D98E84801BA6} = {A441F317-9D9D-4EAC-80C1-4D6305500316}
 		{4065AEFA-A48E-44BD-ADB4-5279CBFADA0B} = {E2FBEF8F-B9A8-4780-A69B-D98E84801BA6}
+		{D0BE7F6D-F766-4782-AA2A-07E4197B5BFC} = {AA37D759-F348-4337-92CB-6515A1049B20}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D2F2190D-B4DE-48B8-B87C-7AA80A91538E}

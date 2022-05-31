@@ -19,7 +19,7 @@ public abstract class InquiryEmailServiceBase<TInquiryRequest, TTemplateModel> :
     /// <summary>
     /// Path to the email template.
     /// </summary>
-    protected abstract string Template { get; }
+    protected internal abstract string Template { get; }
 
     protected abstract string GetKey(string ipAddress);
     protected abstract string GetFromEmail();

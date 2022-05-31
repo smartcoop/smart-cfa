@@ -12,7 +12,7 @@ public class SmartLearningTeamInquiryEmailService : InquiryEmailServiceBase<Inqu
     private readonly InquiryOptions _inquirySettings;
     private readonly FluentEmailOptions _fluentEmailSettings;
 
-    protected override string Template => "Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry.SmartLearningTeam.InquiryEmailTemplate.cshtml";
+    protected internal override string Template => "Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry.SmartLearningTeam.InquiryEmailTemplate.cshtml";
 
     public SmartLearningTeamInquiryEmailService(ILogger<SmartLearningTeamInquiryEmailService> logger,
         IFluentEmail fluentEmail,
