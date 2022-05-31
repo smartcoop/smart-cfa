@@ -13,20 +13,20 @@ namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.Update;
 
 public class UpdateModel : AdminPage
 {
+    private readonly UrlOptions _urlOptions;
+
     private int TrainingId { get; set; }
 
     public List<string> ValidationErrors { get; private set; } = new();
 
     public IUserIdentity UserIdentity { get; }
 
-    public string ShowcaseTrainingDetailsUrl { get; set; }
-
     [BindProperty] public UpdateTrainingViewModel UpdateTrainingViewModel { get; set; } = null!;
 
     public UpdateModel(IMediator mediator, IUserIdentity userIdentity, IOptions<UrlOptions> urlOptions) : base(mediator)
     {
         UserIdentity = userIdentity;
-        ShowcaseTrainingDetailsUrl = urlOptions.Value.Showcase + urlOptions.Value.ShowcaseTrainingDetailsPath;
+        _urlOptions = urlOptions.Value;
     }
 
     private void Init()
@@ -71,7 +71,7 @@ public class UpdateModel : AdminPage
 
         if (!UpdateTrainingViewModel.IsDraft)
         {
-            TempData["Url"] = $"{ShowcaseTrainingDetailsUrl}{id}";
+            TempData["Url"] = _urlOptions.GetShowcaseTrainingDetailsUrl(id);
         }
 
         return RedirectAfterSuccessfulUpdate();
