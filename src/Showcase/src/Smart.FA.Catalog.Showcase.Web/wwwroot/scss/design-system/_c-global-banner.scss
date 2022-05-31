@@ -1,15 +1,15 @@
 /* ==========================================================================
-  Component: Global alert
+  Component: Global banner
    ========================================================================== */
 
-.c-global-alert {
+.c-global-banner {
   padding: 1.2rem 2.4rem;
   position: relative;
   min-height: 5.6rem;
   display: flex;
   align-items: center;
 
-  &.c-global-alert--default {
+  &.c-global-banner--default {
     background-color: $color-blue-600;
     color: $color-white;
 
@@ -18,7 +18,7 @@
       color: $color-white;
     }
   }
-  &.c-global-alert--warning {
+  &.c-global-banner--warning {
     background-color: $color-semantic-warning;
 
     .o-svg-icon {
