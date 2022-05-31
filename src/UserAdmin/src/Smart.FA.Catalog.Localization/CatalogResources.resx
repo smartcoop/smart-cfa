@@ -515,6 +515,6 @@
     <value>Formateur</value>
   </data>
   <data name="ShowTrainingInShowcase" xml:space="preserve">
-    <value>Voir en ligne</value>
+    <value>Visualiser la formation encodée</value>
   </data>
 </root>
