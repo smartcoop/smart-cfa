@@ -7,6 +7,7 @@ using Smart.FA.Catalog.Shared.Security;
 using Smart.FA.Catalog.Showcase.Domain.Common.Options;
 using Smart.FA.Catalog.Showcase.Infrastructure.Data;
 using Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry.SmartLearningTeam;
+using Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry.Trainer;
 using Smart.FA.Catalog.Showcase.Web.Extensions;
 using Smart.FA.Catalog.Showcase.Web.Options;
 using Smart.FA.Catalog.Showcase.Web.Services.Trainer;
@@ -27,6 +28,7 @@ builder.Services
     .AddTransient<ITrainingService, TrainingService>()
     .AddTransient<ITrainerService, TrainerService>()
     .AddTransient<ISmartLearningInquiryEmailService, SmartLearningTeamInquiryEmailService>()
+    .AddTransient<ITrainerInquirySendEmailService, TrainerInquirySendEmailService>()
     //.AddHangfire(builder.Configuration)
     .AddMemoryCache()
     .AddSmartDesign();

@@ -9,10 +9,12 @@
 
   <ItemGroup>
     <None Remove="Mailing\Inquiry\SmartLearningTeam\InquiryEmailTemplate.cshtmll" />
+    <None Remove="Mailing\Inquiry\Trainer\TrainerInquiryTemplate.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Mailing\Inquiry\SmartLearningTeam\InquiryEmailTemplate.cshtml" />
+    <EmbeddedResource Include="Mailing\Inquiry\Trainer\TrainerInquiryTemplate.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

@@ -10,10 +10,6 @@
         <p>@ShowcaseResources.Contact_Presentation</p>
         <p><br />@ShowcaseResources.Contact_Presentation_SecondPart <a href="@ShowcaseResources.Contact_Presentation_Link">@ShowcaseResources.Contact_Presentation_Link</a></p>
     </div>
-
     @await Html.PartialAsync("Partials/Inquiry/_FormSendingMailResultAlerts", Model.SendEmailResult)
-
-    <div class="main__contact-form">
-        @await Html.PartialAsync("Partials/Inquiry/_InquiryForm", Model.SendEmailRequest)
-    </div>
+    @await Html.PartialAsync("Partials/Inquiry/_InquiryForm", Model.SendEmailRequest)
 </section>
