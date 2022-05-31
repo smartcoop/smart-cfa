@@ -11,6 +11,7 @@ namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.Create;
 public class CreateModel : AdminPage
 {
     private readonly ILogger<CreateModel> _logger;
+    private readonly UrlOptions _urlOptions;
 
     public IUserIdentity UserIdentity { get; }
 
@@ -22,7 +23,7 @@ public class CreateModel : AdminPage
     {
         _logger = logger;
         UserIdentity = userIdentity;
-        ShowcaseTrainingDetailsUrl = urlOptions.Value.Showcase + urlOptions.Value.ShowcaseTrainingDetailsUrl;
+        _urlOptions = urlOptions.Value ?? throw new ArgumentException($"{urlOptions} not found");
     }
 
     private void Init()
@@ -49,7 +50,7 @@ public class CreateModel : AdminPage
         TempData.AddGlobalAlertMessage(CatalogResources.TrainingCreatedWithSuccess, AlertStyle.Success);
         if (!request.IsDraft)
         {
-            TempData["Url"] = $"{ShowcaseTrainingDetailsUrl}{reponse.TrainingId}";
+            TempData["Url"] = _urlOptions.GetShowcaseTrainingDetailsUrl(reponse.TrainingId);
         }
 
         return RedirectToPage("/Admin/Trainings/List/Index");

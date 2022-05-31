@@ -10,5 +10,8 @@ public class UrlOptions
 
     public string Showcase { get; set; }
 
-    public string ShowcaseTrainingDetailsUrl { get; set; } = "/Training/TrainingDetails/TrainingDetails?id=";
+    public string ShowcaseTrainingDetailsPath { get; set; }
+
+    public string GetShowcaseTrainingDetailsUrl(int trainingId) => $"{Showcase}{ShowcaseTrainingDetailsPath}{trainingId}";
+
 }

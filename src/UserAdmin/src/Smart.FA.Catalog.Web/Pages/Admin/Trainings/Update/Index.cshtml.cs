@@ -26,7 +26,7 @@ public class UpdateModel : AdminPage
     public UpdateModel(IMediator mediator, IUserIdentity userIdentity, IOptions<UrlOptions> urlOptions) : base(mediator)
     {
         UserIdentity = userIdentity;
-        ShowcaseTrainingDetailsUrl = urlOptions.Value.Showcase + urlOptions.Value.ShowcaseTrainingDetailsUrl;
+        ShowcaseTrainingDetailsUrl = urlOptions.Value.Showcase + urlOptions.Value.ShowcaseTrainingDetailsPath;
     }
 
     private void Init()
