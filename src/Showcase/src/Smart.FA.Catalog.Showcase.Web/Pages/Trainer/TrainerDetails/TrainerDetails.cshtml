@@ -1,6 +1,7 @@
 ﻿@page
 @using Microsoft.Extensions.Localization
 @using Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer
+@using Smart.FA.Catalog.Showcase.Web.Extensions
 @model Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerDetails.TrainerDetailsModel
 @inject IStringLocalizer<ShowcaseResources> StringLocalizer
 
@@ -14,14 +15,14 @@
         @Model.Trainer.FirstName @Model.Trainer.LastName
     </div>
     <div class="trainer-card__fonction">
-        @Model.Trainer.Title
+        @Html.PreserveLineBreaks(Model.Trainer.Title)
     </div>
     <div class="trainer-card__details">
         <div class="trainer-card__image">
-            <img src="@Model.Trainer.ProfileImageUrl" class="trainer-image" alt="trainer-image" />
+            <img src="@Model.Trainer.ProfileImageUrl" class="trainer-image" alt="trainer-image"/>
         </div>
         <div class="trainer-card__details-txts">
-            @Model.Trainer.Biography
+            @Html.PreserveLineBreaks(Model.Trainer.Biography)
         </div>
         <div class="trainer-card__contacts">
             <ul>
@@ -32,14 +33,17 @@
                             // No icon to personnel web site
                             if (socialNetwork.SocialNetwork.Id != SocialNetwork.PersonalWebsite.Id)
                             {
-                                <img src="@socialNetwork.IconPathFileName" class="o-svg-icon--small contact-icon" alt="" />
+                                <img src="@socialNetwork.IconPathFileName" class="o-svg-icon--small contact-icon" alt=""/>
                             }
                         }
                         <a href="@socialNetwork.SocialNetworkUrl" target="_blank" class="trainer-card__trainer-link">
-                            @socialNetwork.SocialNetwork.Name
+                            @StringLocalizer[socialNetwork.SocialNetwork.Name]
                         </a>
                     </li>
                 }
+                <li class="trainer-card__trainer-links">
+                    <img src="/icons/message.svg" class="o-svg-icon--small contact-icon" /><a class="trainer-card__trainer-link trainer-card__contact-link" data-dialog="dialogId">@ShowcaseResources.TrainerCard_Contact</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -55,7 +59,7 @@
                         <a class="training-list__training-link" asp-page="@Routes.TrainingDetails" asp-route-id="@training.TrainingId">@training.Title</a>
                     </div>
                     <div class="training-list__category">
-                        <img src="~/icons/tag--blue.svg" class="o-svg-icon--small sectors-icon" alt="" />
+                        <img src="~/icons/tag--blue.svg" class="o-svg-icon--small sectors-icon" alt=""/>
                         @foreach (var topic in training.Topics)
                         {
                             <a class="training-list__category-link" href="#">@StringLocalizer[$"TopicName_{topic.Name}"]</a>
@@ -69,7 +73,7 @@
                 <div class="training-list__container-right">
                     <div class="training-list__more">
                         <a class="training-list__more-link" asp-page="@Routes.TrainingDetails" asp-route-id="@training.TrainingId">
-                            <img src="~/icons/chevron-right--blue.svg" class="o-svg-icon--large chevron-icon" />
+                            <img src="~/icons/chevron-right--blue.svg" class="o-svg-icon--large chevron-icon"/>
                         </a>
                     </div>
                 </div>
@@ -99,9 +103,36 @@
     <div class="trainer-card__footer">
         <div class="trainer-card__back">
             <a class="trainer-card__back-link" asp-page="@Routes.TrainerList">
-                <img src="~/icons/chevron-left--blue.svg" class="o-svg-icon--small chevron-icon" alt="" />@ShowcaseResources.AllTrainers
+                <img src="~/icons/chevron-left--blue.svg" class="o-svg-icon--small chevron-icon" alt=""/>@ShowcaseResources.AllTrainers
             </a>
         </div>
     </div>
 </section>
+  
+<div class="c-dialog-context o-flex--center" id="dialogId">
+    <div class="c-dialog c-dialog--large" role="dialog" aria-labelledby="dialogTitle-02">
+        <div class="c-dialog__push"></div>
+        <div class="c-dialog__header c-dialog__header--bordered">
+            <div class="c-dialog__close" style="float:right;padding:0.6rem;">
+                <a data-dialog-close >
+                    <img src="/icons/close.svg " class="o-svg-icon--medium" /></a>
+            </div>
+            <div class="c-toolbar c-toolbar--spaced">
+                <div class="c-toolbar__left">
+                    <div class="c-toolbar__item">
+                        <h2 class="c-dialog__title" id="dialogTitle-02">@ShowcaseResources.TrainerCard_Contact @ShowcaseResources.To @Model.Trainer.FirstName @Model.Trainer.LastName</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="c-dialog__body">
+            <div class="u-spacer">
+                <section class="main__presentation">
 
+                    <!-- Ici vient le formulaire de contact (identique au formulaire général) -->
+
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

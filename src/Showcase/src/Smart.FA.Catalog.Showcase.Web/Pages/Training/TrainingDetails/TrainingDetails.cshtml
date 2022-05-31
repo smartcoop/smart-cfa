@@ -1,10 +1,11 @@
 ﻿@page
 @using Microsoft.Extensions.Localization
+@using Smart.FA.Catalog.Showcase.Web.Extensions
 @model Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingDetails.TrainingDetailsModel
 @inject IStringLocalizer<ShowcaseResources> StringLocalizer
 
 @{
-    ViewData["Title"] = Model.Training.TrainingTitle; ;
+    ViewData["Title"] = Model.Training.TrainingTitle;
     Layout = Routes.Layout;
 }
 
@@ -29,25 +30,25 @@
                 <div class="training-card__details-label">
                     @ShowcaseResources.Presentation
                 </div>
-                @Model.Training.Methodology
+                @Html.PreserveLineBreaks(Model.Training.Methodology)
             </div>
             <div class="training-card__details-section">
                 <div class="training-card__details-label">
                     @ShowcaseResources.Objectives
                 </div>
-                @Model.Training.Goal
+                @Html.PreserveLineBreaks(Model.Training.Goal)
             </div>
             <div class="training-card__details-section">
                 <div class="training-card__details-label">
                     @ShowcaseResources.PracticalModalities
                 </div>
-                @Model.Training.PracticalModalities
+                @Html.PreserveLineBreaks(Model.Training.PracticalModalities)
             </div>
         </div>
         <div class="training-card__trainer">
             <div class="training-card__trainer-name">
                 <a class="training-card__trainer-link" asp-page="@Routes.TrainerDetails" asp-route-id="@Model.Training.TrainerId">
-                     @Model.Training.TrainerFirstName @Model.Training.TrainerLastName
+                    @Model.Training.TrainerFirstName @Model.Training.TrainerLastName
                 </a>
             </div>
             <div class="training-card__trainer-fonction">

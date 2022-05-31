@@ -1,4 +1,5 @@
 ﻿@page
+@using Smart.FA.Catalog.Showcase.Web.Extensions
 @model Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerList.TrainerListModel
 @{
     ViewData["Title"] = ShowcaseResources.AssociateTrainers;
@@ -43,7 +44,7 @@
                             <a asp-page="@Routes.TrainerDetails" asp-route-id="@trainer.Id" class="trainer-list__item-link">@trainer.FirstName @trainer.LastName</a>
                         </div>
                         <div class="trainer-list__item-function">
-                            @trainer.Title
+                            @Html.PreserveLineBreaks(trainer.Title)
                         </div>
                     </div>
                 </div>

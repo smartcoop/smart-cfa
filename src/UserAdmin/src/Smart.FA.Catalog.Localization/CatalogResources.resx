@@ -123,6 +123,9 @@
   <data name="ProfileUpdatedWithSuccess" xml:space="preserve">
     <value>Profil mis à jour</value>
   </data>
+  <data name="ProfilePageUnexpectedError" xml:space="preserve">
+    <value>Une erreur innatendue s'est produite lors de la mise-à-jour de votre profil</value>
+  </data>
   <data name="TrainerTitle" xml:space="preserve">
     <value>Fonction</value>
   </data>
@@ -410,13 +413,13 @@
     <value>Rechercher</value>
   </data>
   <data name="Status" xml:space="preserve">
-    <value>Status</value>
+    <value>Statut</value>
   </data>
   <data name="Trainings" xml:space="preserve">
     <value>Formations</value>
   </data>
   <data name="TrainingSearchTitle" xml:space="preserve">
-    <value>Édition de formations</value>
+    <value>Recherche de formation</value>
   </data>
   <data name="Training_IsOther" xml:space="preserve">
     <value>Autre</value>
@@ -520,5 +523,8 @@
   </data>
   <data name="AddTrainingTooltip_Modalities" xml:space="preserve">
     <value>Renseignez ici les infos pratiques : lieu, dates, online, à la demande,...</value>
+  </data>
+  <data name="Trainer" xml:space="preserve">
+    <value>Formateur</value>
   </data>
 </root>

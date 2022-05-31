@@ -5,8 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Smart.FA.Catalog.Infrastructure.Persistence;
-
+using Smart.FA.Catalog.UserAdmin.Infrastructure.Persistence;
 #nullable disable
 
 namespace Infrastructure.Migrations

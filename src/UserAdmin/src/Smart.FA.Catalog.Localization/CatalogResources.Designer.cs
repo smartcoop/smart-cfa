@@ -763,6 +763,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Une erreur innatendue s&apos;est produite lors de la mise-à-jour de votre profil.
+        /// </summary>
+        public static string ProfilePageUnexpectedError {
+            get {
+                return ResourceManager.GetString("ProfilePageUnexpectedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Profil mis à jour.
         /// </summary>
         public static string ProfileUpdatedWithSuccess {
@@ -948,6 +957,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string Topics {
             get {
                 return ResourceManager.GetString("Topics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formateur.
+        /// </summary>
+        public static string Trainer {
+            get {
+                return ResourceManager.GetString("Trainer", resourceCulture);
             }
         }
         
@@ -1141,7 +1159,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Édition de formations.
+        ///   Looks up a localized string similar to Recherche de formation.
         /// </summary>
         public static string TrainingSearchTitle {
             get {
