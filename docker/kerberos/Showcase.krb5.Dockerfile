@@ -33,7 +33,7 @@ RUN apt install -y krb5-user
 COPY ./pipeline-scripts/ktutil/cfa-cron /etc/cron.d/cfa-cron
 COPY ./pipeline-scripts/ktutil/refresh.sh /etc/cron.d/refresh.sh
 # Give execution rights on the cron job
-RUN chmod 0644 /etc/cron.d/cfa-cron
+RUN chmod 777 /etc/cron.d/cfa-cron
 RUN chmod +x /etc/cron.d/refresh.sh
 # Apply cron job
 RUN crontab /etc/cron.d/cfa-cron
