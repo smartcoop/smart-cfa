@@ -8,11 +8,11 @@ echo "user=${DB_USER}" >> .env
 
 
 # generate myUserName.keytab
-docker build -t ktuil ./ktutil
-docker run -v $(pwd)/ktutil/files:/files --env-file ./.env  ktuil:latest
+docker build -t ktuil ./pipeline-scripts/ktutil
+docker run -v $(pwd)/pipeline-scripts/ktutil/files:/files --env-file ./.env  ktuil:latest
 
 # change permission myUserName.keytab
-sudo chmod 777 $(pwd)/ktutil/files/$DB_USER.keytab
+sudo chmod 777 $(pwd)/pipeline-scripts/ktutil/files/$DB_USER.keytab
 
 sed -e "s/{minio_access-key}/$MINIO_ACCESS_KEY/" \
     -e "s/{minio_secret-key}/$MINIO_SECRET_KEY/" \
@@ -22,41 +22,41 @@ mv ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Production.tmp.json ./sr
 
 docker build \
   --build-arg Environment="Production" \
-  -f "Web.krb5.Dockerfile" \
-  -t "cfa_production_api" \
+  -f "./docker/kerberos/Web.krb5.Dockerfile" \
+  -t "cfa_production_useradmin" \
   .
 
 docker build \
   --build-arg Environment="Production" \
-  -f "Showcase.krb5.Dockerfile" \
-  -t "cfa-production-public" \
+  -f "./docker/kerberos/Showcase.krb5.Dockerfile" \
+  -t "cfa-production-showcase" \
   .
 
-docker stop cfa_production_api || true
-docker rm cfa_production_api || true
+docker stop cfa_production_useradmin || true
+docker rm cfa_production_useradmin || true
 
-docker stop cfa_production_public || true
-docker rm cfa_production_public || true
+docker stop cfa_production_showcase || true
+docker rm cfa_production_showcase || true
 
 docker network create --driver bridge --subnet 172.22.100.0/24 --attachable cfa || true
 
 echo "RUN DOCKER"
 docker run -d \
-  --name cfa_production_api \
+  --name cfa_production_useradmin \
   --env Environment="Production" \
   --env-file ./.env \
-  --volume $(pwd)/ktutil/files/krb5.conf:/etc/krb5.conf \
-  --volume $(pwd)/ktutil/files/${DB_USER}.keytab:/app/${DB_USER}.keytab \
+  --volume $(pwd)/pipeline-scripts/ktutil/files/krb5.conf:/etc/krb5.conf \
+  --volume $(pwd)/pipeline-scripts/ktutil/files/${DB_USER}.keytab:/app/${DB_USER}.keytab \
   --network=cfa \
   -p "8087:80" \
-  cfa_production_api
+  cfa_production_useradmin
 
   docker run -d \
-    --name cfa_production_public \
+    --name cfa_production_showcase \
     --env Environment="Production" \
     --env-file ./.env \
-    --volume $(pwd)/ktutil/files/krb5.conf:/etc/krb5.conf \
-    --volume $(pwd)/ktutil/files/${DB_USER}.keytab:/app/${DB_USER}.keytab \
+    --volume $(pwd)/pipeline-scripts/ktutil/files/krb5.conf:/etc/krb5.conf \
+    --volume $(pwd)/pipeline-scripts/ktutil/files/${DB_USER}.keytab:/app/${DB_USER}.keytab \
     --network=cfa \
     -p "8086:80" \
-    cfa-production-public
+    cfa-production-showcase

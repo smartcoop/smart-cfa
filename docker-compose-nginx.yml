@@ -3,8 +3,8 @@ version: "3.9"
 services:
   datasource:
     build:
-      context: .
-      dockerfile: DB.Dockerfile
+      context: ..
+      dockerfile: docker/DB.Dockerfile
     hostname: "${DOCKER_NAME}-datasource"
     container_name: "${DOCKER_NAME}-datasource"
     restart: always
@@ -14,34 +14,35 @@ services:
       - "SA_PASSWORD=localStoragePassword!"
     networks:
       - "cfa"
-  api:
+  useradmin:
     depends_on:
       - datasource
     build:
       context: .
-      dockerfile: Web.Dockerfile
+      dockerfile: docker/Web.Dockerfile
     ports:
       - "5091:80"
-    hostname: ${DOCKER_NAME}-api
-    container_name: ${DOCKER_NAME}-api
+    hostname: ${DOCKER_NAME}-useradmin
+    container_name: ${DOCKER_NAME}-useradmin
     restart: always
     networks:
       - "cfa"
     environment:
       - "ASPNETCORE_ENVIRONMENT=Docker"
-  front:
+  accountsim:
     build:
       context: .
-      dockerfile: AccountSim.Dockerfile
+      dockerfile: docker/nginx/AccountSim.Dockerfile
     ports:
       - "5259:80"
-    hostname: account-sim
+    hostname:  ${DOCKER_NAME}-account-sim
+    container_name: ${DOCKER_NAME}-account-sim
     networks:
       - "cfa"
   proxy:
     build:
       context: .
-      dockerfile: Nginx.Dockerfile
+      dockerfile: docker/nginx/Nginx.Dockerfile
     ports:
       - "7002:80"
     networks:
@@ -59,8 +60,8 @@ services:
       - "9000:9000"
       - "9001:9001"
     environment:
-      - "MINIO_ROOT_USER=admin"
-      - "MINIO_ROOT_PASSWORD=adminpassword!"
+      - "MINIO_ROOT_USER=${DOCKER_MINIO_USER}"
+      - "MINIO_ROOT_PASSWORD=${DOCKER_MINIO_PASSWORD}"
     command: server /data --console-address ":9001"
 
   minioclient:
@@ -70,7 +71,7 @@ services:
       - minio
     entrypoint: >
       bash -c
-           "/usr/bin/mc alias set myminio http://host.docker.internal:9000 admin adminpassword!;
+           "/usr/bin/mc alias set myminio http://host.docker.internal:9000 ${DOCKER_MINIO_USER} ${DOCKER_MINIO_PASSWORD};
             /usr/bin/mc mb myminio/cfa;
             /usr/bin/mc policy set public myminio/cfa;
             /usr/bin/mc admin user add myminio newuser newuser123;

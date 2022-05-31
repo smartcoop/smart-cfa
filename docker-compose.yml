@@ -4,7 +4,7 @@ services:
   datasource:
     build:
       context: .
-      dockerfile: DB.Dockerfile
+      dockerfile: docker/DB.Dockerfile
     hostname: "${DOCKER_NAME}-datasource"
     container_name: "${DOCKER_NAME}-datasource"
     restart: always
@@ -12,25 +12,25 @@ services:
       - "cfa"
     environment:
       - "SA_PASSWORD=${DOCKER_SQL_PASSWORD}"
-  api:
+  useradmin:
     depends_on:
       - datasource
     build:
       context: .
-      dockerfile: Web.Dockerfile
-    hostname: ${DOCKER_NAME}-api
-    container_name: ${DOCKER_NAME}-api
+      dockerfile: docker/Web.Dockerfile
+    hostname: ${DOCKER_NAME}-useradmin
+    container_name: ${DOCKER_NAME}-useradmin
     restart: always
     networks:
       - "cfa"
-  public:
+  showcase:
     depends_on:
       - datasource
     build:
       context: .
-      dockerfile: Showcase.Dockerfile
-    hostname: ${DOCKER_NAME}-public
-    container_name: ${DOCKER_NAME}-public
+      dockerfile: docker/Showcase.Dockerfile
+    hostname: ${DOCKER_NAME}-showcase
+    container_name: ${DOCKER_NAME}-showcase
     restart: always
     networks:
       - "cfa"
