@@ -1,4 +1,4 @@
 SHELL=/bin/bash
 BASH_ENV=/container.env
-0 */12 * * *  root /etc/cron.d/refresh.sh
+0 */2 * * * /etc/cron.d/refresh.sh
 # An empty line is required at the end of this file for a valid cron file.
