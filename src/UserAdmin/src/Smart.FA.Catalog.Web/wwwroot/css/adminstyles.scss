@@ -31,6 +31,21 @@
     overflow-wrap: anywhere;
 }
 
+.icon-help {
+    .o-svg-icon {
+        display: inline;
+
+        svg {
+            vertical-align: middle;
+            max-width: 2.4rem;
+            max-height: 2.4rem;
+            display: inline;
+            color: #666;
+        }
+    }
+}
+
+
 @media (max-width: 380px) {
     .section-header .c-toolbar, .section-header .c-toolbar__right {
         display: block;
