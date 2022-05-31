@@ -9,4 +9,9 @@ public class UrlOptions
     public string SignOut {get; set;}
 
     public string Showcase { get; set; }
+
+    public string ShowcaseTrainingDetailsPath { get; set; }
+
+    public string GetShowcaseTrainingDetailsUrl(int trainingId) => $"{Showcase}{ShowcaseTrainingDetailsPath}{trainingId}";
+
 }

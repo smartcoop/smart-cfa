@@ -1,16 +1,20 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 using Smart.Design.Razor.TagHelpers.Alert;
 using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Domain.Models;
 using Smart.FA.Catalog.Core.Services;
+using Smart.FA.Catalog.Web.Options;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.Update;
 
 public class UpdateModel : AdminPage
 {
+    private readonly UrlOptions _urlOptions;
+
     private int TrainingId { get; set; }
 
     public List<string> ValidationErrors { get; private set; } = new();
@@ -19,9 +23,10 @@ public class UpdateModel : AdminPage
 
     [BindProperty] public UpdateTrainingViewModel UpdateTrainingViewModel { get; set; } = null!;
 
-    public UpdateModel(IMediator mediator, IUserIdentity userIdentity) : base(mediator)
+    public UpdateModel(IMediator mediator, IUserIdentity userIdentity, IOptions<UrlOptions> urlOptions) : base(mediator)
     {
         UserIdentity = userIdentity;
+        _urlOptions = urlOptions.Value;
     }
 
     private void Init()
@@ -62,7 +67,12 @@ public class UpdateModel : AdminPage
         var response = await Mediator.Send(request);
         UpdateTrainingViewModel = response.MapUpdateToResponse(UserIdentity.Identity.Trainer.DefaultLanguage);
 
-        TempData.AddGlobalBannerMessage(CatalogResources.TrainingEditedWithSuccess, AlertStyle.Success);
+        TempData.AddGlobalAlertMessage(CatalogResources.TrainingEditedWithSuccess, AlertStyle.Success);
+
+        if (!UpdateTrainingViewModel.IsDraft)
+        {
+            TempData["Url"] = _urlOptions.GetShowcaseTrainingDetailsUrl(id);
+        }
 
         return RedirectAfterSuccessfulUpdate();
     }
