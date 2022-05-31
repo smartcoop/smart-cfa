@@ -9,4 +9,6 @@ public class UrlOptions
     public string SignOut {get; set;}
 
     public string Showcase { get; set; }
+
+    public string ShowcaseTrainingDetailsUrl { get; set; } = "/Training/TrainingDetails/TrainingDetails?id=";
 }

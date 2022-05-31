@@ -19,14 +19,14 @@ public class UpdateModel : AdminPage
 
     public IUserIdentity UserIdentity { get; }
 
-    public string ShowcaseUrl { get; set; }
+    public string ShowcaseTrainingDetailsUrl { get; set; }
 
     [BindProperty] public UpdateTrainingViewModel UpdateTrainingViewModel { get; set; } = null!;
 
     public UpdateModel(IMediator mediator, IUserIdentity userIdentity, IOptions<UrlOptions> urlOptions) : base(mediator)
     {
         UserIdentity = userIdentity;
-        ShowcaseUrl = urlOptions.Value.Showcase;
+        ShowcaseTrainingDetailsUrl = urlOptions.Value.Showcase + urlOptions.Value.ShowcaseTrainingDetailsUrl;
     }
 
     private void Init()
@@ -71,7 +71,7 @@ public class UpdateModel : AdminPage
 
         if (!UpdateTrainingViewModel.IsDraft)
         {
-            TempData["Url"] = $"{ShowcaseUrl}/Training/TrainingDetails/TrainingDetails?id={id}";
+            TempData["Url"] = $"{ShowcaseTrainingDetailsUrl}{id}";
         }
 
         return RedirectAfterSuccessfulUpdate();

@@ -16,15 +16,13 @@ public class CreateModel : AdminPage
 
     [BindProperty] public CreateTrainingViewModel CreateTrainingViewModel { get; set; } = new();
 
-    public List<string> ValidationErrors { get; set; } = new();
-
-    public string ShowcaseUrl { get; set; }
+    public string ShowcaseTrainingDetailsUrl { get; set; }
 
     public CreateModel(IMediator mediator, ILogger<CreateModel> logger, IUserIdentity userIdentity, IOptions<UrlOptions> urlOptions) : base(mediator)
     {
         _logger = logger;
         UserIdentity = userIdentity;
-        ShowcaseUrl = urlOptions.Value.Showcase;
+        ShowcaseTrainingDetailsUrl = urlOptions.Value.Showcase + urlOptions.Value.ShowcaseTrainingDetailsUrl;
     }
 
     private void Init()
@@ -51,7 +49,7 @@ public class CreateModel : AdminPage
         TempData.AddGlobalAlertMessage(CatalogResources.TrainingCreatedWithSuccess, AlertStyle.Success);
         if (!request.IsDraft)
         {
-            TempData["Url"] = $"{ShowcaseUrl}/Training/TrainingDetails/TrainingDetails?id={reponse.TrainingId}";
+            TempData["Url"] = $"{ShowcaseTrainingDetailsUrl}{reponse.TrainingId}";
         }
 
         return RedirectToPage("/Admin/Trainings/List/Index");
