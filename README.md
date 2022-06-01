@@ -58,5 +58,3 @@ The url are generated based on the name of the branch or the pr number with the 
 
 ---
 ## Showcase
-
-
