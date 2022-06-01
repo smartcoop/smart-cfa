@@ -8,11 +8,6 @@ using Smart.FA.Catalog.Showcase.Domain.Common.Options;
 
 namespace Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry;
 
-public abstract class InquiryEmailServiceBase
-{
-    protected static object RateLimitLock = new();
-}
-
 public abstract class InquiryEmailServiceBase<TInquiryRequest, TTemplateModel> : IInquiryEmailService<TInquiryRequest, TTemplateModel>
     where TInquiryRequest : InquirySendEmailRequest
 {
