@@ -1,5 +1,6 @@
 #nullable disable
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Smart.FA.Catalog.Showcase.Domain.Common.Enums;
 using Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry.Trainer;
 using Smart.FA.Catalog.Showcase.Web.Services.Trainer;
@@ -8,11 +9,10 @@ namespace Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerDetails;
 
 public class TrainerDetailsModel : PageModelBase
 {
+    private const string TempDataTrainerIdKey = "TrainerId";
+
     private readonly ITrainerService _trainerService;
     private readonly ITrainerInquirySendEmailService _trainerInquirySendEmailService;
-
-    [TempData(Key = nameof(TrainerId))]
-    public int? TrainerId { get; set; }
 
     public TrainerDetailsViewModel Trainer { get; set; } = null!;
 
@@ -37,7 +37,7 @@ public class TrainerDetailsModel : PageModelBase
             return RedirectToNotFound();
         }
 
-        TrainerId = Trainer.Id;
+        SetTempDataTrainerId(Trainer.Id);
         return Page();
     }
 
@@ -49,15 +49,22 @@ public class TrainerDetailsModel : PageModelBase
 
     public async Task<ActionResult> OnPostAsync()
     {
+        if (!TempData.TryGetConvertedValue<int>(TempDataTrainerIdKey, out var trainerId))
+        {
+            return RedirectToPage(Routes.TrainingList);
+        }
+
         if (ModelState.IsValid)
         {
-            TrainerInquiryEmailRequest.TrainerId = TrainerId.Value;
+            TrainerInquiryEmailRequest.TrainerId = trainerId;
             EmailSendingResult = await _trainerInquirySendEmailService.SendEmailAsync(TrainerInquiryEmailRequest);
         }
 
-        TempData[nameof(TrainerId)] = TrainerId;
-        await LoadTrainerDetailsAsync(TrainerId.Value);
+        await LoadTrainerDetailsAsync(trainerId);
+        SetTempDataTrainerId(trainerId);
         return Page();
     }
+
+    private void SetTempDataTrainerId(int trainerId) => TempData[TempDataTrainerIdKey] = trainerId;
 }
 #nullable enable
