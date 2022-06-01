@@ -332,6 +332,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lorsque vous passez du statut ‘publié’ au statut ‘brouillon’, votre formation n’est plus visible sur la partie publique du site..
+        /// </summary>
+        public static string ChangeStatusToDraft {
+            get {
+                return ResourceManager.GetString("ChangeStatusToDraft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Charte d&apos;utilisation.
         /// </summary>
         public static string CharterUse {

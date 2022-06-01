@@ -40,14 +40,19 @@
                     <div class="c-alert__text">
                         <h4 class="c-h4">@TempData.GetGlobalAlertMessage().Message</h4>
                         @*Show training's page link if it is published*@
-                        @if (!string.IsNullOrEmpty(TempData["Url"]?.ToString()))
-                        {
-                            <div class="c-alert__message">
-                                <div class="c-content">
+                        <div class="c-alert__message">
+                            <div class="c-content">
+                                @if (!string.IsNullOrEmpty(TempData["Url"]?.ToString()))
+                                {
                                     <p><a href="@TempData["Url"].ToString()">@CatalogResources.ShowTrainingInShowcase</a></p>
-                                </div>
+                                }
+                                @if (!string.IsNullOrEmpty(TempData["IsDraft"]?.ToString()))
+                                {
+                                    <p>@TempData["IsDraft"].ToString()</p>
+                                }
                             </div>
-                        }
+                        </div>
+
                     </div>
                 </div>
                 <button class="c-button-link c-button--borderless-muted c-button--icon" type="button" data-alert-close="data-alert-close" aria-label="Close alert">

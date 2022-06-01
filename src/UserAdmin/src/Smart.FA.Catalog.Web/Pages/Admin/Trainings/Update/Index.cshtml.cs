@@ -73,6 +73,10 @@ public class UpdateModel : AdminPage
         {
             TempData["Url"] = _urlOptions.GetShowcaseTrainingDetailsUrl(id);
         }
+        else
+        {
+            TempData["IsDraft"] = CatalogResources.ChangeStatusToDraft;
+        }
 
         return RedirectAfterSuccessfulUpdate();
     }
