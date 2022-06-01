@@ -1,12 +1,21 @@
 CREATE VIEW [Cfa].[v_TrainerDetails]
-	AS
-SELECT Cfa.Trainer.Id
-      ,Cfa.Trainer.FirstName
-      ,Cfa.Trainer.LastName
-      ,Cfa.Trainer.Biography
-      ,Cfa.Trainer.Title
-      ,Cfa.Trainer.ProfileImagePath
-      ,Cfa.TrainerSocialNetwork.SocialNetworkId
-      ,Cfa.TrainerSocialNetwork.UrlToProfile
-FROM [Cfa].Trainer
-LEFT OUTER JOIN Cfa.TrainerSocialNetwork ON Cfa.Trainer.Id = Cfa.TrainerSocialNetwork.TrainerId
+AS
+SELECT trainer.Id
+    ,trainer.FirstName
+    ,trainer.LastName
+    ,trainer.Biography
+    ,trainer.Title
+    ,trainer.Email
+    ,trainer.ProfileImagePath
+    ,socialNetwork.SocialNetworkId
+    ,socialNetwork.UrlToProfile
+FROM [Cfa].Trainer trainer
+    LEFT JOIN Cfa.TrainerSocialNetwork socialNetwork
+    ON trainer.Id = socialNetwork.TrainerId
+    INNER JOIN Cfa.TrainerAssignment assignment
+    ON assignment.TrainerId = trainer.Id
+    INNER JOIn Cfa.Training training
+    ON training.Id = assignment.TrainingId
+    INNER JOIN Cfa.TrainingStatusType trainingStatusType
+    ON trainingStatusType.Id = training.TrainingStatusTypeId
+WHERE TrainingStatusType.Name = 'Published'
