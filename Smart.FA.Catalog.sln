@@ -122,7 +122,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "compose", "compose", "{694A
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.Showcase.Infrastructure.Tests", "src\Showcase\test\Smart.FA.Catalog.Showcase.Infrastructure.Tests\Smart.FA.Catalog.Showcase.Infrastructure.Tests.csproj", "{78924C18-F390-4E5E-A8E8-DC5FE1FE45B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.Showcase.Infrastructure.Tests", "src\Showcase\test\Smart.FA.Catalog.Showcase.Infrastructure.Tests\Smart.FA.Catalog.Showcase.Infrastructure.Tests.csproj", "{17634CDE-4641-4C03-A32C-135658339BE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -186,10 +186,10 @@ Global
 		{4065AEFA-A48E-44BD-ADB4-5279CBFADA0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4065AEFA-A48E-44BD-ADB4-5279CBFADA0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4065AEFA-A48E-44BD-ADB4-5279CBFADA0B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78924C18-F390-4E5E-A8E8-DC5FE1FE45B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78924C18-F390-4E5E-A8E8-DC5FE1FE45B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78924C18-F390-4E5E-A8E8-DC5FE1FE45B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78924C18-F390-4E5E-A8E8-DC5FE1FE45B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17634CDE-4641-4C03-A32C-135658339BE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17634CDE-4641-4C03-A32C-135658339BE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17634CDE-4641-4C03-A32C-135658339BE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17634CDE-4641-4C03-A32C-135658339BE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -223,7 +223,7 @@ Global
 		{F482971A-904F-448D-A4A1-02406A12E854} = {AF8FF0D7-F857-4162-832F-EB145EA461DA}
 		{5A9FEC67-6FBA-4DB4-96B3-74DD28096403} = {5C8DDEDB-9212-4B54-A111-75254BE1C65F}
 		{694A39BC-7BFA-43D5-8B7C-29718E79629B} = {AF8FF0D7-F857-4162-832F-EB145EA461DA}
-		{78924C18-F390-4E5E-A8E8-DC5FE1FE45B5} = {AA37D759-F348-4337-92CB-6515A1049B20}
+		{17634CDE-4641-4C03-A32C-135658339BE7} = {AA37D759-F348-4337-92CB-6515A1049B20}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D2F2190D-B4DE-48B8-B87C-7AA80A91538E}
