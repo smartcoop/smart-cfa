@@ -52,7 +52,7 @@ public class TrainerInquirySendEmailService : InquiryEmailServiceBase<TrainerInq
     {
         if (!request.TrainerId.HasValue)
         {
-            throw new InvalidOperationException($"Id of the Trainer is not defined");
+            throw new InvalidOperationException("Id of the Trainer is not defined");
         }
     }
 
@@ -67,7 +67,7 @@ public class TrainerInquirySendEmailService : InquiryEmailServiceBase<TrainerInq
     {
         if (_trainer is null)
         {
-            throw new InvalidOperationException($"Attempted to send a mail to a trainer that either doesn't exist or hasn't at least one published training");
+            throw new InvalidOperationException("Attempted to send a mail to a trainer that either doesn't exist or hasn't at least one published training");
         }
     }
 
