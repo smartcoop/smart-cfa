@@ -9,10 +9,12 @@ namespace Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry.SmartLearning
 /// <inheritdoc cref="ISmartLearningInquiryEmailService" />
 public class SmartLearningTeamInquiryEmailService : InquiryEmailServiceBase<InquirySendEmailRequest, InquirySendEmailRequest>, ISmartLearningInquiryEmailService
 {
+    private const string TemplatePath = "Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry.SmartLearningTeam.InquiryEmailTemplate.cshtml";
+
     private readonly InquiryOptions _inquirySettings;
     private readonly FluentEmailOptions _fluentEmailSettings;
 
-    protected internal override string Template => "Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry.SmartLearningTeam.InquiryEmailTemplate.cshtml";
+    protected internal override string Template => TemplatePath;
 
     public SmartLearningTeamInquiryEmailService(ILogger<SmartLearningTeamInquiryEmailService> logger,
         IFluentEmail fluentEmail,

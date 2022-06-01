@@ -12,6 +12,8 @@ namespace Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry.Trainer;
 
 public class TrainerInquirySendEmailService : InquiryEmailServiceBase<TrainerInquirySendEmailRequest, TrainerInquirySendEmailTemplateModel>, ITrainerInquirySendEmailService
 {
+    private const string TemplatePath = "Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry.Trainer.TrainerInquiryTemplate.cshtml";
+
     private readonly InquiryOptions _inquirySettings;
     private readonly FluentEmailOptions _fluentEmailSettings;
     private readonly IServiceProvider _serviceProvider;
@@ -31,7 +33,7 @@ public class TrainerInquirySendEmailService : InquiryEmailServiceBase<TrainerInq
         _inquirySettings = inquiryOptions.Value;
     }
 
-    protected internal override string Template => "Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry.Trainer.TrainerInquiryTemplate.cshtml";
+    protected internal override string Template => TemplatePath;
 
     protected override async Task LoadDataAsync(TrainerInquirySendEmailRequest request, CancellationToken cancellationToken)
     {
