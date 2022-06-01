@@ -138,6 +138,9 @@
   <data name="LegalNotice_TitlePage" xml:space="preserve">
     <value>Mentions Légales</value>
   </data>
+  <data name="LegalNotice_ContentPage" xml:space="preserve">
+    <value>Les présentes conditions générales ont pour objet de définir les modalités et conditions d’utilisation, par tous visiteurs, du site http://learning.smart.coop , ci-après « le site », le nom est la propriété de la Fondation SmartBe qui en cède l’usage à l’asbl Formateurs Associés n° d’entreprise 0654785434 dont le siège social est situé rue Coenraets 72 à 1060 Bruxelles, ci-après « FA».</value>
+  </data>
   <data name="PublicPage_Subtitle" xml:space="preserve">
     <value>Sous titre</value>
   </data>

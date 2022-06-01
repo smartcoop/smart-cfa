@@ -349,7 +349,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ce catalogue en ligne s’adresse à toute personne en recherche d’une formation. Vous trouverez sur ce site des formations de type scolaire, professionnel  (organisées et produites par Formateurs Associés asbl et Productions Associées asbl, le cas échéant) ou encore récréatif (uniquement dans Producteurs Associés asbl). Vous visualisez aisément la personne qui dispense la formation et pouvez la contacter en direct pour obtenir davantage d’informations. .
+        ///   Looks up a localized string similar to Ce catalogue en ligne s’adresse à toute personne en recherche d’une formation. Vous trouverez sur ce site des formations de type scolaire, professionnel  (organisées et produites par Formateurs Associés asbl et Productions Associées asbl, le cas échéant). Vous visualisez aisément la personne qui dispense la formation et pouvez la contacter en direct pour obtenir davantage d’informations. .
         /// </summary>
         public static string Homepage_IntroductionPart3 {
             get {
@@ -399,6 +399,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         public static string InvalidEmail {
             get {
                 return ResourceManager.GetString("InvalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Les présentes conditions générales ont pour objet de définir les modalités et conditions d’utilisation, par tous visiteurs, du site http://learning.smart.coop , ci-après « le site », le nom est la propriété de la Fondation SmartBe qui en cède l’usage à l’asbl Formateurs Associés n° d’entreprise 0654785434 dont le siège social est situé rue Coenraets 72 à 1060 Bruxelles, ci-après « FA»..
+        /// </summary>
+        public static string LegalNotice_ContentPage {
+            get {
+                return ResourceManager.GetString("LegalNotice_ContentPage", resourceCulture);
             }
         }
         
@@ -457,7 +466,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Site personel.
+        ///   Looks up a localized string similar to Site personnel.
         /// </summary>
         public static string PersonalWebsite {
             get {
@@ -520,7 +529,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to à.
         /// </summary>
         public static string To {
             get {
