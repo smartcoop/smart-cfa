@@ -18,7 +18,7 @@ public class TrainerInquirySendEmailService : InquiryEmailServiceBase<TrainerInq
     private readonly FluentEmailOptions _fluentEmailSettings;
     private readonly IServiceProvider _serviceProvider;
 
-    private TrainerDetails _trainer;
+    private TrainerDetails _trainer = null!;
 
     public TrainerInquirySendEmailService(
         ILogger<InquiryEmailServiceBase<TrainerInquirySendEmailRequest, TrainerInquirySendEmailTemplateModel>> logger,
