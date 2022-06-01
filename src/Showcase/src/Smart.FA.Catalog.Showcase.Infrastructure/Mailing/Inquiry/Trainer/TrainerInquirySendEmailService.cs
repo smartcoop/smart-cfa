@@ -52,7 +52,7 @@ public class TrainerInquirySendEmailService : InquiryEmailServiceBase<TrainerInq
     {
         if (!request.TrainerId.HasValue)
         {
-            throw new InvalidOperationException($"Id of the Trainer is not defined");
+            throw new InvalidOperationException("Id of the Trainer is not defined");
         }
     }
 
