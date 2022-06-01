@@ -24,7 +24,7 @@ public class TemplateEmailServiceTests
     }
 
     [Fact]
-    public void SmartLearningTeamInquiryTemplatePropertyIsAnExistingEmbeddedResource()
+    public void SmartLearningTeamInquiryTemplateProperty_ShouldBeAnExistingEmbeddedResource()
     {
         // Arrange
         var inquiryEmailService = new SmartLearningTeamInquiryEmailService(default,
@@ -41,7 +41,7 @@ public class TemplateEmailServiceTests
     }
 
     [Fact]
-    public void TrainerInquiryTemplateIsAnExistingEmbeddedResource()
+    public void TrainerInquiryTemplateIs_ShouldBeAnExistingEmbeddedResource()
     {
         // Arrange
         var trainerInquirySendEmailService = new TrainerInquirySendEmailService(

@@ -14,7 +14,7 @@ namespace Smart.FA.Catalog.Showcase.Infrastructure.Tests.Mailing;
 public class EmailServiceBaseTests
 {
     [Fact]
-    public async Task SendingTwoMailsBeforeRateLimitTimeFrameExpireReturnsTooManyRequests()
+    public async Task SendingTwoMails_BeforeRateLimitTimeFrameExpire_ShouldReturnTooManyRequests()
     {
         // Arrange
         var memoryCache = new MemoryCache(Options.Create(new MemoryCacheOptions()));
@@ -33,7 +33,7 @@ public class EmailServiceBaseTests
     }
 
     [Fact]
-    public async Task SendingTwoMailsWithHigherDelayBetweenThanRateLimitTimeFrameReturnsSuccess()
+    public async Task SendingTwoMails_WithHigherDelayBetweenThanRateLimitTimeFrame_ShouldReturnSuccess()
     {
         // Arrange
         var memoryCache = new MemoryCache(Options.Create(new MemoryCacheOptions()));
