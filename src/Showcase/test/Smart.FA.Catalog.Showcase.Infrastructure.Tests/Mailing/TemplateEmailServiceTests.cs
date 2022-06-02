@@ -20,7 +20,7 @@ public class TemplateEmailServiceTests
 
     public TemplateEmailServiceTests()
     {
-        _infrastructureAssembly = typeof(InquiryEmailServiceBase).Assembly;
+        _infrastructureAssembly = typeof(InquiryEmailServiceBase<,>).Assembly;
     }
 
     [Fact]
