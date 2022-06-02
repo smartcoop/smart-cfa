@@ -12,6 +12,7 @@ public partial class TrainerDetails
     public string LastName { get; set; } = null!;
     public string Biography { get; set; } = null!;
     public string Title { get; set; } = null!;
+    public string? Email { get; set; }
     public string? ProfileImagePath { get; set; }
     public int? SocialNetwork { get; set; }
     public string? UrlToProfile { get; set; }

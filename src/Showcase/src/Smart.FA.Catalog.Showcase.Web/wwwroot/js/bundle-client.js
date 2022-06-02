@@ -275,6 +275,54 @@
         }; // Open dialog
 
 
+        var focusTrap = function focusTrap(dialog, e) {
+            //dialog.focusedElBeforeOpen;
+            var focusableEls = dialog.querySelectorAll('a[href], area[href], input[type=text]:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"]');
+            dialog.focusableEls = Array.prototype.slice.call(focusableEls);
+            dialog.firstFocusableEl = dialog.focusableEls[0];
+            dialog.lastFocusableEl = dialog.focusableEls[dialog.focusableEls.length - 1];
+            dialog.firstFocusableEl.focus();
+
+            function handleKeyDown(e) {
+                var KEY_TAB = 9;
+
+                function handleBackwardTab() {
+                    if (document.activeElement === dialog.firstFocusableEl) {
+                        e.preventDefault();
+                        dialog.lastFocusableEl.focus();
+                    }
+                }
+
+                function handleForwardTab() {
+                    if (document.activeElement === dialog.lastFocusableEl) {
+                        e.preventDefault();
+                        dialog.firstFocusableEl.focus();
+                    }
+                }
+
+                switch (e.keyCode) {
+                case KEY_TAB:
+                    if (dialog.focusableEls.length === 1) {
+                        e.preventDefault();
+                        break;
+                    }
+
+                    if (e.shiftKey) {
+                        handleBackwardTab();
+                    } else {
+                        handleForwardTab();
+                    }
+
+                    break;
+
+                default:
+                    break;
+                }
+            }
+
+            dialog.addEventListener('keydown', handleKeyDown, false);
+        };
+
         var showdialog = function showdialog(contextEl) {
             if (contextEl) {
                 contextEl.classList.add(contextVisibleClass);
@@ -282,8 +330,8 @@
                 backdrop.classList.add(backdropVisibleclass);
             } // Push dialog to URL of browser
 
-
-            window.history.pushState('page', 'Title', "".concat(window.location.origin).concat(window.location.pathname, "?dialog=").concat(contextEl.getAttribute('id')));
+            appendQueryParameterDialogIdToCurrentLocation(contextEl.getAttribute('id'));
+            focusTrap(contextEl.querySelector('.c-dialog'));
         }; // Close dialog
 
 
@@ -294,8 +342,7 @@
                 backdrop.classList.remove(backdropVisibleclass);
             } // Push normal URL to browser again
 
-
-            window.history.pushState('page', 'Title', "".concat(window.location.origin).concat(window.location.pathname));
+            removeDialogIdFromSearchParams();
         }; // Close all other dialogs in case multiple dialogs are opened after each other
 
 
@@ -358,6 +405,21 @@
             }.bind({}))[0];
         } // If there is a parameter `dialog` in the URL, call that dialog
 
+        function appendQueryParameterToCurrentLocation(key, value) {
+            var url = new URL(window.location);
+            url.searchParams.set(key, value);
+            window.history.pushState({}, "", url.href);
+        }
+
+        function appendQueryParameterDialogIdToCurrentLocation(id) {
+            appendQueryParameterToCurrentLocation("dialog", id);
+        }
+
+        function removeDialogIdFromSearchParams() {
+            var url = new URL(window.location.href);
+            url.searchParams.delete("dialog");
+            window.history.pushState({}, "", url.href);
+        }
 
         if (queryParams.dialog) {
             var calldialog = document.getElementById(queryParams.dialog);
@@ -389,60 +451,6 @@
         /* Accessibility
            ========================================================================== */
         // Needs to be reviewed/improved
-
-        window.addEventListener('load', function() {
-            for (var i = 0; i < dialogs.length; i += 1) {
-                focusTrap(dialogs[i]);
-            }
-        });
-
-        var focusTrap = function focusTrap(dialog, e) {
-            dialog.focusedElBeforeOpen;
-            var focusableEls = dialog.querySelectorAll('a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"]');
-            dialog.focusableEls = Array.prototype.slice.call(focusableEls);
-            dialog.firstFocusableEl = dialog.focusableEls[0];
-            dialog.lastFocusableEl = dialog.focusableEls[dialog.focusableEls.length - 1];
-            dialog.firstFocusableEl.focus();
-
-            function handleKeyDown(e) {
-                var KEY_TAB = 9;
-
-                function handleBackwardTab() {
-                    if (document.activeElement === dialog.firstFocusableEl) {
-                        e.preventDefault();
-                        dialog.lastFocusableEl.focus();
-                    }
-                }
-
-                function handleForwardTab() {
-                    if (document.activeElement === dialog.lastFocusableEl) {
-                        e.preventDefault();
-                        dialog.firstFocusableEl.focus();
-                    }
-                }
-
-                switch (e.keyCode) {
-                    case KEY_TAB:
-                        if (dialog.focusableEls.length === 1) {
-                            e.preventDefault();
-                            break;
-                        }
-
-                        if (e.shiftKey) {
-                            handleBackwardTab();
-                        } else {
-                            handleForwardTab();
-                        }
-
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-
-            dialog.addEventListener('keydown', handleKeyDown, false);
-        };
 
     }, { "./util.js": 13 }],
     7: [function(require, module, exports) {

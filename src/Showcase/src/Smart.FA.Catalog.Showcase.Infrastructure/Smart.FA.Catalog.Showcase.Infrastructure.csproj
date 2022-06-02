@@ -8,11 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Mailing\Contact\InquiryEmailTemplate.cshtml" />
+    <None Remove="Mailing\Inquiry\SmartLearningTeam\InquiryEmailTemplate.cshtmll" />
+    <None Remove="Mailing\Inquiry\Trainer\TrainerInquiryTemplate.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Mailing\Contact\InquiryEmailTemplate.cshtml" />
+    <EmbeddedResource Include="Mailing\Inquiry\SmartLearningTeam\InquiryEmailTemplate.cshtml" />
+    <EmbeddedResource Include="Mailing\Inquiry\Trainer\TrainerInquiryTemplate.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +27,12 @@
     <PackageReference Include="Hangfire.Core" Version="1.7.28" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.4" />
     <PackageReference Include="RazorLight" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>Smart.FA.Catalog.Showcase.Infrastructure.Tests</_Parameter1>
+    </AssemblyAttribute>
   </ItemGroup>
 
 </Project>

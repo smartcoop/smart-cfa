@@ -5,6 +5,7 @@ SELECT Cfa.Trainer.Id
       ,Cfa.Trainer.LastName
       ,Cfa.Trainer.Biography
       ,Cfa.Trainer.Title
+      ,Cfa.Trainer.Email
       ,Cfa.Trainer.ProfileImagePath
       ,Cfa.TrainerSocialNetwork.SocialNetworkId
       ,Cfa.TrainerSocialNetwork.UrlToProfile

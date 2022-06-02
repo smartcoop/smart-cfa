@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using Smart.FA.Catalog.Localization;
 using Smart.FA.Catalog.Showcase.Localization;
 
-namespace Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Contact;
+namespace Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry;
 
 public class InquirySendEmailRequest
 {
