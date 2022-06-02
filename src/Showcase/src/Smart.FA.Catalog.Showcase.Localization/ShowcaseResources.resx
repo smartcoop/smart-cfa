@@ -138,6 +138,9 @@
   <data name="LegalNotice_TitlePage" xml:space="preserve">
     <value>Mentions Légales</value>
   </data>
+  <data name="LegalNotice_ContentPage" xml:space="preserve">
+    <value>Les présentes conditions générales ont pour objet de définir les modalités et conditions d’utilisation, par tous visiteurs, du site http://learning.smart.coop , ci-après « le site », le nom est la propriété de la Fondation SmartBe qui en cède l’usage à l’asbl Formateurs Associés n° d’entreprise 0654785434 dont le siège social est situé rue Coenraets 72 à 1060 Bruxelles, ci-après « FA».</value>
+  </data>
   <data name="PublicPage_Subtitle" xml:space="preserve">
     <value>Sous titre</value>
   </data>
@@ -202,7 +205,7 @@
     <value>Smart est une coopérative de travailleuses et travailleurs qui utilisent sa structure pour exercer leur métier, par exemple de la formation.</value>
   </data>
   <data name="Homepage_IntroductionPart3" xml:space="preserve">
-    <value>Ce catalogue en ligne s’adresse à toute personne en recherche d’une formation. Vous trouverez sur ce site des formations de type scolaire, professionnel  (organisées et produites par Formateurs Associés asbl et Productions Associées asbl, le cas échéant) ou encore récréatif (uniquement dans Producteurs Associés asbl). Vous visualisez aisément la personne qui dispense la formation et pouvez la contacter en direct pour obtenir davantage d’informations. </value>
+    <value>Ce catalogue en ligne s’adresse à toute personne en recherche d’une formation. Vous trouverez sur ce site des formations de type scolaire, professionnel  (organisées et produites par Formateurs Associés asbl et Productions Associées asbl, le cas échéant). Vous visualisez aisément la personne qui dispense la formation et pouvez la contacter en direct pour obtenir davantage d’informations. </value>
   </data>
   <data name="ToTrainingHomePage" xml:space="preserve">
     <value>Retour vers les formations</value>
@@ -331,6 +334,6 @@
     <value>à</value>
   </data>
   <data name="PersonalWebsite" xml:space="preserve">
-    <value>Site personel</value>
+    <value>Site personnel</value>
   </data>
 </root>

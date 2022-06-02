@@ -45,6 +45,7 @@ public class CreateTrainingCommandHandler : IRequestHandler<CreateTrainingReques
         _unitOfWork.Commit();
         _logger.LogInformation(LogEventIds.TrainingCreated, "Training with id {Id} has been created", training.Id);
 
+        resp.TrainingId = training.Id;
         resp.SetSuccess();
 
         return resp;
@@ -65,4 +66,5 @@ public class CreateTrainingRequest : IRequest<CreateTrainingResponse>
 
 public class CreateTrainingResponse : ResponseBase
 {
+    public int TrainingId { get; set; }
 }

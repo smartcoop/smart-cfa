@@ -44,7 +44,7 @@ public class ListModel : AdminPage
     public async Task<IActionResult> OnPostDeleteAsync(int id)
     {
         await Mediator.Send(new DeleteTrainingRequest { TrainingId = id });
-        TempData.AddGlobalBannerMessage(CatalogResources.TrainingDeletedWithSuccess, AlertStyle.Success);
+        TempData.AddGlobalAlertMessage(CatalogResources.TrainingDeletedWithSuccess, AlertStyle.Success);
         return RedirectToPage();
     }
 

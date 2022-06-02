@@ -70,6 +70,43 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Renseignez ici les infos pratiques : lieu, dates, online, à la demande,....
+        /// </summary>
+        public static string AddTrainingTooltip_Modalities {
+            get {
+                return ResourceManager.GetString("AddTrainingTooltip_Modalities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Décrivez ici les compétences ou les aptitudes avec lesquelles la personne repart de la formation..
+        /// </summary>
+        public static string AddTrainingTooltip_Objectif {
+            get {
+                return ResourceManager.GetString("AddTrainingTooltip_Objectif", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Décrivez brièvement le contenu de votre formation et à qui elle s’adresse. Veillez à proposer un contenu engageant..
+        /// </summary>
+        public static string AddTrainingTooltip_Presentation {
+            get {
+                return ResourceManager.GetString("AddTrainingTooltip_Presentation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Veillez à utiliser un titre explicite par rapport au contenu de votre formation.
+        ///        Utilisez au minimum les lettres capitales. Uniquement pour les débuts de phrases ou noms svp..
+        /// </summary>
+        public static string AddTrainingTooltip_Title {
+            get {
+                return ResourceManager.GetString("AddTrainingTooltip_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Charte d&apos;utilisation.
         /// </summary>
         public static string AdminHomepage_AcceptCharter {
@@ -88,7 +125,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Je m&apos;engage à respecter la Charter d&apos;utilisation de Formateurs Associés.
+        ///   Looks up a localized string similar to Je m&apos;engage à respecter la charte d&apos;utilisation de Formateurs Associés.
         /// </summary>
         public static string AdminHomepage_IAcceptCharter {
             get {
@@ -291,6 +328,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string Cancelled {
             get {
                 return ResourceManager.GetString("Cancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lorsque vous passez du statut ‘publié’ au statut ‘brouillon’, votre formation n’est plus visible sur la partie publique du site..
+        /// </summary>
+        public static string ChangeStatusToDraft {
+            get {
+                return ResourceManager.GetString("ChangeStatusToDraft", resourceCulture);
             }
         }
         
@@ -826,6 +872,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Visualiser la formation encodée.
+        /// </summary>
+        public static string ShowTrainingInShowcase {
+            get {
+                return ResourceManager.GetString("ShowTrainingInShowcase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Déconnexion.
         /// </summary>
         public static string SignOut {
@@ -880,7 +935,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Status.
+        ///   Looks up a localized string similar to Statut.
         /// </summary>
         public static string Status {
             get {

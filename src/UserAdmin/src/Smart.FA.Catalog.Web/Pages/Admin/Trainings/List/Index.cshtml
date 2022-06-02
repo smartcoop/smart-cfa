@@ -9,28 +9,65 @@
 }
 
 @section HeaderToolbar {
-    <div class="c-toolbar">
-        <div class="c-toolbar__left">
-            <div class="c-toolbar__item">
-                <h2 class="c-toolbar__title">@CatalogResources.MyTrainings</h2>
-            </div>
-        </div>
-
-        <div class="c-toolbar__right">
-            <smart-button-toolbar>
-                <a href="/cfa/admin/trainings/create?fromlist=">
-                    <smart-button label="@CatalogResources.AddNewTraining" leading-icon="Add"></smart-button>
-                </a>
-            </smart-button-toolbar>
+<div class="c-toolbar">
+    <div class="c-toolbar__left">
+        <div class="c-toolbar__item">
+            <h2 class="c-toolbar__title">@CatalogResources.MyTrainings</h2>
         </div>
     </div>
+
+    <div class="c-toolbar__right">
+        <smart-button-toolbar>
+            <a href="/cfa/admin/trainings/create?fromlist=">
+                <smart-button label="@CatalogResources.AddNewTraining" leading-icon="Add"></smart-button>
+            </a>
+        </smart-button-toolbar>
+    </div>
+</div>
 }
 
-@if (TempData.HasGlobalBannerMessage())
+@if (TempData.HasGlobalAlertMessage())
 {
     <div class="o-container">
         <smart-spacer left="ExtraLarge" right="ExtraLarge" top="Small">
-            <smart-alert style="@TempData.GetGlobalBannerMessage().Style" message="@TempData.GetGlobalBannerMessage().Message" is-closable="true"></smart-alert>
+            <div class="c-alert c-alert--success">
+                <div class="o-svg-icon o-svg-icon-circle-check">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4ZM2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22C6.477 22 2 17.523 2 12ZM16.664 8.753C16.862 8.92918 16.9819 9.17675 16.9975 9.44132C17.0131 9.70589 16.923 9.96582 16.747 10.164L11.414 16.164C11.3202 16.2696 11.2051 16.3541 11.0762 16.412C10.9474 16.4698 10.8077 16.4997 10.6665 16.4997C10.5253 16.4997 10.3856 16.4698 10.2568 16.412C10.1279 16.3541 10.0128 16.2696 9.919 16.164L7.253 13.164C7.08712 12.9645 7.0053 12.7083 7.02482 12.4495C7.04434 12.1907 7.16368 11.9497 7.35762 11.7773C7.55156 11.6049 7.80492 11.5147 8.06418 11.5256C8.32344 11.5366 8.56828 11.6479 8.747 11.836L10.667 13.995L15.253 8.835C15.4293 8.63716 15.677 8.51739 15.9415 8.50202C16.2061 8.48664 16.4659 8.57691 16.664 8.753Z" fill="#595959" />
+                    </svg>
+                </div>
+                <div class="c-alert__body">
+                    <div class="c-alert__text">
+                        <h4 class="c-h4">@TempData.GetGlobalAlertMessage().Message</h4>
+                        @*Show training's page link if it is published*@
+                        <div class="c-alert__message">
+                            <div class="c-content">
+                                @if (!string.IsNullOrEmpty(TempData["Url"]?.ToString()))
+                                {
+                                    <p><a href="@TempData["Url"].ToString()">@CatalogResources.ShowTrainingInShowcase</a></p>
+                                }
+                                @if (!string.IsNullOrEmpty(TempData["IsDraft"]?.ToString()))
+                                {
+                                    <p>@TempData["IsDraft"].ToString()</p>
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <button class="c-button-link c-button--borderless-muted c-button--icon" type="button" data-alert-close="data-alert-close" aria-label="Close alert">
+                    <span class="c-button__content">
+                        <div class="o-svg-icon o-svg-icon-close  ">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.29289 5.2929C5.68342 4.90237 6.31658 4.90237 6.70711 5.2929L12 10.5858L17.2929 5.2929C17.6834 4.90237 18.3166 4.90237 18.7071 5.2929C19.0976 5.68342 19.0976 6.31659 18.7071 6.70711L13.4142 12L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L12 13.4142L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L10.5858 12L5.29289 6.70711C4.90237 6.31659 4.90237 5.68342 5.29289 5.2929Z" fill="#595959" />
+                            </svg>
+                        </div>
+                        <div class="u-sr-accessible">
+                            Alert sluiten
+                        </div>
+                    </span>
+                </button>
+            </div>
         </smart-spacer>
     </div>
 }
@@ -113,15 +150,15 @@ else
     @section Scripts
     {
         <script>
-                // Submits the form surrounding the delete button of a training.
-                function deleteTraining(elem) {
-                    document.getElementById('delete-training-form-' + elem.dataset.trainingid).submit();
-                }
+            // Submits the form surrounding the delete button of a training.
+            function deleteTraining(elem) {
+                document.getElementById('delete-training-form-' + elem.dataset.trainingid).submit();
+            }
 
-                // Used in the AdminTrainingTile HTML.
-                function setTrainingId(trainingId) {
-                    document.getElementById('delete-training-button').dataset.trainingid = trainingId;
-                }
-            </script>
+            // Used in the AdminTrainingTile HTML.
+            function setTrainingId(trainingId) {
+                document.getElementById('delete-training-button').dataset.trainingid = trainingId;
+            }
+        </script>
     }
 }

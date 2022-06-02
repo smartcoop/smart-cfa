@@ -11,7 +11,7 @@
     ViewData["ToolBarTitle"] = @CatalogResources.EditTraining;
     ViewData.SetTitle(CatalogResources.EditTraining);
 }
-<smart-container size="Large">
+<div class="o-container">
     <form method="post" id="form" class="u-spacer-xl">
 
         @section HeaderToolbar
@@ -48,15 +48,50 @@
 
         <div class="o-form-group-layout o-form-group-layout--standard">
             <smart-panel header="@CatalogResources.FieldsThatWillAppearInThePublicCatalog">
-                <smart-form-group-input-text label="@CatalogResources.TrainingTitleCreationLabel *" asp-for="UpdateTrainingViewModel.Title"></smart-form-group-input-text>
+                <smart-formgroup>
+                    <label class="o-form-group__label">@CatalogResources.TrainingTitleCreationLabel * <span data-tooltip="tooltip-title" data-tooltip-placement="top" class="icon-help"><smart-icon icon="CircleHelp"></smart-icon></span></label>
+                    <smart-formgroup-controls>
+                        <smart-input asp-for="UpdateTrainingViewModel.Title"></smart-input>
+                        <smart-validation-message asp-for="UpdateTrainingViewModel.Title"></smart-validation-message>
+                    </smart-formgroup-controls>
+                </smart-formgroup>
+                
                 @if (Model.UserIdentity.IsSuperUser)
                 {
                     <smart-checkbox label="@CatalogResources.IsTrainingGivenBySmart" asp-for="UpdateTrainingViewModel.IsGivenBySmart"></smart-checkbox>
                     <smart-validation-message asp-for="UpdateTrainingViewModel.IsGivenBySmart"></smart-validation-message>
                 }
-                <smart-form-group-textarea rows="5" label="@CatalogResources.TrainingPresentation *" asp-for="UpdateTrainingViewModel.Methodology" helper-text="@CatalogResources.Min30CharMax1000Char"></smart-form-group-textarea>
-                <smart-form-group-textarea rows="5" label="@CatalogResources.TrainingGoal *" asp-for="UpdateTrainingViewModel.Goal" helper-text="@CatalogResources.Min30CharMax1000Char"></smart-form-group-textarea>
-                <smart-form-group-textarea rows="5"label="@CatalogResources.PracticalModalities *" asp-for="UpdateTrainingViewModel.PracticalModalities" helper-text="@CatalogResources.Min30CharMax1000Char"></smart-form-group-textarea>
+
+                <smart-formgroup>
+                    <label class="o-form-group__label">@CatalogResources.TrainingPresentation * <span data-tooltip="tooltip-presentation" data-tooltip-placement="top" class="icon-help"><smart-icon icon="CircleHelp"></smart-icon></span></label>
+                    <smart-formgroup-controls>
+                        <smart-textarea asp-for="UpdateTrainingViewModel.Methodology" rows="5"></smart-textarea>
+                        
+                        <p class="c-form-help-text">@CatalogResources.Min30CharMax1000Char</p>
+                        <smart-validation-message asp-for="UpdateTrainingViewModel.Methodology"></smart-validation-message>
+                    </smart-formgroup-controls>
+                </smart-formgroup>
+
+                <smart-formgroup>
+                    <label class="o-form-group__label">@CatalogResources.TrainingGoal * <span data-tooltip="tooltip-objectif" data-tooltip-placement="top" class="icon-help"><smart-icon icon="CircleHelp"></smart-icon></span></label>
+                    <smart-formgroup-controls>
+                        <smart-textarea asp-for="UpdateTrainingViewModel.Goal" rows="5"></smart-textarea>
+                        
+                        <p class="c-form-help-text">@CatalogResources.Min30CharMax1000Char</p>
+                        <smart-validation-message asp-for="UpdateTrainingViewModel.Goal"></smart-validation-message>
+                    </smart-formgroup-controls>
+                </smart-formgroup>
+
+                <smart-formgroup>
+                    <label class="o-form-group__label">@CatalogResources.PracticalModalities * <span data-tooltip="tooltip-modalities" data-tooltip-placement="top" class="icon-help"><smart-icon icon="CircleHelp"></smart-icon></span></label>
+                    <smart-formgroup-controls>
+                        <smart-textarea asp-for="UpdateTrainingViewModel.PracticalModalities" rows="5"></smart-textarea>
+                        
+                        <p class="c-form-help-text">@CatalogResources.Min30CharMax1000Char</p>
+                        <smart-validation-message asp-for="UpdateTrainingViewModel.PracticalModalities"></smart-validation-message>
+                    </smart-formgroup-controls>
+                </smart-formgroup>
+
                 <smart-formgroup label="@CatalogResources.Topics *">
                     <smart-grid>
                         @foreach (var topics in Topic.List.Chunk(2))
@@ -105,8 +140,25 @@
             <div class="u-spacer"></div>
         </div>
     </form>
-</smart-container>
+</div>
 
+<div>
+    <div class="c-tooltip" id="tooltip-title" role="tooltip">@CatalogResources.AddTrainingTooltip_Title
+        <div class="c-tooltip__arrow" data-popper-arrow="data-popper-arrow"></div>
+    </div>
+
+    <div class="c-tooltip" id="tooltip-presentation" role="tooltip">@CatalogResources.AddTrainingTooltip_Presentation
+        <div class="c-tooltip__arrow" data-popper-arrow="data-popper-arrow"></div>
+    </div>
+
+    <div class="c-tooltip" id="tooltip-objectif" role="tooltip">@CatalogResources.AddTrainingTooltip_Objectif
+        <div class="c-tooltip__arrow" data-popper-arrow="data-popper-arrow"></div>
+    </div>
+
+    <div class="c-tooltip" id="tooltip-modalities" role="tooltip">@CatalogResources.AddTrainingTooltip_Modalities
+        <div class="c-tooltip__arrow" data-popper-arrow="data-popper-arrow"></div>
+    </div>
+</div>
 <div class="u-spacer"></div>
 
 @section Scripts
