@@ -31,16 +31,16 @@ public class TrainingService : ITrainingService
         return new PagedList<TrainingListViewModel>(trainingListViewModels, new PageItem(pageNumber, pageSize), result.TotalCount);
     }
 
-    public async Task<PagedList<TrainingListViewModel>> SearchPublishedTrainingViewModelsAsync(string? searchKeyword, int currentPage, int pageSize)
+    public async Task<PagedList<TrainingListViewModel>> SearchTrainingViewModelsAsync(string? searchKeyword, int currentPage, int pageSize)
     {
-        var trainings = await _catalogShowcaseContext.TrainingList.Where(training => training.Status == TrainingStatusType.Published).SearchPaginatedTrainingsAsync(searchKeyword, currentPage, pageSize);
+        var trainings = await _catalogShowcaseContext.TrainingList.SearchPaginatedTrainingsAsync(searchKeyword, currentPage, pageSize);
 
         return new PagedList<TrainingListViewModel>(trainings.ToTrainingListViewModels(), new PageItem(currentPage, pageSize), trainings.TotalCount);
     }
 
-    public async Task<PagedList<TrainingListViewModel>> SearchPublishedTrainingViewModelsByTopicIdAsync(int? searchTopicId, int currentPage, int pageSize)
+    public async Task<PagedList<TrainingListViewModel>> SearchTrainingViewModelsByTopicIdAsync(int? searchTopicId, int currentPage, int pageSize)
     {
-        var trainings = await _catalogShowcaseContext.TrainingList.Where(training => training.Status == TrainingStatusType.Published).SearchPaginatedTrainingsByTopicAsync(searchTopicId, currentPage, pageSize);
+        var trainings = await _catalogShowcaseContext.TrainingList.SearchPaginatedTrainingsByTopicAsync(searchTopicId, currentPage, pageSize);
 
         return new PagedList<TrainingListViewModel>(trainings.ToTrainingListViewModels(), new PageItem(currentPage, pageSize), trainings.TotalCount);
     }
