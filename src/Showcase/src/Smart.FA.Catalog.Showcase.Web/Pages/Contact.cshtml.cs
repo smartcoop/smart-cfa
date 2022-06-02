@@ -1,21 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Smart.FA.Catalog.Showcase.Domain.Common.Enums;
-using Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Contact;
+using Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry;
+using Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry.SmartLearningTeam;
 
 namespace Smart.FA.Catalog.Showcase.Web.Pages;
 
 public class ContactModel : PageModel
 {
-    private readonly IInquiryEmailService _inquiryEmailService;
+    private readonly ISmartLearningInquiryEmailService _inquiryEmailService;
 
     [BindProperty]
     public InquirySendEmailRequest SendEmailRequest { get; set; } = null!;
 
-    [TempData]
-    public string? ErrorMessage { get; set; }
+    public InquirySendEmailResult? SendEmailResult { get; set; }
 
-    public ContactModel(IInquiryEmailService inquiryEmailService)
+    public ContactModel(ISmartLearningInquiryEmailService inquiryEmailService)
     {
         _inquiryEmailService = inquiryEmailService;
     }
@@ -25,7 +25,7 @@ public class ContactModel : PageModel
         return Page();
     }
 
-    public ActionResult OnPost()
+    public async Task<ActionResult> OnPostAsync()
     {
         try
         {
@@ -35,34 +35,22 @@ public class ContactModel : PageModel
             }
 
             AddToRequestSenderRemoteIpAddress();
-            var result = _inquiryEmailService.SendEmail(SendEmailRequest);
-            SetFeedbackMessageAccordinglyToResult(result);
+            SendEmailResult = await _inquiryEmailService.SendEmailAsync(SendEmailRequest);
         }
         catch (Exception)
         {
             // No need to perform any logging here as _inquiryEmailService.SendEmail logs any encountered exception.
             // The method is supposed to catch any exceptions but better be safe than sorry.
-            ErrorMessage = ShowcaseResources.Contact_ErrorMessage;
+            SendEmailResult = InquirySendEmailResult.Failure;
         }
 
         // If ErrorMessage has a value this means we are in an error/invalid state.
         // If it is the case, render the Page again with Page() method.
-        return string.IsNullOrEmpty(ErrorMessage) ? RedirectToPage() : Page();
+        return Page();
     }
 
     private void AddToRequestSenderRemoteIpAddress()
     {
         SendEmailRequest.RemoteIpAddress = HttpContext.Connection.RemoteIpAddress!.ToString();
-    }
-
-    private void SetFeedbackMessageAccordinglyToResult(InquirySendEmailResult result)
-    {
-        ErrorMessage = result switch
-        {
-            InquirySendEmailResult.TooManyRequests => ShowcaseResources.YouReachedRateLimit,
-            InquirySendEmailResult.Failure => ShowcaseResources.Contact_ErrorMessage,
-            InquirySendEmailResult.Ok => string.Empty,
-            _ => ShowcaseResources.Contact_ErrorMessage
-        };
     }
 }

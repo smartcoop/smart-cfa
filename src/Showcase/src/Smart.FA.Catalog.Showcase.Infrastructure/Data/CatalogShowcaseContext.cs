@@ -31,6 +31,8 @@ public partial class CatalogShowcaseContext : DbContext
 
             entity.Property(e => e.Biography).HasMaxLength(1500);
 
+            entity.Property(e => e.Email).HasMaxLength(254);
+
             entity.Property(e => e.FirstName).HasMaxLength(200);
 
             entity.Property(e => e.LastName).HasMaxLength(200);
