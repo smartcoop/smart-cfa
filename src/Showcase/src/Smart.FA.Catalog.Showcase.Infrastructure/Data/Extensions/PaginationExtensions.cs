@@ -42,7 +42,7 @@ public static class PaginationExtensions
 
         // Make sure to keep consistent ordering.
         var orderedList = await query.OrderBy(item => item.Id).ToListAsync();
-        
+
         return (orderedList, totalCount);
     }
 }
