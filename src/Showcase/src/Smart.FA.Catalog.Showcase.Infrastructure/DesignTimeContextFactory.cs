@@ -9,7 +9,7 @@ public class DesignTimeContextFactory : IDesignTimeDbContextFactory<CatalogShowc
     {
         var optionsBuilder = new DbContextOptionsBuilder<CatalogShowcaseContext>();
 
-        optionsBuilder.UseSqlServer("DataSource=app.db");
+        optionsBuilder.UseSqlServer("Server=(LocalDB)\\MSSQLLocalDB; Database=Catalog; Integrated Security=true;");
         return new CatalogShowcaseContext(optionsBuilder.Options);
 
     }
