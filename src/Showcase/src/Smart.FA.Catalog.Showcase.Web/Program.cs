@@ -70,6 +70,11 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+if (!app.Environment.IsProduction() && !app.Environment.IsEnvironment("PreProduction"))
+{
+    await app.BootStrapAsync();
+}
+
 //app.UseHangfireDashboard();
 
 app.Run();
