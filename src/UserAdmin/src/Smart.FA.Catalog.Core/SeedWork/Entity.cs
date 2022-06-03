@@ -1,8 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
+using Smart.FA.Catalog.Core.Domain;
 
 namespace Smart.FA.Catalog.Core.SeedWork;
 
-public abstract class Entity
+public abstract class Entity : IEFSoftDelete
 {
     #region Fields
 
@@ -24,6 +25,10 @@ public abstract class Entity
 
     public int LastModifiedBy { get; set; }
 
+    public bool IsDeleted { get; private set; }
+
+    public bool IsDestroyed { get; private set; }
+
     public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
     #endregion
@@ -44,6 +49,12 @@ public abstract class Entity
     {
         _domainEvents.Clear();
     }
+
+    public void Delete() => IsDeleted = true;
+
+    public void Recover() => IsDeleted = false;
+
+    public void Destroy() => IsDestroyed = true;
 
     #endregion
 

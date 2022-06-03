@@ -12,17 +12,20 @@ public class EntityConfigurationBase<T> : IEntityTypeConfiguration<T>
         builder.HasKey(e => e.Id);
 
         builder
-           .Ignore(e => e.IsTransient);
+            .Ignore(e => e.IsTransient);
 
         builder
-           .Property(e => e.CreatedAt)
-           .HasPrecision(3)
-           .IsRequired();
+            .Property(e => e.CreatedAt)
+            .HasPrecision(3)
+            .IsRequired();
 
         builder
-           .Property(e => e.LastModifiedAt)
-           .HasPrecision(3)
-           .IsRequired();
+            .Ignore(e => e.IsDestroyed);
+
+        builder
+            .Property(e => e.LastModifiedAt)
+            .HasPrecision(3)
+            .IsRequired();
 
         builder.Ignore(e => e.DomainEvents);
     }

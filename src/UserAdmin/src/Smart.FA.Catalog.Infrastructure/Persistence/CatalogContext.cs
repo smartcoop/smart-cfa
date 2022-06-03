@@ -6,8 +6,8 @@ using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Infrastructure.Extensions;
 using Smart.FA.Catalog.Infrastructure.Persistence.Extensions;
-using Smart.FA.Catalog.Shared.Domain.Enumerations;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Common;
+
 
 namespace Smart.FA.Catalog.Infrastructure.Persistence;
 
@@ -34,6 +34,7 @@ public class CatalogContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.AddSoftDeleteQueryFilter();
         modelBuilder.HasDefaultSchema("Cfa");
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         modelBuilder.ApplyDateTimeConverters();
@@ -48,6 +49,7 @@ public class CatalogContext : DbContext
     {
         UpdateAuditableEntitiesData();
         DetachEnumerations();
+        SetSoftDeleteToEntities();
         var numberOfEntitiesWritten = await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         await PublishEntityDomainEventsAsync();
         return numberOfEntitiesWritten;
@@ -78,5 +80,19 @@ public class CatalogContext : DbContext
             .Where(entity => entity.DomainEvents.Any());
 
         return _eventPublisher.PublishEntitiesEventsAsync(entitiesWithEvents);
+    }
+
+    private void SetSoftDeleteToEntities()
+    {
+        var entityListToSoftDelete = ChangeTracker.Entries<IEFSoftDelete>().Where(entry => entry.State == EntityState.Deleted);
+        foreach (var entity in entityListToSoftDelete)
+        {
+            // The IsDestroyed flag allow to force hard delete to the entity
+            if (entity.Entity.IsDestroyed is false)
+            {
+                entity.Entity.Delete();
+                entity.State = EntityState.Modified;
+            }
+        }
     }
 }
