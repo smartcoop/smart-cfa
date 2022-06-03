@@ -1,4 +1,4 @@
-﻿# Catalogue Formateurs Associés
+# Catalogue Formateurs Associés
 
 ## Structure of the solution:
 
