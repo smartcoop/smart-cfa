@@ -6,7 +6,7 @@ SELECT
     ,trainer.LastName
     ,trainer.Title
     ,trainer.ProfileImagePath
-	,count(assignment.TrainingId) As TrainingCount
+    ,count(assignment.TrainingId) As TrainingCount
 FROM Cfa.Trainer trainer
     INNER JOIN Cfa.TrainerAssignment assignment
     ON assignment.TrainerId = trainer.Id
