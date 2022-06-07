@@ -30,7 +30,7 @@ namespace Smart.FA.Catalog.Showcase.Infrastructure.Migrations
                     ON training.Id = assignment.TrainingId
                     INNER JOIN Cfa.TrainingStatusType trainingStatusType
                     ON trainingStatusType.Id = training.TrainingStatusTypeId
-                WHERE Training.IsDeleted = 0 AND
+                WHERE Training.IsSoftDeleted = 0 AND
                       TrainingStatusType.Name = 'Published'
                 GROUP BY trainer.Id
                     ,trainer.FirstName
@@ -60,7 +60,7 @@ namespace Smart.FA.Catalog.Showcase.Infrastructure.Migrations
                     assignment.TrainingId = training.Id
                     INNER JOIN Cfa.TrainingStatusType trainingStatusType
                     ON trainingStatusType.Id = training.TrainingStatusTypeId
-                WHERE Training.IsDeleted = 0 AND
+                WHERE Training.IsSoftDeleted = 0 AND
                       TrainingStatusType.Name = 'Published'
                 GROUP BY trainer.Id, trainer.FirstName, trainer.LastName, trainer.Title, trainer.ProfileImagePath
                 HAVING count(assignment.TrainingId) >= 1");
@@ -92,7 +92,7 @@ namespace Smart.FA.Catalog.Showcase.Infrastructure.Migrations
                     ON training.Id = topic.TrainingId
                     INNER JOIN Cfa.TrainingStatusType trainingStatusType
                     ON trainingStatusType.Id = training.TrainingStatusTypeId
-                WHERE Training.IsDeleted = 0 AND
+                WHERE Training.IsSoftDeleted = 0 AND
                       TrainingStatusType.Name = 'Published'");
 
             // TrainingList.
@@ -120,7 +120,7 @@ namespace Smart.FA.Catalog.Showcase.Infrastructure.Migrations
                     ON trainingTrainer.TrainerId = trainer.Id
                     INNER JOIN Cfa.TrainingStatusType trainingStatusType
                     ON trainingStatusType.Id = training.TrainingStatusTypeId
-                WHERE Training.IsDeleted = 0 AND
+                WHERE Training.IsSoftDeleted = 0 AND
                       TrainingStatusType.Name = 'Published'");
         }
 

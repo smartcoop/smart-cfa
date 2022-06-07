@@ -3,7 +3,7 @@ using Smart.FA.Catalog.Core.Domain;
 
 namespace Smart.FA.Catalog.Core.SeedWork;
 
-public abstract class Entity : IEFSoftDelete
+public abstract class Entity : ISoftDeletable
 {
     #region Fields
 
@@ -25,9 +25,7 @@ public abstract class Entity : IEFSoftDelete
 
     public int LastModifiedBy { get; set; }
 
-    public bool IsDeleted { get; private set; }
-
-    public bool IsDestroyed { get; private set; }
+    public bool IsSoftDeleted { get; private set; }
 
     public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
@@ -49,12 +47,6 @@ public abstract class Entity : IEFSoftDelete
     {
         _domainEvents.Clear();
     }
-
-    public void Delete() => IsDeleted = true;
-
-    public void Recover() => IsDeleted = false;
-
-    public void Destroy() => IsDestroyed = true;
 
     #endregion
 

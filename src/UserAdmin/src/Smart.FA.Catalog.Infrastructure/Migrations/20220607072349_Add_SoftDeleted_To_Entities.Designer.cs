@@ -12,8 +12,8 @@ using Smart.FA.Catalog.Infrastructure.Persistence;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    [Migration("20220602073824_Add_SoftDelete_To_Entities")]
-    partial class Add_SoftDelete_To_Entities
+    [Migration("20220607072349_Add_SoftDeleted_To_Entities")]
+    partial class Add_SoftDeleted_To_Entities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -66,7 +66,7 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(254)
                         .HasColumnType("nvarchar(254)");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool>("IsSoftDeleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("LastModifiedAt")
@@ -86,6 +86,8 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(150)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsSoftDeleted");
 
                     b.ToTable("Trainer", "Cfa");
                 });
@@ -157,10 +159,10 @@ namespace Infrastructure.Migrations
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool>("IsGivenBySmart")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsGivenBySmart")
+                    b.Property<bool>("IsSoftDeleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("LastModifiedAt")
@@ -177,6 +179,8 @@ namespace Infrastructure.Migrations
                         .HasColumnName("TrainingStatusTypeId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsSoftDeleted");
 
                     b.ToTable("Training", "Cfa");
                 });
@@ -269,7 +273,7 @@ namespace Infrastructure.Migrations
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool>("IsSoftDeleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("LastModifiedAt")
@@ -296,6 +300,8 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsSoftDeleted");
 
                     b.ToTable("UserChartRevision", "Cfa");
                 });

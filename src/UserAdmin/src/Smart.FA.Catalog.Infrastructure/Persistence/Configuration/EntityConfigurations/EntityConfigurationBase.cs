@@ -20,9 +20,6 @@ public class EntityConfigurationBase<T> : IEntityTypeConfiguration<T>
             .IsRequired();
 
         builder
-            .Ignore(e => e.IsDestroyed);
-
-        builder
             .Property(e => e.LastModifiedAt)
             .HasPrecision(3)
             .IsRequired();

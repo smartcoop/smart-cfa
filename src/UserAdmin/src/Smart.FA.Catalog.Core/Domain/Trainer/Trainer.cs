@@ -149,6 +149,7 @@ public class Trainer : Entity, IAggregateRoot
         {
             return;
         }
+
         _approvals.Add(new TrainerApproval(this, userChart!));
     }
 
