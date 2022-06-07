@@ -84,15 +84,11 @@ public class CatalogContext : DbContext
 
     private void SetSoftDeleteToEntities()
     {
-        var entityListToSoftDelete = ChangeTracker.Entries<IEFSoftDelete>().Where(entry => entry.State == EntityState.Deleted);
-        foreach (var entity in entityListToSoftDelete)
+        var entityListToSoftDelete = ChangeTracker.Entries<ISoftDeletable>().Where(entry => entry.State == EntityState.Deleted);
+        foreach (var entry in entityListToSoftDelete)
         {
-            // The IsDestroyed flag allow to force hard delete to the entity
-            if (entity.Entity.IsDestroyed is false)
-            {
-                entity.Entity.Delete();
-                entity.State = EntityState.Modified;
-            }
+            entry.Property(entity => entity.IsSoftDeleted).CurrentValue = true;
+            entry.State = EntityState.Modified;
         }
     }
 }

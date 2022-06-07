@@ -7,7 +7,7 @@ using Smart.FA.Catalog.Core.Domain;
 namespace Smart.FA.Catalog.Infrastructure.Extensions;
 
 /// <summary>
-/// Add global query filter for soft deletable class implementing the <see cref="IEFSoftDelete"/> interface
+/// Add global query filter for soft deletable class implementing the <see cref="ISoftDeletable"/> interface
 /// </summary>
 public static class SoftDeleteQueryExtension
 {
@@ -16,7 +16,7 @@ public static class SoftDeleteQueryExtension
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
         {
             // Does the entity implements IEFSoftDelete interface? (Note the Entity base class of all entities implement the interface and so all entities do, too)
-            if (typeof(IEFSoftDelete).IsAssignableFrom(entityType.ClrType))
+            if (typeof(ISoftDeletable).IsAssignableFrom(entityType.ClrType))
             {
                 ApplySoftDeleteQueryFilter(entityType);
             }
@@ -31,7 +31,7 @@ public static class SoftDeleteQueryExtension
         // Set the filter to be automatically applied on top of any queries on the entity
         entityType.SetQueryFilter((LambdaExpression)filter!);
         // Index on the soft deleted flag to increase database performance
-        entityType.AddIndex(entityType.FindProperty(nameof(IEFSoftDelete.IsDeleted))!);
+        entityType.AddIndex(entityType.FindProperty(nameof(ISoftDeletable.IsSoftDeleted))!);
     }
 
     /// <summary>
@@ -39,9 +39,9 @@ public static class SoftDeleteQueryExtension
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     /// <returns></returns>
-    private static LambdaExpression GetSoftDeleteFilter<TEntity>() where TEntity : class, IEFSoftDelete
+    private static LambdaExpression GetSoftDeleteFilter<TEntity>() where TEntity : class, ISoftDeletable
     {
-        Expression<Func<TEntity, bool>> filter = x => !x.IsDeleted;
+        Expression<Func<TEntity, bool>> filter = x => !x.IsSoftDeleted;
         return filter;
     }
 }
