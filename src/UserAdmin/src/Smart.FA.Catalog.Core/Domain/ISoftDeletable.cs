@@ -8,5 +8,5 @@ public interface ISoftDeletable
     /// <summary>
     /// The field marks the entity as soft deleted, meaning it could be recovered in the database.
     /// </summary>
-    public bool IsSoftDeleted { get; }
+    public DateTime? SoftDeletedAt { get; }
 }

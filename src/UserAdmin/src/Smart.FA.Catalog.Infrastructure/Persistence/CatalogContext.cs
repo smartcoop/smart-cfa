@@ -87,7 +87,7 @@ public class CatalogContext : DbContext
         var entityListToSoftDelete = ChangeTracker.Entries<ISoftDeletable>().Where(entry => entry.State == EntityState.Deleted);
         foreach (var entry in entityListToSoftDelete)
         {
-            entry.Property(entity => entity.IsSoftDeleted).CurrentValue = true;
+            entry.Property(entity => entity.SoftDeletedAt).CurrentValue = DateTime.UtcNow;
             entry.State = EntityState.Modified;
         }
     }

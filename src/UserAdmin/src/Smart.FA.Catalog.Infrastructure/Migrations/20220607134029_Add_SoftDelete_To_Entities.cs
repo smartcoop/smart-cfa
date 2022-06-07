@@ -5,85 +5,81 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
-    public partial class Add_SoftDeleted_To_Entities : Migration
+    public partial class Add_SoftDelete_To_Entities : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<bool>(
-                name: "IsSoftDeleted",
-                schema: "Cfa",
-                table: "Training",
-                type: "bit",
-                nullable: false,
-                defaultValue: false);
-
-            migrationBuilder.AddColumn<bool>(
-                name: "IsSoftDeleted",
-                schema: "Cfa",
-                table: "Trainer",
-                type: "bit",
-                nullable: false,
-                defaultValue: false);
-
-            migrationBuilder.AddColumn<bool>(
-                name: "IsSoftDeleted",
+            migrationBuilder.AddColumn<DateTime>(
+                name: "SoftDeletedAt",
                 schema: "Cfa",
                 table: "UserChartRevision",
-                type: "bit",
-                nullable: false,
-                defaultValue: false);
+                type: "datetime2(3)",
+                nullable: true);
 
-            migrationBuilder.CreateIndex(
-                name: "IX_UserChartRevision_IsSoftDeleted",
-                schema: "Cfa",
-                table: "UserChartRevision",
-                column: "IsSoftDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Training_IsSoftDeleted",
+            migrationBuilder.AddColumn<DateTime>(
+                name: "SoftDeletedAt",
                 schema: "Cfa",
                 table: "Training",
-                column: "IsSoftDeleted");
+                type: "datetime2(3)",
+                nullable: true);
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Trainer_IsSoftDeleted",
+            migrationBuilder.AddColumn<DateTime>(
+                name: "SoftDeletedAt",
                 schema: "Cfa",
                 table: "Trainer",
-                column: "IsSoftDeleted");
+                type: "datetime2(3)",
+                nullable: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserChartRevision_SoftDeletedAt",
+                schema: "Cfa",
+                table: "UserChartRevision",
+                column: "SoftDeletedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Training_SoftDeletedAt",
+                schema: "Cfa",
+                table: "Training",
+                column: "SoftDeletedAt");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Trainer_SoftDeletedAt",
+                schema: "Cfa",
+                table: "Trainer",
+                column: "SoftDeletedAt");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropIndex(
-                name: "IX_UserChartRevision_IsSoftDeleted",
+                name: "IX_UserChartRevision_SoftDeletedAt",
                 schema: "Cfa",
                 table: "UserChartRevision");
 
             migrationBuilder.DropIndex(
-                name: "IX_Training_IsSoftDeleted",
+                name: "IX_Training_SoftDeletedAt",
                 schema: "Cfa",
                 table: "Training");
 
             migrationBuilder.DropIndex(
-                name: "IX_Trainer_IsSoftDeleted",
+                name: "IX_Trainer_SoftDeletedAt",
                 schema: "Cfa",
                 table: "Trainer");
 
             migrationBuilder.DropColumn(
-                name: "IsSoftDeleted",
+                name: "SoftDeletedAt",
                 schema: "Cfa",
                 table: "UserChartRevision");
 
             migrationBuilder.DropColumn(
-                name: "IsSoftDeleted",
+                name: "SoftDeletedAt",
                 schema: "Cfa",
                 table: "Training");
 
             migrationBuilder.DropColumn(
-                name: "IsSoftDeleted",
+                name: "SoftDeletedAt",
                 schema: "Cfa",
                 table: "Trainer");
-
         }
     }
 }

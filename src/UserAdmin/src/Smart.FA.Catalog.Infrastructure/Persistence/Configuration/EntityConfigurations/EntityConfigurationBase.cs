@@ -24,6 +24,10 @@ public class EntityConfigurationBase<T> : IEntityTypeConfiguration<T>
             .HasPrecision(3)
             .IsRequired();
 
+        builder
+            .Property(e => e.SoftDeletedAt)
+            .HasPrecision(3);
+
         builder.Ignore(e => e.DomainEvents);
     }
 }

@@ -64,9 +64,6 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(254)
                         .HasColumnType("nvarchar(254)");
 
-                    b.Property<bool>("IsSoftDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime>("LastModifiedAt")
                         .HasPrecision(3)
                         .HasColumnType("datetime2(3)");
@@ -78,6 +75,9 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<DateTime?>("SoftDeletedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -85,7 +85,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IsSoftDeleted");
+                    b.HasIndex("SoftDeletedAt");
 
                     b.ToTable("Trainer", "Cfa");
                 });
@@ -160,15 +160,15 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("IsGivenBySmart")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsSoftDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime>("LastModifiedAt")
                         .HasPrecision(3)
                         .HasColumnType("datetime2(3)");
 
                     b.Property<int>("LastModifiedBy")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("SoftDeletedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("StatusType")
                         .ValueGeneratedOnAdd()
@@ -178,7 +178,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IsSoftDeleted");
+                    b.HasIndex("SoftDeletedAt");
 
                     b.ToTable("Training", "Cfa");
                 });
@@ -271,15 +271,15 @@ namespace Infrastructure.Migrations
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsSoftDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime>("LastModifiedAt")
                         .HasPrecision(3)
                         .HasColumnType("datetime2(3)");
 
                     b.Property<int>("LastModifiedBy")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("SoftDeletedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -299,7 +299,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IsSoftDeleted");
+                    b.HasIndex("SoftDeletedAt");
 
                     b.ToTable("UserChartRevision", "Cfa");
                 });
@@ -590,31 +590,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.Trainer", b =>
                 {
-                    b.OwnsOne("Smart.FA.Catalog.Core.Domain.Trainer.Identity#Smart.FA.Catalog.Core.Domain.ValueObjects.TrainerIdentity", "Identity", b1 =>
-                        {
-                            b1.Property<int>("TrainerId")
-                                .HasColumnType("int");
-
-                            b1.Property<int>("ApplicationTypeId")
-                                .HasMaxLength(200)
-                                .HasColumnType("int")
-                                .HasColumnName("ApplicationType");
-
-                            b1.Property<string>("UserId")
-                                .IsRequired()
-                                .HasMaxLength(200)
-                                .HasColumnType("nvarchar(200)")
-                                .HasColumnName("UserId");
-
-                            b1.HasKey("TrainerId");
-
-                            b1.ToTable("Trainer", "Cfa");
-
-                            b1.WithOwner()
-                                .HasForeignKey("TrainerId");
-                        });
-
-                    b.OwnsOne("Smart.FA.Catalog.Core.Domain.Trainer.Name#Smart.FA.Catalog.Core.Domain.ValueObjects.Name", "Name", b1 =>
+                    b.OwnsOne("Smart.FA.Catalog.Core.Domain.ValueObjects.Name", "Name", b1 =>
                         {
                             b1.Property<int>("TrainerId")
                                 .HasColumnType("int");
@@ -630,6 +606,30 @@ namespace Infrastructure.Migrations
                                 .HasMaxLength(200)
                                 .HasColumnType("nvarchar(200)")
                                 .HasColumnName("LastName");
+
+                            b1.HasKey("TrainerId");
+
+                            b1.ToTable("Trainer", "Cfa");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TrainerId");
+                        });
+
+                    b.OwnsOne("Smart.FA.Catalog.Core.Domain.ValueObjects.TrainerIdentity", "Identity", b1 =>
+                        {
+                            b1.Property<int>("TrainerId")
+                                .HasColumnType("int");
+
+                            b1.Property<int>("ApplicationTypeId")
+                                .HasMaxLength(200)
+                                .HasColumnType("int")
+                                .HasColumnName("ApplicationType");
+
+                            b1.Property<string>("UserId")
+                                .IsRequired()
+                                .HasMaxLength(200)
+                                .HasColumnType("nvarchar(200)")
+                                .HasColumnName("UserId");
 
                             b1.HasKey("TrainerId");
 

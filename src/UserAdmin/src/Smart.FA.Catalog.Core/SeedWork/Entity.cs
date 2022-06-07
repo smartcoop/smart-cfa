@@ -25,7 +25,7 @@ public abstract class Entity : ISoftDeletable
 
     public int LastModifiedBy { get; set; }
 
-    public bool IsSoftDeleted { get; private set; }
+    public DateTime? SoftDeletedAt { get; private set; }
 
     public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
@@ -99,4 +99,5 @@ public abstract class Entity : ISoftDeletable
     protected Entity() { }
 
     #endregion
+
 }
