@@ -27,7 +27,6 @@ public class TrainerQueries : ITrainerQueries
                     INNER JOIN Cfa.TrainerAssignment TE ON T.Id = TE.TrainerId
                     WHERE TE.TrainingId IN @TrainingIds";
         await using var connection = new SqlConnection(_connectionString);
-        var test =  connection.Query<TrainerDto>(sql, new {TrainingIds = trainingIds});
-        return test;
+        return connection.Query<TrainerDto>(sql, new {TrainingIds = trainingIds});
     }
 }

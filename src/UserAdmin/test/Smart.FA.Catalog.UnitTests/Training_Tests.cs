@@ -27,7 +27,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void HasInitiallyOneTrainer()
+    public void TrainingHasInitiallyOneTrainer()
     {
         var trainer = TrainerFactory.CreateClean();
         var training = TrainingFactory.Create(trainer);
@@ -49,21 +49,19 @@ public class TrainingTests
         training.TrainerAssignments.Should().HaveCount(2);
     }
 
-
     [Fact]
-    public void CanAddValidDetails()
+    public void CanAddValidDetailsToTraining()
     {
         var trainer = TrainerFactory.CreateClean();
         var training = TrainingFactory.Create(trainer);
 
         var action = () => training.AddDetails(_fixture.Create<string>(), _fixture.Create<string>(),
-            _fixture.Create<string>(),_fixture.Create<string>(),
+            _fixture.Create<string>(), _fixture.Create<string>(),
             Language.Create(_fixture.Create<string>().Substring(0, 2)).Value);
 
         action.Should().NotThrow<Exception>();
         training.Details.Should().HaveCount(2);
     }
-
 
     [Theory]
     [InlineData("Title", "Goal", "Methodology", "PracticalModalities", "FRE")]
@@ -95,7 +93,6 @@ public class TrainingTests
         training.Details.Should().HaveCount(2);
     }
 
-
     [Fact]
     public void CanUpdateLanguageDescription()
     {
@@ -107,7 +104,7 @@ public class TrainingTests
         training.AddDetails(_fixture.Create<string>(), _fixture.Create<string>(),
             _fixture.Create<string>(), _fixture.Create<string>(), language);
         var action = () => training.UpdateDetails(newTitle, _fixture.Create<string>(),
-            _fixture.Create<string>(),_fixture.Create<string>(), language);
+            _fixture.Create<string>(), _fixture.Create<string>(), language);
 
 
         action.Should().NotThrow<Exception>();
@@ -115,7 +112,6 @@ public class TrainingTests
         training.Details.FirstOrDefault(details => details.Language == language).Should().NotBeNull();
         training.Details.FirstOrDefault(details => details.Language == language)!.Title.Should().Be(newTitle);
     }
-
 
     [Fact]
     public void StartsInDraft()
@@ -127,14 +123,13 @@ public class TrainingTests
         training.StatusType.Should().Be(TrainingStatusType.Draft);
     }
 
-
     [Fact]
     public void StatusCanBeAutoValidated()
     {
         var trainer = TrainerFactory.CreateClean();
         var training = TrainingFactory.CreateWithAutoValidation(trainer);
 
-        training.UpdateDetails("Hello", "My Goal", "A methodology", "practical modalities",Language.Create("FR").Value);
+        training.UpdateDetails("Hello", "My Goal", "A methodology", "practical modalities", Language.Create("FR").Value);
         var result = training.ChangeStatus(TrainingStatusType.Published);
 
         result.IsSuccess.Should().BeTrue();
@@ -171,13 +166,13 @@ public class TrainingTests
         (
             trainer
             , new TrainingLocalizedDetailsDto(_fixture.Create<string>(), null, "FR", null, null)
-            , new List<VatExemptionType> {VatExemptionType.Professional}
-            , new List<AttendanceType> {AttendanceType.Single}
-            , new List<TargetAudienceType> {TargetAudienceType.Employee}
-            , new List<Topic> {Topic.Communication}
+            , new List<VatExemptionType> { VatExemptionType.Professional }
+            , new List<AttendanceType> { AttendanceType.Single }
+            , new List<TargetAudienceType> { TargetAudienceType.Employee }
+            , new List<Topic> { Topic.Communication }
         );
 
-        training.SwitchAttendanceTypes(new List<AttendanceType> {AttendanceType.Group});
+        training.SwitchAttendanceTypes(new List<AttendanceType> { AttendanceType.Group });
 
         training.Attendances.Should().ContainSingle();
         training.Attendances.Select(trainingAttendance => trainingAttendance.AttendanceType).First().Should()

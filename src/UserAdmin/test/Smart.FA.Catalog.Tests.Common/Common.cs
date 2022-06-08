@@ -1,6 +1,12 @@
-﻿using MediatR;
+﻿using AutoFixture;
+using MediatR;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
+using Smart.FA.Catalog.Core.Domain;
+using Smart.FA.Catalog.Core.Domain.Models;
+using Smart.FA.Catalog.Core.Domain.User.Enumerations;
+using Smart.FA.Catalog.Core.Domain.ValueObjects;
+using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Infrastructure.Services;
 
 namespace Smart.FA.Catalog.Tests.Common;
@@ -18,5 +24,34 @@ public static class DomainEventPublisherFactory
     public static DomainEventPublisher Create()
     {
         return Substitute.For<DomainEventPublisher>(LoggerFactory.Create<DomainEventPublisher>(), Substitute.For<IPublisher>());
+    }
+}
+
+public static class UserIdentityFactory
+{
+    private static Fixture _fixture = new();
+
+    public static IUserIdentity Create()
+    {
+        return new MockedUserIdentity();
+    }
+
+    class MockedUserIdentity : IUserIdentity
+    {
+        public int Id { get; }
+
+        public CustomIdentity Identity { get; } =
+            new(
+                new(
+                    Name.Create(_fixture.Create<string>()[..20], _fixture.Create<string>()[..20]).Value,
+                    TrainerIdentity.Create(_fixture.Create<short>().ToString(), ApplicationType.Default).Value,
+                    _fixture.Create<string>()[..30], _fixture.Create<string>()[..30],
+                    Language.Create(_fixture.Create<string>()[..2]).Value
+                )
+            );
+
+        public Trainer CurrentTrainer { get; }
+
+        public bool IsSuperUser { get; }
     }
 }

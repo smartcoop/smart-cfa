@@ -1,10 +1,8 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture;
 using FluentAssertions;
-using Microsoft.Data.SqlClient;
 using Smart.FA.Catalog.Infrastructure.Persistence.Read;
 using Smart.FA.Catalog.Infrastructure.Persistence.Write;
 using Smart.FA.Catalog.IntegrationTests.Base;
@@ -13,10 +11,10 @@ using Xunit;
 
 namespace Smart.FA.Catalog.IntegrationTests.Repositories;
 
-[Collection("Integration test collection")]
+[Collection(IntegrationTestCollections.Default)]
 public class TrainerRepositoryTests : IntegrationTestBase
 {
-    private TrainerQueries _trainerQueries = new(Connection.Catalog.ConnectionString);
+    private readonly TrainerQueries _trainerQueries = new(Connection.Catalog.ConnectionString);
 
     private readonly Fixture _fixture = new();
     [Fact]

@@ -1,25 +1,17 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture;
 using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
 using Smart.FA.Catalog.Application.UseCases.Queries;
-using Smart.FA.Catalog.Core.Domain;
-using Smart.FA.Catalog.Core.Domain.Dto;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
-using Smart.FA.Catalog.Infrastructure.Extensions;
-using Smart.FA.Catalog.Infrastructure.Persistence.Read;
 using Smart.FA.Catalog.IntegrationTests.Base;
 using Smart.FA.Catalog.Shared.Collections;
-using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 using Smart.FA.Catalog.Tests.Common;
 using Xunit;
 
 namespace Smart.FA.Catalog.IntegrationTests.Repositories;
 
-[Collection("Integration test collection")]
+[Collection(IntegrationTestCollections.Default)]
 public class TrainingRepositoryTests : IntegrationTestBase
 {
     private readonly Fixture _fixture = new();

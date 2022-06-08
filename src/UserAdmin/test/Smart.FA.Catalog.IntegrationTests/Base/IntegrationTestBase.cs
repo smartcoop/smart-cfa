@@ -1,32 +1,24 @@
 using System;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Smart.FA.Catalog.Core.Domain;
-using Smart.FA.Catalog.Core.Domain.Models;
-using Smart.FA.Catalog.Core.Domain.User.Enumerations;
-using Smart.FA.Catalog.Core.Domain.ValueObjects;
-using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 using Smart.FA.Catalog.Tests.Common;
 
 namespace Smart.FA.Catalog.IntegrationTests.Base;
 
-public class MockedUserIdentity : IUserIdentity
-{
-    public int Id { get; } = 1;
-    public CustomIdentity Identity { get; } = new(new(Name.Create("Vic", "vD").Value, TrainerIdentity.Create("1", ApplicationType.Default).Value, "Test", "Test", Language.Create("FR").Value));
-    public Trainer CurrentTrainer { get; }
-    public bool IsSuperUser { get; }
-}
-
+/// <summary>
+/// Base helper method that every integration tests needs, namely the DBContext <see cref="CatalogContext"/> and connection settings from <see cref="ConnectionSetup"/> for using Queries
+/// Test classes need to inherit from the class in order to be able to use its methods
+/// </summary>
 public class IntegrationTestBase
 {
-    public static ConnectionSetup Connection { get; private set; }
+    protected static ConnectionSetup Connection { get; private set; }
 
     protected static CatalogContext GivenCatalogContext(bool beginTransaction = true)
     {
         var dbOptions = CreateNewContextOptions();
-        var context = new CatalogContext(dbOptions, DomainEventPublisherFactory.Create(), new MockedUserIdentity());
+        var context = new CatalogContext(dbOptions, DomainEventPublisherFactory.Create(), UserIdentityFactory.Create());
         if (beginTransaction)
             context.Database.BeginTransaction();
         return context;
@@ -40,18 +32,33 @@ public class IntegrationTestBase
             .AddEnvironmentVariables();
 
         var config = builder.Build();
+
         Connection = new ConnectionSetup(config);
-        var connectionString = config.GetConnectionString("Catalog");
-        if (string.IsNullOrWhiteSpace(connectionString))
-            throw new InvalidOperationException(
-                "Could not find a connection string named 'Catalog'.");
 
+        Console.WriteLine(@"Setting SQL provider...");
         var optionsBuilder = new DbContextOptionsBuilder<CatalogContext>();
-        Console.WriteLine("Setting provider");
-
-        optionsBuilder.UseSqlServer(connectionString);
+        optionsBuilder.UseSqlServer(Connection.Catalog.ConnectionString);
         var options = optionsBuilder.Options;
 
         return options;
     }
+}
+
+/// <summary>
+/// Includes all connection strings for databases needed for integration testing
+/// </summary>
+public class ConnectionSetup
+{
+    private readonly IConfigurationRoot _configuration;
+
+    public ConnectionSetup(IConfigurationRoot configuration)
+    {
+        _configuration = configuration;
+    }
+
+    public SqlConnectionStringBuilder Master =>
+        new() { DataSource = Catalog.DataSource, InitialCatalog = "master", IntegratedSecurity = true };
+
+    public SqlConnectionStringBuilder Catalog =>
+        new(_configuration.GetConnectionString("Catalog"));
 }

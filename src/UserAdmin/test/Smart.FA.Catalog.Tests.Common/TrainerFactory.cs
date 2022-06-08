@@ -34,7 +34,7 @@ public static class TrainerFactory
     public static Trainer Create(string firstName, string lastName)
     {
         var fixture = new Fixture();
-        var defaultLanguage = Language.Create(fixture.Create<string>().Substring(0, 2));
+        var defaultLanguage = Language.Create(fixture.Create<string>()[..2]);
         var name = Name.Create(firstName, lastName);
         return new Trainer
         (
