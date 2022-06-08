@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using FluentAssertions;
 using Smart.FA.Catalog.Core.Exceptions;
@@ -17,7 +18,7 @@ public class PagedListTests
     {
         var action = () => new PageItem(1, pageNumber);
 
-        action.Should().Throw<GuardClauseException>();
+        action.Should().Throw<Exception>();
     }
 
     [Theory]
@@ -28,7 +29,7 @@ public class PagedListTests
     {
         var action = () => new PageItem(currentPage, 1);
 
-        action.Should().Throw<GuardClauseException>();
+        action.Should().Throw<Exception>();
     }
 
 

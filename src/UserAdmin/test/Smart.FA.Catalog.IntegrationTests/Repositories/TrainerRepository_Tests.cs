@@ -16,9 +16,9 @@ namespace Smart.FA.Catalog.IntegrationTests.Repositories;
 [Collection("Integration test collection")]
 public class TrainerRepositoryTests : IntegrationTestBase
 {
-    private readonly Fixture _fixture = new();
-    private readonly TrainerQueries _trainerQueries = new(ConnectionSetup.Training.ConnectionString);
+    private TrainerQueries _trainerQueries = new(Connection.Catalog.ConnectionString);
 
+    private readonly Fixture _fixture = new();
     [Fact]
     public async Task GetListFromTrainingId()
     {
@@ -26,12 +26,13 @@ public class TrainerRepositoryTests : IntegrationTestBase
         var trainerRepository = new TrainerRepository(context);
         var trainer = TrainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
         context.Trainers.Attach(trainer);
-        context.SaveChanges();
+        await context.SaveChangesAsync();
         var training = TrainingFactory.Create(trainer);
-        context.Trainings.Add(training);
-        context.SaveChanges();
+        context.Trainings.Attach(training);
+        await context.SaveChangesAsync();
 
         var foundTrainers = await trainerRepository.GetListAsync(training.Id, CancellationToken.None);
+
         foundTrainers.Should().NotBeEmpty();
         foundTrainers.Should().Contain(trainer);
     }
@@ -46,9 +47,7 @@ public class TrainerRepositoryTests : IntegrationTestBase
         context.Trainings.Attach(trainingToAdd);
         await context.SaveChangesAsync();
 
-        var trainers = (await _trainerQueries
-                .GetListAsync(new List<int> {trainingToAdd.Id}, CancellationToken.None))
-            .ToList();
+        var trainers = await _trainerQueries.GetListAsync(new List<int> { trainingToAdd.Id, 2 }, CancellationToken.None);
 
         trainers.Should().NotBeEmpty();
         trainers.Should().Contain(trainer => trainer.Id == trainerToAdd.Id);

@@ -142,19 +142,6 @@ public class TrainingTests
     }
 
     [Fact]
-    public void StatusMustBeManuallyValidated()
-    {
-        var trainer = TrainerFactory.CreateClean();
-        var training = TrainingFactory.CreateWithManualValidation(trainer);
-        training.UpdateDetails("Hello", "My Goal", "A methodology", "practical modalities", Language.Create("FR").Value);
-
-        var result = training.ChangeStatus(TrainingStatusType.Published);
-
-        result.IsSuccess.Should().BeTrue();
-        training.StatusType.Should().Be(TrainingStatusType.WaitingForValidation);
-    }
-
-    [Fact]
     public void HasAlwaysAType()
     {
         var trainer = TrainerFactory.CreateClean();
@@ -204,6 +191,6 @@ public class TrainingTests
 
         var action = () => training.SwitchTargetAudience(null!);
 
-        action.Should().Throw<GuardClauseException>();
+        action.Should().Throw<Exception>();
     }
 }

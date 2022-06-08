@@ -26,7 +26,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Smart.FA.Catalog.Application\Smart.FA.Catalog.Application.csproj" />
-    <ProjectReference Include="..\..\src\Smart.FA.Catalog.Infrastructure\Smart.FA.Catalog.Infrastructure.csproj" />
     <ProjectReference Include="..\Smart.FA.Catalog.Tests.Common\Smart.FA.Catalog.Tests.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.Testing.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

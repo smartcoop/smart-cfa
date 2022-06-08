@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,44 +19,36 @@ public class TestSetup : IntegrationTestBase, IDisposable
 
     public void Dispose()
     {
-        DestroyDatabase();
+         DestroyDatabase();
     }
 
-    private static void CreateDatabase()
+    private void CreateDatabase()
     {
-        ExecuteSqlCommand(ConnectionSetup.Master, $@"
-                CREATE DATABASE [{ConnectionSetup.DatabaseName}]
-                ON (NAME = '{ConnectionSetup.DatabaseName}',
-                FILENAME = '{ConnectionSetup.Filename}')");
-
         using (var context = GivenCatalogContext(beginTransaction: false))
         {
-            context.Database.Migrate();
-            context.SaveChanges();
+            if (!context.Database.CanConnect())
+            {
+                context.Database.EnsureCreated();
+            }
+            else
+            {
+                Console.WriteLine("Test");
+            }
         }
     }
 
-    private static void DestroyDatabase()
+    private void DestroyDatabase()
     {
-        var fileNames = ExecuteSqlQuery(ConnectionSetup.Master, $@"
-                SELECT [physical_name] FROM [sys].[master_files]
-                WHERE [database_id] = DB_ID('{ConnectionSetup.DatabaseName}')",
-            row => (string)row["physical_name"]);
-
-        if (fileNames.Any())
+        using (var context = GivenCatalogContext(beginTransaction: false))
         {
-            ExecuteSqlCommand(ConnectionSetup.Master, $@"
-                    ALTER DATABASE [{ConnectionSetup.DatabaseName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-                    EXEC sp_detach_db '{ConnectionSetup.DatabaseName}'");
-
-            fileNames.ForEach(File.Delete);
+            context.Database.EnsureDeleted();
         }
     }
 
     private static List<T> ExecuteSqlQuery<T>(
-    SqlConnectionStringBuilder connectionStringBuilder,
-    string queryText,
-    Func<SqlDataReader, T> read)
+        SqlConnectionStringBuilder connectionStringBuilder,
+        string queryText,
+        Func<SqlDataReader, T> read)
     {
         var result = new List<T>();
         using (var connection = new SqlConnection(connectionStringBuilder.ConnectionString))
@@ -73,12 +66,13 @@ public class TestSetup : IntegrationTestBase, IDisposable
                 }
             }
         }
+
         return result;
     }
 
     private static void ExecuteSqlCommand(
-      SqlConnectionStringBuilder connectionStringBuilder,
-      string commandText)
+        SqlConnectionStringBuilder connectionStringBuilder,
+        string commandText)
     {
         using (var connection = new SqlConnection(connectionStringBuilder.ConnectionString))
         {

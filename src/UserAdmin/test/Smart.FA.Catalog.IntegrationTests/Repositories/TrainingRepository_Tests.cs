@@ -1,11 +1,15 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture;
 using FluentAssertions;
+using Microsoft.EntityFrameworkCore;
+using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.Dto;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
+using Smart.FA.Catalog.Infrastructure.Extensions;
 using Smart.FA.Catalog.Infrastructure.Persistence.Read;
 using Smart.FA.Catalog.IntegrationTests.Base;
 using Smart.FA.Catalog.Shared.Collections;
@@ -19,42 +23,28 @@ namespace Smart.FA.Catalog.IntegrationTests.Repositories;
 public class TrainingRepositoryTests : IntegrationTestBase
 {
     private readonly Fixture _fixture = new();
-    private readonly TrainingQueries _trainingQueries = new(ConnectionSetup.Training.ConnectionString);
 
     [Fact]
     public async Task GetPaginatedReadOnlyListFromTrainerId()
     {
-        var pageSize = 1;
-        var currentPage = 1;
-        await using var context = GivenCatalogContext(false);
-        var trainerToAdd = TrainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
+        var pagedItem = new PageItem(1, 1);
+        var context = GivenCatalogContext();
+        var trainerToAdd = TrainerFactory.CreateClean();
         context.Trainers.Attach(trainerToAdd);
         var language = Language.Create(_fixture.Create<string>().Substring(0, 2)).Value;
-        var trainingToAdd = new Training
-        (
-            trainerToAdd
-            , new TrainingLocalizedDetailsDto
-            (
-                _fixture.Create<string>(),
-                null,
-                language.Value,
-                null,
-                null
-            )
-            , new List<VatExemptionType> {VatExemptionType.LanguageCourse}
-            , new List<AttendanceType> {AttendanceType.Group}
-            , new List<TargetAudienceType> {TargetAudienceType.Employee}
-            , new List<Topic>() {Topic.Communication}
-        );
-        context.Trainings.Attach(trainingToAdd);
+        for (int trainerCount = 0; trainerCount < 10; trainerCount++)
+        {
+            var trainingToAdd = TrainingFactory.Create(trainerToAdd, language);
+            context.Trainings.Attach(trainingToAdd);
+        }
         await context.SaveChangesAsync();
+        var handler = new GetPagedTrainingListFromTrainerQueryHandler(LoggerFactory.Create<GetPagedTrainingListFromTrainerQueryHandler>(), context);
 
-        var pagedTrainingList = await _trainingQueries
-            .GetPagedListAsync(trainerToAdd.Id, language.Value, new PageItem(currentPage, pageSize),
-                CancellationToken.None);
+        var pagedTrainingList = await handler
+            .Handle(new GetPagedTrainingListFromTrainerRequest { Language = language, PageItem = pagedItem, TrainerId = trainerToAdd.Id }, CancellationToken.None);
 
-        pagedTrainingList.Should().NotBeEmpty();
-        pagedTrainingList.Should().HaveCountLessOrEqualTo(pageSize);
-        pagedTrainingList.Should().HaveCountLessOrEqualTo(pagedTrainingList.TotalCount);
+        pagedTrainingList.Trainings.Should().NotBeEmpty();
+        pagedTrainingList.Trainings.Should().HaveCountLessOrEqualTo(pagedItem.PageSize);
+        pagedTrainingList.Trainings.Should().HaveCountLessOrEqualTo(pagedTrainingList.Trainings.TotalCount);
     }
 }
