@@ -31,7 +31,7 @@ services:
       - "ASPNETCORE_ENVIRONMENT=${DOCKER_ENVIRONMENT}"
   showcase:
     depends_on:
-      - datasource
+      - useradmin
     build:
       context: .
       dockerfile: docker/Showcase.Dockerfile
@@ -43,6 +43,7 @@ services:
       - "cfa"
     environment:
       - "ASPNETCORE_ENVIRONMENT=${DOCKER_ENVIRONMENT}"
+    restart: on-failure
   minio:
     image: quay.io/minio/minio
     hostname: minio
@@ -51,7 +52,7 @@ services:
     networks:
       - "cfa"
     volumes:
-      - /minio/data:/data
+      - /minio/data:/local/data
     ports:
       - "9000:9000"
       - "9001:9001"
