@@ -1,0 +1,34 @@
+{
+  "Trainer": [
+    {
+      "FirstName": "Victor",
+      "LastName": "vD",
+      "Title": "Title",
+      "Description": "My Description",
+      "Language": "FR"
+    },
+    {
+      "FirstName": "Maxime",
+      "LastName": "P",
+      "Title": "Title",
+      "Description": "My Description",
+      "Language": "FR"
+    },
+    {
+      "FirstName": "Maxime",
+      "LastName": "P",
+      "Title": "Title",
+      "Description": "My Description",
+      "Language": "FR"
+    }
+  ],
+  "Training": [
+    {
+      "Title": "Title",
+      "Goal": "My Goal",
+      "Methodology": "My methodology",
+      "Modalities": "My modalities",
+      "Language": "FR"
+    }
+  ]
+}

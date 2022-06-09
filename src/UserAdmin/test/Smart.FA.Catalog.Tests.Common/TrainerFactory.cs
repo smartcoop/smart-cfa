@@ -14,7 +14,7 @@ public static class TrainerFactory
     private static Fixture fixture = new();
     public static Trainer CreateClean()
     {
-        var defaultLanguage = Language.Create(fixture.Create<string>().Substring(0, 2));
+        var defaultLanguage = Language.Create(fixture.Create<string>()[..2]);
         var name = Name.Create(fixture.Create<string>(), fixture.Create<string>());
 
         return new Trainer

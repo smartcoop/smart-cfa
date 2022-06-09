@@ -3,28 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoFixture;
 using FluentAssertions;
-using NSubstitute;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.Dto;
-using Smart.FA.Catalog.Core.Domain.Enumerations;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
-using Smart.FA.Catalog.Core.Exceptions;
-using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 using Smart.FA.Catalog.Tests.Common;
+using Smart.FA.Catalog.UnitTests.Data;
 using Xunit;
 
 namespace Smart.FA.Catalog.UnitTests;
 
 public class TrainingTests
 {
-    private Fixture _fixture = new();
-    private readonly IMailService _mailService;
-
-    public TrainingTests()
-    {
-        _mailService = Substitute.For<IMailService>();
-    }
+    private readonly Fixture _fixture = new();
 
     [Fact]
     public void TrainingHasInitiallyOneTrainer()
@@ -64,8 +55,8 @@ public class TrainingTests
     }
 
     [Theory]
-    [InlineData("Title", "Goal", "Methodology", "PracticalModalities", "FRE")]
-    public void CantAddInvalidDetails(string title, string goal, string methodology, string practicalModalities, string language)
+    [JsonFileData("data.json", "Training")]
+    public void CantAddTrainingWithInvalidDetails(string title, string goal, string methodology, string practicalModalities, string language)
     {
         var trainer = TrainerFactory.CreateClean();
         var training = TrainingFactory.Create(trainer);
@@ -77,7 +68,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void CantAddTwiceSameLanguageDescription()
+    public void CantAddTrainingWithTwiceTheSameLanguageDescription()
     {
         var trainer = TrainerFactory.CreateClean();
         var training = TrainingFactory.Create(trainer);
@@ -94,7 +85,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void CanUpdateLanguageDescription()
+    public void CanUpdateTrainingLanguageDescription()
     {
         var trainer = TrainerFactory.CreateClean();
         var training = TrainingFactory.Create(trainer);
@@ -114,7 +105,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void StartsInDraft()
+    public void TrainingStartsInDraft()
     {
         var trainer = TrainerFactory.CreateClean();
 
@@ -124,7 +115,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void StatusCanBeAutoValidated()
+    public void TrainingStatusCanBeAutoValidated()
     {
         var trainer = TrainerFactory.CreateClean();
         var training = TrainingFactory.CreateWithAutoValidation(trainer);
@@ -137,7 +128,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void HasAlwaysAType()
+    public void TrainingHasAlwaysAType()
     {
         var trainer = TrainerFactory.CreateClean();
 
@@ -148,7 +139,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void HasAlwaysATargetAudience()
+    public void TrainingHasAlwaysATargetAudience()
     {
         var trainer = TrainerFactory.CreateClean();
 
@@ -159,7 +150,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void AttendanceTypeCanBeSwitchedFromSingleToGroup()
+    public void TrainingAttendanceTypeCanBeSwitchedFromSingleToGroup()
     {
         var trainer = TrainerFactory.CreateClean();
         var training = new Training
@@ -180,7 +171,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void CannotBeSwitchedToNullValue()
+    public void TrainingCannotBeSwitchedToNullValue()
     {
         var training = TrainingFactory.CreateClean();
 

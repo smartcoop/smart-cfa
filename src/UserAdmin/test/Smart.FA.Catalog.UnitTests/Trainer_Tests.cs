@@ -6,6 +6,7 @@ using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.User.Enumerations;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
 using Smart.FA.Catalog.Tests.Common;
+using Smart.FA.Catalog.UnitTests.Data;
 using Xunit;
 
 namespace Smart.FA.Catalog.UnitTests;
@@ -23,47 +24,51 @@ public class TrainerTests
     }
 
     [Theory]
-    [InlineData("Victor", "van Duynen", "Developer", "Hello my name is Victor van Duynen", "EN")]
-    public void CanCreateWithValidDescription(string firstName, string lastName, string title, string description, string language)
+    [JsonFileData("data.json", "Trainer")]
+    public void CanCreateTrainerWithValidDescription(string firstName, string lastName, string title, string description, string language, params object[] extra)
     {
-        var action = () => new Trainer(Name.Create(firstName, lastName).Value, TrainerIdentity.Create(_fixture.Create<string>(), ApplicationType.Account).Value, title,description, Language.Create(language).Value);
+        var action = () => new Trainer(Name.Create(firstName, lastName).Value, TrainerIdentity.Create(_fixture.Create<string>(), ApplicationType.Account).Value, title, description,
+            Language.Create(language).Value);
 
         action.Should().NotThrow<Exception>();
     }
 
     [Theory]
-    [InlineData("Victor", "van Duynen", "Developer", "Hello my name is Victor van Duynen", "EN")]
-    public void CanUpdateWithValidDescription(string firstName, string lastName, string title, string description, string language)
+    [JsonFileData("data.json", "Trainer")]
+    public void CanUpdateTrainerWithValidDescription(string firstName, string lastName, string title, string description, string language)
     {
-       var trainer = new Trainer(Name.Create(firstName, lastName).Value, TrainerIdentity.Create(_fixture.Create<string>(), ApplicationType.Account).Value,title, description, Language.Create(language).Value);
-       string updatedDescription = description + "!";
+        var trainer = new Trainer(Name.Create(firstName, lastName).Value, TrainerIdentity.Create(_fixture.Create<string>(), ApplicationType.Account).Value, title, description,
+            Language.Create(language).Value);
+        string updatedDescription = description + "!";
 
-       var action = () => trainer.UpdateBiography(updatedDescription);
+        var action = () => trainer.UpdateBiography(updatedDescription);
 
         action.Should().NotThrow<Exception>();
         trainer.Biography.Should().BeEquivalentTo(updatedDescription);
     }
 
     [Fact]
-    public void CantCreateWithInvalidDescription()
+    public void CantCreateTrainerWithInvalidDescription()
     {
-        var action = () => new Trainer(Name.Create(_fixture.Create<string>(), _fixture.Create<string>()).Value, TrainerIdentity.Create(_fixture.Create<string>(), ApplicationType.Account).Value,_fixture.Create<string>(),string.Concat(Enumerable.Repeat('a', 2001)),  Language.Create(_fixture.Create<string>().Substring(0,2)).Value);
+        var action = () => new Trainer(Name.Create(_fixture.Create<string>(), _fixture.Create<string>()).Value, TrainerIdentity.Create(_fixture.Create<string>(), ApplicationType.Account).Value,
+            _fixture.Create<string>(), string.Concat(Enumerable.Repeat('a', 2001)), Language.Create(_fixture.Create<string>().Substring(0, 2)).Value);
 
         action.Should().Throw<Exception>();
     }
 
     [Fact]
-    public void CantUpdateWithInvalidDescription()
+    public void CantUpdateTrainerWithInvalidDescription()
     {
-        string description = "Hello my name is Victor van Duynen";
-        var trainer = new Trainer(Name.Create("Victor", "van Duynen").Value,
-            TrainerIdentity.Create(_fixture.Create<string>(), ApplicationType.Account).Value, _fixture.Create<string>(), description, Language.Create("EN").Value );
+        string description = _fixture.Create<string>();
+        var trainer = new Trainer(Name.Create(_fixture.Create<string>(), _fixture.Create<string>()).Value,
+            TrainerIdentity.Create(_fixture.Create<string>(), ApplicationType.Account).Value, _fixture.Create<string>(), description, Language.Create(_fixture.Create<string>()[..2]).Value);
 
         var action = () => trainer.UpdateBiography(string.Concat(Enumerable.Repeat('a', 2000)));
 
         action.Should().Throw<Exception>();
         trainer.Biography.Should().BeEquivalentTo(description);
     }
+
     [Fact]
     public void CanAssignInTraining()
     {
@@ -77,15 +82,14 @@ public class TrainerTests
     }
 
     [Fact]
-    public void CanGetUnAssignedFromTraining()
+    public void CanUnAssignTrainerFromTraining()
     {
         var training = TrainingFactory.CreateClean();
-        var trainerToAssign = TrainerFactory.CreateClean();
-        trainerToAssign.AssignTo(training);
+        var trainerToUnAssign = TrainerFactory.CreateClean();
+        trainerToUnAssign.AssignTo(training);
 
-        trainerToAssign.UnAssignFrom(training);
+        trainerToUnAssign.UnAssignFrom(training);
 
-        trainerToAssign.Assignments.Should().BeEmpty();
+        trainerToUnAssign.Assignments.Should().BeEmpty();
     }
-
 }
