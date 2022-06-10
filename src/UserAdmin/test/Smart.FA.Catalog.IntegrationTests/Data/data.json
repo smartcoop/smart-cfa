@@ -1,5 +1,5 @@
 {
-  "CreateTrainerFromUserApp": [
+  "ValidTrainerProfile": [
     {
       "UserId": "1234",
       "FirstName": "Test",
@@ -8,13 +8,13 @@
       "Email": "test@gmail.com"
     }
   ],
-  "EditProfileOfTrainer": [
+  "ValidTrainerProfileDescription": [
     {
       "Bio": "A bio",
       "Title": "A title"
     }
   ],
-  "SocialNetworkList": [
+  "ValidSocialNetworks": [
     {
       "1": "www.facebook.com",
       "2": "www.twitter.com"

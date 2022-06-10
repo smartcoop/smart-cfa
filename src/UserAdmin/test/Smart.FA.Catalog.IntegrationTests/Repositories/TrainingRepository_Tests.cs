@@ -37,6 +37,6 @@ public class TrainingRepositoryTests : IntegrationTestBase
 
         pagedTrainingList.Trainings.Should().NotBeEmpty();
         pagedTrainingList.Trainings.Should().HaveCountLessOrEqualTo(pagedItem.PageSize);
-        pagedTrainingList.Trainings.Should().HaveCountLessOrEqualTo(pagedTrainingList.Trainings.TotalCount);
+        pagedTrainingList.Trainings.Should().HaveCountLessOrEqualTo(pagedTrainingList.Trainings!.TotalCount);
     }
 }

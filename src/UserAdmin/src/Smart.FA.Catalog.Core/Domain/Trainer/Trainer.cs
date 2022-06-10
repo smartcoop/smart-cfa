@@ -42,13 +42,14 @@ public class Trainer : Entity, IAggregateRoot
 
     #region Constructors
 
-    public Trainer(Name name, TrainerIdentity identity, string title, string biography, Language defaultLanguage)
+    public Trainer(Name name, TrainerIdentity identity, string title, string biography, Language defaultLanguage, string email)
     {
         Identity = identity;
         ChangeDefaultLanguage(defaultLanguage);
         Rename(name);
         UpdateBiography(biography);
         UpdateTitle(title);
+        ChangeEmail(email);
     }
 
     protected Trainer()

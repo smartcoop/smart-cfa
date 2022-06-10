@@ -25,6 +25,7 @@ public static class MockedTrainerFactory
             , fixture.Create<string>()
             , fixture.Create<string>()
             , defaultLanguage.Value
+            , $"{Guid.NewGuid()}@gmail.com"
         );
     }
 
@@ -39,7 +40,9 @@ public static class MockedTrainerFactory
             , TrainerIdentity.Create(fixture.Create<string>()
                 , ApplicationType.Account).Value
             , fixture.Create<string>()
-            , fixture.Create<string>(), defaultLanguage.Value);
+            , fixture.Create<string>(), defaultLanguage.Value
+            , $"{Guid.NewGuid()}@gmail.com"
+            );
     }
 
     public static Trainer CreateFromUser(UserDto user)
@@ -56,6 +59,8 @@ public static class MockedTrainerFactory
             ).Value
             , fixture.Create<string>()
             , fixture.Create<string>()
-            , defaultLanguage.Value);
+            , defaultLanguage.Value
+            , $"{Guid.NewGuid()}@gmail.com"
+            );
     }
 }

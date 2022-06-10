@@ -14,7 +14,7 @@ namespace Smart.FA.Catalog.IntegrationTests.Base;
 /// </summary>
 public class IntegrationTestBase
 {
-    protected static ConnectionSetup Connection { get; private set; }
+    protected static ConnectionSetup Connection { get; private set; } = null!;
 
     protected static CatalogContext GivenCatalogContext(bool beginTransaction = true)
     {

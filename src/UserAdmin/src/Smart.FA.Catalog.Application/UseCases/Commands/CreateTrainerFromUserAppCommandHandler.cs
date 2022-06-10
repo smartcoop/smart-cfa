@@ -45,6 +45,7 @@ public class
             , string.Empty
             , string.Empty
             , Language.Create("EN").Value
+            , command.User.Email
         );
         _context.Trainers.Add(linkedTrainer);
         await _context.SaveChangesAsync(cancellationToken);

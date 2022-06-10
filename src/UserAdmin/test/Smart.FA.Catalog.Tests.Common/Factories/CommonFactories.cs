@@ -33,10 +33,14 @@ public static class MockedUserIdentityFactory
         public CustomIdentity Identity { get; } =
             new(
                 new(
-                    Name.Create(_fixture.Create<string>()[..20], _fixture.Create<string>()[..20]).Value,
-                    TrainerIdentity.Create(_fixture.Create<short>().ToString(), ApplicationType.Default).Value,
-                    _fixture.Create<string>()[..30], _fixture.Create<string>()[..30],
-                    Language.Create(_fixture.Create<string>()[..2]).Value
+                    Name.Create(_fixture.Create<string>(),
+                        _fixture.Create<string>()).Value,
+                    TrainerIdentity.Create(_fixture.Create<short>().ToString(),
+                        ApplicationType.Default).Value,
+                    _fixture.Create<string>(),
+                    _fixture.Create<string>(),
+                    Language.Create(_fixture.Create<string>()[..2]).Value,
+                    $"{Guid.NewGuid()}@gmail.com"
                 )
             );
 
