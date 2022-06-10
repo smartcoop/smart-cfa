@@ -24,11 +24,7 @@ public class TrainerSocialNetworkConfiguration : IEntityTypeConfiguration<Traine
 
         builder
             .Property(trainerSocialNetwork => trainerSocialNetwork.SocialNetwork)
-            .HasConversion
-            (
-                socialNetwork => socialNetwork.Id,
-                socialNetworkId => SocialNetwork.FromValue(socialNetworkId)
-            ).HasColumnName($"{nameof(SocialNetwork)}Id");
+            .HasColumnName($"{nameof(SocialNetwork)}Id");
 
         builder.Property(trainerSocialNetwork => trainerSocialNetwork.UrlToProfile)
             .HasMaxLength(255);

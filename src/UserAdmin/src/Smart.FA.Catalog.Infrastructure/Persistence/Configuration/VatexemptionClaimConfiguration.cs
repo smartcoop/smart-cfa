@@ -16,7 +16,6 @@ public class VatexemptionClaimConfiguration: IEntityTypeConfiguration<VatExempti
 
 
         builder.Property(e => e.VatExemptionType)
-            .HasConversion(e => e.Id, id => VatExemptionType.FromValue(id))
             .HasColumnName($"{nameof(VatExemptionType)}Id");
 
         builder.ToTable("VatExemptionClaim");
