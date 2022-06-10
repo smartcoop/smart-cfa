@@ -3,9 +3,9 @@ using AutoFixture;
 using Smart.FA.Catalog.Core.Domain.User.Dto;
 using Smart.FA.Catalog.Core.Domain.User.Enumerations;
 
-namespace Smart.FA.Catalog.Tests.Common;
+namespace Smart.FA.Catalog.Tests.Common.Factories;
 
-public static class UserFactory
+public static class MockedUserFactory
 {
     private static Fixture fixture = new();
 

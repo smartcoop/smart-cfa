@@ -5,8 +5,9 @@ using FluentAssertions;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.User.Enumerations;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
+using Smart.FA.Catalog.Tests.Common.Extensions;
+using Smart.FA.Catalog.Tests.Common.Factories;
 using Smart.FA.Catalog.Tests.Common;
-using Smart.FA.Catalog.UnitTests.Data;
 using Xunit;
 
 namespace Smart.FA.Catalog.UnitTests;
@@ -18,7 +19,7 @@ public class TrainerTests
     [Fact]
     public void HasInitiallyNoTraining()
     {
-        var trainer = TrainerFactory.CreateClean();
+        var trainer = MockedTrainerFactory.CreateClean();
 
         trainer.Assignments.Should().BeEmpty();
     }
@@ -72,9 +73,9 @@ public class TrainerTests
     [Fact]
     public void CanAssignInTraining()
     {
-        var otherTrainer = TrainerFactory.CreateClean();
-        var training = TrainingFactory.Create(otherTrainer);
-        var trainerToAssign = TrainerFactory.CreateClean();
+        var otherTrainer = MockedTrainerFactory.CreateClean();
+        var training = MockedTrainingFactory.Create(otherTrainer);
+        var trainerToAssign = MockedTrainerFactory.CreateClean();
 
         trainerToAssign.AssignTo(training);
 
@@ -84,8 +85,8 @@ public class TrainerTests
     [Fact]
     public void CanUnAssignTrainerFromTraining()
     {
-        var training = TrainingFactory.CreateClean();
-        var trainerToUnAssign = TrainerFactory.CreateClean();
+        var training = MockedTrainingFactory.CreateClean();
+        var trainerToUnAssign = MockedTrainerFactory.CreateClean();
         trainerToUnAssign.AssignTo(training);
 
         trainerToUnAssign.UnAssignFrom(training);

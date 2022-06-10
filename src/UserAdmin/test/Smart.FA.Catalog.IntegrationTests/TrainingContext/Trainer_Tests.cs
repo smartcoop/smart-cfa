@@ -1,12 +1,23 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture;
 using FluentAssertions;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using NSubstitute;
+using Smart.FA.Catalog.Application.UseCases.Commands;
 using Smart.FA.Catalog.Core.Domain.User.Dto;
 using Smart.FA.Catalog.Core.Domain.User.Enumerations;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
+using Smart.FA.Catalog.Infrastructure.Helpers;
+using Smart.FA.Catalog.Infrastructure.Services.Options;
 using Smart.FA.Catalog.IntegrationTests.Base;
 using Smart.FA.Catalog.Tests.Common;
+using Smart.FA.Catalog.Tests.Common.Extensions;
+using Smart.FA.Catalog.Tests.Common.Factories;
 using Xunit;
 
 namespace Smart.FA.Catalog.IntegrationTests.TrainingContext;
@@ -21,7 +32,7 @@ public class TrainerTests : IntegrationTestBase
     public async Task CanCreateTrainer(string firstName, string lastName)
     {
         await using var context = GivenCatalogContext();
-        var trainer = TrainerFactory.Create(firstName, lastName);
+        var trainer = MockedTrainerFactory.Create(firstName, lastName);
 
         context.Trainers.Attach(trainer);
         await context.SaveChangesAsync();
@@ -39,7 +50,7 @@ public class TrainerTests : IntegrationTestBase
     public async Task CanChangeTrainerName(string firstName, string lastName)
     {
         await using var context = GivenCatalogContext();
-        var trainer = TrainerFactory.Create(firstName, lastName);
+        var trainer = MockedTrainerFactory.Create(firstName, lastName);
         context.Trainers.Attach(trainer);
         await context.SaveChangesAsync();
         var newName = Name.Create("Maxime", "P.");
@@ -54,8 +65,8 @@ public class TrainerTests : IntegrationTestBase
     public async Task CanCreateFromUser()
     {
         await using var context = GivenCatalogContext();
-        var user = UserFactory.CreateClean();
-        var trainer = TrainerFactory.CreateFromUser(user);
+        var user = MockedUserFactory.CreateClean();
+        var trainer = MockedTrainerFactory.CreateFromUser(user);
 
         context.Trainers.Add(trainer);
         await context.SaveChangesAsync();
@@ -78,7 +89,7 @@ public class TrainerTests : IntegrationTestBase
         {
             string? applicationName = applicationTypeId is null ? null : ApplicationType.FromValue((int)applicationTypeId).Name;
             var user = new UserDto(userId!, _fixture.Create<string>(), _fixture.Create<string>(), applicationName, "victor@victor.com");
-            var trainer = TrainerFactory.CreateFromUser(user);
+            var trainer = MockedTrainerFactory.CreateFromUser(user);
             context.Trainers.Add(trainer);
             await context.SaveChangesAsync();
         };

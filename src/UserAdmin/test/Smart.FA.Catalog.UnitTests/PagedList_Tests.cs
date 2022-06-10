@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using FluentAssertions;
-using Smart.FA.Catalog.Core.Exceptions;
 using Smart.FA.Catalog.Shared.Collections;
 using Xunit;
 

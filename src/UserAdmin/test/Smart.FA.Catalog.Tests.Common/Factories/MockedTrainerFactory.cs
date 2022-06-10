@@ -1,15 +1,12 @@
 using AutoFixture;
-using CSharpFunctionalExtensions;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.User.Dto;
 using Smart.FA.Catalog.Core.Domain.User.Enumerations;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
-using Smart.FA.Catalog.Core.SeedWork;
-using Smart.FA.Catalog.Shared.Domain.Enumerations;
 
-namespace Smart.FA.Catalog.Tests.Common;
+namespace Smart.FA.Catalog.Tests.Common.Factories;
 
-public static class TrainerFactory
+public static class MockedTrainerFactory
 {
     private static Fixture fixture = new();
     public static Trainer CreateClean()

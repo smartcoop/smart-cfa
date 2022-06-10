@@ -7,6 +7,7 @@ using Smart.FA.Catalog.Infrastructure.Persistence.Read;
 using Smart.FA.Catalog.Infrastructure.Persistence.Write;
 using Smart.FA.Catalog.IntegrationTests.Base;
 using Smart.FA.Catalog.Tests.Common;
+using Smart.FA.Catalog.Tests.Common.Factories;
 using Xunit;
 
 namespace Smart.FA.Catalog.IntegrationTests.Repositories;
@@ -22,10 +23,10 @@ public class TrainerRepositoryTests : IntegrationTestBase
     {
         await using var context = GivenCatalogContext();
         var trainerRepository = new TrainerRepository(context);
-        var trainer = TrainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
+        var trainer = MockedTrainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
         context.Trainers.Attach(trainer);
         await context.SaveChangesAsync();
-        var training = TrainingFactory.Create(trainer);
+        var training = MockedTrainingFactory.Create(trainer);
         context.Trainings.Attach(training);
         await context.SaveChangesAsync();
 
@@ -39,9 +40,9 @@ public class TrainerRepositoryTests : IntegrationTestBase
     public async Task GetReadOnlyListFromTrainingId()
     {
         await using var context = GivenCatalogContext(false);
-        var trainerToAdd = TrainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
+        var trainerToAdd = MockedTrainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
         context.Trainers.Attach(trainerToAdd);
-        var trainingToAdd = TrainingFactory.Create(trainerToAdd);
+        var trainingToAdd = MockedTrainingFactory.Create(trainerToAdd);
         context.Trainings.Attach(trainingToAdd);
         await context.SaveChangesAsync();
 
@@ -56,7 +57,7 @@ public class TrainerRepositoryTests : IntegrationTestBase
     {
         await using var context = GivenCatalogContext();
         var trainerRepository = new TrainerRepository(context);
-        var trainer = TrainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
+        var trainer = MockedTrainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
         context.Trainers.Attach(trainer);
         await context.SaveChangesAsync();
 

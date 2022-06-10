@@ -8,7 +8,8 @@ using Smart.FA.Catalog.Core.Domain.Dto;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 using Smart.FA.Catalog.Tests.Common;
-using Smart.FA.Catalog.UnitTests.Data;
+using Smart.FA.Catalog.Tests.Common.Extensions;
+using Smart.FA.Catalog.Tests.Common.Factories;
 using Xunit;
 
 namespace Smart.FA.Catalog.UnitTests;
@@ -20,8 +21,8 @@ public class TrainingTests
     [Fact]
     public void TrainingHasInitiallyOneTrainer()
     {
-        var trainer = TrainerFactory.CreateClean();
-        var training = TrainingFactory.Create(trainer);
+        var trainer = MockedTrainerFactory.CreateClean();
+        var training = MockedTrainingFactory.Create(trainer);
 
         training.TrainerAssignments.Should().ContainSingle();
         training.TrainerAssignments.Select(assignment => assignment.Trainer).FirstOrDefault().Should()
@@ -31,10 +32,10 @@ public class TrainingTests
     [Fact]
     public void CanAddTrainer()
     {
-        var trainerAlpha = TrainerFactory.CreateClean();
-        var training = TrainingFactory.Create(trainerAlpha);
+        var trainerAlpha = MockedTrainerFactory.CreateClean();
+        var training = MockedTrainingFactory.Create(trainerAlpha);
 
-        var trainerBeta = TrainerFactory.CreateClean();
+        var trainerBeta = MockedTrainerFactory.CreateClean();
         training.AssignTrainer(trainerBeta);
 
         training.TrainerAssignments.Should().HaveCount(2);
@@ -43,8 +44,8 @@ public class TrainingTests
     [Fact]
     public void CanAddValidDetailsToTraining()
     {
-        var trainer = TrainerFactory.CreateClean();
-        var training = TrainingFactory.Create(trainer);
+        var trainer = MockedTrainerFactory.CreateClean();
+        var training = MockedTrainingFactory.Create(trainer);
 
         var action = () => training.AddDetails(_fixture.Create<string>(), _fixture.Create<string>(),
             _fixture.Create<string>(), _fixture.Create<string>(),
@@ -58,8 +59,8 @@ public class TrainingTests
     [JsonFileData("data.json", "Training")]
     public void CantAddTrainingWithInvalidDetails(string title, string goal, string methodology, string practicalModalities, string language)
     {
-        var trainer = TrainerFactory.CreateClean();
-        var training = TrainingFactory.Create(trainer);
+        var trainer = MockedTrainerFactory.CreateClean();
+        var training = MockedTrainingFactory.Create(trainer);
 
         var action = () => training.AddDetails(title, goal, methodology, practicalModalities, Language.Create(language).Value);
 
@@ -70,8 +71,8 @@ public class TrainingTests
     [Fact]
     public void CantAddTrainingWithTwiceTheSameLanguageDescription()
     {
-        var trainer = TrainerFactory.CreateClean();
-        var training = TrainingFactory.Create(trainer);
+        var trainer = MockedTrainerFactory.CreateClean();
+        var training = MockedTrainingFactory.Create(trainer);
         var language = Language.Create(_fixture.Create<string>().Substring(0, 2)).Value;
 
 
@@ -87,8 +88,8 @@ public class TrainingTests
     [Fact]
     public void CanUpdateTrainingLanguageDescription()
     {
-        var trainer = TrainerFactory.CreateClean();
-        var training = TrainingFactory.Create(trainer);
+        var trainer = MockedTrainerFactory.CreateClean();
+        var training = MockedTrainingFactory.Create(trainer);
         var language = Language.Create(_fixture.Create<string>().Substring(0, 2)).Value;
         var newTitle = _fixture.Create<string>();
 
@@ -107,9 +108,9 @@ public class TrainingTests
     [Fact]
     public void TrainingStartsInDraft()
     {
-        var trainer = TrainerFactory.CreateClean();
+        var trainer = MockedTrainerFactory.CreateClean();
 
-        var training = TrainingFactory.Create(trainer);
+        var training = MockedTrainingFactory.Create(trainer);
 
         training.StatusType.Should().Be(TrainingStatusType.Draft);
     }
@@ -117,8 +118,8 @@ public class TrainingTests
     [Fact]
     public void TrainingStatusCanBeAutoValidated()
     {
-        var trainer = TrainerFactory.CreateClean();
-        var training = TrainingFactory.CreateWithAutoValidation(trainer);
+        var trainer = MockedTrainerFactory.CreateClean();
+        var training = MockedTrainingFactory.CreateWithAutoValidation(trainer);
 
         training.UpdateDetails("Hello", "My Goal", "A methodology", "practical modalities", Language.Create("FR").Value);
         var result = training.ChangeStatus(TrainingStatusType.Published);
@@ -130,9 +131,9 @@ public class TrainingTests
     [Fact]
     public void TrainingHasAlwaysAType()
     {
-        var trainer = TrainerFactory.CreateClean();
+        var trainer = MockedTrainerFactory.CreateClean();
 
-        var training = TrainingFactory.Create(trainer);
+        var training = MockedTrainingFactory.Create(trainer);
 
         training.VatExemptionClaims.Should().NotBeNull();
         training.VatExemptionClaims.Should().NotBeEmpty();
@@ -141,9 +142,9 @@ public class TrainingTests
     [Fact]
     public void TrainingHasAlwaysATargetAudience()
     {
-        var trainer = TrainerFactory.CreateClean();
+        var trainer = MockedTrainerFactory.CreateClean();
 
-        var training = TrainingFactory.Create(trainer);
+        var training = MockedTrainingFactory.Create(trainer);
 
         training.Targets.Should().NotBeNull();
         training.Targets.Should().NotBeEmpty();
@@ -152,7 +153,7 @@ public class TrainingTests
     [Fact]
     public void TrainingAttendanceTypeCanBeSwitchedFromSingleToGroup()
     {
-        var trainer = TrainerFactory.CreateClean();
+        var trainer = MockedTrainerFactory.CreateClean();
         var training = new Training
         (
             trainer
@@ -173,7 +174,7 @@ public class TrainingTests
     [Fact]
     public void TrainingCannotBeSwitchedToNullValue()
     {
-        var training = TrainingFactory.CreateClean();
+        var training = MockedTrainingFactory.CreateClean();
 
         var action = () => training.SwitchTargetAudience(null!);
 

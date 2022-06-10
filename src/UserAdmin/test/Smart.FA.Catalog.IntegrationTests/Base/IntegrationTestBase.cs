@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 using Smart.FA.Catalog.Tests.Common;
+using Smart.FA.Catalog.Tests.Common.Factories;
 
 namespace Smart.FA.Catalog.IntegrationTests.Base;
 
@@ -18,7 +19,7 @@ public class IntegrationTestBase
     protected static CatalogContext GivenCatalogContext(bool beginTransaction = true)
     {
         var dbOptions = CreateNewContextOptions();
-        var context = new CatalogContext(dbOptions, DomainEventPublisherFactory.Create(), UserIdentityFactory.Create());
+        var context = new CatalogContext(dbOptions, MockedDomainEventPublisherFactory.Create(), MockedUserIdentityFactory.Create());
         if (beginTransaction)
             context.Database.BeginTransaction();
         return context;

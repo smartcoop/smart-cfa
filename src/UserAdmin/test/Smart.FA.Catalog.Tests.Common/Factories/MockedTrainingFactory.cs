@@ -1,13 +1,12 @@
 using AutoFixture;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.Dto;
-using Smart.FA.Catalog.Core.Domain.Enumerations;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
-namespace Smart.FA.Catalog.Tests.Common;
+namespace Smart.FA.Catalog.Tests.Common.Factories;
 
-public static class TrainingFactory
+public static class MockedTrainingFactory
 {
     private static Fixture fixture = new();
 
@@ -26,7 +25,7 @@ public static class TrainingFactory
 
     public static Training CreateClean()
     {
-        return Create(TrainerFactory.CreateClean());
+        return Create(MockedTrainerFactory.CreateClean());
     }
 
     public static Training CreateWithManualValidation(Trainer trainer)

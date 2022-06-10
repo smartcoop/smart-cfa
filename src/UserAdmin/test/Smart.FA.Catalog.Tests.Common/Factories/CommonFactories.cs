@@ -9,9 +9,9 @@ using Smart.FA.Catalog.Core.Domain.ValueObjects;
 using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Infrastructure.Services;
 
-namespace Smart.FA.Catalog.Tests.Common;
+namespace Smart.FA.Catalog.Tests.Common.Factories;
 
-public static class LoggerFactory
+public static class MockedLoggerFactory
 {
     public static ILogger<T> Create<T>()
     {
@@ -19,15 +19,15 @@ public static class LoggerFactory
     }
 }
 
-public static class DomainEventPublisherFactory
+public static class MockedDomainEventPublisherFactory
 {
     public static DomainEventPublisher Create()
     {
-        return Substitute.For<DomainEventPublisher>(LoggerFactory.Create<DomainEventPublisher>(), Substitute.For<IPublisher>());
+        return Substitute.For<DomainEventPublisher>(MockedLoggerFactory.Create<DomainEventPublisher>(), Substitute.For<IPublisher>());
     }
 }
 
-public static class UserIdentityFactory
+public static class MockedUserIdentityFactory
 {
     private static Fixture _fixture = new();
 
