@@ -25,7 +25,7 @@ public class Trainer : Entity, IAggregateRoot
 
     public string? Email { get; private set; }
 
-    public string? ProfileImagePath { get; set; }
+    public string? ProfileImagePath { get; set; } = null!;
 
     public Language DefaultLanguage { get; private set; } = null!;
 
