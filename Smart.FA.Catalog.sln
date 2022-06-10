@@ -124,6 +124,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "compose", "compose", "{694A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.Showcase.Infrastructure.Tests", "src\Showcase\test\Smart.FA.Catalog.Showcase.Infrastructure.Tests\Smart.FA.Catalog.Showcase.Infrastructure.Tests.csproj", "{17634CDE-4641-4C03-A32C-135658339BE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.FA.Catalog.E2ETests", "src\UserAdmin\test\Smart.FA.Catalog.E2ETests\Smart.FA.Catalog.E2ETests.csproj", "{E523D7E7-9CC3-4787-A35F-EC687D8507FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -190,6 +192,10 @@ Global
 		{17634CDE-4641-4C03-A32C-135658339BE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17634CDE-4641-4C03-A32C-135658339BE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17634CDE-4641-4C03-A32C-135658339BE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E523D7E7-9CC3-4787-A35F-EC687D8507FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E523D7E7-9CC3-4787-A35F-EC687D8507FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E523D7E7-9CC3-4787-A35F-EC687D8507FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E523D7E7-9CC3-4787-A35F-EC687D8507FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -224,6 +230,7 @@ Global
 		{5A9FEC67-6FBA-4DB4-96B3-74DD28096403} = {5C8DDEDB-9212-4B54-A111-75254BE1C65F}
 		{694A39BC-7BFA-43D5-8B7C-29718E79629B} = {AF8FF0D7-F857-4162-832F-EB145EA461DA}
 		{17634CDE-4641-4C03-A32C-135658339BE7} = {AA37D759-F348-4337-92CB-6515A1049B20}
+		{E523D7E7-9CC3-4787-A35F-EC687D8507FC} = {D485BE00-A082-47D7-827D-0FD646807006}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D2F2190D-B4DE-48B8-B87C-7AA80A91538E}
