@@ -1,4 +1,5 @@
 using FluentValidation;
+using FluentValidation.Results;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -10,6 +11,7 @@ using Smart.FA.Catalog.Infrastructure.Helpers;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 using Smart.FA.Catalog.Infrastructure.Services.Options;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer;
+using Smart.FA.Catalog.Shared.Helper;
 
 namespace Smart.FA.Catalog.Application.UseCases.Commands;
 
@@ -24,7 +26,7 @@ public class EditProfileCommand : IRequest<ProfileEditionResponse>
 
     public string? Title { get; set; }
 
-    public Dictionary<string, string>? Socials { get; set; }
+    public Dictionary<int, string>? Socials { get; set; }
 }
 
 public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, ProfileEditionResponse>
@@ -96,7 +98,7 @@ public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, Pro
         trainer.UpdateTitle(command.Title ?? string.Empty);
         foreach (var commandSocial in command.Socials!)
         {
-            var socialNetwork = SocialNetwork.FromValue(int.Parse(commandSocial.Key));
+            var socialNetwork = SocialNetwork.FromValue(commandSocial.Key);
             var url = commandSocial.Value;
             trainer.SetSocialNetwork(socialNetwork, url);
         }
@@ -155,5 +157,23 @@ public class EditProfileCommandValidator : AbstractValidator<EditProfileCommand>
             .WithMessage(CatalogResources.BioMustBe30Chars)
             .MaximumLength(500)
             .WithMessage(CatalogResources.BioCannotExceed500Chars);
+
+        RuleFor(command => command.Socials).SetValidator(new SocialNetworkValidator());
+    }
+
+    private sealed class SocialNetworkValidator : AbstractValidator<Dictionary<int, string>?>
+    {
+        public SocialNetworkValidator()
+        {
+            RuleForEach(socials => socials)
+                .Custom((socialNetwork, validationContext) =>
+                {
+                    var socialUrl = socialNetwork.Value;
+                    if (!string.IsNullOrWhiteSpace(socialUrl) && !UriHelper.IsValidUrl(socialUrl))
+                    {
+                        validationContext.AddFailure(new ValidationFailure($"Socials[{socialNetwork.Key}]", CatalogResources.InvalidUrl, socialNetwork.Value));
+                    }
+                });
+        }
     }
 }
