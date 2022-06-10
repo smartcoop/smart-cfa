@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Nodes;
-using Newtonsoft.Json.Linq;
 using Xunit.Sdk;
 
-namespace Smart.FA.Catalog.UnitTests.Data;
+namespace Smart.FA.Catalog.Tests.Common.Extensions;
 
 public class JsonFileDataAttribute : DataAttribute
 {
@@ -59,16 +54,15 @@ public class JsonFileDataAttribute : DataAttribute
         if (string.IsNullOrEmpty(_propertyName))
         {
             //whole file is the data
-           yield return JsonSerializer.Deserialize<object[]>(fileData) ??  throw new Exception();
+            yield return JsonSerializer.Deserialize<object[]>(fileData) ?? throw new JsonException();
         }
 
         // Only use the specified property as the data
-        var allData =  JsonNode.Parse(fileData);
-        var data = allData?[_propertyName].AsArray() ?? throw new Exception();
+        var allData = JsonNode.Parse(fileData);
+        var data = allData?[_propertyName]?.AsArray() ?? throw new JsonException();
         foreach (var objectTest in data)
         {
             yield return objectTest!.AsObject().Select(keyvalue => (object?)keyvalue.Value!.ToString()).ToArray()!;
         }
     }
 }
-
