@@ -5,8 +5,8 @@ using Smart.FA.Catalog.Core.Domain.Authorization;
 using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Infrastructure.Extensions;
+using Smart.FA.Catalog.Infrastructure.Persistence.EfCore.Extensions;
 using Smart.FA.Catalog.Infrastructure.Persistence.Extensions;
-using Smart.FA.Catalog.Shared.Domain.Enumerations;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Common;
 
 namespace Smart.FA.Catalog.Infrastructure.Persistence;
@@ -37,6 +37,7 @@ public class CatalogContext : DbContext
         modelBuilder.HasDefaultSchema("Cfa");
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         modelBuilder.ApplyDateTimeConverters();
+        modelBuilder.ApplyConverterOnEnumerations();
     }
 
     public override int SaveChanges(bool acceptAllChangesOnSuccess)
