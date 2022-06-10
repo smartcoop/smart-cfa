@@ -15,7 +15,7 @@ public class TrainerListModel : PageModelBase
     [BindProperty(SupportsGet = true)]
     public int CurrentPage { get; set; } = 1;
 
-    private const int ItemsPerPage = 5;
+    private const int ItemsPerPage = 8;
 
     public TrainerListModel(ITrainerService trainerService, IOptions<MinIOOptions> minIOOptions)
     {
