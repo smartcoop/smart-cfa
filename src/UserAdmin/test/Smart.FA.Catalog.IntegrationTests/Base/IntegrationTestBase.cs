@@ -58,7 +58,7 @@ public class ConnectionSetup
     }
 
     public SqlConnectionStringBuilder Master =>
-        new() { DataSource = Catalog.DataSource, InitialCatalog = "master", IntegratedSecurity = true };
+        new(_configuration.GetConnectionString("Catalog")) { InitialCatalog = "master" };
 
     public SqlConnectionStringBuilder Catalog =>
         new(_configuration.GetConnectionString("Catalog"));
