@@ -1,8 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using Smart.FA.Catalog.Core.SeedWork;
-using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 
 namespace Smart.FA.Catalog.Infrastructure;
@@ -13,10 +11,10 @@ public class DesignTimeContextFactory : IDesignTimeDbContextFactory<CatalogConte
         var basePath = Directory.GetCurrentDirectory();
         var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
         Console.WriteLine($"\nDesignTimeContextFactory.Create(string[]):\n\tBase Path: {basePath}\n\tEnvironmentVariable: {environmentName}");
-        return Create(basePath, environmentName!);
+        return Create(basePath, environmentName!, true);
     }
 
-    private static CatalogContext Create(string basePath, string environmentName, IDomainEventPublisher domainEventPublisher = default, IUserIdentity userIdentity = default)
+    private static CatalogContext Create(string basePath, string environmentName, bool useConsoleLogger)
     {
         const string appSettingsFileName = "appsettings.Infrastructure";
         var builder = new ConfigurationBuilder()
@@ -33,12 +31,11 @@ public class DesignTimeContextFactory : IDesignTimeDbContextFactory<CatalogConte
                 "Could not find a connection string named 'Catalog'.");
 
         var optionsBuilder = new DbContextOptionsBuilder<CatalogContext>();
-        Console.WriteLine("Setting provider");
+        Console.WriteLine($"Setting provider");
 
         optionsBuilder.UseSqlServer(connectionString);
         Console.WriteLine($"\nDesignTimeContextFactory.Create(string):\n\tConnection string: {connectionString}\n");
         var options = optionsBuilder.Options;
-
-        return new CatalogContext(options, domainEventPublisher, userIdentity);
+        return new CatalogContext(options, default, default);
     }
 }
