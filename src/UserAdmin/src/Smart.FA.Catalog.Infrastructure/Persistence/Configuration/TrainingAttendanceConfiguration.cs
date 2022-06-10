@@ -15,7 +15,6 @@ public class TrainingAttendanceConfiguration: IEntityTypeConfiguration<TrainingA
             .HasForeignKey(attendance => attendance.TrainingId);
 
         builder.Property(e => e.AttendanceType)
-            .HasConversion(e => e.Id, id => AttendanceType.FromValue(id))
             .HasColumnName($"{nameof(AttendanceType)}Id");
 
         builder.ToTable("TrainingAttendance");

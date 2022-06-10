@@ -18,7 +18,6 @@ public class TrainingTargetAudienceConfigurations : IEntityTypeConfiguration<Tra
             .HasForeignKey(targetAudience => targetAudience.TrainingId);
 
         builder.Property(target => target.TargetAudienceType)
-            .HasConversion(target => target.Id, id => TargetAudienceType.FromValue(id))
             .HasColumnName($"{nameof(TargetAudienceType)}Id");
     }
 }
