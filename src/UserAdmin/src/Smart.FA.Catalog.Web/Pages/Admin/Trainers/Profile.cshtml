@@ -1,4 +1,5 @@
 ﻿@page "/admin/myprofile"
+@using Microsoft.AspNetCore.Mvc.ModelBinding
 @using Microsoft.Extensions.Localization
 @using Smart.Design.Razor.TagHelpers.Alert
 @using Smart.FA.Catalog.Web.Extensions
@@ -52,7 +53,11 @@
                 {
                     <smart-spacer bottom="Large">
                         <smart-formgroup label="@StringLocalizer[socialVm.Name!]">
-                            <smart-input-group icon="@socialVm.Icon" name="@("social" + "-" + socialVm.SocialNetworkId)" value="@socialVm.Url"></smart-input-group>
+                            <smart-input-group icon="@socialVm.Icon" name="@Model.GetSocialAttributeName(socialVm.SocialNetworkId)" value="@(socialVm.Url)"></smart-input-group>
+                            @if (ModelState[Model.GetSocialAttributeName(socialVm.SocialNetworkId)]?.ValidationState == ModelValidationState.Invalid)
+                            {
+                                <div class="c-form-help-text c-form-help-text--error">@CatalogResources.InvalidUrl</div>
+                            }
                         </smart-formgroup>
                     </smart-spacer>
                 }

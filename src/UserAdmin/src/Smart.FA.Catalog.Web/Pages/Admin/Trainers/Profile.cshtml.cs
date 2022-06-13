@@ -55,17 +55,17 @@ public class ProfileModel : AdminPage
     {
         if (ModelState.IsValid)
         {
-            ParseSocialMedias();
             EditProfileCommand!.TrainerId = UserIdentity.CurrentTrainer.Id;
             var editionResponse = await Mediator.Send(EditProfileCommand);
             EditionSucceeded = !editionResponse.HasErrors();
+            return RedirectToPage();
         }
 
         SetSideMenuItem();
 
         // Page reload from a post, whether the underlying operation was successful or not, requires the social networks list to load again.
-        await LoadSocialsAsync();
-        return EditionSucceeded is true ? RedirectToPage() : Page();
+        ReloadSocials();
+        return Page();
     }
 
     private async Task LoadDataAsync()
@@ -79,19 +79,13 @@ public class ProfileModel : AdminPage
         }
     }
 
-    private async Task LoadSocialsAsync()
+    private void ReloadSocials()
     {
-        var trainerProfile = await Mediator.Send(new GetTrainerProfileQuery(UserIdentity.CurrentTrainer.Id));
-        SocialNetworkViewModels = trainerProfile.Socials.ToSocialViewModels();
-    }
-
-    private void ParseSocialMedias()
-    {
-        // The request gives us a collection of the following key par values for social networks.:
-        // "social-" + [SocialId] + [url value of the profile]
-        EditProfileCommand.Socials = Request.Form
-            .Where(formElement => formElement.Key.StartsWith("social-", StringComparison.OrdinalIgnoreCase))
-            .ToDictionary(key => key.Key.Split("-")[1], value => value.Value.ToString());
+        SocialNetworkViewModels = EditProfileCommand!.Socials!.Select(keyPair => new TrainerProfile.Social()
+        {
+            SocialNetworkId = keyPair.Key,
+            Url = keyPair.Value
+        }).ToSocialViewModels();
     }
 
     public async Task<FileResult?> OnGetLoadImageAsync()
@@ -124,4 +118,6 @@ public class ProfileModel : AdminPage
     }
 
     protected override SideMenuItem GetSideMenuItem() => SideMenuItem.MyProfile;
+
+    internal string GetSocialAttributeName(int socialId) => $"{nameof(EditProfileCommand)}.Socials[{socialId}]";
 }

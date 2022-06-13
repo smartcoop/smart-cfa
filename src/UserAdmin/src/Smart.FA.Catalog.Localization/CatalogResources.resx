@@ -533,4 +533,7 @@
   <data name="ChangeStatusToDraft" xml:space="preserve">
     <value>Lorsque vous passez du statut ‘publié’ au statut ‘brouillon’, votre formation n’est plus visible sur la partie publique du site.</value>
   </data>
+  <data name="InvalidUrl" xml:space="preserve">
+    <value>Addresse invalide</value>
+  </data>
 </root>
