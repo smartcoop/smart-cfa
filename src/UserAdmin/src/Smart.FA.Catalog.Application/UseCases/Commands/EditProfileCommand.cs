@@ -1,5 +1,4 @@
 using FluentValidation;
-using FluentValidation.Results;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -166,13 +165,11 @@ public class EditProfileCommandValidator : AbstractValidator<EditProfileCommand>
         public SocialNetworkValidator()
         {
             RuleForEach(socials => socials)
-                .Custom((socialNetwork, validationContext) =>
+                .OverrideIndexer((_, _, keyValuePair, _) => $"[{keyValuePair.Key}]")
+                .Must(socialNetwork =>
                 {
                     var socialUrl = socialNetwork.Value;
-                    if (!string.IsNullOrWhiteSpace(socialUrl) && !UriHelper.IsValidUrl(socialUrl))
-                    {
-                        validationContext.AddFailure(new ValidationFailure($"Socials[{socialNetwork.Key}]", CatalogResources.InvalidUrl, socialNetwork.Value));
-                    }
+                    return string.IsNullOrWhiteSpace(socialUrl) || UriHelper.IsValidUrl(socialUrl);
                 });
         }
     }
