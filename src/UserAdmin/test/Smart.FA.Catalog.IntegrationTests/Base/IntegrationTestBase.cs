@@ -29,7 +29,7 @@ public class IntegrationTestBase
     {
         var builder = new ConfigurationBuilder()
             .SetBasePath(Environment.CurrentDirectory)
-            .AddJsonFile("appsettings.Testing.json", false)
+            .AddJsonFile("appsettings.json", false)
             .AddEnvironmentVariables();
 
         var config = builder.Build();
