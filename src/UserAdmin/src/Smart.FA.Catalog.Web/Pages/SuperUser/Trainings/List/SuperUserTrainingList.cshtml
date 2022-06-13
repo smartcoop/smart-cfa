@@ -108,29 +108,7 @@
             </div>
 
             <div class="c-toolbar">
-                <div class="c-toolbar__left">
-                    @if (Model.Trainings.HasPreviousPage)
-                    {
-                        <a id="previous" href="@Routes.SuperUserTrainingList?@Model.SerializeHtmlForm()&@(nameof(Model.GetTrainingsRequest.PageNumber))=@(Model.GetTrainingsRequest.PageNumber - 1)">
-                            <div class="o-flex">
-                                <smart-icon icon="ChevronLeft"></smart-icon>@CatalogResources.Previous
-                            </div>
-                        </a>
-                    }
-                </div>
-
-                <div>Page @(Model.Trainings.CurrentPage)/@(Model.Trainings.TotalPages.ToString())</div>
-
-                <div class="c-toolbar__right">
-                    @if (Model.Trainings.HasNextPage)
-                    {
-                        <a id="next" href="@Routes.SuperUserTrainingList?@Model.SerializeHtmlForm()&@(nameof(Model.GetTrainingsRequest.PageNumber))=@(Model.GetTrainingsRequest.PageNumber + 1)">
-                            <div class="o-flex">
-                                @CatalogResources.Next <smart-icon icon="ChevronRight"></smart-icon>
-                            </div>
-                        </a>
-                    }
-                </div>
+                <smart-pagination pagination-settings="Model.PaginationSettings"></smart-pagination>
             </div>
         }
     </smart-spacer>

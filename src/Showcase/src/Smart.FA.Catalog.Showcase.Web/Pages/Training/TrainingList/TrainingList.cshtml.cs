@@ -1,5 +1,6 @@
 #nullable disable
 using Microsoft.AspNetCore.Mvc;
+using Smart.Design.Razor.TagHelpers.Pagination;
 using Smart.FA.Catalog.Shared.Collections;
 using Smart.FA.Catalog.Showcase.Web.Services.Training;
 
@@ -17,6 +18,8 @@ public class TrainingListModel : PageModelBase
 
     public int? TopicId { get; set; }
 
+    public PaginationSettings PaginationSettings { get; set; } = null!;
+
     public TrainingListModel(ITrainingService trainingService)
     {
         _trainingService = trainingService;
@@ -29,6 +32,7 @@ public class TrainingListModel : PageModelBase
         }
 
         Trainings = await _trainingService.SearchTrainingViewModelsAsync(searchKeyword, CurrentPage, ItemsPerPage);
+        SetPaginationSettings(searchKeyword);
         return Page();
     }
 
@@ -41,6 +45,27 @@ public class TrainingListModel : PageModelBase
 
         TopicId = id;
         Trainings = await _trainingService.SearchTrainingViewModelsByTopicIdAsync(id, CurrentPage, ItemsPerPage);
+        SetPaginationSettings(null);
         return Page();
+    }
+
+    private void SetPaginationSettings(string searchKeyword)
+    {
+        PaginationSettings = new PaginationSettings()
+        {
+            PageNumberParameterName = nameof(CurrentPage),
+            NumberOfLinks = 7,
+            TotalPages = Trainings.TotalPages,
+            PageNumber = CurrentPage
+        };
+
+        if (!string.IsNullOrWhiteSpace(searchKeyword))
+        {
+            PaginationSettings.QueryString = $"{nameof(searchKeyword)}={searchKeyword}";
+        }
+        else if(TopicId.HasValue)
+        {
+            PaginationSettings.QueryString = $"id={TopicId.Value}";
+        }
     }
 }

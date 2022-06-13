@@ -1,6 +1,7 @@
 #nullable disable
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Smart.Design.Razor.TagHelpers.Pagination;
 using Smart.FA.Catalog.Showcase.Domain.Common.Enums;
 using Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry.Trainer;
 using Smart.FA.Catalog.Showcase.Web.Services.Trainer;
@@ -22,6 +23,8 @@ public class TrainerDetailsModel : PageModelBase
 
     public InquirySendEmailResult? EmailSendingResult { get; set; }
 
+    public PaginationSettings PaginationSettings { get; set; } = null!;
+
     const int ItemsPerPage = 5;
 
     public TrainerDetailsModel(ITrainerService trainerService, ITrainerInquirySendEmailService trainerInquirySendEmailService)
@@ -32,7 +35,14 @@ public class TrainerDetailsModel : PageModelBase
 
     public async Task<ActionResult> OnGetAsync(int? id)
     {
-        if (id is null || (Trainer = await LoadTrainerDetailsAsync(id.Value)) is null)
+        if (id is null)
+        {
+            return RedirectToNotFound();
+        }
+
+        Trainer = await LoadTrainerDetailsAsync(id.Value);
+
+        if (Trainer is null)
         {
             return RedirectToNotFound();
         }
@@ -44,6 +54,7 @@ public class TrainerDetailsModel : PageModelBase
     private async Task<TrainerDetailsViewModel> LoadTrainerDetailsAsync(int id)
     {
         Trainer = await _trainerService.GetTrainerDetailsViewModelsByIdAsync(id, CurrentPage, ItemsPerPage);
+        SetPaginationSettings();
         return Trainer;
     }
 
@@ -66,5 +77,17 @@ public class TrainerDetailsModel : PageModelBase
     }
 
     private void SetTempDataTrainerId(int trainerId) => TempData[TempDataTrainerIdKey] = trainerId;
+
+    private void SetPaginationSettings()
+    {
+        PaginationSettings = new PaginationSettings()
+        {
+            TotalPages = Trainer.Trainings.TotalPages,
+            PageNumber = CurrentPage,
+            NumberOfLinks = 7,
+            PageNumberParameterName = nameof(CurrentPage),
+            QueryString = $"id={Trainer.Id}"
+        };
+    }
 }
 #nullable enable

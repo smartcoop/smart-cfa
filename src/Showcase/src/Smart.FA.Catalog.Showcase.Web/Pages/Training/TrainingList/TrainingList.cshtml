@@ -53,23 +53,8 @@
 
     @if (Model.Trainings is not null && Model.Trainings.Any())
     {
-        <div class="u-spacer-xl">
-            <div class="c-toolbar">
-                <div class="c-toolbar__left">
-                    @if (Model?.Trainings?.HasPreviousPage ?? false)
-                    {
-                        <a asp-page="@Routes.TrainingList" asp-route-CurrentPage="@(Model.CurrentPage - 1)">@ShowcaseResources.Previous</a>
-                    }
-                </div>
-
-                <div>Page @(Model.CurrentPage)/@(Model?.Trainings?.TotalPages ?? 0)</div>
-                <div class="c-toolbar__right">
-                    @if (Model?.Trainings?.HasNextPage ?? false)
-                    {
-                        <a asp-page="@Routes.TrainingList" asp-route-CurrentPage="@(Model.CurrentPage + 1)">@ShowcaseResources.Next</a>
-                    }
-                </div>
-            </div>
+        <div class="c-toolbar">
+            <smart-pagination pagination-settings="Model.PaginationSettings"></smart-pagination>
         </div>
     }
 </section>
