@@ -38,6 +38,7 @@ public class CatalogContext : DbContext
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         modelBuilder.ApplyDateTimeConverters();
         modelBuilder.ApplyConverterOnEnumerations();
+        modelBuilder.ApplyAutomaticDatabaseColumnNamingOnEnumerations();
     }
 
     public override int SaveChanges(bool acceptAllChangesOnSuccess)

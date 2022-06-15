@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Smart.FA.Catalog.Core.Domain;
-using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
 namespace Smart.FA.Catalog.Infrastructure.Persistence.Configuration;
 
@@ -13,9 +12,6 @@ public class TrainingTopicConfiguration : IEntityTypeConfiguration<TrainingTopic
         builder.HasOne(trainingTopic => trainingTopic.Training)
             .WithMany(training => training.Topics)
             .HasForeignKey(trainingTopic => trainingTopic.TrainingId);
-
-        builder.Property(trainingTopic => trainingTopic.Topic)
-            .HasColumnName("TopicId");
 
         builder.ToTable("TrainingTopic");
     }
