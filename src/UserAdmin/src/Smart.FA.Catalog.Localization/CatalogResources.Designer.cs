@@ -665,7 +665,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cette page n&apos;existe pas.
+        ///   Looks up a localized string similar to mais cette page est introuvable.
         /// </summary>
         public static string PageNotFound {
             get {
@@ -917,7 +917,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Désolé.
+        ///   Looks up a localized string similar to Nous sommes désolés.
         /// </summary>
         public static string Sorry {
             get {
