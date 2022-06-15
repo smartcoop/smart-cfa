@@ -1,4 +1,5 @@
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
+using Smart.FA.Catalog.Core.Exceptions;
 using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Shared.Collections;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer;
@@ -58,47 +59,70 @@ public class Trainer : Entity, IAggregateRoot
 
     #region Methods
 
+    /// <summary>
+    /// Update the biography of the <see cref="Trainer"/>
+    /// </summary>
+    // /// <param name="newBiography">The new biography</param>
     public void UpdateBiography(string newBiography)
     {
         Guard.AgainstNull(newBiography, nameof(newBiography));
-        Guard.Requires(() => newBiography.Length <= 500, "Biography is too long");
+        Guard.Requires(() => newBiography.Length <= 500, Errors.Trainer.BiographyIsTooLong(Id).Message);
 
         Biography = newBiography;
     }
 
+    /// <summary>
+    /// Update the job title of the <see cref="Trainer"/>
+    /// </summary>
+    /// <param name="newTitle">The new job title</param>
     public void UpdateTitle(string newTitle)
     {
         Guard.AgainstNull(newTitle, nameof(newTitle));
-        Guard.Requires(() => newTitle.Length <= 150
-            , "Title is too long");
+        Guard.Requires(() => newTitle.Length <= 150, Errors.Trainer.TitleIsTooLong(Id).Message);
         Title = newTitle;
     }
 
+    /// <summary>
+    /// Update the relative path of the profile image of the <see cref="Trainer"/>
+    /// </summary>
+    /// <param name="profileImagePath">The new relative path of the profile image</param>
     public void UpdateProfileImagePath(string profileImagePath)
     {
         Guard.AgainstNull(profileImagePath, nameof(profileImagePath));
-        Guard.Requires(() => profileImagePath.Length <= 50, "URL for profile path is too long");
+        Guard.Requires(() => profileImagePath.Length <= 50, Errors.Trainer.ProfileImage.UrlTooLong(Id).Message);
         ProfileImagePath = profileImagePath;
     }
 
+    /// <summary>
+    /// Assign a <see cref="Trainer"/> to a <see cref="Training"/>
+    /// </summary>
+    /// <param name="training">The <see cref="Training"/> to assign a <see cref="Trainer"/> to</param>
     public void AssignTo(Training training)
     {
-        Guard.Requires(() => !_assignments.Select(assignment => assignment.Training).Contains(training),
-            "The trainer is already assigned to that training");
+        Guard.Requires(() => !_assignments.Select(assignment => assignment.Training).Contains(training), Errors.Trainer.TrainerAlreadyAssignedToTraining(Id, training.Id).Message);
         _assignments.Add(new TrainerAssignment(training, this));
     }
 
+    /// <summary>
+    /// UnAssign a <see cref="Trainer"/>  from a specific  <see cref="Training"/>
+    /// </summary>
+    /// <param name="training">The <see cref="Training"/> to unAssign a <see cref="Trainer"/> from</param>
     public void UnAssignFrom(Training training)
     {
         var trainingNumberRemoved = _assignments.RemoveAll(assignment => assignment.Training == training);
-        Guard.Ensures(() => trainingNumberRemoved != 0, "The trainer was never assigned to that training");
+        Guard.Ensures(() => trainingNumberRemoved != 0, Errors.Trainer.TrainerNeverAssignedToTraining(Id, training.Id).Message);
     }
 
-    public List<Training> GetTrainings()
-        => Assignments.Any() ? Assignments.Select(assignment => assignment.Training).ToList() : new List<Training>();
-
+    /// <summary>
+    /// Rename the <see cref="Trainer"/> to the new <see cref="Name"/>
+    /// </summary>
+    /// <param name="name">The new name</param>
     public void Rename(Name name) => Name = name;
 
+    /// <summary>
+    /// Update the default language of the <see cref="Trainer"/>
+    /// </summary>
+    /// <param name="language">The new default language of the trainer</param>
     public void ChangeDefaultLanguage(Language language) => DefaultLanguage = language;
 
     /// <summary>
@@ -149,6 +173,7 @@ public class Trainer : Entity, IAggregateRoot
         {
             return;
         }
+
         _approvals.Add(new TrainerApproval(this, userChart!));
     }
 

@@ -1,3 +1,4 @@
+using Smart.FA.Catalog.Core.Exceptions;
 using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Shared.Collections;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer;
@@ -29,7 +30,7 @@ public class TrainerSocialNetwork
 
     public void SetSocialNetworkInfo(int trainerId, SocialNetwork? socialNetwork, string? urlToSocialNetworkProfile)
     {
-        Guard.Requires(() => trainerId != 0, "The trainer cannot be transient");
+        Guard.Requires(() => trainerId != 0, Errors.Trainer.TrainerIsTransient().Message);
         Guard.AgainstNull(socialNetwork, nameof(socialNetwork));
 
         TrainerId     = trainerId;

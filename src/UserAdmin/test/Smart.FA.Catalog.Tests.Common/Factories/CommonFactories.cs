@@ -55,3 +55,13 @@ public static class MockedUserIdentityFactory
         public bool IsSuperUser { get; }
     }
 }
+
+
+public static class MockedUserChartRevisionFactory
+{
+    private static Fixture _fixture = new();
+    public static UserChartRevision Create()
+    {
+        return Substitute.For<UserChartRevision>(_fixture.Create<string>(), _fixture.Create<string>(), _fixture.Create<DateTime>(), _fixture.Create<DateTime>());
+    }
+}
