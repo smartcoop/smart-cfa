@@ -25,10 +25,4 @@
     <ProjectReference Include="..\Smart.FA.Catalog.Tests.Common\Smart.FA.Catalog.Tests.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="Data\data.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-
 </Project>
