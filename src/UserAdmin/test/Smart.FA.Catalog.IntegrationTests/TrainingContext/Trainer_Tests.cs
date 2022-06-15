@@ -28,7 +28,7 @@ public class TrainerTests : IntegrationTestBase
     private readonly Fixture _fixture = new();
 
     [Theory]
-    [InlineData("Victor", "vD")]
+    [JsonFileData("data.json", "TrainerName")]
     public async Task CanCreateTrainer(string firstName, string lastName)
     {
         await using var context = GivenCatalogContext();
@@ -46,7 +46,7 @@ public class TrainerTests : IntegrationTestBase
     }
 
     [Theory]
-    [InlineData("Victor", "vD")]
+    [JsonFileData("data.json", "TrainerName")]
     public async Task CanChangeTrainerName(string firstName, string lastName)
     {
         await using var context = GivenCatalogContext();

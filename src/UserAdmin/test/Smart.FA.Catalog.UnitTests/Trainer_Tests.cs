@@ -74,7 +74,7 @@ public class TrainerTests
 
         var action = () => trainer.UpdateBiography(newBiography);
 
-        action.Should().Throw<Exception>().WithMessage(Errors.Trainer.BiographyIsTooLong(trainer.Id).Message);
+        action.Should().Throw<Exception>().WithMessage(Errors.Trainer.BiographyIsTooLong(trainer.Id, newBiography.Length, 500).Message);
     }
 
     [Fact]
@@ -85,7 +85,7 @@ public class TrainerTests
 
         var action = () => trainer.UpdateTitle(newTitle);
 
-        action.Should().Throw<Exception>(Errors.Trainer.TitleIsTooLong(trainer.Id).Message);
+        action.Should().Throw<Exception>(Errors.Trainer.TitleIsTooLong(trainer.Id, newTitle.Length, 150).Message);
     }
 
     [Fact]
@@ -96,7 +96,7 @@ public class TrainerTests
 
         var action = () => trainer.UpdateProfileImagePath(newUrl);
 
-        action.Should().Throw<Exception>(Errors.Trainer.ProfileImage.UrlTooLong(trainer.Id).Message);
+        action.Should().Throw<Exception>(Errors.Trainer.ProfileImage.UrlTooLong(trainer.Id, newUrl.Length, 50).Message);
     }
 
     [Fact]

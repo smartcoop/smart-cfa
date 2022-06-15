@@ -1,5 +1,4 @@
 using System;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Smart.FA.Catalog.Infrastructure.Persistence;
@@ -43,23 +42,4 @@ public class IntegrationTestBase
 
         return options;
     }
-}
-
-/// <summary>
-/// Includes all connection strings for databases needed for integration testing
-/// </summary>
-public class ConnectionSetup
-{
-    private readonly IConfigurationRoot _configuration;
-
-    public ConnectionSetup(IConfigurationRoot configuration)
-    {
-        _configuration = configuration;
-    }
-
-    public SqlConnectionStringBuilder Master =>
-        new(_configuration.GetConnectionString("Catalog")) { InitialCatalog = "master" };
-
-    public SqlConnectionStringBuilder Catalog =>
-        new(_configuration.GetConnectionString("Catalog"));
 }

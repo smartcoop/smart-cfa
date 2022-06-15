@@ -19,5 +19,11 @@
       "1": "www.facebook.com",
       "2": "www.twitter.com"
     }
+  ],
+  "TrainerName": [
+    {
+      "FirstName": "Victor",
+      "LastName": "vD"
+    }
   ]
 }
