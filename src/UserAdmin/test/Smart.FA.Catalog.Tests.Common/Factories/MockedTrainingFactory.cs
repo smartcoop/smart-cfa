@@ -15,7 +15,7 @@ public static class MockedTrainingFactory
         return new Training
         (
             trainer
-            , new TrainingLocalizedDetailsDto(fixture.Create<string>(), null, language?.Value ?? Language.Create("FR").Value.Value, null, null)
+            , new TrainingLocalizedDetailsDto(fixture.Create<string>(), fixture.Create<string>(), language?.Value ?? Language.Create("FR").Value.Value, fixture.Create<string>(), fixture.Create<string>())
             , new List<VatExemptionType> {VatExemptionType.Professional}
             , new List<AttendanceType> {AttendanceType.Group}
             , new List<TargetAudienceType> {TargetAudienceType.Employee}
@@ -33,7 +33,7 @@ public static class MockedTrainingFactory
         return new Training
         (
             trainer
-            , new TrainingLocalizedDetailsDto(fixture.Create<string>(), null, "FR", null, null)
+            , new TrainingLocalizedDetailsDto(fixture.Create<string>(), fixture.Create<string>(), "FR", fixture.Create<string>(), fixture.Create<string>())
             , new List<VatExemptionType> {VatExemptionType.Professional}
             , new List<AttendanceType> {AttendanceType.Group}
             , new List<TargetAudienceType> {TargetAudienceType.Employee}
@@ -46,7 +46,7 @@ public static class MockedTrainingFactory
         return new Training
         (
             trainer
-            , new TrainingLocalizedDetailsDto(fixture.Create<string>(), null, "FR", null, null)
+            , new TrainingLocalizedDetailsDto(fixture.Create<string>(), fixture.Create<string>(), "FR", fixture.Create<string>(), fixture.Create<string>())
             , new List<VatExemptionType> {VatExemptionType.LanguageCourse}
             , new List<AttendanceType> {AttendanceType.Group}
             , new List<TargetAudienceType> {TargetAudienceType.Employee}
