@@ -17,7 +17,7 @@ public class TrainerTests
     private readonly Fixture _fixture = new();
 
     [Fact]
-    public void InstantiatingATrainerShouldStartWithNoAssignment()
+    public void InstantiatingATrainer_ShouldStartWithEmptyAssignment()
     {
         var trainer = MockedTrainerFactory.CreateClean();
 
@@ -26,7 +26,7 @@ public class TrainerTests
 
     [Theory]
     [InlineData("A super biography")]
-    public void UpdatingATrainerWithValidBiographyShouldNotThrowExceptionAndUpdateTrainer(string biography)
+    public void UpdatingTrainer_WithValidBiography_ShouldNotThrowExceptionAndUpdateTrainer(string biography)
     {
         var trainer = MockedTrainerFactory.CreateClean();
 
@@ -37,7 +37,7 @@ public class TrainerTests
     }
 
     [Fact]
-    public void UpdatingATrainingWithNullBiographyShouldThrowException()
+    public void UpdatingTrainer_WithNullBiography_ShouldThrowException()
     {
         var trainer = MockedTrainerFactory.CreateClean();
 
@@ -47,7 +47,7 @@ public class TrainerTests
     }
 
     [Fact]
-    public void UpdatingATrainingWithNullTitleShouldThrowException()
+    public void UpdatingTrainer_WithNullTitle_ShouldThrowException()
     {
         var trainer = MockedTrainerFactory.CreateClean();
 
@@ -57,7 +57,7 @@ public class TrainerTests
     }
 
     [Fact]
-    public void UpdatingATrainingWithNullProfileUrlShouldThrowException()
+    public void UpdatingTrainer_WithNullProfileUrl_ShouldThrowException()
     {
         var trainer = MockedTrainerFactory.CreateClean();
 
@@ -67,7 +67,7 @@ public class TrainerTests
     }
 
     [Fact]
-    public void UpdatingATrainingWithBiographyTooBigShouldThrowException()
+    public void UpdatingTrainer_WithBiographyTooBig_ShouldThrowException()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var newBiography = string.Concat(Enumerable.Repeat('a', 501));
@@ -78,7 +78,7 @@ public class TrainerTests
     }
 
     [Fact]
-    public void UpdatingATrainingWithTitleTooBigShouldThrowException()
+    public void UpdatingTrainer_WithTitleTooBig_ShouldThrowException()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var newTitle = string.Concat(Enumerable.Repeat('a', 151));
@@ -89,7 +89,7 @@ public class TrainerTests
     }
 
     [Fact]
-    public void UpdatingATrainingWithProfileUrlTooBigShouldThrowException()
+    public void UpdatingTrainer_WithProfileUrlTooBig_ShouldThrowException()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var newUrl = string.Concat(Enumerable.Repeat('a', 51));
@@ -100,7 +100,7 @@ public class TrainerTests
     }
 
     [Fact]
-    public void UpdatingATrainingWithValidProfileUrlShouldSucceed()
+    public void UpdatingTrainer_WithValidProfileUrl_ShouldSucceed()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var newUrl = _fixture.Create<string>();
@@ -112,7 +112,7 @@ public class TrainerTests
     }
 
     [Fact]
-    public void UpdatingATrainingWithValidShouldSucceed()
+    public void UpdatingTrainer_WithValidTitle_ShouldSucceed()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var newTitle = _fixture.Create<string>();
@@ -125,7 +125,7 @@ public class TrainerTests
 
 
     [Fact]
-    public void RenamingATrainerShouldSucceed()
+    public void RenamingTrainer_ShouldSucceed()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var newName = Name.Create("test_firstName", "test_lastName").Value;
@@ -136,7 +136,7 @@ public class TrainerTests
     }
 
     [Fact]
-    public void ChangingDefaultLanguageOfATrainerShouldSucceed()
+    public void ChangingDefaultLanguageOfTrainer_ShouldSucceed()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var newLanguage = Language.Create("PT").Value;
@@ -147,7 +147,7 @@ public class TrainerTests
     }
 
     [Fact]
-    public void UpdatingATrainerWithInvalidBiographyShouldThrowException()
+    public void UpdatingTrainer_WithInvalidBiography_ShouldThrowException()
     {
         var description = _fixture.Create<string>();
         var trainer = new Trainer(Name.Create(_fixture.Create<string>(), _fixture.Create<string>()).Value,
@@ -159,7 +159,7 @@ public class TrainerTests
     }
 
     [Fact]
-    public void AssigningATrainerToTheSameTrainingTwiceShouldThrowException()
+    public void AssigningTrainer_ToTheSameTrainingTwice_ShouldThrowException()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var training = MockedTrainingFactory.Create(trainer);
@@ -171,7 +171,7 @@ public class TrainerTests
     }
 
     [Fact]
-    public void AssigningATrainerShouldAssignItToATraining()
+    public void AssigningTrainer_ShouldAssignItToTraining()
     {
         var otherTrainer = MockedTrainerFactory.CreateClean();
         var training = MockedTrainingFactory.Create(otherTrainer);
@@ -183,7 +183,7 @@ public class TrainerTests
     }
 
     [Fact]
-    public void UnAssigningATrainerFromATrainingShouldSucceed()
+    public void UnAssigningTrainerFromTraining_ShouldSucceed()
     {
         var training = MockedTrainingFactory.CreateClean();
         var trainerToUnAssign = MockedTrainerFactory.CreateClean();
@@ -195,7 +195,7 @@ public class TrainerTests
     }
 
     [Fact]
-    public void ApprovingNullUserChartShouldThrowException()
+    public void ApprovingNullUserChart_ShouldThrowException()
     {
         var trainerToUnAssign = MockedTrainerFactory.CreateClean();
 
@@ -205,7 +205,7 @@ public class TrainerTests
     }
 
     [Fact]
-    public void ApprovingTheSameUserChartForTrainerShouldNotThrowException()
+    public void ApprovingSameUserChartForTrainer_ShouldNotThrowException()
     {
         var trainerToUnAssign = MockedTrainerFactory.CreateClean();
         var userChartRevision = MockedUserChartRevisionFactory.Create();
@@ -217,7 +217,7 @@ public class TrainerTests
     }
 
     [Fact]
-    public void ChangingTrainerWithEmailShouldSucceed()
+    public void ChangingTrainerWithEmail_ShouldSucceed()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var email = "test@gmail.com";
@@ -229,7 +229,7 @@ public class TrainerTests
     }
 
     [Fact]
-    public void ChangingTrainerWithNullEmailShouldThrowException()
+    public void ChangingTrainerWithNullEmail_ShouldThrowException()
     {
         var trainer = MockedTrainerFactory.CreateClean();
 
@@ -240,7 +240,7 @@ public class TrainerTests
 
     [Theory]
     [InlineData("&é&é&@gmail.com")]
-    public void ChangingTrainerWithInvalidEmailShouldThrowException(string email)
+    public void ChangingTrainerWithInvalidEmail_ShouldThrowException(string email)
     {
         var trainer = MockedTrainerFactory.CreateClean();
 
@@ -250,7 +250,7 @@ public class TrainerTests
     }
 
     [Fact]
-    public void SettingNewSocialNetworkToTrainerShouldSucceed()
+    public void SettingNewSocialNetworkToTrainer_ShouldSucceed()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         trainer.Id = 1;
@@ -264,7 +264,7 @@ public class TrainerTests
     }
 
     [Fact]
-    public void SettingExistingSocialNetworkToTrainerShouldSucceedAndUpdateUrl()
+    public void SettingExistingSocialNetworkToTrainer_ShouldSucceedAndUpdateUrl()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         trainer.Id = 1;
@@ -281,7 +281,7 @@ public class TrainerTests
     }
 
     [Fact]
-    public void SettingExistingSocialNetworkWithNullUrlToProfileToTrainerShouldSucceedAndRemoveSocialNetwork()
+    public void SettingExistingSocialNetwork_WithNullUrlToProfileToTrainer_ShouldSucceedAndRemoveSocialNetwork()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         trainer.Id = 1;
@@ -296,7 +296,7 @@ public class TrainerTests
     }
 
     [Fact]
-    public void SettingNewSocialNetworkToTransientTrainerShouldThrowException()
+    public void SettingNewSocialNetworkToTransientTrainer_ShouldThrowException()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var socialNetwork = SocialNetwork.Twitter;
@@ -308,7 +308,7 @@ public class TrainerTests
     }
 
     [Fact]
-    public void SettingNullSocialNetworkToTrainerShouldThrowException()
+    public void SettingNullSocialNetworkToTrainer_ShouldThrowException()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         trainer.Id = 1;

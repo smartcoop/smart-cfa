@@ -18,7 +18,7 @@ public class TrainingTests
     private readonly Fixture _fixture = new();
 
     [Fact]
-    public void InstantiatingATrainingShouldRequireAtLeastOneTrainer()
+    public void InstantiatingTraining_ShouldRequireAtLeastOneTrainer()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var training = MockedTrainingFactory.Create(trainer);
@@ -29,7 +29,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void AssigningAValidTrainerToATrainingShouldAddItToTheTrainingList()
+    public void AssigningValidTrainerToATraining_ShouldAddItToTheTrainingList()
     {
         var trainerAlpha = MockedTrainerFactory.CreateClean();
         var training = MockedTrainingFactory.Create(trainerAlpha);
@@ -42,7 +42,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void AddingDetailToTrainingWithValidTitleShouldNotThrowExceptionAndAddToDetailsList()
+    public void AddingDetailToTraining_WithValidTitle_ShouldNotThrowException_AndAddToDetailsList()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var training = MockedTrainingFactory.Create(trainer);
@@ -57,7 +57,7 @@ public class TrainingTests
 
     [Theory]
     [InlineData(null)]
-    public void AddingDetailToTrainingWithInvalidTitleShouldThrowException(string title)
+    public void AddingDetailToTraining_WithInvalidTitle_ShouldThrowException(string title)
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var training = MockedTrainingFactory.Create(trainer);
@@ -69,7 +69,7 @@ public class TrainingTests
 
     [Theory]
     [InlineData("FR")]
-    public void AddingDetailToTrainingWithDuplicateLanguageShouldThrowException(string language)
+    public void AddingDetailToTraining_WithDuplicateLanguage_ShouldThrowException(string language)
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var duplicateLanguage = Language.Create(language).Value;
@@ -82,7 +82,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void UpdatingATrainingLocalizedDetailsShouldNotThrowException()
+    public void UpdatingTrainingLocalizedDetails_ShouldNotThrowException()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var training = MockedTrainingFactory.Create(trainer);
@@ -102,7 +102,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void InstantiatingTrainingShouldHaveADefaultDraftStatus()
+    public void InstantiatingTraining_ShouldHaveADefaultDraftStatus()
     {
         var trainer = MockedTrainerFactory.CreateClean();
 
@@ -112,7 +112,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void UpdatingTrainingStatusToPublishedShouldSucceed()
+    public void UpdatingTrainingStatus_ToPublished_ShouldSucceed()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var training = MockedTrainingFactory.CreateWithAutoValidation(trainer);
@@ -125,7 +125,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void InstantiatingATrainingShouldAlwaysHaveAtLeastOneVatExemptionClaimType()
+    public void InstantiatingTraining_ShouldAlwaysHaveAtLeastOneVatExemptionClaimType()
     {
         var trainer = MockedTrainerFactory.CreateClean();
 
@@ -136,7 +136,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void InstantiatingATrainingShouldAlwaysComeWithATargetAudience()
+    public void InstantiatingTraining_ShouldAlwaysComeWithATargetAudience()
     {
         var trainer = MockedTrainerFactory.CreateClean();
 
@@ -147,7 +147,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void SwitchingATrainingAttendanceTypeFromSingleToGroupShouldSucceed()
+    public void SwitchingTrainingAttendanceType_FromSingleToGroup_ShouldSucceed()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var training = new Training
@@ -168,7 +168,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void SwitchingTrainingTargetAudienceToNullShouldThrowAnException()
+    public void SwitchingTrainingTargetAudience_ToNull_ShouldThrowAnException()
     {
         var training = MockedTrainingFactory.CreateClean();
 
@@ -178,7 +178,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void SwitchingTrainingTopicsToNullShouldThrowAnException()
+    public void SwitchingTrainingTopics_ToNull_ShouldThrowAnException()
     {
         var training = MockedTrainingFactory.CreateClean();
 
@@ -188,7 +188,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void SwitchingTrainingVatExemptionToNullShouldThrowAnException()
+    public void SwitchingTrainingVatExemption_ToNull_ShouldThrowAnException()
     {
         var training = MockedTrainingFactory.CreateClean();
 
@@ -198,7 +198,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void MarkingATrainingAsGivenBySmartShouldSucceed()
+    public void MarkingATraining_AsGivenBySmart_ShouldSucceed()
     {
         var training = MockedTrainingFactory.CreateClean();
 
@@ -208,7 +208,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void AssigningATrainerToATrainingShouldSucceed()
+    public void AssigningTrainerToTraining_ShouldSucceed()
     {
         var training = MockedTrainingFactory.CreateClean();
         var trainer = MockedTrainerFactory.CreateClean();
@@ -221,7 +221,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void AssigningMultipleTrainersToATrainingShouldSucceed()
+    public void AssigningMultipleTrainersToTraining_ShouldSucceed()
     {
         var training = MockedTrainingFactory.CreateClean();
         var trainer1 = MockedTrainerFactory.CreateClean();
@@ -237,7 +237,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void AssigningTwiceTheSameTrainerToATrainingShouldThrowException()
+    public void AssigningTwiceTheSameTrainerToTraining_ShouldThrowException()
     {
         var training = MockedTrainingFactory.CreateClean();
         var trainer = MockedTrainerFactory.CreateClean();
@@ -249,7 +249,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void UnAssigningMultipleTrainersToATrainingShouldMakeItsAssignmentEmpty()
+    public void UnAssigningMultipleTrainersToTraining_ShouldMakeItsAssignmentEmpty()
     {
         var training = MockedTrainingFactory.CreateClean();
         var trainer1 = MockedTrainerFactory.CreateClean();
@@ -265,7 +265,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void ChangingTrainingStatusToDraftShouldSucceed()
+    public void ChangingTrainingStatus_ToDraftShouldSucceed()
     {
         var training = MockedTrainingFactory.CreateClean();
 
@@ -275,7 +275,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void PublishingTrainingWithValidFieldShouldSucceed()
+    public void PublishingTraining_WithValidField_ShouldSucceed()
     {
         var training = MockedTrainingFactory.CreateClean();
 
@@ -285,7 +285,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void PublishingTrainingWithValidFieldShouldCreateValidateTrainingDomainEvent()
+    public void PublishingTraining_WithValidField_ShouldCreateValidateTrainingDomainEvent()
     {
         var training = MockedTrainingFactory.CreateClean();
         var details = training.Details.FirstOrDefault(training => training.Language == Language.Create("EN").Value) ?? training.Details.First();
@@ -297,7 +297,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void PublishingTrainingWithMissingGoalShouldReturnError()
+    public void PublishingTraining_WithMissingGoal_ShouldReturnError()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var training = new Training(trainer,
@@ -312,7 +312,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void PublishingTrainingWithMissingMethodologyShouldReturnError()
+    public void PublishingTraining_WithMissingMethodology_ShouldReturnError()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var training = new Training(trainer,
@@ -327,7 +327,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void PublishingTrainingWithMissingModalitiesShouldReturnError()
+    public void PublishingTraining_WithMissingModalities_ShouldReturnError()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var training = new Training(trainer,
@@ -342,7 +342,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void PublishingTrainingWithMissingVatExemptionsShouldReturnError()
+    public void PublishingTraining_WithMissingVatExemptions_ShouldReturnError()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var training = new Training(trainer,
@@ -357,7 +357,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void PublishingTrainingWithMissingAttendanceShouldReturnError()
+    public void PublishingTraining_WithMissingAttendance_ShouldReturnError()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var training = new Training(trainer,
@@ -372,7 +372,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void PublishingTrainingWithMissingTargetAudienceShouldReturnError()
+    public void PublishingTraining_WithMissingTargetAudience_ShouldReturnError()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var training = new Training(trainer,
@@ -387,7 +387,7 @@ public class TrainingTests
     }
 
     [Fact]
-    public void PublishingTrainingWithMissingTopicShouldReturnError()
+    public void PublishingTraining_WithMissingTopic_ShouldReturnError()
     {
         var trainer = MockedTrainerFactory.CreateClean();
         var training = new Training(trainer,
