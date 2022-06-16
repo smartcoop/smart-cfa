@@ -611,7 +611,7 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mon profil .
+        ///   Looks up a localized string similar to Mon profil formateur.
         /// </summary>
         public static string MyTrainerProfile {
             get {

@@ -151,7 +151,7 @@
     <value>Le formateur n'a pas été trouvé</value>
   </data>
   <data name="MyTrainerProfile" xml:space="preserve">
-    <value>Mon profil </value>
+    <value>Mon profil formateur</value>
   </data>
   <data name="MyTrainings" xml:space="preserve">
     <value>Mes formations</value>
