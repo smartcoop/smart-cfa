@@ -48,7 +48,7 @@ public static class TrainingQueryableExtensions
                                                 trainingList.Methodology.Contains(searchKeyWord));
         }
 
-        var paginationResult = await query.PaginateAsync(pageNumber, pageSize, randomIds: true);
+        var paginationResult = await query.PaginateAsync(pageNumber, pageSize, randomizeIds: true);
         return new PagedList<TrainingList>(paginationResult.PaginatedItems, new PageItem(pageNumber, pageSize), paginationResult.TotalCount);
     }
 
@@ -62,7 +62,7 @@ public static class TrainingQueryableExtensions
             query = query.Where(trainingList => trainingList.Topic == searchTopic);
         }
 
-        var paginationResult = await query.PaginateAsync(pageNumber, pageSize, randomIds: true);
+        var paginationResult = await query.PaginateAsync(pageNumber, pageSize, randomizeIds: true);
         return new PagedList<TrainingList>(paginationResult.PaginatedItems, new PageItem(pageNumber, pageSize), paginationResult.TotalCount);
     }
 }
