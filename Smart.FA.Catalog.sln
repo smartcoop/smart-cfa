@@ -32,11 +32,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.Localizati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.Web", "src\UserAdmin\src\Smart.FA.Catalog.Web\Smart.FA.Catalog.Web.csproj", "{DBFB7029-ED26-4266-9F39-60FD11182943}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.IntegrationTests", "src\UserAdmin\test\Smart.FA.Catalog.IntegrationTests\Smart.FA.Catalog.IntegrationTests.csproj", "{BA0E4758-4993-4A0F-994E-7EC5FB42DA51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.Tests.Integration", "src\UserAdmin\test\Smart.FA.Catalog.Tests.Integration\Smart.FA.Catalog.Tests.Integration.csproj", "{BA0E4758-4993-4A0F-994E-7EC5FB42DA51}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.Tests.Common", "src\UserAdmin\test\Smart.FA.Catalog.Tests.Common\Smart.FA.Catalog.Tests.Common.csproj", "{0E243C6E-290F-41ED-9B61-DC04A84F3982}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.UnitTests", "src\UserAdmin\test\Smart.FA.Catalog.UnitTests\Smart.FA.Catalog.UnitTests.csproj", "{F6B11CF4-3504-4BBC-834D-D7D3AFABAA27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.Tests.Unit", "src\UserAdmin\test\Smart.FA.Catalog.Tests.Unit\Smart.FA.Catalog.Tests.Unit.csproj", "{F6B11CF4-3504-4BBC-834D-D7D3AFABAA27}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.Shared", "src\Shared\Smart.FA.Catalog.Shared\Smart.FA.Catalog.Shared.csproj", "{244709FB-2162-48D2-B558-DB70CA63A8C5}"
 EndProject
@@ -124,7 +124,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "compose", "compose", "{694A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.Showcase.Infrastructure.Tests", "src\Showcase\test\Smart.FA.Catalog.Showcase.Infrastructure.Tests\Smart.FA.Catalog.Showcase.Infrastructure.Tests.csproj", "{17634CDE-4641-4C03-A32C-135658339BE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.FA.Catalog.E2ETests", "src\UserAdmin\test\Smart.FA.Catalog.E2ETests\Smart.FA.Catalog.E2ETests.csproj", "{E523D7E7-9CC3-4787-A35F-EC687D8507FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.FA.Catalog.Tests.E2E", "src\UserAdmin\test\Smart.FA.Catalog.Tests.E2E\Smart.FA.Catalog.Tests.E2E.csproj", "{E523D7E7-9CC3-4787-A35F-EC687D8507FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

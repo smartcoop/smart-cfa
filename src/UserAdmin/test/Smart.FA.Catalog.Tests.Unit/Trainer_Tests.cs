@@ -10,7 +10,7 @@ using Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer;
 using Smart.FA.Catalog.Tests.Common.Factories;
 using Xunit;
 
-namespace Smart.FA.Catalog.UnitTests;
+namespace Smart.FA.Catalog.Tests.Unit;
 
 public class TrainerTests
 {
@@ -151,7 +151,8 @@ public class TrainerTests
     {
         var description = _fixture.Create<string>();
         var trainer = new Trainer(Name.Create(_fixture.Create<string>(), _fixture.Create<string>()).Value,
-            TrainerIdentity.Create(_fixture.Create<string>(), ApplicationType.Account).Value, _fixture.Create<string>(), description, Language.Create(_fixture.Create<string>()[..2]).Value);
+            TrainerIdentity.Create(_fixture.Create<string>(), ApplicationType.Account).Value, _fixture.Create<string>(), description, Language.Create(_fixture.Create<string>()[..2]).Value,
+            "test@hotmail.com");
 
         var action = () => trainer.UpdateBiography(string.Concat(Enumerable.Repeat('a', 2000)));
 

@@ -3,7 +3,7 @@ using NSubstitute;
 using Smart.FA.Catalog.Infrastructure.Services;
 using Smart.FA.Catalog.Tests.Common.Factories;
 
-namespace Smart.FA.Catalog.IntegrationTests.Mock;
+namespace Smart.FA.Catalog.Tests.Integration.Mock;
 
 public static class MockedDomainEventPublisherFactory
 {

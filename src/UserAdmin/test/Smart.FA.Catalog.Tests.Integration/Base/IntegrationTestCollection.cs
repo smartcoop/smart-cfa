@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace Smart.FA.Catalog.IntegrationTests.Base;
+namespace Smart.FA.Catalog.Tests.Integration.Base;
 
 /// <summary>
 /// A custom <see cref="ICollectionFixture{TFixture}"/> that will create an instance of the <see cref="TestSetup"/> class before a test class

@@ -4,6 +4,8 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
+    <RootNamespace>Smart.FA.Catalog.Tests.Unit</RootNamespace>
+    <AssemblyName>Smart.FA.Catalog.Tests.Unit</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

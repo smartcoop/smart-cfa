@@ -5,12 +5,11 @@ using AutoFixture;
 using FluentAssertions;
 using Smart.FA.Catalog.Infrastructure.Persistence.Read;
 using Smart.FA.Catalog.Infrastructure.Persistence.Write;
-using Smart.FA.Catalog.IntegrationTests.Base;
-using Smart.FA.Catalog.Tests.Common;
 using Smart.FA.Catalog.Tests.Common.Factories;
+using Smart.FA.Catalog.Tests.Integration.Base;
 using Xunit;
 
-namespace Smart.FA.Catalog.IntegrationTests.Repositories;
+namespace Smart.FA.Catalog.Tests.Integration.Repositories;
 
 [Collection(IntegrationTestCollections.Default)]
 public class TrainerRepositoryTests : IntegrationTestBase

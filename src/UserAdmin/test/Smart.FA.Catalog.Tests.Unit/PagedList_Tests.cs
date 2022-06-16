@@ -4,7 +4,7 @@ using FluentAssertions;
 using Smart.FA.Catalog.Shared.Collections;
 using Xunit;
 
-namespace Smart.FA.Catalog.UnitTests;
+namespace Smart.FA.Catalog.Tests.Unit;
 
 public class PagedListTests
 {

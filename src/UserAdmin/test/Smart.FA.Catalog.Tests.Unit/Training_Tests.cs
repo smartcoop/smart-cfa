@@ -11,7 +11,7 @@ using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 using Smart.FA.Catalog.Tests.Common.Factories;
 using Xunit;
 
-namespace Smart.FA.Catalog.UnitTests;
+namespace Smart.FA.Catalog.Tests.Unit;
 
 public class TrainingTests
 {

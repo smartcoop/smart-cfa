@@ -1,6 +1,6 @@
 using System;
 
-namespace Smart.FA.Catalog.IntegrationTests.Base;
+namespace Smart.FA.Catalog.Tests.Integration.Base;
 
 /// <summary>
 /// The base class instantiated before each test run. It will recreate a fresh test db every time

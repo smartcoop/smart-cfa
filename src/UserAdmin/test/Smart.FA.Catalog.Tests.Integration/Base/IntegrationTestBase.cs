@@ -2,11 +2,10 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Smart.FA.Catalog.Infrastructure.Persistence;
-using Smart.FA.Catalog.IntegrationTests.Mock;
-using Smart.FA.Catalog.Tests.Common;
 using Smart.FA.Catalog.Tests.Common.Factories;
+using Smart.FA.Catalog.Tests.Integration.Mock;
 
-namespace Smart.FA.Catalog.IntegrationTests.Base;
+namespace Smart.FA.Catalog.Tests.Integration.Base;
 
 /// <summary>
 /// Base helper method that every integration tests needs, namely the DBContext <see cref="CatalogContext"/> and connection settings from <see cref="ConnectionSetup"/> for using Queries

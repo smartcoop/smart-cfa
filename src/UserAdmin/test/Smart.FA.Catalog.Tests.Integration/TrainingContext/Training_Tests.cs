@@ -1,11 +1,11 @@
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Smart.FA.Catalog.IntegrationTests.Base;
 using Smart.FA.Catalog.Tests.Common.Factories;
+using Smart.FA.Catalog.Tests.Integration.Base;
 using Xunit;
 
-namespace Smart.FA.Catalog.IntegrationTests.TrainingContext;
+namespace Smart.FA.Catalog.Tests.Integration.TrainingContext;
 
 [Collection(IntegrationTestCollections.Default)]
 public class TrainingTests : IntegrationTestBase

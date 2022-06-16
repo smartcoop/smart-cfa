@@ -15,12 +15,12 @@ using Smart.FA.Catalog.Core.Domain.User.Enumerations;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
 using Smart.FA.Catalog.Infrastructure.Helpers;
 using Smart.FA.Catalog.Infrastructure.Services.Options;
-using Smart.FA.Catalog.IntegrationTests.Base;
 using Smart.FA.Catalog.Tests.Common.Extensions;
 using Smart.FA.Catalog.Tests.Common.Factories;
+using Smart.FA.Catalog.Tests.Integration.Base;
 using Xunit;
 
-namespace Smart.FA.Catalog.IntegrationTests.TrainingContext;
+namespace Smart.FA.Catalog.Tests.Integration.TrainingContext;
 
 [Collection(IntegrationTestCollections.Default)]
 public class TrainerTests : IntegrationTestBase

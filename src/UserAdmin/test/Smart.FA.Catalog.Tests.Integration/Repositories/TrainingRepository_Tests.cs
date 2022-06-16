@@ -4,12 +4,12 @@ using AutoFixture;
 using FluentAssertions;
 using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
-using Smart.FA.Catalog.IntegrationTests.Base;
 using Smart.FA.Catalog.Shared.Collections;
 using Smart.FA.Catalog.Tests.Common.Factories;
+using Smart.FA.Catalog.Tests.Integration.Base;
 using Xunit;
 
-namespace Smart.FA.Catalog.IntegrationTests.Repositories;
+namespace Smart.FA.Catalog.Tests.Integration.Repositories;
 
 [Collection(IntegrationTestCollections.Default)]
 public class TrainingRepositoryTests : IntegrationTestBase

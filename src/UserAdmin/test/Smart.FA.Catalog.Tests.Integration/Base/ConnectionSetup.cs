@@ -1,7 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 
-namespace Smart.FA.Catalog.IntegrationTests.Base;
+namespace Smart.FA.Catalog.Tests.Integration.Base;
 
 /// <summary>
 /// Includes all connection strings for databases needed for integration testing
