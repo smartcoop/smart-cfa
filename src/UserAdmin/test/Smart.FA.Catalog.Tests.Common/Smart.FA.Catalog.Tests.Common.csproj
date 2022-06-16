@@ -7,19 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoFixture" Version="4.17.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-    <PackageReference Include="NSubstitute" Version="4.3.0" />
-    <PackageReference Include="xunit.extensibility.core" Version="2.4.1" />
+    <PackageReference Include="AutoFixture" Version="4.17.0"/>
+    <PackageReference Include="NSubstitute" Version="4.3.0"/>
+    <PackageReference Include="xunit.extensibility.core" Version="2.4.1"/>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Smart.FA.Catalog.Core\Smart.FA.Catalog.Core.csproj" />
-    <ProjectReference Include="..\..\src\Smart.FA.Catalog.Infrastructure\Smart.FA.Catalog.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Smart.FA.Catalog.Core\Smart.FA.Catalog.Core.csproj"/>
   </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Data\data.json" />
-  </ItemGroup>
-
 </Project>

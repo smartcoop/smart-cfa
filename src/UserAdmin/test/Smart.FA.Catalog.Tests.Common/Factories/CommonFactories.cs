@@ -1,5 +1,4 @@
 ﻿using AutoFixture;
-using MediatR;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using Smart.FA.Catalog.Core.Domain;
@@ -7,7 +6,6 @@ using Smart.FA.Catalog.Core.Domain.Models;
 using Smart.FA.Catalog.Core.Domain.User.Enumerations;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
 using Smart.FA.Catalog.Core.Services;
-using Smart.FA.Catalog.Infrastructure.Services;
 
 namespace Smart.FA.Catalog.Tests.Common.Factories;
 
@@ -16,14 +14,6 @@ public static class MockedLoggerFactory
     public static ILogger<T> Create<T>()
     {
         return Substitute.For<ILogger<T>>();
-    }
-}
-
-public static class MockedDomainEventPublisherFactory
-{
-    public static DomainEventPublisher Create()
-    {
-        return Substitute.For<DomainEventPublisher>(MockedLoggerFactory.Create<DomainEventPublisher>(), Substitute.For<IPublisher>());
     }
 }
 

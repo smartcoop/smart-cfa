@@ -2,6 +2,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Smart.FA.Catalog.Infrastructure.Persistence;
+using Smart.FA.Catalog.IntegrationTests.Mock;
 using Smart.FA.Catalog.Tests.Common;
 using Smart.FA.Catalog.Tests.Common.Factories;
 
