@@ -17,18 +17,22 @@ public class TrainingListModel : PageModelBase
 
     public int? TopicId { get; set; }
 
+    [FromQuery(Name = nameof(SearchKeyword))]
+    public string? SearchKeyword { get; set; }
+
     public TrainingListModel(ITrainingService trainingService)
     {
         _trainingService = trainingService;
     }
-    public async Task<ActionResult> OnGetAsync([FromQuery] string? searchKeyword)
+
+    public async Task<ActionResult> OnGetAsync()
     {
         if (CurrentPage <= 0)
         {
             return RedirectToNotFound();
         }
 
-        Trainings = await _trainingService.SearchTrainingViewModelsAsync(searchKeyword, CurrentPage, ItemsPerPage);
+        Trainings = await _trainingService.SearchTrainingViewModelsAsync(SearchKeyword, CurrentPage, ItemsPerPage);
         return Page();
     }
 
