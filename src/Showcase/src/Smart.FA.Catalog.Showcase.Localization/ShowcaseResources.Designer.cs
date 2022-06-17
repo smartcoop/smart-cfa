@@ -709,6 +709,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Une erreur innattendue s&apos;est produite.
+        /// </summary>
+        public static string UnexpectedError {
+            get {
+                return ResourceManager.GetString("UnexpectedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vous avez atteint la limite de contact.
         /// </summary>
         public static string YouReachedRateLimit {

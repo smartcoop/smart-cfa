@@ -21,15 +21,14 @@ var app = builder.Build();
 // A fix which allows SQL domain authentication with Kerberos on linux host
 NetSecurityNativeFix.Initialize(app.Services.GetRequiredService<ILogger<Program>>());
 
-app.UseStatusCodePagesWithReExecute("/{0}");
-
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsProduction())
 {
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseExceptionHandler("/500");
     app.UseHsts();
 }
+
+app.UseStatusCodePagesWithReExecute("/{0}");
 
 app.UseHttpsRedirection();
 
