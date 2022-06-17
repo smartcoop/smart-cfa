@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Smart.FA.Catalog.Shared.Collections;
 using Smart.FA.Catalog.Showcase.Web.Services.Trainer;
-using Microsoft.Extensions.Options;
-using Smart.FA.Catalog.Showcase.Web.Options;
 
 namespace Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerList;
 
@@ -17,19 +15,22 @@ public class TrainerListModel : PageModelBase
 
     private const int ItemsPerPage = 8;
 
-    public TrainerListModel(ITrainerService trainerService, IOptions<MinIOOptions> minIOOptions)
+    [FromQuery(Name = nameof(SearchKeyword))]
+    public string? SearchKeyword { get; set; }
+
+    public TrainerListModel(ITrainerService trainerService)
     {
         _trainerService = trainerService;
     }
 
-    public async Task<ActionResult> OnGetAsync([FromQuery] string? searchKeyword)
+    public async Task<ActionResult> OnGetAsync()
     {
         if (CurrentPage <= 0)
         {
             return RedirectToNotFound();
         }
 
-        Trainers = await _trainerService.SearchTrainerDetailsViewModelsAsync(searchKeyword, CurrentPage, ItemsPerPage);
+        Trainers = await _trainerService.SearchTrainerDetailsViewModelsAsync(SearchKeyword, CurrentPage, ItemsPerPage);
         return Page();
     }
 }
