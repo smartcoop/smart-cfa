@@ -1,9 +1,9 @@
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 
-namespace Smart.FA.Catalog.Showcase.Web.Extensions;
+namespace Smart.Extensions.DependencyInjection;
 
-public static class LocalizationRegistration
+public static class LocalizationServiceCollectionExtensions
 {
     public static IServiceCollection AddShowcaseLocalization(this IServiceCollection services)
     {
