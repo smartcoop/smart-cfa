@@ -432,6 +432,24 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Minimum 30 caractères.
         /// </summary>
+        public static string Min30Char {
+            get {
+                return ResourceManager.GetString("Min30Char", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to min 30 caractères / max 1000 caractères.
+        /// </summary>
+        public static string Min30CharMax1000Char {
+            get {
+                return ResourceManager.GetString("Min30CharMax1000Char", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum 30 caractères.
+        /// </summary>
         public static string Min50Chars {
             get {
                 return ResourceManager.GetString("Min50Chars", resourceCulture);
