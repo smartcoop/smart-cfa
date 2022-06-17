@@ -1,20 +1,17 @@
 using AutoFixture;
-using CSharpFunctionalExtensions;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.User.Dto;
 using Smart.FA.Catalog.Core.Domain.User.Enumerations;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
-using Smart.FA.Catalog.Core.SeedWork;
-using Smart.FA.Catalog.Shared.Domain.Enumerations;
 
-namespace Smart.FA.Catalog.Tests.Common;
+namespace Smart.FA.Catalog.Tests.Common.Factories;
 
-public static class TrainerFactory
+public static class MockedTrainerFactory
 {
     private static Fixture fixture = new();
     public static Trainer CreateClean()
     {
-        var defaultLanguage = Language.Create(fixture.Create<string>().Substring(0, 2));
+        var defaultLanguage = Language.Create(fixture.Create<string>()[..2]);
         var name = Name.Create(fixture.Create<string>(), fixture.Create<string>());
 
         return new Trainer
@@ -34,7 +31,7 @@ public static class TrainerFactory
     public static Trainer Create(string firstName, string lastName)
     {
         var fixture = new Fixture();
-        var defaultLanguage = Language.Create(fixture.Create<string>().Substring(0, 2));
+        var defaultLanguage = Language.Create(fixture.Create<string>()[..2]);
         var name = Name.Create(firstName, lastName);
         return new Trainer
         (
