@@ -99,6 +99,13 @@ public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, Pro
         {
             var socialNetwork = SocialNetwork.FromValue(commandSocial.Key);
             var url = commandSocial.Value;
+            if (!string.IsNullOrEmpty(url) &&
+                !url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) &&
+                !url.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+            {
+                url = "https://" + url;
+            }
+
             trainer.SetSocialNetwork(socialNetwork, url);
         }
     }
