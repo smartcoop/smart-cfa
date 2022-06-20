@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Authorization.Policy;
@@ -39,12 +40,12 @@ public class UserAdminAuthorizationResultHandler : IAuthorizationMiddlewareResul
 
             if (authorizationFailure.FailedRequirements.AnyOfType<MustBeSuperUserOrTrainingCreator>())
             {
-                context.Response.StatusCode = 404;
+                context.Response.StatusCode = (int)HttpStatusCode.NotFound;
             }
 
             if (authorizationFailure.FailedRequirements.AnyOfType<MustBeSocialMemberRequirement>())
             {
-                context.Response.StatusCode = 403;
+                context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
             }
             return;
         }
