@@ -1,5 +1,6 @@
 ﻿@page
 @using Microsoft.Extensions.Options
+@using Smart.FA.Catalog.Web.Identity
 @using Smart.FA.Catalog.Web.Options
 
 @inject IOptions<UrlOptions> UrlOptions
@@ -28,32 +29,34 @@
     </smart-panel>
 
     <smart-spacer bottom="ExtraLarge" top="ExtraLarge"></smart-spacer>
+    @if (Model.UserIdentity.IsSocialMember)
+    {
+        <smart-panel header="@CatalogResources.AdminHomepageProfil_Title">
+            <p class="intro__paragraph">@CatalogResources.AdminHomepageProfil_IntroductionPart1</p>
+            <p class="intro__paragraph">@CatalogResources.AdminHomepageProfil_IntroductionPart2</p>
+            <a href="/cfa/admin/myprofile">
+                <button class="c-button c-button--primary" type="button">
+                    <span class="c-button__content">
+                        <span class="c-button__label">@CatalogResources.AdminHomepageProfil_Button</span>
+                    </span>
+                </button>
+            </a>
+        </smart-panel>
 
-    <smart-panel header="@CatalogResources.AdminHomepageProfil_Title">
-        <p class="intro__paragraph">@CatalogResources.AdminHomepageProfil_IntroductionPart1</p>
-        <p class="intro__paragraph">@CatalogResources.AdminHomepageProfil_IntroductionPart2</p>
-        <a href="/cfa/admin/myprofile">
-            <button class="c-button c-button--primary" type="button">
-                <span class="c-button__content">
-                    <span class="c-button__label">@CatalogResources.AdminHomepageProfil_Button</span>
-                </span>
-            </button>
-        </a>
-    </smart-panel>
+        <smart-spacer bottom="ExtraLarge" top="ExtraLarge"></smart-spacer>
 
-    <smart-spacer bottom="ExtraLarge" top="ExtraLarge"></smart-spacer>
-
-    <smart-panel header="@CatalogResources.AdminHomepageTraining_Title">
-        <p class="intro__paragraph">@CatalogResources.AdminHomepageTraining_IntroductionPart1</p>
-        <p class="intro__paragraph">@CatalogResources.AdminHomepageTraining_IntroductionPart2</p>
-        <p class="intro__paragraph">@CatalogResources.AdminHomepageTraining_IntroductionPart3</p>
-        <a href="/cfa/admin/Trainings/Create">
-            <button class="c-button c-button--primary" type="button">
-                <span class="c-button__content">
-                    <span class="c-button__label">@CatalogResources.AdminHomepageTraining_Button</span>
-                </span>
-            </button>
-        </a>
-    </smart-panel>
+        <smart-panel header="@CatalogResources.AdminHomepageTraining_Title">
+            <p class="intro__paragraph">@CatalogResources.AdminHomepageTraining_IntroductionPart1</p>
+            <p class="intro__paragraph">@CatalogResources.AdminHomepageTraining_IntroductionPart2</p>
+            <p class="intro__paragraph">@CatalogResources.AdminHomepageTraining_IntroductionPart3</p>
+            <a href="/cfa/admin/Trainings/Create">
+                <button class="c-button c-button--primary" type="button">
+                    <span class="c-button__content">
+                        <span class="c-button__label">@CatalogResources.AdminHomepageTraining_Button</span>
+                    </span>
+                </button>
+            </a>
+        </smart-panel>
+    }
 
 </div>

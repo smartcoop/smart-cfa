@@ -27,4 +27,9 @@ public interface IUserIdentity
     /// Indicates if the connected user is a super admin.
     /// </summary>
     public bool IsSuperUser { get; }
+
+    /// <summary>
+    /// Indicates if the connected user is a social member (the opposite would be a permanent member).
+    /// </summary>
+    public bool IsSocialMember { get; }
 }

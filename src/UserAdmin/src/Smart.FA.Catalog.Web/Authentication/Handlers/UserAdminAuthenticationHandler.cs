@@ -1,5 +1,6 @@
 using System.Security.Principal;
 using System.Text.Encodings.Web;
+using System.Text.RegularExpressions;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
@@ -10,8 +11,10 @@ using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.Models;
 using Smart.FA.Catalog.Core.Domain.User.Dto;
 using Smart.FA.Catalog.Core.Domain.User.Enumerations;
+using Smart.FA.Catalog.Shared.Extensions;
 using Smart.FA.Catalog.Web.Options;
 using Smart.FA.Catalog.Web.Authentication.Header;
+using Smart.FA.Catalog.Web.Authorization.Role;
 
 namespace Smart.FA.Catalog.Web.Authentication.Handlers;
 
@@ -159,12 +162,22 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
     {
         // Sets the data for the IUserIdentity service.
         var isAdmin = await _mediator.Send(new IsSuperUserQuery(trainer.Id));
-        Context.User = new GenericPrincipal(new CustomIdentity(trainer), roles: isAdmin ? new[] { "SuperUser" } : null);
-
+        var roles = new List<string>();
+        roles.AddIf(() => isAdmin, Roles.SuperUser);
+        roles.AddIf(() => IsSocialMember(trainer.Identity.UserId), Roles.SocialMember);
+        Context.User = new GenericPrincipal(new CustomIdentity(trainer), roles.ToArray());
         // Updates the first name, last name and email address of the current trainer if they changed for any reason.
         // If anything goes wrong an exception will be thrown and stops execution of the HTTP request.
         await _mediator.Send(new UpdateTrainerIdentityCommand(trainer.Id, _firstName, _lastName, _email));
     }
+
+    /// <summary>
+    /// Check if the connected user is not impersonating a social member and is directly connected as a Permanent member.
+    /// The "AD" prefix before the user id is a convention adopted between the app to indicate permanent member access.
+    /// </summary>
+    /// <param name="userId">The user id of the connected user</param>
+    /// <returns></returns>
+    private static bool IsSocialMember(string userId) => !Regex.Match(userId, "^AD").Success;
 }
 
 public class CfaAuthenticationOptions

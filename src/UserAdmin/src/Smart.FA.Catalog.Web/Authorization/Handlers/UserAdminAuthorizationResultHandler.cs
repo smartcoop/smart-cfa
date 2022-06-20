@@ -42,6 +42,10 @@ public class UserAdminAuthorizationResultHandler : IAuthorizationMiddlewareResul
                 context.Response.StatusCode = 404;
             }
 
+            if (authorizationFailure.FailedRequirements.AnyOfType<MustBeSocialMemberRequirement>())
+            {
+                context.Response.StatusCode = 403;
+            }
             return;
         }
 

@@ -7,6 +7,7 @@ using Smart.FA.Catalog.Web.Authentication.Header;
 using Smart.FA.Catalog.Web.Authorization.Handlers;
 using Smart.FA.Catalog.Web.Authorization.Policy;
 using Smart.FA.Catalog.Web.Authorization.Policy.Requirements;
+using Smart.FA.Catalog.Web.Authorization.Role;
 using Smart.FA.Catalog.Web.Identity;
 using Smart.FA.Catalog.Web.Options;
 
@@ -52,7 +53,8 @@ public static class ServiceCollectionExtensions
     {
         return services.AddSingleton<IAuthorizationMiddlewareResultHandler, UserAdminAuthorizationResultHandler>()
             .AddScoped<IAuthorizationHandler, MustBeSuperUserOrTrainingCreatorHandler>()
-            .AddScoped<IAuthorizationHandler, UserChartRevisionApprovalHandler>();
+            .AddScoped<IAuthorizationHandler, UserChartRevisionApprovalHandler>()
+            .AddScoped<IAuthorizationHandler, MustBeSocialMemberHandler>();
     }
 
     private static void ConfigureAuthorizationOptions(this AuthorizationOptions options)
@@ -60,9 +62,11 @@ public static class ServiceCollectionExtensions
         options.AddPolicy(Policies.AtLeastOneValidUserChartRevisionApproval,
             policy => policy.Requirements.Add(new AtLeastOneActiveUserChartRevisionApprovalRequirement()));
 
-        options.AddPolicy(Policies.MustBeSuperUser, policy => policy.RequireRole("SuperUser"));
+        options.AddPolicy(Policies.MustBeSuperUser, policy => policy.RequireRole(Roles.SuperUser));
 
         options.AddPolicy(Policies.MustBeSuperUserOrTrainingCreator,
             policy => policy.Requirements.Add(new MustBeSuperUserOrTrainingCreator()));
+
+        options.AddPolicy(Policies.MustBeSocialMember, policy => policy.Requirements.Add(new MustBeSocialMemberRequirement()));
     }
 }
