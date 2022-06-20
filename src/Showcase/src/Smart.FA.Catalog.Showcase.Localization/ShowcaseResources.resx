@@ -336,6 +336,9 @@
   <data name="PersonalWebsite" xml:space="preserve">
     <value>Site personnel</value>
   </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>Une erreur innattendue s'est produite</value>
+  </data>
   <data name="TrainingWasNotFound" xml:space="preserve">
     <value>La formation n'a pas été trouvée</value>
   </data>
