@@ -6,6 +6,21 @@ namespace Smart.FA.Catalog.Web.Authentication.Header;
 public class AccountData
 {
     public string? FirstName { get; set; }
+
     public string? LastName { get; set; }
+
     public string? Email { get; set; }
+
+    public AdminBehindUser? AdminBehindUser { get; set; }
+}
+
+public class AdminBehindUser
+{
+    public string? FirstName { get; set; }
+
+    public string? LastName { get; set; }
+
+    public string? Email { get; set; }
+
+    public string? UserId { get; set; }
 }
