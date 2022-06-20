@@ -18,7 +18,7 @@ public static class TrainerQueryableExtensions
             query = query.Where(trainerList => trainerList.FirstName.Contains(searchKeyWord) || trainerList.LastName.Contains(searchKeyWord));
         }
 
-        var paginationResult = await query.PaginateAsync(pageNumber, pageSize, randomizeIds: true);
+        var paginationResult = await query.PaginateAsync(pageNumber, pageSize, randomizeIds: false);
         return new PagedList<TrainerList>(paginationResult.PaginatedItems, new PageItem(pageNumber, pageSize), paginationResult.TotalCount);
     }
 }

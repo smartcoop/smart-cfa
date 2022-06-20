@@ -21,7 +21,7 @@ public static class PaginationExtensions
         where T : IHasId
     {
         // Build a query that returns every entity ids.
-        var idsQuery = query.Select(item => item.Id).Distinct();
+        var idsQuery = query.Select(item => item.Id).Distinct().OrderBy(id => id).AsQueryable();
         if (randomizeIds)
         {
             idsQuery = idsQuery.RandomizeOrder();
