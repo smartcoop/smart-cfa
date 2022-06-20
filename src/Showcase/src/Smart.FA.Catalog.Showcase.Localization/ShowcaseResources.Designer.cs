@@ -340,7 +340,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Smart est une coopérative de travailleuses et travailleurs qui utilisent sa structure pour exercer leur métier, par exemple de la formation..
+        ///   Looks up a localized string similar to Smart est une coopérative de travailleuses et travailleurs qui utilisent leur structure pour exercer leur métier, par exemple de la formation..
         /// </summary>
         public static string Homepage_IntroductionPart2 {
             get {
@@ -664,7 +664,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Retrouvez ici la liste des formateur·rices qui proposent une ou plusieurs formations sur ce site. Vous pouvez effectuer une recherche sur base de mots-clés. La liste des formateur·rices est proposée de manière aléatoire. .
+        ///   Looks up a localized string similar to Retrouvez ici la liste des formateur·rices qui proposent une ou plusieurs formations sur ce site. Vous pouvez effectuer une recherche sur base du nom et prénom. La liste des formateur·rices est proposée de manière aléatoire. .
         /// </summary>
         public static string TrainerListe_Presentation {
             get {
