@@ -11,6 +11,7 @@ using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.Models;
 using Smart.FA.Catalog.Core.Domain.User.Dto;
 using Smart.FA.Catalog.Core.Domain.User.Enumerations;
+using Smart.FA.Catalog.Core.Domain.ValueObjects;
 using Smart.FA.Catalog.Shared.Extensions;
 using Smart.FA.Catalog.Web.Options;
 using Smart.FA.Catalog.Web.Authentication.Header;
@@ -29,11 +30,12 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
     private readonly CustomDataFieldsValidator _customDataFieldsDataValidator;
     private readonly IMediator _mediator;
     private readonly IAccountDataHeaderSerializer _accountDataHeaderSerializer;
-    private string? _userId;
-    private string? _appName;
-    private string? _firstName;
-    private string? _lastName;
-    private string? _email;
+    private string _userId = string.Empty;
+    private string _appName = string.Empty;
+    private string _firstName = string.Empty;
+    private string _lastName = string.Empty;
+    private string _email = string.Empty;
+    private AdminBehindUser? _adminBehindUser;
     private readonly SpecialAuthenticationOptions _authenticationOptions;
 
     public UserAdminAuthenticationHandler(
@@ -108,6 +110,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
         _firstName = accountData!.FirstName!;
         _lastName = accountData.LastName!;
         _email = accountData.Email!;
+        _adminBehindUser = accountData.AdminBehindUser;
     }
 
     private void SetFakeHeaderValueIfOptionSetToTrue()
@@ -165,7 +168,10 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
         var roles = new List<string>();
         roles.AddIf(() => isAdmin, Roles.SuperUser);
         roles.AddIf(() => IsSocialMember(trainer.Identity.UserId), Roles.SocialMember);
-        Context.User = new GenericPrincipal(new CustomIdentity(trainer), roles.ToArray());
+        var connectedUser = _adminBehindUser is null
+            ? null
+            : new ConnectedUser(_adminBehindUser.UserId!, _adminBehindUser.Email!, Name.Create(_adminBehindUser.FirstName!, _adminBehindUser.LastName!).Value);
+        Context.User = new GenericPrincipal(new CustomIdentity(trainer, connectedUser), roles.ToArray());
         // Updates the first name, last name and email address of the current trainer if they changed for any reason.
         // If anything goes wrong an exception will be thrown and stops execution of the HTTP request.
         await _mediator.Send(new UpdateTrainerIdentityCommand(trainer.Id, _firstName, _lastName, _email));
