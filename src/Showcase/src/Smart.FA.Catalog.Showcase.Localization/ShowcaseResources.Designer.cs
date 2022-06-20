@@ -727,6 +727,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to La formation n&apos;a pas été trouvée.
+        /// </summary>
+        public static string TrainingWasNotFound {
+            get {
+                return ResourceManager.GetString("TrainingWasNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Une erreur innattendue s&apos;est produite.
         /// </summary>
         public static string UnexpectedError {

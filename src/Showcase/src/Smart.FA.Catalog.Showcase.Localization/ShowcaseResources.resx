@@ -345,4 +345,7 @@
   <data name="Min30CharMax1000Char" xml:space="preserve">
     <value>min 30 caractères / max 1000 caractères</value>
   </data>
+  <data name="TrainingWasNotFound" xml:space="preserve">
+    <value>La formation n'a pas été trouvée</value>
+  </data>
 </root>

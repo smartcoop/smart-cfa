@@ -6,7 +6,7 @@ public class ServerErrorPage : PageModel
 {
     public const string ErrorTitleKey = nameof(ErrorTitle);
 
-    public const string ErrorMessageKey = nameof(ErrorMessageKey);
+    public const string ErrorMessageKey = nameof(ErrorMessage);
 
     public string ErrorTitle { get; set; } = null!;
 
@@ -38,7 +38,7 @@ public class ServerErrorPage : PageModel
 
     private void SetMessage()
     {
-        if (TempData[ErrorMessageKey]?.ToString() == string.Empty)
+        if (string.IsNullOrEmpty(TempData[ErrorMessageKey]?.ToString()))
         {
             return;
         }
