@@ -1,12 +1,11 @@
 #nullable disable
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
 namespace Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingDetails;
 
-public class TrainingDetailsModel : PageModel
+public class TrainingDetailsModel : PageModelBase
 {
     private readonly Infrastructure.Data.CatalogShowcaseContext _context;
 
@@ -21,18 +20,14 @@ public class TrainingDetailsModel : PageModel
     {
         if (id == null)
         {
-            //TO DO: add translated custom messages
-            TempData["errorMessage"] = "There is no record for this request. Please try again.";
-            return RedirectToPage("/404");
+            return RedirectToNotFound();
         }
 
         var trainingDetails = await _context.TrainingDetails.Where(training => training.Id == id).ToListAsync();
 
         if (!trainingDetails.Any())
         {
-            //TO DO: add translated custom messages
-            TempData["errorMessage"] = "This training does not exist! Please try again.";
-            return RedirectToPage("/404");
+            return RedirectToNotFound(message: ShowcaseResources.TrainingWasNotFound);
         }
 
         Training = MapTrainingDetails(trainingDetails);
