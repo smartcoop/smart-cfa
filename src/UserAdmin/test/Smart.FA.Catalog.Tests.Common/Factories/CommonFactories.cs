@@ -38,18 +38,20 @@ public static class MockedUserIdentityFactory
                     _fixture.Create<string>()[..30], _fixture.Create<string>()[..30],
                     Language.Create(_fixture.Create<string>()[..2]).Value
                 )
+                , null
             );
 
         public Trainer CurrentTrainer { get; }
 
         public bool IsSuperUser { get; }
+        public bool IsSocialMember { get; }
     }
 }
-
 
 public static class MockedUserChartRevisionFactory
 {
     private static Fixture _fixture = new();
+
     public static UserChartRevision Create()
     {
         return Substitute.For<UserChartRevision>(_fixture.Create<string>(), _fixture.Create<string>(), _fixture.Create<DateTime>(), _fixture.Create<DateTime>());
