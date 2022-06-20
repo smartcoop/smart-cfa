@@ -336,4 +336,7 @@
   <data name="PersonalWebsite" xml:space="preserve">
     <value>Site personnel</value>
   </data>
+  <data name="TrainingWasNotFound" xml:space="preserve">
+    <value>La formation n'a pas été trouvée</value>
+  </data>
 </root>

@@ -709,6 +709,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to La formation n&apos;a pas été trouvée.
+        /// </summary>
+        public static string TrainingWasNotFound {
+            get {
+                return ResourceManager.GetString("TrainingWasNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vous avez atteint la limite de contact.
         /// </summary>
         public static string YouReachedRateLimit {
