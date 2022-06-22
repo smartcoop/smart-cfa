@@ -47,8 +47,10 @@
                     </span>
                 </label>
                 <smart-formgroup-controls>
-                    <smart-textarea asp-for="Methodology" rows="5"></smart-textarea>
-
+                    <div id="training-presentation-editor">
+                        @Html.Raw(Model.Methodology)
+                    </div>
+                    <textarea hidden id="training-presentation" asp-for="Methodology"></textarea>
                     <p class="c-form-help-text">@CatalogResources.Min30CharMax1000Char</p>
                     <smart-validation-message asp-for="Methodology"></smart-validation-message>
                 </smart-formgroup-controls>
@@ -62,8 +64,10 @@
                     </span>
                 </label>
                 <smart-formgroup-controls>
-                    <smart-textarea asp-for="Goal" rows="5"></smart-textarea>
-
+                    <div id="training-goal-editor">
+                        @Html.Raw(Model.Goal)
+                    </div>
+                    <textarea hidden id="training-goal" asp-for="Goal"></textarea>
                     <p class="c-form-help-text">@CatalogResources.Min30CharMax1000Char</p>
                     <smart-validation-message asp-for="Goal"></smart-validation-message>
                 </smart-formgroup-controls>
@@ -77,8 +81,10 @@
                     </span>
                 </label>
                 <smart-formgroup-controls>
-                    <smart-textarea asp-for="PracticalModalities" rows="5"></smart-textarea>
-
+                    <div id="training-modalities-editor">
+                        @Html.Raw(Model.PracticalModalities)
+                    </div>
+                    <textarea hidden id="training-modalities" asp-for="PracticalModalities"></textarea>
                     <p class="c-form-help-text">@CatalogResources.Min30CharMax1000Char</p>
                     <smart-validation-message asp-for="PracticalModalities"></smart-validation-message>
                 </smart-formgroup-controls>
@@ -128,22 +134,59 @@
             <smart-validation-message asp-for="AttendanceTypeIds"></smart-validation-message>
         </smart-panel>
 
-        <input type="hidden" id="isDraft" value="false" asp-for="IsDraft" />
+        <input type="hidden" id="isDraft" value="false" asp-for="IsDraft"/>
 
     </div>
 </form>
-<div class="c-tooltip" id="tooltip-title" role="tooltip">@CatalogResources.AddTrainingTooltip_Title
+<div class="c-tooltip" id="tooltip-title" role="tooltip">
+    @CatalogResources.AddTrainingTooltip_Title
     <div class="c-tooltip__arrow" data-popper-arrow="data-popper-arrow"></div>
 </div>
 
-<div class="c-tooltip" id="tooltip-presentation" role="tooltip">@CatalogResources.AddTrainingTooltip_Presentation
+<div class="c-tooltip" id="tooltip-presentation" role="tooltip">
+    @CatalogResources.AddTrainingTooltip_Presentation
     <div class="c-tooltip__arrow" data-popper-arrow="data-popper-arrow"></div>
 </div>
 
-<div class="c-tooltip" id="tooltip-objectif" role="tooltip">@CatalogResources.AddTrainingTooltip_Objectif
+<div class="c-tooltip" id="tooltip-objectif" role="tooltip">
+    @CatalogResources.AddTrainingTooltip_Objectif
     <div class="c-tooltip__arrow" data-popper-arrow="data-popper-arrow"></div>
 </div>
 
-<div class="c-tooltip" id="tooltip-modalities" role="tooltip">@CatalogResources.AddTrainingTooltip_Modalities
+<div class="c-tooltip" id="tooltip-modalities" role="tooltip">
+    @CatalogResources.AddTrainingTooltip_Modalities
     <div class="c-tooltip__arrow" data-popper-arrow="data-popper-arrow"></div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded',
+        function() {
+            addQuillEditor("training-presentation-editor", "training-presentation");
+            addQuillEditor("training-goal-editor", "training-goal");
+            addQuillEditor("training-modalities-editor", "training-modalities");
+        },
+        false);
+
+    function addQuillEditor(editorId, hiddenValueElement) {
+        var editor = new Quill('#' + editorId,
+            {
+                modules: {
+                    toolbar: true
+                },
+                theme: 'snow'
+            });
+
+        editor.on('text-change',
+            function() {
+                var text = editor.root.innerHTML;
+                var hidden = document.getElementById(hiddenValueElement);
+                hidden.value = text;
+            });
+    }
+</script>
+
+<style>
+    .ql-editor {
+        height: 15rem;
+    }
+</style>

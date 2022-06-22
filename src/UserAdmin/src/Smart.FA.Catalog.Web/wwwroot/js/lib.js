@@ -41,7 +41,7 @@ function RegisterScrollToFirstElementInError() {
 // Handling of the culture switching.
 document.addEventListener("DOMContentLoaded",
     function() {
-        RegisterCultureChange();
+        //RegisterCultureChange();
     });
 
 function ChangeCulture(culture) {
@@ -63,11 +63,16 @@ function RegisterCultureChange() {
 function disableEnterKeyUpKeyPressOnForm() {
     var forms = document.getElementsByTagName('form');
     for (var i = 0; i < forms.length; i++) {
-        forms[i].addEventListener('keydown', ignoreEnterKeyEventHandler, true);
-        forms[i].addEventListener('keyup', ignoreEnterKeyEventHandler, true);
+        forms[i].addEventListener('keydown', disableEnterKeyEvent, true);
+        forms[i].addEventListener('keyup', disableEnterKeyEvent, true);
     }
 
     function disableEnterKeyEvent(e) {
+        var e = (e) ? e : ((event) ? event : null);
+        var node = (e.target) ? e.target : ((e.srcElement) ? e.srcElement : null);
+        if (node.nodeName == "div" || node.nodeName == "DIV") {
+            return true;
+        }
         if (e.keyIdentifier === 'U+000A' || e.keyIdentifier === 'Enter' || e.keyCode === 13) {
             e.preventDefault();
             return false;
