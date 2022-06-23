@@ -35,7 +35,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
     private string _firstName = string.Empty;
     private string _lastName = string.Empty;
     private string _email = string.Empty;
-    private AdminBehindUser? _adminBehindUser;
+    private Impersonator? _impersonator;
     private readonly SpecialAuthenticationOptions _authenticationOptions;
 
     public UserAdminAuthenticationHandler(
@@ -110,7 +110,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
         _firstName = accountData!.FirstName!;
         _lastName = accountData.LastName!;
         _email = accountData.Email!;
-        _adminBehindUser = accountData.AdminBehindUser;
+        _impersonator = accountData.AdminBehindUser;
     }
 
     private void SetFakeHeaderValueIfOptionSetToTrue()
@@ -167,10 +167,10 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
         var isAdmin = await _mediator.Send(new IsSuperUserQuery(trainer.Id));
         var roles = new List<string>();
         roles.AddIf(() => isAdmin, Roles.SuperUser);
-        roles.AddIf(() => IsSocialMember(trainer.Identity.UserId), Roles.SocialMember);
-        var connectedUser = _adminBehindUser is null
+        roles.AddIf(() => IsShareholder(trainer.Identity.UserId), Roles.Shareholder);
+        var connectedUser = _impersonator is null
             ? null
-            : new ConnectedUser(_adminBehindUser.UserId!, _adminBehindUser.Email!, Name.Create(_adminBehindUser.FirstName!, _adminBehindUser.LastName!).Value);
+            : new ConnectedUser(_impersonator.UserId!, _impersonator.Email!, Name.Create(_impersonator.FirstName!, _impersonator.LastName!).Value);
         Context.User = new GenericPrincipal(new CustomIdentity(trainer, connectedUser), roles.ToArray());
         // Updates the first name, last name and email address of the current trainer if they changed for any reason.
         // If anything goes wrong an exception will be thrown and stops execution of the HTTP request.
@@ -183,7 +183,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
     /// </summary>
     /// <param name="userId">The user id of the connected user</param>
     /// <returns></returns>
-    private static bool IsSocialMember(string userId) => !Regex.Match(userId, "^AD").Success;
+    private static bool IsShareholder(string userId) => userId.StartsWith("AD", StringComparison.OrdinalIgnoreCase);
 }
 
 public class CfaAuthenticationOptions

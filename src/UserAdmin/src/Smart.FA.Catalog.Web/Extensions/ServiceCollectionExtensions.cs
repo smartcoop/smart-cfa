@@ -54,7 +54,7 @@ public static class ServiceCollectionExtensions
         return services.AddSingleton<IAuthorizationMiddlewareResultHandler, UserAdminAuthorizationResultHandler>()
             .AddScoped<IAuthorizationHandler, MustBeSuperUserOrTrainingCreatorHandler>()
             .AddScoped<IAuthorizationHandler, UserChartRevisionApprovalHandler>()
-            .AddScoped<IAuthorizationHandler, MustBeSocialMemberHandler>();
+            .AddScoped<IAuthorizationHandler, MustBeShareholderHandler>();
     }
 
     private static void ConfigureAuthorizationOptions(this AuthorizationOptions options)
@@ -67,6 +67,6 @@ public static class ServiceCollectionExtensions
         options.AddPolicy(Policies.MustBeSuperUserOrTrainingCreator,
             policy => policy.Requirements.Add(new MustBeSuperUserOrTrainingCreator()));
 
-        options.AddPolicy(Policies.MustBeSocialMember, policy => policy.Requirements.Add(new MustBeSocialMemberRequirement()));
+        options.AddPolicy(Policies.MustBeShareholder, policy => policy.Requirements.Add(new MustBeShareholderRequirement()));
     }
 }

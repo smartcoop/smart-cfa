@@ -11,10 +11,13 @@ public class AccountData
 
     public string? Email { get; set; }
 
-    public AdminBehindUser? AdminBehindUser { get; set; }
+    public Impersonator? AdminBehindUser { get; set; }
 }
 
-public class AdminBehindUser
+/// <summary>
+/// Data about a permanent member impersonating a trainer
+/// </summary>
+public class Impersonator
 {
     public string? FirstName { get; set; }
 

@@ -3,5 +3,5 @@
 public static class Roles
 {
     public const string SuperUser = nameof(SuperUser);
-    public const string SocialMember = nameof(SocialMember);
+    public const string Shareholder = nameof(Shareholder);
 }

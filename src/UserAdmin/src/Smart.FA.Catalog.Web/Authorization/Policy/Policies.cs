@@ -6,7 +6,7 @@ public static class Policies
 
     public const string MustBeSuperUser = nameof(MustBeSuperUser);
 
-    public const string MustBeSocialMember = nameof(MustBeSocialMember);
+    public const string MustBeShareholder = nameof(MustBeShareholder);
 
     public const string MustBeSuperUserOrTrainingCreator = nameof(MustBeSuperUserOrTrainingCreator);
 }

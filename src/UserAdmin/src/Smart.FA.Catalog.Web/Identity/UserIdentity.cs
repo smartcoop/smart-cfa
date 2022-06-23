@@ -23,7 +23,7 @@ public class UserIdentity : IUserIdentity
     public bool IsSuperUser => _httpContextAccessor.HttpContext!.User.IsInRole(Roles.SuperUser);
 
     /// <inheritdoc />
-    public bool IsSocialMember => _httpContextAccessor.HttpContext!.User.IsInRole(Roles.SocialMember);
+    public bool IsShareholder => _httpContextAccessor.HttpContext!.User.IsInRole(Roles.Shareholder);
 
     public UserIdentity(IHttpContextAccessor httpContextAccessor)
     {

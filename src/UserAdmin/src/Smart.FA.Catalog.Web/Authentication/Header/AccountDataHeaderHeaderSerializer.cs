@@ -11,7 +11,7 @@ public class AccountDataHeaderHeaderSerializer : IAccountDataHeaderSerializer
             FirstName = "Maxime",
             LastName = "P.",
             Email = "maxime@maxime.com",
-            AdminBehindUser = new AdminBehindUser { Email = "victor@victor.com", FirstName = "Victor", LastName = "v.", UserId = "AD-1001" }
+            AdminBehindUser = new Impersonator { Email = "victor@victor.com", FirstName = "Victor", LastName = "v.", UserId = "AD-1001" }
         };
     }
 

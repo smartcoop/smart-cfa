@@ -6,23 +6,23 @@ namespace Smart.FA.Catalog.Web.Authorization.Policy.Requirements;
 /// <summary>
 /// Requires that the user is a social member (at the opposite of a permanent member)
 /// </summary>
-public class MustBeSocialMemberRequirement : IAuthorizationRequirement
+public class MustBeShareholderRequirement : IAuthorizationRequirement
 {
 }
 
-public class MustBeSocialMemberHandler : AuthorizationHandler<MustBeSocialMemberRequirement>
+public class MustBeShareholderHandler : AuthorizationHandler<MustBeShareholderRequirement>
 {
     private readonly IUserIdentity _userIdentity;
 
-    public MustBeSocialMemberHandler(IUserIdentity userIdentity)
+    public MustBeShareholderHandler(IUserIdentity userIdentity)
     {
         _userIdentity = userIdentity;
     }
 
 
-    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, MustBeSocialMemberRequirement requirement)
+    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, MustBeShareholderRequirement requirement)
     {
-        if (_userIdentity.IsSocialMember)
+        if (_userIdentity.IsShareholder)
         {
             context.Succeed(requirement);
         }

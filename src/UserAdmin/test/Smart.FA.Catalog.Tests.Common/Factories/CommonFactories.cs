@@ -44,7 +44,7 @@ public static class MockedUserIdentityFactory
         public Trainer CurrentTrainer { get; }
 
         public bool IsSuperUser { get; }
-        public bool IsSocialMember { get; }
+        public bool IsShareholder { get; }
     }
 }
 

@@ -11,7 +11,7 @@ namespace Smart.FA.Catalog.Web.Authorization.Handlers;
 
 public class UserAdminAuthorizationResultHandler : IAuthorizationMiddlewareResultHandler
 {
-    private IUserIdentity _userIdentity;
+    private IUserIdentity? _userIdentity;
     private readonly AuthorizationMiddlewareResultHandler _defaultHandler = new();
 
     public async Task HandleAsync(
@@ -40,12 +40,12 @@ public class UserAdminAuthorizationResultHandler : IAuthorizationMiddlewareResul
 
             if (authorizationFailure.FailedRequirements.AnyOfType<MustBeSuperUserOrTrainingCreator>())
             {
-                context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                context.Response.StatusCode = StatusCodes.Status404NotFound;
             }
 
-            if (authorizationFailure.FailedRequirements.AnyOfType<MustBeSocialMemberRequirement>())
+            if (authorizationFailure.FailedRequirements.AnyOfType<MustBeShareholderRequirement>())
             {
-                context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                context.Response.StatusCode = StatusCodes.Status403Forbidden;
             }
             return;
         }
