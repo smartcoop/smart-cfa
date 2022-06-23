@@ -1,0 +1,149 @@
+﻿@using Microsoft.Extensions.Localization
+@using Smart.Design.Razor.TagHelpers.Elements.Checkbox
+@using Smart.Design.Razor.TagHelpers.Elements.Textarea
+@using Smart.Design.Razor.TagHelpers.FormGroup
+@using Smart.Design.Razor.TagHelpers.Grid
+@using Smart.Design.Razor.TagHelpers.Icon
+@using Smart.Design.Razor.TagHelpers.Panel
+@using Smart.Design.Razor.TagHelpers.Spacer
+@using Smart.FA.Catalog.Core.Services
+@using Smart.FA.Catalog.Shared.Domain.Enumerations.Common
+@using Smart.FA.Catalog.Shared.Domain.Enumerations.Training
+@model Smart.FA.Catalog.Web.Pages.Admin.Trainings.Create.CreateTrainingViewModel
+@inject IStringLocalizer<CatalogResources> Localizer
+@{
+    var identityService = ViewContext.HttpContext.RequestServices.GetRequiredService<IUserIdentity>();
+
+    var superUser = identityService.IsSuperUser;
+}
+
+<form method="post" id="form" class="u-spacer-xl">
+    <div class="o-form-group-layout o-form-group-layout--standard">
+        <smart-panel header="@CatalogResources.FieldsThatWillAppearInThePublicCatalog">
+
+            <smart-formgroup>
+                <label class="o-form-group__label">
+                    @CatalogResources.TrainingTitleCreationLabel *
+                    <span data-tooltip="tooltip-title" data-tooltip-placement="top" class="icon-help">
+                        <smart-icon icon="CircleHelp"></smart-icon>
+                    </span>
+                </label>
+                <smart-formgroup-controls>
+                    <smart-input asp-for="Title"></smart-input>
+                    <smart-validation-message asp-for="Title"></smart-validation-message>
+                </smart-formgroup-controls>
+            </smart-formgroup>
+
+            @if (superUser)
+            {
+                <smart-checkbox label="@CatalogResources.IsTrainingGivenBySmart" asp-for="IsGivenBySmart"></smart-checkbox>
+                <smart-validation-message asp-for="IsGivenBySmart"></smart-validation-message>
+            }
+            <smart-formgroup>
+                <label class="o-form-group__label">
+                    @CatalogResources.TrainingPresentation *
+                    <span data-tooltip="tooltip-presentation" data-tooltip-placement="top" class="icon-help">
+                        <smart-icon icon="CircleHelp"></smart-icon>
+                    </span>
+                </label>
+                <smart-formgroup-controls>
+                    <smart-textarea asp-for="Methodology" rows="5"></smart-textarea>
+
+                    <p class="c-form-help-text">@CatalogResources.Min30CharMax1000Char</p>
+                    <smart-validation-message asp-for="Methodology"></smart-validation-message>
+                </smart-formgroup-controls>
+            </smart-formgroup>
+
+            <smart-formgroup>
+                <label class="o-form-group__label">
+                    @CatalogResources.TrainingGoal *
+                    <span data-tooltip="tooltip-objectif" data-tooltip-placement="top" class="icon-help">
+                        <smart-icon icon="CircleHelp"></smart-icon>
+                    </span>
+                </label>
+                <smart-formgroup-controls>
+                    <smart-textarea asp-for="Goal" rows="5"></smart-textarea>
+
+                    <p class="c-form-help-text">@CatalogResources.Min30CharMax1000Char</p>
+                    <smart-validation-message asp-for="Goal"></smart-validation-message>
+                </smart-formgroup-controls>
+            </smart-formgroup>
+
+            <smart-formgroup>
+                <label class="o-form-group__label">
+                    @CatalogResources.PracticalModalities *
+                    <span data-tooltip="tooltip-modalities" data-tooltip-placement="top" class="icon-help">
+                        <smart-icon icon="CircleHelp"></smart-icon>
+                    </span>
+                </label>
+                <smart-formgroup-controls>
+                    <smart-textarea asp-for="PracticalModalities" rows="5"></smart-textarea>
+
+                    <p class="c-form-help-text">@CatalogResources.Min30CharMax1000Char</p>
+                    <smart-validation-message asp-for="PracticalModalities"></smart-validation-message>
+                </smart-formgroup-controls>
+            </smart-formgroup>
+
+            <smart-formgroup label="@CatalogResources.Topics *">
+                <smart-grid>
+                    @foreach (var topics in Topic.List.Chunk(2))
+                    {
+                        @foreach (var topic in topics)
+                        {
+                            <smart-grid-column width="4">
+                                <smart-checkbox label="@Localizer[topic.Name]" asp-for="TopicIds" value="@topic.Id" checked="@(topic.IsContainedIn(Model.TopicIds))"></smart-checkbox>
+                            </smart-grid-column>
+                        }
+                    }
+                </smart-grid>
+                <smart-validation-message asp-for="TopicIds"></smart-validation-message>
+            </smart-formgroup>
+        </smart-panel>
+
+        <smart-spacer top="ExtraLarge" bottom="ExtraLarge"></smart-spacer>
+
+        <smart-panel header="@CatalogResources.TrainingVatJustification">
+            <smart-formgroup label="@CatalogResources.TheTraining *">
+                @foreach (var vatExemptionType in VatExemptionType.List)
+                {
+                    <smart-checkbox label="@Localizer["Training_Is" + vatExemptionType.Name]" asp-for="VatExemptionTypeIds" value="@vatExemptionType.Id" checked="@(vatExemptionType.IsContainedIn(Model.VatExemptionTypeIds))"></smart-checkbox>
+                }
+                <smart-validation-message asp-for="VatExemptionTypeIds"></smart-validation-message>
+            </smart-formgroup>
+
+            <smart-formgroup label="@CatalogResources.TrainingTarget *">
+                @foreach (var targetAudience in TargetAudienceType.List)
+                {
+                    <smart-checkbox label="@Localizer[targetAudience.Name]" asp-for="TargetAudienceTypeIds" value="@targetAudience.Id" checked="@(targetAudience.IsContainedIn(Model.TargetAudienceTypeIds))"></smart-checkbox>
+                }
+                <smart-validation-message asp-for="TargetAudienceTypeIds"></smart-validation-message>
+            </smart-formgroup>
+
+            <smart-formgroup label="@CatalogResources.Training_IsItATrainingThat *">
+                @foreach (var attendanceType in AttendanceType.List)
+                {
+                    <smart-checkbox asp-for="AttendanceTypeIds" value="@attendanceType.Id" label="@Localizer["Training_" + attendanceType.Name]" checked="@(attendanceType.IsContainedIn(Model.AttendanceTypeIds))"></smart-checkbox>
+                }
+            </smart-formgroup>
+            <smart-validation-message asp-for="AttendanceTypeIds"></smart-validation-message>
+        </smart-panel>
+
+        <input type="hidden" id="isDraft" value="false" asp-for="IsDraft" />
+
+    </div>
+</form>
+<div class="c-tooltip" id="tooltip-title" role="tooltip">@CatalogResources.AddTrainingTooltip_Title
+    <div class="c-tooltip__arrow" data-popper-arrow="data-popper-arrow"></div>
+</div>
+
+<div class="c-tooltip" id="tooltip-presentation" role="tooltip">@CatalogResources.AddTrainingTooltip_Presentation
+    <div class="c-tooltip__arrow" data-popper-arrow="data-popper-arrow"></div>
+</div>
+
+<div class="c-tooltip" id="tooltip-objectif" role="tooltip">@CatalogResources.AddTrainingTooltip_Objectif
+    <div class="c-tooltip__arrow" data-popper-arrow="data-popper-arrow"></div>
+</div>
+
+<div class="c-tooltip" id="tooltip-modalities" role="tooltip">@CatalogResources.AddTrainingTooltip_Modalities
+    <div class="c-tooltip__arrow" data-popper-arrow="data-popper-arrow"></div>
+</div>

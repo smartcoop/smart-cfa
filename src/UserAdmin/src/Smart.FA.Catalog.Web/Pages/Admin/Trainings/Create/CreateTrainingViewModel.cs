@@ -1,9 +1,6 @@
-using System.Diagnostics.CodeAnalysis;
 using Smart.FA.Catalog.Application.UseCases.Commands;
 using Smart.FA.Catalog.Core.Domain.Dto;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
-using Smart.FA.Catalog.Shared.Domain.Enumerations;
-using Smart.FA.Catalog.Shared.Domain.Enumerations.Common;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin.Trainings.Create;
