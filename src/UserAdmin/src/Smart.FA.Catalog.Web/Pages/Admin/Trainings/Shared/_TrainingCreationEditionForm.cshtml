@@ -1,6 +1,5 @@
 ﻿@using Microsoft.Extensions.Localization
 @using Smart.Design.Razor.TagHelpers.Elements.Checkbox
-@using Smart.Design.Razor.TagHelpers.Elements.Textarea
 @using Smart.Design.Razor.TagHelpers.FormGroup
 @using Smart.Design.Razor.TagHelpers.Grid
 @using Smart.Design.Razor.TagHelpers.Icon
@@ -11,11 +10,7 @@
 @using Smart.FA.Catalog.Shared.Domain.Enumerations.Training
 @model Smart.FA.Catalog.Web.Pages.Admin.Trainings.Create.CreateTrainingViewModel
 @inject IStringLocalizer<CatalogResources> Localizer
-@{
-    var identityService = ViewContext.HttpContext.RequestServices.GetRequiredService<IUserIdentity>();
-
-    var superUser = identityService.IsSuperUser;
-}
+@inject IUserIdentity UserIdentity
 
 <form method="post" id="form" class="u-spacer-xl">
     <div class="o-form-group-layout o-form-group-layout--standard">
@@ -34,7 +29,7 @@
                 </smart-formgroup-controls>
             </smart-formgroup>
 
-            @if (superUser)
+            @if (UserIdentity.IsSuperUser)
             {
                 <smart-checkbox label="@CatalogResources.IsTrainingGivenBySmart" asp-for="IsGivenBySmart"></smart-checkbox>
                 <smart-validation-message asp-for="IsGivenBySmart"></smart-validation-message>
