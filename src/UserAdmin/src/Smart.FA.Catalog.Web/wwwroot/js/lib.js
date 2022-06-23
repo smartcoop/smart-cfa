@@ -70,7 +70,7 @@ function disableEnterKeyUpKeyPressOnForm() {
     function disableEnterKeyEvent(e) {
         var e = (e) ? e : ((event) ? event : null);
         var node = (e.target) ? e.target : ((e.srcElement) ? e.srcElement : null);
-        if (node.nodeName == "div" || node.nodeName == "DIV") {
+        if (node.nodeName === "div" || node.nodeName === "DIV") {
             return true;
         }
         if (e.keyIdentifier === 'U+000A' || e.keyIdentifier === 'Enter' || e.keyCode === 13) {
