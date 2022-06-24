@@ -1,0 +1,22 @@
+﻿@model Smart.FA.Catalog.Core.Domain.Trainer
+
+<smart-card>
+    <smart-card-body>
+        <smart-card-title text="@Model.Name"></smart-card-title>
+        <smart-muted-text text="@Model.Email"></smart-muted-text>
+        <smart-muted-text text="@string.Join(Environment.NewLine, Model.SocialNetworks.Where(socialNetwork => !string.IsNullOrEmpty(socialNetwork.UrlToProfile)).Select(socialNetwork => $"{socialNetwork.SocialNetwork.Name}: {socialNetwork.UrlToProfile}"))"></smart-muted-text>
+    </smart-card-body>
+    <smart-card-actions>
+        <div class="o-flex o-flex--vertical-center o-flex--justify-between o-flex--spaced-wide">
+            <div class="c-button-toolbar">
+                <form id="delete-trainer-form-@Model.Id" method="post" asp-page-handler="Delete" asp-route-id="@Model!.Id">
+                    <button class="c-button c-button--borderless c-button--icon" type="button" data-trainerId="@Model.Id" data-dialog="delete-trainer-dialog-confirmation" onclick="setTrainerId(@Model.Id)">
+                        <span class="c-button__content">
+                            <smart-icon icon="Delete"></smart-icon>
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </smart-card-actions>
+</smart-card>

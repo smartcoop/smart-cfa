@@ -998,6 +998,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Formateur supprimé avec succès.
+        /// </summary>
+        public static string TrainerDeletedWithSuccess {
+            get {
+                return ResourceManager.GetString("TrainerDeletedWithSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Le formateur n&apos;a pas été trouvé.
         /// </summary>
         public static string TrainerNotFound_TrainerId {
@@ -1012,6 +1021,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string TrainerPicture {
             get {
                 return ResourceManager.GetString("TrainerPicture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formateurs.
+        /// </summary>
+        public static string Trainers {
+            get {
+                return ResourceManager.GetString("Trainers", resourceCulture);
             }
         }
         
@@ -1273,6 +1291,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string UserChartAccept {
             get {
                 return ResourceManager.GetString("UserChartAccept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vous êtes sur le point de supprimer l&apos;accès et les données d&apos;un formateur.
+        /// </summary>
+        public static string YouAreAboutToDeleteTrainer {
+            get {
+                return ResourceManager.GetString("YouAreAboutToDeleteTrainer", resourceCulture);
             }
         }
         

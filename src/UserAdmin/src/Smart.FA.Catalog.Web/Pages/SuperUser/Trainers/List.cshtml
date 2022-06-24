@@ -1,0 +1,66 @@
+﻿@page "/superuser/trainers"
+@model Smart.FA.Catalog.Web.Pages.SuperUser.Trainers.List
+
+@{
+    Layout = "Shared/_AdminLayout";
+}
+
+
+<div class="o-container">
+
+    <div class="o-card-grid small-up-1">
+
+        @foreach (var trainer in Model.TrainerList)
+        {
+            @await Component.InvokeAsync(nameof(Shared.Components.SuperUserTrainerList), new { trainer })
+        }
+    </div>
+</div>
+
+<div id="delete-trainer-dialog-confirmation" class="c-dialog-context o-flex--center">
+    <div class="c-dialog c-dialog--small" role="dialog">
+        <div class="c-dialog__push"></div>
+        <div class="c-dialog__body">
+            <div class="c-dialog__content">
+                <h3 class="c-h3">@CatalogResources.YouAreAboutToDeleteTrainer</h3>
+            </div>
+        </div>
+        <div class="c-dialog__footer">
+            <div class="c-toolbar c-toolbar--spaced">
+                <div class="c-toolbar__right">
+                    <div class="c-toolbar__item">
+                        <div class="c-button-toolbar">
+                            <button class="c-button c-button--secondary" data-dialog-close="data-dialog-close">
+                                <div class="c-button__content">
+                                    <div class="c-button__label">@CatalogResources.Cancel</div>
+                                </div>
+                            </button>
+                            <button id="delete-trainer-button" data-trainerId="" class="c-button c-button--primary" data-dialog-close="data-dialog-close" onclick="deleteTrainer(this)">
+                                <div class="c-button__content">
+                                    <smart-icon icon="Delete"></smart-icon>
+                                    <div class="c-button__label">@CatalogResources.Delete</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="c-dialog__push"></div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+            // Submits the form surrounding the delete button of a trainer.
+            function deleteTrainer(elem) {
+                document.getElementById('delete-trainer-form-' + elem.dataset.trainerId).submit();
+            }
+
+            // Used in the SuperUserTrainerListViewComponent HTML.
+            function setTrainerId(trainerId) {
+                document.getElementById('delete-trainer-button').dataset.trainerId = trainerId;
+            }
+    </script>
+}

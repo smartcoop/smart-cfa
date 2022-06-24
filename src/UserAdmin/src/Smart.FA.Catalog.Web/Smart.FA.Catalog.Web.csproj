@@ -65,6 +65,9 @@
 
   <ItemGroup>
     <Compile Include="../Smart.FA.Catalog.Core/GlobalUsing.cs" />
+    <Compile Update="Pages\Shared\Components\SuperUserTrainerList\Default.cshtml.cs">
+      <DependentUpon>Default.cshtml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
