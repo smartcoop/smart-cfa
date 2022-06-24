@@ -202,7 +202,7 @@
     <value>Nombre de formateur·rices :</value>
   </data>
   <data name="Homepage_IntroductionPart2" xml:space="preserve">
-    <value>Smart est une coopérative de travailleuses et travailleurs qui utilisent sa structure pour exercer leur métier, par exemple de la formation.</value>
+    <value>Smart est une coopérative de travailleuses et travailleurs qui utilisent leur structure pour exercer leur métier, par exemple de la formation.</value>
   </data>
   <data name="Homepage_IntroductionPart3" xml:space="preserve">
     <value>Ce catalogue en ligne s’adresse à toute personne en recherche d’une formation. Vous trouverez sur ce site des formations de type scolaire, professionnel  (organisées et produites par Formateurs Associés asbl et Productions Associées asbl, le cas échéant). Vous visualisez aisément la personne qui dispense la formation et pouvez la contacter en direct pour obtenir davantage d’informations. </value>
@@ -295,7 +295,7 @@
     <value>Liste des formateur·rices</value>
   </data>
   <data name="TrainerListe_Presentation" xml:space="preserve">
-    <value>Retrouvez ici la liste des formateur·rices qui proposent une ou plusieurs formations sur ce site. Vous pouvez effectuer une recherche sur base de mots-clés. La liste des formateur·rices est proposée de manière aléatoire. </value>
+    <value>Retrouvez ici la liste des formateur·rices qui proposent une ou plusieurs formations sur ce site. Vous pouvez effectuer une recherche sur base du nom et prénom. La liste des formateur·rices est proposée de manière aléatoire. </value>
   </data>
   <data name="TrainingList_Title" xml:space="preserve">
     <value>Liste des formations </value>
