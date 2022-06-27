@@ -9,6 +9,6 @@ public class SuperUserOptions
     /// </summary>
     public int NumberOfTrainingsPerPage { get; set; } = 20;
 
-    public int NumberOfTrainerPerPage { get; set; } = 2;
+    public int NumberOfTrainersPerPage { get; set; } = 20;
 
 }

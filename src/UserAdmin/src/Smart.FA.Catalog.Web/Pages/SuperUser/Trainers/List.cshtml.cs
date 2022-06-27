@@ -36,9 +36,11 @@ public class List : PageModel
 
     public async Task OnGetAsync()
     {
+        ViewData[nameof(SuperUserSideMenuItem)] = SuperUserSideMenuItem.SuperUserTrainerList;
+
         //Get All trainers
         var getTrainerListRequest =
-            new GetTrainerListRequest { TrainerName = TrainerNameSearchQuery, PageItem = new PageItem(CurrentPage, Settings.NumberOfTrainerPerPage), SelfTrainerId = UserIdentity.Id };
+            new GetTrainerListRequest { TrainerName = TrainerNameSearchQuery, PageItem = new PageItem(CurrentPage, Settings.NumberOfTrainersPerPage), SelfTrainerId = UserIdentity.Id };
         TrainerList = await Mediator.Send(getTrainerListRequest);
     }
 
