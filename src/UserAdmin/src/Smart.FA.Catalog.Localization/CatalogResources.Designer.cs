@@ -647,6 +647,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Aucun formateur trouvé.
+        /// </summary>
+        public static string NoTrainerFound {
+            get {
+                return ResourceManager.GetString("NoTrainerFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Aucune formation trouvée.
         /// </summary>
         public static string NoTrainingFound {
@@ -1003,6 +1012,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string TrainerDeletedWithSuccess {
             get {
                 return ResourceManager.GetString("TrainerDeletedWithSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nom du formateur.
+        /// </summary>
+        public static string TrainerNameSearchLabel {
+            get {
+                return ResourceManager.GetString("TrainerNameSearchLabel", resourceCulture);
             }
         }
         

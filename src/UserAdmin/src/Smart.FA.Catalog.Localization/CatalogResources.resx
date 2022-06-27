@@ -180,6 +180,9 @@
   <data name="TrainingTitleCreationLabel" xml:space="preserve">
     <value>Titre de la formation</value>
   </data>
+  <data name="TrainerNameSearchLabel" xml:space="preserve">
+    <value>Nom du formateur</value>
+  </data>
   <data name="TheTraining" xml:space="preserve">
     <value>La formation</value>
   </data>
@@ -411,6 +414,9 @@
   </data>
   <data name="NoTrainingFound" xml:space="preserve">
     <value>Aucune formation trouvée</value>
+  </data>
+  <data name="NoTrainerFound" xml:space="preserve">
+    <value>Aucun formateur trouvé</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Rechercher</value>
