@@ -23,5 +23,7 @@ public static class MvcBuilderExtensions
         // Folders
         conventions.AuthorizeFolder("/Admin", Policies.AtLeastOneValidUserChartRevisionApproval);
         conventions.AuthorizeFolder("/SuperUser", Policies.MustBeSuperUser);
+        conventions.AuthorizeFolder("/Admin/Trainings", Policies.MustBeShareholder);
+        conventions.AuthorizeFolder("/Admin/Trainers", Policies.MustBeShareholder);
     }
 }

@@ -6,7 +6,13 @@ public class AccountDataHeaderHeaderSerializer : IAccountDataHeaderSerializer
 {
     private AccountData CreateMock()
     {
-        return new AccountData { FirstName = "Maxime", LastName = "P.", Email = "maxime@maxime.com" };
+        return new AccountData
+        {
+            FirstName = "Maxime",
+            LastName = "P.",
+            Email = "maxime@maxime.com",
+            AdminBehindUser = new Impersonator { Email = "victor@victor.com", FirstName = "Victor", LastName = "v.", UserId = "AD-1001" }
+        };
     }
 
     /// <inheritdoc />

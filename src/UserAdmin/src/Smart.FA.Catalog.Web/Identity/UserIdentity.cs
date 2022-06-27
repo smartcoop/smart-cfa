@@ -1,6 +1,7 @@
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.Models;
 using Smart.FA.Catalog.Core.Services;
+using Smart.FA.Catalog.Web.Authorization.Role;
 
 namespace Smart.FA.Catalog.Web.Identity;
 
@@ -19,7 +20,10 @@ public class UserIdentity : IUserIdentity
     public Trainer CurrentTrainer => Identity?.Trainer!;
 
     /// <inheritdoc />
-    public bool IsSuperUser => _httpContextAccessor.HttpContext!.User.IsInRole("SuperUser");
+    public bool IsSuperUser => _httpContextAccessor.HttpContext!.User.IsInRole(Roles.SuperUser);
+
+    /// <inheritdoc />
+    public bool IsShareholder => _httpContextAccessor.HttpContext!.User.IsInRole(Roles.Shareholder);
 
     public UserIdentity(IHttpContextAccessor httpContextAccessor)
     {

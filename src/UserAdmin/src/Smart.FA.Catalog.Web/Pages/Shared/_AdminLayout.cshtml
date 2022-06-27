@@ -92,15 +92,19 @@
     <main class="u-maximize-width u-scroll-wrapper">
         <div class="c-app-layout-inner">
             <div class="c-app-layout-inner__sidebar">
-                <ul class="c-side-menu">
-                    @foreach (var sideMenuItem in SideMenuItem.List)
-                    {
-                        <li class="c-side-menu__item @((SideMenuItem)ViewData[nameof(SideMenuItem)]! == sideMenuItem ? "c-side-menu__item--active" : "")">
-                            <a class="c-side-menu__link " href="@sideMenuItem.Href">@sideMenuItem.DisplayName()</a>
-                        </li>
-                    }
-                </ul>
+                @if (UserIdentity.IsShareholder)
+                {
+                    <ul class="c-side-menu">
 
+                        @foreach (var sideMenuItem in SideMenuItem.List)
+                        {
+                            <li class="c-side-menu__item @((SideMenuItem)ViewData[nameof(SideMenuItem)]! == sideMenuItem ? "c-side-menu__item--active" : "")">
+                                <a class="c-side-menu__link " href="@sideMenuItem.Href">@sideMenuItem.DisplayName()</a>
+                            </li>
+                        }
+
+                    </ul>
+                }
                 @if (UserIdentity.IsSuperUser)
                 {
                     <ul class="c-side-menu">

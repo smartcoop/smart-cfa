@@ -1,5 +1,6 @@
 using System.Security.Principal;
 using System.Text.Encodings.Web;
+using System.Text.RegularExpressions;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
@@ -10,8 +11,11 @@ using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Domain.Models;
 using Smart.FA.Catalog.Core.Domain.User.Dto;
 using Smart.FA.Catalog.Core.Domain.User.Enumerations;
+using Smart.FA.Catalog.Core.Domain.ValueObjects;
+using Smart.FA.Catalog.Shared.Extensions;
 using Smart.FA.Catalog.Web.Options;
 using Smart.FA.Catalog.Web.Authentication.Header;
+using Smart.FA.Catalog.Web.Authorization.Role;
 
 namespace Smart.FA.Catalog.Web.Authentication.Handlers;
 
@@ -26,11 +30,12 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
     private readonly CustomDataFieldsValidator _customDataFieldsDataValidator;
     private readonly IMediator _mediator;
     private readonly IAccountDataHeaderSerializer _accountDataHeaderSerializer;
-    private string? _userId;
-    private string? _appName;
-    private string? _firstName;
-    private string? _lastName;
-    private string? _email;
+    private string _userId = string.Empty;
+    private string _appName = string.Empty;
+    private string _firstName = string.Empty;
+    private string _lastName = string.Empty;
+    private string _email = string.Empty;
+    private Impersonator? _impersonator;
     private readonly SpecialAuthenticationOptions _authenticationOptions;
 
     public UserAdminAuthenticationHandler(
@@ -105,6 +110,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
         _firstName = accountData!.FirstName!;
         _lastName = accountData.LastName!;
         _email = accountData.Email!;
+        _impersonator = accountData.AdminBehindUser;
     }
 
     private void SetFakeHeaderValueIfOptionSetToTrue()
@@ -159,12 +165,25 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
     {
         // Sets the data for the IUserIdentity service.
         var isAdmin = await _mediator.Send(new IsSuperUserQuery(trainer.Id));
-        Context.User = new GenericPrincipal(new CustomIdentity(trainer), roles: isAdmin ? new[] { "SuperUser" } : null);
-
+        var roles = new List<string>();
+        roles.AddIf(() => isAdmin, Roles.SuperUser);
+        roles.AddIf(() => IsShareholder(trainer.Identity.UserId), Roles.Shareholder);
+        var connectedUser = _impersonator is null
+            ? null
+            : new ConnectedUser(_impersonator.UserId!, _impersonator.Email!, Name.Create(_impersonator.FirstName!, _impersonator.LastName!).Value);
+        Context.User = new GenericPrincipal(new CustomIdentity(trainer, connectedUser), roles.ToArray());
         // Updates the first name, last name and email address of the current trainer if they changed for any reason.
         // If anything goes wrong an exception will be thrown and stops execution of the HTTP request.
         await _mediator.Send(new UpdateTrainerIdentityCommand(trainer.Id, _firstName, _lastName, _email));
     }
+
+    /// <summary>
+    /// Check if the connected user is not impersonating a social member and is directly connected as a Permanent member.
+    /// The "AD" prefix before the user id is a convention adopted between the app to indicate permanent member access.
+    /// </summary>
+    /// <param name="userId">The user id of the connected user</param>
+    /// <returns></returns>
+    private static bool IsShareholder(string userId) => userId.StartsWith("AD", StringComparison.OrdinalIgnoreCase);
 }
 
 public class CfaAuthenticationOptions

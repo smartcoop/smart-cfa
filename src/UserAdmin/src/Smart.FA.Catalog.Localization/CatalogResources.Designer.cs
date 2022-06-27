@@ -674,6 +674,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cette page n&apos;est pas authorizée.
+        /// </summary>
+        public static string PageUnAuthorized {
+            get {
+                return ResourceManager.GetString("PageUnAuthorized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to En attente de validation.
         /// </summary>
         public static string PendingValidation {

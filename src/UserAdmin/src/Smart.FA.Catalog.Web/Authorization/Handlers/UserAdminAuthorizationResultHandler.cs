@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Authorization.Policy;
@@ -10,7 +11,7 @@ namespace Smart.FA.Catalog.Web.Authorization.Handlers;
 
 public class UserAdminAuthorizationResultHandler : IAuthorizationMiddlewareResultHandler
 {
-    private IUserIdentity _userIdentity;
+    private IUserIdentity? _userIdentity;
     private readonly AuthorizationMiddlewareResultHandler _defaultHandler = new();
 
     public async Task HandleAsync(
@@ -39,9 +40,13 @@ public class UserAdminAuthorizationResultHandler : IAuthorizationMiddlewareResul
 
             if (authorizationFailure.FailedRequirements.AnyOfType<MustBeSuperUserOrTrainingCreator>())
             {
-                context.Response.StatusCode = 404;
+                context.Response.StatusCode = StatusCodes.Status404NotFound;
             }
 
+            if (authorizationFailure.FailedRequirements.AnyOfType<MustBeShareholderRequirement>())
+            {
+                context.Response.StatusCode = StatusCodes.Status403Forbidden;
+            }
             return;
         }
 
