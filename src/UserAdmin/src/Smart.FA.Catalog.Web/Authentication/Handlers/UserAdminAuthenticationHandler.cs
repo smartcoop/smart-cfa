@@ -111,6 +111,16 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
     }
 
     /// <summary>
+    /// Checks if the user id and the application type passed in the header have been added to the blacklist
+    /// </summary>
+    /// <returns></returns>
+    private async Task<bool> IsBlackListed()
+    {
+        var response = await _mediator.Send(new IsUserBlackListedRequest { UserId = _userId!, ApplicationType = _appName!});
+        return response.IsBlackListed;
+    }
+
+    /// <summary>
     /// Sets hardcoded headers values if the UseFakeHeaders option is enabled.
     /// </summary>
     private void SetFakeHeaderValueIfOptionSetToTrue()
