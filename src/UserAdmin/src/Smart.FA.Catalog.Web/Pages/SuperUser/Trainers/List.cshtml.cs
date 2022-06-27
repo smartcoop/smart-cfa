@@ -39,6 +39,8 @@ public class List : PageModel
 
     public async Task<ActionResult> OnPostDeleteAsync(int id)
     {
+        var trainerResponse = await Mediator.Send(new GetTrainerRequest { TrainerId = id });
+        await Mediator.Send(new BlackListUserRequest { UserId = trainerResponse.Trainer.Identity.UserId, ApplicationTypeId = trainerResponse.Trainer.Identity.ApplicationTypeId });
         await Mediator.Send(new DeleteTrainerRequest { TrainerId = id });
         TempData.AddGlobalAlertMessage(CatalogResources.TrainerDeletedWithSuccess, AlertStyle.Success);
         return RedirectToPage();
