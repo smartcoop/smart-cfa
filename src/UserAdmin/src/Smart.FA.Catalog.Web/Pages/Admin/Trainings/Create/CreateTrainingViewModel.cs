@@ -1,3 +1,4 @@
+using Smart.FA.Catalog.Application.SeedWork.Attributes;
 using Smart.FA.Catalog.Application.UseCases.Commands;
 using Smart.FA.Catalog.Core.Domain.Dto;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;

@@ -1,5 +1,6 @@
 using FluentValidation;
 using Microsoft.Extensions.Localization;
+using Smart.FA.Catalog.Application.Extensions.FluentValidation;
 using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Web.Pages.Admin.Trainings.Update;
 
@@ -21,15 +22,15 @@ public class UpdateTrainingViewModelValidator : AbstractValidator<UpdateTraining
             .WithMessage(CatalogResources.TrainingTitleIsRequired);
 
         RuleFor(viewModel => viewModel.Methodology)
-            .MaximumLength(1000)
+            .MaximumHtmlInnerLength(1000)
             .WithMessage(CatalogResources.Max1000Characters);
 
         RuleFor(viewModel => viewModel.Goal)
-            .MaximumLength(1000)
+            .MaximumHtmlInnerLength(1000)
             .WithMessage(CatalogResources.Max1000Characters);
 
         RuleFor(viewModel => viewModel.PracticalModalities)
-            .MaximumLength(1000)
+            .MaximumHtmlInnerLength(1000)
             .WithMessage(CatalogResources.Max1000Characters);
 
         RuleFor(viewModel => viewModel.IsGivenBySmart)
@@ -48,19 +49,19 @@ public class UpdateTrainingViewModelValidator : AbstractValidator<UpdateTraining
         RuleFor(viewModel => viewModel.Methodology)
             .NotEmpty()
             .WithMessage(CatalogResources.FieldRequired)
-            .MinimumLength(30)
+            .MinimumHtmlInnerLength(30)
             .WithMessage(CatalogResources.Min30Char);
 
         RuleFor(viewModel => viewModel.Goal)
             .NotEmpty()
             .WithMessage(CatalogResources.FieldRequired)
-            .MinimumLength(30)
+            .MinimumHtmlInnerLength(30)
             .WithMessage(CatalogResources.Min30Char);
 
         RuleFor(viewModel => viewModel.PracticalModalities)
             .NotEmpty()
             .WithMessage(CatalogResources.FieldRequired)
-            .MinimumLength(30)
+            .MinimumHtmlInnerLength(30)
             .WithMessage(CatalogResources.Min30Char);
 
         RuleFor(viewModel => viewModel.TopicIds)
