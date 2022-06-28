@@ -17,10 +17,13 @@ public class CreateTrainingViewModel
 
     public List<int>? TopicIds { get; set; }
 
+    [Sanitized]
     public string? Goal { get; set; }
 
+    [Sanitized]
     public string? Methodology { get; set; }
 
+    [Sanitized]
     public string? PracticalModalities { get; set; }
 
     public bool IsDraft { get; set; }

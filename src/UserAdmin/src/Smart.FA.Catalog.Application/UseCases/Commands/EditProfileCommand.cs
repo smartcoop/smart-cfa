@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Smart.FA.Catalog.Application.SeedWork;
+using Smart.FA.Catalog.Application.SeedWork.Attributes;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Core.Extensions;
 using Smart.FA.Catalog.Infrastructure.Helpers;
@@ -21,8 +22,10 @@ public class EditProfileCommand : IRequest<ProfileEditionResponse>
 {
     public int TrainerId { get; set; }
 
+    [Sanitized]
     public string? Bio { get; set; }
 
+    [Sanitized]
     public string? Title { get; set; }
 
     public Dictionary<int, string>? Socials { get; set; }
