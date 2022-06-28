@@ -1,3 +1,4 @@
+using Ganss.XSS;
 using Microsoft.AspNetCore.Authorization;
 using Smart.FA.Catalog.Application.Models.Options;
 using Smart.FA.Catalog.Core.Services;
@@ -18,6 +19,7 @@ public static class ServiceCollectionExtensions
     {
         return services
             .AddScoped<IUserIdentity, UserIdentity>()
+            .AddSingleton<IHtmlSanitizer, HtmlSanitizer>()
             .AddOptions(configuration);
     }
 

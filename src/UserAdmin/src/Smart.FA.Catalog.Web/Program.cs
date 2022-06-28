@@ -26,6 +26,7 @@ builder.Services
 builder.Services
     .AddRazorPages()
     .ConfigureRazorPagesOptions()
+    .ConfigureMvcOptions()
     .AddFluentValidation(configuration =>
     {
         configuration.RegisterValidatorsFromAssemblyContaining<Program>();
