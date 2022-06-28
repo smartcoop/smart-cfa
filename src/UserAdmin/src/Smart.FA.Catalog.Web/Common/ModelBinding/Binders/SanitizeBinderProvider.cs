@@ -2,6 +2,7 @@ using Ganss.XSS;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Smart.FA.Catalog.Application;
+using Smart.FA.Catalog.Application.SeedWork.Attributes;
 
 namespace Smart.FA.Catalog.Web.Common.ModelBinding.Binders;
 
