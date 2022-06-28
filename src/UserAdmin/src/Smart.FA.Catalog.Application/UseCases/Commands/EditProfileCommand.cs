@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Smart.FA.Catalog.Application.Extensions.FluentValidation;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Application.SeedWork.Attributes;
 using Smart.FA.Catalog.Core.Domain;
@@ -161,10 +162,14 @@ public class EditProfileCommandValidator : AbstractValidator<EditProfileCommand>
     {
         _storageOptions = storageOptions;
 
+        RuleFor(command => command.Title)
+            .MaximumLength(100)
+            .WithMessage(CatalogResources.TrainerTitleCannotExceed100Chars);
+
         RuleFor(command => command.Bio)
             .MinimumLength(30)
             .WithMessage(CatalogResources.BioMustBe30Chars)
-            .MaximumLength(500)
+            .MaximumHtmlInnerLength(500)
             .WithMessage(CatalogResources.BioCannotExceed500Chars);
 
         RuleFor(command => command.Socials).SetValidator(new SocialNetworkValidator());
