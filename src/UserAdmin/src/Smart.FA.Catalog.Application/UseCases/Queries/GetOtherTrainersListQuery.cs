@@ -26,7 +26,6 @@ public class GetOtherTrainersListQuery : IRequestHandler<GetOtherTrainersListReq
             .Include(trainer => trainer.Assignments)
             .Where(trainer => trainer.Id != request.SelfTrainerId);
 
-
         if (!request.TrainerName.IsNullOrEmpty())
         {
             trainerQueryable = trainerQueryable.Where(trainer => trainer.Name.FirstName.Contains(request.TrainerName!) || trainer.Name.LastName.Contains(request.TrainerName!));

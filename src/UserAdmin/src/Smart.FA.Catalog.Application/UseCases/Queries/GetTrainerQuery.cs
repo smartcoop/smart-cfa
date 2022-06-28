@@ -21,7 +21,6 @@ public class GetTrainerQuery: IRequestHandler<GetTrainerRequest, GetTrainerRespo
         response.SetSuccess();
 
         return response;
-
     }
 }
 
