@@ -1,0 +1,20 @@
+﻿@model Smart.FA.Catalog.Web.Pages.Shared.Components.PagingTile.PagingObject
+
+<div class="u-spacer-xl right">
+    <div class="c-toolbar">
+        <div class="c-toolbar__left">
+            @if (Model.List.HasPreviousPage)
+            {
+                <a href="@Routes.SuperUserTrainerList?currentPage=@(Model.List.CurrentPage - 1)">@CatalogResources.Previous</a>
+            }
+        </div>
+
+        <div>Page @(Model.List.CurrentPage)/@Model.List.TotalPages.ToString()</div>
+        <div class="c-toolbar__right">
+            @if (Model.List.HasNextPage)
+            {
+                <a href="@Model.Route?currentPage=@(Model.List.CurrentPage + 1)">@CatalogResources.Next</a>
+            }
+        </div>
+    </div>
+</div>

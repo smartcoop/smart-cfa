@@ -65,6 +65,6 @@ public class List : PageModel
             }
         }
         TempData.AddGlobalAlertMessage(CatalogResources.UnExpectedError, AlertStyle.Error);
-        return Page();
+        return RedirectToPage();
     }
 }

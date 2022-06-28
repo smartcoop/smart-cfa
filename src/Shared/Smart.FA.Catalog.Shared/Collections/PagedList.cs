@@ -79,3 +79,8 @@ public class PageItem
         PageSize = pageSize;
     }
 }
+
+public static class PagedListExtensions
+{
+    public static PagedList<object> ToPagedListOfObjects<T>(this PagedList<T> pagedList) => new(pagedList.Cast<object>(), new PageItem(pagedList.CurrentPage, pagedList.PageSize), pagedList.TotalCount);
+}

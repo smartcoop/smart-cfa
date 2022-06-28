@@ -9,7 +9,6 @@
     <smart-card-body>
         <smart-card-title text="@($"{Model.Name} → id: {Model.Identity.UserId} - application: {Enumeration<ApplicationType>.FromValue(Model.Identity.ApplicationTypeId)}")"></smart-card-title>
         <smart-muted-text text="@($"Email: {Model.Email}")"></smart-muted-text>
-
         @foreach (var socialNetwork in Model.SocialNetworks)
         {
             @if (!string.IsNullOrEmpty(socialNetwork.UrlToProfile))
