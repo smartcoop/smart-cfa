@@ -69,7 +69,7 @@ function disableEnterKeyUpKeyPressOnForm() {
 
     function disableEnterKeyEvent(e) {
         var e = (e) ? e : ((event) ? event : null);
-        var node = (e.target) ? e.target : ((e.srcElement) ? e.srcElement : null);
+        var node = (e.target) ? e.target : null;
         if (node.nodeName === "div" || node.nodeName === "DIV") {
             return true;
         }
