@@ -53,7 +53,6 @@ public static class Guard
             htmlDocument.LoadHtml(htmlInput);
 
             Guard.AgainstMaxLength(htmlDocument.DocumentNode.InnerText, paramName, maxValue, message);
-            return htmlInput;
         }
 
         return htmlInput;
