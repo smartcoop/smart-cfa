@@ -15,13 +15,13 @@ public class TrainingLocalizedDetailsConfiguration : IEntityTypeConfiguration<Tr
             .Property(details => details.Title)
             .HasMaxLength(500);
         builder.Property(details => details.Goal)
-            .HasMaxLength(1000)
+            .HasMaxLength(1500)
             .IsRequired(false);
         builder.Property(details => details.Methodology)
-            .HasMaxLength(1000)
+            .HasMaxLength(1500)
             .IsRequired(false);
         builder.Property(details => details.PracticalModalities)
-            .HasMaxLength(1000)
+            .HasMaxLength(1500)
             .IsRequired(false);
         builder.Property(trainer => trainer.Language)
             .HasConversion(language => language.Value,
