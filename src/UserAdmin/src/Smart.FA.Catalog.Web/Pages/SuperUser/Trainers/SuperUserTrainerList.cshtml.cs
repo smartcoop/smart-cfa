@@ -15,9 +15,11 @@ namespace Smart.FA.Catalog.Web.Pages.SuperUser.Trainers;
 
 public class List : PageModel
 {
-    [BindProperty(SupportsGet = true)]  public string? TrainerNameSearchQuery { get; set; }
+    [BindProperty(SupportsGet = true)]
+    public string? TrainerNameSearchQuery { get; set; }
 
-    [BindProperty(SupportsGet = true)] public int CurrentPage { get; set; } = 1;
+    [BindProperty(SupportsGet = true)]
+    public int CurrentPage { get; set; } = 1;
 
     public IUserIdentity UserIdentity { get; }
 
@@ -36,20 +38,33 @@ public class List : PageModel
 
     public async Task OnGetAsync()
     {
+        // Display side panel as selected
         ViewData[nameof(SuperUserSideMenuItem)] = SuperUserSideMenuItem.SuperUserTrainerList;
 
-        //Get All trainers
+        // Get All trainers (except yourself) paged
         var getTrainerListRequest =
-            new GetTrainerListRequest { TrainerName = TrainerNameSearchQuery, PageItem = new PageItem(CurrentPage, Settings.NumberOfTrainersPerPage), SelfTrainerId = UserIdentity.Id };
+            new GetOtherTrainersListRequest { TrainerName = TrainerNameSearchQuery, PageItem = new PageItem(CurrentPage, Settings.NumberOfTrainersPerPage), SelfTrainerId = UserIdentity.Id };
         TrainerList = await Mediator.Send(getTrainerListRequest);
     }
 
     public async Task<ActionResult> OnPostDeleteAsync(int id)
     {
+        // Fetch trainer identity from trainer id
         var trainerResponse = await Mediator.Send(new GetTrainerRequest { TrainerId = id });
-        await Mediator.Send(new BlackListUserRequest { UserId = trainerResponse.Trainer.Identity.UserId, ApplicationTypeId = trainerResponse.Trainer.Identity.ApplicationTypeId });
-        await Mediator.Send(new DeleteTrainerRequest { TrainerId = id });
-        TempData.AddGlobalAlertMessage(CatalogResources.TrainerDeletedWithSuccess, AlertStyle.Success);
-        return RedirectToPage();
+        if (trainerResponse.IsSuccess)
+        {
+            // Add trainer to the blacklist
+            var blacklistingResponse = await Mediator.Send(new BlackListUserRequest { UserId = trainerResponse.Trainer.Identity.UserId, ApplicationTypeId = trainerResponse.Trainer.Identity.ApplicationTypeId });
+            if (blacklistingResponse.IsSuccess)
+            {
+                // Delete data related to the trainer
+                await Mediator.Send(new DeleteTrainerRequest { TrainerId = id });
+                // Display success message
+                TempData.AddGlobalAlertMessage(CatalogResources.TrainerDeletedWithSuccess, AlertStyle.Success);
+                return RedirectToPage();
+            }
+        }
+        TempData.AddGlobalAlertMessage(CatalogResources.UnExpectedError, AlertStyle.Error);
+        return Page();
     }
 }

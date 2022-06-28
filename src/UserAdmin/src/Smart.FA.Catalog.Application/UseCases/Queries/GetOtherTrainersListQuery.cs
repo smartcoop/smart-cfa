@@ -9,16 +9,16 @@ using Smart.FA.Catalog.Shared.Collections;
 
 namespace Smart.FA.Catalog.Application.UseCases.Queries;
 
-public class GetTrainerListQuery : IRequestHandler<GetTrainerListRequest, PagedList<Trainer>>
+public class GetOtherTrainersListQuery : IRequestHandler<GetOtherTrainersListRequest, PagedList<Trainer>>
 {
     private readonly CatalogContext _catalogContext;
 
-    public GetTrainerListQuery(CatalogContext catalogContext)
+    public GetOtherTrainersListQuery(CatalogContext catalogContext)
     {
         _catalogContext = catalogContext;
     }
 
-    public async Task<PagedList<Trainer>> Handle(GetTrainerListRequest request, CancellationToken cancellationToken)
+    public async Task<PagedList<Trainer>> Handle(GetOtherTrainersListRequest request, CancellationToken cancellationToken)
     {
         var trainerQueryable = _catalogContext.Trainers
             .Include(trainer => trainer.SocialNetworks)
@@ -36,7 +36,7 @@ public class GetTrainerListQuery : IRequestHandler<GetTrainerListRequest, PagedL
     }
 }
 
-public class GetTrainerListRequest : IRequest<PagedList<Trainer>>
+public class GetOtherTrainersListRequest : IRequest<PagedList<Trainer>>
 {
     public int SelfTrainerId { get; set; }
     public string? TrainerName { get; set; }
