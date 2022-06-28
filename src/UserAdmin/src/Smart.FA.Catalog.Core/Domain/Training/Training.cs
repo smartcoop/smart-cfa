@@ -72,7 +72,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
 
     public void SwitchVatExemptionTypes(IEnumerable<VatExemptionType>? vatExemptionTypes)
     {
-        Guard.AgainstNull(vatExemptionTypes, nameof(vatExemptionTypes));
+        Guard.Requires(() => vatExemptionTypes != null, Errors.Training.NoVatExemption().Message);
         _vatExemptionClaims.Clear();
         _vatExemptionClaims.AddRange(vatExemptionTypes!.Distinct()
             .Select(vatExemptionType => new VatExemptionClaim(this, vatExemptionType)));
@@ -80,7 +80,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
 
     public void SwitchTargetAudience(IEnumerable<TargetAudienceType>? trainingTargetAudiences)
     {
-        Guard.Requires(() => trainingTargetAudiences != null, "training audiences should not be null");
+        Guard.Requires(() => trainingTargetAudiences != null, Errors.Training.NoTargetAudience().Message);
         _targets.Clear();
         _targets.AddRange(trainingTargetAudiences!.Distinct()
             .Select(trainingAudience => new TrainingTargetAudience(this, trainingAudience)));
@@ -96,7 +96,7 @@ public class Training : SeedWork.Entity, IAggregateRoot
 
     public void SwitchTopics(IEnumerable<Topic>? topics)
     {
-        Guard.Requires(() => topics != null, "topics should not be null");
+        Guard.Requires(() => topics != null, Errors.Training.NoTopics().Message);
         _topics.Clear();
         _topics.AddRange(topics!.Distinct()
             .Select(topic => new TrainingTopic(this, topic)));
@@ -104,9 +104,9 @@ public class Training : SeedWork.Entity, IAggregateRoot
 
     public void AssignTrainer(Trainer? trainer)
     {
-        Guard.Requires(() => trainer is not null, "There should be at least one trainer assigned (owner)");
+        Guard.AgainstNull(trainer, nameof(trainer));
         TrainerAssignment trainerAssignment = new(this, trainer!);
-        if (_trainerAssignments.Contains(trainerAssignment)) throw new Exception();
+        if (_trainerAssignments.FirstOrDefault(assignment => assignment.Trainer.Id == trainer?.Id) != null) throw new Exception(Errors.Training.AlreadyAssigned(trainer.Name).Message);
         _trainerAssignments.Add(trainerAssignment);
     }
 
@@ -171,15 +171,15 @@ public class Training : SeedWork.Entity, IAggregateRoot
 
         var details = Details.FirstOrDefault(training => training.Language == Language.Create("EN").Value) ??
                              Details.First();
-        AddDomainEvent(new ValidateTrainingEvent(details.Title!, Id, TrainerAssignments.Select(assignment => assignment.TrainerId)));
+        AddDomainEvent(new ValidateTrainingEvent(details.Title, Id, TrainerAssignments.Select(assignment => assignment.TrainerId)));
         return Result.Success<Training, IEnumerable<Error>>(this);
     }
 
     public void AddDetails(string title, string? goal, string? methodology, string? practicalModalities, Language language)
     {
-        Guard.AgainstNull(title, nameof(title));
+        Guard.Requires(() => !string.IsNullOrWhiteSpace(title), Errors.Training.EmptyTitle().Message);
         Guard.Requires(() => _details.FirstOrDefault(details => details.Language.Value == language.Value) == null,
-            "A description for that language already exists");
+            Errors.Training.DuplicateLanguageDetails().Message);
         _details.Add(new TrainingLocalizedDetails(this, title!, goal, methodology, practicalModalities, language));
     }
 

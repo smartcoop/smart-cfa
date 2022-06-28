@@ -17,8 +17,6 @@ public class UpdateModel : AdminPage
 
     private int TrainingId { get; set; }
 
-    public List<string> ValidationErrors { get; private set; } = new();
-
     public IUserIdentity UserIdentity { get; }
 
     [BindProperty] public UpdateTrainingViewModel UpdateTrainingViewModel { get; set; } = null!;
@@ -34,11 +32,11 @@ public class UpdateModel : AdminPage
         SetSideMenuItem();
     }
 
-    public async Task<ActionResult> OnGet(int id)
+    public async Task<ActionResult> OnGetAsync(int id)
     {
         var user = (HttpContext.User.Identity as CustomIdentity)!;
         TrainingId = id;
-        var response = await Mediator.Send(new GetTrainingFromIdRequest {TrainingId = TrainingId}, CancellationToken.None);
+        var response = await Mediator.Send(new GetTrainingFromIdRequest {TrainingId = TrainingId});
 
         // We need to check if Training is not null otherwise MapToGetResponse will throw an exception.
         if (response.Training is null)
@@ -46,7 +44,7 @@ public class UpdateModel : AdminPage
             return RedirectToNotFound(CatalogResources.TrainingDoesNotExist);
         }
 
-        UpdateTrainingViewModel = response.MapGetToResponse(user.Trainer.DefaultLanguage);
+        UpdateTrainingViewModel = response.MapToViewModel(user.Trainer.DefaultLanguage);
         Init();
 
         // Used for returning to previous page after save.
@@ -63,9 +61,9 @@ public class UpdateModel : AdminPage
             return Page();
         }
 
-        var request = UpdateTrainingViewModel.MapToUpdateRequest(UserIdentity.Identity.Trainer.DefaultLanguage.Value, id, UserIdentity.Identity.Trainer.Id);
+        var request = UpdateTrainingViewModel.MapToRequest(UserIdentity.CurrentTrainer.DefaultLanguage.Value, id, UserIdentity.Identity.Trainer.Id);
         var response = await Mediator.Send(request);
-        UpdateTrainingViewModel = response.MapUpdateToResponse(UserIdentity.Identity.Trainer.DefaultLanguage);
+        UpdateTrainingViewModel = response.MapToViewModel(UserIdentity.CurrentTrainer.DefaultLanguage);
 
         TempData.AddGlobalAlertMessage(CatalogResources.TrainingEditedWithSuccess, AlertStyle.Success);
 

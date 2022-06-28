@@ -1,7 +1,7 @@
 using FluentEmail.MailKitSmtp;
 using Smart.FA.Catalog.Showcase.Domain.Common.Options;
 
-namespace Smart.FA.Catalog.Showcase.Web.Extensions;
+namespace Smart.Extensions.DependencyInjection;
 
 public static class FluentEmailServiceCollectionExtensions
 {

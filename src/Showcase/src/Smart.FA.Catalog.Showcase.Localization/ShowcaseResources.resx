@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!--
-    Microsoft ResX Schema
-
+  <!-- 
+    Microsoft ResX Schema 
+    
     Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
     associated with the data types.
-
+    
     Example:
-
+    
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-
-    There are any number of "resheader" rows that contain simple
+                
+    There are any number of "resheader" rows that contain simple 
     name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
     mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
     extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
     read any of the formats listed below.
-
+    
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-
+    
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
+    value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -202,7 +202,7 @@
     <value>Nombre de formateur·rices :</value>
   </data>
   <data name="Homepage_IntroductionPart2" xml:space="preserve">
-    <value>Smart est une coopérative de travailleuses et travailleurs qui utilisent sa structure pour exercer leur métier, par exemple de la formation.</value>
+    <value>Smart est une coopérative de travailleuses et travailleurs qui utilisent leur structure pour exercer leur métier, par exemple de la formation.</value>
   </data>
   <data name="Homepage_IntroductionPart3" xml:space="preserve">
     <value>Ce catalogue en ligne s’adresse à toute personne en recherche d’une formation. Vous trouverez sur ce site des formations de type scolaire, professionnel  (organisées et produites par Formateurs Associés asbl et Productions Associées asbl, le cas échéant). Vous visualisez aisément la personne qui dispense la formation et pouvez la contacter en direct pour obtenir davantage d’informations. </value>
@@ -211,10 +211,10 @@
     <value>Retour vers les formations</value>
   </data>
   <data name="GenericNotFoundPageTitle" xml:space="preserve">
-    <value>Désolé</value>
+    <value>Nous sommes désolés</value>
   </data>
   <data name="GenericNotFoundPageMessage" xml:space="preserve">
-    <value>Cette page n'existe pas</value>
+    <value>mais cette page est introuvable</value>
   </data>
   <data name="Header_LabelMemberAccess" xml:space="preserve">
     <value>&gt;&gt; Accès membre &lt;&lt;</value>
@@ -295,7 +295,7 @@
     <value>Liste des formateur·rices</value>
   </data>
   <data name="TrainerListe_Presentation" xml:space="preserve">
-    <value>Retrouvez ici la liste des formateur·rices qui proposent une ou plusieurs formations sur ce site. Vous pouvez effectuer une recherche sur base de mots-clés. La liste des formateur·rices est proposée de manière aléatoire. </value>
+    <value>Retrouvez ici la liste des formateur·rices qui proposent une ou plusieurs formations sur ce site. Vous pouvez effectuer une recherche sur base du nom et prénom. La liste des formateur·rices est proposée de manière aléatoire. </value>
   </data>
   <data name="TrainingList_Title" xml:space="preserve">
     <value>Liste des formations </value>
@@ -335,5 +335,17 @@
   </data>
   <data name="PersonalWebsite" xml:space="preserve">
     <value>Site personnel</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>Une erreur innattendue s'est produite</value>
+  </data>
+  <data name="Min30Char" xml:space="preserve">
+    <value>Minimum 30 caractères</value>
+  </data>
+  <data name="Min30CharMax1000Char" xml:space="preserve">
+    <value>min 30 caractères / max 1000 caractères</value>
+  </data>
+  <data name="TrainingWasNotFound" xml:space="preserve">
+    <value>La formation n'a pas été trouvée</value>
   </data>
 </root>

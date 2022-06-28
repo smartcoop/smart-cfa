@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Smart.FA.Catalog.Web.Pages;
+namespace Smart.FA.Catalog.Showcase.Web.Pages;
 
-public class NotFoundPageModel : PageModel
+public class ServerErrorPage : PageModel
 {
     public const string ErrorTitleKey = nameof(ErrorTitle);
 
@@ -32,7 +32,7 @@ public class NotFoundPageModel : PageModel
         }
         else
         {
-            ErrorTitle = CatalogResources.Sorry;
+            ErrorTitle = ShowcaseResources.GenericNotFoundPageTitle;
         }
     }
 
@@ -53,7 +53,7 @@ public class NotFoundPageModel : PageModel
         }
         else
         {
-            ErrorMessage = CatalogResources.PageNotFound;
+            ErrorMessage = ShowcaseResources.UnexpectedError;
         }
     }
 }

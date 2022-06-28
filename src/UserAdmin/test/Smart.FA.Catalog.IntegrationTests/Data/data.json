@@ -1,0 +1,29 @@
+{
+  "CreateTrainerFromUserApp": [
+    {
+      "UserId": "1234",
+      "FirstName": "Test",
+      "LastName": "T",
+      "ApplicationType": "Account",
+      "Email": "test@gmail.com"
+    }
+  ],
+  "EditProfileOfTrainer": [
+    {
+      "Bio": "A bio",
+      "Title": "A title"
+    }
+  ],
+  "SocialNetworkList": [
+    {
+      "1": "www.facebook.com",
+      "2": "www.twitter.com"
+    }
+  ],
+  "TrainerName": [
+    {
+      "FirstName": "Victor",
+      "LastName": "vD"
+    }
+  ]
+}

@@ -12,15 +12,15 @@ public static class TrainingQueryableExtensions
     /// <param name="query"><see cref="IQueryable{TrainingList}"/> on which the operation will be performed.</param>
     /// <param name="pageNumber">The number of the page.</param>
     /// <param name="pageSize">Every <see cref="TrainingList" /> for a given number of trainings.</param>
-    /// <param name="randomIds">Bool that indicates if the result should be randomly picked.</param>
+    /// <param name="randomizeIds">Bool that indicates if the result should be randomly picked.</param>
     /// <returns>A task representing the asynchronous operations. The task's result is a paginated list of <see cref="TrainingList" />.</returns>
     public static async Task<PagedList<TrainingList>> GetPaginatedTrainingListsAsync(this IQueryable<TrainingList> query,
         int pageNumber,
         int pageSize,
-        bool randomIds = false)
+        bool randomizeIds = false)
     {
         // We need only published trainings.
-        var result = await query.PaginateAsync(pageNumber, pageSize, randomIds);
+        var result = await query.PaginateAsync(pageNumber, pageSize, randomizeIds);
         return new PagedList<TrainingList>(result.PaginatedItems, new PageItem(pageNumber, pageSize), result.TotalCount);
     }
 
@@ -28,11 +28,11 @@ public static class TrainingQueryableExtensions
         int trainerId,
         int pageNumber,
         int pageSize,
-        bool randomIds = false)
+        bool randomizeIds = false)
     {
         // We need only published trainings.
         query = query.Where(training => training.Status == TrainingStatusType.Published.Id && training.TrainerId == trainerId);
-        var result = await query.PaginateAsync(pageNumber, pageSize, randomIds);
+        var result = await query.PaginateAsync(pageNumber, pageSize, randomizeIds);
         return new PagedList<TrainingList>(result.PaginatedItems, new PageItem(pageNumber, pageSize), result.TotalCount);
     }
 
@@ -48,7 +48,7 @@ public static class TrainingQueryableExtensions
                                                 trainingList.Methodology.Contains(searchKeyWord));
         }
 
-        var paginationResult = await query.PaginateAsync(pageNumber, pageSize);
+        var paginationResult = await query.PaginateAsync(pageNumber, pageSize, randomizeIds: false);
         return new PagedList<TrainingList>(paginationResult.PaginatedItems, new PageItem(pageNumber, pageSize), paginationResult.TotalCount);
     }
 
@@ -62,7 +62,7 @@ public static class TrainingQueryableExtensions
             query = query.Where(trainingList => trainingList.Topic == searchTopic);
         }
 
-        var paginationResult = await query.PaginateAsync(pageNumber, pageSize);
+        var paginationResult = await query.PaginateAsync(pageNumber, pageSize, randomizeIds: false);
         return new PagedList<TrainingList>(paginationResult.PaginatedItems, new PageItem(pageNumber, pageSize), paginationResult.TotalCount);
     }
 }

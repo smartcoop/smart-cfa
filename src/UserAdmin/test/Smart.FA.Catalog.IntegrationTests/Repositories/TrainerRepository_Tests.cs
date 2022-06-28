@@ -1,37 +1,37 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture;
 using FluentAssertions;
-using Microsoft.Data.SqlClient;
 using Smart.FA.Catalog.Infrastructure.Persistence.Read;
 using Smart.FA.Catalog.Infrastructure.Persistence.Write;
 using Smart.FA.Catalog.IntegrationTests.Base;
 using Smart.FA.Catalog.Tests.Common;
+using Smart.FA.Catalog.Tests.Common.Factories;
 using Xunit;
 
 namespace Smart.FA.Catalog.IntegrationTests.Repositories;
 
-[Collection("Integration test collection")]
+[Collection(IntegrationTestCollections.Default)]
 public class TrainerRepositoryTests : IntegrationTestBase
 {
-    private readonly Fixture _fixture = new();
-    private readonly TrainerQueries _trainerQueries = new(ConnectionSetup.Training.ConnectionString);
+    private readonly TrainerQueries _trainerQueries = new(Connection.Catalog.ConnectionString);
 
+    private readonly Fixture _fixture = new();
     [Fact]
     public async Task GetListFromTrainingId()
     {
         await using var context = GivenCatalogContext();
         var trainerRepository = new TrainerRepository(context);
-        var trainer = TrainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
+        var trainer = MockedTrainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
         context.Trainers.Attach(trainer);
-        context.SaveChanges();
-        var training = TrainingFactory.Create(trainer);
-        context.Trainings.Add(training);
-        context.SaveChanges();
+        await context.SaveChangesAsync();
+        var training = MockedTrainingFactory.Create(trainer);
+        context.Trainings.Attach(training);
+        await context.SaveChangesAsync();
 
         var foundTrainers = await trainerRepository.GetListAsync(training.Id, CancellationToken.None);
+
         foundTrainers.Should().NotBeEmpty();
         foundTrainers.Should().Contain(trainer);
     }
@@ -40,15 +40,13 @@ public class TrainerRepositoryTests : IntegrationTestBase
     public async Task GetReadOnlyListFromTrainingId()
     {
         await using var context = GivenCatalogContext(false);
-        var trainerToAdd = TrainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
+        var trainerToAdd = MockedTrainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
         context.Trainers.Attach(trainerToAdd);
-        var trainingToAdd = TrainingFactory.Create(trainerToAdd);
+        var trainingToAdd = MockedTrainingFactory.Create(trainerToAdd);
         context.Trainings.Attach(trainingToAdd);
         await context.SaveChangesAsync();
 
-        var trainers = (await _trainerQueries
-                .GetListAsync(new List<int> {trainingToAdd.Id}, CancellationToken.None))
-            .ToList();
+        var trainers = await _trainerQueries.GetListAsync(new List<int> { trainingToAdd.Id, 2 }, CancellationToken.None);
 
         trainers.Should().NotBeEmpty();
         trainers.Should().Contain(trainer => trainer.Id == trainerToAdd.Id);
@@ -59,7 +57,7 @@ public class TrainerRepositoryTests : IntegrationTestBase
     {
         await using var context = GivenCatalogContext();
         var trainerRepository = new TrainerRepository(context);
-        var trainer = TrainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
+        var trainer = MockedTrainerFactory.Create(_fixture.Create<string>(), _fixture.Create<string>());
         context.Trainers.Attach(trainer);
         await context.SaveChangesAsync();
 

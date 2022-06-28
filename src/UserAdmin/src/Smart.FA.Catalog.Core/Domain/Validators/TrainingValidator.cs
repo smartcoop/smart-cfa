@@ -13,8 +13,8 @@ public class TrainingValidator : AbstractValidator<Training>
             .NotEmptyWithGenericMessage().WithMessage(Errors.General.MissingField("target").Message);
         RuleFor(request => request.Topics)
             .NotEmptyWithGenericMessage().WithMessage(Errors.General.MissingField("topic").Message);
-        RuleFor(request => request.TrainerAssignments)
-            .NotEmptyWithGenericMessage().WithMessage(Errors.General.MissingField("trainer").Message);
+        RuleFor(request => request.Attendances)
+            .NotEmptyWithGenericMessage().WithMessage(Errors.General.MissingField("attendance").Message);
         RuleFor(request => request.TrainerAssignments)
             .NotEmptyWithGenericMessage().WithMessage(Errors.General.MissingField("trainer").Message);
         RuleFor(request => request.Details)

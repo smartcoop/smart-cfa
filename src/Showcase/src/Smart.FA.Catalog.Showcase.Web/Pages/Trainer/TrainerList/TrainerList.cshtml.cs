@@ -20,20 +20,23 @@ public class TrainerListModel : PageModelBase
 
     private const int ItemsPerPage = 8;
 
-    public TrainerListModel(ITrainerService trainerService, IOptions<MinIOOptions> minIOOptions)
+    [FromQuery(Name = nameof(SearchKeyword))]
+    public string? SearchKeyword { get; set; }
+
+    public TrainerListModel(ITrainerService trainerService)
     {
         _trainerService = trainerService;
     }
 
-    public async Task<ActionResult> OnGetAsync([FromQuery] string? searchKeyword)
+    public async Task<ActionResult> OnGetAsync()
     {
         if (CurrentPage <= 0)
         {
             return RedirectToNotFound();
         }
 
-        Trainers = await _trainerService.SearchTrainerDetailsViewModelsAsync(searchKeyword, CurrentPage, ItemsPerPage);
-        SetPaginationSettings(searchKeyword);
+        Trainers = await _trainerService.SearchTrainerDetailsViewModelsAsync(SearchKeyword, CurrentPage, ItemsPerPage);
+        SetPaginationSettings(SearchKeyword);
         return Page();
     }
 

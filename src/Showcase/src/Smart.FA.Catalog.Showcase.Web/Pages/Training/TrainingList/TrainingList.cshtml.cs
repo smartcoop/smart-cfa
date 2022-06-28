@@ -19,20 +19,25 @@ public class TrainingListModel : PageModelBase
     public int? TopicId { get; set; }
 
     public PaginationSettings PaginationSettings { get; set; } = null!;
+    
+    [FromQuery(Name = nameof(SearchKeyword))]
+    public string? SearchKeyword { get; set; }
 
     public TrainingListModel(ITrainingService trainingService)
     {
         _trainingService = trainingService;
     }
-    public async Task<ActionResult> OnGetAsync([FromQuery] string? searchKeyword)
+
+    public async Task<ActionResult> OnGetAsync()
     {
         if (CurrentPage <= 0)
         {
             return RedirectToNotFound();
         }
 
-        Trainings = await _trainingService.SearchTrainingViewModelsAsync(searchKeyword, CurrentPage, ItemsPerPage);
-        SetPaginationSettings(searchKeyword);
+        Trainings = await _trainingService.SearchTrainingViewModelsAsync(SearchKeyword, CurrentPage, ItemsPerPage);
+        SetPaginationSettings(SearchKeyword);
+        
         return Page();
     }
 

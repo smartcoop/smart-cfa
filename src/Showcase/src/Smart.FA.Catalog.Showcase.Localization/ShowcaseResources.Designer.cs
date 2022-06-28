@@ -277,7 +277,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cette page n&apos;existe pas.
+        ///   Looks up a localized string similar to mais cette page est introuvable.
         /// </summary>
         public static string GenericNotFoundPageMessage {
             get {
@@ -286,7 +286,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Désolé.
+        ///   Looks up a localized string similar to Nous sommes désolés.
         /// </summary>
         public static string GenericNotFoundPageTitle {
             get {
@@ -340,7 +340,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Smart est une coopérative de travailleuses et travailleurs qui utilisent sa structure pour exercer leur métier, par exemple de la formation..
+        ///   Looks up a localized string similar to Smart est une coopérative de travailleuses et travailleurs qui utilisent leur structure pour exercer leur métier, par exemple de la formation..
         /// </summary>
         public static string Homepage_IntroductionPart2 {
             get {
@@ -426,6 +426,24 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         public static string LoremIpsum {
             get {
                 return ResourceManager.GetString("LoremIpsum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum 30 caractères.
+        /// </summary>
+        public static string Min30Char {
+            get {
+                return ResourceManager.GetString("Min30Char", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to min 30 caractères / max 1000 caractères.
+        /// </summary>
+        public static string Min30CharMax1000Char {
+            get {
+                return ResourceManager.GetString("Min30CharMax1000Char", resourceCulture);
             }
         }
         
@@ -664,7 +682,7 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Retrouvez ici la liste des formateur·rices qui proposent une ou plusieurs formations sur ce site. Vous pouvez effectuer une recherche sur base de mots-clés. La liste des formateur·rices est proposée de manière aléatoire. .
+        ///   Looks up a localized string similar to Retrouvez ici la liste des formateur·rices qui proposent une ou plusieurs formations sur ce site. Vous pouvez effectuer une recherche sur base du nom et prénom. La liste des formateur·rices est proposée de manière aléatoire. .
         /// </summary>
         public static string TrainerListe_Presentation {
             get {
@@ -705,6 +723,24 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         public static string TrainingsToFollow {
             get {
                 return ResourceManager.GetString("TrainingsToFollow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to La formation n&apos;a pas été trouvée.
+        /// </summary>
+        public static string TrainingWasNotFound {
+            get {
+                return ResourceManager.GetString("TrainingWasNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Une erreur innattendue s&apos;est produite.
+        /// </summary>
+        public static string UnexpectedError {
+            get {
+                return ResourceManager.GetString("UnexpectedError", resourceCulture);
             }
         }
         

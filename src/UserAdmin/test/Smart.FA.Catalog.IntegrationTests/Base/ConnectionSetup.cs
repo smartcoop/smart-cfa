@@ -1,31 +1,23 @@
-using System.IO;
-using System.Reflection;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 namespace Smart.FA.Catalog.IntegrationTests.Base;
 
+/// <summary>
+/// Includes all connection strings for databases needed for integration testing
+/// </summary>
 public class ConnectionSetup
 {
-    public const string DatabaseName = "Training";
+    private readonly IConfigurationRoot _configuration;
 
-    public static SqlConnectionStringBuilder Master =>
-        new SqlConnectionStringBuilder
-        {
-            DataSource = @"(LocalDB)\MSSQLLocalDB",
-            InitialCatalog = "master",
-            IntegratedSecurity = true
-        };
+    public ConnectionSetup(IConfigurationRoot configuration)
+    {
+        _configuration = configuration;
+    }
 
-    public static SqlConnectionStringBuilder Training =>
-        new SqlConnectionStringBuilder
-        {
-            DataSource = @"(LocalDB)\MSSQLLocalDB",
-            InitialCatalog = "Catalog",
-            IntegratedSecurity = true
-        };
+    public SqlConnectionStringBuilder Master =>
+        new(_configuration.GetConnectionString("Catalog")) { InitialCatalog = "master" };
 
-    public static string Filename => Path.Combine(
-        Path.GetDirectoryName(
-            typeof(TestSetup).GetTypeInfo().Assembly.Location)!,
-        $"{DatabaseName}.mdf");
+    public SqlConnectionStringBuilder Catalog =>
+        new(_configuration.GetConnectionString("Catalog"));
 }
