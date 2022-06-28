@@ -1,5 +1,5 @@
 ﻿@page "/superuser/trainers"
-@using Smart.FA.Catalog.Shared.Collections
+@using Smart.FA.Catalog.Infrastructure.Extensions
 @model Smart.FA.Catalog.Web.Pages.SuperUser.Trainers.List
 
 @{
@@ -110,7 +110,7 @@
             </div>
 
             // Paging interface
-            @await Component.InvokeAsync(nameof(Shared.Components.PagingTile.PagingTile), new { list = Model.TrainerList.ToPagedListOfObjects(), route = Routes.SuperUserTrainerList })
+            @await Component.InvokeAsync(nameof(Shared.Components.PagingTile.PagingTile), new { List = Model.TrainerList.ToPagedListOfEntities(), route = Routes.SuperUserTrainerList })
         }
     </smart-spacer>
 </div>
