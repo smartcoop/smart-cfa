@@ -19,7 +19,7 @@ public class TrainingListModel : PageModelBase
     public int? TopicId { get; set; }
 
     public PaginationSettings PaginationSettings { get; set; } = null!;
-    
+
     [FromQuery(Name = nameof(SearchKeyword))]
     public string? SearchKeyword { get; set; }
 
@@ -37,7 +37,7 @@ public class TrainingListModel : PageModelBase
 
         Trainings = await _trainingService.SearchTrainingViewModelsAsync(SearchKeyword, CurrentPage, ItemsPerPage);
         SetPaginationSettings(SearchKeyword);
-        
+
         return Page();
     }
 
@@ -70,7 +70,7 @@ public class TrainingListModel : PageModelBase
         }
         else if(TopicId.HasValue)
         {
-            PaginationSettings.QueryString = $"id={TopicId.Value}";
+            PaginationSettings.QueryString = $"id={TopicId.Value}&handler=SearchTopic";
         }
     }
 }

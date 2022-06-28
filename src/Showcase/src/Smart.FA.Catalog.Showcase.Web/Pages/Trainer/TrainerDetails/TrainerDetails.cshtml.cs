@@ -40,7 +40,7 @@ public class TrainerDetailsModel : PageModelBase
             return RedirectToNotFound();
         }
 
-        Trainer = await LoadTrainerDetailsAsync(id.Value);
+        await LoadTrainerDetailsAsync(id.Value);
 
         if (Trainer is null)
         {
@@ -51,11 +51,13 @@ public class TrainerDetailsModel : PageModelBase
         return Page();
     }
 
-    private async Task<TrainerDetailsViewModel> LoadTrainerDetailsAsync(int id)
+    private async Task LoadTrainerDetailsAsync(int id)
     {
         Trainer = await _trainerService.GetTrainerDetailsViewModelsByIdAsync(id, CurrentPage, ItemsPerPage);
-        SetPaginationSettings();
-        return Trainer;
+        if (Trainer is not null)
+        {
+            SetPaginationSettings();
+        }
     }
 
     public async Task<ActionResult> OnPostAsync()
