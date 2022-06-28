@@ -1,4 +1,6 @@
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using HtmlAgilityPack;
 
 namespace Smart.FA.Catalog.Shared.Collections;
 
@@ -41,6 +43,20 @@ public static class Guard
         }
 
         return input;
+    }
+
+    public static string? AgainstMaxHtmlInnerTextLength(string? htmlInput, int maxValue, [CallerArgumentExpression("htmlInput")] string paramName = null, string? message = null)
+    {
+        if (htmlInput is not null)
+        {
+            var htmlDocument = new HtmlDocument();
+            htmlDocument.LoadHtml(htmlInput);
+
+            Guard.AgainstMaxLength(htmlDocument.DocumentNode.InnerText, paramName, maxValue, message);
+            return htmlInput;
+        }
+
+        return htmlInput;
     }
 
     public static string? AgainstMinLength(string? input, string parameterName, int minValue, string? message = null)

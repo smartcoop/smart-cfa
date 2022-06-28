@@ -66,9 +66,7 @@ public class Trainer : Entity, IAggregateRoot
     public void UpdateBiography(string newBiography)
     {
         Guard.AgainstNull(newBiography, nameof(newBiography));
-        Guard.Requires(() => newBiography.Length <= 500, Errors.Trainer.BiographyIsTooLong(Id, newBiography.Length, 500).Message);
-
-        Biography = newBiography;
+        Biography = Guard.AgainstMaxHtmlInnerTextLength(newBiography, 500, message: Errors.Trainer.BiographyIsTooLong(Id, newBiography.Length, 500).Message)!;
     }
 
     /// <summary>
