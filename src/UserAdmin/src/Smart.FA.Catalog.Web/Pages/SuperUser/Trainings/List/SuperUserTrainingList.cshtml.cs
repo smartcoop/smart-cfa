@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 using Smart.Design.Razor.TagHelpers.Pagination;
 using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Domain;
-using Smart.FA.Catalog.Core.Domain.Dto;
 using Smart.FA.Catalog.Core.Extensions;
 using Smart.FA.Catalog.Shared.Collections;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
