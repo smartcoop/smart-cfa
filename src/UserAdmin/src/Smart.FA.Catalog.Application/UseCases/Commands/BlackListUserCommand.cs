@@ -20,7 +20,7 @@ public class BlackListUserCommand : IRequestHandler<BlackListUserRequest, BlackL
     public async Task<BlackListUserResponse> Handle(BlackListUserRequest request, CancellationToken cancellationToken)
     {
         BlackListUserResponse response = new();
-        var blackListedUserIdentity = TrainerIdentity.Create(request.UserId, Enumeration<ApplicationType>.FromValue(request.ApplicationTypeId));
+        var blackListedUserIdentity = TrainerIdentity.Create(request.UserId, ApplicationType.FromValue(request.ApplicationTypeId));
         var blackListedUser =  new BlackListedUser(blackListedUserIdentity.Value);
         _catalogContext.BlackListedUsers.Add(blackListedUser);
         await _catalogContext.SaveChangesAsync(cancellationToken);

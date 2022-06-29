@@ -51,20 +51,25 @@ public class List : PageModel
     {
         // Fetch trainer identity from trainer id
         var trainerResponse = await Mediator.Send(new GetTrainerRequest { TrainerId = id });
-        if (trainerResponse.IsSuccess)
+        if (!trainerResponse.IsSuccess)
         {
-            // Add trainer to the blacklist
-            var blacklistingResponse = await Mediator.Send(new BlackListUserRequest { UserId = trainerResponse.Trainer.Identity.UserId, ApplicationTypeId = trainerResponse.Trainer.Identity.ApplicationTypeId });
-            if (blacklistingResponse.IsSuccess)
-            {
-                // Delete data related to the trainer
-                await Mediator.Send(new DeleteTrainerRequest { TrainerId = id });
-                // Display success message
-                TempData.AddGlobalAlertMessage(CatalogResources.TrainerDeletedWithSuccess, AlertStyle.Success);
-                return RedirectToPage();
-            }
+            TempData.AddGlobalAlertMessage(CatalogResources.UnExpectedError, AlertStyle.Error);
+            return RedirectToPage();
         }
-        TempData.AddGlobalAlertMessage(CatalogResources.UnExpectedError, AlertStyle.Error);
+
+        // Add trainer to the blacklist
+        var blacklistingResponse =
+            await Mediator.Send(new BlackListUserRequest { UserId = trainerResponse.Trainer.Identity.UserId, ApplicationTypeId = trainerResponse.Trainer.Identity.ApplicationTypeId });
+        if (!blacklistingResponse.IsSuccess)
+        {
+            TempData.AddGlobalAlertMessage(CatalogResources.UnExpectedError, AlertStyle.Error);
+            return RedirectToPage();
+        }
+
+        // Delete data related to the trainer
+        await Mediator.Send(new DeleteTrainerRequest { TrainerId = id });
+        // Display success message
+        TempData.AddGlobalAlertMessage(CatalogResources.TrainerDeletedWithSuccess, AlertStyle.Success);
         return RedirectToPage();
     }
 }

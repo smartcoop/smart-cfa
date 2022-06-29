@@ -6,7 +6,7 @@ using Smart.FA.Catalog.Infrastructure.Persistence;
 
 namespace Smart.FA.Catalog.Application.UseCases.Queries;
 
-public class GetTrainerQuery: IRequestHandler<GetTrainerRequest, GetTrainerResponse>
+public class GetTrainerQuery : IRequestHandler<GetTrainerRequest, GetTrainerResponse>
 {
     private readonly CatalogContext _catalogContext;
 
@@ -14,22 +14,23 @@ public class GetTrainerQuery: IRequestHandler<GetTrainerRequest, GetTrainerRespo
     {
         _catalogContext = catalogContext;
     }
+
     public async Task<GetTrainerResponse> Handle(GetTrainerRequest request, CancellationToken cancellationToken)
     {
         GetTrainerResponse response = new();
-        response.Trainer = await _catalogContext.Trainers.FirstAsync(  trainer => trainer.Id == request.TrainerId, cancellationToken);
+        response.Trainer = await _catalogContext.Trainers.SingleAsync(trainer => trainer.Id == request.TrainerId, cancellationToken);
         response.SetSuccess();
 
         return response;
     }
 }
 
-public class GetTrainerRequest: IRequest<GetTrainerResponse>
+public class GetTrainerRequest : IRequest<GetTrainerResponse>
 {
     public int TrainerId { get; set; }
 }
 
-public class GetTrainerResponse: ResponseBase
+public class GetTrainerResponse : ResponseBase
 {
     public Trainer Trainer { get; set; } = null!;
 }

@@ -19,7 +19,7 @@ public class IsUserBlackListedQuery : IRequestHandler<IsUserBlackListedRequest, 
     public async Task<IsUserBlackListedResponse> Handle(IsUserBlackListedRequest request, CancellationToken cancellationToken)
     {
         IsUserBlackListedResponse response = new();
-        var applicationType = Enumeration<ApplicationType>.FromName(request.ApplicationType);
+        var applicationType = ApplicationType.FromName(request.ApplicationType);
         var blackListedUser = await _catalogContext.BlackListedUsers.FirstOrDefaultAsync(blacklistedUser => blacklistedUser.UserId == request.UserId && blacklistedUser.ApplicationTypeId == applicationType, cancellationToken);
         response.IsBlackListed = blackListedUser is not null;
         response.SetSuccess();

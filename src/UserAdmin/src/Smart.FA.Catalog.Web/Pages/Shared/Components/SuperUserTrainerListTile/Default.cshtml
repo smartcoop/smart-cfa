@@ -1,20 +1,15 @@
 ﻿@using Smart.Design.Razor.TagHelpers.Card
 @using Smart.Design.Razor.TagHelpers.Icon
 @using Smart.Design.Razor.TagHelpers.MutedText
-@using Smart.FA.Catalog.Core.Domain.User.Enumerations
-@using Smart.FA.Catalog.Shared.Domain.Enumerations.Common
-@model Smart.FA.Catalog.Core.Domain.Trainer
+@model TrainerListTile
 
 <smart-card>
     <smart-card-body>
-        <smart-card-title text="@($"{Model.Name} → id: {Model.Identity.UserId} - application: {Enumeration<ApplicationType>.FromValue(Model.Identity.ApplicationTypeId)}")"></smart-card-title>
+        <smart-card-title text="@($"{Model.Name} → id: {Model.UserId} - application: {Model.ApplicationType}")"></smart-card-title>
         <smart-muted-text text="@($"Email: {Model.Email}")"></smart-muted-text>
-        @foreach (var socialNetwork in Model.SocialNetworks)
+        @foreach (var socialNetwork in Model.SocialNetworkDictionary)
         {
-            @if (!string.IsNullOrEmpty(socialNetwork.UrlToProfile))
-            {
-                <smart-muted-text text="@($"{socialNetwork.SocialNetwork.Name}: {socialNetwork.UrlToProfile}")"></smart-muted-text>
-            }
+            <smart-muted-text text="@($"{socialNetwork.Key}: {socialNetwork.Value}")"></smart-muted-text>
         }
     </smart-card-body>
     <smart-card-actions>

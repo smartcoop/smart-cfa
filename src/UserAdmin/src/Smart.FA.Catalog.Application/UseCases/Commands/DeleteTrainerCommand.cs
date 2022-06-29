@@ -18,8 +18,11 @@ public class DeleteTrainerCommand : IRequestHandler<DeleteTrainerRequest, Delete
     {
         DeleteTrainerResponse response = new();
         var trainer = await _catalogContext.Trainers.FirstOrDefaultAsync(trainer => trainer.Id == request.TrainerId, cancellationToken);
-        _catalogContext.Remove(trainer);
-        await _catalogContext.SaveChangesAsync(cancellationToken);
+        if (trainer is not null)
+        {
+            _catalogContext.Remove(trainer);
+            await _catalogContext.SaveChangesAsync(cancellationToken);
+        }
         response.SetSuccess();
         return response;
     }

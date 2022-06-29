@@ -8,4 +8,5 @@ public static partial class LogEventIds
     public static EventId TrainerUpdated = new(20005, nameof(TrainerUpdated));
     public static EventId TrainerDeleted = new(20006, nameof(TrainerDeleted));
     public static EventId TrainerProfileImageUpdated = new(20007, nameof(TrainerProfileImageUpdated));
+    public static EventId TrainerNotFound= new(20008, nameof(TrainerNotFound));
 }
