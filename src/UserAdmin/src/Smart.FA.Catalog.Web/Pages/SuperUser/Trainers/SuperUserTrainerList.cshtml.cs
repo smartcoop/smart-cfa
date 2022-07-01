@@ -56,18 +56,13 @@ public class List : PageModel
             TempData.AddGlobalAlertMessage(CatalogResources.UnExpectedError, AlertStyle.Error);
             return RedirectToPage();
         }
-
-        // Add trainer to the blacklist
-        var blacklistingResponse =
-            await Mediator.Send(new BlackListUserRequest { UserId = trainerResponse.Trainer.Identity.UserId, ApplicationTypeId = trainerResponse.Trainer.Identity.ApplicationTypeId });
-        if (!blacklistingResponse.IsSuccess)
+        // Delete data related to the trainer
+        var deleteTrainerWithTrainingsResponse = await Mediator.Send(new DeleteTrainerWithTrainingsRequest { TrainerId = id });
+        if (!deleteTrainerWithTrainingsResponse.IsSuccess)
         {
             TempData.AddGlobalAlertMessage(CatalogResources.UnExpectedError, AlertStyle.Error);
             return RedirectToPage();
         }
-
-        // Delete data related to the trainer
-        await Mediator.Send(new DeleteTrainerRequest { TrainerId = id });
         // Display success message
         TempData.AddGlobalAlertMessage(CatalogResources.TrainerDeletedWithSuccess, AlertStyle.Success);
         return RedirectToPage();
