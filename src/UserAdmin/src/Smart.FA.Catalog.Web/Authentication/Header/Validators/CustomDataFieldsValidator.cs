@@ -1,7 +1,7 @@
 namespace Smart.FA.Catalog.Web.Authentication.Header.Validators;
 
 /// <summary>
-/// Validator for validation of the customData header holding the current user information.
+/// Validator for the customData header holding the current user information.
 /// </summary>
 internal class CustomDataFieldsValidator
 {
