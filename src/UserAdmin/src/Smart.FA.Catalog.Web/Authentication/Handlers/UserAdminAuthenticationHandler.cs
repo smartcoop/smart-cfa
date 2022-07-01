@@ -115,7 +115,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
     /// </summary>
     private void SetFakeHeaderValueIfOptionSetToTrue()
     {
-        // The developer may not pass through NGNIX redirection therefore because he is developing locally.
+        // A user will then bypass any NGNIX redirection (usefull for debugging locally for example)
         if (_authenticationOptions.UseFakeHeaders)
         {
             Context.Request.Headers.Add(Headers.UserId, "1");
