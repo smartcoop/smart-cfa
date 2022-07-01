@@ -1,8 +1,6 @@
 ﻿@page
 @using Microsoft.Extensions.Localization
 @using Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer
-@using Smart.FA.Catalog.Showcase.Domain.Common.Enums
-@using Smart.FA.Catalog.Showcase.Infrastructure.Data
 @using Smart.FA.Catalog.Showcase.Web.Extensions
 @model Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerDetails.TrainerDetailsModel
 @inject IStringLocalizer<ShowcaseResources> StringLocalizer
@@ -83,23 +81,8 @@
         }
     </div>
 
-    <div class="u-spacer-xl">
-        <div class="c-toolbar">
-            <div class="c-toolbar__left">
-                @if (Model?.Trainer.Trainings?.HasPreviousPage ?? false)
-                {
-                    <a asp-page="@Routes.TrainerDetails" asp-route-CurrentPage="@(Model.CurrentPage - 1)" asp-route-id="@Model.Trainer.Id">@ShowcaseResources.Previous</a>
-                }
-            </div>
-
-            <div>Page @(Model.CurrentPage)/@(Model?.Trainer.Trainings?.TotalPages ?? 0)</div>
-            <div class="c-toolbar__right">
-                @if (Model?.Trainer.Trainings?.HasNextPage ?? false)
-                {
-                    <a asp-page="@Routes.TrainerDetails" asp-route-CurrentPage="@(Model.CurrentPage + 1)" asp-route-id="@Model.Trainer.Id">@ShowcaseResources.Next</a>
-                }
-            </div>
-        </div>
+    <div class="c-toolbar">
+        <smart-pagination pagination-settings="Model.PaginationSettings"></smart-pagination>
     </div>
 
     <div class="trainer-card__footer">
