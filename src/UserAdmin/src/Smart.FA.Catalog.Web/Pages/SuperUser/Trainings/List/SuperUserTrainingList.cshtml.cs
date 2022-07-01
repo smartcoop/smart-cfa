@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
+using Smart.Design.Razor.TagHelpers.Pagination;
 using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Domain;
-using Smart.FA.Catalog.Core.Domain.Dto;
 using Smart.FA.Catalog.Core.Extensions;
 using Smart.FA.Catalog.Shared.Collections;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
@@ -63,6 +63,7 @@ public class SuperUserTrainingListPageModel : PageModel
         {
             GetTrainingsRequest.PageSize = _settings.NumberOfTrainingsPerPage;
             Trainings = await _mediator.Send(GetTrainingsRequest);
+            SetPaginationSettings();
             LoadData();
         }
         catch (Exception exception)
@@ -95,9 +96,27 @@ public class SuperUserTrainingListPageModel : PageModel
 
         if (request.Topics is not null && request.Topics.Any())
         {
-            queryString += string.Join("&", request.Topics.Select(p => $"{nameof(request.Topics)}={p}"));
+            queryString += string.Join("&", request.Topics.Select(p => $"{nameof(request.Topics)}={p}") + "&");
+        }
+
+        if (request.TrainerName is not null)
+        {
+            queryString += $"{nameof(request.TrainerName)}={request.TrainerName}";
         }
 
         return queryString;
     }
+    private void SetPaginationSettings()
+    {
+        PaginationSettings = new PaginationSettings()
+        {
+            NumberOfLinks = 7,
+            PageNumber = Trainings!.CurrentPage,
+            TotalPages = Trainings.TotalPages,
+            PageNumberParameterName = nameof(GetTrainingsRequest.PageNumber),
+            QueryString = SerializeHtmlForm()
+        };
+    }
+
+    public PaginationSettings PaginationSettings { get; set; } = new();
 }
