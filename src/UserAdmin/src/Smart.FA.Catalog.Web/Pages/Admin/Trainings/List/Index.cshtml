@@ -96,22 +96,7 @@ else
         </div>
 
         <div class="u-spacer-xl right">
-            <div class="c-toolbar">
-                <div class="c-toolbar__left">
-                    @if (Model?.Trainings?.HasPreviousPage ?? false)
-                    {
-                        <a asp-page="/admin/trainings/list/index" asp-route-CurrentPage="@(Model.CurrentPage - 1)">@CatalogResources.Previous</a>
-                    }
-                </div>
-
-                <div>Page @(Model?.CurrentPage ?? 0)/@(Model?.Trainings?.TotalPages ?? 0)</div>
-                <div class="c-toolbar__right">
-                    @if (Model?.Trainings?.HasNextPage ?? false)
-                    {
-                        <a asp-page="/admin/trainings/list/index" asp-route-CurrentPage="@(Model.CurrentPage + 1)">@CatalogResources.Next</a>
-                    }
-                </div>
-            </div>
+            <smart-pagination  pagination-settings="Model.PaginationSettings"></smart-pagination>
         </div>
     </div>
     <div id="delete-training-dialog-confirmation" class="c-dialog-context o-flex--center">

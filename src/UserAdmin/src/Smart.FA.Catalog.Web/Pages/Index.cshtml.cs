@@ -18,4 +18,9 @@ public class IndexModel : PageModel
     {
         return RedirectToPage("/Admin/Index");
     }
+
+    public IActionResult OnPost()
+    {
+        return RedirectToPage("/Admin/Index");
+    }
 }
