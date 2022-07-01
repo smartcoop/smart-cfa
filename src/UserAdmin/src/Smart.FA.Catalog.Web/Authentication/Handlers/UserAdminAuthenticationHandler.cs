@@ -164,8 +164,8 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
     private async Task SetUserIdentityAsync(Trainer trainer)
     {
         // Sets the data for the IUserIdentity service.
-        var isAdmin = await _mediator.Send(new IsSuperUserQuery(trainer.Id));
-        Context.User = new GenericPrincipal(new CustomIdentity(trainer), roles: isAdmin ? new[] { "SuperUser" } : null);
+        var isSuperUser = await _mediator.Send(new IsSuperUserQuery(trainer.Id));
+        Context.User = new GenericPrincipal(new CustomIdentity(trainer), roles: isSuperUser ? new[] { "SuperUser" } : null);
 
         // Updates the first name, last name and email address of the current trainer if they changed for any reason.
         // If anything goes wrong an exception will be thrown and stops execution of the HTTP request.
