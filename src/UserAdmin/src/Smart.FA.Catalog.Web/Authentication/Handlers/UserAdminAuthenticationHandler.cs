@@ -111,7 +111,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
     }
 
     /// <summary>
-    /// Sets hardcoded headers values if UserFakeHeaders options is enabled.
+    /// Sets hardcoded headers values if the UseFakeHeaders option is enabled.
     /// </summary>
     private void SetFakeHeaderValueIfOptionSetToTrue()
     {
