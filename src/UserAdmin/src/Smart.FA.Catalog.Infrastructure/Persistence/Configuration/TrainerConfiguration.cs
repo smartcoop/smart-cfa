@@ -38,7 +38,7 @@ public class TrainerConfiguration : EntityConfigurationBase<Trainer>
             )
             .HasColumnType("nchar(2)");
 
-        builder.Property(trainer => trainer.Biography).HasMaxLength(2250);
+        builder.Property(trainer => trainer.Biography).HasMaxLength(3000);
         builder.Property(trainer => trainer.Title).HasMaxLength(150);
         builder.Property(trainer => trainer.ProfileImagePath).HasMaxLength(50);
 
