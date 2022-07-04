@@ -1,32 +1,13 @@
-﻿namespace Smart.FA.Catalog.Web.Authentication.Header;
+namespace Smart.FA.Catalog.Web.Authentication.Header.Validators;
 
-internal class AccountHeadersValidator
-{
-    public List<string> Validate(IHeaderDictionary headerDictionary)
-    {
-        var validationFailures = new List<string>();
-
-        if (!headerDictionary.ContainsKey(Headers.UserId))
-        {
-            validationFailures.Add($"{Headers.UserId} header not found");
-        }
-
-        if (!headerDictionary.ContainsKey(Headers.ApplicationName))
-        {
-            validationFailures.Add($"{Headers.ApplicationName} header not found");
-        }
-
-        if (!headerDictionary.ContainsKey(Headers.AccountData))
-        {
-            validationFailures.Add($"{Headers.AccountData} header not found");
-        }
-
-        return validationFailures;
-    }
-}
-
+/// <summary>
+/// Validator for the customData header holding the current user information.
+/// </summary>
 internal class CustomDataFieldsValidator
 {
+    /// <summary>
+    /// Validates the customData header holding the current user information.
+    /// </summary>
     public List<string> Validate(AccountData? accountData)
     {
         var validationFailures = new List<string>();
@@ -34,6 +15,8 @@ internal class CustomDataFieldsValidator
         if (accountData is null)
         {
             validationFailures.Add($"{nameof(AccountData)} not found in {Headers.AccountData} header");
+
+            return validationFailures;
         }
 
         if (accountData.FirstName is null)
