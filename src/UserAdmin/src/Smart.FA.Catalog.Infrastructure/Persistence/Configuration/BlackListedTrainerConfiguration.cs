@@ -10,8 +10,6 @@ public class BlackListedTrainerConfiguration : IEntityTypeConfiguration<BlackLis
     {
         builder.HasKey(blackListedTrainer => blackListedTrainer.TrainerId);
 
-        builder.Property(blackListedTrainer => blackListedTrainer.TrainerId);
-
         builder.ToTable("BlackListedTrainer");
     }
 }

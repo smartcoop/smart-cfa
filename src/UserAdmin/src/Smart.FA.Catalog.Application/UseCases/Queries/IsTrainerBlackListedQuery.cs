@@ -14,10 +14,7 @@ public class IsTrainerBlackListedQuery : IRequestHandler<IsTrainerBlackListedReq
     }
 
     public async Task<bool> Handle(IsTrainerBlackListedRequest request, CancellationToken cancellationToken)
-    {
-        var blackListedTrainer = await _catalogContext.BlackListedTrainer.FirstOrDefaultAsync(blacklistedTrainer => blacklistedTrainer.TrainerId == request.TrainerId, cancellationToken);
-        return blackListedTrainer is not null;
-    }
+        => await _catalogContext.BlackListedTrainer.AnyAsync(blacklistedTrainer => blacklistedTrainer.TrainerId == request.TrainerId, cancellationToken);
 }
 
 public class IsTrainerBlackListedRequest : IRequest<bool>

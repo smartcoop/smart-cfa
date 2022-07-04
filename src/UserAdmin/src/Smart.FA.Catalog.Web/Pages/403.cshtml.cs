@@ -25,17 +25,16 @@ public class ForbiddenPageModel : PageModel
         if (TempData.ContainsKey(ErrorTitleKey))
         {
             ErrorTitle = TempData[ErrorTitle]!.ToString()!;
+            return;
         }
 
-        else if (HttpContext.Items.ContainsKey(ErrorTitleKey))
+        if (HttpContext.Items.ContainsKey(ErrorTitleKey))
         {
             ErrorTitle = HttpContext.Items[ErrorTitleKey]!.ToString()!;
+            return;
         }
 
-        else
-        {
-            ErrorTitle = CatalogResources.Sorry;
-        }
+        ErrorTitle = CatalogResources.Sorry;
     }
 
     private void SetMessage()
