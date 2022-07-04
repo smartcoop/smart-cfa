@@ -27,18 +27,12 @@ public class SuperUserTrainerListTile : ViewComponent
             Name = trainer.Name,
             ApplicationType = ApplicationType.FromValue(trainer.Identity.ApplicationTypeId).Name,
             UserId = trainer.Identity.UserId,
-            SocialNetworkDictionary = DictionaryOutOfSocialNetwork(trainer.SocialNetworks),
             IsBlackListed = isTrainerBlackListed
         };
         return View(trainerListTile);
     }
 
     public async Task<bool> IsBlackListed(Trainer trainer) => await _mediator.Send(new IsTrainerBlackListedRequest { TrainerId = trainer.Id });
-
-    public Dictionary<string, string> DictionaryOutOfSocialNetwork(IEnumerable<TrainerSocialNetwork> trainerSocialNetworks)
-        => trainerSocialNetworks
-            .Where(trainerSocialNetwork => !string.IsNullOrEmpty(trainerSocialNetwork.UrlToProfile))
-            .ToDictionary(trainerSocialNetwork => trainerSocialNetwork.SocialNetwork.Name, trainerSocialNetwork => trainerSocialNetwork.UrlToProfile!);
 }
 
 public class TrainerListTile
@@ -48,8 +42,6 @@ public class TrainerListTile
     public string Email { get; set; } = null!;
 
     public Name Name { get; set; } = null!;
-
-    public Dictionary<string, string> SocialNetworkDictionary { get; set; } = new();
 
     public string UserId { get; set; } = null!;
 
