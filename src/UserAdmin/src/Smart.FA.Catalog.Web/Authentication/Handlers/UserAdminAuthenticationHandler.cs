@@ -60,7 +60,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
             // An exception will be thrown if any of the headers are invalid.
             EnsureHeaders();
 
-            // Retrieves the trainer profile by its smart id.
+            // Retrieve the trainer profile by its smart id.
             var currentTrainer = await GetTrainerBySmartUserIdAndApplicationTypeAsync();
 
             // Handle first time a Smart user connects in FA.
