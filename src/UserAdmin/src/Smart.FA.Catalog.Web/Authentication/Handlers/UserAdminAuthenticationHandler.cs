@@ -60,10 +60,6 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
             // An exception will be thrown if any of the headers are invalid.
             EnsureHeaders();
 
-            // Retrieve the trainer profile by its smart id.
-            // Throws exception if an user is blacklisted from the application
-            await ThrowIfUserIsBlackListedAsync();
-
             // Retrieves the trainer profile by its smart id.
             var currentTrainer = await GetTrainerBySmartUserIdAndApplicationTypeAsync();
 
@@ -79,10 +75,6 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
 
             var ticket = new AuthenticationTicket(Context.User, Scheme.Name);
             return AuthenticateResult.Success(ticket);
-        }
-        catch (BlackListedUserException e)
-        {
-            return AuthenticateResult.Fail(e);
         }
         catch (AccountHeadersMissingException e)
         {
@@ -116,20 +108,6 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
         _firstName = accountData!.FirstName!;
         _lastName = accountData.LastName!;
         _email = accountData.Email!;
-    }
-
-    /// <summary>
-    /// Checks if the user id and the application type passed in the header have been added to the blacklist
-    /// </summary>
-    /// <returns></returns>
-    private async Task ThrowIfUserIsBlackListedAsync()
-    {
-        var response = await _mediator.Send(new IsUserBlackListedRequest { UserId = _userId!, ApplicationType = _appName!});
-        if (response.IsBlackListed)
-        {
-            Logger.LogInformation($"Blacklisted User `{_userId}` connected from `{_appName}` has tried to access the app.");
-            throw new BlackListedUserException("This user does not have access to the page");
-        }
     }
 
     /// <summary>
@@ -203,13 +181,6 @@ public class CfaAuthenticationOptions
 public class AccountHeadersMissingException : Exception
 {
     public AccountHeadersMissingException(string? message) : base(message)
-    {
-    }
-}
-
-public class BlackListedUserException : Exception
-{
-    public BlackListedUserException(string? message) : base(message)
     {
     }
 }

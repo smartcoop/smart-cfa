@@ -674,6 +674,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to L&apos;accès à cette page vous est interdit.
+        /// </summary>
+        public static string PageForbidden {
+            get {
+                return ResourceManager.GetString("PageForbidden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to mais cette page est introuvable.
         /// </summary>
         public static string PageNotFound {
@@ -1007,6 +1016,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Formateur ajouté à la blacklist avec succès.
+        /// </summary>
+        public static string TrainerBlackListedWithSuccess {
+            get {
+                return ResourceManager.GetString("TrainerBlackListedWithSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Formateur supprimé avec succès.
         /// </summary>
         public static string TrainerDeletedWithSuccess {
@@ -1057,6 +1075,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string TrainerTitle {
             get {
                 return ResourceManager.GetString("TrainerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formateur ajouté à la whitelist avec succès.
+        /// </summary>
+        public static string TrainerWhiteListedWithSuccess {
+            get {
+                return ResourceManager.GetString("TrainerWhiteListedWithSuccess", resourceCulture);
             }
         }
         

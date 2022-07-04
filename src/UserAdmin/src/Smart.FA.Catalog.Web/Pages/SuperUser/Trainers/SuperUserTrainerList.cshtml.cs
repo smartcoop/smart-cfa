@@ -56,6 +56,7 @@ public class List : PageModel
             TempData.AddGlobalAlertMessage(CatalogResources.UnExpectedError, AlertStyle.Error);
             return RedirectToPage();
         }
+
         // Delete data related to the trainer
         var deleteTrainerWithTrainingsResponse = await Mediator.Send(new DeleteTrainerWithTrainingsRequest { TrainerId = id });
         if (!deleteTrainerWithTrainingsResponse.IsSuccess)
@@ -63,8 +64,55 @@ public class List : PageModel
             TempData.AddGlobalAlertMessage(CatalogResources.UnExpectedError, AlertStyle.Error);
             return RedirectToPage();
         }
+
         // Display success message
         TempData.AddGlobalAlertMessage(CatalogResources.TrainerDeletedWithSuccess, AlertStyle.Success);
+        return RedirectToPage();
+    }
+
+    public async Task<ActionResult> OnPostBlackListAsync(int id)
+    {
+        // Fetch trainer identity from trainer id
+        var trainerResponse = await Mediator.Send(new GetTrainerRequest { TrainerId = id });
+        if (!trainerResponse.IsSuccess)
+        {
+            TempData.AddGlobalAlertMessage(CatalogResources.UnExpectedError, AlertStyle.Error);
+            return RedirectToPage();
+        }
+
+        // Blacklist trainer
+        var blackListedUserResponse = await Mediator.Send(new BlackListTrainerRequest { TrainerId = trainerResponse.Trainer.Id });
+        if (!blackListedUserResponse.IsSuccess)
+        {
+            TempData.AddGlobalAlertMessage(CatalogResources.UnExpectedError, AlertStyle.Error);
+            return RedirectToPage();
+        }
+
+        // Display success message
+        TempData.AddGlobalAlertMessage(CatalogResources.TrainerBlackListedWithSuccess, AlertStyle.Success);
+        return RedirectToPage();
+    }
+
+    public async Task<ActionResult> OnPostWhiteListAsync(int id)
+    {
+        // Fetch trainer identity from trainer id
+        var trainerResponse = await Mediator.Send(new GetTrainerRequest { TrainerId = id });
+        if (!trainerResponse.IsSuccess)
+        {
+            TempData.AddGlobalAlertMessage(CatalogResources.UnExpectedError, AlertStyle.Error);
+            return RedirectToPage();
+        }
+
+        // Whitelist trainer
+        var blackListedUserResponse = await Mediator.Send(new WhiteListTrainerRequest { TrainerId = trainerResponse.Trainer.Id });
+        if (!blackListedUserResponse.IsSuccess)
+        {
+            TempData.AddGlobalAlertMessage(CatalogResources.UnExpectedError, AlertStyle.Error);
+            return RedirectToPage();
+        }
+
+        // Display success message
+        TempData.AddGlobalAlertMessage(CatalogResources.TrainerWhiteListedWithSuccess, AlertStyle.Success);
         return RedirectToPage();
     }
 }

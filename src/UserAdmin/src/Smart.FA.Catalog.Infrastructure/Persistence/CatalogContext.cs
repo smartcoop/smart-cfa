@@ -30,8 +30,8 @@ public class CatalogContext : DbContext
 
     public DbSet<SuperUser> SuperUsers { get; set; } = null!;
 
-    public DbSet<BlackListedUser> BlackListedUsers { get; set; } = null!;
-    
+    public DbSet<BlackListedTrainer> BlackListedTrainer { get; set; } = null!;
+
     public DbSet<UserChartRevision> UserChartRevisions { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

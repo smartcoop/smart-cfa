@@ -4,29 +4,27 @@
 
 namespace Infrastructure.Migrations
 {
-    public partial class Add_BlackList_User_Table : Migration
+    public partial class Add_BlackList_Trainer_Table : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "BlackListedUser",
+                name: "BlackListedTrainer",
                 schema: "Cfa",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    ApplicationType = table.Column<int>(type: "int", nullable: false)
+                    TrainerId = table.Column<int>(type: "int", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BlackListedUser", x => new { x.UserId, x.ApplicationType })
-                        .Annotation("SqlServer:Clustered", true);
+                    table.PrimaryKey("PK_BlackListedTrainer", x => x.TrainerId);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BlackListedUser",
+                name: "BlackListedTrainer",
                 schema: "Cfa");
         }
     }

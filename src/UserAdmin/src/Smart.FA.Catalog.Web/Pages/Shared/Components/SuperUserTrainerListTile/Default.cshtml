@@ -22,6 +22,14 @@
                         </span>
                     </button>
                 </form>
+
+                <form id="blacklist-trainer-form-@Model.Id" method="post" asp-page-handler="@(Model.IsBlackListed ? "WhiteList" : "BlackList")" asp-route-id="@Model!.Id">
+                    <button class="c-button c-button--borderless c-button--icon">
+                        <span class="c-button__content">
+                            <smart-icon icon="@(Model.IsBlackListed ? Image.CircleCheck : Image.CircleError)"></smart-icon>
+                        </span>
+                    </button>
+                </form>
             </div>
         </div>
     </smart-card-actions>

@@ -472,6 +472,12 @@
   <data name="TrainerDeletedWithSuccess" xml:space="preserve">
     <value>Formateur supprimé avec succès</value>
   </data>
+  <data name="TrainerWhiteListedWithSuccess" xml:space="preserve">
+    <value>Formateur ajouté à la whitelist avec succès</value>
+  </data>
+  <data name="TrainerBlackListedWithSuccess" xml:space="preserve">
+    <value>Formateur ajouté à la blacklist avec succès</value>
+  </data>
   <data name="UpdateTraining_YouCantEditATrainingYouDidntCreate" xml:space="preserve">
     <value>Vous ne pouvez pas éditer une formation dont vous n'êtes pas l'auteur.</value>
   </data>
@@ -480,6 +486,9 @@
   </data>
   <data name="PageNotFound" xml:space="preserve">
     <value>mais cette page est introuvable</value>
+  </data>
+  <data name="PageForbidden" xml:space="preserve">
+    <value>L'accès à cette page vous est interdit</value>
   </data>
   <data name="UnExpectedError" xml:space="preserve">
     <value>Une erreur innattendue s'est produite</value>

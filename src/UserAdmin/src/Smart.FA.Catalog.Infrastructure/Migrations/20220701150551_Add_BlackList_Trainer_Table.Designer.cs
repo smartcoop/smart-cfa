@@ -12,8 +12,8 @@ using Smart.FA.Catalog.Infrastructure.Persistence;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    [Migration("20220627090710_Add_BlackList_User_Table")]
-    partial class Add_BlackList_User_Table
+    [Migration("20220701150551_Add_BlackList_Trainer_Table")]
+    partial class Add_BlackList_Trainer_Table
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,22 +25,19 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.Authorization.BlackListedUser", b =>
+            modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.Authorization.BlackListedTrainer", b =>
                 {
-                    b.Property<string>("UserId")
+                    b.Property<int>("TrainerId")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
-                        .HasColumnName("UserId");
-
-                    b.Property<int>("ApplicationTypeId")
                         .HasColumnType("int")
-                        .HasColumnName("ApplicationType");
+                        .HasColumnName("TrainerId");
 
-                    b.HasKey("UserId", "ApplicationTypeId");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TrainerId"), 1L, 1);
 
-                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("UserId", "ApplicationTypeId"));
+                    b.HasKey("TrainerId");
 
-                    b.ToTable("BlackListedUser", "Cfa");
+                    b.ToTable("BlackListedTrainer", "Cfa");
                 });
 
             modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.Authorization.SuperUser", b =>
