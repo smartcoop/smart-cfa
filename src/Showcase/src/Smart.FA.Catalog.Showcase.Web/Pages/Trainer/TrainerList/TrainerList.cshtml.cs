@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Smart.FA.Catalog.Shared.Collections;
 using Smart.FA.Catalog.Showcase.Web.Services.Trainer;
-using Microsoft.Extensions.Options;
 using Smart.Design.Razor.TagHelpers.Pagination;
-using Smart.FA.Catalog.Showcase.Web.Options;
 
 namespace Smart.FA.Catalog.Showcase.Web.Pages.Trainer.TrainerList;
 

@@ -1,8 +1,5 @@
-using System.Collections.Generic;
 using System.Globalization;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Smart.FA.Catalog.Web.Extensions;
 

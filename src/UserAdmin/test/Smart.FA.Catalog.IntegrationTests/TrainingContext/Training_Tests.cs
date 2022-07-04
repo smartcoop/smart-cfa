@@ -2,7 +2,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Smart.FA.Catalog.IntegrationTests.Base;
-using Smart.FA.Catalog.Tests.Common;
 using Smart.FA.Catalog.Tests.Common.Factories;
 using Xunit;
 

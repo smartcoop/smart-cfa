@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Smart.FA.Catalog.Shared.Collections;
-using Smart.FA.Catalog.Showcase.Infrastructure.Data;
 using Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingList;
 using Smart.FA.Catalog.Showcase.Web.Services.Trainer;
 using Smart.FA.Catalog.Showcase.Web.Services.Training;
