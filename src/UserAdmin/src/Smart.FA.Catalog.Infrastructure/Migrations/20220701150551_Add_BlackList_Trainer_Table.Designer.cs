@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Smart.FA.Catalog.Infrastructure.Persistence;
 
@@ -11,9 +12,10 @@ using Smart.FA.Catalog.Infrastructure.Persistence;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(CatalogContext))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220701150551_Add_BlackList_Trainer_Table")]
+    partial class Add_BlackList_Trainer_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,6 +29,7 @@ namespace Infrastructure.Migrations
                 {
                     b.Property<int>("TrainerId")
                         .ValueGeneratedOnAdd()
+                        .HasMaxLength(200)
                         .HasColumnType("int")
                         .HasColumnName("TrainerId");
 
@@ -589,30 +592,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Smart.FA.Catalog.Core.Domain.Trainer", b =>
                 {
-                    b.OwnsOne("Smart.FA.Catalog.Core.Domain.Trainer.Identity#Smart.FA.Catalog.Core.Domain.ValueObjects.TrainerIdentity", "Identity", b1 =>
-                        {
-                            b1.Property<int>("TrainerId")
-                                .HasColumnType("int");
-
-                            b1.Property<int>("ApplicationTypeId")
-                                .HasColumnType("int")
-                                .HasColumnName("ApplicationType");
-
-                            b1.Property<string>("UserId")
-                                .IsRequired()
-                                .HasMaxLength(200)
-                                .HasColumnType("nvarchar(200)")
-                                .HasColumnName("UserId");
-
-                            b1.HasKey("TrainerId");
-
-                            b1.ToTable("Trainer", "Cfa");
-
-                            b1.WithOwner()
-                                .HasForeignKey("TrainerId");
-                        });
-
-                    b.OwnsOne("Smart.FA.Catalog.Core.Domain.Trainer.Name#Smart.FA.Catalog.Core.Domain.ValueObjects.Name", "Name", b1 =>
+                    b.OwnsOne("Smart.FA.Catalog.Core.Domain.ValueObjects.Name", "Name", b1 =>
                         {
                             b1.Property<int>("TrainerId")
                                 .HasColumnType("int");
@@ -628,6 +608,30 @@ namespace Infrastructure.Migrations
                                 .HasMaxLength(200)
                                 .HasColumnType("nvarchar(200)")
                                 .HasColumnName("LastName");
+
+                            b1.HasKey("TrainerId");
+
+                            b1.ToTable("Trainer", "Cfa");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TrainerId");
+                        });
+
+                    b.OwnsOne("Smart.FA.Catalog.Core.Domain.ValueObjects.TrainerIdentity", "Identity", b1 =>
+                        {
+                            b1.Property<int>("TrainerId")
+                                .HasColumnType("int");
+
+                            b1.Property<int>("ApplicationTypeId")
+                                .HasMaxLength(200)
+                                .HasColumnType("int")
+                                .HasColumnName("ApplicationType");
+
+                            b1.Property<string>("UserId")
+                                .IsRequired()
+                                .HasMaxLength(200)
+                                .HasColumnType("nvarchar(200)")
+                                .HasColumnName("UserId");
 
                             b1.HasKey("TrainerId");
 

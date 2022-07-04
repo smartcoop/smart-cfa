@@ -26,7 +26,7 @@ public class TrainerConfiguration : EntityConfigurationBase<Trainer>
 
         builder.OwnsOne(p => p.Identity, p =>
         {
-            p.Property(pp => pp.ApplicationTypeId).HasColumnName("ApplicationType").HasMaxLength(200).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+            p.Property(pp => pp.ApplicationTypeId).HasColumnName("ApplicationType").Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
             p.Property(pp => pp.UserId).HasColumnName("UserId").HasMaxLength(200).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
         });
 

@@ -647,6 +647,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Aucun formateur trouvé.
+        /// </summary>
+        public static string NoTrainerFound {
+            get {
+                return ResourceManager.GetString("NoTrainerFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Aucune formation trouvée.
         /// </summary>
         public static string NoTrainingFound {
@@ -661,6 +670,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string Other {
             get {
                 return ResourceManager.GetString("Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to L&apos;accès à cette page vous est interdit.
+        /// </summary>
+        public static string PageForbidden {
+            get {
+                return ResourceManager.GetString("PageForbidden", resourceCulture);
             }
         }
         
@@ -998,6 +1016,42 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Formateur ajouté à la blacklist avec succès.
+        /// </summary>
+        public static string TrainerBlackListedWithSuccess {
+            get {
+                return ResourceManager.GetString("TrainerBlackListedWithSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formateur supprimé avec succès.
+        /// </summary>
+        public static string TrainerDeletedWithSuccess {
+            get {
+                return ResourceManager.GetString("TrainerDeletedWithSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nom ou email du formateur.
+        /// </summary>
+        public static string TrainerNameOrEmailSearchLabel {
+            get {
+                return ResourceManager.GetString("TrainerNameOrEmailSearchLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nom du formateur.
+        /// </summary>
+        public static string TrainerNameSearchLabel {
+            get {
+                return ResourceManager.GetString("TrainerNameSearchLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Le formateur n&apos;a pas été trouvé.
         /// </summary>
         public static string TrainerNotFound_TrainerId {
@@ -1016,11 +1070,29 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Formateurs.
+        /// </summary>
+        public static string Trainers {
+            get {
+                return ResourceManager.GetString("Trainers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fonction.
         /// </summary>
         public static string TrainerTitle {
             get {
                 return ResourceManager.GetString("TrainerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Formateur ajouté à la whitelist avec succès.
+        /// </summary>
+        public static string TrainerWhiteListedWithSuccess {
+            get {
+                return ResourceManager.GetString("TrainerWhiteListedWithSuccess", resourceCulture);
             }
         }
         
@@ -1273,6 +1345,15 @@ namespace Smart.FA.Catalog.Localization {
         public static string UserChartAccept {
             get {
                 return ResourceManager.GetString("UserChartAccept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vous êtes sur le point de supprimer l&apos;accès et les données d&apos;un formateur.
+        /// </summary>
+        public static string YouAreAboutToDeleteTrainer {
+            get {
+                return ResourceManager.GetString("YouAreAboutToDeleteTrainer", resourceCulture);
             }
         }
         

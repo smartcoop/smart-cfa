@@ -1,0 +1,8 @@
+﻿@model Smart.FA.Catalog.Web.Pages.Shared.Components.PagingTile.PagingObject
+
+@if (Model.List.Any())
+{
+    <div class="c-toolbar">
+        <smart-pagination pagination-settings="Model.PaginationSettings"></smart-pagination>
+    </div>
+}

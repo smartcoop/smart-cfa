@@ -7,10 +7,7 @@ public static class MvcBuilderExtensions
 {
     public static IMvcBuilder ConfigureRazorPagesOptions(this IMvcBuilder mvcBuilder)
     {
-        mvcBuilder.AddRazorPagesOptions(options =>
-        {
-            options.Conventions.AddPageConventionsAuthorization();
-        });
+        mvcBuilder.AddRazorPagesOptions(options =>  options.Conventions.AddPageConventionsAuthorization());
 
         return mvcBuilder;
     }
@@ -21,6 +18,8 @@ public static class MvcBuilderExtensions
         conventions.AuthorizePage("/Admin/Trainings/Update/Index", Policies.MustBeSuperUserOrTrainingCreator);
 
         // Folders
+        conventions.AuthorizeFolder("/Admin", Policies.MustNotBeBlackListed);
+        conventions.AuthorizeFolder("/SuperUser", Policies.MustNotBeBlackListed);
         conventions.AuthorizeFolder("/Admin", Policies.AtLeastOneValidUserChartRevisionApproval);
         conventions.AuthorizeFolder("/SuperUser", Policies.MustBeSuperUser);
     }

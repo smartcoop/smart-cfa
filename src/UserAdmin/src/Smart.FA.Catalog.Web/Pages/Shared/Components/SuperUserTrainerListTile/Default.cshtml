@@ -1,0 +1,32 @@
+﻿@using Smart.Design.Razor.TagHelpers.Card
+@using Smart.Design.Razor.TagHelpers.Icon
+@using Smart.Design.Razor.TagHelpers.MutedText
+@model TrainerListTile
+
+<smart-card>
+    <smart-card-body>
+        <smart-card-title text="@($"{Model.Name} → id: {Model.UserId} - application: {Model.ApplicationType}")"></smart-card-title>
+        <smart-muted-text text="@($"Email: {Model.Email}")"></smart-muted-text>
+    </smart-card-body>
+    <smart-card-actions>
+        <div class="o-flex o-flex--vertical-center o-flex--justify-between o-flex--spaced-wide">
+            <div class="c-button-toolbar">
+                <form id="delete-trainer-form-@Model.Id" method="post" asp-page-handler="Delete" asp-route-id="@Model!.Id">
+                    <button class="c-button c-button--borderless c-button--icon" type="button" data-trainerId="@Model.Id" data-dialog="delete-trainer-dialog-confirmation" onclick="setTrainerId(@Model.Id)">
+                        <span class="c-button__content">
+                            <smart-icon icon="Delete"></smart-icon>
+                        </span>
+                    </button>
+                </form>
+
+                <form id="blacklist-trainer-form-@Model.Id" method="post" asp-page-handler="@(Model.IsBlackListed ? "WhiteList" : "BlackList")" asp-route-id="@Model!.Id">
+                    <button class="c-button c-button--borderless c-button--icon">
+                        <span class="c-button__content">
+                            <smart-icon icon="@(Model.IsBlackListed ? Image.CircleCheck : Image.CircleError)"></smart-icon>
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </smart-card-actions>
+</smart-card>

@@ -76,13 +76,13 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
             var ticket = new AuthenticationTicket(Context.User, Scheme.Name);
             return AuthenticateResult.Success(ticket);
         }
+        catch (AccountHeadersMissingException e)
+        {
+            return AuthenticateResult.Fail(e);
+        }
         catch (Exception exception)
         {
-            if (exception is not AccountHeadersMissingException)
-            {
-                Logger.LogCritical(exception, "An error occurred while authenticating");
-            }
-
+            Logger.LogCritical(exception, "An error occurred while authenticating");
             return AuthenticateResult.Fail(new Exception("An issue occurred during authentication"));
         }
     }
