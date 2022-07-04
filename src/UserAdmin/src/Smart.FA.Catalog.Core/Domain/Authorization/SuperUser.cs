@@ -2,7 +2,7 @@ using Smart.FA.Catalog.Core.SeedWork;
 
 namespace Smart.FA.Catalog.Core.Domain.Authorization;
 
-public class SuperUser: IAggregateRoot
+public class SuperUser : IAggregateRoot
 {
     public int TrainerId { get; init; }
 
