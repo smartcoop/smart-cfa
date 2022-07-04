@@ -91,10 +91,9 @@
                     @await Component.InvokeAsync(typeof(Shared.Components.SuperUserTrainerListTile.SuperUserTrainerListTile), new { trainer })
                 }
             </div>
-
-            // Paging interface
-            @await Component.InvokeAsync(typeof(Shared.Components.PagingTile.PagingTile), new { List = Model.TrainerList.ToPagedListOfEntities(), route = Routes.SuperUserTrainerList })
         }
+        @* Paging interface *@
+        @await Component.InvokeAsync(typeof(Shared.Components.PagingTile.PagingTile), new { List = Model.TrainerList.ToPagedListOfEntities(), queryParameters = new Dictionary<string, string?> { { nameof(Model.TrainerNameSearchQuery), Model.TrainerNameSearchQuery } } })
     </smart-spacer>
 </div>
 
