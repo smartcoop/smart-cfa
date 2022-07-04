@@ -16,7 +16,7 @@ namespace Smart.FA.Catalog.Web.Pages.SuperUser.Trainers;
 public class List : PageModel
 {
     [BindProperty(SupportsGet = true)]
-    public string? TrainerNameSearchQuery { get; set; }
+    public string? TrainerNameOrEmailFilterQuery { get; set; }
 
     [BindProperty(SupportsGet = true)]
     public int CurrentPage { get; set; } = 1;
@@ -43,7 +43,7 @@ public class List : PageModel
 
         // Get All trainers (except yourself) paged
         var getTrainerListRequest =
-            new GetOtherTrainersListRequest { TrainerName = TrainerNameSearchQuery, PageItem = new PageItem(CurrentPage, Settings.NumberOfTrainersPerPage), SelfTrainerId = UserIdentity.Id };
+            new GetOtherTrainersListRequest { TrainerNameOrEmailQueryFilter = TrainerNameOrEmailFilterQuery, PageItem = new PageItem(CurrentPage, Settings.NumberOfTrainersPerPage), SelfTrainerId = UserIdentity.Id };
         TrainerList = await Mediator.Send(getTrainerListRequest);
     }
 

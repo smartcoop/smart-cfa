@@ -183,6 +183,9 @@
   <data name="TrainerNameSearchLabel" xml:space="preserve">
     <value>Nom du formateur</value>
   </data>
+  <data name="TrainerNameOrEmailSearchLabel" xml:space="preserve">
+    <value>Nom ou email du formateur</value>
+  </data>
   <data name="TheTraining" xml:space="preserve">
     <value>La formation</value>
   </data>

@@ -1034,6 +1034,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nom ou email du formateur.
+        /// </summary>
+        public static string TrainerNameOrEmailSearchLabel {
+            get {
+                return ResourceManager.GetString("TrainerNameOrEmailSearchLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nom du formateur.
         /// </summary>
         public static string TrainerNameSearchLabel {

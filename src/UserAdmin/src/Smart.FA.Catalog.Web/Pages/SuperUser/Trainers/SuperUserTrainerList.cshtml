@@ -32,8 +32,8 @@
             <div class="o-form-group-layout o-form-group-layout--standard  u-spacer-bottom-l">
                 <smart-card>
                     <smart-card-body>
-                        <smart-formgroup label="@CatalogResources.TrainerNameSearchLabel">
-                            <smart-input-group asp-for="@Model.TrainerNameSearchQuery" icon="Search" align="Start"></smart-input-group>
+                        <smart-formgroup label="@CatalogResources.TrainerNameOrEmailSearchLabel">
+                            <smart-input-group asp-for="@Model.TrainerNameOrEmailFilterQuery" icon="Search" align="Start"></smart-input-group>
                         </smart-formgroup>
                         <smart-button id="submit-btn" label="@CatalogResources.Search" is-block="true" button-style="Primary" button-type="Submit" leading-icon="Search"></smart-button>
                     </smart-card-body>
@@ -93,7 +93,7 @@
             </div>
         }
         @* Paging interface *@
-        @await Component.InvokeAsync(typeof(Shared.Components.PagingTile.PagingTile), new { List = Model.TrainerList.ToPagedListOfEntities(), queryParameters = new Dictionary<string, string?> { { nameof(Model.TrainerNameSearchQuery), Model.TrainerNameSearchQuery } } })
+        @await Component.InvokeAsync(typeof(Shared.Components.PagingTile.PagingTile), new { List = Model.TrainerList.ToPagedListOfEntities(), queryParameters = new Dictionary<string, string?> { { nameof(Model.TrainerNameOrEmailFilterQuery), Model.TrainerNameOrEmailFilterQuery } } })
     </smart-spacer>
 </div>
 

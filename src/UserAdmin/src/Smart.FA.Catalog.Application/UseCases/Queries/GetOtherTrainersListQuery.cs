@@ -26,9 +26,9 @@ public class GetOtherTrainersListQuery : IRequestHandler<GetOtherTrainersListReq
             .Include(trainer => trainer.Assignments)
             .Where(trainer => trainer.Id != request.SelfTrainerId);
 
-        if (!string.IsNullOrEmpty(request.TrainerName))
+        if (!string.IsNullOrEmpty(request.TrainerNameOrEmailQueryFilter))
         {
-            trainerQueryable = trainerQueryable.Where(trainer => trainer.Name.FirstName.Contains(request.TrainerName!) || trainer.Name.LastName.Contains(request.TrainerName!));
+            trainerQueryable = trainerQueryable.Where(trainer => trainer.Name.FirstName.Contains(request.TrainerNameOrEmailQueryFilter!) || trainer.Name.LastName.Contains(request.TrainerNameOrEmailQueryFilter!) || trainer.Email!.Contains(request.TrainerNameOrEmailQueryFilter));
         }
 
         return await trainerQueryable.PaginateAsync(request.PageItem, cancellationToken);
@@ -38,6 +38,6 @@ public class GetOtherTrainersListQuery : IRequestHandler<GetOtherTrainersListReq
 public class GetOtherTrainersListRequest : IRequest<PagedList<Trainer>>
 {
     public int SelfTrainerId { get; set; }
-    public string? TrainerName { get; set; }
-    public PageItem PageItem { get; set; }
+    public string? TrainerNameOrEmailQueryFilter { get; set; }
+    public PageItem PageItem { get; set; } = null!;
 }
