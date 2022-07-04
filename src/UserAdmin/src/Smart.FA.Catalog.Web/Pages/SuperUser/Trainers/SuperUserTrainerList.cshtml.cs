@@ -42,7 +42,7 @@ public class List : PageModel
         ViewData[nameof(SuperUserSideMenuItem)] = SuperUserSideMenuItem.SuperUserTrainerList;
 
         // Get All trainers (except the connected trainer) paged
-        var getTrainerListRequest = new GetOtherTrainersListRequest
+        var getTrainerListRequest = new GetTrainersByCriteriaExceptSelfListRequest
             {
                 TrainerNameOrEmailQueryFilter = TrainerNameOrEmailFilterQuery,
                 PageItem = new PageItem(CurrentPage, Settings.NumberOfTrainersPerPage),

@@ -1,9 +1,13 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Options;
+using Smart.FA.Catalog.Web.Options;
 
 namespace Smart.FA.Catalog.Web.Pages;
 
 public class ForbiddenPageModel : PageModel
 {
+    public UrlOptions UrlOptions { get; }
+
     public const string ErrorTitleKey = nameof(ErrorTitle);
 
     public const string ErrorMessageKey = nameof(ErrorMessage);
@@ -11,6 +15,11 @@ public class ForbiddenPageModel : PageModel
     public string ErrorTitle { get; set; } = null!;
 
     public string ErrorMessage { get; set; } = null!;
+
+    public ForbiddenPageModel(IOptions<UrlOptions> urlOptions)
+    {
+        UrlOptions = urlOptions.Value;
+    }
 
     public PageResult OnGet()
     {

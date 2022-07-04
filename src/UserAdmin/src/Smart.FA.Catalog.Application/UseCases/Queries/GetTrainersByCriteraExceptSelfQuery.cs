@@ -1,7 +1,5 @@
-﻿using Castle.Core.Internal;
-using MediatR;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Core.Domain;
 using Smart.FA.Catalog.Infrastructure.Extensions;
 using Smart.FA.Catalog.Infrastructure.Persistence;
@@ -9,17 +7,22 @@ using Smart.FA.Catalog.Shared.Collections;
 
 namespace Smart.FA.Catalog.Application.UseCases.Queries;
 
-public class GetOtherTrainersListQuery : IRequestHandler<GetOtherTrainersListRequest, PagedList<Trainer>>
+public class GetTrainersByCriteriaExceptSelfQuery : IRequestHandler<GetTrainersByCriteriaExceptSelfListRequest, PagedList<Trainer>>
 {
     private readonly CatalogContext _catalogContext;
 
-    public GetOtherTrainersListQuery(CatalogContext catalogContext)
+    public GetTrainersByCriteriaExceptSelfQuery(CatalogContext catalogContext)
     {
         _catalogContext = catalogContext;
     }
 
-    public async Task<PagedList<Trainer>> Handle(GetOtherTrainersListRequest request, CancellationToken cancellationToken)
+    public async Task<PagedList<Trainer>> Handle(GetTrainersByCriteriaExceptSelfListRequest request, CancellationToken cancellationToken)
     {
+        if (request.SelfTrainerId == default)
+        {
+            throw new ArgumentException("Connected trainer id cannot be 0");
+        }
+
         var trainerQueryable = _catalogContext.Trainers
             .Include(trainer => trainer.SocialNetworks)
             .Include(trainer => trainer.Approvals)
@@ -38,7 +41,7 @@ public class GetOtherTrainersListQuery : IRequestHandler<GetOtherTrainersListReq
     }
 }
 
-public class GetOtherTrainersListRequest : IRequest<PagedList<Trainer>>
+public class GetTrainersByCriteriaExceptSelfListRequest : IRequest<PagedList<Trainer>>
 {
     public int SelfTrainerId { get; set; }
     public string? TrainerNameOrEmailQueryFilter { get; set; }
