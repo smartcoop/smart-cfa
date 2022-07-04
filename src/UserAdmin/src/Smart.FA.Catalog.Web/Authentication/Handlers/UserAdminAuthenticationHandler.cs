@@ -12,12 +12,14 @@ using Smart.FA.Catalog.Core.Domain.User.Dto;
 using Smart.FA.Catalog.Core.Domain.User.Enumerations;
 using Smart.FA.Catalog.Web.Options;
 using Smart.FA.Catalog.Web.Authentication.Header;
+using Smart.FA.Catalog.Web.Authentication.Header.Validators;
+using AccountHeadersValidator = Smart.FA.Catalog.Web.Authentication.Header.Validators.AccountHeadersValidator;
 
 namespace Smart.FA.Catalog.Web.Authentication.Handlers;
 
 /// <summary>
-/// The authentication is working with a system from Nginx (the proxy in front of our apps) called x-accel (https://www.nginx.com/resources/wiki/start/topics/examples/x-accel/).
-/// The proxy header middleware parse incoming request from nginx to fetch a user and the name of the application the call originated.
+/// The authentication is working with a system from NGINX (the proxy in front of our apps) called x-accel (https://www.nginx.com/resources/wiki/start/topics/examples/x-accel/).
+/// The proxy header middleware parses incoming request from NGINX to fetch a user and the name of the application the call originated.
 /// It will then proceed to log the user as a trainer for the rest of the request lifetime.
 /// </summary>
 public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthenticationOptions>
@@ -49,25 +51,26 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
         _authenticationOptions = authenticationOptions.CurrentValue;
     }
 
+    /// <inheritdoc />
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
     {
         try
         {
-            // Checks if the headers contain the expected values set during Account redirection.
+            // Check if the headers contains the expected values set during Account redirection.
             // An exception will be thrown if any of the headers are invalid.
             EnsureHeaders();
 
-            // Retrieves the trainer profile by its smart id.
+            // Retrieve the trainer profile by its smart id.
             var currentTrainer = await GetTrainerBySmartUserIdAndApplicationTypeAsync();
 
-            // First time a Smart user connects in FA.
+            // Handle first time a Smart user connects in FA.
             if (currentTrainer is null)
             {
                 Logger.LogInformation($"User `{_userId}` connected from `{_appName}` for the first time in FA. Creating a trainer for the user.");
                 currentTrainer = await CreateTrainerAsync();
             }
 
-            // Set up trainer's identity that will be used across the application.
+            // Set up trainer's identity that will be used during requests.
             await SetUserIdentityAsync(currentTrainer);
 
             var ticket = new AuthenticationTicket(Context.User, Scheme.Name);
@@ -92,7 +95,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
     {
         SetFakeHeaderValueIfOptionSetToTrue();
 
-        ThrowIfHeadersInvalid();
+        ThrowIfHeadersAreInvalid();
 
         _userId = Context.Request.Headers[Headers.UserId].ToString();
         _appName = Context.Request.Headers[Headers.ApplicationName].ToString();
@@ -107,18 +110,21 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
         _email = accountData.Email!;
     }
 
+    /// <summary>
+    /// Sets hardcoded headers values if the UseFakeHeaders option is enabled.
+    /// </summary>
     private void SetFakeHeaderValueIfOptionSetToTrue()
     {
-        // If the UserFakeHeaders option is set to true, the developer may not pass through ngnix redirection therefore, default values are set for him/her.
+        // A user will then bypass any NGNIX redirection (usefull for debugging locally for example)
         if (_authenticationOptions.UseFakeHeaders)
         {
             Context.Request.Headers.Add(Headers.UserId, "1");
             Context.Request.Headers.Add(Headers.ApplicationName, ApplicationType.Account.Name);
-            Context.Request.Headers.Add(Headers.AccountData, _accountDataHeaderSerializer.CreateSerializedMock());
+            Context.Request.Headers.Add(Headers.AccountData, _accountDataHeaderSerializer.CreateFakeAccountDataHeader());
         }
     }
 
-    private void ThrowIfHeadersInvalid()
+    private void ThrowIfHeadersAreInvalid()
     {
         var accountValidationFailures = _accountHeadersValidator.Validate(Context.Request.Headers);
 
@@ -144,12 +150,12 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
 
     private async Task<Trainer?> GetTrainerBySmartUserIdAndApplicationTypeAsync()
     {
-        return (await _mediator.Send(new GetTrainerFromUserAppRequest(applicationType: ApplicationType.FromName(_appName), userId: _userId))).Trainer;
+        return (await _mediator.Send(new GetTrainerFromUserAppRequest(applicationType: ApplicationType.FromName(_appName!), userId: _userId!))).Trainer;
     }
 
     private async Task<Trainer> CreateTrainerAsync()
     {
-        var createTrainerRequest = new CreateTrainerFromUserAppRequest() { User = new UserDto(_userId, _firstName, _lastName, _appName, _email) };
+        var createTrainerRequest = new CreateTrainerFromUserAppRequest() { User = new UserDto(_userId!, _firstName!, _lastName!, _appName!, _email!) };
         var createdTrainerResponse = await _mediator.Send(createTrainerRequest);
 
         return createdTrainerResponse.Trainer;
@@ -158,12 +164,12 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
     private async Task SetUserIdentityAsync(Trainer trainer)
     {
         // Sets the data for the IUserIdentity service.
-        var isAdmin = await _mediator.Send(new IsSuperUserQuery(trainer.Id));
-        Context.User = new GenericPrincipal(new CustomIdentity(trainer), roles: isAdmin ? new[] { "SuperUser" } : null);
+        var isSuperUser = await _mediator.Send(new IsSuperUserQuery(trainer.Id));
+        Context.User = new GenericPrincipal(new CustomIdentity(trainer), roles: isSuperUser ? new[] { "SuperUser" } : null);
 
         // Updates the first name, last name and email address of the current trainer if they changed for any reason.
         // If anything goes wrong an exception will be thrown and stops execution of the HTTP request.
-        await _mediator.Send(new UpdateTrainerIdentityCommand(trainer.Id, _firstName, _lastName, _email));
+        await _mediator.Send(new UpdateTrainerIdentityCommand(trainer.Id, _firstName!, _lastName!, _email!));
     }
 }
 
