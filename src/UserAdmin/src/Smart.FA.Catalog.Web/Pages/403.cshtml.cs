@@ -26,10 +26,12 @@ public class ForbiddenPageModel : PageModel
         {
             ErrorTitle = TempData[ErrorTitle]!.ToString()!;
         }
+
         else if (HttpContext.Items.ContainsKey(ErrorTitleKey))
         {
             ErrorTitle = HttpContext.Items[ErrorTitleKey]!.ToString()!;
         }
+
         else
         {
             ErrorTitle = CatalogResources.Sorry;
@@ -46,14 +48,15 @@ public class ForbiddenPageModel : PageModel
         if (TempData.ContainsKey(ErrorMessageKey))
         {
             ErrorMessage = TempData[ErrorMessageKey]!.ToString()!;
+            return;
         }
-        else if (HttpContext.Items.ContainsKey(ErrorMessageKey))
+
+        if (HttpContext.Items.ContainsKey(ErrorMessageKey))
         {
             ErrorMessage = HttpContext.Items[ErrorMessageKey]!.ToString()!;
+            return;
         }
-        else
-        {
-            ErrorMessage = CatalogResources.PageForbidden;
-        }
+
+        ErrorMessage = CatalogResources.PageForbidden;
     }
 }

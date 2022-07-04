@@ -6,7 +6,7 @@ using Smart.FA.Catalog.Core.Services;
 namespace Smart.FA.Catalog.Web.Authorization.Policy.Requirements;
 
 /// <summary>
-/// Requires that the user was not blacklisted.
+/// Requires that the user is not blacklisted.
 /// </summary>
 public class MustNotBeBlackListedRequirement : IAuthorizationRequirement
 {

@@ -21,9 +21,9 @@ public class List : PageModel
     [BindProperty(SupportsGet = true)]
     public int CurrentPage { get; set; } = 1;
 
-    public IUserIdentity UserIdentity { get; }
+    private IUserIdentity UserIdentity { get; }
 
-    public IMediator Mediator { get; }
+    private IMediator Mediator { get; }
 
     public SuperUserOptions Settings { get; set; }
 
@@ -41,16 +41,20 @@ public class List : PageModel
         // Display side panel as selected
         ViewData[nameof(SuperUserSideMenuItem)] = SuperUserSideMenuItem.SuperUserTrainerList;
 
-        // Get All trainers (except yourself) paged
-        var getTrainerListRequest =
-            new GetOtherTrainersListRequest { TrainerNameOrEmailQueryFilter = TrainerNameOrEmailFilterQuery, PageItem = new PageItem(CurrentPage, Settings.NumberOfTrainersPerPage), SelfTrainerId = UserIdentity.Id };
+        // Get All trainers (except the connected trainer) paged
+        var getTrainerListRequest = new GetOtherTrainersListRequest
+            {
+                TrainerNameOrEmailQueryFilter = TrainerNameOrEmailFilterQuery,
+                PageItem = new PageItem(CurrentPage, Settings.NumberOfTrainersPerPage),
+                SelfTrainerId = UserIdentity.Id
+            };
         TrainerList = await Mediator.Send(getTrainerListRequest);
     }
 
     public async Task<ActionResult> OnPostDeleteAsync(int id)
     {
         // Fetch trainer identity from trainer id
-        var trainerResponse = await Mediator.Send(new GetTrainerRequest { TrainerId = id });
+        var trainerResponse = await Mediator.Send(new GetTrainerByIdRequest { TrainerId = id });
         if (!trainerResponse.IsSuccess)
         {
             TempData.AddGlobalAlertMessage(CatalogResources.UnExpectedError, AlertStyle.Error);
@@ -73,7 +77,7 @@ public class List : PageModel
     public async Task<ActionResult> OnPostBlackListAsync(int id)
     {
         // Fetch trainer identity from trainer id
-        var trainerResponse = await Mediator.Send(new GetTrainerRequest { TrainerId = id });
+        var trainerResponse = await Mediator.Send(new GetTrainerByIdRequest { TrainerId = id });
         if (!trainerResponse.IsSuccess)
         {
             TempData.AddGlobalAlertMessage(CatalogResources.UnExpectedError, AlertStyle.Error);
@@ -96,7 +100,7 @@ public class List : PageModel
     public async Task<ActionResult> OnPostWhiteListAsync(int id)
     {
         // Fetch trainer identity from trainer id
-        var trainerResponse = await Mediator.Send(new GetTrainerRequest { TrainerId = id });
+        var trainerResponse = await Mediator.Send(new GetTrainerByIdRequest { TrainerId = id });
         if (!trainerResponse.IsSuccess)
         {
             TempData.AddGlobalAlertMessage(CatalogResources.UnExpectedError, AlertStyle.Error);

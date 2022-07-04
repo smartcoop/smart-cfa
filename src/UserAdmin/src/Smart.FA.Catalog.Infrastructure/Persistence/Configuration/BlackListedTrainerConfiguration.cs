@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Smart.FA.Catalog.Core.Domain.Authorization;
 
@@ -13,6 +12,6 @@ public class BlackListedTrainerConfiguration : IEntityTypeConfiguration<BlackLis
 
         builder.Property(blackListedTrainer => blackListedTrainer.TrainerId);
 
-        builder.ToTable("BlackListedTrainer", "Cfa");
+        builder.ToTable("BlackListedTrainer");
     }
 }

@@ -27,7 +27,6 @@ namespace Infrastructure.Migrations
                 {
                     b.Property<int>("TrainerId")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(200)
                         .HasColumnType("int")
                         .HasColumnName("TrainerId");
 
@@ -596,7 +595,6 @@ namespace Infrastructure.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<int>("ApplicationTypeId")
-                                .HasMaxLength(200)
                                 .HasColumnType("int")
                                 .HasColumnName("ApplicationType");
 

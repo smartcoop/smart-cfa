@@ -25,13 +25,10 @@ public class DeleteTrainerWithTrainingsCommand : IRequestHandler<DeleteTrainerWi
                 .Select(assignment => assignment.Training)
                 .Where(training => training.CreatedBy == trainer.Id);
 
-            await using var transaction = await _catalogContext.Database.BeginTransactionAsync(cancellationToken);
-
             _catalogContext.Remove(trainer);
             _catalogContext.RemoveRange(trainingListOfTrainer);
 
             await _catalogContext.SaveChangesAsync(cancellationToken);
-            await transaction.CommitAsync(cancellationToken);
         }
 
         withTrainingsResponse.SetSuccess();

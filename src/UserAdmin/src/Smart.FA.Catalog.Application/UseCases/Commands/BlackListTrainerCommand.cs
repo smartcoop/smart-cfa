@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Smart.FA.Catalog.Application.SeedWork;
 using Smart.FA.Catalog.Core.Domain.Authorization;
 using Smart.FA.Catalog.Infrastructure.Persistence;
@@ -17,11 +18,14 @@ public class BlackListTrainerCommand : IRequestHandler<BlackListTrainerRequest, 
     public async Task<BlackListTrainerResponse> Handle(BlackListTrainerRequest command, CancellationToken cancellationToken)
     {
         BlackListTrainerResponse response = new();
-        var blackListedUser = new BlackListedTrainer(command.TrainerId);
-        _catalogContext.BlackListedTrainer.Add(blackListedUser);
-        await _catalogContext.SaveChangesAsync(cancellationToken);
-        response.SetSuccess();
+        if (!await _catalogContext.BlackListedTrainer.AnyAsync(blackListedTrainer => blackListedTrainer.TrainerId == command.TrainerId, cancellationToken))
+        {
+            var blackListedUser = new BlackListedTrainer(command.TrainerId);
+            _catalogContext.BlackListedTrainer.Add(blackListedUser);
+            await _catalogContext.SaveChangesAsync(cancellationToken);
+        }
 
+        response.SetSuccess();
         return response;
     }
 }

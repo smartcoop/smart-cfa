@@ -18,7 +18,7 @@ public class SuperUserTrainerListTile : ViewComponent
 
     public async Task<IViewComponentResult> InvokeAsync(Trainer trainer)
     {
-        var isTrainerBlackListed = await IsBlackListed(trainer);
+        var isTrainerBlackListed = await IsBlackListedAsync(trainer);
 
         var trainerListTile = new TrainerListTile
         {
@@ -32,7 +32,7 @@ public class SuperUserTrainerListTile : ViewComponent
         return View(trainerListTile);
     }
 
-    public async Task<bool> IsBlackListed(Trainer trainer) => await _mediator.Send(new IsTrainerBlackListedRequest { TrainerId = trainer.Id });
+    public async Task<bool> IsBlackListedAsync(Trainer trainer) => await _mediator.Send(new IsTrainerBlackListedRequest { TrainerId = trainer.Id });
 }
 
 public class TrainerListTile

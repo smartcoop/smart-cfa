@@ -28,7 +28,10 @@ public class GetOtherTrainersListQuery : IRequestHandler<GetOtherTrainersListReq
 
         if (!string.IsNullOrEmpty(request.TrainerNameOrEmailQueryFilter))
         {
-            trainerQueryable = trainerQueryable.Where(trainer => trainer.Name.FirstName.Contains(request.TrainerNameOrEmailQueryFilter!) || trainer.Name.LastName.Contains(request.TrainerNameOrEmailQueryFilter!) || trainer.Email!.Contains(request.TrainerNameOrEmailQueryFilter));
+            trainerQueryable = trainerQueryable
+                .Where(trainer => trainer.Name.FirstName.Contains(request.TrainerNameOrEmailQueryFilter!)
+                    || trainer.Name.LastName.Contains(request.TrainerNameOrEmailQueryFilter!)
+                    || trainer.Email!.Contains(request.TrainerNameOrEmailQueryFilter));
         }
 
         return await trainerQueryable.PaginateAsync(request.PageItem, cancellationToken);
