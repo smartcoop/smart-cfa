@@ -29,7 +29,7 @@ docker build \
 docker build \
   --build-arg Environment="Production" \
   -f "./docker/kerberos/Showcase.krb5.Dockerfile" \
-  -t "cfa-production-showcase" \git
+  -t "cfa-production-showcase" \
   .
 
 docker stop cfa_production_useradmin || true
