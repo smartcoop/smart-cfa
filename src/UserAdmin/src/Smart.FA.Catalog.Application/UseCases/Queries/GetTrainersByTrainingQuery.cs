@@ -6,19 +6,19 @@ using Smart.FA.Catalog.Infrastructure.Persistence;
 
 namespace Smart.FA.Catalog.Application.UseCases.Queries;
 
-public class GetTrainersFromTrainingQueryHandler : IRequestHandler<GetTrainersFromTrainingRequest, GetTrainersFromTrainingResponse>
+public class GetTrainersByTrainingQueryHandler : IRequestHandler<GetTrainersByTrainingRequest, GetTrainersByTrainingResponse>
 {
-    private readonly ILogger<GetTrainersFromTrainingQueryHandler> _logger;
+    private readonly ILogger<GetTrainersByTrainingQueryHandler> _logger;
     private readonly CatalogContext _catalogContext;
 
-    public GetTrainersFromTrainingQueryHandler(ILogger<GetTrainersFromTrainingQueryHandler> logger, CatalogContext catalogContext)
+    public GetTrainersByTrainingQueryHandler(ILogger<GetTrainersByTrainingQueryHandler> logger, CatalogContext catalogContext)
     {
         _logger = logger;
         _catalogContext = catalogContext;
     }
-    public async Task<GetTrainersFromTrainingResponse> Handle(GetTrainersFromTrainingRequest request, CancellationToken cancellationToken)
+    public async Task<GetTrainersByTrainingResponse> Handle(GetTrainersByTrainingRequest request, CancellationToken cancellationToken)
     {
-        GetTrainersFromTrainingResponse response = new();
+        GetTrainersByTrainingResponse response = new();
         var training = await _catalogContext.Trainings.FindAsync(new object?[] { request.TrainingId }, cancellationToken: cancellationToken);
         response.Trainers = training?.TrainerAssignments.Select(trainerAssignment => trainerAssignment.Trainer).ToList();
         response.SetSuccess();
@@ -27,12 +27,12 @@ public class GetTrainersFromTrainingQueryHandler : IRequestHandler<GetTrainersFr
     }
 }
 
-public class GetTrainersFromTrainingRequest: IRequest<GetTrainersFromTrainingResponse>
+public class GetTrainersByTrainingRequest: IRequest<GetTrainersByTrainingResponse>
 {
     public int TrainingId { get; set; }
 }
 
-public class GetTrainersFromTrainingResponse: ResponseBase
+public class GetTrainersByTrainingResponse: ResponseBase
 {
     public ICollection<Trainer>? Trainers { get; set; }
 }

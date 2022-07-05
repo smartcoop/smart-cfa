@@ -41,7 +41,7 @@ public class MustBeSuperUserOrTrainingCreatorHandler : AuthorizationHandler<Must
         var success = int.TryParse(httpContext.GetRouteValue("id") as string, out var trainingId);
         if (success)
         {
-            var trainingFromIdResponse = await _mediator.Send(new GetTrainingFromIdRequest() { TrainingId = trainingId });
+            var trainingFromIdResponse = await _mediator.Send(new GetTrainingByIdRequest() { TrainingId = trainingId });
 
             if (trainingFromIdResponse.Training?.CreatedBy == _userIdentity.Id)
             {

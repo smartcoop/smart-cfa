@@ -36,7 +36,7 @@ public static class EditTrainingViewModelMapping
         };
 
 
-    public static UpdateTrainingViewModel MapToViewModel(this GetTrainingFromIdResponse model, Language language)
+    public static UpdateTrainingViewModel MapToViewModel(this GetTrainingByIdResponse model, Language language)
     {
         var details = model.Training!.Details.FirstOrDefault(localizedDetails => localizedDetails.Language == language);
         UpdateTrainingViewModel response = new()
