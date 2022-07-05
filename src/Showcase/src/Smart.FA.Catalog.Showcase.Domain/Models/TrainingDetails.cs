@@ -19,4 +19,5 @@ public partial class TrainingDetails
     public int TrainerId { get; set; }
     public string TrainerTitle { get; set; } = null!;
     public int StatusId { get; set; }
+    public string? ProfileImagePath { get; set; }
 }

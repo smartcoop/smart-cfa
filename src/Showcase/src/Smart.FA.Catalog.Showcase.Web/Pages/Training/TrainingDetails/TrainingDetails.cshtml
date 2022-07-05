@@ -14,7 +14,7 @@
         @Model.Training.TrainingTitle
     </div>
     <div class="training-card__sectors">
-        <img src="~/icons/tag--blue.svg" class="o-svg-icon--small sectors-icon" alt=""/>
+        <img src="~/icons/tag--blue.svg" class="o-svg-icon--small sectors-icon" alt="" />
         @foreach (var topic in Model.Training.Topics)
         {
             <a class="training-list__category-link" href="#">@StringLocalizer[$"TopicName_{topic.Name}"]</a>
@@ -46,6 +46,9 @@
             </div>
         </div>
         <div class="training-card__trainer">
+            <div class="trainer-card__image">
+                <img src="@Model.Training.TrainerProfileImageUrl" class="trainer-image" alt="trainer-image" />
+            </div>
             <div class="training-card__trainer-name">
                 <a class="training-card__trainer-link" asp-page="@Routes.TrainerDetails" asp-route-id="@Model.Training.TrainerId">
                     @Model.Training.TrainerFirstName @Model.Training.TrainerLastName
@@ -54,13 +57,46 @@
             <div class="training-card__trainer-fonction">
                 @Model.Training.TrainerTitle
             </div>
+
+            <div class="training-card__trainer-links">
+                <img src="/icons/message.svg" class="o-svg-icon--small contact-icon" />
+                <a class="training-card__trainer-link training-card__contact-link" data-dialog="inquiry-form-dialog">@ShowcaseResources.TrainerCard_Contact</a>
+            </div>
         </div>
     </div>
+
     <div class="training-card__footer">
         <div class="training-card__back">
             <a class="training-card__back-link" asp-page="@Routes.TrainingList">
-                <img src="~/icons/chevron-left--blue.svg" class="o-svg-icon--small chevron-icon" alt=""/>@ShowcaseResources.AllTrainings
+                <img src="~/icons/chevron-left--blue.svg" class="o-svg-icon--small chevron-icon" alt="" />@ShowcaseResources.AllTrainings
             </a>
         </div>
     </div>
 </section>
+
+<div class="c-dialog-context o-flex--center" id="inquiry-form-dialog">
+    <div class="c-dialog c-dialog--large" role="dialog" aria-labelledby="dialogTitle-02">
+        <div class="c-dialog__header c-dialog__header--bordered">
+            <div class="c-dialog__close" style="float: right; padding: 0.6rem;">
+                <a data-dialog-close>
+                    <img src="/icons/close.svg " class="o-svg-icon--medium" />
+                </a>
+            </div>
+            <div class="c-toolbar c-toolbar--spaced">
+                <div class="c-toolbar__left">
+                    <div class="c-toolbar__item">
+                        <h2 class="c-dialog__title" id="dialogTitle-02">@ShowcaseResources.TrainerCard_Contact @ShowcaseResources.To @Model.Training.TrainerFirstName @Model.Training.TrainerLastName</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="c-dialog__body">
+            <div class="u-spacer">
+                <section class="main__presentation">
+                    @await Html.PartialAsync("Partials/Inquiry/_FormSendingMailResultAlerts", Model.EmailSendingResult)
+                    @await Html.PartialAsync("Partials/Inquiry/_InquiryForm", Model.TrainerInquiryEmailRequest)
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
