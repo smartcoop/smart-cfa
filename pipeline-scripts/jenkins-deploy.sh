@@ -42,7 +42,7 @@ sed -e "s/{catalog-server-name}/${DOCKER_NAME}-datasource/" \
     -e "s/{catalog-server-user-id}/$USERNAME/" \
     -e "s/{catalog-server-user-password}/$PASSWORD/" \
     -e "s/{docker_name-minio}/${DOCKER_NAME}-minio/" \
-    ../src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.json > ../src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.tmp.json
+    ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.PreProduction.json > ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.PreProduction.tmp.json
 
 mv ../src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.tmp.json ../src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.json
 
