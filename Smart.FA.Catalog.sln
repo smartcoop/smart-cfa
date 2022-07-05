@@ -66,9 +66,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pipeline-scripts", "pipelin
 		pipeline-scripts\deploy-prod.sh = pipeline-scripts\deploy-prod.sh
 		pipeline-scripts\deploy-staging.sh = pipeline-scripts\deploy-staging.sh
 		pipeline-scripts\jenkins-deploy.sh = pipeline-scripts\jenkins-deploy.sh
-		pipeline-scripts\Jenkinsfile = pipeline-scripts\Jenkinsfile
 		pipeline-scripts\launch_showcase.sh = pipeline-scripts\launch_showcase.sh
 		pipeline-scripts\launch_useradmin.sh = pipeline-scripts\launch_useradmin.sh
+		Jenkinsfile = Jenkinsfile
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "startup-scripts", "startup-scripts", "{8082E5D0-6D0E-47CF-96EA-C4B6C6DF0E3D}"
