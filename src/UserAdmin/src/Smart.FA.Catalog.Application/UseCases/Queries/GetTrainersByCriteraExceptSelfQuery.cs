@@ -24,8 +24,6 @@ public class GetTrainersByCriteriaExceptSelfQuery : IRequestHandler<GetTrainersB
         }
 
         var trainerQueryable = _catalogContext.Trainers
-            .Include(trainer => trainer.SocialNetworks)
-            .Include(trainer => trainer.Approvals)
             .Include(trainer => trainer.Assignments)
             .Where(trainer => trainer.Id != request.SelfTrainerId);
 
