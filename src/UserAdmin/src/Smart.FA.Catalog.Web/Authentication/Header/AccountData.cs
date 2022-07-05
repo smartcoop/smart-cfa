@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-
-namespace Smart.FA.Catalog.Web.Authentication.Header;
+﻿namespace Smart.FA.Catalog.Web.Authentication.Header;
 
 // The extra data passed in the header "customData" received by Nginx
 public class AccountData

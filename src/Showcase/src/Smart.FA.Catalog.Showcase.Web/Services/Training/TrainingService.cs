@@ -1,5 +1,4 @@
 using Smart.FA.Catalog.Shared.Collections;
-using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 using Smart.FA.Catalog.Showcase.Infrastructure.Data;
 using Smart.FA.Catalog.Showcase.Infrastructure.Data.Extensions;
 using Smart.FA.Catalog.Showcase.Web.Mappers;
