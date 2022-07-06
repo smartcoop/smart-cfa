@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Smart.FA.Catalog.Application.UseCases.Commands;
 using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Services;
@@ -69,11 +70,14 @@ public class ProfileModel : AdminPage
 
     public async Task<ActionResult> OnPostDescriptionAsync()
     {
-        await UpdateDescriptionAsync();
+        if (ModelState.IsValid)
+        {
+            await UpdateDescriptionAsync();
+        }
 
         await LoadDataAsync();
 
-        return RedirectToPage();
+        return Page();
     }
 
     private void ReloadSocials()
@@ -96,7 +100,7 @@ public class ProfileModel : AdminPage
 
         //Refresh page
         await LoadDataAsync();
-        return RedirectToPage();
+        return Page();
     }
 
     public async Task UploadImageAsync()
