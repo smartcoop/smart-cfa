@@ -1,6 +1,5 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Smart.FA.Catalog.Application.UseCases.Commands;
 using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Services;
@@ -55,9 +54,7 @@ public class ProfileModel : AdminPage
 
     public async Task<ActionResult> OnGetAsync()
     {
-        SetSideMenuItem();
-        await LoadDataAsync().ConfigureAwait(false);
-
+        await LoadDataAsync();
         return Page();
     }
 
@@ -70,13 +67,14 @@ public class ProfileModel : AdminPage
 
     public async Task<ActionResult> OnPostDescriptionAsync()
     {
+        //Update description
         if (ModelState.IsValid)
         {
             await UpdateDescriptionAsync();
         }
 
+        //Refresh page
         await LoadDataAsync();
-
         return Page();
     }
 
@@ -109,25 +107,6 @@ public class ProfileModel : AdminPage
         var imageUploadResponse = await Mediator.Send(imageUploadRequest);
         ProfilePictureAbsoluteUrl = imageUploadResponse.ProfilePictureAbsoluteUrl;
         EditionSucceeded = !imageUploadResponse.HasErrors();
-    }
-
-    public async Task<FileResult?> OnGetLoadImageAsync()
-    {
-        var profilePicture = await Mediator.Send(new GetTrainerProfileImageRequest { Trainer = UserIdentity.CurrentTrainer });
-        var response = profilePicture.ImageStream is null ? null : new FileStreamResult(profilePicture.ImageStream, "image/jpeg");
-        return response;
-    }
-
-    public async Task<ActionResult> OnPostDeleteImageAsync()
-    {
-        if (ProfilePicture is not null)
-        {
-            var imageDeletionResponse = await Mediator.Send(new DeleteTrainerProfileImageRequest { RelativeProfilePictureUrl = UserIdentity.CurrentTrainer.ProfileImagePath });
-            EditionSucceeded = !imageDeletionResponse.HasErrors();
-        }
-
-        await LoadDataAsync();
-        return RedirectToPage();
     }
 
     protected override SideMenuItem GetSideMenuItem() => SideMenuItem.MyProfile;
