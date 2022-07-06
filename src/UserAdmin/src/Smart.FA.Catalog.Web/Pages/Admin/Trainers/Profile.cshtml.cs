@@ -15,7 +15,7 @@ public class ProfileModel : AdminPage
     public string Email => UserIdentity.CurrentTrainer.Email!;
 
     [BindProperty]
-    public EditProfileCommand EditProfileCommand { get; set; } = new();
+    public EditProfileCommand EditProfileCommand { get; set; }
 
     [BindProperty]
     public IFormFile? ProfilePicture { get; set; }
@@ -41,14 +41,13 @@ public class ProfileModel : AdminPage
     {
         SetSideMenuItem();
 
-        // Page reload from a post, whether the underlying operation was successful or not, requires the social networks list to load again.
-        ReloadSocials();
-
         var trainerProfile = await Mediator.Send(new GetTrainerProfileQuery(UserIdentity.CurrentTrainer.Id));
         if (trainerProfile.TrainerId is not null)
         {
             EditProfileCommand = trainerProfile.ToCommand();
             SocialNetworkViewModels = trainerProfile.Socials.ToSocialViewModels();
+            // Page reload from a post, whether the underlying operation was successful or not, requires the social networks list to load again.
+            ReloadSocials();
         }
     }
 
@@ -81,7 +80,7 @@ public class ProfileModel : AdminPage
 
         //Refresh page
         await LoadDataAsync();
-        return Page();
+        return RedirectToPage();
     }
 
     public async Task UpdateDescriptionAsync()
