@@ -83,7 +83,7 @@ public class ProfileModel : AdminPage
             .Select(keyPair => new TrainerProfile.Social { SocialNetworkId = keyPair.Key, Url = keyPair.Value }).ToSocialViewModels();
     }
 
-    public async Task<ActionResult> OnPostUploadProfileImageAndDescriptionAsync()
+    public async Task<ActionResult> OnPostUploadProfileImageAndUpdateDescriptionAsync()
     {
         if (ModelState.IsValid)
         {

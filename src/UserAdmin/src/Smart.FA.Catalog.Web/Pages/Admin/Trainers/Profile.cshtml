@@ -34,7 +34,7 @@
             <smart-alert message="@(editionSucceeded ? CatalogResources.ProfileUpdatedWithSuccess : CatalogResources.ProfilePageUnexpectedError)" style="@(editionSucceeded ? AlertStyle.Success : AlertStyle.Error)" is-closable="true"></smart-alert>
         </smart-spacer>
     }
-    <form id="profile-form" enctype="multipart/form-data" asp-page-handler="UploadProfileImageAndDescription" method="post">
+    <form id="profile-form" enctype="multipart/form-data" asp-page-handler="UploadProfileImageAndUpdateDescription" method="post">
 
         <smart-grid >
             <smart-grid-column width="5">
