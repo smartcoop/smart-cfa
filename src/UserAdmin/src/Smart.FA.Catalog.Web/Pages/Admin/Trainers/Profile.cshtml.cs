@@ -93,7 +93,7 @@ public class ProfileModel : AdminPage
 
     public async Task UploadImageAsync()
     {
-        var imageUploadRequest = new UploadTrainerProfileImageToStorageCommandRequest { TrainerId = UserIdentity.CurrentTrainer.Id, ProfilePicture = ProfilePicture };
+        var imageUploadRequest = new UploadTrainerProfileImageToStorageCommandRequest { TrainerId = UserIdentity.CurrentTrainer.Id, ProfilePicture = ProfilePicture! };
         var imageUploadResponse = await Mediator.Send(imageUploadRequest);
         ProfilePictureAbsoluteUrl = imageUploadResponse.ProfilePictureAbsoluteUrl;
         EditionSucceeded = !imageUploadResponse.HasErrors();
