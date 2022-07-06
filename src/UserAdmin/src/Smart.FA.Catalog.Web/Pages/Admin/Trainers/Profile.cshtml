@@ -20,7 +20,7 @@
         <div class="c-toolbar__right">
             <div class="c-toolbar__item">
                 <smart-button-toolbar>
-                    <smart-button form="profile-form" button-type="Submit" label="@CatalogResources.Save" asp-page-handler="Description"></smart-button>
+                    <smart-button form="profile-form" button-type="Submit" label="@CatalogResources.Save"></smart-button>
                 </smart-button-toolbar>
             </div>
         </div>
@@ -34,8 +34,7 @@
             <smart-alert message="@(editionSucceeded ? CatalogResources.ProfileUpdatedWithSuccess : CatalogResources.ProfilePageUnexpectedError)" style="@(editionSucceeded ? AlertStyle.Success : AlertStyle.Error)" is-closable="true"></smart-alert>
         </smart-spacer>
     }
-    <form id="profile-form" enctype="multipart/form-data" asp-page-handler="UploadProfileImageAndUpdateDescription" method="post">
-
+    <smart-form id="profile-form" enctype="multipart/form-data" method="Post">
         <smart-grid >
             <smart-grid-column width="5">
                 <smart-panel header="@Model.UserIdentity.Identity.Name">
@@ -101,6 +100,5 @@
             </smart-grid-column>
             <smart-validation-message asp-for="ProfilePicture"></smart-validation-message>
         </smart-grid>
-    </form>
-
+    </smart-form>
 </div>

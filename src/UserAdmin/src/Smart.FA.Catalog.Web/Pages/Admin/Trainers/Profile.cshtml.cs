@@ -58,26 +58,6 @@ public class ProfileModel : AdminPage
         return Page();
     }
 
-    public async Task UpdateDescriptionAsync()
-    {
-        EditProfileCommand.TrainerId = UserIdentity.CurrentTrainer.Id;
-        var editionResponse = await Mediator.Send(EditProfileCommand);
-        EditionSucceeded = !editionResponse.HasErrors();
-    }
-
-    public async Task<ActionResult> OnPostDescriptionAsync()
-    {
-        //Update description
-        if (ModelState.IsValid)
-        {
-            await UpdateDescriptionAsync();
-        }
-
-        //Refresh page
-        await LoadDataAsync();
-        return Page();
-    }
-
     private void ReloadSocials()
     {
         SocialNetworkViewModels = EditProfileCommand
@@ -85,20 +65,30 @@ public class ProfileModel : AdminPage
             .Select(keyPair => new TrainerProfile.Social { SocialNetworkId = keyPair.Key, Url = keyPair.Value }).ToSocialViewModels();
     }
 
-    public async Task<ActionResult> OnPostUploadProfileImageAndUpdateDescriptionAsync()
+    public async Task<ActionResult> OnPostAsync()
     {
         if (ModelState.IsValid)
         {
             //Update description
             await UpdateDescriptionAsync();
 
-            //Upload image
-            await UploadImageAsync();
+            if (ProfilePicture is not null)
+            {
+                //Upload image
+                await UploadImageAsync();
+            }
         }
 
         //Refresh page
         await LoadDataAsync();
         return Page();
+    }
+
+    public async Task UpdateDescriptionAsync()
+    {
+        EditProfileCommand.TrainerId = UserIdentity.CurrentTrainer.Id;
+        var editionResponse = await Mediator.Send(EditProfileCommand);
+        EditionSucceeded = !editionResponse.HasErrors();
     }
 
     public async Task UploadImageAsync()
