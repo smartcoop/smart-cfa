@@ -15,7 +15,7 @@ public class ProfileModel : AdminPage
     public string Email => UserIdentity.CurrentTrainer.Email!;
 
     [BindProperty]
-    public EditProfileCommand? EditProfileCommand { get; set; }
+    public EditProfileCommand EditProfileCommand { get; set; } = new();
 
     [BindProperty]
     public IFormFile? ProfilePicture { get; set; }
@@ -37,40 +37,13 @@ public class ProfileModel : AdminPage
         ProfilePictureAbsoluteUrl = minIoLinkGenerator.GetAbsoluteTrainerProfilePictureUrl(userIdentity.CurrentTrainer.ProfileImagePath);
     }
 
-    public async Task<ActionResult> OnGetAsync()
+    private async Task LoadDataAsync()
     {
-        SetSideMenuItem();
-        await LoadDataAsync().ConfigureAwait(false);
-
-        // Trainer was not found.
-        if (EditProfileCommand is null)
-        {
-            return RedirectToPage("/404");
-        }
-
-        return Page();
-    }
-
-    public async Task<ActionResult> OnPostAsync()
-    {
-        if (ModelState.IsValid)
-        {
-            EditProfileCommand!.TrainerId = UserIdentity.CurrentTrainer.Id;
-            var editionResponse = await Mediator.Send(EditProfileCommand);
-            EditionSucceeded = !editionResponse.HasErrors();
-            return RedirectToPage();
-        }
-
         SetSideMenuItem();
 
         // Page reload from a post, whether the underlying operation was successful or not, requires the social networks list to load again.
         ReloadSocials();
-        return Page();
-    }
 
-    private async Task LoadDataAsync()
-    {
-        SetSideMenuItem();
         var trainerProfile = await Mediator.Send(new GetTrainerProfileQuery(UserIdentity.CurrentTrainer.Id));
         if (trainerProfile.TrainerId is not null)
         {
@@ -79,13 +52,59 @@ public class ProfileModel : AdminPage
         }
     }
 
+    public async Task<ActionResult> OnGetAsync()
+    {
+        SetSideMenuItem();
+        await LoadDataAsync().ConfigureAwait(false);
+
+        return Page();
+    }
+
+    public async Task UpdateDescriptionAsync()
+    {
+        EditProfileCommand.TrainerId = UserIdentity.CurrentTrainer.Id;
+        var editionResponse = await Mediator.Send(EditProfileCommand);
+        EditionSucceeded = !editionResponse.HasErrors();
+    }
+
+    public async Task<ActionResult> OnPostDescriptionAsync()
+    {
+        await UpdateDescriptionAsync();
+
+        await LoadDataAsync();
+
+        return RedirectToPage();
+    }
+
     private void ReloadSocials()
     {
-        SocialNetworkViewModels = EditProfileCommand!.Socials!.Select(keyPair => new TrainerProfile.Social()
+        SocialNetworkViewModels = EditProfileCommand
+            .Socials
+            .Select(keyPair => new TrainerProfile.Social { SocialNetworkId = keyPair.Key, Url = keyPair.Value }).ToSocialViewModels();
+    }
+
+    public async Task<ActionResult> OnPostUploadProfileImageAndDescriptionAsync()
+    {
+        if (ModelState.IsValid)
         {
-            SocialNetworkId = keyPair.Key,
-            Url = keyPair.Value
-        }).ToSocialViewModels();
+            //Update description
+            await UpdateDescriptionAsync();
+
+            //Upload image
+            await UploadImageAsync();
+        }
+
+        //Refresh page
+        await LoadDataAsync();
+        return RedirectToPage();
+    }
+
+    public async Task UploadImageAsync()
+    {
+        var imageUploadRequest = new UploadTrainerProfileImageToStorageCommandRequest { TrainerId = UserIdentity.CurrentTrainer.Id, ProfilePicture = ProfilePicture };
+        var imageUploadResponse = await Mediator.Send(imageUploadRequest);
+        ProfilePictureAbsoluteUrl = imageUploadResponse.ProfilePictureAbsoluteUrl;
+        EditionSucceeded = !imageUploadResponse.HasErrors();
     }
 
     public async Task<FileResult?> OnGetLoadImageAsync()
@@ -93,16 +112,6 @@ public class ProfileModel : AdminPage
         var profilePicture = await Mediator.Send(new GetTrainerProfileImageRequest { Trainer = UserIdentity.CurrentTrainer });
         var response = profilePicture.ImageStream is null ? null : new FileStreamResult(profilePicture.ImageStream, "image/jpeg");
         return response;
-    }
-
-    public async Task<ActionResult> OnPostUploadProfileImageAsync()
-    {
-        var imageUploadRequest = new UploadTrainerProfileImageToStorageCommandRequest { TrainerId = UserIdentity.CurrentTrainer.Id, ProfilePicture = ProfilePicture };
-        var imageUploadResponse = await Mediator.Send(imageUploadRequest);
-        ProfilePictureAbsoluteUrl = imageUploadResponse.ProfilePictureAbsoluteUrl;
-        EditionSucceeded = !imageUploadResponse.HasErrors();
-        await LoadDataAsync();
-        return RedirectToPage();
     }
 
     public async Task<ActionResult> OnPostDeleteImageAsync()

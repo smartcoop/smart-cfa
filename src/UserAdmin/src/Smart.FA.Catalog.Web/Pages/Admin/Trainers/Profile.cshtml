@@ -20,7 +20,7 @@
         <div class="c-toolbar__right">
             <div class="c-toolbar__item">
                 <smart-button-toolbar>
-                    <smart-button form="profile-form" button-type="Submit" label="@CatalogResources.Save"></smart-button>
+                    <smart-button form="profile-form" button-type="Submit" label="@CatalogResources.Save" asp-page-handler="Description"></smart-button>
                 </smart-button-toolbar>
             </div>
         </div>
@@ -34,48 +34,51 @@
             <smart-alert message="@(editionSucceeded ? CatalogResources.ProfileUpdatedWithSuccess : CatalogResources.ProfilePageUnexpectedError)" style="@(editionSucceeded ? AlertStyle.Success : AlertStyle.Error)" is-closable="true"></smart-alert>
         </smart-spacer>
     }
-    <smart-grid>
-        <smart-form id="profile-form" class="o-grid-col-7">
-            <smart-panel header="@Model.UserIdentity.Identity.Name">
-                <smart-spacer bottom="Small">
-                    <smart-key-value-list>
-                        <smart-key-value-list-item label="Email" value="@Model.Email"></smart-key-value-list-item>
-                    </smart-key-value-list>
-                </smart-spacer>
+    <form id="profile-form" enctype="multipart/form-data" asp-page-handler="UploadProfileImageAndDescription" method="post">
 
-                <smart-form-group-input-text label="@CatalogResources.TrainerTitle" asp-for="EditProfileCommand.Title"></smart-form-group-input-text>
-                <smart-form-group-textarea rows="6" label="@CatalogResources.Profile_bioLabel" asp-for="EditProfileCommand.Bio" helper-text="@CatalogResources.Min30CharMax500Char"></smart-form-group-textarea>
-            </smart-panel>
-            <smart-spacer top="ExtraLarge"></smart-spacer>
-
-            <smart-panel header="@CatalogResources.SocialNetworks">
-                @foreach (var socialVm in Model.SocialNetworkViewModels)
-                {
+        <smart-grid >
+            <smart-grid-column width="5">
+                <smart-panel header="@Model.UserIdentity.Identity.Name">
                     <smart-spacer bottom="Large">
-                        <smart-formgroup label="@StringLocalizer[socialVm.Name!]">
-                            <smart-input-group icon="@socialVm.Icon" name="@Model.GetSocialAttributeName(socialVm.SocialNetworkId)" value="@(socialVm.Url)"></smart-input-group>
-                            @if (ModelState[Model.GetSocialAttributeName(socialVm.SocialNetworkId)]?.ValidationState == ModelValidationState.Invalid)
-                            {
-                                <div class="c-form-help-text c-form-help-text--error">@CatalogResources.InvalidUrl</div>
-                            }
-                        </smart-formgroup>
+                        <smart-key-value-list>
+                            <smart-key-value-list-item label="Email" value="@Model.Email"></smart-key-value-list-item>
+                        </smart-key-value-list>
                     </smart-spacer>
-                }
-            </smart-panel>
-        </smart-form>
-        @*Trainer profile picture*@
+                    <smart-spacer bottom="Large">
+                        <smart-form-group-input-text label="@CatalogResources.TrainerTitle" asp-for="EditProfileCommand.Title"></smart-form-group-input-text>
+                    </smart-spacer>
+                    <smart-form-group-textarea rows="6" label="@CatalogResources.Profile_bioLabel" asp-for="EditProfileCommand.Bio" helper-text="@CatalogResources.Min30CharMax500Char"></smart-form-group-textarea>
+                </smart-panel>
+                <smart-spacer top="ExtraLarge"></smart-spacer>
 
-        <smart-grid-column width="5" class="o-grid-col-5">
-            <form id="profile-image" enctype="multipart/form-data" asp-page-handler="UploadProfileImage" method="post">
+                <smart-panel header="@CatalogResources.SocialNetworks">
+                    @foreach (var socialVm in Model.SocialNetworkViewModels)
+                    {
+                        <smart-spacer bottom="Large">
+                            <smart-formgroup label="@StringLocalizer[socialVm.Name!]">
+                                <smart-input-group icon="@socialVm.Icon" name="@Model.GetSocialAttributeName(socialVm.SocialNetworkId)" value="@(socialVm.Url)"></smart-input-group>
+                                @if (ModelState[Model.GetSocialAttributeName(socialVm.SocialNetworkId)]?.ValidationState == ModelValidationState.Invalid)
+                                {
+                                    <div class="c-form-help-text c-form-help-text--error">@CatalogResources.InvalidUrl</div>
+                                }
+                            </smart-formgroup>
+                        </smart-spacer>
+                    }
+                </smart-panel>
+            </smart-grid-column>
+            @*Trainer profile picture*@
+            <smart-grid-column width="5">
                 <smart-spacer left="ExtraLarge" top="Unspecified">
-                    <div class="o-form-group">
-                        <label for="input-file" class="o-form-group__label trainer-picture-label" style="text-align: center;">@CatalogResources.Profile_ImageTitle</label>
-                        <div class="o-form-group__controls o-flex o-flex--horizontal-center">
-                            <div class=" image-upload c-avatar c-avatar--img c-avatar--extra-large">
-                                <img src="@(Model.ProfilePictureAbsoluteUrl)" alt="Profile Picture image">
+                    <smart-spacer bottom="Large">
+                        <div class="o-form-group">
+                            <label for="input-file" class="o-form-group__label trainer-picture-label" style="text-align: center;">@CatalogResources.Profile_ImageTitle</label>
+                            <div class="o-form-group__controls o-flex o-flex--horizontal-center">
+                                <div class=" image-upload c-avatar c-avatar--img c-avatar--extra-large">
+                                    <img src="@(Model.ProfilePictureAbsoluteUrl)" alt="Profile Picture image">
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </smart-spacer>
                     <div class="c-file-upload">
                         <smart-input id="input-file" type="file" asp-for="ProfilePicture" class="clearable" accept="image/png, image/jpeg, image/gif" onchange="this.form.submit()"/>
                         <div class="c-file-upload__content">
@@ -94,9 +97,10 @@
                             <p>@CatalogResources.Profile_DragDropPicture</p>
                         </div>
                     </div>
-                    <smart-validation-message asp-for="ProfilePicture"></smart-validation-message>
                 </smart-spacer>
-            </form>
-        </smart-grid-column>
-    </smart-grid>
+            </smart-grid-column>
+            <smart-validation-message asp-for="ProfilePicture"></smart-validation-message>
+        </smart-grid>
+    </form>
+
 </div>
