@@ -1,20 +1,7 @@
 version: "3.9"
 
 services:
-  datasource:
-    build:
-      context: .
-      dockerfile: docker/DB.Dockerfile
-    hostname: "${DOCKER_NAME}-datasource"
-    container_name: "${DOCKER_NAME}-datasource"
-    restart: always
-    networks:
-      - "cfa"
-    environment:
-      - "SA_PASSWORD=${DOCKER_SQL_PASSWORD}"
   useradmin:
-    depends_on:
-      - datasource
     build:
       context: .
       dockerfile: docker/Web.Dockerfile
@@ -24,8 +11,6 @@ services:
     networks:
       - "cfa"
   showcase:
-    depends_on:
-      - datasource
     build:
       context: .
       dockerfile: docker/Showcase.Dockerfile

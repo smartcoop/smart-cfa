@@ -46,6 +46,25 @@ sed -e "s/{catalog-server-name}/${DOCKER_NAME}-datasource/" \
 
 mv ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.tmp.json ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.json
 
+if [ "$( docker container inspect -f '{{.State.Running}}' "dev-cfa-datasource" )" != "true" ]; then
+
+echo "dev-cfa-datasource not running"
+docker stop dev-cfa-datasource || true
+docker rm dev-cfa-datasource || true
+
+docker build \
+  -f "./docker/DB.Dockerfile" \
+  -t "dev-cfa-datasource" \
+  .
+docker run -d \
+  --name dev-cfa-datasource \
+  -e "SA_PASSWORD=${PASSWORD}" \
+  --network=cfa \
+  dev-cfa-datasource
+sleep 3
+else
+  echo "dev-cfa-datasource running"
+fi
 
 echo "build docker DB and API"
 docker-compose --env-file ./.env build
