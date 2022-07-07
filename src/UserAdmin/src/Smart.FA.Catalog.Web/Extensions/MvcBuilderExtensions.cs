@@ -7,8 +7,9 @@ public static class MvcBuilderExtensions
 {
     public static IMvcBuilder ConfigureRazorPagesOptions(this IMvcBuilder mvcBuilder)
     {
-        mvcBuilder.AddRazorPagesOptions(options =>  options.Conventions.AddPageConventionsAuthorization());
-
+        mvcBuilder
+            .AddRazorPagesOptions(options =>  options.Conventions.AddPageConventionsAuthorization())
+            .AddMvcOptions(options => options.Filters.Add<SerializeModelStateFilter>());
         return mvcBuilder;
     }
 

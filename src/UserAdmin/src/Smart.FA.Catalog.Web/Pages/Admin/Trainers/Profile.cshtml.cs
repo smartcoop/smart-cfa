@@ -4,6 +4,7 @@ using Smart.FA.Catalog.Application.UseCases.Commands;
 using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Infrastructure.Helpers;
+using Smart.FA.Catalog.Web.Extensions;
 using Smart.FA.Catalog.Web.ViewModels.Trainers;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin.Trainers;
@@ -64,7 +65,7 @@ public class ProfileModel : AdminPage
             .Select(keyPair => new TrainerProfile.Social { SocialNetworkId = keyPair.Key, Url = keyPair.Value }).ToSocialViewModels();
     }
 
-    public async Task<ActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync()
     {
         if (ModelState.IsValid)
         {
@@ -80,7 +81,7 @@ public class ProfileModel : AdminPage
 
         //Refresh page
         await LoadDataAsync();
-        return RedirectToPage();
+        return RedirectToPage().WithModelStateOf(this);
     }
 
     public async Task UpdateDescriptionAsync()
