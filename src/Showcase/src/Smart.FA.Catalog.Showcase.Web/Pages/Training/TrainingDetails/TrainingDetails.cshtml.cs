@@ -28,7 +28,7 @@ public class TrainingDetailsModel : PageModelBase
     public TrainingDetailsModel(Infrastructure.Data.CatalogShowcaseContext context, IOptions<MinIOOptions> minIOSettings, ITrainerInquirySendEmailService trainerInquirySendEmailService)
     {
         _context = context;
-        _minIoSettings = minIOSettings.Value ?? throw new InvalidOperationException($"MinIO options not defined");
+        _minIoSettings = minIOSettings.Value ?? throw new InvalidOperationException($"{nameof(minIOSettings)} options not defined");
         _trainerInquirySendEmailService = trainerInquirySendEmailService;
     }
     public InquirySendEmailResult? EmailSendingResult { get; set; }
@@ -54,33 +54,29 @@ public class TrainingDetailsModel : PageModelBase
             return null;
         }
 
-        var firstLine = trainingDetails.FirstOrDefault();
+        var firstTrainerDetail = trainingDetails.FirstOrDefault();
         return new TrainingDetailsViewModel
         {
-            Id = firstLine.Id,
-            TrainingTitle = firstLine.TrainingTitle,
-            Goal = firstLine.Goal,
-            Methodology = firstLine.Methodology,
-            PracticalModalities = firstLine.PracticalModalities,
-            TrainerFirstName = firstLine.TrainerFirstName,
-            TrainerLastName = firstLine.TrainerLastName,
-            TrainerId = firstLine.TrainerId,
-            TrainerTitle = firstLine.TrainerTitle,
-            Status = TrainingStatusType.FromValue(firstLine.StatusId),
+            Id = firstTrainerDetail.Id,
+            TrainingTitle = firstTrainerDetail.TrainingTitle,
+            Goal = firstTrainerDetail.Goal ?? string.Empty,
+            Methodology = firstTrainerDetail.Methodology ?? string.Empty,
+            PracticalModalities = firstTrainerDetail.PracticalModalities ?? string.Empty,
+            TrainerFirstName = firstTrainerDetail.TrainerFirstName,
+            TrainerLastName = firstTrainerDetail.TrainerLastName,
+            TrainerId = firstTrainerDetail.TrainerId,
+            TrainerTitle = firstTrainerDetail.TrainerTitle,
+            Status = TrainingStatusType.FromValue(firstTrainerDetail.StatusId),
             Topics = trainingDetails.Select(x => Topic.FromValue(x.TrainingTopicId)).ToList(),
             Languages = trainingDetails.Select(x => x.Language).Distinct().ToList(),
-            TrainerProfileImageUrl = _minIoSettings.GenerateMinIoTrainerProfileUrl(firstLine.ProfileImagePath)
+            TrainerProfileImageUrl = _minIoSettings.GenerateMinIoTrainerProfileUrl(firstTrainerDetail.ProfileImagePath)
         };
     }
 
     public async Task<ActionResult> OnPostAsync()
     {
-        if (!TempData.TryGetConvertedValue<int>(TempDataTrainerIdKey, out var trainerId))
-        {
-            return RedirectToPage(Routes.TrainingList);
-        }
-
-        if (!TempData.TryGetConvertedValue<int>(TempDataTrainingIdKey, out var trainingId))
+        if (!TempData.TryGetConvertedValue<int>(TempDataTrainerIdKey, out var trainerId) ||
+            !TempData.TryGetConvertedValue<int>(TempDataTrainingIdKey, out var trainingId))
         {
             return RedirectToPage(Routes.TrainingList);
         }
