@@ -72,11 +72,8 @@ public class ProfileModel : AdminPage
             //Update description
             await UpdateDescriptionAsync();
 
-            if (ProfilePicture is not null)
-            {
-                //Upload image
-                await UploadImageAsync();
-            }
+            //Upload image
+            await UploadImageAsync();
         }
 
         //Refresh page
@@ -93,10 +90,13 @@ public class ProfileModel : AdminPage
 
     public async Task UploadImageAsync()
     {
-        var imageUploadRequest = new UploadTrainerProfileImageToStorageCommandRequest { TrainerId = UserIdentity.CurrentTrainer.Id, ProfilePicture = ProfilePicture! };
-        var imageUploadResponse = await Mediator.Send(imageUploadRequest);
-        ProfilePictureAbsoluteUrl = imageUploadResponse.ProfilePictureAbsoluteUrl;
-        EditionSucceeded = !imageUploadResponse.HasErrors();
+        if (ProfilePicture is not null)
+        {
+            var imageUploadRequest = new UploadTrainerProfileImageToStorageCommandRequest { TrainerId = UserIdentity.CurrentTrainer.Id, ProfilePicture = ProfilePicture! };
+            var imageUploadResponse = await Mediator.Send(imageUploadRequest);
+            ProfilePictureAbsoluteUrl = imageUploadResponse.ProfilePictureAbsoluteUrl;
+            EditionSucceeded = !imageUploadResponse.HasErrors();
+        }
     }
 
     protected override SideMenuItem GetSideMenuItem() => SideMenuItem.MyProfile;
