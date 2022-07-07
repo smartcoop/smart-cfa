@@ -1,13 +1,9 @@
 #nullable disable
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
 using Smart.FA.Catalog.Showcase.Domain.Common.Enums;
 using Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry.Trainer;
-using Smart.FA.Catalog.Showcase.Web.Options;
-
+using Smart.FA.Catalog.Showcase.Web.Services.Training;
 
 namespace Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingDetails;
 
@@ -19,17 +15,15 @@ public class TrainingDetailsModel : PageModelBase
 
     private readonly ITrainerInquirySendEmailService _trainerInquirySendEmailService;
 
-    private readonly Infrastructure.Data.CatalogShowcaseContext _context;
 
-    private readonly MinIOOptions _minIoSettings;
+    private readonly ITrainingService _trainingService;
 
     public TrainingDetailsViewModel Training { get; set; }
 
-    public TrainingDetailsModel(Infrastructure.Data.CatalogShowcaseContext context, IOptions<MinIOOptions> minIOSettings, ITrainerInquirySendEmailService trainerInquirySendEmailService)
+    public TrainingDetailsModel(ITrainerInquirySendEmailService trainerInquirySendEmailService, ITrainingService trainingService)
     {
-        _context = context;
-        _minIoSettings = minIOSettings.Value ?? throw new InvalidOperationException($"{nameof(minIOSettings)} options not defined");
         _trainerInquirySendEmailService = trainerInquirySendEmailService;
+        _trainingService = trainingService;
     }
     public InquirySendEmailResult? EmailSendingResult { get; set; }
 
@@ -37,7 +31,7 @@ public class TrainingDetailsModel : PageModelBase
 
     public async Task<ActionResult> OnGetAsync(int? id)
     {
-        if (id is null || (Training = await LoadTrainingDetailsAsync(id.Value)) is null)
+        if (id is null || (Training = await _trainingService.GetTrainingDetailsViewModelsByIdAsync(id.Value)) is null)
         {
             return RedirectToNotFound();
         }
@@ -47,31 +41,6 @@ public class TrainingDetailsModel : PageModelBase
         return Page();
     }
 
-    private TrainingDetailsViewModel MapTrainingDetails(List<Domain.Models.TrainingDetails> trainingDetails)
-    {
-        if (trainingDetails is null)
-        {
-            return null;
-        }
-
-        var firstTrainerDetail = trainingDetails.FirstOrDefault();
-        return new TrainingDetailsViewModel
-        {
-            Id = firstTrainerDetail.Id,
-            TrainingTitle = firstTrainerDetail.TrainingTitle,
-            Goal = firstTrainerDetail.Goal ?? string.Empty,
-            Methodology = firstTrainerDetail.Methodology ?? string.Empty,
-            PracticalModalities = firstTrainerDetail.PracticalModalities ?? string.Empty,
-            TrainerFirstName = firstTrainerDetail.TrainerFirstName,
-            TrainerLastName = firstTrainerDetail.TrainerLastName,
-            TrainerId = firstTrainerDetail.TrainerId,
-            TrainerTitle = firstTrainerDetail.TrainerTitle,
-            Status = TrainingStatusType.FromValue(firstTrainerDetail.StatusId),
-            Topics = trainingDetails.Select(x => Topic.FromValue(x.TrainingTopicId)).ToList(),
-            Languages = trainingDetails.Select(x => x.Language).Distinct().ToList(),
-            TrainerProfileImageUrl = _minIoSettings.GenerateMinIoTrainerProfileUrl(firstTrainerDetail.ProfileImagePath)
-        };
-    }
 
     public async Task<ActionResult> OnPostAsync()
     {
@@ -87,7 +56,7 @@ public class TrainingDetailsModel : PageModelBase
             EmailSendingResult = await _trainerInquirySendEmailService.SendEmailAsync(TrainerInquiryEmailRequest);
         }
 
-        await LoadTrainingDetailsAsync(trainingId);
+        await _trainingService.GetTrainingDetailsViewModelsByIdAsync(trainingId);
         SetTempDataTrainerId(trainerId);
         SetTempDataTrainingId(trainingId);
         return Page();
@@ -96,17 +65,4 @@ public class TrainingDetailsModel : PageModelBase
     private void SetTempDataTrainerId(int trainerId) => TempData[TempDataTrainerIdKey] = trainerId;
 
     private void SetTempDataTrainingId(int trainingId) => TempData[TempDataTrainingIdKey] = trainingId;
-
-    private async Task<TrainingDetailsViewModel> LoadTrainingDetailsAsync(int id)
-    {
-        var trainingDetails = await _context.TrainingDetails.Where(training => training.Id == id).ToListAsync();
-
-        if (!trainingDetails.Any())
-        {
-            return null;
-        }
-
-        Training = MapTrainingDetails(trainingDetails);
-        return Training;
-    }
 }
