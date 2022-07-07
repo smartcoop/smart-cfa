@@ -6,4 +6,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Smart.Design.Razor" Version="1.0.24-rc" />
+    </ItemGroup>
+
 </Project>
