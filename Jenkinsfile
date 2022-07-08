@@ -8,7 +8,7 @@
           usernamePassword(credentialsId: 'docker_name-minio-cfa', usernameVariable: 'DOCKER_MINIO_USER', passwordVariable: 'DOCKER_MINIO_PASSWORD'),
           usernamePassword(credentialsId: 'catalogServerUserPassword', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD'),
         ]) {
-          sh "./jenkins-deploy.sh"
+          sh "./pipeline-scripts/jenkins-deploy.sh"
         }
       }
       stage('Clean up our workspace') {
