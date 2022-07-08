@@ -66,6 +66,29 @@ else
   echo "dev-cfa-datasource running"
 fi
 
+
+if [ "$( docker container inspect -f '{{.State.Running}}' "dev-cfa-minio" )" != "true" ]; then
+
+echo "dev-cfa-minio not running"
+docker stop dev-cfa-minio || true
+docker rm dev-cfa-minio || true
+
+docker run -d \
+  --name dev-cfa-minio \
+  -e "MINIO_ROOT_USER=${DOCKER_MINIO_USER}"  \
+  -e "MINIO_ROOT_PASSWORD=${DOCKER_MINIO_PASSWORD}" \
+  -v "/minio/data:/data" \
+  -p "9001:9001" \
+  -p "9000:9000" \
+  --network=cfa \
+  quay.io/minio/minio \
+  server /data --console-address ":9001"
+sleep 3
+else
+  echo "dev-cfa-minio running"
+fi
+
+
 echo "build docker DB and API"
 docker-compose --env-file ./.env build
 echo "stop old docker"
