@@ -78,7 +78,7 @@ public class ProfileModel : AdminPage
 
         //Refresh page
         await LoadDataAsync();
-        return RedirectToPage().WithModelStateOf(this);
+        return RedirectAndPreserveModelState();
     }
 
     public async Task UpdateDescriptionAsync()
