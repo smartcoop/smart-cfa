@@ -20,7 +20,7 @@ services:
     networks:
       - "cfa"
   minio:
-    image: quay.io/minio/minio
+    image: quay.io/minio/minio:latest
     hostname: ${DOCKER_NAME}-minio
     container_name: ${DOCKER_NAME}-minio
     restart: always
