@@ -19,20 +19,6 @@ services:
     restart: always
     networks:
       - "cfa"
-  minio:
-    image: quay.io/minio/minio
-    hostname: ${DOCKER_NAME}-minio
-    container_name: ${DOCKER_NAME}-minio
-    restart: always
-    networks:
-      - "cfa"
-    volumes:
-      - /minio/data:/data
-    environment:
-      - "MINIO_ROOT_USER=${DOCKER_MINIO_USER}"
-      - "MINIO_ROOT_PASSWORD=${DOCKER_MINIO_PASSWORD}"
-    command: server /data --console-address ":9001"
-
   minioclient:
     image: minio/mc
     container_name: ${DOCKER_NAME}-minio_client
