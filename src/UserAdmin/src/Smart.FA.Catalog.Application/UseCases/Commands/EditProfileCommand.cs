@@ -25,7 +25,7 @@ public class EditProfileCommand : IRequest<ProfileEditionResponse>
 
     public string? Title { get; set; }
 
-    public Dictionary<int, string> Socials { get; set; }
+    public Dictionary<int, string>? Socials { get; set; }
 }
 
 public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, ProfileEditionResponse>
@@ -45,7 +45,7 @@ public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, Pro
     {
         try
         {
-            _logger.LogInformation("Editing profile of trainer {trainerId}", command.TrainerId);
+            _logger.LogInformation("Editing profile of trainer {TrainerId}", command.TrainerId);
             var trainer = await GetTrainerWithSocialNetworksByIdAsync(command.TrainerId, cancellationToken);
 
             // If null is returned this means that the trainer was not found.
@@ -59,13 +59,13 @@ public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, Pro
             // This could have been pulled into the UpdateTrainerData method but I prefer to make it explicit.
             await _catalogContext.SaveChangesAsync(cancellationToken);
 
-            _logger.LogInformation("Profile edition of trainer {trainerId} succeeded", trainer.Id);
+            _logger.LogInformation("Profile edition of trainer {TrainerId} succeeded", trainer.Id);
 
             return new TrainerProfileUpdatedSuccessfullyResponse();
         }
         catch (Exception exception)
         {
-            _logger.LogError(exception, "An unexpected error occurred during the executing of the command: {payload}", command.ToJson());
+            _logger.LogError(exception, "An unexpected error occurred during the executing of the command: {Payload}", command.ToJson());
             throw;
         }
     }
