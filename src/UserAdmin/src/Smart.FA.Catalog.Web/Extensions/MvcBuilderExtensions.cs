@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Smart.FA.Catalog.Web.Authorization.Policy;
+using Smart.FA.Catalog.Web.Filters;
 
 namespace Smart.FA.Catalog.Web.Extensions;
 
