@@ -25,7 +25,7 @@ public class EditProfileCommand : IRequest<ProfileEditionResponse>
 
     public string? Title { get; set; }
 
-    public Dictionary<int, string>? Socials { get; set; }
+    public Dictionary<int, string> Socials { get; set; }
 }
 
 public class EditProfileCommandHandler : IRequestHandler<EditProfileCommand, ProfileEditionResponse>

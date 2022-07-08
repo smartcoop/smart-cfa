@@ -4,6 +4,7 @@ using Smart.FA.Catalog.Application.UseCases.Commands;
 using Smart.FA.Catalog.Application.UseCases.Queries;
 using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Infrastructure.Helpers;
+using Smart.FA.Catalog.Web.Extensions;
 using Smart.FA.Catalog.Web.ViewModels.Trainers;
 
 namespace Smart.FA.Catalog.Web.Pages.Admin.Trainers;
@@ -15,7 +16,7 @@ public class ProfileModel : AdminPage
     public string Email => UserIdentity.CurrentTrainer.Email!;
 
     [BindProperty]
-    public EditProfileCommand? EditProfileCommand { get; set; }
+    public EditProfileCommand EditProfileCommand { get; set; }
 
     [BindProperty]
     public IFormFile? ProfilePicture { get; set; }
@@ -37,84 +38,65 @@ public class ProfileModel : AdminPage
         ProfilePictureAbsoluteUrl = minIoLinkGenerator.GetAbsoluteTrainerProfilePictureUrl(userIdentity.CurrentTrainer.ProfileImagePath);
     }
 
-    public async Task<ActionResult> OnGetAsync()
-    {
-        SetSideMenuItem();
-        await LoadDataAsync().ConfigureAwait(false);
-
-        // Trainer was not found.
-        if (EditProfileCommand is null)
-        {
-            return RedirectToPage("/404");
-        }
-
-        return Page();
-    }
-
-    public async Task<ActionResult> OnPostAsync()
-    {
-        if (ModelState.IsValid)
-        {
-            EditProfileCommand!.TrainerId = UserIdentity.CurrentTrainer.Id;
-            var editionResponse = await Mediator.Send(EditProfileCommand);
-            EditionSucceeded = !editionResponse.HasErrors();
-            return RedirectToPage();
-        }
-
-        SetSideMenuItem();
-
-        // Page reload from a post, whether the underlying operation was successful or not, requires the social networks list to load again.
-        ReloadSocials();
-        return Page();
-    }
-
     private async Task LoadDataAsync()
     {
         SetSideMenuItem();
+
         var trainerProfile = await Mediator.Send(new GetTrainerProfileQuery(UserIdentity.CurrentTrainer.Id));
         if (trainerProfile.TrainerId is not null)
         {
             EditProfileCommand = trainerProfile.ToCommand();
             SocialNetworkViewModels = trainerProfile.Socials.ToSocialViewModels();
+            // Page reload from a post, whether the underlying operation was successful or not, requires the social networks list to load again.
+            ReloadSocials();
         }
+    }
+
+    public async Task<ActionResult> OnGetAsync()
+    {
+        await LoadDataAsync();
+        return Page();
     }
 
     private void ReloadSocials()
     {
-        SocialNetworkViewModels = EditProfileCommand!.Socials!.Select(keyPair => new TrainerProfile.Social()
+        SocialNetworkViewModels = EditProfileCommand
+            .Socials
+            .Select(keyPair => new TrainerProfile.Social { SocialNetworkId = keyPair.Key, Url = keyPair.Value }).ToSocialViewModels();
+    }
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (ModelState.IsValid)
         {
-            SocialNetworkId = keyPair.Key,
-            Url = keyPair.Value
-        }).ToSocialViewModels();
-    }
+            //Update description
+            await UpdateDescriptionAsync();
 
-    public async Task<FileResult?> OnGetLoadImageAsync()
-    {
-        var profilePicture = await Mediator.Send(new GetTrainerProfileImageRequest { Trainer = UserIdentity.CurrentTrainer });
-        var response = profilePicture.ImageStream is null ? null : new FileStreamResult(profilePicture.ImageStream, "image/jpeg");
-        return response;
-    }
+            //Upload image
+            await UploadImageAsync();
+        }
 
-    public async Task<ActionResult> OnPostUploadProfileImageAsync()
-    {
-        var imageUploadRequest = new UploadTrainerProfileImageToStorageCommandRequest { TrainerId = UserIdentity.CurrentTrainer.Id, ProfilePicture = ProfilePicture };
-        var imageUploadResponse = await Mediator.Send(imageUploadRequest);
-        ProfilePictureAbsoluteUrl = imageUploadResponse.ProfilePictureAbsoluteUrl;
-        EditionSucceeded = !imageUploadResponse.HasErrors();
+        //Refresh page
         await LoadDataAsync();
-        return RedirectToPage();
+        return RedirectAndPreserveModelState();
     }
 
-    public async Task<ActionResult> OnPostDeleteImageAsync()
+    public async Task UpdateDescriptionAsync()
+    {
+        EditProfileCommand.TrainerId = UserIdentity.CurrentTrainer.Id;
+        var editionResponse = await Mediator.Send(EditProfileCommand);
+        EditionSucceeded = !editionResponse.HasErrors();
+    }
+
+    public async Task UploadImageAsync()
     {
         if (ProfilePicture is not null)
         {
-            var imageDeletionResponse = await Mediator.Send(new DeleteTrainerProfileImageRequest { RelativeProfilePictureUrl = UserIdentity.CurrentTrainer.ProfileImagePath });
-            EditionSucceeded = !imageDeletionResponse.HasErrors();
+            var imageUploadRequest = new UploadTrainerProfileImageToStorageCommandRequest { TrainerId = UserIdentity.CurrentTrainer.Id, ProfilePicture = ProfilePicture! };
+            var imageUploadResponse = await Mediator.Send(imageUploadRequest);
+            ProfilePictureAbsoluteUrl = imageUploadResponse.ProfilePictureAbsoluteUrl;
+            EditionSucceeded = !imageUploadResponse.HasErrors();
         }
-
-        await LoadDataAsync();
-        return RedirectToPage();
     }
 
     protected override SideMenuItem GetSideMenuItem() => SideMenuItem.MyProfile;

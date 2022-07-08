@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Smart.FA.Catalog.Web.Extensions;
 
 namespace Smart.FA.Catalog.Web.Pages;
 
@@ -18,5 +19,13 @@ public abstract class PageModelBase : PageModel
         TempData["ErrorMessage"] = message;
 
         return NotFound();
+    }
+
+    /// <summary>
+    /// Redirects to page (http code 302) while also preserving the ModelState using TempData
+    /// </summary>
+    public IActionResult RedirectAndPreserveModelState()
+    {
+        return RedirectToPage().WithModelStateOf(this);
     }
 }
