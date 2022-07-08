@@ -11,9 +11,9 @@ public static class ModelStateExtensions
     {
         public string Key { get; set; } = null!;
 
-        public string AttemptedValue { get; set; } = null!;
+        public string? AttemptedValue { get; set; }
 
-        public object RawValue { get; set; } = null!;
+        public object? RawValue { get; set; }
 
         public ICollection<string> ErrorMessages { get; set; } = new List<string>();
     }
@@ -24,8 +24,8 @@ public static class ModelStateExtensions
             .Select(kvp => new ModelStateTransferValue
             {
                 Key = kvp.Key,
-                AttemptedValue = kvp.Value?.AttemptedValue ?? string.Empty,
-                RawValue = kvp.Value?.RawValue ?? string.Empty,
+                AttemptedValue = kvp.Value?.AttemptedValue,
+                RawValue = kvp.Value?.RawValue,
                 ErrorMessages = kvp.Value?.Errors.Select(err => err.ErrorMessage).ToList() ?? new List<string>(),
             });
 
