@@ -14,7 +14,7 @@
         @Model.Training.TrainingTitle
     </div>
     <div class="training-card__sectors">
-        <img src="~/icons/tag--blue.svg" class="o-svg-icon--small sectors-icon" alt="" />
+        <img src="~/icons/tag--blue.svg" class="o-svg-icon--small sectors-icon" alt=""/>
         @foreach (var topic in Model.Training.Topics)
         {
             <a class="training-list__category-link" href="#">@StringLocalizer[$"TopicName_{topic.Name}"]</a>
@@ -59,7 +59,7 @@
             </div>
 
             <div class="training-card__trainer-links">
-                <img src="/icons/message.svg" class="o-svg-icon--small contact-icon" />
+                <img src="/icons/message.svg" class="o-svg-icon--small contact-icon"/>
                 <a class="training-card__trainer-link training-card__contact-link" data-dialog="inquiry-form-dialog">@ShowcaseResources.TrainerCard_Contact</a>
             </div>
         </div>
@@ -68,7 +68,7 @@
     <div class="training-card__footer">
         <div class="training-card__back">
             <a class="training-card__back-link" asp-page="@Routes.TrainingList">
-                <img src="~/icons/chevron-left--blue.svg" class="o-svg-icon--small chevron-icon" alt="" />@ShowcaseResources.AllTrainings
+                <img src="~/icons/chevron-left--blue.svg" class="o-svg-icon--small chevron-icon" alt=""/>@ShowcaseResources.AllTrainings
             </a>
         </div>
     </div>
