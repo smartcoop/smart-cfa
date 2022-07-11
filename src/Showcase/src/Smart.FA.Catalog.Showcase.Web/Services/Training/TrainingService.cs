@@ -86,7 +86,8 @@ public class TrainingService : ITrainingService
             Status = TrainingStatusType.FromValue(firstTrainerDetail.StatusId),
             Topics = trainingDetails.Select(x => Topic.FromValue(x.TrainingTopicId)).ToList(),
             Languages = trainingDetails.Select(x => x.Language).Distinct().ToList(),
-            TrainerProfileImageUrl = _minIoSettings.GenerateMinIoTrainerProfileUrl(firstTrainerDetail.ProfileImagePath)
+            TrainerProfileImageUrl = _minIoSettings.GenerateMinIoTrainerProfileUrl(firstTrainerDetail.ProfileImagePath),
+            IsGivenBySmart = firstTrainerDetail.IsGivenBySmart
         };
     }
 

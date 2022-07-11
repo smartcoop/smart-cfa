@@ -61,6 +61,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://smartbe.be/fr/formations-2022/.
+        /// </summary>
+        public static string AllSmartTrainingsLink {
+            get {
+                return ResourceManager.GetString("AllSmartTrainingsLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dans toutes les matières.
         /// </summary>
         public static string AllTopics {
@@ -291,6 +300,15 @@ namespace Smart.FA.Catalog.Showcase.Localization {
         public static string GenericNotFoundPageTitle {
             get {
                 return ResourceManager.GetString("GenericNotFoundPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cette formation est organisée par Smart Formation et propose des tarifs préférentiels pour les sociétaires Smart. Voir toutes les formations Smart..
+        /// </summary>
+        public static string GivenBySmart {
+            get {
+                return ResourceManager.GetString("GivenBySmart", resourceCulture);
             }
         }
         

@@ -44,6 +44,12 @@
                 </div>
                 @Html.PreserveLineBreaks(Model.Training.PracticalModalities)
             </div>
+            @if (Model.Training.IsGivenBySmart)
+            {
+                <div>
+                    @ShowcaseResources.GivenBySmart <a href="@ShowcaseResources.AllSmartTrainingsLink">@ShowcaseResources.AllSmartTrainingsLink</a>
+                </div>
+            }
         </div>
         <div class="training-card__trainer">
             <div class="trainer-card__image">
@@ -74,7 +80,7 @@
     </div>
 </section>
 
- @await Html.PartialAsync("Shared/_TrainerContact",new { firstName = Model.Training.TrainerFirstName,
+@await Html.PartialAsync("Shared/_TrainerContact",new { firstName = Model.Training.TrainerFirstName,
                                                          lastName = Model.Training.TrainerFirstName,
                                                          EmailSendingResult = Model.EmailSendingResult,
                                                          TrainerInquiryEmailRequest = Model.TrainerInquiryEmailRequest

@@ -348,4 +348,10 @@
   <data name="TrainingWasNotFound" xml:space="preserve">
     <value>La formation n'a pas été trouvée</value>
   </data>
+  <data name="AllSmartTrainingsLink" xml:space="preserve">
+    <value>https://smartbe.be/fr/formations-2022/</value>
+  </data>
+  <data name="GivenBySmart" xml:space="preserve">
+    <value>Cette formation est organisée par Smart Formation et propose des tarifs préférentiels pour les sociétaires Smart. Voir toutes les formations Smart.</value>
+  </data>
 </root>
