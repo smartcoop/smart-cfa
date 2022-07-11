@@ -25,7 +25,7 @@ public static class Mappers
             TrainerId = trainerProfile.TrainerId!.Value,
             Bio = trainerProfile.Bio,
             Title = trainerProfile.Title,
-            Socials = new Dictionary<int, string>()
+            Socials = trainerProfile.Socials.ToDictionary(socialNetwork => socialNetwork.SocialNetworkId, socialNetwork => socialNetwork.Url ?? string.Empty)
         };
     }
 
@@ -52,12 +52,7 @@ public static class Mappers
 
     public static SocialNetworkViewModel ToViewModel(this SocialNetwork socialNetwork)
     {
-        return new SocialNetworkViewModel
-        {
-            SocialNetworkId = socialNetwork.Id,
-            Name = socialNetwork.Name,
-            Icon = socialNetwork.ToImage()
-        };
+        return new SocialNetworkViewModel { SocialNetworkId = socialNetwork.Id, Name = socialNetwork.Name, Icon = socialNetwork.ToImage() };
     }
 
     /// <summary>
