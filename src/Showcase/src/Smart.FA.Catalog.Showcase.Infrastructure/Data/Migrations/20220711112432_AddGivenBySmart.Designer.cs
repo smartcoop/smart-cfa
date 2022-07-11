@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Smart.FA.Catalog.Showcase.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using Smart.FA.Catalog.Showcase.Infrastructure.Data;
 namespace Smart.FA.Catalog.Showcase.Infrastructure.Migrations
 {
     [DbContext(typeof(CatalogShowcaseContext))]
-    partial class CatalogShowcaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220711112432_AddGivenBySmart")]
+    partial class AddGivenBySmart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
