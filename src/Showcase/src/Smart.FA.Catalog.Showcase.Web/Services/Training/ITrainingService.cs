@@ -1,4 +1,5 @@
 using Smart.FA.Catalog.Shared.Collections;
+using Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingDetails;
 using Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingList;
 
 namespace Smart.FA.Catalog.Showcase.Web.Services.Training;
@@ -26,4 +27,6 @@ public interface ITrainingService
     /// <param name="pageSize">The number of item returned by the search.</param>
     /// <returns>A task that represents the asynchronous operation. The task's result is a paginated list of <see cref="TrainingListViewModel"/>.</returns>
     public Task<PagedList<TrainingListViewModel>> SearchTrainingViewModelsByTopicIdAsync(int? searchTopicId, int currentPage, int pageSize);
+
+    public Task<TrainingDetailsViewModel?> GetTrainingDetailsViewModelsByIdAsync(int value);
 }

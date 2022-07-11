@@ -14,6 +14,7 @@ public class TrainingDetailsViewModel
     public string TrainerLastName { get; set; }
     public int TrainerId { get; set; }
     public string TrainerTitle { get; set; }
+    public string TrainerProfileImageUrl { get; set; }
     public List<Topic> Topics { get; set; } = new List<Topic>();
     public List<string> Languages { get; set; } = new List<string>();
     public TrainingStatusType Status { get; set; }
