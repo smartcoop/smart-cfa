@@ -56,7 +56,7 @@ public class TrainingDetailsModel : PageModelBase
             EmailSendingResult = await _trainerInquirySendEmailService.SendEmailAsync(TrainerInquiryEmailRequest);
         }
 
-        await _trainingService.GetTrainingDetailsViewModelsByIdAsync(trainingId);
+        Training = await _trainingService.GetTrainingDetailsViewModelsByIdAsync(trainingId);
         SetTempDataTrainerId(trainerId);
         SetTempDataTrainingId(trainingId);
         return Page();
