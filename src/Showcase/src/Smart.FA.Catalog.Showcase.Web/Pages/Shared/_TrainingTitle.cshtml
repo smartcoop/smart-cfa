@@ -9,6 +9,10 @@
             <div class="training-list__title">
                 <a class="training-list__training-link" asp-page="@Routes.TrainingDetails" asp-route-id="@Model.TrainingId">@Model.Title</a>
             </div>
+            @if (Model.IsGivenBySmart)
+            {
+              <img src="~/icons/chevron-right--blue.svg" class="o-svg-icon--large chevron-icon"/>
+            }
             <div class="training-list__trainer">
                 @Html.DisplayFor(modelItem => Model.TrainerFirstName) @Html.DisplayFor(modelItem => Model.TrainerLastName)
             </div>
