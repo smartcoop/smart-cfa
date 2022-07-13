@@ -33,17 +33,29 @@ public static class ShowcaseServiceCollectionExtensions
 
     private static IServiceCollection AddTransientServices(this IServiceCollection services)
     {
-        return services
+        services
             .AddTransient<ITrainingService, TrainingService>()
             .AddTransient<ITrainerService, TrainerService>()
-            .AddTransient<ISmartLearningInquiryEmailService, SmartLearningTeamInquiryEmailService>()
-            .AddTransient<ITrainerInquirySendEmailService, TrainerInquirySendEmailService>();
+            .AddTransient<ISmartLearningInquiryEmailService, SmartLearningTeamInquiryEmailService>();
+
+        var environment = services.BuildServiceProvider().GetRequiredService<IWebHostEnvironment>();
+        if (environment.IsProduction())
+        {
+            services.AddTransient<ITrainerInquirySendEmailService, TrainerInquirySendEmailService>();
+        }
+        else
+        {
+            services.AddTransient<ITrainerInquirySendEmailService, TrainerInquirySendEmailWithTestRedirectService>();
+        }
+
+        return services;
     }
 
     public static IServiceCollection ConfigureShowcaseOptions(this IServiceCollection services, IConfiguration configuration)
     {
         return services.Configure<MinIOOptions>(configuration.GetSection(MinIOOptions.SectionName))
             .Configure<FluentEmailOptions>(configuration.GetSection(FluentEmailOptions.SectionName))
-            .Configure<InquiryOptions>(configuration.GetSection(InquiryOptions.SectionName));
+            .Configure<InquiryOptions>(configuration.GetSection(InquiryOptions.SectionName))
+            .Configure<TestInquiryOptions>(configuration.GetSection(TestInquiryOptions.SectionName));
     }
 }
