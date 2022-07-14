@@ -13,10 +13,10 @@ namespace Smart.Extensions.DependencyInjection;
 
 public static class ShowcaseServiceCollectionExtensions
 {
-    public static IServiceCollection AddDependencies(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddDependencies(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
     {
         return services
-            .AddTransientServices()
+            .AddTransientServices(webHostEnvironment)
             .AddFluentEmail(configuration)
             .AddShowcaseLocalization()
             .AddEfCore(configuration)
@@ -31,15 +31,14 @@ public static class ShowcaseServiceCollectionExtensions
             dbContextOptionsBuilder.UseSqlServer(configuration.GetConnectionString("Catalog"), sqlServerDbContextOptionsBuilder => sqlServerDbContextOptionsBuilder.UseRowNumberForPaging()));
     }
 
-    private static IServiceCollection AddTransientServices(this IServiceCollection services)
+    private static IServiceCollection AddTransientServices(this IServiceCollection services, IWebHostEnvironment webHostEnvironment)
     {
         services
             .AddTransient<ITrainingService, TrainingService>()
             .AddTransient<ITrainerService, TrainerService>()
             .AddTransient<ISmartLearningInquiryEmailService, SmartLearningTeamInquiryEmailService>();
 
-        var environment = services.BuildServiceProvider().GetRequiredService<IWebHostEnvironment>();
-        if (environment.IsProduction())
+        if (webHostEnvironment.IsProduction())
         {
             services.AddTransient<ITrainerInquirySendEmailService, TrainerInquirySendEmailService>();
         }
