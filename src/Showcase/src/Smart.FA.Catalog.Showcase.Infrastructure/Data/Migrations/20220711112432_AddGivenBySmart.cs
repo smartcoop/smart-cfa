@@ -40,9 +40,8 @@ namespace Smart.FA.Catalog.Showcase.Infrastructure.Migrations
                 WHERE TrainingStatusType.Name = 'Published'");
 
             // TrainingList.
-            migrationBuilder.Sql("DROP VIEW IF EXISTS [Cfa].[v_TrainingList]");
             migrationBuilder.Sql(@"
-                CREATE VIEW [Cfa].[v_TrainingList]
+                ALTER VIEW [Cfa].[v_TrainingList]
                 AS
                 SELECT training.Id
                     ,detail.Title
@@ -102,10 +101,9 @@ namespace Smart.FA.Catalog.Showcase.Infrastructure.Migrations
                 WHERE TrainingStatusType.Name = 'Published'");
 
             // TrainingList.
-            migrationBuilder.Sql("DROP VIEW IF EXISTS [Cfa].[v_TrainingList]");
             migrationBuilder.Sql(@"
-                CREATE VIEW [Cfa].[v_TrainingList]
-                AS
+               ALTER VIEW [Cfa].[v_TrainingList]
+               AS
                 SELECT training.Id
                     ,detail.Title
                     ,detail.Language
