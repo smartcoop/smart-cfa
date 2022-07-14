@@ -27,13 +27,6 @@ public class TrainerSpecs
     {
         _action.Should().Throw<Exception>();
     }
-
-
-    [When(@"I try to update with the invalid title (.*)")]
-    public void WhenITryToUpdateWithTheInvalidTitle(string title)
-    {
-        _action = () => _trainer.UpdateTitle(title);
-    }
 }
 
 
