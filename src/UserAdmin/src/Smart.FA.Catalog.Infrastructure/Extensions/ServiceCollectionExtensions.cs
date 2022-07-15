@@ -1,6 +1,5 @@
 using Amazon;
 using Amazon.S3;
-using EntityFrameworkCore.UseRowNumberForPaging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -92,7 +91,7 @@ public static class ServiceCollectionExtensions
             });
 
             options
-                .UseSqlServer(connectionString, options => options.UseRowNumberForPaging())
+                .UseSqlServer(connectionString)
                 .UseLazyLoadingProxies();
             if (efCoreOptions.Value.UseConsoleLogger)
             {
