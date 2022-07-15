@@ -1,4 +1,3 @@
-using EntityFrameworkCore.UseRowNumberForPaging;
 using Microsoft.EntityFrameworkCore;
 using Smart.Design.Razor.Extensions;
 using Smart.FA.Catalog.Showcase.Domain.Common.Options;
@@ -28,7 +27,7 @@ public static class ShowcaseServiceCollectionExtensions
     private static IServiceCollection AddEfCore(this IServiceCollection services, IConfiguration configuration)
     {
         return services.AddDbContext<CatalogShowcaseContext>(dbContextOptionsBuilder =>
-            dbContextOptionsBuilder.UseSqlServer(configuration.GetConnectionString("Catalog"), sqlServerDbContextOptionsBuilder => sqlServerDbContextOptionsBuilder.UseRowNumberForPaging()));
+            dbContextOptionsBuilder.UseSqlServer(configuration.GetConnectionString("Catalog")));
     }
 
     private static IServiceCollection AddTransientServices(this IServiceCollection services)
