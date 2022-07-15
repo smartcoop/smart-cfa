@@ -28,8 +28,10 @@ namespace Smart.FA.Catalog.Showcase.Infrastructure.Migrations
                                        ON training.Id = assignment.TrainingId
                                        INNER JOIN Cfa.TrainingStatusType trainingStatusType
                                        ON trainingStatusType.Id = training.TrainingStatusTypeId
+                                       LEFT JOIN [Cfa].[BlackListedTrainer] blacklist
+                                       ON blacklist.TrainerId = trainer.Id
                                    WHERE TrainingStatusType.Name = 'Published' AND
-	                                     trainer.Id NOT IN (SELECT TrainerId FROM [Cfa].[BlackListedTrainer])
+	                                     blacklist.TrainerId IS NULL
                                    GROUP BY trainer.Id
                                        ,trainer.FirstName
                                        ,trainer.LastName
@@ -56,8 +58,10 @@ namespace Smart.FA.Catalog.Showcase.Infrastructure.Migrations
                                        assignment.TrainingId = training.Id
                                        INNER JOIN Cfa.TrainingStatusType  TrainingStatusType
                                        ON TrainingStatusType.Id = training.TrainingStatusTypeId
+                                       LEFT JOIN [Cfa].[BlackListedTrainer] blacklist
+                                       ON blacklist.TrainerId = trainer.Id
                                    WHERE TrainingStatusType.Name = 'Published' AND
-	                                     trainer.Id NOT IN (SELECT TrainerId FROM [Cfa].[BlackListedTrainer])
+	                                     blacklist.TrainerId IS NULL
                                    GROUP BY trainer.Id, trainer.FirstName, trainer.LastName, trainer.Title, trainer.ProfileImagePath
                                    HAVING count(assignment.TrainingId) >= 1");
 
@@ -87,8 +91,10 @@ namespace Smart.FA.Catalog.Showcase.Infrastructure.Migrations
                                        ON training.Id = topic.TrainingId
                                        INNER JOIN Cfa.TrainingStatusType trainingStatusType
                                        ON trainingStatusType.Id = training.TrainingStatusTypeId
+                                       LEFT JOIN [Cfa].[BlackListedTrainer] blacklist
+                                       ON blacklist.TrainerId = trainer.Id
                                    WHERE TrainingStatusType.Name = 'Published' AND
-	                                     trainer.Id NOT IN (SELECT TrainerId FROM [Cfa].[BlackListedTrainer])");
+	                                     blacklist.TrainerId IS NULL");
 
             migrationBuilder.Sql(@"ALTER VIEW [Cfa].[v_TrainingList]
                                     AS
@@ -113,8 +119,10 @@ namespace Smart.FA.Catalog.Showcase.Infrastructure.Migrations
                                         ON trainingTrainer.TrainerId = trainer.Id
                                         INNER JOIN Cfa.TrainingStatusType trainingStatusType
                                         ON trainingStatusType.Id = training.TrainingStatusTypeId
+                                        LEFT JOIN [Cfa].[BlackListedTrainer] blacklist
+                                        ON blacklist.TrainerId = trainer.Id
                                     WHERE TrainingStatusType.Name = 'Published' AND
-	                                      trainer.Id NOT IN (SELECT TrainerId FROM [Cfa].[BlackListedTrainer])");
+	                                      blacklist.TrainerId IS NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
