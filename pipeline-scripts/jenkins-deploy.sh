@@ -11,7 +11,7 @@ DOCKER_HOSTNAME=${DOCKER_NAME}
 
 # Exit without deploying if the branch's name use non-authorized character or if the branch is a PR branch
 echo
-if ! echo "${DOCKER_NAME}" |  grep -q "^(?!pr).+[a-z][a-z0-9_-]*$"; then
+if ! echo "${DOCKER_NAME}" |  grep -q "^[a-z][a-z0-9_-]*$"; then
   echo "The branch does not use only alphanumeric characters and dashes. Exiting.";
   exit 1
 fi
