@@ -9,6 +9,5 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Smart.FA.Catalog.Shared\Smart.FA.Catalog.Shared.csproj" />
     <ProjectReference Include="..\Smart.FA.Catalog.Showcase.Localization\Smart.FA.Catalog.Showcase.Localization.csproj" />
-  </ItemGroup>
-
+  </ItemGroup>  
 </Project>

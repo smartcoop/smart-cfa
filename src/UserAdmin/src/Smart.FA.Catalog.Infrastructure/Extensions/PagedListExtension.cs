@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Shared.Collections;
 
 namespace Smart.FA.Catalog.Infrastructure.Extensions;
@@ -11,4 +12,7 @@ public static class PagedListExtension
         var items = await source.Skip(pageItem.Offset).Take(pageItem.PageSize).ToListAsync(cancellationToken);
         return new PagedList<T>(items, pageItem, count);
     }
+
+    public static PagedList<Entity> ToPagedListOfEntities<T>(this PagedList<T> pagedList) where T : Entity
+    => new(pagedList, new PageItem(pagedList.CurrentPage, pagedList.PageSize), pagedList.TotalCount);
 }

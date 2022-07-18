@@ -46,6 +46,9 @@
             </div>
         </div>
         <div class="training-card__trainer">
+            <div class="trainer-card__image">
+                <img src="@Model.Training.TrainerProfileImageUrl" class="trainer-image" alt="trainer-image"/>
+            </div>
             <div class="training-card__trainer-name">
                 <a class="training-card__trainer-link" asp-page="@Routes.TrainerDetails" asp-route-id="@Model.Training.TrainerId">
                     @Model.Training.TrainerFirstName @Model.Training.TrainerLastName
@@ -54,8 +57,14 @@
             <div class="training-card__trainer-fonction">
                 @Model.Training.TrainerTitle
             </div>
+
+            <div class="training-card__trainer-links">
+                <img src="/icons/message.svg" class="o-svg-icon--small contact-icon"/>
+                <a class="training-card__trainer-link training-card__contact-link" data-dialog="inquiry-form-dialog">@ShowcaseResources.TrainerCard_Contact</a>
+            </div>
         </div>
     </div>
+
     <div class="training-card__footer">
         <div class="training-card__back">
             <a class="training-card__back-link" asp-page="@Routes.TrainingList">
@@ -64,3 +73,9 @@
         </div>
     </div>
 </section>
+
+ @await Html.PartialAsync("Shared/_TrainerContact",new { firstName = Model.Training.TrainerFirstName,
+                                                         lastName = Model.Training.TrainerFirstName,
+                                                         EmailSendingResult = Model.EmailSendingResult,
+                                                         TrainerInquiryEmailRequest = Model.TrainerInquiryEmailRequest
+                                                       })

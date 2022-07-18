@@ -1,61 +1,68 @@
 #nullable disable
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Smart.FA.Catalog.Shared.Domain.Enumerations.Training;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Smart.FA.Catalog.Showcase.Domain.Common.Enums;
+using Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry.Trainer;
+using Smart.FA.Catalog.Showcase.Web.Services.Training;
 
 namespace Smart.FA.Catalog.Showcase.Web.Pages.Training.TrainingDetails;
 
 public class TrainingDetailsModel : PageModelBase
 {
-    private readonly Infrastructure.Data.CatalogShowcaseContext _context;
+    private const string TempDataTrainerIdKey = "TrainerId";
+
+    private const string TempDataTrainingIdKey = "TrainingId";
+
+    private readonly ITrainerInquirySendEmailService _trainerInquirySendEmailService;
+
+
+    private readonly ITrainingService _trainingService;
 
     public TrainingDetailsViewModel Training { get; set; }
 
-    public TrainingDetailsModel(Infrastructure.Data.CatalogShowcaseContext context)
+    public TrainingDetailsModel(ITrainerInquirySendEmailService trainerInquirySendEmailService, ITrainingService trainingService)
     {
-        _context = context;
+        _trainerInquirySendEmailService = trainerInquirySendEmailService;
+        _trainingService = trainingService;
     }
+    public InquirySendEmailResult? EmailSendingResult { get; set; }
+
+    [BindProperty(SupportsGet = false)] public TrainerInquirySendEmailRequest TrainerInquiryEmailRequest { get; set; } = null!;
 
     public async Task<ActionResult> OnGetAsync(int? id)
     {
-        if (id == null)
+        if (id is null || (Training = await _trainingService.GetTrainingDetailsViewModelsByIdAsync(id.Value)) is null)
         {
             return RedirectToNotFound();
         }
 
-        var trainingDetails = await _context.TrainingDetails.Where(training => training.Id == id).ToListAsync();
-
-        if (!trainingDetails.Any())
-        {
-            return RedirectToNotFound(message: ShowcaseResources.TrainingWasNotFound);
-        }
-
-        Training = MapTrainingDetails(trainingDetails);
+        SetTempDataTrainerId(Training.TrainerId);
+        SetTempDataTrainingId(Training.Id);
         return Page();
     }
 
-    private TrainingDetailsViewModel MapTrainingDetails(List<Domain.Models.TrainingDetails> trainingDetails)
+
+    public async Task<ActionResult> OnPostAsync()
     {
-        if (trainingDetails is null)
+        if (!TempData.TryGetConvertedValue<int>(TempDataTrainerIdKey, out var trainerId) ||
+            !TempData.TryGetConvertedValue<int>(TempDataTrainingIdKey, out var trainingId))
         {
-            return null;
+            return RedirectToPage(Routes.TrainingList);
         }
 
-        var firstLine = trainingDetails.FirstOrDefault();
-        return new TrainingDetailsViewModel
+        if (ModelState.IsValid)
         {
-            Id = firstLine.Id,
-            TrainingTitle = firstLine.TrainingTitle,
-            Goal = firstLine.Goal,
-            Methodology = firstLine.Methodology,
-            PracticalModalities = firstLine.PracticalModalities,
-            TrainerFirstName = firstLine.TrainerFirstName,
-            TrainerLastName = firstLine.TrainerLastName,
-            TrainerId = firstLine.TrainerId,
-            TrainerTitle = firstLine.TrainerTitle,
-            Status = TrainingStatusType.FromValue(firstLine.StatusId),
-            Topics = trainingDetails.Select(x => Topic.FromValue(x.TrainingTopicId)).ToList(),
-            Languages = trainingDetails.Select(x => x.Language).Distinct().ToList()
-        };
+            TrainerInquiryEmailRequest.TrainerId = trainerId;
+            EmailSendingResult = await _trainerInquirySendEmailService.SendEmailAsync(TrainerInquiryEmailRequest);
+        }
+
+        Training = await _trainingService.GetTrainingDetailsViewModelsByIdAsync(trainingId);
+        SetTempDataTrainerId(trainerId);
+        SetTempDataTrainingId(trainingId);
+        return Page();
     }
+
+    private void SetTempDataTrainerId(int trainerId) => TempData[TempDataTrainerIdKey] = trainerId;
+
+    private void SetTempDataTrainingId(int trainingId) => TempData[TempDataTrainingIdKey] = trainingId;
 }

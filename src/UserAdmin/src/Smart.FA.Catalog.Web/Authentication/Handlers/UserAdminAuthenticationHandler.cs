@@ -76,13 +76,13 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
             var ticket = new AuthenticationTicket(Context.User, Scheme.Name);
             return AuthenticateResult.Success(ticket);
         }
+        catch (AccountHeadersMissingException e)
+        {
+            return AuthenticateResult.Fail(e);
+        }
         catch (Exception exception)
         {
-            if (exception is not AccountHeadersMissingException)
-            {
-                Logger.LogCritical(exception, "An error occurred while authenticating");
-            }
-
+            Logger.LogCritical(exception, "An error occurred while authenticating");
             return AuthenticateResult.Fail(new Exception("An issue occurred during authentication"));
         }
     }
@@ -150,7 +150,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
 
     private async Task<Trainer?> GetTrainerBySmartUserIdAndApplicationTypeAsync()
     {
-        return (await _mediator.Send(new GetTrainerFromUserAppRequest(applicationType: ApplicationType.FromName(_appName!), userId: _userId!))).Trainer;
+        return (await _mediator.Send(new GetTrainerByUserAppRequest(applicationType: ApplicationType.FromName(_appName!), userId: _userId!))).Trainer;
     }
 
     private async Task<Trainer> CreateTrainerAsync()

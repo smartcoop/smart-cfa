@@ -8,4 +8,7 @@ public class SuperUserOptions
     /// Default value is 20.
     /// </summary>
     public int NumberOfTrainingsPerPage { get; set; } = 20;
+
+    public int NumberOfTrainersPerPage { get; set; } = 20;
+
 }

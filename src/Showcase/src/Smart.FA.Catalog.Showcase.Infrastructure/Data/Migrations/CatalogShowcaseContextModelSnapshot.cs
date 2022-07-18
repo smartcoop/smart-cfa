@@ -17,7 +17,7 @@ namespace Smart.FA.Catalog.Showcase.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.4")
+                .HasAnnotation("ProductVersion", "6.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -118,6 +118,10 @@ namespace Smart.FA.Catalog.Showcase.Infrastructure.Migrations
                     b.Property<string>("PracticalModalities")
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("ProfileImagePath")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("StatusId")
                         .HasColumnType("int")

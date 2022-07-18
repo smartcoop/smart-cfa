@@ -11,4 +11,7 @@ public static class Routes
     public const string UserChartApproval = "/cfa/userchart";
 
     public const string SuperUserTrainingList = "/cfa/superuser/trainings";
+
+    public const string SuperUserTrainerList = "/cfa/superuser/trainers";
+
 }

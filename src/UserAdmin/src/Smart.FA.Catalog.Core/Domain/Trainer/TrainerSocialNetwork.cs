@@ -1,5 +1,4 @@
 using Smart.FA.Catalog.Core.Exceptions;
-using Smart.FA.Catalog.Core.SeedWork;
 using Smart.FA.Catalog.Shared.Collections;
 using Smart.FA.Catalog.Shared.Domain.Enumerations.Trainer;
 

@@ -145,7 +145,10 @@ public class Trainer : Entity, IAggregateRoot
         }
         else
         {
-            _socialNetworks.Add(new TrainerSocialNetwork(Id, socialNetwork, urlToProfile));
+            if (!string.IsNullOrWhiteSpace(urlToProfile))
+            {
+                _socialNetworks.Add(new TrainerSocialNetwork(Id, socialNetwork, urlToProfile));
+            }
         }
     }
 

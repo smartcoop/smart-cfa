@@ -1,5 +1,4 @@
 using FluentValidation;
-using Microsoft.Extensions.Localization;
 using Smart.FA.Catalog.Application.Extensions.FluentValidation;
 using Smart.FA.Catalog.Core.Services;
 using Smart.FA.Catalog.Web.Pages.Admin.Trainings.Update;

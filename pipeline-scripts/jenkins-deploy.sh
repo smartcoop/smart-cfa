@@ -42,9 +42,51 @@ sed -e "s/{catalog-server-name}/${DOCKER_NAME}-datasource/" \
     -e "s/{catalog-server-user-id}/$USERNAME/" \
     -e "s/{catalog-server-user-password}/$PASSWORD/" \
     -e "s/{docker_name-minio}/${DOCKER_NAME}-minio/" \
-    ../src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.json > ../src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.tmp.json
+    ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.json > ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.tmp.json
 
-mv ../src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.tmp.json ../src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.json
+mv ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.tmp.json ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.json
+
+if [ "$( docker container inspect -f '{{.State.Running}}' "dev-cfa-datasource" )" != "true" ]; then
+
+echo "dev-cfa-datasource not running"
+docker stop dev-cfa-datasource || true
+docker rm dev-cfa-datasource || true
+
+docker build \
+  -f "./docker/DB.Dockerfile" \
+  -t "dev-cfa-datasource" \
+  .
+docker run -d \
+  --name dev-cfa-datasource \
+  -e "SA_PASSWORD=${PASSWORD}" \
+  --network=cfa \
+  dev-cfa-datasource
+sleep 3
+else
+  echo "dev-cfa-datasource running"
+fi
+
+
+if [ "$( docker container inspect -f '{{.State.Running}}' "dev-cfa-minio" )" != "true" ]; then
+
+echo "dev-cfa-minio not running"
+docker stop dev-cfa-minio || true
+docker rm dev-cfa-minio || true
+
+docker run -d \
+  --name dev-cfa-minio \
+  -e "MINIO_ROOT_USER=${DOCKER_MINIO_USER}"  \
+  -e "MINIO_ROOT_PASSWORD=${DOCKER_MINIO_PASSWORD}" \
+  -v "/minio/data:/data" \
+  -p "9001:9001" \
+  -p "9000:9000" \
+  --network=cfa \
+  quay.io/minio/minio \
+  server /data --console-address ":9001"
+sleep 3
+else
+  echo "dev-cfa-minio running"
+fi
 
 
 echo "build docker DB and API"

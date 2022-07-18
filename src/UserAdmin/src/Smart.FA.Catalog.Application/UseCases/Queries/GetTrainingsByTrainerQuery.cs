@@ -7,35 +7,34 @@ using Smart.FA.Catalog.Core.Domain.ValueObjects;
 
 namespace Smart.FA.Catalog.Application.UseCases.Queries;
 
-public class
-    GetTrainingsFromTrainerQueryHandler : IRequestHandler<GetTrainingsFromTrainerRequest, GetTrainingsFromTrainerResponse>
+public class GetTrainingsByTrainerQueryHandler : IRequestHandler<GetTrainingsByTrainerRequest, GetTrainingsByTrainerResponse>
 {
-    private readonly ILogger<GetTrainingsFromTrainerQueryHandler> _logger;
+    private readonly ILogger<GetTrainingsByTrainerQueryHandler> _logger;
     private readonly ITrainingQueries _trainingQueries;
 
-    public GetTrainingsFromTrainerQueryHandler(ILogger<GetTrainingsFromTrainerQueryHandler> logger,
+    public GetTrainingsByTrainerQueryHandler(ILogger<GetTrainingsByTrainerQueryHandler> logger,
         ITrainingQueries trainingQueries )
     {
         _logger = logger;
         _trainingQueries = trainingQueries;
     }
 
-    public async Task<GetTrainingsFromTrainerResponse> Handle(GetTrainingsFromTrainerRequest request, CancellationToken cancellationToken)
+    public async Task<GetTrainingsByTrainerResponse> Handle(GetTrainingsByTrainerRequest request, CancellationToken cancellationToken)
     {
-        GetTrainingsFromTrainerResponse resp = new();
+        GetTrainingsByTrainerResponse resp = new();
         resp.Trainings = await _trainingQueries.GetListAsync(request.TrainerId, request.Language.Value, cancellationToken);
         resp.SetSuccess();
         return resp;
     }
 }
 
-public class GetTrainingsFromTrainerRequest : IRequest<GetTrainingsFromTrainerResponse>
+public class GetTrainingsByTrainerRequest : IRequest<GetTrainingsByTrainerResponse>
 {
     public int TrainerId { get; init; }
     public Language Language { get; init; } = null!;
 }
 
-public class GetTrainingsFromTrainerResponse : ResponseBase
+public class GetTrainingsByTrainerResponse : ResponseBase
 {
     public IEnumerable<TrainingDto>? Trainings { get; set; }
 }

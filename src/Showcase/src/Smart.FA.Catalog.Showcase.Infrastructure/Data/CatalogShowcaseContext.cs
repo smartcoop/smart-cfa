@@ -77,6 +77,8 @@ public partial class CatalogShowcaseContext : DbContext
 
             entity.Property(e => e.PracticalModalities).HasMaxLength(1000);
 
+            entity.Property(e => e.ProfileImagePath).HasMaxLength(50);
+
             entity.Property(e => e.StatusId).HasColumnName("TrainingStatusTypeId");
 
             entity.Property(e => e.TrainerFirstName)

@@ -334,10 +334,31 @@
             min-width: 25rem;
             padding: 0 0 3rem 10rem;
             overflow-wrap: break-word;
+            
 
             @media (max-width: $g-bp3) {
                 width: 100%;
                 padding: 0 0 3rem 0;
+            }
+
+            .training-card__trainer-links {
+                margin-bottom: 0.8rem;
+
+                .training-card__trainer-link {
+                    color: $color-gray-500;
+                    text-decoration: underline;
+                    padding-bottom: 0.8rem;
+                }
+
+                .training-card__contact-link {
+                    font-weight: 700;
+                    cursor: pointer
+                }
+
+                .contact-icon {
+                    margin-right: 1rem;
+                    vertical-align: bottom;
+                }
             }
 
             .training-card__trainer-name {

@@ -36,15 +36,15 @@ public class UpdateModel : AdminPage
     {
         var user = (HttpContext.User.Identity as CustomIdentity)!;
         TrainingId = id;
-        var trainingFromIdResponse = await Mediator.Send(new GetTrainingFromIdRequest {TrainingId = TrainingId});
+        var response = await Mediator.Send(new GetTrainingByIdRequest {TrainingId = TrainingId});
 
         // We need to check if Training is not null otherwise MapToGetResponse will throw an exception.
-        if (trainingFromIdResponse.Training is null)
+        if (response.Training is null)
         {
             return RedirectToNotFound(CatalogResources.TrainingDoesNotExist);
         }
 
-        UpdateTrainingViewModel = trainingFromIdResponse.MapToViewModel(user.Trainer.DefaultLanguage);
+        UpdateTrainingViewModel = response.MapToViewModel(user.Trainer.DefaultLanguage);
         Init();
 
         // Used for returning to previous page after save.

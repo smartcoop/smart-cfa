@@ -20,10 +20,14 @@ public class UserAdminAuthorizationResultHandler : IAuthorizationMiddlewareResul
         PolicyAuthorizationResult authorizeResult)
     {
         _userIdentity = context.RequestServices.GetRequiredService<IUserIdentity>();
+        var authorizationFailure = authorizeResult.AuthorizationFailure!;
 
         if (!_userIdentity.IsSuperUser && authorizeResult.Forbidden)
         {
-            var authorizationFailure = authorizeResult.AuthorizationFailure!;
+            if (authorizationFailure.FailedRequirements.AnyOfType<MustNotBeBlackListedRequirement>())
+            {
+                context.Response.StatusCode = StatusCodes.Status403Forbidden;
+            }
 
             // In the case of a failed requirement to have approved at least one valid user chart, the user will be redirected to the user chart approval page
             if (authorizationFailure.FailedRequirements.AnyOfType<AtLeastOneActiveUserChartRevisionApprovalRequirement>())
@@ -39,7 +43,7 @@ public class UserAdminAuthorizationResultHandler : IAuthorizationMiddlewareResul
 
             if (authorizationFailure.FailedRequirements.AnyOfType<MustBeSuperUserOrTrainingCreator>())
             {
-                context.Response.StatusCode = 404;
+                context.Response.StatusCode = StatusCodes.Status404NotFound;
             }
 
             return;

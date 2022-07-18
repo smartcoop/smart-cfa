@@ -6,20 +6,20 @@ using Smart.FA.Catalog.Infrastructure.Persistence;
 
 namespace Smart.FA.Catalog.Application.UseCases.Queries;
 
-public class GetTrainingFromIdQueryHandler: IRequestHandler<GetTrainingFromIdRequest, GetTrainingFromIdResponse>
+public class GetTrainingByIdQueryHandler: IRequestHandler<GetTrainingByIdRequest, GetTrainingByIdResponse>
 {
-    private readonly ILogger<GetTrainingFromIdQueryHandler> _logger;
+    private readonly ILogger<GetTrainingByIdQueryHandler> _logger;
     private readonly CatalogContext _catalogContext;
 
-    public GetTrainingFromIdQueryHandler(ILogger<GetTrainingFromIdQueryHandler> logger, CatalogContext catalogContext )
+    public GetTrainingByIdQueryHandler(ILogger<GetTrainingByIdQueryHandler> logger, CatalogContext catalogContext )
     {
         _logger = logger;
         _catalogContext = catalogContext;
     }
 
-    public async Task<GetTrainingFromIdResponse> Handle(GetTrainingFromIdRequest request, CancellationToken cancellationToken)
+    public async Task<GetTrainingByIdResponse> Handle(GetTrainingByIdRequest request, CancellationToken cancellationToken)
     {
-        GetTrainingFromIdResponse resp = new();
+        GetTrainingByIdResponse resp = new();
         var training = await _catalogContext.Trainings.FindAsync(new object?[] { request.TrainingId }, cancellationToken: cancellationToken);
         resp.Training = training!;
         resp.SetSuccess();
@@ -28,12 +28,12 @@ public class GetTrainingFromIdQueryHandler: IRequestHandler<GetTrainingFromIdReq
     }
 }
 
-public class GetTrainingFromIdRequest: IRequest<GetTrainingFromIdResponse>
+public class GetTrainingByIdRequest: IRequest<GetTrainingByIdResponse>
 {
     public int TrainingId { get; set; }
 }
 
-public class GetTrainingFromIdResponse : ResponseBase
+public class GetTrainingByIdResponse : ResponseBase
 {
     public Training? Training { get; set; }
 }
