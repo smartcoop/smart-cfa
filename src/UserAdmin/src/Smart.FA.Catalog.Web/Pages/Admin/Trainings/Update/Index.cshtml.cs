@@ -36,7 +36,7 @@ public class UpdateModel : AdminPage
     {
         var user = (HttpContext.User.Identity as CustomIdentity)!;
         TrainingId = id;
-        var response = await Mediator.Send(new GetTrainingFromIdRequest {TrainingId = TrainingId});
+        var response = await Mediator.Send(new GetTrainingByIdRequest {TrainingId = TrainingId});
 
         // We need to check if Training is not null otherwise MapToGetResponse will throw an exception.
         if (response.Training is null)

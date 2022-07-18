@@ -150,7 +150,7 @@ public class UserAdminAuthenticationHandler : AuthenticationHandler<CfaAuthentic
 
     private async Task<Trainer?> GetTrainerBySmartUserIdAndApplicationTypeAsync()
     {
-        return (await _mediator.Send(new GetTrainerFromUserAppRequest(applicationType: ApplicationType.FromName(_appName!), userId: _userId!))).Trainer;
+        return (await _mediator.Send(new GetTrainerByUserAppRequest(applicationType: ApplicationType.FromName(_appName!), userId: _userId!))).Trainer;
     }
 
     private async Task<Trainer> CreateTrainerAsync()
