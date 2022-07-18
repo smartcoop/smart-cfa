@@ -40,7 +40,7 @@ echo "Git author email: ${GIT_AUTHOR_EMAIL}"
     echo "DOCKER_ENVIRONMENT=Staging"
     echo "MINIO_ROOT_USER=${DOCKER_MINIO_USER}"
     echo "MINIO_ROOT_PASSWORD=${DOCKER_MINIO_PASSWORD}"
-} >> .env
+} > .env
 
 # Swap in all placeholders with sensitive or contextual data in the appsettings and make a tmp copy from it
 # UserAdmin
