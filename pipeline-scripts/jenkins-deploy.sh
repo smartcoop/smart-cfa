@@ -43,14 +43,25 @@ echo "Git author email: ${GIT_AUTHOR_EMAIL}"
 } >> .env
 
 # Swap in all placeholders with sensitive or contextual data in the appsettings and make a tmp copy from it
+# UserAdmin
 sed -e "s/{catalog-server-name}/${DOCKER_NAME}-datasource/" \
     -e "s/{catalog-server-user-id}/$USERNAME/" \
     -e "s/{catalog-server-user-password}/$PASSWORD/" \
     -e "s/{docker_name-minio}/${DOCKER_NAME}-minio/" \
     ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.json > ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.tmp.json
 
+# Showcase
+sed -e "s/{catalog-server-name}/${DOCKER_NAME}-datasource/" \
+    -e "s/{catalog-server-user-id}/$USERNAME/" \
+    -e "s/{catalog-server-user-password}/$PASSWORD/" \
+    -e "s/{docker_name-minio}/${DOCKER_NAME}-minio/" \
+    ./src/Showcase/src/Smart.FA.Catalog.Showcase.Web/appsettings.Staging.json > ./src/Showcase/src/Smart.FA.Catalog.Showcase.Web/appsettings.Staging.tmp.json
+
 # Replace the actual file with the tmp copy
+# UserAdmin
 mv ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.tmp.json ./src/UserAdmin/src/Smart.FA.Catalog.Web/appsettings.Staging.json
+# Showcase
+mv ./src/Showcase/src/Smart.FA.Catalog.Showcase.Web/appsettings.Staging.tmp.json ./src/Showcase/src/Smart.FA.Catalog.Showcase.Web/appsettings.Staging.json
 
 # If a SQL server container is not already running for cfa, then we create it
 if [ "$( docker container inspect -f '{{.State.Running}}' "dev-cfa-datasource" )" != "true" ]; then
