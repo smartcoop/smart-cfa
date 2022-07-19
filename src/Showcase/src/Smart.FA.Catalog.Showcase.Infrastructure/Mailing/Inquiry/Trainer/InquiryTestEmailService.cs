@@ -9,12 +9,12 @@ namespace Smart.FA.Catalog.Showcase.Infrastructure.Mailing.Inquiry.Trainer;
 /// <summary>
 /// Test Trainer Inquiry mail service with sending of the mail to a specific address used for debugging and general testing.
 /// </summary>
-public class TrainerInquirySendTestRecipientEmailService : TrainerInquirySendEmailService
+public class InquiryTestEmailService : TrainerInquirySendEmailService
 {
     private readonly TestInquiryOptions _testInquirySettings;
 
-    public TrainerInquirySendTestRecipientEmailService(
-        ILogger<TrainerInquirySendTestRecipientEmailService> logger,
+    public InquiryTestEmailService(
+        ILogger<InquiryTestEmailService> logger,
         IServiceProvider serviceProvider,
         IFluentEmail fluentEmail,
         IMemoryCache memoryCache,

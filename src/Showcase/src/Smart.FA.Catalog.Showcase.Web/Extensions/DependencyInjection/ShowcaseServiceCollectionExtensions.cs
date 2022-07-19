@@ -44,7 +44,7 @@ public static class ShowcaseServiceCollectionExtensions
         }
         else
         {
-            services.AddTransient<ITrainerInquirySendEmailService, TrainerInquirySendTestRecipientEmailService>();
+            services.AddTransient<ITrainerInquirySendEmailService, InquiryTestEmailService>();
         }
 
         return services;
