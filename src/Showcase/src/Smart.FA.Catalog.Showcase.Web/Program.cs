@@ -12,7 +12,7 @@ builder.Host.UseNLog();
 builder.Services.AddRazorPages();
 
 // Add every dependencies required by the Showcase web app.
-builder.Services.AddDependencies(builder.Configuration);
+builder.Services.AddDependencies(builder.Configuration, builder.Environment);
 
 builder.Services.ConfigureShowcaseOptions(builder.Configuration);
 
