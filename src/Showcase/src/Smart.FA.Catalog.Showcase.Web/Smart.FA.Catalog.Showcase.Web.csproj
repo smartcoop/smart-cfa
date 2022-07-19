@@ -34,6 +34,12 @@
     <Content Update="appsettings.PreProduction.json">
       <DependentUpon>appsettings.json</DependentUpon>
     </Content>
+    <Content Update="appsettings.Staging.json">
+      <DependentUpon>appsettings.json</DependentUpon>
+    </Content>
+    <Content Update="appsettings.Production.json">
+      <DependentUpon>appsettings.json</DependentUpon>
+    </Content>
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties sassconfig_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
