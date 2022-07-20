@@ -12,4 +12,5 @@ public class TrainingListViewModel
     public List<Topic> Topics { get; set; } = new List<Topic>();
     public List<string> Languages { get; set; } = new List<string>();
     public TrainingStatusType Status { get; set; }
+    public bool IsGivenBySmart { get; set; }
 }

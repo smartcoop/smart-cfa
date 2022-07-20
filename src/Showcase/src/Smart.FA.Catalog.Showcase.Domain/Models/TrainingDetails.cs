@@ -20,4 +20,5 @@ public partial class TrainingDetails
     public string TrainerTitle { get; set; } = null!;
     public int StatusId { get; set; }
     public string? ProfileImagePath { get; set; }
+    public bool IsGivenBySmart { get; set; }
 }
