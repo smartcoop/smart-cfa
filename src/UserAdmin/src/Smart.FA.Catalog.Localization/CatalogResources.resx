@@ -563,4 +563,7 @@
   <data name="InvalidUrl" xml:space="preserve">
     <value>Addresse invalide</value>
   </data>
+  <data name="TrainerTitleCannotExceed100Chars" xml:space="preserve">
+    <value>La fonction ne peut excéder 100 caractères</value>
+  </data>
 </root>

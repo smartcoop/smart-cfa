@@ -32,19 +32,19 @@ public class TrainingLocalizedDetails
     public string? Goal
     {
         get => _goal;
-        set => _goal = Guard.AgainstMaxLength(value, nameof(Goal), 1000);
+        set => _goal = Guard.AgainstMaxHtmlInnerTextLength(value, 1000);
     }
 
     public string? Methodology
     {
         get => _methodology;
-        set => _methodology = Guard.AgainstMaxLength(value, nameof(Methodology), 1000);
+        set => _methodology = Guard.AgainstMaxHtmlInnerTextLength(value, 1000);
     }
 
     public string? PracticalModalities
     {
         get => _practicalModalities;
-        set => _practicalModalities = Guard.AgainstMaxLength(value, nameof(PracticalModalities), 1000);
+        set => _practicalModalities = Guard.AgainstMaxHtmlInnerTextLength(value, 1000);
     }
 
     public Language Language { get; } = null!;

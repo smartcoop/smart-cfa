@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Smart.FA.Catalog.Web.Authorization.Policy;
+using Smart.FA.Catalog.Web.Common.ModelBinding.Binders;
 using Smart.FA.Catalog.Web.Filters;
 
 namespace Smart.FA.Catalog.Web.Extensions;
@@ -12,6 +13,14 @@ public static class MvcBuilderExtensions
             .AddRazorPagesOptions(options =>  options.Conventions.AddPageConventionsAuthorization())
             .AddMvcOptions(options => options.Filters.Add<SerializeModelStateFilter>());
         return mvcBuilder;
+    }
+
+    public static IMvcBuilder ConfigureMvcOptions(this IMvcBuilder mvcBuilder)
+    {
+        return mvcBuilder.AddMvcOptions(options =>
+        {
+            options.ModelBinderProviders.Insert(0, new SanitizeBinderProvider());
+        });
     }
 
     private static void AddPageConventionsAuthorization(this PageConventionCollection conventions)

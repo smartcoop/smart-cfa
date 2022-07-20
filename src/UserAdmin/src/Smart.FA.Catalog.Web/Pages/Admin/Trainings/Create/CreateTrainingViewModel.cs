@@ -1,3 +1,4 @@
+using Smart.FA.Catalog.Application.SeedWork.Attributes;
 using Smart.FA.Catalog.Application.UseCases.Commands;
 using Smart.FA.Catalog.Core.Domain.Dto;
 using Smart.FA.Catalog.Core.Domain.ValueObjects;
@@ -17,10 +18,13 @@ public class CreateTrainingViewModel
 
     public List<int>? TopicIds { get; set; }
 
+    [Sanitized]
     public string? Goal { get; set; }
 
+    [Sanitized]
     public string? Methodology { get; set; }
 
+    [Sanitized]
     public string? PracticalModalities { get; set; }
 
     public bool IsDraft { get; set; }

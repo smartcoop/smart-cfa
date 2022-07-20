@@ -1088,6 +1088,15 @@ namespace Smart.FA.Catalog.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to La fonction ne peut excéder 100 caractères.
+        /// </summary>
+        public static string TrainerTitleCannotExceed100Chars {
+            get {
+                return ResourceManager.GetString("TrainerTitleCannotExceed100Chars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Formateur ajouté à la whitelist avec succès.
         /// </summary>
         public static string TrainerWhiteListedWithSuccess {

@@ -41,12 +41,12 @@ public class CreateModel : AdminPage
         }
 
         var createTrainingRequest = CreateTrainingViewModel.MapToRequest(UserIdentity.CurrentTrainer.Id, UserIdentity.CurrentTrainer.DefaultLanguage);
-        var response = await Mediator.Send(createTrainingRequest);
+        var createTrainingResponse = await Mediator.Send(createTrainingRequest);
 
         TempData.AddGlobalAlertMessage(CatalogResources.TrainingCreatedWithSuccess, AlertStyle.Success);
         if (!createTrainingRequest.IsDraft)
         {
-            TempData["Url"] = _urlOptions.GetShowcaseTrainingDetailsUrl(response.TrainingId);
+            TempData["Url"] = _urlOptions.GetShowcaseTrainingDetailsUrl(createTrainingResponse.TrainingId);
         }
 
         return RedirectToPage("/Admin/Trainings/List/Index");
