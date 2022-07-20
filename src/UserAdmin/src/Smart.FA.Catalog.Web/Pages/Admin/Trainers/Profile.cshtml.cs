@@ -67,18 +67,22 @@ public class ProfileModel : AdminPage
 
     public async Task<IActionResult> OnPostAsync()
     {
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
-            //Update description
-            await UpdateDescriptionAsync();
-
-            //Upload image
-            await UploadImageAsync();
+            ReloadSocials();
+            return Page();
         }
+
+        //Update description
+        await UpdateDescriptionAsync();
+
+        //Upload image
+        await UploadImageAsync();
 
         //Refresh page
         await LoadDataAsync();
-        return RedirectAndPreserveModelState();
+
+        return Page();
     }
 
     public async Task UpdateDescriptionAsync()
