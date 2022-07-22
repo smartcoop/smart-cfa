@@ -9,8 +9,9 @@
   "AllowedHosts": "*",
   "DetailedErrors": true,
   "ConnectionStrings": {
-    "Catalog": "Server=SRVWPRDSQL;Database=SMart;Integrated Security=True;TrustServerCertificate=true"
+    "Catalog": "Server=host.docker.internal; Database=Catalog; User Id =SA; Password=localStoragePassword!"
   },
+  "ForceHttpRedirection": false,
   "MailOptions": {
     "Server": "",
     "Sender": ""
@@ -24,24 +25,26 @@
     "ImageBucketName": "cfa",
     "FileSizeLimit": 2097152,
     "Credentials": {
-      "SecretKey": "{minio_secret-key}",
-      "AccessKey": "{minio_access-key}"
+      "SecretKey": "newuser123",
+      "AccessKey": "newuser"
     },
     "AWS": {
       "RegionEndpoint": "us-east-1",
-      "ServiceUrl": "https://minio.smart.coop",
+      "ServiceUrl": "http://host.docker.internal:9000",
       "ForcePathStyle": true
     }
   },
-  "EFCore": {
-    "UseConsoleLogger": false
+  "MediatR": {
+    "LogRequests": true
   },
-  "Url": {
-    "Home": "https://account.ubik.be/home",
-    "SignOut": "https://account.ubik.be/logout",
-    "Showcase": "https://learning.smart.coop"
+  "EFCore": {
+    "UseConsoleLogger": true
   },
   "Authentication": {
-    "UseFakeHeaders": false
+    "UseFakeHeaders": true
+  },
+  "SuperUser": {
+    "NumberOfTrainingsPerPage": 2,
+    "NumberOfTrainersPerPage": 4
   }
 }
