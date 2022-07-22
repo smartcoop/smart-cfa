@@ -124,7 +124,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "compose", "compose", "{694A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.FA.Catalog.Showcase.Infrastructure.Tests", "src\Showcase\test\Smart.FA.Catalog.Showcase.Infrastructure.Tests\Smart.FA.Catalog.Showcase.Infrastructure.Tests.csproj", "{17634CDE-4641-4C03-A32C-135658339BE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.FA.Catalog.Tests.Specs", "src\UserAdmin\test\Smart.FA.Catalog.Tests.Specs\Smart.FA.Catalog.Tests.Specs.csproj", "{4C06E7E3-8C07-4CE2-9AB2-E74BE5DF180B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.FA.Catalog.Tests.Specflow", "src\UserAdmin\test\Smart.FA.Catalog.Tests.Specflow\Smart.FA.Catalog.Tests.Specflow.csproj", "{4C06E7E3-8C07-4CE2-9AB2-E74BE5DF180B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
