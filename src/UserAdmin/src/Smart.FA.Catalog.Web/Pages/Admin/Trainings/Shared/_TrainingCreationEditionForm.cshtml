@@ -163,10 +163,14 @@
         false);
 
     function addQuillEditor(editorId, hiddenValueElement) {
+        var toolbarOptions = [ [{ 'header': [1, 2, 3, 4, false] }],
+        ['bold', 'italic', 'underline'],
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        ['clean']  ];
         var editor = new Quill('#' + editorId,
             {
                 modules: {
-                    toolbar: true
+                    toolbar: toolbarOptions
                 },
                 theme: 'snow'
             });
