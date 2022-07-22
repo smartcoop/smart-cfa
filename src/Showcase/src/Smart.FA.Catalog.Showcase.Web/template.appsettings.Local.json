@@ -1,0 +1,36 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning",
+      "Hangfire": "Information"
+    }
+  },
+  "ConnectionStrings": {
+    "Catalog": "Server=host.docker.internal; Database=Catalog; User Id =SA; Password=localStoragePassword!"
+  },
+  "AllowedHosts": "*",
+  "MinIO": {
+    "BaseUrl": "http://host.docker.internal:9000",
+    "BucketName": "cfa"
+  },
+  "Mailing": {
+    "FluentEmail": {
+      "Server": "172.16.1.48",
+      "Port": 25,
+      "User": "notifications@smart.coop",
+      "Password": null,
+      "UseSsl": false,
+      "RequiresAuthentication": false,
+      "DefaultSender": "notifications@smart.coop"
+    },
+    "Inquiry": {
+      "DefaultEmail": "learning@smart.coop", // Email to whom will be sent the inquiries.
+      "RateLimitInSeconds": 60  // time frame in seconds between two email sendings.
+    },
+    "TestInquiry": {
+      "DefaultEmail": "product@smart.coop", // Test Email to whom will be sent the inquiries (development/staging).
+      "RateLimitInSeconds": 60  // time frame in seconds between two email sendings.
+    }
+  }
+}
